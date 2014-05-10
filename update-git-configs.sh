@@ -35,6 +35,11 @@ cp -Rv $HOME/.pcsx/pcsx.cfg $HOME/RetroRig/PS1/
 #mupen64plus
 #default path: /home/$USER/.config/mupen64plus
 #Main config
+cp -Rv $HOME/.config/pcsx2/PCSX2-reg.ini $HOME/RetroRig/PS2/
+
+#mupen64plus
+#default path: /home/$USER/.config/mupen64plus
+#Main config
 cp -Rv $HOME/.config/mupen64plus/mupen64plus.cfg $HOME/RetroRig/mupen64plus/
 
 #update configs for other utilities
@@ -42,7 +47,7 @@ cp -Rv $HOME/Games/Configs/qjoypad_launch.sh $HOME/RetroRig/controller-cfg/
 cp -Rv $HOME/Games/Configs/xpad-wireless.xboxdrv $HOME/RetroRig/controller-cfg/
 
 git add *
-git commit -m "(Auto)update-git-config"
+git commit -m "(Auto-comment) update-git-config ran"
 git push origin master
 
 
