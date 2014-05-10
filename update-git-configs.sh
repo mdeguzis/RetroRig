@@ -30,12 +30,12 @@ cp -Rv $HOME/.mame/cfg/default.cfg $HOME/RetroRig/MAME/
 #pcsx
 #default path: /home/$USER/.pcsx
 #Main config
-cp -Rv $HOME/.pcsx/pcsx.cfg $HOME/RetroRig/PS1/
+cp -Rv $HOME/.pcsx/pcsx.cfg $HOME/RetroRig/pcsx/
 
 #mupen64plus
 #default path: /home/$USER/.config/mupen64plus
 #Main config
-cp -Rv $HOME/.config/pcsx2/PCSX2-reg.ini $HOME/RetroRig/PS2/
+cp -Rv $HOME/.config/pcsx2/PCSX2-reg.ini $HOME/RetroRig/pcsx2/
 
 #mupen64plus
 #default path: /home/$USER/.config/mupen64plus
