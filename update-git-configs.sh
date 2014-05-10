@@ -46,6 +46,12 @@ cp -Rv $HOME/.config/mupen64plus/mupen64plus.cfg $HOME/RetroRig/mupen64plus/
 cp -Rv $HOME/Games/Configs/qjoypad_launch.sh $HOME/RetroRig/controller-cfg/
 cp -Rv $HOME/Games/Configs/xpad-wireless.xboxdrv $HOME/RetroRig/controller-cfg/
 
+#update init-scripts
+#xboxdrv service
+cp -Rv /etc/init.d/xboxdrv $HOME/RetroRig/init-scripts/
+#qjoypad autostart
+cp -Rv $HOME/.config/autostart/qjoypad.desktop $HOME/RetroRig/init-scripts/
+
 git add *
 git commit -m "(Auto-comment) update-git-config ran"
 git push origin master
