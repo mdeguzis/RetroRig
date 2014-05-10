@@ -42,8 +42,15 @@ cp -Rv $HOME/.config/pcsx2/PCSX2-reg.ini $HOME/RetroRig/PS2/
 #Main config
 cp -Rv $HOME/.config/mupen64plus/mupen64plus.cfg $HOME/RetroRig/mupen64plus/
 
+#mupen64plus
+#default path: /home/$USER/.config/mupen64plus
+#Main config
+cp -Rv $HOME/.stella/stellarc $HOME/RetroRig/Stella/
+
 #update configs for other utilities
+#qjoypad
 cp -Rv $HOME/Games/Configs/qjoypad_launch.sh $HOME/RetroRig/controller-cfg/
+#xboxdrv cfg
 cp -Rv $HOME/Games/Configs/xpad-wireless.xboxdrv $HOME/RetroRig/controller-cfg/
 
 #update init-scripts
