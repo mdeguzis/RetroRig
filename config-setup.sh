@@ -4,6 +4,14 @@
 #Version 1.1
 #cp has interactive mode enabled to prompt for changes
 
+#setup skelton folders for XBMC Rom Collection Browser
+mkdir -pv $HOME/Games/ROMs
+mkdir -pv $HOME/Games/Artwork
+mkdir -pv $HOME/Games/Emulators
+mkdir -pv $HOME/Games/Saves
+mkdir -pv $HOME/Games/Tools
+mkdir -pv $HOME/Games/Configs
+
 #Nestopia
 #default path: /home/$USER/.nestopia
 cp -Rvi nestopia/nstcontrols $HOME/.nestopia/nstcontrols
@@ -37,6 +45,6 @@ cp -Rvi $HOME/RetroRig/PS1/ $HOME/.pcsx/pcsx.cfg
 #Main config
 cp -Rvi $HOME/RetroRig/mupen64plus/ $HOME/.config/mupen64plus/mupen64plus.cfg
 
-#update configs for other utilities
+#copy configs for other utilities
 cp -Rvi $HOME/RetroRig/controller-cfg/ $HOME/Games/Configs/qjoypad_launch.sh
 cp -Rvi $HOME/RetroRig/controller-cfg/ $HOME/Games/Configs/xpad-wireless.xboxdrv
