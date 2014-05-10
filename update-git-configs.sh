@@ -5,5 +5,5 @@
 
 #Nestopia
 #default path: /home/$USER/.nestopia
-cp -Rvi $HOME/.nestopia/nstcontrols $HOME/RetroRig/Nestopia
+cp -Rvi $HOME/.nestopia/nstcontrols $HOME/RetroRig/Nestopia/
 
