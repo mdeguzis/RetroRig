@@ -42,7 +42,7 @@ cp -Rv $HOME/Games/Configs/qjoypad_launch.sh $HOME/RetroRig/controller-cfg/
 cp -Rv $HOME/Games/Configs/xpad-wireless.xboxdrv $HOME/RetroRig/controller-cfg/
 
 git add *
-git commit -m date+"(Auto)update-git-config"
+git commit -m 'date'+"(Auto)update-git-config"
 git push origin master
 
 
