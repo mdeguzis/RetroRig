@@ -11,7 +11,7 @@ cp -Rv $HOME/.nestopia/nstcontrols $HOME/RetroRig/Nestopia/
 #gens
 #default path: /home/$USER/.gens
 #Global config
-cp -Rvi $HOME/.gens/gens.cfg $HOME/RetroRig/Gens-GS/
+cp -Rv $HOME/.gens/gens.cfg $HOME/RetroRig/Gens-GS/
 
 #ZSNES
 #default path: /home/$USER/.zsnes
@@ -42,7 +42,7 @@ cp -Rv $HOME/Games/Configs/qjoypad_launch.sh $HOME/RetroRig/controller-cfg/
 cp -Rv $HOME/Games/Configs/xpad-wireless.xboxdrv $HOME/RetroRig/controller-cfg/
 
 git add *
-git commit -m 'date'+"(Auto)update-git-config"
+git commit -m "(Auto)update-git-config"
 git push origin master
 
 
