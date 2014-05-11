@@ -1,12 +1,12 @@
 #!/bin/bash
-
+#
 #small script to copy over configuration files for emulators
 #Version 0.6
 #Please report any errors via a pull request
 #
 #
 clear
-echo "RetroRig requires	dialog and gitfor installation tasks. Installing..."
+echo "RetroRig requires dialog and git for installation tasks. Installing..."
 sudo apt-get update >> /dev/null
 sudo apt-get install git dialog >> /dev/null
 sleep 2s
@@ -15,7 +15,7 @@ while true; do
     cmd=(dialog --backtitle "LibreGeek.org RetroRig Installer" --menu "Choose your option" 22 76 16)
     options=(1 "Install Software"
              2 "Set up configuration files and init scripts"
-             3 ""
+             3 "Pull latest files"
              4 ""
              5 ""
              6 "Reboot PC"
@@ -29,11 +29,10 @@ while true; do
 		clear
 		sudo apt-get update
 		sudo apt-get install git xboxdrv zsnes nestopia pcsxr\
-		pcsx2 mame mupen64plus qjoypad xbmc dolphin-emu stella\
-		ca-certificates
-		git clone https://github.com/ProfessorKaos64/RetroRig
-		sleep 5s
+		pcsx2 mame mupen64plus qjoypad xbmc dolphin-emu stella	
+		echo ""
 		echo "RetroRig files cloned into: $HOME/RetroRig"	 
+		sleep 5s		
 		#clear
 		clear
 		;;
@@ -42,11 +41,26 @@ while true; do
 		sleep 3s
 		clear
 		#setup skelton folders for XBMC Rom Collection Browser
-		mkdir -pv $HOME/Games/ROMs
-		mkdir -pv $HOME/Games/Artwork
+		#ROMs		
+		mkdir -pv $HOME/Games/ROMs/Atari\ 2600/
+		mkdir -pv $HOME/Games/ROMs/Gamecube/
+		mkdir -pv $HOME/Games/ROMs/Mame4All/
+		mkdir -pv $HOME/Games/ROMs/N64/
+		mkdir -pv $HOME/Games/ROMs/NES/
+		mkdir -pv $HOME/Games/ROMs/SNES/
+		mkdir -pv $HOME/Games/ROMs/PS2/
+		mkdir -pv $HOME/Games/ROMs/PS1/
+		mkdir -pv $HOME/Games/ROMs/sgenroms/
+		mkdir -pv $HOME/Games/ROMs/SNK\ Neo\ Geo/
+		#Artwork
+		mkdir -pv $HOME/Games/Artwork/
+		#Emulators (if any fall here)		
 		mkdir -pv $HOME/Games/Emulators
+		#Saves (if any)		
 		mkdir -pv $HOME/Games/Saves
+		#Tools		
 		mkdir -pv $HOME/Games/Tools
+		#configs		
 		mkdir -pv $HOME/Games/Configs
 
 		#Nestopia
@@ -103,19 +117,24 @@ while true; do
 		cp -v $HOME/RetroRig/controller-cfg/xpad-wireless.xboxdrv $HOME/Games/Configs/
 
 		#clear and prompt
-	       ;;
-            2) ;;
-            3) ;;
-            4) ;;
-            5) ;;
-            6)
-	       echo "Rebooting in 5 seconds, press CTRL+C to cancel"
-               sleep 5s
-               sudo reboot 
-	       ;;
-            7) 
-	       break
-               ;;
+	        ;;
+            3)
+		echo "updating git repo"
+		sleep 2s
+		cd $HOME/RetroRig/
+		git pull 
+		;;
+            4)  ;;
+            5)  ;;
+            6)  ;;
+            7)
+	        echo "Rebooting in 5 seconds, press CTRL+C to cancel"
+                sleep 5s
+                sudo reboot 
+	        ;;
+            8) 
+	        break
+                ;;
          esac
      else
 	 break
