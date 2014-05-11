@@ -16,8 +16,8 @@ while true; do
              3 ""
              4 ""
              5 ""
-             6 ""
-             7 "Reboot PC" )
+             6 "Reboot PC"
+             7 "Exit" )
     choices=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
     if [ "$choices" != "" ]; then
 	case $choices in
@@ -31,13 +31,10 @@ while true; do
 		sleep 5s
 		#clear
 		clear
-
+		;;
 	    2) 
 		echo "Seting up configuration files"
-            	;;
-		"Setup configuration files")
-		echo "Configuring..."
-		sleep 2s
+		sleep 3s
 		clear
 		#setup skelton folders for XBMC Rom Collection Browser
 		mkdir -pv $HOME/Games/ROMs
@@ -106,23 +103,20 @@ while true; do
             3) ;;
             4) ;;
             5) ;;
-            6) ;;
-            7) echo "Rebooting in 5 seconds, press CTRL+C to cancel"
+            6)
+	       echo "Rebooting in 5 seconds, press CTRL+C to cancel"
                sleep 5s
-               sudo reboot
+               sudo reboot 
+	       ;;
+            7) 
+	       break
                ;;
-        esac
-else
-break
-fi
+         esac
+     else
+	 break
+     fi
+done     
+clear
 
-        "Reboot PC")
-            
-        "Quit")
-            break
-            ;;
-        *) echo invalid option;;
-    esac
-done
 
 
