@@ -42,7 +42,7 @@ while true; do
 		#dot files without loading XBMC at least once
 		#copy in default folder base from first run:
 		mkdir -pv $HOME/RetroRig/.xbmc/
-		cp -Rv $HOME/RetroRig/XBMC/* $HOME/.xbmc/addons/
+		cp -Rv $HOME/RetroRig/XBMC/* $HOME/.xbmc/
 
 		#Auto-pull of RCB will be automated with curl later!
 		cd $HOME/.xbmc/addons && curl romcollectionbrowser.googlecode.com/files/script.games.rom.collection.browser-2.0.10.zip > ~/.xbmc/addons/script.games.rom.collection.browser-2.0.10.zip
