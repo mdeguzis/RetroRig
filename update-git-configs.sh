@@ -60,7 +60,7 @@ cp -Rv /etc/init.d/xboxdrv $HOME/RetroRig/init-scripts/
 cp -Rv $HOME/.config/autostart/qjoypad.desktop $HOME/RetroRig/init-scripts/
 
 git add *
-git commit -m "(Auto-comment) update-git-config ran"
+git commit
 git push origin master
 
 
