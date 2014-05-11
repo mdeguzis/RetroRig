@@ -25,28 +25,35 @@ while true; do
 		echo "Installing required programs..."
 		sleep 2s
 		clear
+
 		#add multi-arch support
 		sudo dpkg --add-architecture i386
+
 		#add repository for pcsx2 (PS2 emulator)
 		sudo add-apt-repository -y ppa:gregory-hainaut/pcsx2.official.ppa
+
 		#add repository for dolphin-emu
 		sudo add-apt-repository -y ppa:glennric/dolphin-emu
 		sudo apt-get update
 		sudo apt-get install -y xboxdrv curl zsnes nestopia pcsxr pcsx2:i386\
-		mame mupen64plus dconf-tools qjoypad xbmc dolphin-emu-master stella	
+		mame mupen64plus dconf-tools qjoypad xbmc dolphin-emu-master stella
+	
 		#xbmc does not (at least for Ubuntu's repo pkg) load the
 		#dot files without loading XBMC at least once
 		#copy in default folder base from first run:
 		mkdir -pv $HOME/RetroRig/.xbmc/
 		cp -Rv $HOME/RetroRig/XBMC/* $HOME/.xbmc/addons/
+
 		#Auto-pull of RCB will be automated with curl later!
 		cd $HOME/.xbmc/addons && curl romcollectionbrowser.googlecode.com/files/script.games.rom.collection.browser-2.0.10.zip > ~/.xbmc/addons/script.games.rom.collection.browser-2.0.10.zip
+
 		#set proper permission for addon
 		chmod 755 script.games.rom.collection.browser-2.0.10.zip
 		cd $HOME/RetroRig/
 		echo ""
 		echo "RetroRig files cloned into: $HOME/RetroRig"	 
-		sleep 5s		
+		sleep 5s
+		
 		#clear
 		clear
 		;;
@@ -54,13 +61,13 @@ while true; do
 		echo "Seting up configuration files"
 		sleep 3s
 		clear
-		#pull ROM Collection Browser into xbmc 
-		asfd
+
 		#disable screensaver, XBMC will manage this
 		#export display to allow gsettings running in terminal window
 		export DISPLAY=:0.0
 		gsettings set org.gnome.settings-daemon.plugins.power active false
 		gsettings set org.gnome.desktop.screensaver idle-activation-enabled false
+
 		#setup skelton folders for XBMC Rom Collection Browser
 		#ROMs		
 		mkdir -pv $HOME/Games/ROMs/Atari\ 2600/
@@ -73,8 +80,10 @@ while true; do
 		mkdir -pv $HOME/Games/ROMs/PS1/
 		mkdir -pv $HOME/Games/ROMs/sgenroms/
 		mkdir -pv $HOME/Games/ROMs/SNK\ Neo\ Geo/
+
 		#Artwork
 		mkdir -pv $HOME/Games/Artwork/
+
 		#Emulators (if any fall here)		
 		mkdir -pv $HOME/Games/Artwork/ROMs/Atari\ 2600/
 		mkdir -pv $HOME/Games/Artwork/ROMs/Gamecube/
@@ -86,6 +95,7 @@ while true; do
 		mkdir -pv $HOME/Games/Artwork/ROMs/PS1/
 		mkdir -pv $HOME/Games/Artwork/ROMs/sgenroms/
 		mkdir -pv $HOME/Games/Artwork/ROMs/SNK\ Neo\ Geo/
+
 		#Saves (if any)		
 		mkdir -pv $HOME/Games/Saves/Atari\ 2600/
 		mkdir -pv $HOME/Games/Saves/Gamecube/
@@ -97,8 +107,10 @@ while true; do
 		mkdir -pv $HOME/Games/Saves/PS1/
 		mkdir -pv $HOME/Games/Saves/genroms/
 		mkdir -pv $HOME/Games/Saves/SNK\ Neo\ Geo/
+
 		#Tools		
 		mkdir -pv $HOME/Games/Tools/
+
 		#configs		
 		mkdir -pv $HOME/Games/Configs/
 
@@ -157,7 +169,7 @@ while true; do
 		cp -v $HOME/RetroRig/controller-cfg/xpad-wireless.xboxdrv $HOME/Games/Configs/
 
 		#create autostart for XBMC
-		sudo cp -v /usr/bin/xbmc /etc/xdg/autostart/
+		sudo cp -v /usr/share/applications/xbmc.desktop /etc/xdg/autostart/
 
 		#clear and prompt
 	        ;;
