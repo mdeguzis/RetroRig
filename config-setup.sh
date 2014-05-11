@@ -85,16 +85,16 @@ while true; do
 		mkdir -pv $HOME/Games/Artwork/
 
 		#Emulators (if any fall here)		
-		mkdir -pv $HOME/Games/Artwork/ROMs/Atari\ 2600/
-		mkdir -pv $HOME/Games/Artwork/ROMs/Gamecube/
-		mkdir -pv $HOME/Games/Artwork/ROMs/Mame4All/
-		mkdir -pv $HOME/Games/Artwork/ROMs/N64/
-		mkdir -pv $HOME/Games/Artwork/ROMs/NES/
-		mkdir -pv $HOME/Games/Artwork/ROMs/SNES/
-		mkdir -pv $HOME/Games/Artwork/ROMs/PS2/
-		mkdir -pv $HOME/Games/Artwork/ROMs/PS1/
-		mkdir -pv $HOME/Games/Artwork/ROMs/sgenroms/
-		mkdir -pv $HOME/Games/Artwork/ROMs/SNK\ Neo\ Geo/
+		mkdir -pv $HOME/Games/Artwork/Atari\ 2600/
+		mkdir -pv $HOME/Games/Artwork/Gamecube/
+		mkdir -pv $HOME/Games/Artwork/Mame4All/
+		mkdir -pv $HOME/Games/Artwork/N64/
+		mkdir -pv $HOME/Games/Artwork/NES/
+		mkdir -pv $HOME/Games/Artwork/SNES/
+		mkdir -pv $HOME/Games/Artwork/PS2/
+		mkdir -pv $HOME/Games/Artwork/PS1/
+		mkdir -pv $HOME/Games/Artwork/sgenroms/
+		mkdir -pv $HOME/Games/Artwork/SNK\ Neo\ Geo/
 
 		#Saves (if any)		
 		mkdir -pv $HOME/Games/Saves/Atari\ 2600/
@@ -165,11 +165,11 @@ while true; do
 		cp -Rv /$HOME/RetroRig/Dolphin/gfx_opengl.ini $HOME/.dolphin-emu/Config/
 
 		#copy configs for other utilities
-		cp -v $HOME/RetroRig/controller-cfg/qjoypad_launch.sh $HOME/Games/Configs/
 		cp -v $HOME/RetroRig/controller-cfg/xpad-wireless.xboxdrv $HOME/Games/Configs/
 
-		#create autostart for XBMC
+		#create autostart for XBMC snd qjoypad
 		sudo cp -v /usr/share/applications/xbmc.desktop /etc/xdg/autostart/
+		sudo cp -v $HOME/RetroRig/controller-cfg/qjoypad_launch.sh /etc/xdg/autostart/
 
 		#clear and prompt
 	        ;;
