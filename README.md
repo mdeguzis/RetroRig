@@ -1,7 +1,7 @@
-[[ RetroRig Project for Ubuntu 14.04 LTS ]]
+RetroRig Project for Ubuntu 14.04 LTS
 ===================================================
 
-[[ Installation ]]
+Installation
 -----------------
 
 To close this repo via the CLI
@@ -10,7 +10,7 @@ To close this repo via the CLI
 
 Simply run "./config.setup.sh" after cloning
 
-[[ Please Note]]
+Please Note
 -------------
 
 This project is not yet complete
