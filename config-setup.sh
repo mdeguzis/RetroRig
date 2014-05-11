@@ -3,8 +3,8 @@
 #small script to copy over configuration files for emulators
 #Version 0.6
 #Please report any errors via a pull request
-
-#auto install dialog
+#
+#
 clear
 echo "RetroRig requires	dialog and gitfor installation tasks. Installing..."
 sudo apt-get update >> /dev/null
@@ -33,7 +33,7 @@ while true; do
 		ca-certificates
 		git clone https://github.com/ProfessorKaos64/RetroRig
 		sleep 5s
-		echo "RetroRig files cloned into: $HOME/RetroRig" 
+		echo "RetroRig files cloned into: $HOME/RetroRig"	 
 		#clear
 		clear
 		;;
