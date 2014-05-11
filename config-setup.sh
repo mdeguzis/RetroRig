@@ -73,6 +73,17 @@ do
 		#Main config
 		cp -v $HOME/RetroRig/mupen64plus/mupen64plus.cfg $HOME/.config/mupen64plus/
 
+		#dolphin
+		#default path /home/$USER/.dolphin-emu/
+		#emulator config
+		cp -Rv /$HOME/RetroRig/Dolphin/Dolphin.ini $HOME/.dolphin-emu/Config/
+		#Gamecube controller config
+		cp -Rv /$HOME/RetroRig/Dolphin/GCPadNew.ini $HOME/.dolphin-emu/Config/
+		#Wii controller config
+		#[PENDING]
+		#opengl config
+		cp -Rv /$HOME/RetroRig/Dolphin/gfx_opengl.ini $HOME/.dolphin-emu/Config/
+
 		#copy configs for other utilities
 		cp -v $HOME/RetroRig/controller-cfg/qjoypad_launch.sh $HOME/Games/Configs/
 		cp -v $HOME/RetroRig/controller-cfg/xpad-wireless.xboxdrv $HOME/Games/Configs/
