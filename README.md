@@ -49,7 +49,7 @@ To clone this repo via the CLI:
 
 `git clone https://github.com/ProfessorKaos64/RetroRig` 
 
-Simply run `./config.setup.sh` after cloning.  You can also choose to just copy configuratio files
+Simply run `./config.setup.sh` after cloning.  You can also choose to just copy configuration files
 from each folder if you wish to just steal some notes on how to setup the emulators. Please 
 reference the issues area on Github for current issues, or the release-roadmap for upcoming 
 items.
