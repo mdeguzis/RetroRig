@@ -39,8 +39,9 @@ while true; do
 		#copy in default folder base from first run:
 		mkdir -pv $HOME/RetroRig/.xbmc/
 		cp -Rv $HOME/RetroRig/XBMC/* $HOME/.xbmc/addons/
-		#This will be automated with curl later!
-		curl -O http://romcollectionbrowser.googlecode.com/filesscript.games.rom.collection.browser-2.0.10.zip $HOME/.xbmc/
+		#Auto-pull of RCB will be automated with curl later!
+		cd $HOME/.xbmc/addons && curl -O http://romcollectionbrowser.googlecode.com/filesscript.games.rom.collection.browser-2.0.10.zip
+		cd $HOME/RetroRig/
 		echo ""
 		echo "RetroRig files cloned into: $HOME/RetroRig"	 
 		sleep 5s		
