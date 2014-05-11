@@ -9,7 +9,6 @@ clear
 echo "RetroRig requires dialog and git for installation tasks. Installing..."
 sudo apt-get update >> /dev/null
 sudo apt-get install git dialog >> /dev/null
-sleep 2s
 
 while true; do
     cmd=(dialog --backtitle "LibreGeek.org RetroRig Installer" --menu "Choose your option" 22 76 16)
@@ -28,8 +27,7 @@ while true; do
 		sleep 2s
 		clear
 		sudo apt-get update
-		sudo apt-get install git xboxdrv zsnes nestopia pcsxr\
-		pcsx2 mame mupen64plus qjoypad xbmc dolphin-emu stella	
+		sudo apt-get install xboxdrv zsnes nestopia pcsxr pcsx2 mame mupen64plus qjoypad xbmc dolphin-emu stella	
 		echo ""
 		echo "RetroRig files cloned into: $HOME/RetroRig"	 
 		sleep 5s		
@@ -55,13 +53,31 @@ while true; do
 		#Artwork
 		mkdir -pv $HOME/Games/Artwork/
 		#Emulators (if any fall here)		
-		mkdir -pv $HOME/Games/Emulators
+		mkdir -pv $HOME/Games/Artwork/ROMs/Atari\ 2600/
+		mkdir -pv $HOME/Games/Artwork/ROMs/Gamecube/
+		mkdir -pv $HOME/Games/Artwork/ROMs/Mame4All/
+		mkdir -pv $HOME/Games/Artwork/ROMs/N64/
+		mkdir -pv $HOME/Games/Artwork/ROMs/NES/
+		mkdir -pv $HOME/Games/Artwork/ROMs/SNES/
+		mkdir -pv $HOME/Games/Artwork/ROMs/PS2/
+		mkdir -pv $HOME/Games/Artwork/ROMs/PS1/
+		mkdir -pv $HOME/Games/Artwork/ROMs/sgenroms/
+		mkdir -pv $HOME/Games/Artwork/ROMs/SNK\ Neo\ Geo/
 		#Saves (if any)		
-		mkdir -pv $HOME/Games/Saves
+		mkdir -pv $HOME/Games/Saves/Atari\ 2600/
+		mkdir -pv $HOME/Games/Saves/Gamecube/
+		mkdir -pv $HOME/Games/Saves/Mame4All/
+		mkdir -pv $HOME/Games/Saves/N64/
+		mkdir -pv $HOME/Games/Saves/NES/
+		mkdir -pv $HOME/Games/Saves/SNES/
+		mkdir -pv $HOME/Games/Saves/PS2/
+		mkdir -pv $HOME/Games/Saves/PS1/
+		mkdir -pv $HOME/Games/Saves/genroms/
+		mkdir -pv $HOME/Games/Saves/SNK\ Neo\ Geo/
 		#Tools		
-		mkdir -pv $HOME/Games/Tools
+		mkdir -pv $HOME/Games/Tools/
 		#configs		
-		mkdir -pv $HOME/Games/Configs
+		mkdir -pv $HOME/Games/Configs/
 
 		#Nestopia
 		#default path: /home/$USER/.nestopia
@@ -126,11 +142,12 @@ while true; do
 		;;
             4)  ;;
             5)  ;;
-            6)  ;;
-            7)
+            6)  
 	        echo "Rebooting in 5 seconds, press CTRL+C to cancel"
                 sleep 5s
                 sudo reboot 
+		;;
+            7)  ;;
 	        ;;
             8) 
 	        break
