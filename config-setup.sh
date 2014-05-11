@@ -26,7 +26,7 @@ while true; do
 		sleep 2s
 		clear
 		#add multi-arch support
-		dpkg --add-architecture i386
+		sudo dpkg --add-architecture i386
 		#add repository for pcsx2 (PS2 emulator)
 		sudo add-apt-repository ppa:gregory-hainaut/pcsx2.official.ppa
 		#add repository for dolphin-emu
