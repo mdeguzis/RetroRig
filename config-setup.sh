@@ -14,7 +14,7 @@ while true; do
     options=(1 "Install Software"
              2 "Set up configuration files and init scripts"
              3 "Pull latest files"
-             4 ""
+             4 "Update emulator binaries"
              5 ""
              6 "Reboot PC"
              7 "Exit" )
@@ -32,7 +32,15 @@ while true; do
 		#add repository for dolphin-emu
 		sudo add-apt-repository -y ppa:glennric/dolphin-emu
 		sudo apt-get update
-		sudo apt-get install -y xboxdrv zsnes nestopia pcsxr pcsx2:i386 mame mupen64plus qjoypad xbmc dolphin-emu-master stella	
+		sudo apt-get install -y xboxdrv zsnes nestopia pcsxr pcsx2:i386\
+		mame mupen64plus qjoypad xbmc dolphin-emu-master stella	
+		#xbmc does not (at least for Ubuntu's repo pkg) load the
+		#dot files without loading XBMC at least once
+		#copy in default folder base from first run:
+		mkdir -pv $HOME/RetroRig/.xbmc/
+		cp -v $HOME/RetroRig/XBMC/* $HOME/.xbmc/
+		#This will be automated with curl later!
+		wget -o http://romcollectionbrowser.googlecode.com/			filesscript.games.rom.collection.browser-2.0.10.zip 
 		echo ""
 		echo "RetroRig files cloned into: $HOME/RetroRig"	 
 		sleep 5s		
@@ -43,6 +51,10 @@ while true; do
 		echo "Seting up configuration files"
 		sleep 3s
 		clear
+		#pull ROM Collection Browser into xbmc 
+		asfd
+		#disable screensaver, XBMC will manage this
+		sudo gsettings set org.gnome.settings-daemon.plugins.power active false
 		#setup skelton folders for XBMC Rom Collection Browser
 		#ROMs		
 		mkdir -pv $HOME/Games/ROMs/Atari\ 2600/
@@ -145,7 +157,11 @@ while true; do
 		cd $HOME/RetroRig/
 		git pull 
 		;;
-            4)  ;;
+            4)  
+		echo "updating binaries"
+		sudo apt-get install -y xboxdrv zsnes nestopia pcsxr pcsx2:i386\
+		mame mupen64plus qjoypad xbmc dolphin-emu-master stella	
+		;;
             5)  ;;
             6)  
 	        echo "Rebooting in 5 seconds, press CTRL+C to cancel"
