@@ -3,15 +3,15 @@ RetroRig Project for Ubuntu 14.04 LTS
 
 ## Please Note!
 
-RetroRig is shell script to setup a Linux x86_64 system  with several emulators, and XBMC as graphical front end.
-The inspiration for doing this lies almost completely with the RetroPie Project. I wanted to provide
-something similar, but wanted something a bit more than RetroArch. One of my chief complaints for 
-RetroArch/RetroPie (as amazing as it is), is organization. Sorting through 100's of games sometimes
-takes a long amount of time (folders and help this), but I soon became addicted to how ROM Collection
-Browser handles games, as well as it's huge set of options. Among those things was seperate and
-easy control of each emulator, rather than a blanket config for the entire suite. Some emulators do 
-things better than others, and I try to adjust them accordingly. Who knows, I may end up using
-RetroArch, but hey, nobody said fun projects are all for naught, right!?
+RetroRig is shell script to setup a Linux x86_64 system  with several emulators, and XBMC as graphical 
+front end.The inspiration for doing this lies almost completely with the RetroPie Project. I wanted to provide
+something similar, but wanted something a bit more than RetroArch. One of my chief nags for RetroArch/RetroPie 
+(as amazing as it is), is organization. Sorting through 100's of games sometimestakes a long amount of time 
+(folders and help this), but I soon became addicted to how ROM Collection Browser handles games, as well as 
+it's huge set of options. Among those things was seperate and easy control of each emulator, rather than a 
+blanket config for the entire suite. This allows emulators to have traditional layouts (reversed buttons
+for SNES, for instance). Some emulators do things better than others, and I try to adjust them accordingly. 
+Who knows, I may end up using RetroArch, but hey, nobody said fun projects are all for naught, right!?
 
 This project is intended to be run on Ubuntu (currently 14.04 LTS) with an wireless Xbox 360 Controller. 
 At some point in the future, I want to try and branch this to other distributions if possible, as well
