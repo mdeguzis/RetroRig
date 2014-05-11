@@ -25,6 +25,12 @@ while true; do
 		echo "Installing required programs..."
 		sleep 2s
 		clear
+		#add multi-arch support
+		dpkg --add-architecture i386
+		#add repository for pcsx2 (PS2 emulator)
+		sudo add-apt-repository ppa:gregory-hainaut/pcsx2.official.ppa
+		#add repository for dolphin-emu
+		sudo add-apt-repository ppa:glennric/dolphin-emu
 		sudo apt-get update
 		sudo apt-get install xboxdrv zsnes nestopia pcsxr pcsx2 mame mupen64plus qjoypad xbmc dolphin-emu stella	
 		echo ""
@@ -146,10 +152,7 @@ while true; do
                 sleep 5s
                 sudo reboot 
 		;;
-            7)  
-		;;
-            8)  
-		break
+            7)  break
                 ;;
          esac
      else
