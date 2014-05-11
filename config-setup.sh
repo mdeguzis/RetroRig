@@ -38,7 +38,7 @@ while true; do
 		#dot files without loading XBMC at least once
 		#copy in default folder base from first run:
 		mkdir -pv $HOME/RetroRig/.xbmc/
-		cp -v $HOME/RetroRig/XBMC/* $HOME/.xbmc/
+		cp -Rv $HOME/RetroRig/XBMC/* $HOME/.xbmc/
 		#This will be automated with curl later!
 		wget -o http://romcollectionbrowser.googlecode.com/			filesscript.games.rom.collection.browser-2.0.10.zip 
 		echo ""
