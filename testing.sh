@@ -5,33 +5,9 @@
 #Please report any errors via a pull request
 
 #auto install dialog
-echo "RetroRig requires	dialog for installation	tasks. Installing..."
+echo "RetroRig requires dialog for installation tasks. Installing..."
 sudo apt-get install dialog >> /dev/null
-sleep 2s
-
-while true; do
-cmd=(dialog --backtitle "LibreGeek.org RetroRig Installer" --menu "Choose your option" 22 76 16)
-    options=(1 ""
-             2 ""
-             3 ""
-             4 ""
-             5 ""
-             6 ""
-             7 "Reboot PC" )
-    choices=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
-    if [ "$choices" != "" ]; then
-case $choices in
-            1) ;;
-            2) ;;
-            3) ;;
-            4) ;;
-            5) ;;
-            6) ;;
-            7) ;;
-        esac
-else
-break
-fi
+sleep 2s 
 
 PS3='Please enter your choice: '
 options=("Install Software" "Setup configuration files" "Reboot PC" "Quit")
