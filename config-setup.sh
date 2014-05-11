@@ -5,8 +5,10 @@
 #Please report any errors via a pull request
 
 #auto install dialog
-echo "RetroRig requires	dialog for installation	tasks. Installing..."
-sudo apt-get install dialog >> /dev/null
+clear
+echo "RetroRig requires	dialog and gitfor installation tasks. Installing..."
+sudo apt-get update >> /dev/null
+sudo apt-get install git dialog >> /dev/null
 sleep 2s
 
 while true; do
@@ -27,8 +29,11 @@ while true; do
 		clear
 		sudo apt-get update
 		sudo apt-get install git xboxdrv zsnes nestopia pcsxr\
-		pcsx2 mame mupen64plus qjoypad xbmc dolphin-emu stella
+		pcsx2 mame mupen64plus qjoypad xbmc dolphin-emu stella\
+		ca-certificates
+		git clone https://github.com/ProfessorKaos64/RetroRig
 		sleep 5s
+		echo "RetroRig files cloned into: $HOME/RetroRig" 
 		#clear
 		clear
 		;;
