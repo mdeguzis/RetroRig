@@ -1,20 +1,32 @@
 #!/bin/bash
 
 #small script to copy over configuration files for emulators
-#Version 1.1
-#cp has interactive mode enabled to prompt for changes
+#Version 0.6
+#Please report any errors via a pull request
 
 PS3='Please enter your choice: '
-options=("(1) Install Software" "(2) Setup configuration files" "Option 3" "Quit")
+options=("Install Software" "Setup configuration files" "Reboot PC" "Quit")
 select opt in "${options[@]}"
 do
     case $opt in
-        "(1) Install Software")
+        "Install Software")
             echo "Installing required programs..."
-	    apt-get install zsnes nestopia pcsxr pcsx2 mame mupen64plus qjoypad xbmc dolphin-emu 		stella		
+	    sleep 2s
+	    clear
+	    sudo apt-get update
+	    sudo apt-get install git xboxdrv zsnes nestopia pcsxr\
+	    pcsx2 mame mupen64plus qjoypad xbmc dolphin-emu stella
+	    sleep 5s
+	    #clear and prompt
+	    clear
+	    echo "Please enter your choice:"	
+            echo "1) Install Software	      3) Other"
+	    echo "2) Setup configuration files  4) Quit"
             ;;
-        "(2) Setup configuration files")
+        "Setup configuration files")
             echo "Configuring..."
+		sleep 2s
+		clear
 		#setup skelton folders for XBMC Rom Collection Browser
 		mkdir -pv $HOME/Games/ROMs
 		mkdir -pv $HOME/Games/Artwork
@@ -25,43 +37,57 @@ do
 
 		#Nestopia
 		#default path: /home/$USER/.nestopia
-		cp -Rvi nestopia/nstcontrols $HOME/.nestopia/nstcontrols
+		cp -v $HOME/RetroRig/Nestopia/nstcontrols $HOME/.nestopia/
 
 		#gens
 		#default path: /home/$USER/.gens
 		#Global config
-		cp -Rvi $HOME/RetroRig/Gens-GS/ $HOME/.gens/gens.cfg 
+		cp -v $HOME/RetroRig/Gens-GS/gens.cfg $HOME/.gens/
 
 		#ZSNES
 		#default path: /home/$USER/.zsnes
 		#Controller config
-		cp -Rvi $HOME/RetroRig/ZSNES/ $HOME/.zsnes/zinput.cfg
+		cp -v $HOME/RetroRig/ZSNES/zinput.cfg $HOME/.zsnes/
 		#emulator config
-		cp -Rvi $HOME/RetroRig/ZSNES/ $HOME/.zsnes/zsnesl.cfg
+		cp -v $HOME/RetroRig/ZSNES/zsnesl.cfg $HOME/.zsnes/
 
 		#mame
 		#default path: /home/$USER/.mame
 		#Main config
-		cp -Rvi $HOME/RetroRig/MAME/ $HOME/.mame/mame.ini
+		cp -v $HOME/RetroRig/MAME/mame.ini $HOME/.mame/
 		#controller config
-		cp -Rvi $HOME/RetroRig/MAME/ $HOME/.mame/cfg/default.cfg
+		cp -Rv $HOME/RetroRig/MAME/default.cfg $HOME/.mame/cfg/
 
 		#pcsx
 		#default path: /home/$USER/.pcsx
 		#Main config
-		cp -Rvi $HOME/RetroRig/PS1/ $HOME/.pcsx/pcsx.cfg
+		cp -v $HOME/RetroRig/pcsx/pcsx.cfg $HOME/.pcsx/
 
-		#mupen64plus
+		#pcsx2
+		#default path: /home/$USER/.config/pcsx2
+		#Main config
+		cp -v $HOME/RetroRig/pcsx2/PCSX2-reg.ini $HOME/.config/pcsx2/
+
+		#mupen64pluspwd
 		#default path: /home/$USER/.config/mupen64plus
 		#Main config
-		cp -Rvi $HOME/RetroRig/mupen64plus/ $HOME/.config/mupen64plus/mupen64plus.cfg
+		cp -v $HOME/RetroRig/mupen64plus/mupen64plus.cfg $HOME/.config/mupen64plus/
 
 		#copy configs for other utilities
-		cp -Rvi $HOME/RetroRig/controller-cfg/ $HOME/Games/Configs/qjoypad_launch.sh
-		cp -Rvi $HOME/RetroRig/controller-cfg/ $HOME/Games/Configs/xpad-wireless.xboxdrv
+		cp -v $HOME/RetroRig/controller-cfg/qjoypad_launch.sh $HOME/Games/Configs/
+		cp -v $HOME/RetroRig/controller-cfg/xpad-wireless.xboxdrv $HOME/Games/Configs/
+
+		#clear and prompt
+		sleep 3s
+		clear
+	    	echo "Please enter your choice:"	
+           	echo "1) Install Software	      3) Other"
+	   	echo "2) Setup configuration files  4) Quit"
             ;;
-        "Option 3")
-            echo "Other"
+        "Reboot PC")
+            echo "Rebooting in 5 seconds, press CTRL+C to cancel"
+            sleep 5s
+            sudo reboot
             ;;
         "Quit")
             break
