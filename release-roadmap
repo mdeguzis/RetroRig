@@ -22,6 +22,11 @@ Overall Goals for 1.0 release
 -CLI logo in script
 -Provide video driver switcher for emulators?
 
+Current Issues
+---------------
+
+-Problems with using OpenGL on Stella (Atari 2600)
+
 Future Goals
 ---------------
 
