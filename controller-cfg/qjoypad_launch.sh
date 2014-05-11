@@ -1,3 +1,3 @@
 #!/bin/bash
 
-qjoypad &
+qjoypad "retro-gaming" &
