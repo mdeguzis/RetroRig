@@ -32,7 +32,7 @@ while true; do
 		#add repository for dolphin-emu
 		sudo add-apt-repository -y ppa:glennric/dolphin-emu
 		sudo apt-get update
-		sudo apt-get install -y xboxdrv zsnes nestopia pcsxr pcsx2:i386 mame mupen64plus qjoypad xbmc dolphin-emu stella	
+		sudo apt-get install -y xboxdrv zsnes nestopia pcsxr pcsx2:i386 mame mupen64plus qjoypad xbmc dolphin-emu-master stella	
 		echo ""
 		echo "RetroRig files cloned into: $HOME/RetroRig"	 
 		sleep 5s		
