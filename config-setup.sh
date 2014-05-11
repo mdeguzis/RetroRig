@@ -146,9 +146,10 @@ while true; do
                 sleep 5s
                 sudo reboot 
 		;;
-            7)  ;;
-	        ;;
-            8)  break
+            7)  
+		;;
+            8)  
+		break
                 ;;
          esac
      else
