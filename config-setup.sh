@@ -40,7 +40,9 @@ while true; do
 		mkdir -pv $HOME/RetroRig/.xbmc/
 		cp -Rv $HOME/RetroRig/XBMC/* $HOME/.xbmc/addons/
 		#Auto-pull of RCB will be automated with curl later!
-		cd $HOME/.xbmc/addons && curl -O http://romcollectionbrowser.googlecode.com/filesscript.games.rom.collection.browser-2.0.10.zip
+		cd $HOME/.xbmc/addons && curl -O http://romcollectionbrowser.googlecode.com/files/script.games.rom.collection.browser-2.0.10.zip
+		#set proper permission for addon
+		chmod 755 script.games.rom.collection.browser-2.0.10.zip
 		cd $HOME/RetroRig/
 		echo ""
 		echo "RetroRig files cloned into: $HOME/RetroRig"	 
