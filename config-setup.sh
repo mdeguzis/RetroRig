@@ -7,7 +7,6 @@
 #
 clear
 echo "RetroRig requires dialog and git for installation tasks. Installing..."
-sudo apt-get update >> /dev/null
 sudo apt-get install git dialog >> /dev/null
 
 while true; do
@@ -149,8 +148,7 @@ while true; do
 		;;
             7)  ;;
 	        ;;
-            8) 
-	        break
+            8)  break
                 ;;
          esac
      else
