@@ -1,6 +1,11 @@
 RetroRig Project for Ubuntu 14.04 LTS
 ===================================================
 
+Please Note!
+----------------
+
+This project is intened to be run on Ubuntu (currently 14.04 LTS) with an Xbox 360 Controller. At some point in the future, I want to try and branch this to other distributions if possible. Thank you for your patience.
+
 Installation
 -----------------
 

@@ -47,6 +47,13 @@ cp -Rv $HOME/.config/mupen64plus/mupen64plus.cfg $HOME/RetroRig/mupen64plus/
 #Main config
 cp -Rv $HOME/.stella/stellarc $HOME/RetroRig/Stella/
 
+#dolphin
+#default path /home/$USER/.dolphin-emu/
+#Dolphin.ini  GCPadNew.ini  gfx_opengl.ini
+cp -Rv $HOME/.dolphin-emu/Configs/Dolphin.ini /$HOME/RetroRig/Dolphin/
+cp -Rv $HOME/.dolphin-emu/Configs/GCPadNew.ini /$HOME/RetroRig/Dolphin/
+cp -Rv $HOME/.dolphin-emu/Configs/gfx_opengl.ini /$HOME/RetroRig/Dolphin/
+
 #update configs for other utilities
 #qjoypad
 cp -Rv $HOME/Games/Configs/qjoypad_launch.sh $HOME/RetroRig/controller-cfg/
