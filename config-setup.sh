@@ -10,9 +10,9 @@ sudo apt-get install dialog >> /dev/null
 sleep 2s
 
 while true; do
-cmd=(dialog --backtitle "LibreGeek.org RetroRig Installer" --menu "Choose your option" 22 76 16)
-    options=(1 ""
-             2 ""
+    cmd=(dialog --backtitle "LibreGeek.org RetroRig Installer" --menu "Choose your option" 22 76 16)
+    options=(1 "Install Software"
+             2 "Set up configuration files and init scripts"
              3 ""
              4 ""
              5 ""
@@ -20,40 +20,23 @@ cmd=(dialog --backtitle "LibreGeek.org RetroRig Installer" --menu "Choose your o
              7 "Reboot PC" )
     choices=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
     if [ "$choices" != "" ]; then
-case $choices in
-            1) ;;
-            2) ;;
-            3) ;;
-            4) ;;
-            5) ;;
-            6) ;;
-            7) ;;
-        esac
-else
-break
-fi
+	case $choices in
+            1) 	
+		echo "Installing required programs..."
+		sleep 2s
+		clear
+		sudo apt-get update
+		sudo apt-get install git xboxdrv zsnes nestopia pcsxr\
+		pcsx2 mame mupen64plus qjoypad xbmc dolphin-emu stella
+		sleep 5s
+		#clear
+		clear
 
-PS3='Please enter your choice: '
-options=("Install Software" "Setup configuration files" "Reboot PC" "Quit")
-select opt in "${options[@]}"
-do
-    case $opt in
-        "Install Software")
-            echo "Installing required programs..."
-	    sleep 2s
-	    clear
-	    sudo apt-get update
-	    sudo apt-get install git xboxdrv zsnes nestopia pcsxr\
-	    pcsx2 mame mupen64plus qjoypad xbmc dolphin-emu stella
-	    sleep 5s
-	    #clear and prompt
-	    clear
-	    echo "Please enter your choice:"	
-            echo "1) Install Software	      3) Other"
-	    echo "2) Setup configuration files  4) Quit"
-            ;;
-        "Setup configuration files")
-            echo "Configuring..."
+	    2) 
+		echo "Seting up configuration files"
+            	;;
+		"Setup configuration files")
+		echo "Configuring..."
 		sleep 2s
 		clear
 		#setup skelton folders for XBMC Rom Collection Browser
@@ -118,17 +101,23 @@ do
 		cp -v $HOME/RetroRig/controller-cfg/xpad-wireless.xboxdrv $HOME/Games/Configs/
 
 		#clear and prompt
-		sleep 3s
-		clear
-	    	echo "Please enter your choice:"	
-           	echo "1) Install Software	      3) Other"
-	   	echo "2) Setup configuration files  4) Quit"
-            ;;
+	       ;;
+            2) ;;
+            3) ;;
+            4) ;;
+            5) ;;
+            6) ;;
+            7) echo "Rebooting in 5 seconds, press CTRL+C to cancel"
+               sleep 5s
+               sudo reboot
+               ;;
+        esac
+else
+break
+fi
+
         "Reboot PC")
-            echo "Rebooting in 5 seconds, press CTRL+C to cancel"
-            sleep 5s
-            sudo reboot
-            ;;
+            
         "Quit")
             break
             ;;
