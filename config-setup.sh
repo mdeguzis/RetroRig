@@ -113,8 +113,19 @@ while true; do
 		mkdir -pv $HOME/Games/Saves/genroms/
 		mkdir -pv $HOME/Games/Saves/SNK\ Neo\ Geo/
 
-		#qjoypad dotfile
+		#create dotfiles
 		mkdir -pv $HOME/.qjoypad3/
+		mkdir -pv $HOME/.dolphin-emu/
+		mkdir -pv $HOME/.config/mupen64plus/
+		mkdir -pv $HOME/.nestopia/
+		mkdir -pv $HOME/.gens/
+		mkdir -pv $HOME/.zsnes/
+		mkdir -pv $HOME/.mame/
+		mkdir -pv $HOME/.pcsx/
+		mkdir -pv $HOME/.config/pcsx2/
+
+		#xboxdrv director located in common area for startup
+		mkdir -pv /usr/share/xboxdrv
 
 		#Tools		
 		mkdir -pv $HOME/Games/Tools/
