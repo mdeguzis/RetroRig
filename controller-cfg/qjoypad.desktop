@@ -2,7 +2,7 @@
 Version=1.0
 Name=qjoypad autostart
 Comment=Bolt on for added gamepad functions 
-Exec=qjoypad "retro-gaming" &
+Exec=qjoypad "retro-gaming"
 Icon=
 Terminal=false
 Type=Application
