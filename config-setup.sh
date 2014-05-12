@@ -46,7 +46,7 @@ while true; do
 
 		#Auto-pull of RCB will be automated with curl later!
 		cd $HOME/.xbmc/addons && curl romcollectionbrowser.googlecode.com/files/script.games.rom.collection.browser-2.0.10.zip > $HOME/.xbmc/addons/script.games.rom.collection.browser-2.0.10.zip
-		unzip -e script.games.rom.collection.browser-2.0.10.zip
+		unzip -eo script.games.rom.collection.browser-2.0.10.zip
 		#set proper permission for addon
 		chmod 755 script.games.rom.collection.browser-2.0.10/
 		cd $HOME/RetroRig/
