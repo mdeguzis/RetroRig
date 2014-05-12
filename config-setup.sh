@@ -174,7 +174,11 @@ while true; do
 
 		#copy configs for other utilities
 		cp -v $HOME/RetroRig/controller-cfg/retro-gaming.lyt $HOME/.qjoypad3/
-		cp -v $HOME/RetroRig/controller-cfg/xpad-wireless.xboxdrv $HOME/Games/Configs/
+		
+		#add xbox controller init script
+		sudo cp -v $HOME/RetroRig/controller-cfg/xpad-wireless.xboxdrv\
+		/usr/share/xboxdrv/
+
 
 		#create autostart for XBMC snd qjoypad
 		sudo cp -v /usr/share/applications/xbmc.desktop /etc/xdg/autostart/
