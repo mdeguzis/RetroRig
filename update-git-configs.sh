@@ -60,7 +60,7 @@ cp -v $HOME/Games/Configs/qjoypad_launch.sh $HOME/RetroRig/controller-cfg/
 cp -v $HOME/.qjoypad3/retro-gaming.lyt $HOME/RetroRig/controller-cfg/
 #xboxdrv cfg
 cp -v $HOME/Games/Configs/xpad-wireless.xboxdrv $HOME/RetroRig/controller-cfg/
-cp -v /etc/init.d/xboxdrv $HOME/RetroRig/init-scipts/
+cp -v /etc/init.d/xboxdrv $HOME/RetroRig/init-scripts/
 
 #update init-scripts
 #xboxdrv service
