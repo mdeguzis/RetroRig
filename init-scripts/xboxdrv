@@ -17,13 +17,13 @@ case "$1" in
 start)
 echo "Starting xboxdrv"
 #Insert your favoured settings for the xbox controller settings
-su - $USER -c "xboxdrv --wid 0 --led 2 --silent --force-feedback --config /home/mikeyd/Games/Configs/xpad-wireless.xboxdrv" &
+su - $USER -c "xboxdrv --wid 0 --led 2 --silent --force-feedback --config /usr/share/xboxdrv/xpad-wireless.xboxdrv" &
 sleep 1
-su - $USER -c "xboxdrv --wid 1 --led 3 --silent --force-feedback --config /home/mikeyd/Games/Configs/xpad-wireless.xboxdrv" &
+su - $USER -c "xboxdrv --wid 1 --led 3 --silent --force-feedback --config /usr/share/xboxdrv/xpad-wireless.xboxdrv" &
 sleep 1
-su - $USER -c "xboxdrv --wid 2 --led 4 --silent --force-feedback --config /home/mikeyd/Games/Configs/xpad-wireless.xboxdrv" &
+su - $USER -c "xboxdrv --wid 2 --led 4 --silent --force-feedback --config /usr/share/xboxdrv/xpad-wireless.xboxdrv" &
 sleep 1
-su - $USER -c "xboxdrv --wid 3 --led 5 --silent --force-feedback --config /home/mikeyd/Games/Configs/xpad-wireless.xboxdrv" &
+su - $USER -c "xboxdrv --wid 3 --led 5 --silent --force-feedback --config /usr/share/xboxdrv/xpad-wireless.xboxdrv" &
 sleep 1
 ;;
 
