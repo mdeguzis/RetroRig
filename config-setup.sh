@@ -68,6 +68,10 @@ while true; do
 		gsettings set org.gnome.settings-daemon.plugins.power active false
 		gsettings set org.gnome.desktop.screensaver idle-activation-enabled false
 
+		#having some trouble with the screensaver re-enabling itself
+		#for now, remove gnome-screensaver, should not be needed
+		sudo apt-get remove -y gnome-screensaver
+
 		#setup skelton folders for XBMC Rom Collection Browser
 		#ROMs		
 		mkdir -pv $HOME/Games/ROMs/Atari\ 2600/
@@ -165,6 +169,7 @@ while true; do
 		cp -Rv /$HOME/RetroRig/Dolphin/gfx_opengl.ini $HOME/.dolphin-emu/Config/
 
 		#copy configs for other utilities
+		cp -v $HOME/RetroRig/controller-config/retro-gaming.lyt $HOME/.qjoypad3/
 		cp -v $HOME/RetroRig/controller-cfg/xpad-wireless.xboxdrv $HOME/Games/Configs/
 
 		#create autostart for XBMC snd qjoypad
