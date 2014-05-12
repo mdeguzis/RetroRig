@@ -190,7 +190,7 @@ while true; do
 		sudo cp -v $HOME/RetroRig/controller-cfg/xpad-wireless.xboxdrv\
 		/usr/share/xboxdrv/
 		sudo cp -v /usr/share/xboxdrv/xpad-wireless.xboxdrv /etc/init.d/
-		sudo update.rc-d xboxdrv defaults
+		sudo update-rc.d xboxdrv defaults
 
 		#create autostart for XBMC snd qjoypad
 		sudo cp -v /usr/share/applications/xbmc.desktop /etc/xdg/autostart/
