@@ -125,7 +125,7 @@ while true; do
 		mkdir -pv $HOME/.config/pcsx2/
 
 		#xboxdrv director located in common area for startup
-		mkdir -pv /usr/share/xboxdrv
+		sudo mkdir -pv /usr/share/xboxdrv/
 
 		#Tools		
 		mkdir -pv $HOME/Games/Tools/
