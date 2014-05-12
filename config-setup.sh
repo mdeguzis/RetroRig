@@ -13,7 +13,7 @@ while true; do
     cmd=(dialog --backtitle "LibreGeek.org RetroRig Installer" --menu "Choose your option" 22 76 16)
     options=(1 "Install Software"
              2 "Set up configuration files and init scripts"
-             3 "Pull latest files"
+             3 "Pull latest files (exit and restart script after!)"
              4 "Update emulator binaries"
              5 "Upgrade System (use with caution!)"
              6 "Reboot PC"
@@ -120,7 +120,7 @@ while true; do
 		mkdir -pv $HOME/.nestopia/
 		mkdir -pv $HOME/.gens/
 		mkdir -pv $HOME/.zsnes/
-		mkdir -pv $HOME/.mame/
+		mkdir -pv $HOME/.mame/cfg/
 		mkdir -pv $HOME/.pcsx/
 		mkdir -pv $HOME/.config/pcsx2/
 
