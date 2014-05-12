@@ -70,6 +70,7 @@ while true; do
 
 		#having some trouble with the screensaver re-enabling itself
 		#for now, remove gnome-screensaver, should not be needed
+		#due to XBMC having its own.
 		sudo apt-get remove -y gnome-screensaver
 
 		#setup skelton folders for XBMC Rom Collection Browser
@@ -111,6 +112,9 @@ while true; do
 		mkdir -pv $HOME/Games/Saves/PS1/
 		mkdir -pv $HOME/Games/Saves/genroms/
 		mkdir -pv $HOME/Games/Saves/SNK\ Neo\ Geo/
+
+		#qjoypad dotfile
+		mkdir -pv $HOME/.qjoypad3/
 
 		#Tools		
 		mkdir -pv $HOME/Games/Tools/
@@ -183,6 +187,7 @@ while true; do
 		sleep 2s
 		cd $HOME/RetroRig/
 		git pull 
+		sleep 3s
 		;;
             4)  
 		echo "updating binaries"
