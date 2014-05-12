@@ -57,7 +57,7 @@ cp -v $HOME/.dolphin-emu/Config/gfx_opengl.ini /$HOME/RetroRig/Dolphin/
 #update configs for other utilities
 #qjoypad
 cp -v $HOME/Games/Configs/qjoypad_launch.sh $HOME/RetroRig/controller-cfg/
-cp -v $HOME/.qjoypad3/retro-gaming.lyt $HOME/RetroRig/controller-config
+cp -v $HOME/.qjoypad3/retro-gaming.lyt $HOME/RetroRig/controller-cfg/
 #xboxdrv cfg
 cp -v $HOME/Games/Configs/xpad-wireless.xboxdrv $HOME/RetroRig/controller-cfg/
 
