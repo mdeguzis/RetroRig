@@ -1,13 +1,15 @@
 Goals for 0.7.0 release
 ----------------
 
--Resolution selection
--Fix script menu appearance
+-Resolution selection (in progress)
+-Fix script menu appearance (done)
 -Establish testing snapshot on Vbox (Ubuntu 14.04 LTS)
--Finish folder skelton
--Double check required config files for emulators
+-Finish folder skelton (done)
+-Double check required config files for emulators (in progress pcsx2!)
+-Replace specifc /home/mikeyd with $HOME (done)
 -Roll out and test 0.6a release on VM
--Ensure dependencies are met
+-Ensure dependencies are met (done)
+-
 
 Overall Goals for 1.0 release
 ---------------
@@ -26,6 +28,7 @@ Current Issues
 ---------------
 
 -Problems with using OpenGL on Stella (Atari 2600)
+-BIOS files cannot be included for PS1, PS2 due to legal issues, user must insert them.
 
 Future Goals
 ---------------
