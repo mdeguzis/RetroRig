@@ -15,7 +15,7 @@ while true; do
              2 "Set up configuration files and init scripts"
              3 "Pull latest files"
              4 "Update emulator binaries"
-             5 ""
+             5 "Upgrade System (use with caution!)"
              6 "Reboot PC"
              7 "Exit" )
     choices=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
@@ -178,9 +178,10 @@ while true; do
 
 		#create autostart for XBMC snd qjoypad
 		sudo cp -v /usr/share/applications/xbmc.desktop /etc/xdg/autostart/
-		sudo cp -v $HOME/RetroRig/controller-cfg/qjoypad_launch.sh /etc/xdg/autostart/
+		sudo cp -v $HOME/RetroRig/controller-cfg/qjoypad.desktop /etc/xdg/autostart/
 
 		#clear and prompt
+		sleep 3s
 	        ;;
             3)
 		echo "updating git repo"
@@ -193,8 +194,14 @@ while true; do
 		echo "updating binaries"
 		sudo apt-get install -y xboxdrv zsnes nestopia pcsxr pcsx2:i386\
 		mame mupen64plus qjoypad xbmc dolphin-emu-master stella	
+		sleep 3s
 		;;
-            5)  ;;
+            5)  
+		echo "updating system"
+		sudo apt-get update
+		sudo apt-get upgrade
+		sleep 3s
+		;;
             6)  
 	        echo "Rebooting in 5 seconds, press CTRL+C to cancel"
                 sleep 5s
