@@ -115,7 +115,7 @@ while true; do
 
 		#create dotfiles
 		mkdir -pv $HOME/.qjoypad3/
-		mkdir -pv $HOME/.dolphin-emu/
+		mkdir -pv $HOME/.dolphin-emu/Config/
 		mkdir -pv $HOME/.config/mupen64plus/
 		mkdir -pv $HOME/.nestopia/
 		mkdir -pv $HOME/.gens/
