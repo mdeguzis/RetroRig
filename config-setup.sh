@@ -173,7 +173,7 @@ while true; do
 		cp -Rv /$HOME/RetroRig/Dolphin/gfx_opengl.ini $HOME/.dolphin-emu/Config/
 
 		#copy configs for other utilities
-		cp -v $HOME/RetroRig/controller-config/retro-gaming.lyt $HOME/.qjoypad3/
+		cp -v $HOME/RetroRig/controller-cfg/retro-gaming.lyt $HOME/.qjoypad3/
 		cp -v $HOME/RetroRig/controller-cfg/xpad-wireless.xboxdrv $HOME/Games/Configs/
 
 		#create autostart for XBMC snd qjoypad
