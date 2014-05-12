@@ -1,49 +1,53 @@
 #!/bin/bash
 
 #small script to update configuration files for git repo
-#Version 1.1
+#Version 0.6.1
 #This configuration file is based on Ubuntu 14.04 LTS
+#absolute home paths replaced with $HOME
 
 #Nestopia
 #default path: /home/$USER/.nestopia
 cp -Rv $HOME/.nestopia/nstcontrols $HOME/RetroRig/Nestopia/
+cp -Rv $HOME/.nestopia/nstsettings $HOME/RetroRig/Nestopia/
 
 #gens
 #default path: /home/$USER/.gens
-#Global config
 cp -v $HOME/.gens/gens.cfg $HOME/RetroRig/Gens-GS/
 
 #ZSNES
 #default path: /home/$USER/.zsnes
-#Controller config
 cp -v $HOME/.zsnes/zinput.cfg $HOME/RetroRig/ZSNES/
-#emulator config
-cp -v $HOME/.zsnes/zsnesl.cfg $HOME/RetroRig/ZSNES/
+cp -v $HOME/.zsnes/zsnesl.cfg  $HOME/RetroRig/ZSNES/
 
 #mame
 #default path: /home/$USER/.mame
-#Main config
 cp -v $HOME/.mame/mame.ini $HOME/RetroRig/MAME/
-#controller config
 cp -v $HOME/.mame/cfg/default.cfg $HOME/RetroRig/MAME/
 
-#pcsx
+#pcsx2
 #default path: /home/$USER/.pcsx
-#Main config
-cp -v $HOME/.pcsx/pcsx.cfg $HOME/RetroRig/pcsx/
+#Do NOT copy in a BIOS files
+#main config
+cp -v $HOME/.pcsx/pcsx.cfg
+#patches and plugins
+cp -v $HOME/.pcsx/plugins/
+cp -v $HOME/.pcsx/patches/
 
-#mupen64plus
-#default path: /home/$USER/.config/mupen64plus
-#Main config
-cp -v $HOME/.config/pcsx2/PCSX2-reg.ini $HOME/RetroRig/pcsx2/
+#pcsx2
+#default path: /home/$USER/.pcsx
+#Do NOT copy in any BIOS files
+cp -v $HOME/.config/pcsx2/inis/* $HOME/RetroRig/pcsx/inis/
+#copy other ini files, but bios
+cp -v $HOME/.config/pcsx2/inisOnePAD.ini
+cp -v $HOME/.config/pcsx2/PCSX2-reg.ini
 
 #mupen64plus
 #default path: /home/$USER/.config/mupen64plus
 #Main config
 cp -v $HOME/.config/mupen64plus/mupen64plus.cfg $HOME/RetroRig/mupen64plus/
 
-#mupen64plus
-#default path: /home/$USER/.config/mupen64plus
+#Stella
+#default path: /home/$USER/.stella
 #Main config
 cp -v $HOME/.stella/stellarc $HOME/RetroRig/Stella/
 
@@ -62,6 +66,8 @@ cp -v $HOME/.qjoypad3/retro-gaming.lyt $HOME/RetroRig/controller-cfg/
 cp -v $HOME/Games/Configs/xpad-wireless.xboxdrv $HOME/RetroRig/controller-cfg/
 cp -v /etc/init.d/xboxdrv $HOME/RetroRig/init-scripts/
 cp -v /etc/modprobe.d/blacklist.conf $HOME/RetroRig/init-scripts/
+#RCB config files
+cp -v $HOME/.xbmc/userdata/autoexec.py $HOME/RetroRig/RCB/
 
 #update init-scripts
 #xboxdrv service

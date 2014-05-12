@@ -45,7 +45,7 @@ while true; do
 		cp -Rv $HOME/RetroRig/XBMC/* $HOME/.xbmc/
 
 		#Auto-pull of RCB will be automated with curl later!
-		cd $HOME/.xbmc/addons && curl romcollectionbrowser.googlecode.com/files/script.games.rom.collection.browser-2.0.10.zip > ~/.xbmc/addons/script.games.rom.collection.browser-2.0.10.zip
+		cd $HOME/.xbmc/addons && curl romcollectionbrowser.googlecode.com/files/script.games.rom.collection.browser-2.0.10.zip > $HOME/.xbmc/addons/script.games.rom.collection.browser-2.0.10.zip
 		unzip -e script.games.rom.collection.browser-2.0.10.zip
 		#set proper permission for addon
 		chmod 755 script.games.rom.collection.browser-2.0.10/
@@ -121,8 +121,9 @@ while true; do
 		mkdir -pv $HOME/.gens/
 		mkdir -pv $HOME/.zsnes/
 		mkdir -pv $HOME/.mame/cfg/
-		mkdir -pv $HOME/.pcsx/
-		mkdir -pv $HOME/.config/pcsx2/
+		mkdir -pv $HOME/.pcsx/plugins/
+		mkdir -pv $HOME/.pcsx/patches/
+		mkdir -pv $HOME/.config/pcsx2/inis/
 
 		#xboxdrv director located in common area for startup
 		sudo mkdir -pv /usr/share/xboxdrv/
@@ -136,6 +137,7 @@ while true; do
 		#Nestopia
 		#default path: /home/$USER/.nestopia
 		cp -v $HOME/RetroRig/Nestopia/nstcontrols $HOME/.nestopia/
+		cp -v $HOME/RetroRig/Nestopia/nstsettings $HOME/.nestopia/
 
 		#gens
 		#default path: /home/$USER/.gens
@@ -146,30 +148,37 @@ while true; do
 		#default path: /home/$USER/.zsnes
 		#Controller config
 		cp -v $HOME/RetroRig/ZSNES/zinput.cfg $HOME/.zsnes/
-		#emulator config
 		cp -v $HOME/RetroRig/ZSNES/zsnesl.cfg $HOME/.zsnes/
 
 		#mame
 		#default path: /home/$USER/.mame
 		#Main config
 		cp -v $HOME/RetroRig/MAME/mame.ini $HOME/.mame/
-		#controller config
-		cp -Rv $HOME/RetroRig/MAME/default.cfg $HOME/.mame/cfg/
+		cp -v $HOME/RetroRig/MAME/default.cfg $HOME/.mame/cfg/
 
 		#pcsx
 		#default path: /home/$USER/.pcsx
 		#Main config
 		cp -v $HOME/RetroRig/pcsx/pcsx.cfg $HOME/.pcsx/
+		cp -v $HOME/RetroRig/pcsx/plugins/* $HOME/.pcsx/plugins/
+		cp -v $HOME/RetroRig/pcsx/patches/* $HOME/.pcsx/patches/
 
 		#pcsx2
 		#default path: /home/$USER/.config/pcsx2
 		#Main config
 		cp -v $HOME/RetroRig/pcsx2/PCSX2-reg.ini $HOME/.config/pcsx2/
+		cp -v $HOME/RetroRig/pcsx2/inisOnePAD.ini $HOME/.config/pcsx2/
+		cp -v $HOME/RetroRig/pcsx2/inis/* $HOME/.config/pcsx2/inis/
 
 		#mupen64pluspwd
 		#default path: /home/$USER/.config/mupen64plus
 		#Main config
 		cp -v $HOME/RetroRig/mupen64plus/mupen64plus.cfg $HOME/.config/mupen64plus/
+
+		#Stella
+		#default path: /home/$USER/.config/mupen64plus
+		#Main config
+		cp -v $HOME/RetroRig/Stella/stellarc $HOME/.stella/
 
 		#dolphin
 		#default path /home/$USER/.dolphin-emu/
@@ -179,11 +188,10 @@ while true; do
 		cp -Rv /$HOME/RetroRig/Dolphin/GCPadNew.ini $HOME/.dolphin-emu/Config/
 		#Wii controller config
 		#[PENDING]
-
-		#opengl config
+		#OpenGL graphics config
 		cp -Rv /$HOME/RetroRig/Dolphin/gfx_opengl.ini $HOME/.dolphin-emu/Config/
 
-		#copy configs for other utilities
+		#copy config for qjoypad setup
 		cp -v $HOME/RetroRig/controller-cfg/retro-gaming.lyt $HOME/.qjoypad3/
 		
 		#add xbox controller init script
@@ -191,6 +199,9 @@ while true; do
 		/usr/share/xboxdrv/
 		sudo cp -v $HOME/RetroRig/init-scripts/xboxdrv /etc/init.d/
 		sudo update-rc.d xboxdrv defaults
+		
+		#copyautoexec.py in the userdata folder for autostarting RCB
+		cp -v $HOME/RetroRig/RCB/autoexec.py $HOME/.xbmc/userdata/
 
 		#blacklist xpad
 		sudo cp -v $HOME/RetroRig/init-scripts/blacklist.conf /etc/modprobe.d/
@@ -198,6 +209,8 @@ while true; do
 		#create autostart for XBMC snd qjoypad
 		sudo cp -v /usr/share/applications/xbmc.desktop /etc/xdg/autostart/
 		sudo cp -v $HOME/RetroRig/controller-cfg/qjoypad.desktop /etc/xdg/autostart/
+		#If xboxdrv config file does not pick up on reboot, 
+		#be sure to resync the wireless receiver! 
 
 		#clear and prompt
 		sleep 3s
