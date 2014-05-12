@@ -11,60 +11,59 @@ cp -Rv $HOME/.nestopia/nstcontrols $HOME/RetroRig/Nestopia/
 #gens
 #default path: /home/$USER/.gens
 #Global config
-cp -Rv $HOME/.gens/gens.cfg $HOME/RetroRig/Gens-GS/
+cp -v $HOME/.gens/gens.cfg $HOME/RetroRig/Gens-GS/
 
 #ZSNES
 #default path: /home/$USER/.zsnes
 #Controller config
-cp -Rv $HOME/.zsnes/zinput.cfg $HOME/RetroRig/ZSNES/
+cp -v $HOME/.zsnes/zinput.cfg $HOME/RetroRig/ZSNES/
 #emulator config
-cp -Rv $HOME/.zsnes/zsnesl.cfg $HOME/RetroRig/ZSNES/
+cp -v $HOME/.zsnes/zsnesl.cfg $HOME/RetroRig/ZSNES/
 
 #mame
 #default path: /home/$USER/.mame
 #Main config
-cp -Rv $HOME/.mame/mame.ini $HOME/RetroRig/MAME/
+cp -v $HOME/.mame/mame.ini $HOME/RetroRig/MAME/
 #controller config
-cp -Rv $HOME/.mame/cfg/default.cfg $HOME/RetroRig/MAME/
+cp -v $HOME/.mame/cfg/default.cfg $HOME/RetroRig/MAME/
 
 #pcsx
 #default path: /home/$USER/.pcsx
 #Main config
-cp -Rv $HOME/.pcsx/pcsx.cfg $HOME/RetroRig/pcsx/
+cp -v $HOME/.pcsx/pcsx.cfg $HOME/RetroRig/pcsx/
 
 #mupen64plus
 #default path: /home/$USER/.config/mupen64plus
 #Main config
-cp -Rv $HOME/.config/pcsx2/PCSX2-reg.ini $HOME/RetroRig/pcsx2/
+cp -v $HOME/.config/pcsx2/PCSX2-reg.ini $HOME/RetroRig/pcsx2/
 
 #mupen64plus
 #default path: /home/$USER/.config/mupen64plus
 #Main config
-cp -Rv $HOME/.config/mupen64plus/mupen64plus.cfg $HOME/RetroRig/mupen64plus/
+cp -v $HOME/.config/mupen64plus/mupen64plus.cfg $HOME/RetroRig/mupen64plus/
 
 #mupen64plus
 #default path: /home/$USER/.config/mupen64plus
 #Main config
-cp -Rv $HOME/.stella/stellarc $HOME/RetroRig/Stella/
+cp -v $HOME/.stella/stellarc $HOME/RetroRig/Stella/
 
 #dolphin
 #default path /home/$USER/.dolphin-emu/
 #Dolphin.ini  GCPadNew.ini  gfx_opengl.ini
-cp -Rv $HOME/.dolphin-emu/Config/Dolphin.ini /$HOME/RetroRig/Dolphin/
-cp -Rv $HOME/.dolphin-emu/Config/GCPadNew.ini /$HOME/RetroRig/Dolphin/
-cp -Rv $HOME/.dolphin-emu/Config/gfx_opengl.ini /$HOME/RetroRig/Dolphin/
+cp -v $HOME/.dolphin-emu/Config/Dolphin.ini /$HOME/RetroRig/Dolphin/
+cp -v $HOME/.dolphin-emu/Config/GCPadNew.ini /$HOME/RetroRig/Dolphin/
+cp -v $HOME/.dolphin-emu/Config/gfx_opengl.ini /$HOME/RetroRig/Dolphin/
 
 #update configs for other utilities
 #qjoypad
-cp -Rv $HOME/Games/Configs/qjoypad_launch.sh $HOME/RetroRig/controller-cfg/
+cp -v $HOME/Games/Configs/qjoypad_launch.sh $HOME/RetroRig/controller-cfg/
+cp -v $HOME/.qjoypad3/retro-gaming.lyt $HOME/RetroRig/controller-config
 #xboxdrv cfg
-cp -Rv $HOME/Games/Configs/xpad-wireless.xboxdrv $HOME/RetroRig/controller-cfg/
+cp -v $HOME/Games/Configs/xpad-wireless.xboxdrv $HOME/RetroRig/controller-cfg/
 
 #update init-scripts
 #xboxdrv service
-cp -Rv /etc/init.d/xboxdrv $HOME/RetroRig/init-scripts/
-#qjoypad autostart
-cp -Rv $HOME/.config/autostart/qjoypad.desktop $HOME/RetroRig/init-scripts/
+cp -v /etc/init.d/xboxdrv $HOME/RetroRig/init-scripts/
 
 git add *
 git commit
