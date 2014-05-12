@@ -124,6 +124,7 @@ while true; do
 		mkdir -pv $HOME/.pcsx/plugins/
 		mkdir -pv $HOME/.pcsx/patches/
 		mkdir -pv $HOME/.config/pcsx2/inis/
+		mkdir -pv $HOME/.stella/
 
 		#xboxdrv director located in common area for startup
 		sudo mkdir -pv /usr/share/xboxdrv/
@@ -160,8 +161,8 @@ while true; do
 		#default path: /home/$USER/.pcsx
 		#Main config
 		cp -v $HOME/RetroRig/pcsx/pcsx.cfg $HOME/.pcsx/
-		cp -v $HOME/RetroRig/pcsx/plugins/* $HOME/.pcsx/plugins/
-		cp -v $HOME/RetroRig/pcsx/patches/* $HOME/.pcsx/patches/
+		cp -v $HOME/RetroRig/pcsx/plugins/ $HOME/.pcsx/
+		cp -v $HOME/RetroRig/pcsx/patches/ $HOME/.pcsx/
 
 		#pcsx2
 		#default path: /home/$USER/.config/pcsx2

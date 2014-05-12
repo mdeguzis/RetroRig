@@ -24,22 +24,22 @@ cp -v $HOME/.zsnes/zsnesl.cfg  $HOME/RetroRig/ZSNES/
 cp -v $HOME/.mame/mame.ini $HOME/RetroRig/MAME/
 cp -v $HOME/.mame/cfg/default.cfg $HOME/RetroRig/MAME/
 
-#pcsx2
+#pcsx
 #default path: /home/$USER/.pcsx
 #Do NOT copy in a BIOS files
 #main config
-cp -v $HOME/.pcsx/pcsx.cfg
+cp -v $HOME/.pcsx/pcsx.cfg $HOME/RetroRig/pcsx/
 #patches and plugins
-cp -v $HOME/.pcsx/plugins/
-cp -v $HOME/.pcsx/patches/
+cp -v $HOME/.pcsx/plugins/ $HOME/RetroRig/pcsx/
+cp -v $HOME/.pcsx/patches/ $HOME/RetroRig/pcsx/
 
 #pcsx2
 #default path: /home/$USER/.pcsx
 #Do NOT copy in any BIOS files
-cp -v $HOME/.config/pcsx2/inis/* $HOME/RetroRig/pcsx/inis/
+cp -v $HOME/.config/pcsx2/inis/* $HOME/RetroRig/pcsx2/inis/
 #copy other ini files, but bios
-cp -v $HOME/.config/pcsx2/inisOnePAD.ini
-cp -v $HOME/.config/pcsx2/PCSX2-reg.ini
+cp -v $HOME/.config/pcsx2/inisOnePAD.ini $HOME/RetroRig/pcsx2/
+cp -v $HOME/.config/pcsx2/PCSX2-reg.ini $HOME/RetroRig/pcsx2/
 
 #mupen64plus
 #default path: /home/$USER/.config/mupen64plus
