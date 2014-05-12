@@ -192,6 +192,9 @@ while true; do
 		sudo cp -v $HOME/RetroRig/init-scripts/xboxdrv /etc/init.d/
 		sudo update-rc.d xboxdrv defaults
 
+		#blacklist xpad
+		sudo cp -v $HOME/RetroRig/init-scripts/blacklist.conf /etc/modprobe.d/
+
 		#create autostart for XBMC snd qjoypad
 		sudo cp -v /usr/share/applications/xbmc.desktop /etc/xdg/autostart/
 		sudo cp -v $HOME/RetroRig/controller-cfg/qjoypad.desktop /etc/xdg/autostart/
