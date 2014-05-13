@@ -30,8 +30,8 @@ cp -v $HOME/.mame/cfg/default.cfg $HOME/RetroRig/MAME/
 #main config
 cp -v $HOME/.pcsx/pcsx.cfg $HOME/RetroRig/pcsx/
 #patches and plugins
-cp -v $HOME/.pcsx/plugins/ $HOME/RetroRig/pcsx/
-cp -v $HOME/.pcsx/patches/ $HOME/RetroRig/pcsx/
+cp -Rv $HOME/.pcsx/plugins/ $HOME/RetroRig/pcsx/
+cp -Rv $HOME/.pcsx/patches/ $HOME/RetroRig/pcsx/
 
 #pcsx2
 #default path: /home/$USER/.pcsx
