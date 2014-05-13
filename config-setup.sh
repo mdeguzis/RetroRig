@@ -6,8 +6,17 @@
 #
 #
 clear
-echo "RetroRig requires dialog and git for installation tasks. Installing..."
-sudo apt-get install git dialog >> /dev/null
+
+#check for dialog and prompt to install if it is not present
+if ! which dialog > /dev/null; then
+   echo -e "Dialog  not found! RetroRig requires this for installation tasks. Install? (y/n) \c"
+   read
+   if "$REPLY" = "y"; then
+      sudo apt-get install dialog >> /dev/null
+      sleed 2s
+   fi
+fi
+
 
 while true; do
     cmd=(dialog --backtitle "LibreGeek.org RetroRig Installer" --menu "Choose your option(s). BIOS files for pcsx, pcsx2 NOT provided!" 16 76 16)
@@ -71,8 +80,18 @@ while true; do
 		#disable screensaver, XBMC will manage this
 		#export display to allow gsettings running in terminal window
 		export DISPLAY=:0.0
-		gsettings set org.gnome.settings-daemon.plugins.power active false
-		gsettings set org.gnome.desktop.screensaver idle-activation-enabled false
+		#gsettings set org.gnome.settings-daemon.plugins.power active 'false'
+		#gsettings set org.gnome.desktop.screensaver idle-activation-enabled 'false'
+		#gsettings set org.gnome.desktop.lockdown disable-lock-screen 'true'
+
+		#trying gconftool to disable screen locks
+		gconftool-2 --type boolean -s /apps/gnome-power-manager/lock/blank_screen false
+		gconftool-2 --type boolean -s /apps/gnome-power-manager/lock/gnome_keyring_hibernate false
+		gconftool-2 --type boolean -s /apps/gnome-power-manager/lock/gnome_keyring_suspend false
+		gconftool-2 --type boolean -s /apps/gnome-power-manager/lock/hibernate false
+		gconftool-2 --type boolean -s /apps/gnome-power-manager/lock/suspend false
+		gconftool-2 --type boolean -s /apps/gnome-power-manager/lock_use_screensaver_settings true
+		gconftool-2 --type boolean -s /apps/gnome-screensaver/lock_enabled false
 
 		#having some trouble with the screensaver re-enabling itself
 		#for now, remove gnome-screensaver, should not be needed
