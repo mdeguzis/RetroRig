@@ -45,9 +45,9 @@ while true; do
 		cp -Rv $HOME/RetroRig/XBMC/* $HOME/.xbmc/
 
 		#Auto-pull of RCB will be automated with curl later!
-		cd $HOME/.xbmc/addons && curl https://romcollectionbrowser.googlecode.com/files/script.games.rom.collection.browser-2.0.10.zip > $HOME/.xbmc/addons/script.games.rom.collection.browser-2.0.10.zip
+		cd $HOME/.xbmc/addons && curl romcollectionbrowser.googlecode.com/files/script.games.rom.collection.browser-2.0.10.zip > $HOME/.xbmc/addons/script.games.rom.collection.browser-2.0.10.zip
 		#pull in RCB service for autostarting
-		cd $HOME/.xbmc/addons && curl https://romcollectionbrowser.googlecode.com/files/service.rom.collection.browser-1.0.0.zip > $HOME/.xbmc/addons/service.rom.collection.browser-1.0.0.zip
+		cd $HOME/.xbmc/addons && curl romcollectionbrowser.googlecode.com/files/service.rom.collection.browser-1.0.0.zip > $HOME/.xbmc/addons/service.rom.collection.browser-1.0.0.zip
 		#unzip files
 		unzip -eo script.games.rom.collection.browser-2.0.10.zip
 		unzip -eo service.rom.collection.browser-1.0.0.zip
