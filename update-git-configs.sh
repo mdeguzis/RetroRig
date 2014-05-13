@@ -66,8 +66,13 @@ cp -v $HOME/.qjoypad3/retro-gaming.lyt $HOME/RetroRig/controller-cfg/
 cp -v $HOME/Games/Configs/xpad-wireless.xboxdrv $HOME/RetroRig/controller-cfg/
 cp -v /etc/init.d/xboxdrv $HOME/RetroRig/init-scripts/
 cp -v /etc/modprobe.d/blacklist.conf $HOME/RetroRig/init-scripts/
+
 #RCB config files
-cp -v $HOME/.xbmc/userdata/autoexec.py $HOME/RetroRig/RCB/
+#--workign with dev--
+
+#add RCB addons from $HOME/.xbmc/addons
+cp -v $HOME/.xbmc/addons/script.games.rom.collection.browser/ $HOME/RetroRig/XBMC/Addons/
+cp -v $HOME/.xbmc/addons/service.rom.collection.browser/ $HOME/RetroRig/XBMC/Addons/
 
 #update init-scripts
 #xboxdrv service

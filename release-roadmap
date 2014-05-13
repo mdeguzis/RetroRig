@@ -11,6 +11,8 @@ Goals for 0.7.0 release
 -Ensure dependencies are met (done)
 -Autostart XBMC via config file (done)
 -Autostart Rom Collection Browser in XBMC (software limitation, working with RCB dev)
+-mechanism to update git repo in scritp (done)
+-test all emulators with sample ROM
 
 Overall Goals for 1.0 release
 ---------------
