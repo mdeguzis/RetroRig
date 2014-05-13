@@ -9,8 +9,8 @@ clear
 
 #check for dialog and prompt to install if it is not present
 if ! which dialog > /dev/null; then
-   echo -e "Dialog  not found! RetroRig requires this for installation tasks. Install? (y/n) \c"
-   read
+   echo -e "Dialog not found! RetroRig requires this for installation tasks. Install? (y/n)\c"
+   read REPLY
    if "$REPLY" = "y"; then
       sudo apt-get install dialog >> /dev/null
       sleed 2s
