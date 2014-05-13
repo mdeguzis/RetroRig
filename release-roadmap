@@ -1,15 +1,16 @@
 Goals for 0.7.0 release
 ----------------
 
--Resolution selection (in progress)
+-Resolution selection for emulators that support it(in progress)
 -Fix script menu appearance (done)
 -Establish testing snapshot on Vbox (Ubuntu 14.04 LTS)
 -Finish folder skelton (done)
--Double check required config files for emulators (in progress pcsx2!)
+-Double check required config files for emulators (in progress)
 -Replace specifc /home/mikeyd with $HOME (done)
 -Roll out and test 0.6a release on VM
 -Ensure dependencies are met (done)
--Autostart Rom Collection Browser in XBMC
+-Autostart XBMC via config file (done)
+-Autostart Rom Collection Browser in XBMC (software limitation, working with RCB dev)
 
 Overall Goals for 1.0 release
 ---------------
