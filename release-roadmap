@@ -9,7 +9,7 @@ Goals for 0.7.0 release
 -Replace specifc /home/mikeyd with $HOME (done)
 -Roll out and test 0.6a release on VM
 -Ensure dependencies are met (done)
--
+-Autostart Rom Collection Browser in XBMC
 
 Overall Goals for 1.0 release
 ---------------
