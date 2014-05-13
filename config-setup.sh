@@ -10,7 +10,7 @@ echo "RetroRig requires dialog and git for installation tasks. Installing..."
 sudo apt-get install git dialog >> /dev/null
 
 while true; do
-    cmd=(dialog --backtitle "LibreGeek.org RetroRig Installer" --menu "Choose your option(s). BIOS files for pcsx, pcsx2 NOT provided!" 12 76 16)
+    cmd=(dialog --backtitle "LibreGeek.org RetroRig Installer" --menu "Choose your option(s). BIOS files for pcsx, pcsx2 NOT provided!" 16 76 16)
     options=(1 "Install Software"
              2 "Set up configuration files and init scripts"
              3 "Pull latest files (exit and restart script after!)"
@@ -52,8 +52,8 @@ while true; do
 		unzip -eo script.games.rom.collection.browser-2.0.10.zip
 		unzip -eo service.rom.collection.browser-1.0.0.zip
 		#set proper permission for addons
-		chmod -Rv 755 script.games.rom.collection.browser-2.0.10/
-		chmod -Rv 755 service.rom.collection.browser-1.0.0.zip/
+		chmod -Rv 755 service.rom.collection.browser
+		chmod -Rv 755 script.games.rom.collection.browser
 		#return home
 		cd $HOME/RetroRig/
 		echo ""
