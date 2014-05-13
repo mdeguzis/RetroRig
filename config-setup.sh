@@ -9,7 +9,7 @@ clear
 
 #check for dialog and prompt to install if it is not present
 if ! which dialog > /dev/null; then
-   echo -e "dialog command not found! Install? (y/n)\c"
+   echo -e "dialog command not found! Install? (y/n) \c"
    read DIALOG
    if [ $DIALOG = "y" ]; then
       sudo apt-get install dialog >> /dev/null
@@ -21,7 +21,7 @@ fi
 fi
 
 if ! which git > /dev/null; then
-   echo -e "git command not found! Install? (y/n)\c"
+   echo -e "git command not found! Install? (y/n) \c"
    read GIT
    if [ $GIT = "y" ]; then
       sudo apt-get install git >> /dev/null
@@ -60,33 +60,26 @@ while true; do
 		sudo apt-get update
 		sudo apt-get install -y xboxdrv curl zsnes nestopia pcsxr pcsx2:i386\
 		mame mupen64plus dconf-tools qjoypad xbmc dolphin-emu-master stella
-	
+
 		#xbmc does not (at least for Ubuntu's repo pkg) load the
 		#dot files without loading XBMC at least once
 		#copy in default folder base from first run:
 		mkdir -pv $HOME/RetroRig/.xbmc/
 		cp -Rv $HOME/RetroRig/XBMC/* $HOME/.xbmc/
 
-		#Pull down RCB addon from git repo
-		#We want to do this to keep RCB's paths so everything is setup
-		
-		
-		#unzip files
-		unzip -eo script.games.rom.collection.browser-2.0.10.zip
-		unzip -eo service.rom.collection.browser-1.0.0.zip
 		#set proper permission for addons
 		chmod -Rv 755 service.rom.collection.browser
 		chmod -Rv 755 script.games.rom.collection.browser
 		#return home
 		cd $HOME/RetroRig/
 		echo ""
-		echo "RetroRig files cloned into: $HOME/RetroRig"	 
+		echo "RetroRig files cloned into: $HOME/RetroRig" 
 		sleep 5s
-		
+
 		#clear
 		clear
 		;;
-	    2) 
+	    2)
 		echo "Seting up configuration files"
 		sleep 3s
 		clear
@@ -113,7 +106,7 @@ while true; do
 		sudo apt-get remove -y gnome-screensaver
 
 		#setup skelton folders for XBMC Rom Collection Browser
-		#ROMs		
+		#ROMs
 		mkdir -pv $HOME/Games/ROMs/Atari\ 2600/
 		mkdir -pv $HOME/Games/ROMs/Gamecube/
 		mkdir -pv $HOME/Games/ROMs/Mame4All/
@@ -128,7 +121,7 @@ while true; do
 		#Artwork
 		mkdir -pv $HOME/Games/Artwork/
 
-		#Emulators (if any fall here)		
+		#Emulators (if any fall here)
 		mkdir -pv $HOME/Games/Artwork/Atari\ 2600/
 		mkdir -pv $HOME/Games/Artwork/Gamecube/
 		mkdir -pv $HOME/Games/Artwork/Mame4All/
@@ -140,7 +133,7 @@ while true; do
 		mkdir -pv $HOME/Games/Artwork/sgenroms/
 		mkdir -pv $HOME/Games/Artwork/SNK\ Neo\ Geo/
 
-		#Saves (if any)		
+		#Saves (if any)
 		mkdir -pv $HOME/Games/Saves/Atari\ 2600/
 		mkdir -pv $HOME/Games/Saves/Gamecube/
 		mkdir -pv $HOME/Games/Saves/Mame4All/
@@ -168,10 +161,10 @@ while true; do
 		#xboxdrv director located in common area for startup
 		sudo mkdir -pv /usr/share/xboxdrv/
 
-		#Tools		
+		#Tools
 		mkdir -pv $HOME/Games/Tools/
 
-		#configs		
+		#configs
 		mkdir -pv $HOME/Games/Configs/
 
 		#Nestopia
@@ -233,13 +226,13 @@ while true; do
 
 		#copy config for qjoypad setup
 		cp -v $HOME/RetroRig/controller-cfg/retro-gaming.lyt $HOME/.qjoypad3/
-		
+
 		#add xbox controller init script
 		sudo cp -v $HOME/RetroRig/controller-cfg/xpad-wireless.xboxdrv\
 		/usr/share/xboxdrv/
 		sudo cp -v $HOME/RetroRig/init-scripts/xboxdrv /etc/init.d/
 		sudo update-rc.d xboxdrv defaults
-		
+
 		#copyautoexec.py in the userdata folder for autostarting RCB
 		cp -v $HOME/RetroRig/RCB/autoexec.py $HOME/.xbmc/userdata/
 
@@ -249,8 +242,8 @@ while true; do
 		#create autostart for XBMC snd qjoypad
 		sudo cp -v /usr/share/applications/xbmc.desktop /etc/xdg/autostart/
 		sudo cp -v $HOME/RetroRig/controller-cfg/qjoypad.desktop /etc/xdg/autostart/
-		#If xboxdrv config file does not pick up on reboot, 
-		#be sure to resync the wireless receiver! 
+		#If xboxdrv config file does not pick up on reboot,
+		#be sure to resync the wireless receiver!
 
 		#clear and prompt
 		sleep 3s
@@ -259,22 +252,22 @@ while true; do
 		echo "updating git repo"
 		sleep 2s
 		cd $HOME/RetroRig/
-		git pull 
-		sleep 3s
+		git pull
+		bash config-setup.sh
 		;;
-            4)  
+            4)
 		echo "updating binaries"
 		sudo apt-get install -y xboxdrv zsnes nestopia pcsxr pcsx2:i386\
 		mame mupen64plus qjoypad xbmc dolphin-emu-master stella	
 		sleep 3s
 		;;
-            5)  
+            5)
 		echo "updating system"
 		sudo apt-get update
 		sudo apt-get upgrade
 		sleep 3s
 		;;
-            6)  
+            6)
 	        echo "Rebooting in 5 seconds, press CTRL+C to cancel"
                 sleep 5s
                 sudo reboot 
