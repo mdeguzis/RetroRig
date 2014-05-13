@@ -9,7 +9,7 @@ clear
 
 #check for dialog and prompt to install if it is not present
 if ! which dialog > /dev/null; then
-   echo -e "Dialog not found! RetroRig requires this for installation tasks. Install? (y/n)\c"
+   echo -e "dialog command not found! Install? (y/n)\c"
    read DIALOG
    if [ $DIALOG = "y" ]; then
       sudo apt-get install dialog >> /dev/null
@@ -21,7 +21,7 @@ fi
 fi
 
 if ! which git > /dev/null; then
-   echo -e "Dialog not found! RetroRig requires this for installation tasks. Install? (y/n)\c"
+   echo -e "git command not found! Install? (y/n)\c"
    read GIT
    if [ $GIT = "y" ]; then
       sudo apt-get install git >> /dev/null
