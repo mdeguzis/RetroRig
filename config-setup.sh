@@ -8,14 +8,29 @@
 clear
 
 #check for dialog and prompt to install if it is not present
-if ! [which dialog > /dev/null]; then
+if ! which dialog > /dev/null; then
    echo -e "Dialog not found! RetroRig requires this for installation tasks. Install? (y/n)\c"
-   read REPLY
-   if [$REPLY = "y"]; then
+   read DIALOG
+   if [ $DIALOG = "y" ]; then
       sudo apt-get install dialog >> /dev/null
-   fi
+   elif  [ $DIALOG = "n" ]; then
+	echo "exiting!"
+	sleep 2s
+	exit
+fi
 fi
 
+if ! which git > /dev/null; then
+   echo -e "Dialog not found! RetroRig requires this for installation tasks. Install? (y/n)\c"
+   read GIT
+   if [ $GIT = "y" ]; then
+      sudo apt-get install git >> /dev/null
+   elif  [ $GIT = "n" ]; then
+        echo "exiting!"
+        sleep 2s
+        exit
+fi
+fi
 
 while true; do
     cmd=(dialog --backtitle "LibreGeek.org RetroRig Installer" --menu "Choose your option(s). BIOS files for pcsx, pcsx2 NOT provided!" 16 76 16)
