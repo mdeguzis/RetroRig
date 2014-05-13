@@ -8,12 +8,11 @@
 clear
 
 #check for dialog and prompt to install if it is not present
-if ! which dialog > /dev/null; then
+if ! [which dialog > /dev/null]; then
    echo -e "Dialog not found! RetroRig requires this for installation tasks. Install? (y/n)\c"
    read REPLY
-   if "$REPLY" = "y"; then
+   if [$REPLY = "y"]; then
       sudo apt-get install dialog >> /dev/null
-      sleed 2s
    fi
 fi
 
@@ -53,10 +52,10 @@ while true; do
 		mkdir -pv $HOME/RetroRig/.xbmc/
 		cp -Rv $HOME/RetroRig/XBMC/* $HOME/.xbmc/
 
-		#Auto-pull of RCB will be automated with curl later!
-		cd $HOME/.xbmc/addons && curl romcollectionbrowser.googlecode.com/files/script.games.rom.collection.browser-2.0.10.zip > $HOME/.xbmc/addons/script.games.rom.collection.browser-2.0.10.zip
-		#pull in RCB service for autostarting
-		curl romcollectionbrowser.googlecode.com/files/service.rom.collection.browser-1.0.0.zip > $HOME/.xbmc/addons/service.rom.collection.browser-1.0.0.zip
+		#Pull down RCB addon from git repo
+		#We want to do this to keep RCB's paths so everything is setup
+		
+		
 		#unzip files
 		unzip -eo script.games.rom.collection.browser-2.0.10.zip
 		unzip -eo service.rom.collection.browser-1.0.0.zip
