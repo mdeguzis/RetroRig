@@ -10,7 +10,7 @@ echo "RetroRig requires dialog and git for installation tasks. Installing..."
 sudo apt-get install git dialog >> /dev/null
 
 while true; do
-    cmd=(dialog --backtitle "LibreGeek.org RetroRig Installer" --menu "Choose your option(s). BIOS files for pcsx, pcsx2 NOT provided!" 22 56 16)
+    cmd=(dialog --backtitle "LibreGeek.org RetroRig Installer" --menu "Choose your option(s). BIOS files for pcsx, pcsx2 NOT provided!" 12 76 16)
     options=(1 "Install Software"
              2 "Set up configuration files and init scripts"
              3 "Pull latest files (exit and restart script after!)"
