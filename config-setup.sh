@@ -181,8 +181,8 @@ while true; do
 		#default path: /home/$USER/.pcsx
 		#Main config
 		cp -v $HOME/RetroRig/pcsx/pcsx.cfg $HOME/.pcsx/
-		cp -Rv $HOME/RetroRig/pcsx/plugins/* $HOME/.pcsx
-		cp -Rv $HOME/RetroRig/pcsx/patches/* $HOME/.pcsx
+		cp -Rv $HOME/RetroRig/pcsx/plugins $HOME/.pcsx/
+		cp -Rv $HOME/RetroRig/pcsx/patches $HOME/.pcsx/
 
 		#pcsx2
 		#default path: /home/$USER/.config/pcsx2
