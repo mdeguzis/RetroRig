@@ -36,11 +36,12 @@ while true; do
     cmd=(dialog --backtitle "LibreGeek.org RetroRig Installer" --menu "Choose your option(s). BIOS files for pcsx, pcsx2 NOT provided!" 16 76 16)
     options=(1 "Install Software"
              2 "Set up configuration files and init scripts"
-             3 "Pull latest files (exit and restart script after!)"
+             3 "Pull latest files from git"
              4 "Update emulator binaries"
              5 "Upgrade System (use with caution!)"
-             6 "Reboot PC"
-             7 "Exit" )
+	     6 "Start RetroRig"
+             7 "Reboot PC"
+             8 "Exit" )
     choices=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
     if [ "$choices" != "" ]; then
 	case $choices in
@@ -65,16 +66,7 @@ while true; do
 		#dot files without loading XBMC at least once
 		#copy in default folder base from first run:
 		mkdir -pv $HOME/RetroRig/.xbmc/
-		cp -Rv $HOME/RetroRig/XBMC/* $HOME/.xbmc/
-
-		#set proper permission for addons
-		chmod -Rv 755 service.rom.collection.browser
-		chmod -Rv 755 script.games.rom.collection.browser
-		#return home
-		cd $HOME/RetroRig/
-		echo ""
-		echo "RetroRig files cloned into: $HOME/RetroRig" 
-		sleep 5s
+		cp -Rv $HOME/RetroRig/XBMC/* $HOME/.xbmc
 
 		#clear
 		clear
@@ -99,11 +91,6 @@ while true; do
 		gconftool-2 --type boolean -s /apps/gnome-power-manager/lock/suspend false
 		gconftool-2 --type boolean -s /apps/gnome-power-manager/lock_use_screensaver_settings true
 		gconftool-2 --type boolean -s /apps/gnome-screensaver/lock_enabled false
-
-		#having some trouble with the screensaver re-enabling itself
-		#for now, remove gnome-screensaver, should not be needed
-		#due to XBMC having its own.
-		sudo apt-get remove -y gnome-screensaver
 
 		#setup skelton folders for XBMC Rom Collection Browser
 		#ROMs
@@ -268,11 +255,15 @@ while true; do
 		sleep 3s
 		;;
             6)
+		echo "starting RetroRig"
+		xbmc
+		;;
+            7)
 	        echo "Rebooting in 5 seconds, press CTRL+C to cancel"
                 sleep 5s
                 sudo reboot 
 		;;
-            7)  break
+            8)  break
                 ;;
          esac
      else
