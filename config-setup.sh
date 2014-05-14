@@ -146,6 +146,7 @@ while true; do
 		mkdir -pv $HOME/.stella/
 
 		#xboxdrv director located in common area for startup
+		echo "sudo needed to create common xboxdrv share!"
 		sudo mkdir -pv /usr/share/xboxdrv/
 
 		#Tools
@@ -215,6 +216,7 @@ while true; do
 		cp -v $HOME/RetroRig/controller-cfg/retro-gaming.lyt $HOME/.qjoypad3/
 
 		#add xbox controller init script
+		echo "sudo needed to create init scripts for xboxdrv!"
 		sudo cp -v $HOME/RetroRig/controller-cfg/xpad-wireless.xboxdrv\
 		/usr/share/xboxdrv/
 		sudo cp -v $HOME/RetroRig/init-scripts/xboxdrv /etc/init.d/
@@ -224,9 +226,11 @@ while true; do
 		cp -v $HOME/RetroRig/RCB/autoexec.py $HOME/.xbmc/userdata/
 
 		#blacklist xpad
+		echo "sudo needed to blacklist xpad!"
 		sudo cp -v $HOME/RetroRig/init-scripts/blacklist.conf /etc/modprobe.d/
 
 		#create autostart for XBMC snd qjoypad
+		echo "sudo needed to create auto-start entries!"
 		sudo cp -v /usr/share/applications/xbmc.desktop /etc/xdg/autostart/
 		sudo cp -v $HOME/RetroRig/controller-cfg/qjoypad.desktop /etc/xdg/autostart/
 		#If xboxdrv config file does not pick up on reboot,
@@ -240,6 +244,8 @@ while true; do
 		sleep 2s
 		cd $HOME/RetroRig/
 		git pull
+		#pause for reviewing changes
+		sleep 5s
 		bash config-setup.sh
 		;;
             4)
