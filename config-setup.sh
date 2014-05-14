@@ -181,8 +181,8 @@ while true; do
 		#default path: /home/$USER/.pcsx
 		#Main config
 		cp -v $HOME/RetroRig/pcsx/pcsx.cfg $HOME/.pcsx/
-		cp -v $HOME/RetroRig/pcsx/plugins/ $HOME/.pcsx/
-		cp -v $HOME/RetroRig/pcsx/patches/ $HOME/.pcsx/
+		cp -Rv $HOME/RetroRig/pcsx/plugins/* $HOME/.pcsx
+		cp -Rv $HOME/RetroRig/pcsx/patches/* $HOME/.pcsx
 
 		#pcsx2
 		#default path: /home/$USER/.config/pcsx2
@@ -223,13 +223,13 @@ while true; do
 		sudo update-rc.d xboxdrv defaults
 
 		#copyautoexec.py in the userdata folder for autostarting RCB
-		cp -v $HOME/RetroRig/RCB/autoexec.py $HOME/.xbmc/userdata/
+		#cp -v $HOME/RetroRig/RCB/autoexec.py $HOME/.xbmc/userdata/
 
 		#blacklist xpad
 		echo "sudo needed to blacklist xpad!"
 		sudo cp -v $HOME/RetroRig/init-scripts/blacklist.conf /etc/modprobe.d/
 
-		#create autostart for XBMC snd qjoypad
+		#create autostart for XBMC and qjoypad
 		echo "sudo needed to create auto-start entries!"
 		sudo cp -v /usr/share/applications/xbmc.desktop /etc/xdg/autostart/
 		sudo cp -v $HOME/RetroRig/controller-cfg/qjoypad.desktop /etc/xdg/autostart/
@@ -269,7 +269,8 @@ while true; do
                 sleep 5s
                 sudo reboot 
 		;;
-            8)  break
+            8)  
+		break
                 ;;
          esac
      else
