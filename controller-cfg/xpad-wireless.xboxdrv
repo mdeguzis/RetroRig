@@ -46,7 +46,7 @@
 # no-uinput = true
 # product-id = -1
 # quiet = false
-rumble = true
+#rumble = true
 # rumble-gain = 255
 # rumble-l = -1
 # rumble-r = -1
