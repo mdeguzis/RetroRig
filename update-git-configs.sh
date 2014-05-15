@@ -70,8 +70,11 @@ cp -v /etc/modprobe.d/blacklist.conf $HOME/RetroRig/init-scripts/
 #RCB config files
 #--workign with dev--
 
-#add XBMC config data and addons from $HOME/.xbmc
-cp -Rv $HOME/.xbmc $HOME/RetroRig/XBMC
+#add RCB addons from $HOME/.xbmc/addons
+#cp -Rv $HOME/.xbmc/addons/script.games.rom.collection.browser $HOME/RetroRig/XBMC
+#cp -Rv $HOME/.xbmc/addons/service.rom.collection.browser $HOME/RetroRig/XBMC
+#cp -Rv $HOME/.xbmc/userdata $HOME/RetroRig/XBMC
+cp -Rv $HOME/.xbmc/ $HOME/RetroRig/XBMC
 
 #update init-scripts
 #xboxdrv service
