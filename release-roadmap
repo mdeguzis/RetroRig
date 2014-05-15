@@ -3,7 +3,7 @@ Goals for 0.7.0 release
 
 -Resolution selection for emulators that support it(in progress)
 -Fix script menu appearance (done)
--Establish testing snapshot on Vbox (Ubuntu 14.04 LTS)
+-Establish testing snapshot on Vbox running Ubuntu 14.04 LTS
 -Finish folder skelton (done)
 -Double check required config files for emulators (in progress)
 -Replace specifc /home/mikeyd with $HOME (done)
@@ -11,8 +11,10 @@ Goals for 0.7.0 release
 -Ensure dependencies are met (done)
 -Autostart XBMC via config file (done)
 -Autostart Rom Collection Browser in XBMC (software limitation, working with RCB dev)
--mechanism to update git repo in scritp (done)
+-mechanism to update git repo in script (done)
 -test all emulators with sample ROM
+	-Mupen64plus (done)
+-remove pw requirement to reboot
 
 Overall Goals for 1.0 release
 ---------------
@@ -23,7 +25,7 @@ Overall Goals for 1.0 release
 -Establish and maintain "Testing" git branch
 -Provide install option for wired or wireless Xbox controller
 -Provide install option for alternate controllers
--Provide install option to import ROMs?
+-Provide install option to import ROMs into default directorys (new dialog window)
 -CLI logo in script
 -Provide video driver switcher for emulators?
 
