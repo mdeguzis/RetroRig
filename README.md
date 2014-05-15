@@ -42,6 +42,11 @@ and is a hot target for many folks. Arch Linux, or Debian Testing were other con
 there are many pro's and con's to using Ubuntu, all of which are understandable. You can't appease 
 everyone!
 
+## ROMs
+
+ROMs for emualtors are not provided for legal reasons. Due to gray areas with BIOS files, they will
+not be provided for emulators that require them (e.g. pcsx, pcsx2). Please do not request these
+items be added.
 
 ## Installation
 
