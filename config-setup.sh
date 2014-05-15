@@ -56,10 +56,18 @@ while true; do
 		#add repository for pcsx2 (PS2 emulator)
 		sudo add-apt-repository -y ppa:gregory-hainaut/pcsx2.official.ppa
 
+		#add repository for official team XBMC "stable"
+		sudo add-apt-repository -y ppa:team-xbmc/ppa
+
 		#add repository for dolphin-emu
 		sudo add-apt-repository -y ppa:glennric/dolphin-emu
+
+		#update repository listings
 		sudo apt-get update
+
+		#install software
 		sudo apt-get install -y xboxdrv curl zsnes nestopia pcsxr pcsx2:i386\
+		python-software-properties pkg-config software-properties-common\
 		mame mupen64plus dconf-tools qjoypad xbmc dolphin-emu-master stella
 
 		#xbmc does not (at least for Ubuntu's repo pkg) load the
@@ -265,6 +273,7 @@ while true; do
 		xbmc
 		;;
             7)
+		#need to add reboot command to sudo to avoid pw prompt
 	        echo "Rebooting in 5 seconds, press CTRL+C to cancel"
                 sleep 5s
                 sudo reboot 
