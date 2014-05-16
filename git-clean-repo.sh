@@ -60,7 +60,9 @@ read run
 echo -e "Folder(s) to remove? Seperate multiples by a space: \c"
 read folder
 
-git filter-branch --tag-name-filter cat --index-filter 'git rm -r --cached --ignore-unmatch $folder' --prune-empty -f -- --all 
+echo $folder
+
+git filter-branch --tag-name-filter cat --index-filter 'git rm -r --cached --ignore-unmatch "$folder"' --prune-empty -f -- --all 
 
 #This command is adapted from other sources—the
 #principle addition is --tag-name-filter cat which ensures tags are rewritten as well.
