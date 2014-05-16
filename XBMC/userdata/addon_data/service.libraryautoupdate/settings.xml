@@ -1,0 +1,32 @@
+<settings>
+    <setting id="clean_libraries" value="false" />
+    <setting id="clean_music_cron_expression" value="0 2 * * *" />
+    <setting id="clean_timer" value="0" />
+    <setting id="clean_video_cron_expression" value="0 0 * * *" />
+    <setting id="custom_1_advanced_timer" value="false" />
+    <setting id="custom_1_cron_expression" value="0 * * * *" />
+    <setting id="custom_1_timer" value="2" />
+    <setting id="custom_2_advanced_timer" value="false" />
+    <setting id="custom_2_cron_expression" value="0 * * * *" />
+    <setting id="custom_2_timer" value="2" />
+    <setting id="custom_3_advanced_timer" value="false" />
+    <setting id="custom_3_cron_expression" value="0 * * * *" />
+    <setting id="custom_3_timer" value="2" />
+    <setting id="last_run" value="0" />
+    <setting id="library_to_clean" value="0" />
+    <setting id="music_advanced_timer" value="false" />
+    <setting id="music_cron_expression" value="0 * * * *" />
+    <setting id="music_timer" value="2" />
+    <setting id="notify_next_run" value="true" />
+    <setting id="run_during_playback" value="false" />
+    <setting id="startup_delay" value="0" />
+    <setting id="update_music" value="false" />
+    <setting id="update_video" value="true" />
+    <setting id="use_custom_1_path" value="false" />
+    <setting id="use_custom_2_path" value="false" />
+    <setting id="use_custom_3_path" value="false" />
+    <setting id="user_confirm_clean" value="false" />
+    <setting id="video_advanced_timer" value="false" />
+    <setting id="video_cron_expression" value="0 * * * *" />
+    <setting id="video_timer" value="2" />
+</settings>

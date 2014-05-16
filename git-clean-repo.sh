@@ -62,7 +62,7 @@ read folder
 
 echo $folder
 
-git filter-branch --tag-name-filter cat --index-filter 'git rm -r --cached --ignore-unmatch "$folder"' --prune-empty -f -- --all 
+git filter-branch --tag-name-filter cat --index-filter 'git rm -r --cached --ignore-unmatch $folder' --prune-empty -f -- --all 
 
 #This command is adapted from other sources—the
 #principle addition is --tag-name-filter cat which ensures tags are rewritten as well.

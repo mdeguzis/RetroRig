@@ -1,0 +1,34 @@
+<settings>
+    <setting id="rcb_cachingOption" value="CACHEITEMANDNEXT" />
+    <setting id="rcb_createNfoWhileScraping" value="true" />
+    <setting id="rcb_enableFullReimport" value="false" />
+    <setting id="rcb_escapeEmulatorCommand" value="false" />
+    <setting id="rcb_favoritesSelected" value="1" />
+    <setting id="rcb_fuzzyFactor" value="2" />
+    <setting id="rcb_ignoreGamesWithoutArtwork" value="false" />
+    <setting id="rcb_ignoreGamesWithoutDesc" value="false" />
+    <setting id="rcb_launchOnStartup" value="false" />
+    <setting id="rcb_logLevel" value="INFO" />
+    <setting id="rcb_nfoFolder" value="" />
+    <setting id="rcb_overwriteWithNullvalues" value="false" />
+    <setting id="rcb_postlaunchDelay" value="1000" />
+    <setting id="rcb_prelaunchDelay" value="1000" />
+    <setting id="rcb_preventUnfilteredSearch" value="false" />
+    <setting id="rcb_saveViewStateOnExit" value="true" />
+    <setting id="rcb_saveViewStateOnLaunchEmu" value="true" />
+    <setting id="rcb_scrapOnStartUP" value="false" />
+    <setting id="rcb_scrapingMode" value="Automatic: Accurate" />
+    <setting id="rcb_searchText" value="" />
+    <setting id="rcb_showEntryAllChars" value="true" />
+    <setting id="rcb_showEntryAllConsoles" value="true" />
+    <setting id="rcb_showEntryAllGenres" value="true" />
+    <setting id="rcb_showEntryAllPublisher" value="true" />
+    <setting id="rcb_showEntryAllYears" value="true" />
+    <setting id="rcb_showFavoriteStars" value="true" />
+    <setting id="rcb_showImportOptions" value="true" />
+    <setting id="rcb_skin" value="Confluence" />
+    <setting id="rcb_startupDelay" value="1000" />
+    <setting id="rcb_useNfoFolder" value="false" />
+    <setting id="rcb_useVBInSoloMode" value="false" />
+    <setting id="rcb_view_mode" value="52" />
+</settings>
