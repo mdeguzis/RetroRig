@@ -65,7 +65,7 @@ echo ""
 #Steve Lorek, http://stevelorek.com/
 
 #RUN OR CANCEL
-echo -e "Run removal? \c"
+echo -e "Run removal? y/n \c"
 read run
    if [ $run = "n" ]; then
 	echo "exiting!"
