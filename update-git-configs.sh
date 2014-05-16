@@ -80,20 +80,8 @@ cp -Rv $HOME/.xbmc/userdata/addon_data $HOME/RetroRig/XBMC/userdata
 #xboxdrv service
 cp -v /etc/init.d/xboxdrv $HOME/RetroRig/init-scripts/
 
-
-#Prune garbage files:
-
-#standard small command
-#git gc
-#optional: prune data to avoid huge .git (when needed)
-#git gc --aggressive --prune
-
-#From Linus:
-#The equivalent of "git gc --aggressive" - but done *properly* - is to do (overnight) something like
-git repack -a -d --depth=250 --window=250
-#And here, you might well want to add the "-f" flag (which is the "drop all old deltas"
-#since you now are actually trying to make sure that this one actually finds good candidates.
-#http://gcc.gnu.org/ml/gcc/2007-12/msg00165.html
+#Note:
+#Remember to run garbage collection script every once in a while
 
 #commit data
 git add *
