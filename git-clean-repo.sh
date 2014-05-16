@@ -9,7 +9,58 @@
 #how busy your repository has been. You just need
 # one command to begin the process:
 
-git filter-branch --tag-name-filter cat --index-filter 'git rm -r --cached --ignore-unmatch filename' --prune-empty -f -- --all 
+#find sizes
+#set -x 
+
+# Shows you the largest objects in your repo's pack file.
+# Written for osx.
+#
+# @see http://stubbisms.wordpress.com/2009/07/10/git-script-to-show-largest-pack-objects-and-trim-your-waist-line/
+# @author Antony Stubbs
+
+# set the internal field spereator to line break, so that we can iterate easily over the verify-pack output
+IFS=$'\n';
+
+# list all objects including their size, sort by size, take top 10
+objects=`git verify-pack -v .git/objects/pack/pack-*.idx | grep -v chain | sort -k3nr | head`
+
+echo "All sizes are in kB's. The pack column is the size of the object, compressed, inside the pack file."
+
+output="size,pack,SHA,location"
+for y in $objects
+do
+        # extract the size in bytes
+        size=$((`echo $y | cut -f 5 -d ' '`/1024))
+        # extract the compressed size in bytes
+        compressedSize=$((`echo $y | cut -f 6 -d ' '`/1024))
+        # extract the SHA
+        sha=`echo $y | cut -f 1 -d ' '`
+        # find the objects location in the repository tree
+        other=`git rev-list --all --objects | grep $sha`
+        #lineBreak=`echo -e "\n"`
+        output="${output}\n${size},${compressedSize},${other}"
+done
+
+echo -e $output | column -t -s ', '
+echo ""
+
+#EOF Orig. Script
+
+#Start my prune/removal code
+
+#RUN OR CANCEL
+echo -e "Run removal? \c"
+read run
+   if [ $run = "n" ]; then
+	echo "exiting!"
+	exit
+   fi
+
+#read folder to prune/remove
+echo -e "Folder(s) to remove? Seperate multiples by a space: \c"
+read folder
+
+git filter-branch --tag-name-filter cat --index-filter 'git rm -r --cached --ignore-unmatch $folder' --prune-empty -f -- --all 
 
 #This command is adapted from other sources—the
 #principle addition is --tag-name-filter cat which ensures tags are rewritten as well.
@@ -24,7 +75,6 @@ git filter-branch --tag-name-filter cat --index-filter 'git rm -r --cached --ign
 
 rm -rf .git/refs/original/
 git reflog expire --expire=now --all
-git gc --prune=now
 git gc --aggressive --prune=now
 
 #Now we have a fresh, clean repository. In my case,
@@ -35,12 +85,5 @@ git gc --aggressive --prune=now
 #Now we need to push the changes back to the remote
 #repository, so that nobody else will suffer the pain of a 180MB download.
 
-git push origin --force --all
-
-#The --all argument pushes all your branches as well.
-#That's why we needed to clone them at the start of the process.
-
-#Then push the newly-rewritten tags:
-
-git push origin --force --tags
+git push origin master --force
 
