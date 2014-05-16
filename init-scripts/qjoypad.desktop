@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=Application
+Exec=/usr/bin/qjoypad "retro-gaming"
+Hidden=false
+NoDisplay=false
+X-GNOME-Autostart-enabled=true
+Name[en_US]=qjoypad
+Name=qjoypad
+Comment[en_US]=
+Comment=
