@@ -1,6 +1,10 @@
 #!/bin/bash
 
-#Credit goes to:
+#www.libregeek.org
+#Author: Michael DeGuzis
+#Desciption: clean the git repo of uneeded huge commits in .git
+
+#additional Credit goes to:
 #http://stevelorek.com/how-to-shrink-a-git-repository.html
 #Author: Steve Lorek
 #Desciption: Ruby and Rails Developer from Southampton, UK—Senior Developer at LoveThis.
@@ -8,6 +12,10 @@
 #Cleaning the file will take a while, depending on
 #how busy your repository has been. You just need
 # one command to begin the process:
+
+##################################
+#Start Orig. Script
+##################################
 
 #find sizes
 #set -x 
@@ -43,10 +51,18 @@ done
 
 echo -e $output | column -t -s ', '
 echo ""
-
+##################################
 #EOF Orig. Script
+##################################
 
-#Start my prune/removal code
+#################################
+#Start prune/removal code
+#################################
+
+#Much of this credit goes to:
+#
+#Manuel van Rijn, http://manuel.manuelles.nl/
+#Steve Lorek, http://stevelorek.com/
 
 #RUN OR CANCEL
 echo -e "Run removal? \c"
@@ -87,4 +103,8 @@ git gc --aggressive --prune=now
 #repository, so that nobody else will suffer the pain of a 180MB download.
 
 git push origin master --force
+
+#################################
+#End prune/removal code
+#################################
 
