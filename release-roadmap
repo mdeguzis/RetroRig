@@ -2,6 +2,10 @@ Goals for 0.7.0 release
 ----------------
 
 -Resolution selection for emulators that support it (in progress)
+	-Custom resolution
+		-Mupen64plus (done)
+	-Preset 720p
+		-Mupen64plus (done)
 -Fix script menu appearance (done)
 -Establish testing snapshot on Vbox running Ubuntu 14.04 LTS
 -Finish folder skelton (done)
@@ -19,6 +23,7 @@ Goals for 0.7.0 release
 Overall Goals for 1.0 release
 ---------------
 
+-Add RetroRig installer as favorite/Advanced launcher item
 -automate XBMC plugins
 -automate XBMC ROM Collection Browser
 -Exit every emulator with Esc (pcsx, pcsx2, dolphin problematic)
