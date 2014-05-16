@@ -35,13 +35,14 @@ fi
 while true; do
     cmd=(dialog --backtitle "LibreGeek.org RetroRig Installer" --menu "Choose your option(s). BIOS files for pcsx, pcsx2 NOT provided!" 16 76 16)
     options=(1 "Install Software"
-             2 "Set up configuration files and init scripts"
-             3 "Pull latest files from git"
-             4 "Update emulator binaries"
-             5 "Upgrade System (use with caution!)"
-	     6 "Start RetroRig"
-             7 "Reboot PC"
-             8 "Exit" )
+             2 "Set up default configuration files and init scripts"
+	     3 "Retro Rig Settings"
+             4 "Pull latest files from git"
+             5 "Update emulator binaries"
+             6 "Upgrade System (use with caution!)"
+	     7 "Start RetroRig"
+             8 "Reboot PC"
+             9 "Exit" )
     choices=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
     if [ "$choices" != "" ]; then
 	case $choices in
@@ -247,7 +248,13 @@ while true; do
 		#clear and prompt
 		sleep 3s
 	        ;;
+
             3)
+		echo "changing settings"
+		bash settings.sh
+		;;
+
+            4)
 		echo "updating git repo"
 		sleep 2s
 		cd $HOME/RetroRig/
@@ -256,29 +263,29 @@ while true; do
 		sleep 5s
 		bash config-setup.sh
 		;;
-            4)
+            5)
 		echo "updating binaries"
 		sudo apt-get install -y xboxdrv zsnes nestopia pcsxr pcsx2:i386\
 		mame mupen64plus qjoypad xbmc dolphin-emu-master stella	
 		sleep 3s
 		;;
-            5)
+            6)
 		echo "updating system"
 		sudo apt-get update
 		sudo apt-get upgrade
 		sleep 3s
 		;;
-            6)
+            7)
 		echo "starting RetroRig"
 		xbmc
 		;;
-            7)
+            8)
 		#need to add reboot command to sudo to avoid pw prompt
 	        echo "Rebooting in 5 seconds, press CTRL+C to cancel"
                 sleep 5s
                 sudo reboot 
 		;;
-            8)  
+            9)  
 		break
                 ;;
          esac
