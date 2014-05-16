@@ -1,0 +1,50 @@
+Goals for 0.7.0 release
+----------------
+
+-Resolution selection for emulators that support it (in progress)
+	-Custom resolution
+		-Mupen64plus (done)
+	-Preset 720p
+		-Mupen64plus (done)
+-Fix script menu appearance (done)
+-Establish testing snapshot on Vbox running Ubuntu 14.04 LTS
+-Finish folder skelton (done)
+-Double check required config files for emulators (in progress)
+-Replace specifc /home/mikeyd with $HOME (done)
+-Roll out and test 0.6a release on VM
+-Ensure dependencies are met (done)
+-Autostart XBMC via config file (done)
+-Autostart Rom Collection Browser in XBMC (software limitation, working with RCB dev)
+-mechanism to update git repo in script (done)
+-test all emulators with sample ROM
+	-Mupen64plus (done)
+-remove pw requirement to reboot
+
+Overall Goals for 1.0 release
+---------------
+
+-Add RetroRig installer as favorite/Advanced launcher item
+-automate XBMC plugins
+-automate XBMC ROM Collection Browser
+-Exit every emulator with Esc (pcsx, pcsx2, dolphin problematic)
+-Establish and maintain "Testing" git branch
+-Provide install option for wired or wireless Xbox controller
+-Provide install option for alternate controllers
+-Provide install option to import ROMs into default directorys (new dialog window)
+-CLI logo in script
+-Provide video driver switcher for emulators?
+
+Current Issues
+---------------
+
+-Problems with using OpenGL on Stella (Atari 2600)
+-BIOS files cannot be included for PS1, PS2 due to legal issues, user must insert them.
+
+Future Goals
+---------------
+
+-Repackage Ubuntu 14.04 LTS into a new distribution???
+-Progress bar for installer in pace of verbose CLI output?
+-Install option to send error logs to git?
+-Install option to copy down documentation for tools and emulators?
+-Cool logo

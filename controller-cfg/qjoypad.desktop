@@ -1,0 +1,9 @@
+[Desktop Entry]
+Version=1.0
+Name=qjoypad autostart
+Comment=Bolt on for added gamepad functions 
+Exec=qjoypad "retro-gaming"
+Icon=
+Terminal=false
+Type=Application
+Categories=AudioVideo;Video;Player;TV;
