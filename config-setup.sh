@@ -274,7 +274,7 @@ function _software () {
 }
 
 #configuration function
-function _config () {
+function _configuration () {
 	echo "Seting up configuration files"
 	sleep 3s
 	clear
