@@ -150,9 +150,13 @@ if [ "$choices" != "" ]; then
 		grep -i "ScreenWidth = " $HOME/.config/mupen64plus/mupen64plus.cfg >> res.txt
 		grep -i "ScreenHeight = " $HOME/.config/mupen64plus/mupen64plus.cfg >> res.txt
 		echo "" >> res.txt
-
+		#ZSNES
+		echo "ZSNES:" >> res.txt
+		grep -i "CustomResX=" $HOME/.zsnes/zsnesl.cfg  >> res.txt
+		grep -i "CustomResY=" $HOME/.zsnes/zsnesl.cfg  >> res.txt
+		echo "" >> res.txt
 		#report current resolution
-		dialog --textbox res.txt 10 40
+		dialog --textbox res.txt 33 40
 		#remove text file
 		rm res.txt
 		;; 
@@ -160,52 +164,79 @@ if [ "$choices" != "" ]; then
 	 2) 
 		clear
 		dialog --infobox "Setting resolution to 1360x768 (720p)" 3 48
+
 		########################		
 		#mupen64plus
 		########################
+
 		m_org_X=$(grep -i "ScreenWidth = " $HOME/.config/mupen64plus/mupen64plus.cfg)
 		m_org_Y=$(grep -i "ScreenHeight = " $HOME/.config/mupen64plus/mupen64plus.cfg)
 		#set new resolution(s) from configs
-		m_new_X="ScreenWidth = 1366"
-		m_new_Y="ScreenHeight = 768"
-		#make the changes
+		m_new_X="1366"
+		m_new_Y="768"
+		#make the changes, prefix new_X in case NULL was entered previousey
 		#mupen64plus
-		sed -i "s|$m_org_X|$m_new_X|g" $HOME/.config/mupen64plus/mupen64plus.cfg
-		sed -i "s|$m_org_Y|$m_new_Y|g" $HOME/.config/mupen64plus/mupen64plus.cfg
+		sed -i "s|$m_org_X|ScreenWidth = $m_new_X|g" $HOME/.config/mupen64plus/mupen64plus.cfg
+		sed -i "s|$m_org_Y|ScreenHeight = $m_new_Y|g" $HOME/.config/mupen64plus/mupen64plus.cfg
 
 		########################		
-		#NEXT EMULATOR HERE
+		#ZSNES
 		######################## 
+
+		#zsnes will not open properly if an improper resolution is set
+		z_org_X=$(grep -i "CustomResX=" $HOME/.zsnes/zsnesl.cfg)
+		z_org_Y=$(grep -i "CustomResY=" $HOME/.zsnes/zsnesl.cfg)
+		#set new resolution(s) from configs
+		z_new_X="1366"
+		z_new_Y="768"
+		#make the changes, prefix new_X in case NULL was entered previously
+		#mupen64plus
+		sed -i "s|$z_org_X|CustomResX="$z_new_X"|g" $HOME/.zsnes/zsnesl.cfg
+		sed -i "s|$z_org_Y|CustomResY="$z_new_Y"|g" $HOME/.zsnes/zsnesl.cfg
 		;; 
 
 	 3) 
 		dialog --infobox  "Setting resolution from user input" 3 40
 
+		#set new resolution(s) from user input
+		dialog --title "Set Custom Resolution" --inputbox "Enter Width (X)" 10 4 2> /tmp/new_X
+		dialog --title "Set Custom Resolution" --inputbox "Enter Length (Y)" 10 4 2> /tmp/new_Y
+
 		########################		
 		#mupen64plus
 		########################
+
 		#grab current resolutions
 		m_org_X=$(grep -i "ScreenWidth = " $HOME/.config/mupen64plus/mupen64plus.cfg)
 		m_org_Y=$(grep -i "ScreenHeight = " $HOME/.config/mupen64plus/mupen64plus.cfg)
-		#set new resolution(s) from user input
-		dialog --title "Inputbox - Example" --inputbox "Enter Width (X)" 8 4 2> /tmp/m_new_X
-		dialog --title "Inputbox - Example" --inputbox "Enter Length (Y)" 8 4 2> /tmp/m_new_Y
 		#set new resolution(s) from configs
-		m_new_X=$(cat '/tmp/m_new_X')
-		m_new_Y=$(cat '/tmp/m_new_Y')
-		#make the changes
+		m_new_X=$(cat '/tmp/new_X')
+		m_new_Y=$(cat '/tmp/new_Y')
+		#make the changes, prefix new_X in case NULL was entered previously
 		sed -i "s|$m_org_X|ScreenWidth = "$m_new_X"|g" $HOME/.config/mupen64plus/mupen64plus.cfg
 		sed -i "s|$m_org_Y|ScreenHeight = "$m_new_Y"|g" $HOME/.config/mupen64plus/mupen64plus.cfg 
 
 		########################		
-		#NEXT EMULATOR HERE
+		#ZSNES
 		######################## 
+
+		#zsnes will not open properly if an improper resolution is set
+		z_org_X=$(grep -i "CustomResX=" $HOME/.zsnes/zsnesl.cfg)
+		z_org_Y=$(grep -i "CustomResY=" $HOME/.zsnes/zsnesl.cfg)
+		#set new resolution(s) from configs
+		z_new_X=$(cat '/tmp/new_X')
+		z_new_Y=$(cat '/tmp/new_Y')
+		#make the changes, prefix new_X in case NULL was entered previously
+		#ZSNES
+		sed -i "s|$z_org_X|CustomResX="$z_new_X"|g" $HOME/.zsnes/zsnesl.cfg
+		sed -i "s|$z_org_Y|CustomResY="$z_new_Y"|g" $HOME/.zsnes/zsnesl.cfg
 
 		########################		
 		#Cleanup
 		######################## 
-		rm -f /tmp/m_new_X
-		rm -f /tmp/m_new_Y
+
+		rm -f /tmp/new_X
+		rm -f /tmp/new_Y
 
 		_resolution
 		;; 
@@ -246,9 +277,10 @@ function _software () {
 	sudo apt-get update
 
 	#install software
-	sudo apt-get install -y xboxdrv curl zsnes nestopia pcsxr pcsx2:i386\
-	python-software-properties pkg-config software-properties-common\
-	mame mupen64plus dconf-tools qjoypad xbmc dolphin-emu-master stella
+	sudo apt-get install -y xboxdrv curl zsnes nestopia pcsxr pcsx2:i386 \
+	python-software-properties pkg-config software-properties-common \
+	mame mupen64plus dconf-tools qjoypad xbmc dolphin-emu-master stella \
+	build-essential 
 
 	#clear
 	clear
@@ -362,11 +394,11 @@ function _configuration () {
 	#mame
 	#default path: /home/$USER/.mame
 	#Main config
-	cp -v $HOME/RetroRig/MAME/mame.ini $HOME/.mame/
-	cp -v $HOME/RetroRig/MAME/default.cfg $HOME/.mame/cfg/
-	#copy parserConfig.xml for offline scrapper
-	cp -v $HOME/RetroRig/MAME/parserConfig.xml $HOME/Games/Artwork/MAME/
-
+	cp -v $HOME/RetroRig/MAME/default.cfg $HOME/.mame/cfg
+	cp -v $HOME/RetroRig/MAME/mame.ini $HOME/.mame
+	#offline artwork
+	cp -v $HOME/RetroRig/MAME/Artwork/* $HOME/Games/Artwork/MAME	
+	
 	#pcsx
 	#default path: /home/$USER/.pcsx
 	#Main config
@@ -407,8 +439,7 @@ function _configuration () {
 
 	#add xbox controller init script
 	echo "sudo needed to create init scripts for xboxdrv!"
-	sudo cp -v $HOME/RetroRig/controller-cfg/xpad-wireless.xboxdrv\
-	/usr/share/xboxdrv/
+	sudo cp -v $HOME/RetroRig/controller-cfg/xpad-wireless.xboxdrv /usr/share/xboxdrv/
 	sudo cp -v $HOME/RetroRig/init-scripts/xboxdrv /etc/init.d/
 	sudo update-rc.d xboxdrv defaults
 
@@ -426,12 +457,22 @@ function _configuration () {
 	#If xboxdrv config file does not pick up on reboot,
 	#be sure to resync the wireless receiver!
 
+	#set the system user to an absolute value.
+	#RCB seems to not seem to like $HOME, rather /home/test/
+	#Let's change the config files to reflect the current username
+	new_U=$(cat'$USER')
+	#change default user from config files to target user. 'first run only!!!' 
+	sed -i "s|/home/test/|/home/$USER/|g" $HOME/.config/pcsx2/PCSX2-reg.ini 
+	sed -i "s|/home/test/|/home/$USER/|g" $HOME/.gens/gens.cfg
+	sed -i "s|/home/test/|/home/$USER/|g" $HOME/.zsnes/zsnesl.cfg
+	sed -i "s|/home/test/|/home/$USER/|g" $HOME/.pcsx/pcsx.cfg 
+	sed -i "s|/home/test/|/home/$USER/|g" $HOME/.dolphin-emu/Config/Dolphin.ini 
+	sed -i "s|/home/test/|/home/$USER/|g" $HOME/.xbmc/userdata/addon_data/script.games.rom.collection.browser/config.xml
 	#clear and prompt
-	sleep 3s
 }
 
 function _update-git () {
-	echo "updating git repo"
+	dialog --infbox "updating git repo" 4 10
 	sleep 2s
 	cd $HOME/RetroRig/
 	git pull
