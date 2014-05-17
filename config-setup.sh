@@ -293,7 +293,7 @@ function _configuration () {
 	#Emulators (if any fall here)
 	mkdir -pv $HOME/Games/Artwork/Atari\ 2600/
 	mkdir -pv $HOME/Games/Artwork/Gamecube/
-	mkdir -pv $HOME/Games/Artwork/Mame4All/
+	mkdir -pv $HOME/Games/Artwork/MAME/
 	mkdir -pv $HOME/Games/Artwork/N64/
 	mkdir -pv $HOME/Games/Artwork/NES/
 	mkdir -pv $HOME/Games/Artwork/SNES/
@@ -364,6 +364,8 @@ function _configuration () {
 	#Main config
 	cp -v $HOME/RetroRig/MAME/mame.ini $HOME/.mame/
 	cp -v $HOME/RetroRig/MAME/default.cfg $HOME/.mame/cfg/
+	#copy parserConfig.xml for offline scrapper
+	cp -v $HOME/Games/Artwork/MAME/parserConfig.xml $HOME/.mame/
 
 	#pcsx
 	#default path: /home/$USER/.pcsx
@@ -459,7 +461,7 @@ function _start-xbmc () {
 
 function _reboot () {
 	#need to add reboot command to sudo to avoid pw prompt
-        dialog --infobox "Rebooting in 5 seconds, press CTRL+C to cancel" 3 35 ; sleep 5s
+        dialog --infobox "Rebooting in 5 seconds, press CTRL+C to cancel" 3 45 ; sleep 5s
         sleep 5s
         sudo reboot 
 }
