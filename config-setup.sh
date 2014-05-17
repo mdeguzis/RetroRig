@@ -171,45 +171,55 @@ if [ "$choices" != "" ]; then
       
 	 2) 
 		clear
-		echo "Setting resolution to 1360x768 (720p)"
+		dialog --infobox "Setting resolution to 1360x768 (720p)" 3 48
+		########################		
 		#mupen64plus
+		########################
 		m_org_X=$(grep -i "ScreenWidth = " $HOME/.config/mupen64plus/mupen64plus.cfg)
 		m_org_Y=$(grep -i "ScreenHeight = " $HOME/.config/mupen64plus/mupen64plus.cfg)
-
 		#set new resolution(s) from configs
 		m_new_X="ScreenWidth = 1366"
 		m_new_Y="ScreenHeight = 768"
-
 		#make the changes
 		#mupen64plus
-		echo "Changing mupen resolution to 720p"
 		sed -i "s|$m_org_X|$m_new_X|g" $HOME/.config/mupen64plus/mupen64plus.cfg
-		sed -i "s|$m_org_Y|$m_new_Y|g" $HOME/.config/mupen64plus/mupen64plus.cfg 
+		sed -i "s|$m_org_Y|$m_new_Y|g" $HOME/.config/mupen64plus/mupen64plus.cfg
+
+		########################		
+		#NEXT EMULATOR HERE
+		######################## 
 		;; 
 
 	 3) 
-		clear
-		echo "Setting resolution from user input"
+		dialog --infobox  "Setting resolution from user input" 3 40
 
+		########################		
 		#mupen64plus
+		########################
+		#grab current resolutions
 		m_org_X=$(grep -i "ScreenWidth = " $HOME/.config/mupen64plus/mupen64plus.cfg)
 		m_org_Y=$(grep -i "ScreenHeight = " $HOME/.config/mupen64plus/mupen64plus.cfg)
-
 		#set new resolution(s) from user input
-		sleep 2s
-		echo -e "Set Width in X: \c"
-		read m_new_X
-		echo -e "Set Height in Y: \c"
-		read m_new_Y
+		dialog --title "Inputbox - Example" --inputbox "Enter Width (X)" 8 4 2> /tmp/m_new_X
+		dialog --title "Inputbox - Example" --inputbox "Enter Length (Y)" 8 4 2> /tmp/m_new_Y
 		#set new resolution(s) from configs
-		m_new_X="ScreenWidth = $m_new_X"
-		m_new_Y="ScreenHeight = $m_new_Y"
-
+		m_new_X=$(cat '/tmp/m_new_X')
+		m_new_Y=$(cat '/tmp/m_new_Y')
 		#make the changes
-		#mupen64plus
-		echo "Changing mupen resolution to 720p"
-		sed -i "s|$m_org_X|$m_new_X|g" $HOME/.config/mupen64plus/mupen64plus.cfg
-		sed -i "s|$m_org_Y|$m_new_Y|g" $HOME/.config/mupen64plus/mupen64plus.cfg 
+		sed -i "s|$m_org_X|ScreenWidth = "$m_new_X"|g" $HOME/.config/mupen64plus/mupen64plus.cfg
+		sed -i "s|$m_org_Y|ScreenHeight = "$m_new_Y"|g" $HOME/.config/mupen64plus/mupen64plus.cfg 
+
+		########################		
+		#NEXT EMULATOR HERE
+		######################## 
+
+		########################		
+		#Cleanup
+		######################## 
+		rm -f /tmp/m_new_X
+		rm -f /tmp/m_new_Y
+
+		_resolution
 		;; 
 	 4) 
 		_settings
@@ -229,7 +239,7 @@ done
 
 #software function
 function _software () {
-	dialog --infobox "Installing required programs...Please wait" 3 48 ; sleep 5 
+	dialog --infobox "Installing required programs...Please wait" 3 48 ; sleep 3s 
 	clear
 
 	#add multi-arch support
