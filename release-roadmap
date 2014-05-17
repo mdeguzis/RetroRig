@@ -21,11 +21,11 @@ Goals for 0.7.0 release
 -test all emulators with sample ROM
 	-(done) Mupen64plus
 -remove pw requirement to reboot
+-import games from folder on startup to avoid manual intervention
 
 Overall Goals for 1.0 release
 ---------------
 
--Add RetroRig installer as favorite/Advanced launcher item
 -automate XBMC plugins
 -automate XBMC ROM Collection Browser
 -Exit every emulator with Esc (pcsx, pcsx2, dolphin problematic)
@@ -36,7 +36,7 @@ Overall Goals for 1.0 release
 -CLI logo in script
 -Provide video driver switcher for emulators?
 
-Current Issues
+Issues list
 ---------------
 
 -Problems with using OpenGL on Stella (Atari 2600)
