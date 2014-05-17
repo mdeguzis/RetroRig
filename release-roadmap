@@ -1,11 +1,13 @@
 Goals for 0.7.0 release
 ----------------
 
--Resolution selection for emulators that support it (in progress)
+-Global Resolution selection for emulators that support it (in progress)
 	-Custom resolution
 		-(done) Mupen64plus
+		-(done) ZSNES
 	-Preset 720p
 		-(done) Mupen64plus
+		-(done) ZSNES
 -Fix script menu appearance (done)
 -Establish testing snapshot on Vbox running Ubuntu 14.04 LTS
 -Finish folder skelton (done)
@@ -14,7 +16,7 @@ Goals for 0.7.0 release
 -Roll out and test 0.6a release on VM
 -(done) Ensure dependencies are met
 -(done) Autostart XBMC via config file
--Autostart Rom Collection Browser in XBMC (software limitation, working with RCB dev)
+-(done) Autostart Rom Collection Browser in XBMC (software limitation, working with RCB dev)
 -(done) mechanism to update git repo in script
 -test all emulators with sample ROM
 	-(done) Mupen64plus
@@ -39,6 +41,9 @@ Current Issues
 
 -Problems with using OpenGL on Stella (Atari 2600)
 -BIOS files cannot be included for PS1, PS2 due to legal issues, user must insert them.
+-ROM Collection browser does not seem to take $HOME paths, must be absolute (/home/test) ? 
+-Preloading ROM Collection Browser userdata is troublesoome, may need to stay manual
+-OpenGL 
 
 Future Goals
 ---------------

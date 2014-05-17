@@ -22,9 +22,8 @@ cp -v $HOME/.zsnes/zsnesl.cfg  $HOME/RetroRig/ZSNES/
 #mame
 #default path: /home/$USER/.mame
 cp -v $HOME/.mame/mame.ini $HOME/RetroRig/MAME/
-cp -v $HOME/.mame/cfg/default.cfg $HOME/RetroRig/MAME/
-#copy over parserConfig.xml
-cp -v $HOME/Games/Artwork/MAME/parserConfig.xml $HOME/MAME/
+#copy over artwork configs
+cp -v $HOME/Games/Artwork/MAME/* $HOME/Games/Artwork/MAME
 
 #pcsx
 #default path: /home/$USER/.pcsx
@@ -72,10 +71,15 @@ cp -v /etc/modprobe.d/blacklist.conf $HOME/RetroRig/init-scripts/
 #RCB config files
 #--workign with dev--
 
+#XBMC
 #add RCB addons from $HOME/.xbmc/addons
 cp -Rv $HOME/.xbmc/addons/script.games.rom.collection.browser $HOME/RetroRig/XBMC/addons
 cp -Rv $HOME/.xbmc/addons/service.rom.collection.browser $HOME/RetroRig/XBMC/addons
+#copy over keymaps and gui settings (since I am not copying every folder at the start)
 cp -Rv $HOME/.xbmc/userdata/addon_data $HOME/RetroRig/XBMC/userdata
+cp -Rv $HOME/.xbmc/userdata/keymaps $HOME/RetroRig/XBMC/userdata
+cp -Rv $HOME/.xbmc/userdata/favourites.xml $HOME/RetroRig/XBMC/userdata
+cp -Rv $HOME/.xbmc/userdata/guisettings.xml $HOME/RetroRig/XBMC/userdata
 
 #update init-scripts
 #xboxdrv service
