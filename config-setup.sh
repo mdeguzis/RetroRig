@@ -31,8 +31,6 @@ if ! which git > /dev/null; then
    fi
 fi
 
-}
-
 function _main () {
 _prereq
 
