@@ -458,7 +458,7 @@ function _configuration () {
 	#be sure to resync the wireless receiver!
 
 	#set the system user to an absolute value.
-	#RCB seems to not seem to like $HOME, rather /home/test/
+	#RCB and some config files don't like using $HOME, rather /home/test/
 	#Let's change the config files to reflect the current username
 	new_U=$(cat'$USER')
 	#change default user from config files to target user. 'first run only!!!' 
@@ -489,20 +489,21 @@ function _update-binaries () {
 }
 
 function _upgrade-system () {
-	echo "updating system"
+	dialog --infobox "updating system" 3 11
 	sudo apt-get update
 	sudo apt-get upgrade
 	sleep 3s
 }
 
 function _start-xbmc () {
-	echo "starting RetroRig"
+	dialog --infbox "starting RetroRig" 3 11
+	sleep 2s
 	xbmc
 }
 
 function _reboot () {
 	#need to add reboot command to sudo to avoid pw prompt
-        dialog --infobox "Rebooting in 5 seconds, press CTRL+C to cancel" 3 45 ; sleep 5s
+        dialog --infobox "Rebooting in 5 seconds, press CTRL+C to cancel" 3 55 ; sleep 5s
         sleep 5s
         sudo reboot 
 }
