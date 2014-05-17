@@ -45,7 +45,8 @@ options=(1 "Install Software"
 
 		4)
 		_update-git
-		_main
+		#reload script with changes
+		bash config-setup.sh
 		;;
 
 		5)
