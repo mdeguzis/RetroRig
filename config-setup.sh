@@ -134,14 +134,6 @@ done
 }
 
 function _resolution () {
-#testing only
-#echo "old"
-#echo $m_org_X
-#echo $m_org_Y
-#echo "new"
-#echo $m_new_X
-#echo $m_new_Y
-#sleep 3s
 
 #menu
 while true; do
@@ -263,22 +255,14 @@ function _software () {
 	python-software-properties pkg-config software-properties-common\
 	mame mupen64plus dconf-tools qjoypad xbmc dolphin-emu-master stella
 
-	#xbmc does not (at least for Ubuntu's repo pkg) load the
-	#dot files without loading XBMC at least once
-	#copy in default folder base from first run:
-	mkdir -pv $HOME/RetroRig/.xbmc/
-	cp -Rv $HOME/RetroRig/XBMC/* $HOME/.xbmc
-
 	#clear
 	clear
 }
 
 #configuration function
 function _configuration () {
-	echo "Seting up configuration files"
-	sleep 3s
+	dialog --infobox "Seting up configuration files" 3 48 ; sleep 3s
 	clear
-
 	#disable screensaver, XBMC will manage this
 	#export display to allow gsettings running in terminal window
 	export DISPLAY=:0.0
@@ -347,6 +331,12 @@ function _configuration () {
 	mkdir -pv $HOME/.pcsx/patches/
 	mkdir -pv $HOME/.config/pcsx2/inis/
 	mkdir -pv $HOME/.stella/
+	mkdir -pv $HOME/.xbmc/
+
+	#xbmc does not (at least for Ubuntu's repo pkg) load the
+	#dot files without loading XBMC at least once
+	#copy in default folder base from first run:	
+	cp -Rv $HOME/RetroRig/XBMC/* $HOME/.xbmc
 
 	#xboxdrv director located in common area for startup
 	echo "sudo needed to create common xboxdrv share!"
@@ -411,7 +401,7 @@ function _configuration () {
 	#Gamecube controller config
 	cp -Rv /$HOME/RetroRig/Dolphin/GCPadNew.ini $HOME/.dolphin-emu/Config/
 	#Wii controller config
-	#[PENDING]
+
 	#OpenGL graphics config
 	cp -Rv /$HOME/RetroRig/Dolphin/gfx_opengl.ini $HOME/.dolphin-emu/Config/
 
