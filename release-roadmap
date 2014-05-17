@@ -3,21 +3,21 @@ Goals for 0.7.0 release
 
 -Resolution selection for emulators that support it (in progress)
 	-Custom resolution
-		-Mupen64plus (done)
+		-(done) Mupen64plus
 	-Preset 720p
-		-Mupen64plus (done)
+		-(done) Mupen64plus
 -Fix script menu appearance (done)
 -Establish testing snapshot on Vbox running Ubuntu 14.04 LTS
 -Finish folder skelton (done)
 -Double check required config files for emulators (in progress)
--Replace specifc /home/mikeyd with $HOME (done)
+-(done) Replace specifc /home/mikeyd with $HOME 
 -Roll out and test 0.6a release on VM
--Ensure dependencies are met (done)
--Autostart XBMC via config file (done)
+-(done) Ensure dependencies are met
+-(done) Autostart XBMC via config file
 -Autostart Rom Collection Browser in XBMC (software limitation, working with RCB dev)
--mechanism to update git repo in script (done)
+-(done) mechanism to update git repo in script
 -test all emulators with sample ROM
-	-Mupen64plus (done)
+	-(done) Mupen64plus
 -remove pw requirement to reboot
 
 Overall Goals for 1.0 release
