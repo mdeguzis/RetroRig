@@ -23,6 +23,8 @@ cp -v $HOME/.zsnes/zsnesl.cfg  $HOME/RetroRig/ZSNES/
 #default path: /home/$USER/.mame
 cp -v $HOME/.mame/mame.ini $HOME/RetroRig/MAME/
 cp -v $HOME/.mame/cfg/default.cfg $HOME/RetroRig/MAME/
+#copy over parserConfig.xml
+cp -v $HOME/Games/Artwork/MAME/parserConfig.xml $HOME/MAME/
 
 #pcsx
 #default path: /home/$USER/.pcsx
