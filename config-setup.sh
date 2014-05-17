@@ -365,7 +365,7 @@ function _configuration () {
 	cp -v $HOME/RetroRig/MAME/mame.ini $HOME/.mame/
 	cp -v $HOME/RetroRig/MAME/default.cfg $HOME/.mame/cfg/
 	#copy parserConfig.xml for offline scrapper
-	cp -v $HOME/Games/Artwork/MAME/parserConfig.xml $HOME/.mame/
+	cp -v $HOME/RetroRig/MAME/parserConfig.xml $HOME/Games/Artwork/MAME/
 
 	#pcsx
 	#default path: /home/$USER/.pcsx
