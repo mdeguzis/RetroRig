@@ -1,13 +1,39 @@
 #!/bin/bash
 #
 #small script to copy over configuration files for emulators
-#Version 0.6
+#Version 0.6.1
 #Please report any errors via a pull request
 #
 #
+#Pre-requisite checks:
+#check for dialog and prompt to install if it is not present
+if ! which dialog > /dev/null; then
+   echo -e "dialog command not found! Install? (y/n) \c"
+   read DIALOG
+   if [ $DIALOG = "y" ]; then
+      sudo apt-get install dialog >> /dev/null
+   elif  [ $DIALOG = "n" ]; then
+	echo "exiting!"
+	sleep 2s
+	exit
+   fi
+fi
+
+if ! which git > /dev/null; then
+   echo -e "git command not found! Install? (y/n) \c"
+   read GIT
+   if [ $GIT = "y" ]; then
+      sudo apt-get install git >> /dev/null
+   elif  [ $GIT = "n" ]; then
+        echo "exiting!"
+        sleep 2s
+        exit
+   fi
+fi
+
+}
 
 function _main () {
-#run pre-requisite checks
 _prereq
 
 cmd=(dialog --backtitle "LibreGeek.org RetroRig Installer" --menu "Choose your option(s). BIOS files for pcsx, pcsx2 NOT provided!" 16 70 16)
@@ -75,35 +101,6 @@ options=(1 "Install Software"
 		;;
 esac
 done
-}
-
-
-function _prereq () {
-#check for dialog and prompt to install if it is not present
-if ! which dialog > /dev/null; then
-   echo -e "dialog command not found! Install? (y/n) \c"
-   read DIALOG
-   if [ $DIALOG = "y" ]; then
-      sudo apt-get install dialog >> /dev/null
-   elif  [ $DIALOG = "n" ]; then
-	echo "exiting!"
-	sleep 2s
-	exit
-   fi
-fi
-
-if ! which git > /dev/null; then
-   echo -e "git command not found! Install? (y/n) \c"
-   read GIT
-   if [ $GIT = "y" ]; then
-      sudo apt-get install git >> /dev/null
-   elif  [ $GIT = "n" ]; then
-        echo "exiting!"
-        sleep 2s
-        exit
-   fi
-fi
-
 }
 
 #settings function
@@ -261,7 +258,7 @@ function _software () {
 
 #configuration function
 function _configuration () {
-	dialog --infobox "Seting up configuration files" 3 48 ; sleep 3s
+	dialog --infobox "Seting up configuration files" 3 35 ; sleep 3s
 	clear
 	#disable screensaver, XBMC will manage this
 	#export display to allow gsettings running in terminal window
@@ -464,7 +461,7 @@ function _start-xbmc () {
 
 function _reboot () {
 	#need to add reboot command to sudo to avoid pw prompt
-        echo "Rebooting in 5 seconds, press CTRL+C to cancel"
+        dialog --infobox "Rebooting in 5 seconds, press CTRL+C to cancel" 3 35 ; sleep 5s
         sleep 5s
         sudo reboot 
 }
