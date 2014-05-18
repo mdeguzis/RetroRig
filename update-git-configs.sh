@@ -77,6 +77,7 @@ cp -Rv $HOME/.xbmc/addons/script.games.rom.collection.browser $HOME/RetroRig/XBM
 cp -Rv $HOME/.xbmc/addons/service.rom.collection.browser $HOME/RetroRig/XBMC/addons
 #copy over keymaps and gui settings (since I am not copying every folder at the start)
 cp -Rv $HOME/.xbmc/userdata/addon_data $HOME/RetroRig/XBMC/userdata
+cp -Rv $HOME/.xbmc/userdata/addon_data $HOME/RetroRig/XBMC/userdata
 cp -Rv $HOME/.xbmc/userdata/keymaps $HOME/RetroRig/XBMC/userdata
 cp -Rv $HOME/.xbmc/userdata/favourites.xml $HOME/RetroRig/XBMC/userdata
 cp -Rv $HOME/.xbmc/userdata/guisettings.xml $HOME/RetroRig/XBMC/userdata

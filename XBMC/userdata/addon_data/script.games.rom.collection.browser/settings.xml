@@ -15,7 +15,7 @@
     <setting id="rcb_prelaunchDelay" value="1000" />
     <setting id="rcb_preventUnfilteredSearch" value="false" />
     <setting id="rcb_saveViewStateOnExit" value="false" />
-    <setting id="rcb_saveViewStateOnLaunchEmu" value="true" />
+    <setting id="rcb_saveViewStateOnLaunchEmu" value="false" />
     <setting id="rcb_scrapOnStartUP" value="true" />
     <setting id="rcb_scrapingMode" value="Automatic: Accurate" />
     <setting id="rcb_searchText" value="" />
