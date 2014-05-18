@@ -1,62 +1,43 @@
 RetroRig Project for Ubuntu 14.04 LTS
 ===================================================
+Version 0.7.2
 
 ## Please Note!
 
-RetroRig is meant to be a standalone setup for XBMC
-It is mainly targeted at folks wishing to repurpose an old PC. It will overwrite:
+RetroRig is meant to be a standalone setup for XBMC on Ubuntu
+It is mainly targeted at folks wishing to repurpose an old PC. 
 
--xboxdrv init scripts and configurations
+It will overwrite:
 
 -Emulator for supported emulators
 
 	-ZSNES
-
 	-Nestopia
-
 	-Gens/GS
-
 	-MAME
-
 	-Stealla
-
 	-Mupen64Plus
-
 	-PCSX
-
 	-PCSX2
-
 	-Dolphin
+-Also
 
--qjoypad
-
--Blacklisting xpad
-
--Autostarted application entries (XBMC, qjoypad)
-
--Some folder structures under ~/Games
+	-qjoypad
+	-Blacklisting xpad
+	-Autostarted application entries (XBMC, qjoypad)
+	-Some folder structures under ~/Games
+	-xboxdrv init scripts and configurations
 
 RetroRig is shell script to setup a Linux x86_64 system  with several emulators, and XBMC as graphical 
 front end.The inspiration for doing this lies almost completely with the RetroPie Project. I wanted to provide
-something similar, but wanted something a bit more than RetroArch. One of my chief nags for RetroArch/RetroPie 
-(as amazing as it is), is organization. Sorting through 100's of games sometimestakes a long amount of time 
-(folders and help this), but I soon became addicted to how ROM Collection Browser handles games, as well as 
-it's huge set of options. Among those things was seperate and easy control of each emulator, rather than a 
-blanket config for the entire suite. This allows emulators to have traditional layouts (reversed buttons
-for SNES, for instance). Some emulators do things better than others, and I try to adjust them accordingly. 
-Who knows, I may end up using RetroArch, but hey, nobody said fun projects are all for naught, right!?
-
+something similar, but with XBMC, x86_64, and my favorite interface, "Rom Collection Browser."
 This project is intended to be run on Ubuntu (currently 14.04 LTS) with an wireless Xbox 360 Controller. 
 At some point in the future, I want to try and branch this to other distributions if possible, as well
 as accomodate other controllers. Please see the release-roadmap file for ideas and future plans. 
 
 I invite you to challenge the configs and scripts to help improve my ultimate goal to provide
 an easy way to get up and running with RetroGaming on x86_64 Linux systems. Pull requests or
-Issues are very much welcome!
-
-I am not a programmer by trade (I am ok with Visual Basic, Powershell, and Python), but enjoy scripting a
-lot. In that respect, I have much to learn, and part of the fun of doing this, is improving upon those
-skills and more.
+Issues are very much welcome! 
 
 Thank you for your patience.
 
@@ -77,7 +58,7 @@ everyone!
 
 ## ROMs
 
-ROMs for emualtors are not provided for legal reasons. Due to gray areas with BIOS files, they will
+ROMs for emualtors are NOT provided for legal reasons. Due to legal gray areas with BIOS files, they will
 not be provided for emulators that require them (e.g. pcsx, pcsx2). Please do not request these
 items be added.
 
@@ -92,13 +73,18 @@ from each folder if you wish to just steal some notes on how to setup the emulat
 reference the issues area on Github for current issues, or the release-roadmap for upcoming 
 items.
 
+You can also download a zip file or by other means on the github page. This will install dialog and
+git as prequisites before running RetroRig.
+
+## Updating
+
+The config-setup.sh script also currently contains mechanisms to upgrade Ubuntu, update the 
+emulator binaries, and also a way to pull the latest files from github.
 
 ## Please Note
 
 This project is not yet complete. 
 
 Project notes and guide will be hosted at www.libregeek.org
-
-Version 0.6a
 
 # EOF #
