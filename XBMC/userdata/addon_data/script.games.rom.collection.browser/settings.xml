@@ -3,7 +3,7 @@
     <setting id="rcb_createNfoWhileScraping" value="true" />
     <setting id="rcb_enableFullReimport" value="false" />
     <setting id="rcb_escapeEmulatorCommand" value="false" />
-    <setting id="rcb_favoritesSelected" value="1" />
+    <setting id="rcb_favoritesSelected" value="0" />
     <setting id="rcb_fuzzyFactor" value="2" />
     <setting id="rcb_ignoreGamesWithoutArtwork" value="false" />
     <setting id="rcb_ignoreGamesWithoutDesc" value="false" />
@@ -16,7 +16,7 @@
     <setting id="rcb_preventUnfilteredSearch" value="false" />
     <setting id="rcb_saveViewStateOnExit" value="false" />
     <setting id="rcb_saveViewStateOnLaunchEmu" value="false" />
-    <setting id="rcb_scrapOnStartUP" value="true" />
+    <setting id="rcb_scrapOnStartUP" value="false" />
     <setting id="rcb_scrapingMode" value="Automatic: Accurate" />
     <setting id="rcb_searchText" value="" />
     <setting id="rcb_showEntryAllChars" value="true" />
