@@ -465,11 +465,17 @@ function _configuration () {
 	sed -i "s|/home/test/|/home/$USER/|g" $HOME/.pcsx/pcsx.cfg 
 	sed -i "s|/home/test/|/home/$USER/|g" $HOME/.dolphin-emu/Config/Dolphin.ini 
 	sed -i "s|/home/test/|/home/$USER/|g" $HOME/.xbmc/userdata/addon_data/script.games.rom.collection.browser/config.xml
-	#clear and prompt
+	
+	#remind user about default resolution
+	#If the default is not supported on the monitor, emulators like zsnes will fail to start!
+	dialog --infobox "Default Resolution is 1360x768 (720p)! Please ensure your \
+                          monitor supports this resolution, or change it in the settings menu! \
+                          Main Menu > Option 3 > Option 1" 8 35
+
 }
 
 function _update-git () {
-	dialog --infbox "updating git repo" 4 10
+	dialog --infobox "updating git repo" 4 10
 	sleep 2s
 	cd $HOME/RetroRig/
 	git pull

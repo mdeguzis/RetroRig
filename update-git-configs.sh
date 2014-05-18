@@ -68,13 +68,12 @@ cp -v $HOME/Games/Configs/xpad-wireless.xboxdrv $HOME/RetroRig/controller-cfg/
 cp -v /etc/init.d/xboxdrv $HOME/RetroRig/init-scripts/
 cp -v /etc/modprobe.d/blacklist.conf $HOME/RetroRig/init-scripts/
 
-#RCB config files
-#--workign with dev--
-
 #XBMC
 #add RCB addons from $HOME/.xbmc/addons
 cp -Rv $HOME/.xbmc/addons/script.games.rom.collection.browser $HOME/RetroRig/XBMC/addons
 cp -Rv $HOME/.xbmc/addons/service.rom.collection.browser $HOME/RetroRig/XBMC/addons
+#userdata
+#don't update this for now
 
 #update init-scripts
 #xboxdrv service
