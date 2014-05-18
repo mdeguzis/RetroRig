@@ -75,12 +75,6 @@ cp -v /etc/modprobe.d/blacklist.conf $HOME/RetroRig/init-scripts/
 #add RCB addons from $HOME/.xbmc/addons
 cp -Rv $HOME/.xbmc/addons/script.games.rom.collection.browser $HOME/RetroRig/XBMC/addons
 cp -Rv $HOME/.xbmc/addons/service.rom.collection.browser $HOME/RetroRig/XBMC/addons
-#copy over keymaps and gui settings (since I am not copying every folder at the start)
-cp -Rv $HOME/.xbmc/userdata/addon_data $HOME/RetroRig/XBMC/userdata
-cp -Rv $HOME/.xbmc/userdata/addon_data $HOME/RetroRig/XBMC/userdata
-cp -Rv $HOME/.xbmc/userdata/keymaps $HOME/RetroRig/XBMC/userdata
-cp -Rv $HOME/.xbmc/userdata/favourites.xml $HOME/RetroRig/XBMC/userdata
-cp -Rv $HOME/.xbmc/userdata/guisettings.xml $HOME/RetroRig/XBMC/userdata
 
 #update init-scripts
 #xboxdrv service
