@@ -23,7 +23,7 @@ cp -v $HOME/.zsnes/zsnesl.cfg  $HOME/RetroRig/ZSNES/
 #default path: /home/$USER/.mame
 cp -v $HOME/.mame/mame.ini $HOME/RetroRig/MAME/
 #inject over offline scapper files
-cp -v $HOME/Games/Artwork/MAME/* $HOME/Games/Artwork/MAME
+cp -v $HOME/Games/Artwork/MAME/* $HOME/RetroRig/MAME/Artwork
 
 #pcsx
 #default path: /home/$USER/.pcsx
