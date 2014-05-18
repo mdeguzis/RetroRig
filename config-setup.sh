@@ -319,20 +319,58 @@ function _configuration () {
 	mkdir -pv $HOME/Games/ROMs/sgenroms/
 	mkdir -pv $HOME/Games/ROMs/SNK\ Neo\ Geo/
 
-	#Artwork
-	mkdir -pv $HOME/Games/Artwork/
-
-	#Emulators (if any fall here)
-	mkdir -pv $HOME/Games/Artwork/Atari\ 2600/
-	mkdir -pv $HOME/Games/Artwork/Gamecube/
+	#Artwork 
+	mkdir -pv $HOME/Games/Artwork/Atari\ 2600/boxback
+	mkdir -pv $HOME/Games/Artwork/Atari\ 2600/boxfront
+	mkdir -pv $HOME/Games/Artwork/Atari\ 2600/fanart
+	mkdir -pv $HOME/Games/Artwork/Atari\ 2600/screenshot
+	mkdir -pv $HOME/Games/Artwork/Gamecube/boxback
+	mkdir -pv $HOME/Games/Artwork/Gamecube/boxfront
+	mkdir -pv $HOME/Games/Artwork/Gamecube/fanart
+	mkdir -pv $HOME/Games/Artwork/Gamecube/screenshot
 	mkdir -pv $HOME/Games/Artwork/MAME/
+	mkdir -pv $HOME/Games/Artwork/MAME/action
+	mkdir -pv $HOME/Games/Artwork/MAME/boxfront
+	mkdir -pv $HOME/Games/Artwork/MAME/cabinet
+	mkdir -pv $HOME/Games/Artwork/MAME/gameplay\ (video)
+	mkdir -pv $HOME/Games/Artwork/MAME/marquee
+	mkdir -pv $HOME/Games/Artwork/MAME/RCB
+	mkdir -pv $HOME/Games/Artwork/MAME/title
 	mkdir -pv $HOME/Games/Artwork/N64/
+	mkdir -pv $HOME/Games/Artwork/N64/boxback
+	mkdir -pv $HOME/Games/Artwork/N64/boxfront
+	mkdir -pv $HOME/Games/Artwork/N64/fanart
+	mkdir -pv $HOME/Games/Artwork/N64/screenshot
 	mkdir -pv $HOME/Games/Artwork/NES/
+	mkdir -pv $HOME/Games/Artwork/NES/boxback
+	mkdir -pv $HOME/Games/Artwork/NES/boxfront
+	mkdir -pv $HOME/Games/Artwork/NES/fanart
+	mkdir -pv $HOME/Games/Artwork/NES/screenshot
 	mkdir -pv $HOME/Games/Artwork/SNES/
+	mkdir -pv $HOME/Games/Artwork/SNES/boxback
+	mkdir -pv $HOME/Games/Artwork/SNES/boxfront
+	mkdir -pv $HOME/Games/Artwork/SNES/fanart
+	mkdir -pv $HOME/Games/Artwork/SNES/screenshot
 	mkdir -pv $HOME/Games/Artwork/PS2/
+	mkdir -pv $HOME/Games/Artwork/PS2/boxback
+	mkdir -pv $HOME/Games/Artwork/PS2/boxfront
+	mkdir -pv $HOME/Games/Artwork/PS2/fanart
+	mkdir -pv $HOME/Games/Artwork/PS2/screenshot
 	mkdir -pv $HOME/Games/Artwork/PS1/
-	mkdir -pv $HOME/Games/Artwork/sgenroms/
+	mkdir -pv $HOME/Games/Artwork/PS1/boxback
+	mkdir -pv $HOME/Games/Artwork/PS1/boxfront
+	mkdir -pv $HOME/Games/Artwork/PS1/fanart
+	mkdir -pv $HOME/Games/Artwork/PS1/screenshot
+	mkdir -pv $HOME/Games/Artwork/Genesis/
+	mkdir -pv $HOME/Games/Artwork/Genesis/boxback
+	mkdir -pv $HOME/Games/Artwork/Genesis/boxfront
+	mkdir -pv $HOME/Games/Artwork/Genesis/fanart
+	mkdir -pv $HOME/Games/Artwork/Genesis/screenshot
 	mkdir -pv $HOME/Games/Artwork/SNK\ Neo\ Geo/
+	mkdir -pv $HOME/Games/Artwork/SNK\ Neo\ Geo/boxback
+	mkdir -pv $HOME/Games/Artwork/SNK\ Neo\ Geo/boxfront
+	mkdir -pv $HOME/Games/Artwork/SNK\ Neo\ Geo/fanart
+	mkdir -pv $HOME/Games/Artwork/SNK\ Neo\ Geo/screenshot
 
 	#Saves (if any)
 	mkdir -pv $HOME/Games/Saves/Atari\ 2600/
@@ -503,7 +541,7 @@ function _start-xbmc () {
 
 function _reboot () {
 	#need to add reboot command to sudo to avoid pw prompt
-        dialog --infobox "Rebooting in 5 seconds, press CTRL+C to cancel" 3 55 ; sleep 5s
+        dialog --infobox "Rebooting in 5 seconds, press CTRL+C to cancel" 3 51 ; sleep 5s
         sleep 5s
         sudo reboot 
 }
