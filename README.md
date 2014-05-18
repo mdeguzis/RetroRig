@@ -7,19 +7,33 @@ RetroRig is meant to be a standalone setup for XBMC
 It is mainly targeted at folks wishing to repurpose an old PC. It will overwrite:
 
 -xboxdrv init scripts and configurations
+
 -Emulator for supported emulators
+
 	-ZSNES
+
 	-Nestopia
+
 	-Gens/GS
+
 	-MAME
+
 	-Stealla
+
 	-Mupen64Plus
+
 	-PCSX
+
 	-PCSX2
+
 	-Dolphin
+
 -qjoypad
+
 -Blacklisting xpad
+
 -Autostarted application entries (XBMC, qjoypad)
+
 -Some folder structures under ~/Games
 
 RetroRig is shell script to setup a Linux x86_64 system  with several emulators, and XBMC as graphical 
