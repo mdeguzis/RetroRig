@@ -6,14 +6,20 @@ Goals for 0.7.0 release
 		-(done) Mupen64plus
 		-(done) ZSNES
 		-(done) Gens/GS
+		-(scaling/filter only) Nestopia
 	-Preset 720p
 		-(done) Mupen64plus
 		-(done) ZSNES
 		-(done) Gens/GS
+		-(scaling/filter only) Stella
 -Fix script menu appearance (done)
--Establish testing snapshot on Vbox running Ubuntu 14.04 LTS
+-(done) Establish testing snapshot on Vbox running Ubuntu 14.04 LTS
 -Finish folder skelton (done)
--Double check required config files for emulators (in progress)
+-Verify required config files for emulators in XBMC (in progress)
+	-(done) Mupen64plus
+	-(done) ZSNES
+	-(done) Gens/GS
+	-(scaling/filter only) Nestopia
 -(done) Replace specifc /home/mikeyd with $HOME 
 -Roll out and test 0.6a release on VM
 -(done) Ensure dependencies are met
