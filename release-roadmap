@@ -33,6 +33,7 @@ Overall Goals for 1.0 release
 -Provide install option for wired or wireless Xbox controller
 -Provide install option for alternate controllers
 -Provide install option to import ROMs into default directorys (new dialog window)
+-Provide settings option to remove RetroRig
 -CLI logo in script
 -Provide video driver switcher for emulators?
 
