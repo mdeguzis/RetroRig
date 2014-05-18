@@ -470,7 +470,7 @@ function _configuration () {
 	#If the default is not supported on the monitor, emulators like zsnes will fail to start!
 	dialog --infobox "Default Resolution is 1360x768 (720p)! Please ensure your \
                           monitor supports this resolution, or change it in the settings menu! \
-                          Main Menu > Option 3 > Option 1" 8 35
+                          Main Menu > Option 3 > Option 1" 8 35 ; sleep 6s
 
 }
 
