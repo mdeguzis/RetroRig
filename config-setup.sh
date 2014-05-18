@@ -239,7 +239,7 @@ if [ "$choices" != "" ]; then
 		########################		
 		#Nestopia
 		######################## 
-		#Nestopia does not support resolution changes, only scaling
+		#Nestopia does not support resolution changes, only scaling and filtering
 		#Scaling testing and configuration will be put in at some point
 		#This emulator does support OpenGL
 		#Current Scaling is reported in RetroRig, but not yet configurable
@@ -367,7 +367,7 @@ function _software () {
 	build-essential 
 
 	#install Gens/GS via deb pkg (only way I  can currently find it)
-	sudo dpkg -i $HOME/RetroRig/Gens-GS/Gens_2.16.7_i386.deb
+	sudo dpkg -i $HOME/RetroRig/emulators/Gens-GS/Gens_2.16.7_i386.deb
 
 	#clear
 	clear
@@ -447,7 +447,7 @@ function _configuration () {
 	#xbmc does not (at least for Ubuntu's repo pkg) load the
 	#dot files without loading XBMC at least once
 	#copy in default folder base from first run:	
-	cp -Rv $HOME/RetroRig/XBMC/* $HOME/.xbmc
+	cp -Rv $HOME/RetroRig/XBMC-configs/* $HOME/.xbmc
 
 	#xboxdrv director located in common area for startup
 	echo "sudo needed to create common xboxdrv share!"
@@ -461,69 +461,69 @@ function _configuration () {
 
 	#Nestopia
 	#default path: /home/$USER/.nestopia
-	cp -v $HOME/RetroRig/Nestopia/nstcontrols $HOME/.nestopia/
-	cp -v $HOME/RetroRig/Nestopia/nstsettings $HOME/.nestopia/
+	cp -v $HOME/RetroRig/emu-configs/Nestopia/nstcontrols $HOME/.nestopia/
+	cp -v $HOME/RetroRig/emu-configs/Nestopia/nstsettings $HOME/.nestopia/
 
 	#gens
 	#default path: /home/$USER/.gens
 	#Global config
-	cp -v $HOME/RetroRig/Gens-GS/gens.cfg $HOME/.gens/
+	cp -v $HOME/RetroRig/emu-configs/Gens-GS/gens.cfg $HOME/.gens/
 
 	#ZSNES
 	#default path: /home/$USER/.zsnes
 	#Controller config
-	cp -v $HOME/RetroRig/ZSNES/zinput.cfg $HOME/.zsnes/
-	cp -v $HOME/RetroRig/ZSNES/zsnesl.cfg $HOME/.zsnes/
+	cp -v $HOME/RetroRig/emu-configs/ZSNES/zinput.cfg $HOME/.zsnes/
+	cp -v $HOME/RetroRig/emu-configs/ZSNES/zsnesl.cfg $HOME/.zsnes/
 
 	#mame
 	#default path: /home/$USER/.mame
 	#Main config
-	cp -v $HOME/RetroRig/MAME/default.cfg $HOME/.mame/cfg
-	cp -v $HOME/RetroRig/MAME/mame.ini $HOME/.mame
+	cp -v $HOME/RetroRig/emu-configs/MAME/default.cfg $HOME/.mame/cfg
+	cp -v $HOME/RetroRig/emu-configs/MAME/mame.ini $HOME/.mame
 	#offline artwork scrapper
-	cp -v $HOME/RetroRig/MAME/Artwork/* $HOME/Games/Artwork/MAME	
+	cp -v $HOME/RetroRig/emu-configs/MAME/Artwork/* $HOME/Games/Artwork/MAME	
 	
 	#pcsx
 	#default path: /home/$USER/.pcsx
 	#Main config
-	cp -v $HOME/RetroRig/pcsx/pcsx.cfg $HOME/.pcsx/
-	cp -Rv $HOME/RetroRig/pcsx/plugins $HOME/.pcsx/
-	cp -Rv $HOME/RetroRig/pcsx/patches $HOME/.pcsx/
+	cp -v $HOME/RetroRig/emu-configs/pcsx/pcsx.cfg $HOME/.pcsx/
+	cp -Rv $HOME/RetroRig/emu-configs/pcsx/plugins $HOME/.pcsx/
+	cp -Rv $HOME/RetroRig/emu-configs/pcsx/patches $HOME/.pcsx/
 
 	#pcsx2
 	#default path: /home/$USER/.config/pcsx2
 	#Main config
-	cp -v $HOME/RetroRig/pcsx2/PCSX2-reg.ini $HOME/.config/pcsx2/
-	cp -v $HOME/RetroRig/pcsx2/inisOnePAD.ini $HOME/.config/pcsx2/
-	cp -v $HOME/RetroRig/pcsx2/inis/* $HOME/.config/pcsx2/inis/
+	cp -v $HOME/RetroRig/emu-configs/pcsx2/PCSX2-reg.ini $HOME/.config/pcsx2/
+	cp -v $HOME/RetroRig/emu-configs/pcsx2/inisOnePAD.ini $HOME/.config/pcsx2/
+	cp -v $HOME/RetroRig/emu-configs/pcsx2/inis/* $HOME/.config/pcsx2/inis/
 
 	#mupen64pluspwd
 	#default path: /home/$USER/.config/mupen64plus
 	#Main config
-	cp -v $HOME/RetroRig/mupen64plus/mupen64plus.cfg $HOME/.config/mupen64plus/
+	cp -v $HOME/RetroRig/emu-configs/mupen64plus/mupen64plus.cfg $HOME/.config/mupen64plus/
 
 	#Stella
 	#default path: /home/$USER/.config/mupen64plus
 	#Main config
-	cp -v $HOME/RetroRig/Stella/stellarc $HOME/.stella/
+	cp -v $HOME/RetroRig/emu-configs/Stella/stellarc $HOME/.stella/
 
 	#dolphin
 	#default path /home/$USER/.dolphin-emu/
 	#emulator config
-	cp -Rv /$HOME/RetroRig/Dolphin/Dolphin.ini $HOME/.dolphin-emu/Config/
+	cp -Rv /$HOME/RetroRig/emu-configs/Dolphin/Dolphin.ini $HOME/.dolphin-emu/Config/
 	#Gamecube controller config
-	cp -Rv /$HOME/RetroRig/Dolphin/GCPadNew.ini $HOME/.dolphin-emu/Config/
+	cp -Rv /$HOME/RetroRig/emu-configs/Dolphin/GCPadNew.ini $HOME/.dolphin-emu/Config/
 	#Wii controller config
 
 	#OpenGL graphics config
-	cp -Rv /$HOME/RetroRig/Dolphin/gfx_opengl.ini $HOME/.dolphin-emu/Config/
+	cp -Rv /$HOME/RetroRig/emu-configs/Dolphin/gfx_opengl.ini $HOME/.dolphin-emu/Config/
 
 	#copy config for qjoypad setup
-	cp -v $HOME/RetroRig/controller-cfg/retro-gaming.lyt $HOME/.qjoypad3/
+	cp -v $HOME/RetroRig/controller-cfgs/retro-gaming.lyt $HOME/.qjoypad3/
 
 	#add xbox controller init script
 	echo "sudo needed to create init scripts for xboxdrv!"
-	sudo cp -v $HOME/RetroRig/controller-cfg/xpad-wireless.xboxdrv /usr/share/xboxdrv/
+	sudo cp -v $HOME/RetroRig/controller-cfgs/xpad-wireless.xboxdrv /usr/share/xboxdrv/
 	sudo cp -v $HOME/RetroRig/init-scripts/xboxdrv /etc/init.d/
 	sudo update-rc.d xboxdrv defaults
 
@@ -537,7 +537,7 @@ function _configuration () {
 	#create autostart for XBMC and qjoypad
 	echo "sudo needed to create auto-start entries!"
 	sudo cp -v /usr/share/applications/xbmc.desktop /etc/xdg/autostart/
-	sudo cp -v $HOME/RetroRig/controller-cfg/qjoypad.desktop /etc/xdg/autostart/
+	sudo cp -v $HOME/RetroRig/controller-cfgs/qjoypad.desktop /etc/xdg/autostart/
 	#If xboxdrv config file does not pick up on reboot,
 	#be sure to resync the wireless receiver!
 
