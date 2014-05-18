@@ -7,9 +7,9 @@ Version 0.7.2
 RetroRig is meant to be a standalone setup for XBMC on Ubuntu
 It is mainly targeted at folks wishing to repurpose an old PC. 
 
-It will overwrite:
+Warning! It will overwrite:
 
--Emulator for supported emulators
+-Emulator configs for supported emulators:
 
 	-ZSNES
 	-Nestopia
@@ -20,7 +20,7 @@ It will overwrite:
 	-PCSX
 	-PCSX2
 	-Dolphin
--Also
+-Also configs related to:
 
 	-qjoypad
 	-Blacklisting xpad
@@ -56,11 +56,35 @@ and is a hot target for many folks. Arch Linux, or Debian Testing were other con
 there are many pro's and con's to using Ubuntu, all of which are understandable. You can't appease 
 everyone!
 
+## Controller Setup:
+
+I Tried to reflect the original controller as much as possible for some such as the NES and SNES. The
+Following button assignments are constant for all emulators except pcsx and pcsx2 (working on it!):
+
+Please see controller-cfg-list.txt for the complete set!
+	
+
 ## ROMs
 
-ROMs for emualtors are NOT provided for legal reasons. Due to legal gray areas with BIOS files, they will
-not be provided for emulators that require them (e.g. pcsx, pcsx2). Please do not request these
-items be added.
+On first startup Rom Collection Browser will ask for games to import. Several emulators are supported
+and built in for easy importing.ROMs for emualtors are NOT provided for legal reasons. Due to legal 
+gray areas with BIOS files, they will not be provided for emulators that require them (e.g. pcsx, pcsx2).
+Please do not request these items be added.
+
+Currently importing ROMs into XBMC is a keyboard-less affair for the following emulators:
+
+	-ZSNES
+	-Nestopia
+	-Gens/GS
+	-MAME
+	-Stealla
+	-Mupen64Plus
+	-PCSX
+	-PCSX2
+	-Dolphin
+
+All ROMs should be placed in the respective folder under "/home/$USER/Games/ROMs". In due time, I will
+add more and more emulators. But until then, you can manually add them.
 
 ## Installation
 
