@@ -2,3 +2,15 @@
 PlayStation 2
 ~~~~~~~~~~~~~~~~~~~~~~~~
 gamename, filename
+~~~~~~~~~~~~~~~~~~~~~~~~
+Atari 2600
+~~~~~~~~~~~~~~~~~~~~~~~~
+gamename, filename
+~~~~~~~~~~~~~~~~~~~~~~~~
+SNES
+~~~~~~~~~~~~~~~~~~~~~~~~
+gamename, filename
+~~~~~~~~~~~~~~~~~~~~~~~~
+MAME
+~~~~~~~~~~~~~~~~~~~~~~~~
+gamename, filename
