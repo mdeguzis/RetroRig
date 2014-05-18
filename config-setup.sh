@@ -493,7 +493,7 @@ function _upgrade-system () {
 }
 
 function _start-xbmc () {
-	dialog --infobox "starting RetroRig" 3 15
+	dialog --infobox "starting RetroRig" 3 24
 	sleep 2s
 	xbmc
 }
