@@ -165,6 +165,15 @@ if [ "$choices" != "" ]; then
 		grep -i "OpenGL Width=" $HOME/.gens/gens.cfg >> res.txt
 		grep -i "OpenGL Height=" $HOME/.gens/gens.cfg >> res.txt
 		echo "" >> res.txt
+		#Nestopia
+		#Nestopia's settings is in a binary file, so echo current manually
+		echo "Nestopia:" >> res.txt
+		echo "Current Scaling: hq?x 3x" >> res.txt
+		echo "" >> res.txt
+		#Stella
+		echo "Stella:" >> res.txt
+		grep -i "tia_filter" $HOME/.stella/stellarc >> res.txt
+		echo "" >> res.txt
 		#report current resolution
 		dialog --textbox res.txt 33 40
 		#remove text file
@@ -218,6 +227,23 @@ if [ "$choices" != "" ]; then
 		#Gens/GS
 		sed -i "s|$g_org_X|OpenGL Width="$g_new_X"|g" $HOME/.gens/gens.cfg
 		sed -i "s|$g_org_Y|OpenGL Height="$g_new_Y"|g" $HOME/.gens/gens.cfg
+
+		########################		
+		#Stella
+		######################## 
+		#Stella does not support resolution changes (except the GUI), only scaling
+		#Scaling testing and configuration will be put in at some point
+		#This emulator does support OpenGL
+		#Current Scaling is reported in RetroRig, but not yet configurable
+
+		########################		
+		#Nestopia
+		######################## 
+		#Nestopia does not support resolution changes, only scaling
+		#Scaling testing and configuration will be put in at some point
+		#This emulator does support OpenGL
+		#Current Scaling is reported in RetroRig, but not yet configurable
+
 		;; 
 
 	 3) 
@@ -272,6 +298,22 @@ if [ "$choices" != "" ]; then
 		#ZSNES
 		sed -i "s|$g_org_X|OpenGL Width="$g_new_X"|g" $HOME/.gens/gens.cfg
 		sed -i "s|$g_org_Y|OpenGL Height="$g_new_Y"|g" $HOME/.gens/gens.cfg
+
+		########################		
+		#Stella
+		######################## 
+		#Stella does not support resolution changes, only scaling
+		#Scaling testing and configuration will be put in at some point
+		#This emulator does support OpenGL
+		#Current Scaling is reported in RetroRig, but not yet configurable
+
+		########################		
+		#Nestopia
+		######################## 
+		#Nestopia does not support resolution changes, only scaling
+		#Scaling testing and configuration will be put in at some point
+		#This emulator does support OpenGL
+		#Current Scaling is reported in RetroRig, but not yet configurable
 
 		########################		
 		#Cleanup
