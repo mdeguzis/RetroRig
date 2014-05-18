@@ -1,0 +1,133 @@
+#####################################
+#Super Nintendo
+#####################################
+
+Suggested emulator: ZSNES
+Alternative emulators: SNES9X, Mednafen
+
+Default Controller layout:
+
+    Primary Control: Joystick
+    A (B)
+    B (A)
+    X (Y)
+    Y (X)
+    Start (Start)
+    Select (Select)
+    Pause emulator (Guide), move controlled to select exit entry to exit emulator
+    Quick Save State (Left-Thumbstick)
+    Quick Load State (Right-Thumstick)
+
+Tips and Tricks:
+
+    I couldn't seem to set Esc as the button to exit the emulator, since that is reserved in the UI for exiting a configuration screen. If you know a way around this, please let me know.
+    The main buttons were reversed to reflect the original gamepad
+    Gamepad is enabled for navigation of menu system
+
+#####################################
+#Nestopia
+#####################################
+
+Suggested emulator: Nestopia
+Alternative emulators: FCE Ultra, FakeNES, Mednafen
+
+Default Controller layout:
+
+    Primary Control: Joystick
+    A (B)
+    B (A)
+    Start (Start)
+    Select (Select)
+    Exit emulator (Guide)
+    Quick Save State (Left-Thumbstick)
+    Quick Load State (Right-Thumstick)
+
+Tips and Tricks:
+
+    The main buttons were reversed to reflect the original gamepad
+    Gamepad is enabled for navigation of menu system
+
+#####################################
+#MAME
+#####################################
+
+Suggested emulator: mame
+Alternative emulators: unknown
+
+Default Controller layout:
+
+    Primary Control: Joystick
+    P1 Button 1 (A)
+    P1 Button 2 (B)
+    P1 Button 3 (X)
+    P1 Button 4 (Y)
+    P1 Button 5 (LB)
+    P1 Button 6 (RB)
+    Start (Start)
+    Select (Select)
+    Exit emulator (Guide)
+    UI Cancel (Guide
+    UI Select (A)
+    P1 Coin Insert: (RB)
+    P2 Coin Insert (LB)
+    Quick Save State (Left-Thumbstick), requires slot number 0-9!
+    Quick Load State (Right-Thumstick), requires slot number 0-9!
+
+Tips and Tricks:
+
+    Gamepad is enabled for navigation of menu system
+    There is no quick save/load feature that I saw. Doing a save/load prompts for a slot number. You could work around this if you wish to give up a button on your gamepad to map to a number 0-9 with the qjoypad program
+
+#####################################
+#Mupen64Plus
+#####################################
+
+Suggested emulator: Mupen64Plus
+Alternative emulators: Project64
+
+Default Controller layout:
+
+    Primary Control: Joystick
+    Dpad enabled
+    A (A)
+    B (X)
+    C Buttons (Right Joystick)
+    L (LB)
+    R (RB)
+    Z Trigger (RT)
+    Start (Start)
+    Select (Select)
+    Exit emulator (Guide)
+    Quick Save State (Left-Thumbstick)
+    Quick Load State (Right-Thumstick)
+
+Tips and Tricks:
+
+    The Mupen64Plus Google code site has superb documentation. Be sure to check it out for all intensive purposes.
+    There is a front end for Mupen64Plus called M64py
+    If you install the front-end GUI, be aware changes when opening up either Mupen64Plus via the CLI, or M64py will overwrite each other
+    The video plugin uses was Glide, due to video issues on Ubuntu 14.04 and my hardware. Your mileage may vary.
+
+#####################################
+#Stella
+#####################################
+
+Suggested emulator: Stella
+Alternative emulators: Unknown
+
+Default Controller layout:
+
+    Primary Control: D-pad
+    Fire (A)
+    Booster top trigger (B)
+    Start (Start)
+    Select (Select)
+    Exit emulator (Guide)
+    Quick Save State (Left-Thumbstick)
+    Quick Load State (Right-Thumstick)
+
+Tips and Tricks:
+
+    There are currently audio issues on my setup
+    Video is using software render (not OpenGL) due to bugs
+    Gamepad is enabled for navigation of menu system
