@@ -7,6 +7,10 @@
 #
 #Pre-requisite checks:
 #check for dialog and prompt to install if it is not present
+
+
+function _prereq (){
+
 if ! which dialog > /dev/null; then
    echo -e "dialog command not found! Install? (y/n) \c"
    read DIALOG
@@ -30,6 +34,7 @@ if ! which git > /dev/null; then
         exit
    fi
 fi
+}
 
 function _main () {
 _prereq
@@ -134,7 +139,7 @@ function _resolution () {
 while true; do
 cmd=(dialog --backtitle "RetroRig Settings" --menu "Choose your resolution" 16 32 16)
 options=(1 "Current Resolution"
-	 2 "1366x768 (720p)"
+	 2 "1360x768 (720p)"
 	 3 "Custom"
 	 4 "Back to settings menu"
 	 5 "Back to main menu"
@@ -155,6 +160,11 @@ if [ "$choices" != "" ]; then
 		grep -i "CustomResX=" $HOME/.zsnes/zsnesl.cfg  >> res.txt
 		grep -i "CustomResY=" $HOME/.zsnes/zsnesl.cfg  >> res.txt
 		echo "" >> res.txt
+		#Gens/GS
+		echo "Gens/GS:" >> res.txt
+		grep -i "OpenGL Width=" $HOME/.gens/gens.cfg >> res.txt
+		grep -i "OpenGL Height=" $HOME/.gens/gens.cfg >> res.txt
+		echo "" >> res.txt
 		#report current resolution
 		dialog --textbox res.txt 33 40
 		#remove text file
@@ -172,7 +182,7 @@ if [ "$choices" != "" ]; then
 		m_org_X=$(grep -i "ScreenWidth = " $HOME/.config/mupen64plus/mupen64plus.cfg)
 		m_org_Y=$(grep -i "ScreenHeight = " $HOME/.config/mupen64plus/mupen64plus.cfg)
 		#set new resolution(s) from configs
-		m_new_X="1366"
+		m_new_X="1360"
 		m_new_Y="768"
 		#make the changes, prefix new_X in case NULL was entered previousey
 		#mupen64plus
@@ -187,12 +197,27 @@ if [ "$choices" != "" ]; then
 		z_org_X=$(grep -i "CustomResX=" $HOME/.zsnes/zsnesl.cfg)
 		z_org_Y=$(grep -i "CustomResY=" $HOME/.zsnes/zsnesl.cfg)
 		#set new resolution(s) from configs
-		z_new_X="1366"
+		z_new_X="1360"
 		z_new_Y="768"
 		#make the changes, prefix new_X in case NULL was entered previously
-		#mupen64plus
+		#ZSNES
 		sed -i "s|$z_org_X|CustomResX="$z_new_X"|g" $HOME/.zsnes/zsnesl.cfg
 		sed -i "s|$z_org_Y|CustomResY="$z_new_Y"|g" $HOME/.zsnes/zsnesl.cfg
+
+		########################		
+		#Gens/GS
+		######################## 
+
+		#Gens/GS will not open properly if an improper resolution is set
+		g_org_X=$(grep -i "OpenGL Width=" $HOME/.gens/gens.cfg)
+		g_org_Y=$(grep -i "OpenGL Height=" $HOME/.gens/gens.cfg)
+		#set new resolution(s) from configs
+		g_new_X="1360"
+		g_new_Y="768"
+		#make the changes, prefix new_X in case NULL was entered previously
+		#Gens/GS
+		sed -i "s|$g_org_X|OpenGL Width="$g_new_X"|g" $HOME/.gens/gens.cfg
+		sed -i "s|$g_org_Y|OpenGL Height="$g_new_Y"|g" $HOME/.gens/gens.cfg
 		;; 
 
 	 3) 
@@ -213,6 +238,7 @@ if [ "$choices" != "" ]; then
 		m_new_X=$(cat '/tmp/new_X')
 		m_new_Y=$(cat '/tmp/new_Y')
 		#make the changes, prefix new_X in case NULL was entered previously
+		#mupen64plus
 		sed -i "s|$m_org_X|ScreenWidth = "$m_new_X"|g" $HOME/.config/mupen64plus/mupen64plus.cfg
 		sed -i "s|$m_org_Y|ScreenHeight = "$m_new_Y"|g" $HOME/.config/mupen64plus/mupen64plus.cfg 
 
@@ -230,6 +256,22 @@ if [ "$choices" != "" ]; then
 		#ZSNES
 		sed -i "s|$z_org_X|CustomResX="$z_new_X"|g" $HOME/.zsnes/zsnesl.cfg
 		sed -i "s|$z_org_Y|CustomResY="$z_new_Y"|g" $HOME/.zsnes/zsnesl.cfg
+
+		
+		########################		
+		#Gens/GS
+		######################## 
+
+		#Gens/GS will not open properly if an improper resolution is set
+		g_org_X=$(grep -i "OpenGL Width=" $HOME/.gens/gens.cfg)
+		g_org_Y=$(grep -i "OpenGL Height=" $HOME/.gens/gens.cfg)
+		#set new resolution(s) from configs
+		g_new_X=$(cat '/tmp/new_X')
+		g_new_Y=$(cat '/tmp/new_Y')
+		#make the changes, prefix new_X in case NULL was entered previously
+		#ZSNES
+		sed -i "s|$g_org_X|OpenGL Width="$g_new_X"|g" $HOME/.gens/gens.cfg
+		sed -i "s|$g_org_Y|OpenGL Height="$g_new_Y"|g" $HOME/.gens/gens.cfg
 
 		########################		
 		#Cleanup
@@ -276,11 +318,14 @@ function _software () {
 	#update repository listings
 	sudo apt-get update
 
-	#install software
+	#install software from repositories
 	sudo apt-get install -y xboxdrv curl zsnes nestopia pcsxr pcsx2:i386 \
 	python-software-properties pkg-config software-properties-common \
 	mame mupen64plus dconf-tools qjoypad xbmc dolphin-emu-master stella \
 	build-essential 
+
+	#install Gens/GS via deb pkg (only way I  can currently find it)
+	sudo dpkg -i $HOME/RetroRig/Gens-GS/Gens_2.16.7_i386.deb
 
 	#clear
 	clear
@@ -468,9 +513,9 @@ function _configuration () {
 	
 	#remind user about default resolution
 	#If the default is not supported on the monitor, emulators like zsnes will fail to start!
-	dialog --infobox "Default Resolution is 1360x768 (720p)! Please ensure your \
-                          monitor supports this resolution, or change it in the settings menu! \
-                          Main Menu > Option 3 > Option 1" 8 35 ; sleep 7s
+	dialog --msgbox "Default Resolution is 1360x768 (720p)! Please ensure your \
+                          display supports this resolution, or change it in the settings menu! \
+                          Main Menu > Option 3 > Option 1" 12 31
 
 }
 
@@ -500,7 +545,7 @@ function _upgrade-system () {
 
 function _start-xbmc () {
 	dialog --infobox "starting RetroRig" 3 24
-	sleep 2s
+	sleep 1s
 	xbmc
 }
 

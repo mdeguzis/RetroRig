@@ -70,10 +70,10 @@ cp -v /etc/modprobe.d/blacklist.conf $HOME/RetroRig/init-scripts/
 
 #XBMC
 #add RCB addons from $HOME/.xbmc/addons
-cp -Rv $HOME/.xbmc/addons/script.games.rom.collection.browser $HOME/RetroRig/XBMC/addons
-cp -Rv $HOME/.xbmc/addons/service.rom.collection.browser $HOME/RetroRig/XBMC/addons
-#userdata
-#don't update this for now
+#Don't* add RCB addon or userdata anymore, default shell established for RCB in git repo!
+
+#cp -Rv $HOME/.xbmc/addons/script.games.rom.collection.browser $HOME/RetroRig/XBMC/addons
+#cp -Rv $HOME/.xbmc/addons/service.rom.collection.browser $HOME/RetroRig/XBMC/addons
 
 #update init-scripts
 #xboxdrv service
