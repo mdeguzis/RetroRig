@@ -2,6 +2,19 @@ RetroRig Project for Ubuntu 14.04 LTS
 ===================================================
 Version 0.7.2
 
+RetroRig is shell script to setup a Linux x86_64 system  with several emulators, and XBMC as graphical 
+front end.The inspiration for doing this lies almost completely with the RetroPie Project. I wanted to provide
+something similar, but with XBMC, x86_64, and my favorite interface, "Rom Collection Browser."
+This project is intended to be run on Ubuntu (currently 14.04 LTS) with an wireless Xbox 360 Controller. 
+At some point in the future, I want to try and branch this to other distributions if possible, as well
+as accomodate other controllers. Please see the release-roadmap file for ideas and future plans. 
+
+I invite you to challenge the configs and scripts to help improve my ultimate goal to provide
+an easy way to get up and running with RetroGaming on x86_64 Linux systems. Pull requests or
+Issues are very much welcome! 
+
+Thank you for your patience.
+
 ## Please Note!
 
 RetroRig is meant to be a standalone setup for XBMC on Ubuntu
@@ -27,19 +40,6 @@ Warning! It will overwrite:
 	-Autostarted application entries (XBMC, qjoypad)
 	-Some folder structures under ~/Games
 	-xboxdrv init scripts and configurations
-
-RetroRig is shell script to setup a Linux x86_64 system  with several emulators, and XBMC as graphical 
-front end.The inspiration for doing this lies almost completely with the RetroPie Project. I wanted to provide
-something similar, but with XBMC, x86_64, and my favorite interface, "Rom Collection Browser."
-This project is intended to be run on Ubuntu (currently 14.04 LTS) with an wireless Xbox 360 Controller. 
-At some point in the future, I want to try and branch this to other distributions if possible, as well
-as accomodate other controllers. Please see the release-roadmap file for ideas and future plans. 
-
-I invite you to challenge the configs and scripts to help improve my ultimate goal to provide
-an easy way to get up and running with RetroGaming on x86_64 Linux systems. Pull requests or
-Issues are very much welcome! 
-
-Thank you for your patience.
 
 ## Why XBMC and Ubuntu?
 
