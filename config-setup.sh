@@ -764,14 +764,6 @@ function _configuration () {
 	clear
 }
 
-# select filename using dialog
-# store it to $FILE
-FILE=$(dialog --title "Delete a file" --stdout --title "Please choose a file to delete" --fselect /tmp/ 14 48)
- 
-# delete file
-[ ! -z $FILE ] && delete_file "$FILE"
-}
-
 function _update-git () {
 	dialog --infobox "updating git repo" 4 10
 	sleep 2s
