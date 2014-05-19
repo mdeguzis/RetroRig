@@ -84,7 +84,10 @@ Currently importing ROMs into XBMC is a keyboard-less affair for the following e
 	-Dolphin
 
 All ROMs should be placed in the respective folder under "/home/$USER/Games/ROMs". In due time, I will
-add more and more emulators. But until then, you can manually add them.
+add more and more emulators. But until then, you can manually add them. In a later release, I plan on 
+building in a text-based file browser to locate and import games. For now, you must copy them in the
+folders under ~/Games. In the near future, I will load SSH and Samba for file transfers as optional
+install items.
 
 ## Installation
 
