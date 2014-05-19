@@ -9,32 +9,6 @@
 #check for dialog and prompt to install if it is not present
 
 
-function _prereq (){
-
-if ! which dialog > /dev/null; then
-   echo -e "dialog command not found! Install? (y/n) \c"
-   read DIALOG
-   if [ $DIALOG = "y" ]; then
-      sudo apt-get install dialog >> /dev/null
-   elif  [ $DIALOG = "n" ]; then
-	echo "exiting!"
-	sleep 2s
-	exit
-   fi
-fi
-
-if ! which git > /dev/null; then
-   echo -e "git command not found! Install? (y/n) \c"
-   read GIT
-   if [ $GIT = "y" ]; then
-      sudo apt-get install git >> /dev/null
-   elif  [ $GIT = "n" ]; then
-        echo "exiting!"
-        sleep 2s
-        exit
-   fi
-fi
-}
 
 function _main () {
 
@@ -42,7 +16,7 @@ _prereq
 
 cmd=(dialog --backtitle "LibreGeek.org RetroRig Installer" --menu "Choose your option(s). BIOS files for pcsx, pcsx2 NOT provided!" 16 70 16)
 options=(1 "Install Software" 
-	 2 "Set up default configuration files and init scripts" 
+	 2 "Set up default configuration files" 
 	 3 "Retro Rig Settings" 
 	 4 "Pull latest files from git" 
 	 5 "Update emulator binaries" 
@@ -107,12 +81,115 @@ esac
 done
 }
 
+function _prereq (){
+
+if ! which dialog > /dev/null; then
+   echo -e "dialog command not found! Install? (y/n) \c"
+   read DIALOG
+   if [ $DIALOG = "y" ]; then
+      sudo apt-get install dialog >> /dev/null
+   elif  [ $DIALOG = "n" ]; then
+	echo "exiting!"
+	sleep 2s
+	exit
+   fi
+fi
+
+if ! which git > /dev/null; then
+   echo -e "git command not found! Install? (y/n) \c"
+   read GIT
+   if [ $GIT = "y" ]; then
+      sudo apt-get install git >> /dev/null
+   elif  [ $GIT = "n" ]; then
+        echo "exiting!"
+        sleep 2s
+        exit
+   fi
+fi
+}
+
+function _file-loader (){
+
+dialog --title "text" --fselect /path/to/dir height width
+FOLDER=$(dialog --stdout --title "Please choose a folder" --fselect $HOME/ 14 48)
+echo "${FOLDER} file chosen." 
+sleep 1s
+
+_rom-loader
+
+}
+
+#Load ROMs at will-call, or yes/no on configuration run
+function _rom-loader (){
+
+cmd=(dialog --backtitle "LibreGeek.org RetroRig Installer" --menu "Load ROMs for which system?" 16 70 16)
+options=(1 "Atari 2600" 
+	 2 "NES" 
+	 3 "SNES" 
+	 4 "Nintendo 64"
+	 5 "MAME"
+	 6 "Sega Genesis"
+	 7 "Playstation 1"
+	 8 "Playstation 2"
+	 9 "Exit to main menu")
+
+	#make menu choice
+	selection=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
+	#functions
+
+	for choice in $selection
+	do
+		case $choice in
+		1)  	
+		_file-loader
+		cp -Rv $FOLDER/* $HOME/Games/ROMs/Atari\ 2600
+		_rom-loader
+		;;
+
+		2)  
+
+		;;
+
+		3)
+
+		;;
+
+		4)
+
+		;;
+
+		5)
+
+		;;
+
+		6)
+
+		;;
+
+		7)
+
+		;;
+
+		8)
+
+		;;
+
+		9)  
+		_main
+		;;
+esac
+done
+
+}
+
+
 #settings function
 function _settings (){
 
 cmd=(dialog --backtitle "LibreGeek.org RetroRig Installer" --menu "Settings Menu" 16 46 16)
 options=(1 "Change resolution for emulators"  
-	 2 "Back to main menu")
+	 2 "Load ROMs"
+	 3 "Back to main menu")
 
 	#make menu choice
 	selection=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
@@ -126,7 +203,12 @@ options=(1 "Change resolution for emulators"
 		_settings
 		;;
 
-		2)  
+		2)  	
+		_rom-loader
+		_
+		;;
+
+		3)  
 		clear
 		_main
 		;;
@@ -441,7 +523,38 @@ function _software () {
 
 #configuration function
 function _configuration () {
-	dialog --infobox "Seting up configuration files" 3 35 ; sleep 3s
+
+	dialog --title "Confirm yes/no" \
+	--backtitle "LibreGeek.org RetroRig Installer" \
+	--yesno "Are you sure you want run the configuration setup?" 5 56
+	 
+	# Get exit status
+	# 0 means user hit [yes] button.
+	# 1 means user hit [no] button.
+	# 255 means user hit [Esc] key.
+	response=$?
+	case $response in
+	   0) 
+	   dialog --infobox "Continuing..." 3 17
+	   sleep 2s
+	   ;;
+
+	   1) 
+	   dialog --infobox "Exiting Configuration Setup"  3 31
+	   sleep 2s
+	   _main
+	   ;;
+
+	   255)
+	   dialog --infobox "Exiting Configuration Setup" 3 31
+	   sleep 2s
+	   _main
+	   ;;
+
+	esac
+
+
+	dialog --infobox "Setting up configuration files" 3 35 ; sleep 3s
 	clear
 	#disable screensaver, XBMC will manage this
 	#export display to allow gsettings running in terminal window
@@ -616,8 +729,47 @@ function _configuration () {
                           display supports this resolution, or change it in the settings menu! \
                           Main Menu > Option 3 > Option 1" 12 31
 
+	#prompt user if they wish to pre-load ROMs now
+		dialog --title "Confirm yes/no" \
+	--backtitle "LibreGeek.org RetroRig Installer" \
+	--yesno "Do you wish to load your ROMs now? (reccomended)" 5 65
+	 
+	# Get exit status
+	# 0 means user hit [yes] button.
+	# 1 means user hit [no] button.
+	# 255 means user hit [Esc] key.
+	response=$?
+	case $response in
+	   0) 
+	   dialog --infobox "Starting ROM loader..." 3 17
+	   _rom-loader
+	   ;;
+
+	   1) 
+	   dialog --infobox "Finished"  3 12
+	   sleep 2s
+	   _main
+	   ;;
+
+	   255)
+	   dialog --infobox "Exiting Configuration Setup" 3 31
+	   sleep 2s
+	   _main
+	   ;;
+
+	esac	
+
+
 	#clear
 	clear
+}
+
+# select filename using dialog
+# store it to $FILE
+FILE=$(dialog --title "Delete a file" --stdout --title "Please choose a file to delete" --fselect /tmp/ 14 48)
+ 
+# delete file
+[ ! -z $FILE ] && delete_file "$FILE"
 }
 
 function _update-git () {

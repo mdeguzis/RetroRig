@@ -20,6 +20,9 @@
 #find sizes
 #set -x 
 
+#change directory
+cd $HOME/RetroRig
+
 # Shows you the largest objects in your repo's pack file.
 # Written for osx.
 #
