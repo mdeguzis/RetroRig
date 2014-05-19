@@ -93,7 +93,7 @@ install items.
 
 Pre-requisites:
 
-You will need the following two pacakges:
+You will need the following two packages:
 
 	-dialog
 	-git
