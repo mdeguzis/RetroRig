@@ -28,7 +28,7 @@ Warning! It will overwrite:
 	-Nestopia
 	-Gens/GS
 	-MAME
-	-Stealla
+	-Stella
 	-Mupen64Plus
 	-PCSX
 	-PCSX2
@@ -59,7 +59,7 @@ everyone!
 ## Controller Setup:
 
 I Tried to reflect the original controller as much as possible for some such as the NES and SNES. The
-Following button assignments are constant for all emulators except pcsx and pcsx2 (working on it!):
+save/load/exit button assignments are constant for all emulators except pcsx and pcsx2 (working on it!):
 
 Please see controller-cfg-list.txt for the complete set!
 	
@@ -77,7 +77,7 @@ Currently importing ROMs into XBMC is a keyboard-less affair for the following e
 	-Nestopia
 	-Gens/GS
 	-MAME
-	-Stealla
+	-Stella
 	-Mupen64Plus
 	-PCSX
 	-PCSX2
@@ -87,6 +87,16 @@ All ROMs should be placed in the respective folder under "/home/$USER/Games/ROMs
 add more and more emulators. But until then, you can manually add them.
 
 ## Installation
+
+Pre-requisites:
+
+You will need the following two pacakges:
+
+	-dialog
+	-git
+
+RetroRig will try to install them for you, but if you experience any issues starting the script,
+enusre they exist with 'which dialog' or 'which git" to ensure they report back.
 
 To clone this repo via the CLI:
 

@@ -37,6 +37,7 @@ fi
 }
 
 function _main () {
+
 _prereq
 
 cmd=(dialog --backtitle "LibreGeek.org RetroRig Installer" --menu "Choose your option(s). BIOS files for pcsx, pcsx2 NOT provided!" 16 70 16)
@@ -140,9 +141,10 @@ while true; do
 cmd=(dialog --backtitle "RetroRig Settings" --menu "Choose your resolution" 16 32 16)
 options=(1 "Current Resolution"
 	 2 "1360x768 (720p)"
-	 3 "Custom"
-	 4 "Back to settings menu"
-	 5 "Back to main menu"
+	 3 "1920x1080 (1080p)"
+	 4 "Custom"
+	 5 "Back to settings menu"
+	 6 "Back to main menu"
 	)
      
 choices=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
@@ -178,9 +180,74 @@ if [ "$choices" != "" ]; then
 		dialog --textbox res.txt 33 40
 		#remove text file
 		rm res.txt
-		;; 
-      
+		;;
+
 	 2) 
+		clear
+		dialog --infobox "Setting resolution to 1920x768 (720p)" 3 48
+
+		########################		
+		#mupen64plus
+		########################
+
+		m_org_X=$(grep -i "ScreenWidth = " $HOME/.config/mupen64plus/mupen64plus.cfg)
+		m_org_Y=$(grep -i "ScreenHeight = " $HOME/.config/mupen64plus/mupen64plus.cfg)
+		#set new resolution(s) from configs
+		m_new_X="1920"
+		m_new_Y="1080"
+		#make the changes, prefix new_X in case NULL was entered previousey
+		#mupen64plus
+		sed -i "s|$m_org_X|ScreenWidth = $m_new_X|g" $HOME/.config/mupen64plus/mupen64plus.cfg
+		sed -i "s|$m_org_Y|ScreenHeight = $m_new_Y|g" $HOME/.config/mupen64plus/mupen64plus.cfg
+
+		########################		
+		#ZSNES
+		######################## 
+
+		#zsnes will not open properly if an improper resolution is set
+		z_org_X=$(grep -i "CustomResX=" $HOME/.zsnes/zsnesl.cfg)
+		z_org_Y=$(grep -i "CustomResY=" $HOME/.zsnes/zsnesl.cfg)
+		#set new resolution(s) from configs
+		z_new_X="1920"
+		z_new_Y="1080"
+		#make the changes, prefix new_X in case NULL was entered previously
+		#ZSNES
+		sed -i "s|$z_org_X|CustomResX="$z_new_X"|g" $HOME/.zsnes/zsnesl.cfg
+		sed -i "s|$z_org_Y|CustomResY="$z_new_Y"|g" $HOME/.zsnes/zsnesl.cfg
+
+		########################		
+		#Gens/GS
+		######################## 
+
+		#Gens/GS will not open properly if an improper resolution is set
+		g_org_X=$(grep -i "OpenGL Width=" $HOME/.gens/gens.cfg)
+		g_org_Y=$(grep -i "OpenGL Height=" $HOME/.gens/gens.cfg)
+		#set new resolution(s) from configs
+		g_new_X="1920"
+		g_new_Y="1080"
+		#make the changes, prefix new_X in case NULL was entered previously
+		#Gens/GS
+		sed -i "s|$g_org_X|OpenGL Width="$g_new_X"|g" $HOME/.gens/gens.cfg
+		sed -i "s|$g_org_Y|OpenGL Height="$g_new_Y"|g" $HOME/.gens/gens.cfg
+
+		########################		
+		#Stella
+		######################## 
+		#Stella does not support resolution changes (except the GUI), only scaling
+		#Scaling testing and configuration will be put in at some point
+		#This emulator does support OpenGL
+		#Current Scaling is reported in RetroRig, but not yet configurable
+
+		########################		
+		#Nestopia
+		######################## 
+		#Nestopia does not support resolution changes, only scaling and filtering
+		#Scaling testing and configuration will be put in at some point
+		#This emulator does support OpenGL
+		#Current Scaling is reported in RetroRig, but not yet configurable
+		;;  
+      
+	 3) 
 		clear
 		dialog --infobox "Setting resolution to 1360x768 (720p)" 3 48
 
@@ -243,10 +310,9 @@ if [ "$choices" != "" ]; then
 		#Scaling testing and configuration will be put in at some point
 		#This emulator does support OpenGL
 		#Current Scaling is reported in RetroRig, but not yet configurable
-
 		;; 
 
-	 3) 
+	 4) 
 		dialog --infobox  "Setting resolution from user input" 3 40
 
 		#set new resolution(s) from user input
@@ -324,11 +390,11 @@ if [ "$choices" != "" ]; then
 
 		_resolution
 		;; 
-	 4) 
+	 5) 
 		_settings
 		return
 		;;
-	 5) 
+	 6) 
 		_main
 		return
 		;;
@@ -559,6 +625,8 @@ function _configuration () {
                           display supports this resolution, or change it in the settings menu! \
                           Main Menu > Option 3 > Option 1" 12 31
 
+	#clear
+	clear
 }
 
 function _update-git () {
@@ -568,6 +636,10 @@ function _update-git () {
 	git pull
 	#pause for reviewing changes
 	sleep 5s
+	
+	#clear
+	clear
+
 	bash config-setup.sh
 }
 
@@ -576,6 +648,8 @@ function _update-binaries () {
 	sudo apt-get install -y xboxdrv zsnes nestopia pcsxr pcsx2:i386\
 	mame mupen64plus qjoypad xbmc dolphin-emu-master stella	
 	sleep 3s
+	#clear
+	clear
 }
 
 function _upgrade-system () {
@@ -583,12 +657,16 @@ function _upgrade-system () {
 	sudo apt-get update
 	sudo apt-get upgrade
 	sleep 3s
+	#clear
+	clear
 }
 
 function _start-xbmc () {
 	dialog --infobox "starting RetroRig" 3 24
 	sleep 1s
 	xbmc
+	#clear
+	clear
 }
 
 function _reboot () {
