@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #small script to update configuration files for git repo
-#Version 0.6.1
+#Version 0.6.4
 #This configuration file is based on Ubuntu 14.04 LTS
 #absolute home paths replaced with $HOME
 
