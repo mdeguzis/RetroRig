@@ -1,4 +1,15 @@
 #####################################
+#General
+#####################################
+
+Note Syntax:
+
+-Suggested emulator built-in
+-Alternative emulators you could use
+-Original Button (Xbox button)
+-Tips and Tricks
+
+#####################################
 #Super Nintendo
 #####################################
 
@@ -45,7 +56,6 @@ Default Controller layout:
 Tips and Tricks:
 
     The main buttons were reversed to reflect the original gamepad
-    Gamepad is enabled for navigation of menu system
 
 #####################################
 #MAME
@@ -76,7 +86,9 @@ Default Controller layout:
 Tips and Tricks:
 
     Gamepad is enabled for navigation of menu system
-    There is no quick save/load feature that I saw. Doing a save/load prompts for a slot number. You could work around this if you wish to give up a button on your gamepad to map to a number 0-9 with the qjoypad program
+    There is no quick save/load feature that I saw. Doing a save/load prompts for a slot number. 
+    You could work around this if you wish to give up a button on your gamepad to map to a number 
+    0-9 with the qjoypad program (future fix?)
 
 #####################################
 #Mupen64Plus
@@ -92,8 +104,8 @@ Default Controller layout:
     A (A)
     B (X)
     C Buttons (Right Joystick)
-    L (LB)
-    R (RB)
+    LT (LB)
+    RT (RB)
     Z Trigger (RT)
     Start (Start)
     Select (Select)
@@ -104,9 +116,11 @@ Default Controller layout:
 Tips and Tricks:
 
     The Mupen64Plus Google code site has superb documentation. Be sure to check it out for all intensive purposes.
-    There is a front end for Mupen64Plus called M64py
-    If you install the front-end GUI, be aware changes when opening up either Mupen64Plus via the CLI, or M64py will overwrite each other
-    The video plugin uses was Glide, due to video issues on Ubuntu 14.04 and my hardware. Your mileage may vary.
+    There is a front end for Mupen64Plus called M64py. If you install the front-end GUI, be aware changes when 
+    opening up either Mupen64Plus via the CLI, or M64py will overwrite each other. The video plugin used is 
+    Glide64, due to video issues on Ubuntu 14.04 and my hardware. Your mileage may vary. 
+    
+    Options to change the video plugin in the RetroRig settings menu will be added at a later date.
 
 #####################################
 #Stella
@@ -129,5 +143,5 @@ Default Controller layout:
 Tips and Tricks:
 
     There are currently audio issues on my setup
-    Video is using software render (not OpenGL) due to bugs
+    Video is using software render (not OpenGL) due to bugs (sad crab...)
     Gamepad is enabled for navigation of menu system
