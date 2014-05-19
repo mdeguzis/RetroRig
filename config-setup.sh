@@ -1,7 +1,7 @@
 #!/bin/bash
 #
 #small script to copy over configuration files for emulators
-#Version 0.6.1
+#Version 0.6.4
 #Please report any errors via a pull request
 #
 #
@@ -446,18 +446,9 @@ function _configuration () {
 	#disable screensaver, XBMC will manage this
 	#export display to allow gsettings running in terminal window
 	export DISPLAY=:0.0
-	#gsettings set org.gnome.settings-daemon.plugins.power active 'false'
-	#gsettings set org.gnome.desktop.screensaver idle-activation-enabled 'false'
-	#gsettings set org.gnome.desktop.lockdown disable-lock-screen 'true'
-
-	#trying gconftool to disable screen locks
-	gconftool-2 --type boolean -s /apps/gnome-power-manager/lock/blank_screen false
-	gconftool-2 --type boolean -s /apps/gnome-power-manager/lock/gnome_keyring_hibernate false
-	gconftool-2 --type boolean -s /apps/gnome-power-manager/lock/gnome_keyring_suspend false
-	gconftool-2 --type boolean -s /apps/gnome-power-manager/lock/hibernate false
-	gconftool-2 --type boolean -s /apps/gnome-power-manager/lock/suspend false
-	gconftool-2 --type boolean -s /apps/gnome-power-manager/lock_use_screensaver_settings true
-	gconftool-2 --type boolean -s /apps/gnome-screensaver/lock_enabled false
+	gsettings set org.gnome.settings-daemon.plugins.power active 'false'
+	gsettings set org.gnome.desktop.screensaver idle-activation-enabled 'false'
+	gsettings set org.gnome.desktop.lockdown disable-lock-screen 'true'
 
 	#setup skelton folders for XBMC Rom Collection Browser
 	#ROMs
