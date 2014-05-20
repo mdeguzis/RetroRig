@@ -104,9 +104,15 @@ To clone this repo via the CLI:
 
 To intstall:
 
+<<<<<<< HEAD
 `cd RetroRig`
 
 `sudo ./config.setup.sh`
+=======
+<pre><code>cd RetroRig
+sudo ./config.setup.sh
+</code></pre>
+>>>>>>> 5f9d87c7ab2666d1dfb0bc70449abe8d7e87f65d
 
 sudo access is needed for updates, installs, and folder creation. If you wish, you can review the script
 code beforehand to see what sudo does.You can also choose to just copy configuration filesfrom each 
