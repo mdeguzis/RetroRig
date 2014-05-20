@@ -650,9 +650,12 @@ function _configuration () {
 	echo "Configuring required packages..." >> install_log.txt
 	echo "-----------------------------------------------------------" >> install_log.txt
 	export DISPLAY=:0.0
-	gsettings set org.gnome.settings-daemon.plugins.power active 'false' &>> install_log.txt
-	gsettings set org.gnome.desktop.screensaver idle-activation-enabled 'false' &>> install_log.txt
-	gsettings set org.gnome.desktop.lockdown disable-lock-screen 'true' &>> install_log.txt
+	echo "-----------------------------------------------------------" >> install_log.txt
+	echo "Configuring Unity Settings..." >> install_log.txt
+	echo "-----------------------------------------------------------" >> install_log.txt
+	#gsettings set org.gnome.settings-daemon.plugins.power active 'false' &>> install_log.txt
+	#gsettings set org.gnome.desktop.screensaver idle-activation-enabled 'false' &>> install_log.txt
+	#gsettings set org.gnome.desktop.lockdown disable-lock-screen 'true' &>> install_log.txt
 	#update progress bar
     	echo $c
         echo "###"
