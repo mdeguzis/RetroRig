@@ -37,6 +37,7 @@ Goals for 0.7.0 release
 	-(done) ZSNES
 
 -(done) import games from folder on startup to avoid manual intervention (RCB menu pop, with cancel)
+-Uninstall option
 
 Issues list
 ---------------

@@ -966,7 +966,7 @@ function _configuration () {
         echo "$c %"
         echo "###"
         ((c+=10))
-	sleep 5s
+	sleep 3s
 
 done
 ) |
@@ -1054,7 +1054,7 @@ function _reboot () {
 	#need to add reboot command to sudo to avoid pw prompt
         dialog --infobox "Rebooting in 5 seconds, press CTRL+C to cancel" 3 51 ; sleep 5s
         sleep 5s
-        sudo reboot 
+        sudo /sbin/reboot
 }
 #call main
 _main
