@@ -188,7 +188,7 @@ function _settings (){
 
 cmd=(dialog --backtitle "LibreGeek.org RetroRig Installer" --menu "Settings Menu" 16 46 16)
 options=(1 "Change resolution for emulators"  
-	 2 "Load ROMs"
+	 2 "Load ROMs (coming soon)"
 	 3 "Back to main menu")
 
 	#make menu choice
@@ -204,8 +204,8 @@ options=(1 "Change resolution for emulators"
 		;;
 
 		2)  	
-		_rom-loader
-		_
+		#_rom-loader
+		_settings
 		;;
 
 		3)  
