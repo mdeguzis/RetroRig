@@ -8,7 +8,13 @@
 #Pre-requisite checks:
 #check for dialog and prompt to install if it is not present
 
+#remove previous install log
+rm -f install_log.txt
 
+#start logging
+echo "-----------------------------------------------------------" >> install_log.txt
+echo "Starting install log..." >> install_log.txt
+echo "-----------------------------------------------------------" >> install_log.txt
 
 function _main () {
 
@@ -73,7 +79,9 @@ options=(1 "Install Software"
 		_main
 		;;
 
-		9)  
+		9)
+		#remove install log
+		rm -f install_log.txt  
 		clear
 		exit
 		;;
@@ -498,9 +506,9 @@ function _software () {
 	do
 
 	#add multi-arch support
-	echo "-----------------------------------------------------------" > install_log.txt
+	echo "-----------------------------------------------------------" >> install_log.txt
 	echo "Adding multi-arch support..." >> install_log.txt
-	echo "-----------------------------------------------------------" > install_log.txt
+	echo "-----------------------------------------------------------" >> install_log.txt
 	sudo dpkg --add-architecture i386 &>> install_log.txt
 	#update progres bar
         echo $c
@@ -511,10 +519,10 @@ function _software () {
 	sleep 1
 
 	#add repository for pcsx2 (PS2 emulator)
-	echo "-----------------------------------------------------------" > install_log.txt
+	echo "-----------------------------------------------------------" >> install_log.txt
 	echo "Adding pcsx2 repository support..." >> install_log.txt
 	echo "-----------------------------------------------------------" >> install_log.txt
-	sudo add-apt-repository -y ppa:gregory-hainaut/pcsx2.official.ppa &> install_log.txt
+	sudo add-apt-repository -y ppa:gregory-hainaut/pcsx2.official.ppa &>> install_log.txt
 	#update progres bar
         echo $c
         echo "###"
@@ -524,7 +532,7 @@ function _software () {
 	sleep 1
 
 	#add repository for official team XBMC "stable"
-	echo "-----------------------------------------------------------" > install_log.txt
+	echo "-----------------------------------------------------------" >> install_log.txt
 	echo "Adding XBMC Ubuntu (stable) repository..." >> install_log.txt
 	echo "-----------------------------------------------------------" >> install_log.txt
 	sudo add-apt-repository -y ppa:team-xbmc/ppa &>> install_log.txt
@@ -537,7 +545,7 @@ function _software () {
 	sleep 1
 
 	#add repository for dolphin-emu
-	echo "-----------------------------------------------------------" > install_log.txt
+	echo "-----------------------------------------------------------" >> install_log.txt
 	echo "Adding Dolphin-Emu repository..." >> install_log.txt
 	echo "-----------------------------------------------------------" >> install_log.txt
 	sudo add-apt-repository -y ppa:glennric/dolphin-emu &>> install_log.txt
@@ -550,7 +558,7 @@ function _software () {
 	sleep 1
 
 	#install Gens/GS via deb pkg (only way I  can currently find it)
-	echo "-----------------------------------------------------------" > install_log.txt
+	echo "-----------------------------------------------------------" >> install_log.txt
 	echo "Installing Gens/GS..." >> install_log.txt
 	echo "-----------------------------------------------------------" >> install_log.txt
 	sudo dpkg -i $HOME/RetroRig/emulators/Gens-GS/Gens_2.16.7_i386.deb &>> install_log.txt
@@ -563,7 +571,7 @@ function _software () {
 	sleep 1
 
 	#update repository listings
-	echo "-----------------------------------------------------------" > install_log.txt
+	echo "-----------------------------------------------------------" >> install_log.txt
 	echo "Updating packages..." >> install_log.txt
 	echo "-----------------------------------------------------------" >> install_log.txt
 	sudo apt-get update &>> install_log.txt
@@ -576,7 +584,7 @@ function _software () {
 	sleep 1
 
 	#install software from repositories
-	echo "-----------------------------------------------------------" > install_log.txt
+	echo "-----------------------------------------------------------" >> install_log.txt
 	echo "Installing required packages..." >> install_log.txt
 	echo "-----------------------------------------------------------" >> install_log.txt
 	sudo apt-get install -y xboxdrv curl zsnes nestopia pcsxr pcsx2:i386 \
@@ -952,8 +960,7 @@ function _configuration () {
 	#set the system user to an absolute value.
 	#RCB and some config files don't like using $HOME, rather /home/test/
 	#Let's change the config files to reflect the current username
-	new_U=$($USER)
-	#change default user from config files to target user. 'first run only!!!' 
+
 	sed -i "s|/home/test/|/home/$USER/|g" $HOME/.config/pcsx2/PCSX2-reg.ini  &>> install_log.txt
 	sed -i "s|/home/test/|/home/$USER/|g" $HOME/.gens/gens.cfg &>> install_log.txt
 	sed -i "s|/home/test/|/home/$USER/|g" $HOME/.zsnes/zsnesl.cfg &>> install_log.txt
