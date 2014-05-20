@@ -601,7 +601,8 @@ function _configuration () {
 
 	dialog --title "Confirm yes/no" \
 	--backtitle "LibreGeek.org RetroRig Installer" \
-	--yesno "Are you sure you want run the configuration setup?" 5 56
+	--yesno "Are you sure you want run the configuration setup? \
+	This will* reset existing configurations!" 7 50
 	 
 	# Get exit status
 	# 0 means user hit [yes] button.
