@@ -104,8 +104,7 @@ To clone this repo via the CLI:
 
 To intstall:
 
-<pre><code>
-cd RetroRig
+<pre><code>cd RetroRig
 sudo ./config.setup.sh
 </code></pre>
 
