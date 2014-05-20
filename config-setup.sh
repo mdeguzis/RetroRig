@@ -1,7 +1,7 @@
 #!/bin/bash
 #
 #small script to copy over configuration files for emulators
-#Version 0.6.4
+#Version 0.6.5
 #Please report any errors via a pull request
 #
 #
@@ -490,35 +490,105 @@ done
 
 #software function
 function _software () {
-	dialog --infobox "Installing required programs...Please wait" 3 48 ; sleep 3s 
-	clear
+
+	(
+	c=10
+	while [ $c -ne 110 ]
+	do
+
+	#clear current install log (if it exists)
+	rm -f install_log.txt
 
 	#add multi-arch support
-	sudo dpkg --add-architecture i386
+	echo "Adding multi-arch support..." >> install_log.txt
+	echo "-----------------------------------------------------------" >> install_log.txt
+	sudo dpkg --add-architecture i386 &>> install_log.txt
+	#update progres bar
+        echo $c
+        echo "###"
+        echo "$c %"
+        echo "###"
+        ((c+=10))
+	sleep 1
 
 	#add repository for pcsx2 (PS2 emulator)
-	sudo add-apt-repository -y ppa:gregory-hainaut/pcsx2.official.ppa
+	echo "Adding pcsx2 repository support..." >> install_log.txt
+	echo "-----------------------------------------------------------" >> install_log.txt
+	sudo add-apt-repository -y ppa:gregory-hainaut/pcsx2.official.ppa &> install_log.txt
+	#update progres bar
+        echo $c
+        echo "###"
+        echo "$c %"
+        echo "###"
+        ((c+=10))
+	sleep 1
 
 	#add repository for official team XBMC "stable"
-	sudo add-apt-repository -y ppa:team-xbmc/ppa
+	echo "Adding XBMC Ubuntu (stable) repository..." >> install_log.txt
+	echo "-----------------------------------------------------------" >> install_log.txt
+	sudo add-apt-repository -y ppa:team-xbmc/ppa &>> install_log.txt
+	#update progres bar
+        echo $c
+        echo "###"
+        echo "$c %"
+        echo "###"
+        ((c+=10))
+	sleep 1
 
 	#add repository for dolphin-emu
-	sudo add-apt-repository -y ppa:glennric/dolphin-emu
+	echo "Adding Dolphin-Emu repository..." >> install_log.txt
+	echo "-----------------------------------------------------------" >> install_log.txt
+	sudo add-apt-repository -y ppa:glennric/dolphin-emu &>> install_log.txt
+	#update progres bar
+        echo $c
+        echo "###"
+        echo "$c %"
+        echo "###"
+        ((c+=10))
+	sleep 1
+
+	#install Gens/GS via deb pkg (only way I  can currently find it)
+	echo "Installing Gens/GS..." >> install_log.txt
+	echo "-----------------------------------------------------------" >> install_log.txt
+	sudo dpkg -i $HOME/RetroRig/emulators/Gens-GS/Gens_2.16.7_i386.deb &>> install_log.txt
+	#update progres bar
+        echo $c
+        echo "###"
+        echo "$c %"
+        echo "###"
+        ((c+=20))
+	sleep 1
 
 	#update repository listings
-	sudo apt-get update
+	echo "Updating packages..." >> install_log.txt
+	echo "-----------------------------------------------------------" >> install_log.txt
+	sudo apt-get update &>> install_log.txt
+	#update progres bar
+        echo $c
+        echo "###"
+        echo "$c %"
+        echo "###"
+        ((c+=30))
+	sleep 1
 
 	#install software from repositories
+	echo "Installing required packages..." >> install_log.txt
+	echo "-----------------------------------------------------------" >> install_log.txt
 	sudo apt-get install -y xboxdrv curl zsnes nestopia pcsxr pcsx2:i386 \
 	python-software-properties pkg-config software-properties-common \
 	mame mupen64plus dconf-tools qjoypad xbmc dolphin-emu-master stella \
-	build-essential 
+	build-essential &>> install_log.txt
+	#update progres bar
+        echo $c
+        echo "###"
+        echo "$c %"
+        echo "###"
+        ((c+=10))
+	sleep 3s
+done
+) |
+dialog --title "Installing Required Programs..." --gauge "Please wait" 7 70 0
 
-	#install Gens/GS via deb pkg (only way I  can currently find it)
-	sudo dpkg -i $HOME/RetroRig/emulators/Gens-GS/Gens_2.16.7_i386.deb
-
-	#clear
-	clear
 }
 
 #configuration function
@@ -553,175 +623,345 @@ function _configuration () {
 
 	esac
 
+	#show progress bar
+	(
+	c=10
+	while [ $c -ne 110 ]
+	do
+
 
 	dialog --infobox "Setting up configuration files" 3 35 ; sleep 3s
 	clear
 	#disable screensaver, XBMC will manage this
 	#export display to allow gsettings running in terminal window
 	export DISPLAY=:0.0
-	gsettings set org.gnome.settings-daemon.plugins.power active 'false'
-	gsettings set org.gnome.desktop.screensaver idle-activation-enabled 'false'
-	gsettings set org.gnome.desktop.lockdown disable-lock-screen 'true'
+	gsettings set org.gnome.settings-daemon.plugins.power active 'false' 2> /dev/null
+	gsettings set org.gnome.desktop.screensaver idle-activation-enabled 'false' 2> /dev/null
+	gsettings set org.gnome.desktop.lockdown disable-lock-screen 'true' 2> /dev/null
+	#update progress bar
+    	echo $c
+        echo "###"
+        echo "$c %"
+        echo "###"
+        ((c+=4))
+	sleep 0
 
 	#setup skelton folders for XBMC Rom Collection Browser
 	#ROMs
-	mkdir -pv $HOME/Games/ROMs/Atari\ 2600/
-	mkdir -pv $HOME/Games/ROMs/Gamecube/
-	mkdir -pv $HOME/Games/ROMs/Mame4All/
-	mkdir -pv $HOME/Games/ROMs/N64/
-	mkdir -pv $HOME/Games/ROMs/NES/
-	mkdir -pv $HOME/Games/ROMs/SNES/
-	mkdir -pv $HOME/Games/ROMs/PS2/
-	mkdir -pv $HOME/Games/ROMs/PS1/
-	mkdir -pv $HOME/Games/ROMs/sgenroms/
-	mkdir -pv $HOME/Games/ROMs/SNK\ Neo\ Geo/
+	mkdir -pv $HOME/Games/ROMs/Atari\ 2600/ 2> /dev/null
+	mkdir -pv $HOME/Games/ROMs/Gamecube/ 2> /dev/null
+	mkdir -pv $HOME/Games/ROMs/Mame4All/ 2> /dev/null
+	mkdir -pv $HOME/Games/ROMs/N64/ 2> /dev/null
+	mkdir -pv $HOME/Games/ROMs/NES/ 2> /dev/null
+	mkdir -pv $HOME/Games/ROMs/SNES/ 2> /dev/null
+	mkdir -pv $HOME/Games/ROMs/PS2/ 2> /dev/null
+	mkdir -pv $HOME/Games/ROMs/PS1/ 2> /dev/null
+	mkdir -pv $HOME/Games/ROMs/sgenroms/ 2> /dev/null
+	mkdir -pv $HOME/Games/ROMs/SNK\ Neo\ Geo/ 2> /dev/null
+	#update progress bar
+    	echo $c
+        echo "###"
+        echo "$c %"
+        echo "###"
+        ((c+=4))
+	sleep 0
 
 	#Artwork 
-	mkdir -pv $HOME/Games/Artwork/Atari\ 2600
-	mkdir -pv $HOME/Games/Artwork/Gamecube
-	mkdir -pv $HOME/Games/Artwork/MAME
-	mkdir -pv $HOME/Games/Artwork/N64
-	mkdir -pv $HOME/Games/Artwork/NESt
-	mkdir -pv $HOME/Games/Artwork/SNES
-	mkdir -pv $HOME/Games/Artwork/PS2
-	mkdir -pv $HOME/Games/Artwork/PS1
-	mkdir -pv $HOME/Games/Artwork/Genesis
-	mkdir -pv $HOME/Games/Artwork/SNK\ Neo\ Geo
+	mkdir -pv $HOME/Games/Artwork/Atari\ 2600 2> /dev/null
+	mkdir -pv $HOME/Games/Artwork/Gamecube 2> /dev/null
+	mkdir -pv $HOME/Games/Artwork/MAME 2> /dev/null
+	mkdir -pv $HOME/Games/Artwork/N64 2> /dev/null
+	mkdir -pv $HOME/Games/Artwork/NES 2> /dev/null
+	mkdir -pv $HOME/Games/Artwork/SNES 2> /dev/null
+	mkdir -pv $HOME/Games/Artwork/PS2 2> /dev/null
+	mkdir -pv $HOME/Games/Artwork/PS1 2> /dev/null
+	mkdir -pv $HOME/Games/Artwork/Genesis 2> /dev/null
+	mkdir -pv $HOME/Games/Artwork/SNK\ Neo\ Geo 2> /dev/null
+	#update progress bar
+    	echo $c
+        echo "###"
+        echo "$c %"
+        echo "###"
+        ((c+=4))
+	sleep 0
 
 	#Saves (if any)
-	mkdir -pv $HOME/Games/Saves/Atari\ 2600/
-	mkdir -pv $HOME/Games/Saves/Gamecube/
-	mkdir -pv $HOME/Games/Saves/Mame4All/
-	mkdir -pv $HOME/Games/Saves/N64/
-	mkdir -pv $HOME/Games/Saves/NES/
-	mkdir -pv $HOME/Games/Saves/SNES/
-	mkdir -pv $HOME/Games/Saves/PS2/
-	mkdir -pv $HOME/Games/Saves/PS1/
-	mkdir -pv $HOME/Games/Saves/genroms/
-	mkdir -pv $HOME/Games/Saves/SNK\ Neo\ Geo/
+	mkdir -pv $HOME/Games/Saves/Atari\ 2600/ 2> /dev/null
+	mkdir -pv $HOME/Games/Saves/Gamecube/ 2> /dev/null
+	mkdir -pv $HOME/Games/Saves/Mame4All/ 2> /dev/null
+	mkdir -pv $HOME/Games/Saves/N64/ 2> /dev/null
+	mkdir -pv $HOME/Games/Saves/NES/ 2> /dev/null
+	mkdir -pv $HOME/Games/Saves/SNES/ 2> /dev/null
+	mkdir -pv $HOME/Games/Saves/PS2/ 2> /dev/null
+	mkdir -pv $HOME/Games/Saves/PS1/ 2> /dev/null
+	mkdir -pv $HOME/Games/Saves/genroms/ 2> /dev/null
+	mkdir -pv $HOME/Games/Saves/SNK\ Neo\ Geo/ 2> /dev/null
+	#update progress bar
+    	echo $c
+        echo "###"
+        echo "$c %"
+        echo "###"
+        ((c+=4))
+	sleep 0
 
 	#create dotfiles
-	mkdir -pv $HOME/.qjoypad3/
-	mkdir -pv $HOME/.dolphin-emu/Config/
-	mkdir -pv $HOME/.config/mupen64plus/
-	mkdir -pv $HOME/.nestopia/
-	mkdir -pv $HOME/.gens/
-	mkdir -pv $HOME/.zsnes/
-	mkdir -pv $HOME/.mame/cfg/
-	mkdir -pv $HOME/.pcsx/plugins/
-	mkdir -pv $HOME/.pcsx/patches/
-	mkdir -pv $HOME/.config/pcsx2/inis/
-	mkdir -pv $HOME/.stella/
-	mkdir -pv $HOME/.xbmc/
+	mkdir -pv $HOME/.qjoypad3/ 2> /dev/null
+	mkdir -pv $HOME/.dolphin-emu/Config/ 2> /dev/null
+	mkdir -pv $HOME/.config/mupen64plus/ 2> /dev/null
+	mkdir -pv $HOME/.nestopia/ 2> /dev/null
+	mkdir -pv $HOME/.gens/ 2> /dev/null
+	mkdir -pv $HOME/.zsnes/ 2> /dev/null
+	mkdir -pv $HOME/.mame/cfg/ 2> /dev/null
+	mkdir -pv $HOME/.pcsx/plugins/ 2> /dev/null
+	mkdir -pv $HOME/.pcsx/patches/ 2> /dev/null
+	mkdir -pv $HOME/.config/pcsx2/inis/ 2> /dev/null
+	mkdir -pv $HOME/.stella/ 2> /dev/null
+	mkdir -pv $HOME/.xbmc/ 2> /dev/null
+	#update progress bar
+    	echo $c
+        echo "###"
+        echo "$c %"
+        echo "###"
+        ((c+=4))
+	sleep 0
 
 	#xbmc does not (at least for Ubuntu's repo pkg) load the
 	#dot files without loading XBMC at least once
 	#copy in default folder base from first run:	
-	cp -Rv $HOME/RetroRig/XBMC-configs/* $HOME/.xbmc
+	cp -Rv $HOME/RetroRig/XBMC-configs/* $HOME/.xbmc 2> /dev/null
+	#update progress bar
+    	echo $c
+        echo "###"
+        echo "$c %"
+        echo "###"
+        ((c+=4))
+	sleep 0
 
 	#xboxdrv director located in common area for startup
 	echo "sudo needed to create common xboxdrv share!"
-	sudo mkdir -pv /usr/share/xboxdrv/
+	sudo mkdir -pv /usr/share/xboxdrv/ 2> /dev/null
+	#update progress bar
+    	echo $c
+        echo "###"
+        echo "$c %"
+        echo "###"
+        ((c+=4))
+	sleep 0
 
 	#Tools
-	mkdir -pv $HOME/Games/Tools/
+	mkdir -pv $HOME/Games/Tools/ 2> /dev/null
+	#update progress bar
+    	echo $c
+        echo "###"
+        echo "$c %"
+        echo "###"
+        ((c+=4))
+	sleep 0
 
 	#configs
-	mkdir -pv $HOME/Games/Configs/
+	mkdir -pv $HOME/Games/Configs/ 2> /dev/null
+	#update progress bar
+    	echo $c
+        echo "###"
+        echo "$c %"
+        echo "###"
+        ((c+=4))
+	sleep 0
 
 	#Nestopia
 	#default path: /home/$USER/.nestopia
-	cp -v $HOME/RetroRig/emu-configs/Nestopia/nstcontrols $HOME/.nestopia/
-	cp -v $HOME/RetroRig/emu-configs/Nestopia/nstsettings $HOME/.nestopia/
+	cp -v $HOME/RetroRig/emu-configs/Nestopia/nstcontrols $HOME/.nestopia/ 2> /dev/null
+	cp -v $HOME/RetroRig/emu-configs/Nestopia/nstsettings $HOME/.nestopia/ 2> /dev/null
+	#update progress bar
+    	echo $c
+        echo "###"
+        echo "$c %"
+        echo "###"
+        ((c+=4))
+	sleep 0
 
 	#gens
 	#default path: /home/$USER/.gens
 	#Global config
-	cp -v $HOME/RetroRig/emu-configs/Gens-GS/gens.cfg $HOME/.gens/
+	cp -v $HOME/RetroRig/emu-configs/Gens-GS/gens.cfg $HOME/.gens/ 2> /dev/null
+	#update progress bar
+    	echo $c
+        echo "###"
+        echo "$c %"
+        echo "###"
+        ((c+=4))
+	sleep 0
 
 	#ZSNES
 	#default path: /home/$USER/.zsnes
 	#Controller config
-	cp -v $HOME/RetroRig/emu-configs/ZSNES/zinput.cfg $HOME/.zsnes/
-	cp -v $HOME/RetroRig/emu-configs/ZSNES/zsnesl.cfg $HOME/.zsnes/
+	cp -v $HOME/RetroRig/emu-configs/ZSNES/zinput.cfg $HOME/.zsnes/ 2> /dev/null
+	cp -v $HOME/RetroRig/emu-configs/ZSNES/zsnesl.cfg $HOME/.zsnes/ 2> /dev/null
+	#update progress bar
+    	echo $c
+        echo "###"
+        echo "$c %"
+        echo "###"
+        ((c+=4))
+	sleep 0
 
 	#mame
 	#default path: /home/$USER/.mame
 	#Main config
-	cp -v $HOME/RetroRig/emu-configs/MAME/default.cfg $HOME/.mame/cfg
-	cp -v $HOME/RetroRig/emu-configs/MAME/mame.ini $HOME/.mame
+	cp -v $HOME/RetroRig/emu-configs/MAME/default.cfg $HOME/.mame/cfg 2> /dev/null
+	cp -v $HOME/RetroRig/emu-configs/MAME/mame.ini $HOME/.mame 2> /dev/null
 	#offline artwork scrapper
-	cp -v $HOME/RetroRig/emu-configs/MAME/Artwork/* $HOME/Games/Artwork/MAME	
+	cp -v $HOME/RetroRig/emu-configs/MAME/Artwork/* $HOME/Games/Artwork/MAME 2> /dev/null
+	#update progress bar
+    	echo $c
+        echo "###"
+        echo "$c %"
+        echo "###"
+        ((c+=4))
+	sleep 0	
 	
 	#pcsx
 	#default path: /home/$USER/.pcsx
 	#Main config
-	cp -v $HOME/RetroRig/emu-configs/pcsx/pcsx.cfg $HOME/.pcsx/
-	cp -Rv $HOME/RetroRig/emu-configs/pcsx/plugins $HOME/.pcsx/
-	cp -Rv $HOME/RetroRig/emu-configs/pcsx/patches $HOME/.pcsx/
+	cp -v $HOME/RetroRig/emu-configs/pcsx/pcsx.cfg $HOME/.pcsx/ 2> /dev/null
+	cp -Rv $HOME/RetroRig/emu-configs/pcsx/plugins $HOME/.pcsx/ 2> /dev/null
+	cp -Rv $HOME/RetroRig/emu-configs/pcsx/patches $HOME/.pcsx/ 2> /dev/null
+	#update progress bar
+    	echo $c
+        echo "###"
+        echo "$c %"
+        echo "###"
+        ((c+=4))
+	sleep 0
 
 	#pcsx2
 	#default path: /home/$USER/.config/pcsx2
 	#Main config
-	cp -v $HOME/RetroRig/emu-configs/pcsx2/PCSX2-reg.ini $HOME/.config/pcsx2/
-	cp -v $HOME/RetroRig/emu-configs/pcsx2/inisOnePAD.ini $HOME/.config/pcsx2/
-	cp -v $HOME/RetroRig/emu-configs/pcsx2/inis/* $HOME/.config/pcsx2/inis/
+	cp -v $HOME/RetroRig/emu-configs/pcsx2/PCSX2-reg.ini $HOME/.config/pcsx2/ 2> /dev/null
+	cp -v $HOME/RetroRig/emu-configs/pcsx2/inisOnePAD.ini $HOME/.config/pcsx2/ 2> /dev/null
+	cp -v $HOME/RetroRig/emu-configs/pcsx2/inis/* $HOME/.config/pcsx2/inis/ 2> /dev/null
+	#update progress bar
+    	echo $c
+        echo "###"
+        echo "$c %"
+        echo "###"
+        ((c+=4))
+	sleep 0
 
 	#mupen64pluspwd
 	#default path: /home/$USER/.config/mupen64plus
 	#Main config
-	cp -v $HOME/RetroRig/emu-configs/mupen64plus/mupen64plus.cfg $HOME/.config/mupen64plus/
+	cp -v $HOME/RetroRig/emu-configs/mupen64plus/mupen64plus.cfg $HOME/.config/mupen64plus/ 2> /dev/null
+	#update progress bar
+    	echo $c
+        echo "###"
+        echo "$c %"
+        echo "###"
+        ((c+=4))
+	sleep 0
 
 	#Stella
 	#default path: /home/$USER/.config/mupen64plus
 	#Main config
-	cp -v $HOME/RetroRig/emu-configs/Stella/stellarc $HOME/.stella/
+	cp -v $HOME/RetroRig/emu-configs/Stella/stellarc $HOME/.stella/ 2> /dev/null
+	#update progress bar
+    	echo $c
+        echo "###"
+        echo "$c %"
+        echo "###"
+        ((c+=4))
+	sleep 0
 
 	#dolphin
 	#default path /home/$USER/.dolphin-emu/
 	#emulator config
-	cp -Rv /$HOME/RetroRig/emu-configs/Dolphin/Dolphin.ini $HOME/.dolphin-emu/Config/
+	cp -Rv /$HOME/RetroRig/emu-configs/Dolphin/Dolphin.ini $HOME/.dolphin-emu/Config/ 2> /dev/null
 	#Gamecube controller config
-	cp -Rv /$HOME/RetroRig/emu-configs/Dolphin/GCPadNew.ini $HOME/.dolphin-emu/Config/
+	cp -Rv /$HOME/RetroRig/emu-configs/Dolphin/GCPadNew.ini $HOME/.dolphin-emu/Config/ 2> /dev/null
 	#Wii controller config
-
 	#OpenGL graphics config
-	cp -Rv /$HOME/RetroRig/emu-configs/Dolphin/gfx_opengl.ini $HOME/.dolphin-emu/Config/
+	cp -Rv /$HOME/RetroRig/emu-configs/Dolphin/gfx_opengl.ini $HOME/.dolphin-emu/Config/ 2> /dev/null
+	#update progress bar
+    	echo $c
+        echo "###"
+        echo "$c %"
+        echo "###"
+        ((c+=4))
+	sleep 0
 
 	#copy config for qjoypad setup
-	cp -v $HOME/RetroRig/controller-cfgs/retro-gaming.lyt $HOME/.qjoypad3/
+	cp -v $HOME/RetroRig/controller-cfgs/retro-gaming.lyt $HOME/.qjoypad3/ 2> /dev/null
+	#update progress bar
+    	echo $c
+        echo "###"
+        echo "$c %"
+        echo "###"
+        ((c+=4))
+	sleep 0
 
 	#add xbox controller init script
 	echo "sudo needed to create init scripts for xboxdrv!"
-	sudo cp -v $HOME/RetroRig/controller-cfgs/xpad-wireless.xboxdrv /usr/share/xboxdrv/
-	sudo cp -v $HOME/RetroRig/init-scripts/xboxdrv /etc/init.d/
-	sudo update-rc.d xboxdrv defaults
+	sudo cp -v $HOME/RetroRig/controller-cfgs/xpad-wireless.xboxdrv /usr/share/xboxdrv/ 2> /dev/null
+	sudo cp -v $HOME/RetroRig/init-scripts/xboxdrv /etc/init.d/ 2> /dev/null
+	sudo update-rc.d xboxdrv defaults 2> /dev/null
+	#update progress bar
+    	echo $c
+        echo "###"
+        echo "$c %"
+        echo "###"
+        ((c+=4))
+	sleep 0
 
 	#copyautoexec.py in the userdata folder for autostarting RCB
 	#cp -v $HOME/RetroRig/RCB/autoexec.py $HOME/.xbmc/userdata/
 
 	#blacklist xpad
 	echo "sudo needed to blacklist xpad!"
-	sudo cp -v $HOME/RetroRig/init-scripts/blacklist.conf /etc/modprobe.d/
+	sudo cp -v $HOME/RetroRig/init-scripts/blacklist.conf /etc/modprobe.d/ 2> /dev/null
+	#update progress bar
+    	echo $c
+        echo "###"
+        echo "$c %"
+        echo "###"
+        ((c+=4))
+	sleep 0
 
 	#create autostart for XBMC and qjoypad
 	echo "sudo needed to create auto-start entries!"
-	sudo cp -v /usr/share/applications/xbmc.desktop /etc/xdg/autostart/
-	sudo cp -v $HOME/RetroRig/controller-cfgs/qjoypad.desktop /etc/xdg/autostart/
+	sudo cp -v /usr/share/applications/xbmc.desktop /etc/xdg/autostart/ 2> /dev/null
+	sudo cp -v $HOME/RetroRig/controller-cfgs/qjoypad.desktop /etc/xdg/autostart/ 2> /dev/null
 	#If xboxdrv config file does not pick up on reboot,
 	#be sure to resync the wireless receiver!
+	#update progress bar
+    	echo $c
+        echo "###"
+        echo "$c %"
+        echo "###"
+        ((c+=6))
+	sleep 0
 
 	#set the system user to an absolute value.
 	#RCB and some config files don't like using $HOME, rather /home/test/
 	#Let's change the config files to reflect the current username
-	new_U=$(cat'$USER')
+	new_U=$($USER)
 	#change default user from config files to target user. 'first run only!!!' 
-	sed -i "s|/home/test/|/home/$USER/|g" $HOME/.config/pcsx2/PCSX2-reg.ini 
-	sed -i "s|/home/test/|/home/$USER/|g" $HOME/.gens/gens.cfg
-	sed -i "s|/home/test/|/home/$USER/|g" $HOME/.zsnes/zsnesl.cfg
-	sed -i "s|/home/test/|/home/$USER/|g" $HOME/.pcsx/pcsx.cfg 
-	sed -i "s|/home/test/|/home/$USER/|g" $HOME/.dolphin-emu/Config/Dolphin.ini 
-	sed -i "s|/home/test/|/home/$USER/|g" $HOME/.xbmc/userdata/addon_data/script.games.rom.collection.browser/config.xml
+	sed -i "s|/home/test/|/home/$USER/|g" $HOME/.config/pcsx2/PCSX2-reg.ini  2> /dev/null
+	sed -i "s|/home/test/|/home/$USER/|g" $HOME/.gens/gens.cfg 2> /dev/null
+	sed -i "s|/home/test/|/home/$USER/|g" $HOME/.zsnes/zsnesl.cfg 2> /dev/null
+	sed -i "s|/home/test/|/home/$USER/|g" $HOME/.pcsx/pcsx.cfg  2> /dev/null
+	sed -i "s|/home/test/|/home/$USER/|g" $HOME/.dolphin-emu/Config/Dolphin.ini  2> /dev/null
+	sed -i "s|/home/test/|/home/$USER/|g" $HOME/.xbmc/userdata/addon_data/script.games.rom.collection.browser/config.xml 2> /dev/null
+	#update progress bar
+    	echo $c
+        echo "###"
+        echo "$c %"
+        echo "###"
+        ((c+=10))
+	sleep 5s
+
+done
+) |
+dialog --title "Configuring Programs..." --gauge "Please wait" 7 70 0
 	
 	#remind user about default resolution
 	#If the default is not supported on the monitor, emulators like zsnes will fail to start!
@@ -742,7 +982,8 @@ function _configuration () {
 	case $response in
 	   0) 
 	   dialog --infobox "Starting ROM loader..." 3 17
-	   _rom-loader
+	   disable rom-loader until ready
+	   #_rom-loader
 	   ;;
 
 	   1) 
@@ -758,10 +999,6 @@ function _configuration () {
 	   ;;
 
 	esac	
-
-
-	#clear
-	clear
 }
 
 function _update-git () {
