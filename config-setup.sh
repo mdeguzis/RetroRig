@@ -80,8 +80,6 @@ options=(1 "Install Software"
 		;;
 
 		9)
-		#remove install log
-		rm -f install_log.txt  
 		clear
 		exit
 		;;
@@ -954,7 +952,7 @@ function _configuration () {
         echo "###"
         echo "$c %"
         echo "###"
-        ((c+=6))
+        ((c+=3))
 	sleep 0
 
 	#set the system user to an absolute value.
@@ -967,6 +965,20 @@ function _configuration () {
 	sed -i "s|/home/test/|/home/$USER/|g" $HOME/.pcsx/pcsx.cfg  &>> install_log.txt
 	sed -i "s|/home/test/|/home/$USER/|g" $HOME/.dolphin-emu/Config/Dolphin.ini  &>> install_log.txt
 	sed -i "s|/home/test/|/home/$USER/|g" $HOME/.xbmc/userdata/addon_data/script.games.rom.collection.browser/config.xml &>> install_log.txt
+	#update progress bar	
+	echo $c
+        echo "###"
+        echo "$c %"
+        echo "###"
+        ((c+=3))
+	sleep 0
+
+	echo "-----------------------------------------------------------" >> install_log.txt
+	echo "Fixing ownership..." >> install_log.txt
+	echo "-----------------------------------------------------------" >> install_log.txt
+	#update ownership of affected directories since we are using sudo (root access)
+	sudo chown -Rv $USER:$USER $HOME &>> install_log.txt
+
 	#update progress bar
     	echo $c
         echo "###"
