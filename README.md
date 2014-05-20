@@ -102,11 +102,15 @@ To clone this repo via the CLI:
 
 `git clone https://github.com/ProfessorKaos64/RetroRig`
 
-Simply run `sudo ./config.setup.sh` after cloning.  sudo access is needed for updates, installs, and 
-folder creation. If you wish, you can review the script code beforehand to see what sudo does.You 
-can also choose to just copy configuration filesfrom each folder if you wish to just steal some notes
-on how to setup the emulators. Please reference the issues area on Github for current issues, or the
-release-roadmap for upcoming items.
+To intstall:
+
+`cd RetroRig`
+`sudo ./config.setup.sh`
+
+sudo access is needed for updates, installs, and folder creation. If you wish, you can review the script
+code beforehand to see what sudo does.You can also choose to just copy configuration filesfrom each 
+folder if you wish to just steal some notes on how to setup the emulators. Please reference the issues
+area on Github for current issues, or the release-roadmap for upcoming items.
 
 You can also download a zip file or by other means on the github page. This will install dialog and
 git as prequisites before running RetroRig.
