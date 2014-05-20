@@ -1,9 +1,9 @@
 #!/bin/bash
 #
 #small script to copy over configuration files for emulators
-#Version 0.6.5
+#Version 0.6.6
 #Please report any errors via a pull request
-#
+#You can also reach me on twitter: @N3RD42
 #
 #Pre-requisite checks:
 #check for dialog and prompt to install if it is not present
@@ -970,9 +970,9 @@ dialog --title "Configuring Programs..." --gauge "Please wait" 7 70 0
                           Main Menu > Option 3 > Option 1" 12 31
 
 	#prompt user if they wish to pre-load ROMs now
-		dialog --title "Confirm yes/no" \
+	dialog --title "Confirm yes/no" \
 	--backtitle "LibreGeek.org RetroRig Installer" \
-	--yesno "Do you wish to load your ROMs now? (reccomended)" 5 65
+	--yesno "Do you wish to load your ROMs now? (reccomended)" 5 52
 	 
 	# Get exit status
 	# 0 means user hit [yes] button.
@@ -981,7 +981,7 @@ dialog --title "Configuring Programs..." --gauge "Please wait" 7 70 0
 	response=$?
 	case $response in
 	   0) 
-	   dialog --infobox "Starting ROM loader..." 3 17
+	   dialog --infobox "ROM Loader Coming Soon!" 3 28 ; sleep 5s
 	   disable rom-loader until ready
 	   #_rom-loader
 	   ;;
