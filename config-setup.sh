@@ -93,7 +93,7 @@ if ! which dialog > /dev/null; then
    echo -e "dialog command not found! Install? (y/n) \c"
    read DIALOG
    if [ $DIALOG = "y" ]; then
-      sudo apt-get install dialog >> /dev/null
+      echo $userpasswd | sudo -S apt-get install dialog >> /dev/null
    elif  [ $DIALOG = "n" ]; then
 	echo "exiting!"
 	sleep 2s
@@ -105,7 +105,7 @@ if ! which git > /dev/null; then
    echo -e "git command not found! Install? (y/n) \c"
    read GIT
    if [ $GIT = "y" ]; then
-      sudo apt-get install git >> /dev/null
+      echo $userpasswd | sudo -S apt-get install git >> /dev/null
    elif  [ $GIT = "n" ]; then
         echo "exiting!"
         sleep 2s
@@ -120,6 +120,8 @@ dialog --title "text" --fselect /path/to/dir height width
 FOLDER=$(dialog --stdout --title "Please choose a folder" --fselect $HOME/ 14 48)
 echo "${FOLDER} file chosen." 
 sleep 1s
+
+return $FOLDER
 
 _rom-loader
 
@@ -188,6 +190,10 @@ done
 
 }
 
+#settings function
+function _remote-tools (){
+echo "nothing here yet, coming soon"
+}
 
 #settings function
 function _settings (){
@@ -195,6 +201,7 @@ function _settings (){
 cmd=(dialog --backtitle "LibreGeek.org RetroRig Installer" --menu "Settings Menu" 16 46 16)
 options=(1 "Change resolution for emulators"  
 	 2 "Load ROMs (coming soon)"
+	 3 "Setup folder shares (samba) (coming soon)"
 	 3 "Back to main menu")
 
 	#make menu choice
@@ -210,7 +217,12 @@ options=(1 "Change resolution for emulators"
 		;;
 
 		2)  	
-		#_rom-loader
+		_rom-loader
+		_settings
+		;;
+
+		3)  	
+		_remote-tools
 		_settings
 		;;
 
@@ -497,6 +509,34 @@ done
 #software function
 function _software () {
 
+
+	#prompt for sudo password for elevated operations
+	#The -S (stdin) option causes sudo to read the password from the standard input 
+	#instead of the terminal device. You can then use "echo <password> | sudo -S <command>" 
+	data=$(tempfile 2>/dev/null)
+ 
+	# trap it
+	trap "rm -f $data" 0 1 2 5 15
+	 
+	# get password with the --insecure option
+	dialog --title "Password" \
+	--clear \
+	--insecure \
+	--passwordbox "Enter your password" 10 30 2> $data
+	 
+	ret=$?
+	 
+	# make decison
+	case $ret in
+	  0)
+	    userpasswd=$(cat "$data")
+	    ;;
+	  1)
+	    echo "Cancel pressed.";;
+	  255)
+	    [ -s $data ] &&  cat $data || echo "ESC pressed.";;
+	esac
+
 	#progress bar while loop
 	(
 	c=10
@@ -507,7 +547,7 @@ function _software () {
 	echo "-----------------------------------------------------------" >> install_log.txt
 	echo "Adding multi-arch support..." >> install_log.txt
 	echo "-----------------------------------------------------------" >> install_log.txt
-	sudo dpkg --add-architecture i386 &>> install_log.txt
+	echo $userpasswd | sudo -S dpkg --add-architecture i386 &>> install_log.txt
 	#update progres bar
         echo $c
         echo "###"
@@ -533,7 +573,7 @@ function _software () {
 	echo "-----------------------------------------------------------" >> install_log.txt
 	echo "Adding XBMC Ubuntu (stable) repository..." >> install_log.txt
 	echo "-----------------------------------------------------------" >> install_log.txt
-	sudo add-apt-repository -y ppa:team-xbmc/ppa &>> install_log.txt
+	echo $userpasswd | sudo -S add-apt-repository -y ppa:team-xbmc/ppa &>> install_log.txt
 	#update progres bar
         echo $c
         echo "###"
@@ -559,20 +599,31 @@ function _software () {
 	echo "-----------------------------------------------------------" >> install_log.txt
 	echo "Installing Gens/GS..." >> install_log.txt
 	echo "-----------------------------------------------------------" >> install_log.txt
-	sudo dpkg -i $HOME/RetroRig/emulators/Gens-GS/Gens_2.16.7_i386.deb &>> install_log.txt
+	#need to use gdebi here to autoresolve dependencies that Gens/GS requires for i386
+	echo $userpasswd | sudo -S apt-get install -y gdebi &>> install_log.txt
 	#update progres bar
         echo $c
         echo "###"
         echo "$c %"
         echo "###"
-        ((c+=20))
+        ((c+=10))
 	sleep 1
 
+	#install Gens/GS using gdebi
+	echo $userpasswd | sudo -S gdebi $HOME/RetroRig/emulators/Gens-GS/Gens_2.16.7_i386.deb &>> install_log.txt
+	#update progres bar
+        echo $c
+        echo "###"
+        echo "$c %"
+        echo "###"
+        ((c+=10))
+	sleep 1
+	
 	#update repository listings
 	echo "-----------------------------------------------------------" >> install_log.txt
 	echo "Updating packages..." >> install_log.txt
-	echo "-----------------------------------------------------------" >> install_log.txt
-	sudo apt-get update &>> install_log.txt
+	echo "-----------------------------------------------------------" >> install_log.txt	
+	echo $userpasswd | sudo -S apt-getupdate &>> install_log.txt
 	#update progres bar
         echo $c
         echo "###"
@@ -585,7 +636,7 @@ function _software () {
 	echo "-----------------------------------------------------------" >> install_log.txt
 	echo "Installing required packages..." >> install_log.txt
 	echo "-----------------------------------------------------------" >> install_log.txt
-	sudo apt-get install -y xboxdrv curl zsnes nestopia pcsxr pcsx2:i386 \
+	echo $userpasswd | sudo -S apt-get install -y xboxdrv curl zsnes nestopia pcsxr pcsx2:i386 \
 	python-software-properties pkg-config software-properties-common \
 	mame mupen64plus dconf-tools qjoypad xbmc dolphin-emu-master stella \
 	build-essential &>> install_log.txt
@@ -597,7 +648,7 @@ function _software () {
         ((c+=10))
 	sleep 3s
 done
-) |
+) | 
 dialog --title "Installing Required Programs..." --gauge "Please wait" 7 70 0
 
 }
@@ -653,9 +704,9 @@ function _configuration () {
 	echo "-----------------------------------------------------------" >> install_log.txt
 	echo "Configuring Unity Settings..." >> install_log.txt
 	echo "-----------------------------------------------------------" >> install_log.txt
-	#gsettings set org.gnome.settings-daemon.plugins.power active 'false' &>> install_log.txt
-	#gsettings set org.gnome.desktop.screensaver idle-activation-enabled 'false' &>> install_log.txt
-	#gsettings set org.gnome.desktop.lockdown disable-lock-screen 'true' &>> install_log.txt
+	gsettings set org.gnome.desktop.screensaver lock-enabled false &>> install_log.txt
+	gsettings set org.gnome.desktop.screensaver ubuntu-lock-on-suspend false &>> install_log.txt
+	gsettings set org.gnome.desktop.session idle-delay 3600 &>> install_log.txt
 	#update progress bar
     	echo $c
         echo "###"
@@ -663,7 +714,9 @@ function _configuration () {
         echo "###"
         ((c+=4))
 	sleep 0
-
+	echo "-----------------------------------------------------------" >> install_log.txt
+	echo "Setup skelton folders for RetroRig" >> install_log.txt
+	echo "-----------------------------------------------------------" >> install_log.txt
 	#setup skelton folders for XBMC Rom Collection Browser
 	#ROMs
 	mkdir -pv $HOME/Games/ROMs/Atari\ 2600/ &>> install_log.txt
@@ -743,6 +796,7 @@ function _configuration () {
         ((c+=4))
 	sleep 0
 
+
 	#xbmc does not (at least for Ubuntu's repo pkg) load the
 	#dot files without loading XBMC at least once
 	#copy in default folder base from first run:	
@@ -756,7 +810,7 @@ function _configuration () {
 	sleep 0
 
 	#xboxdrv director located in common area for startup
-	echo "sudo needed to create common xboxdrv share!"
+	echo "echo $userpasswd | sudo -S needed to create common xboxdrv share!"
 	sudo mkdir -pv /usr/share/xboxdrv/ &>> install_log.txt
 	#update progress bar
     	echo $c
@@ -776,6 +830,9 @@ function _configuration () {
         ((c+=4))
 	sleep 0
 
+	echo "-----------------------------------------------------------" >> install_log.txt
+	echo "Copy software configurations" >> install_log.txt
+	echo "-----------------------------------------------------------" >> install_log.txt
 	#configs
 	mkdir -pv $HOME/Games/Configs/ &>> install_log.txt
 	#update progress bar
@@ -917,11 +974,15 @@ function _configuration () {
         ((c+=4))
 	sleep 0
 
+	echo "-----------------------------------------------------------" >> install_log.txt
+	echo "init scripts and post-configurations" >> install_log.txt
+	echo "-----------------------------------------------------------" >> install_log.txt
+
 	#add xbox controller init script
-	echo "sudo needed to create init scripts for xboxdrv!"
-	sudo cp -v $HOME/RetroRig/controller-cfgs/xpad-wireless.xboxdrv /usr/share/xboxdrv/ &>> install_log.txt
-	sudo cp -v $HOME/RetroRig/init-scripts/xboxdrv /etc/init.d/ &>> install_log.txt
-	sudo update-rc.d xboxdrv defaults &>> install_log.txt
+	echo "echo $userpasswd | sudo -S needed to create init scripts for xboxdrv!"
+	echo $userpasswd | sudo -S cp -v $HOME/RetroRig/controller-cfgs/xpad-wireless.xboxdrv /usr/share/xboxdrv/ &>> install_log.txt
+	echo $userpasswd | sudo -S cp -v $HOME/RetroRig/init-scripts/xboxdrv /etc/init.d/ &>> install_log.txt
+	echo $userpasswd | sudo -S update-rc.d xboxdrv defaults &>> install_log.txt
 	#update progress bar
     	echo $c
         echo "###"
@@ -935,7 +996,7 @@ function _configuration () {
 
 	#blacklist xpad
 	echo "sudo needed to blacklist xpad!"
-	sudo cp -v $HOME/RetroRig/init-scripts/blacklist.conf /etc/modprobe.d/ &>> install_log.txt
+	echo $userpasswd | sudo -S cp -v $HOME/RetroRig/init-scripts/blacklist.conf /etc/modprobe.d/ &>> install_log.txt
 	#update progress bar
     	echo $c
         echo "###"
@@ -946,8 +1007,8 @@ function _configuration () {
 
 	#create autostart for XBMC and qjoypad
 	echo "sudo needed to create auto-start entries!"
-	sudo cp -v /usr/share/applications/xbmc.desktop /etc/xdg/autostart/ &>> install_log.txt
-	sudo cp -v $HOME/RetroRig/controller-cfgs/qjoypad.desktop /etc/xdg/autostart/ &>> install_log.txt
+	echo $userpasswd | sudo -S cp -v /usr/share/applications/xbmc.desktop /etc/xdg/autostart/ &>> install_log.txt
+	echo $userpasswd | sudo -S cp -v $HOME/RetroRig/controller-cfgs/qjoypad.desktop /etc/xdg/autostart/ &>> install_log.txt
 	#If xboxdrv config file does not pick up on reboot,
 	#be sure to resync the wireless receiver!
 	#update progress bar
@@ -955,7 +1016,7 @@ function _configuration () {
         echo "###"
         echo "$c %"
         echo "###"
-        ((c+=3))
+        ((c+=6))
 	sleep 0
 
 	#set the system user to an absolute value.
@@ -968,20 +1029,6 @@ function _configuration () {
 	sed -i "s|/home/test/|/home/$USER/|g" $HOME/.pcsx/pcsx.cfg  &>> install_log.txt
 	sed -i "s|/home/test/|/home/$USER/|g" $HOME/.dolphin-emu/Config/Dolphin.ini  &>> install_log.txt
 	sed -i "s|/home/test/|/home/$USER/|g" $HOME/.xbmc/userdata/addon_data/script.games.rom.collection.browser/config.xml &>> install_log.txt
-	#update progress bar	
-	echo $c
-        echo "###"
-        echo "$c %"
-        echo "###"
-        ((c+=3))
-	sleep 0
-
-	echo "-----------------------------------------------------------" >> install_log.txt
-	echo "Fixing ownership..." >> install_log.txt
-	echo "-----------------------------------------------------------" >> install_log.txt
-	#update ownership of affected directories since we are using sudo (root access)
-	sudo chown -Rv $USER:$USER $HOME &>> install_log.txt
-
 	#update progress bar
     	echo $c
         echo "###"
@@ -1048,7 +1095,7 @@ function _update-git () {
 
 function _update-binaries () {
 	echo "updating binaries"
-	sudo apt-get install -y xboxdrv zsnes nestopia pcsxr pcsx2:i386\
+	echo $userpasswd | sudo -S apt-get install -y xboxdrv zsnes nestopia pcsxr pcsx2:i386\
 	mame mupen64plus qjoypad xbmc dolphin-emu-master stella	
 	sleep 3s
 	#clear
@@ -1057,8 +1104,8 @@ function _update-binaries () {
 
 function _upgrade-system () {
 	dialog --infobox "updating system" 3 11
-	sudo apt-get update
-	sudo apt-get upgrade
+	echo $userpasswd | sudo -S apt-get update
+	echo $userpasswd | sudo -S apt-get upgrade
 	sleep 3s
 	#clear
 	clear
@@ -1076,7 +1123,7 @@ function _reboot () {
 	#need to add reboot command to sudo to avoid pw prompt
         dialog --infobox "Rebooting in 5 seconds, press CTRL+C to cancel" 3 51 ; sleep 5s
         sleep 5s
-        sudo /sbin/reboot
+        echo $userpasswd | sudo -S /sbin/reboot
 }
 #call main
 _main
