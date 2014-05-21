@@ -24,14 +24,14 @@ Warning! It will overwrite:
 
 -Emulator configs for supported emulators:
 
-SNES
-Nestopia
-Gens/GS
-MAME
-Stella
-Mupen64Plus
-PCSX
-PCSX2
+SNES, 
+Nestopia, 
+Gens/GS, 
+MAME, 
+Stella, 
+Mupen64Plus, 
+PCSX, 
+PCSX2, and
 Dolphin
 
 -Also configs related to:
@@ -71,14 +71,14 @@ It is a good idea to load games before hand into the predefined folders after th
 
 Currently importing ROMs into XBMC is a keyboard-less affair for the following emulators:
 
-NES
-Nestopia
-Gens/GS
-MAME
-Stella
-Mupen64Plus
-PCSX
-PCSX2
+NES, 
+Nestopia, 
+Gens/GS, 
+MAME, 
+Stella, 
+Mupen64Plus, 
+PCSX ,
+PCSX2, and
 Dolphin
 
 All ROMs should be placed in the respective folder under "/home/$USER/Games/ROMs". In due time, I will
@@ -93,8 +93,9 @@ Pre-requisites:
 
 You will need the following two packges:
 
- -dialog
- -git
+'dialog'
+
+'git'
 
 RetroRig will try to install them for you, but if you experience any issues starting the script,
 enusre they exist with the CLI commands 'which dialog' and 'which git" to ensure they report back.
