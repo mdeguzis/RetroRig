@@ -12,9 +12,9 @@
 rm -f install_log.txt
 
 #start logging
-echo "-----------------------------------------------------------" >> install_log.txt
-echo "Starting install log..." >> install_log.txt
-echo "-----------------------------------------------------------" >> install_log.txt
+echo "-----------------------------------------------------------" tee -a install_log.txt
+echo "Starting install log..." tee -a install_log.txt
+echo "-----------------------------------------------------------" tee -a install_log.txt
 
 function _main () {
 
@@ -254,18 +254,18 @@ if [ "$choices" != "" ]; then
 	 1) 
 		#mupen64plus
 		echo "mupen64plus:" >> res.txt
-		grep -i "ScreenWidth = " $HOME/.config/mupen64plus/mupen64plus.cfg 
-		grep -i "ScreenHeight = " $HOME/.config/mupen64plus/mupen64plus.cfg 
+		grep -i "ScreenWidth = " $HOME/.config/mupen64plus/mupen64plus.cfg >> res.txt
+		grep -i "ScreenHeight = " $HOME/.config/mupen64plus/mupen64plus.cfg >> res.txt
 		echo "" >> res.txt
 		#ZSNES
 		echo "ZSNES:" >> res.txt
-		grep -i "CustomResX=" $HOME/.zsnes/zsnesl.cfg
-		grep -i "CustomResY=" $HOME/.zsnes/zsnesl.cfg
+		grep -i "CustomResX=" $HOME/.zsnes/zsnesl.cfg >> res.txt
+		grep -i "CustomResY=" $HOME/.zsnes/zsnesl.cfg >> res.txt
 		echo "" >> res.txt
 		#Gens/GS
 		echo "Gens/GS:" >> res.txt
-		grep -i "OpenGL Width=" $HOME/.gens/gens.cfg
-		grep -i "OpenGL Height=" $HOME/.gens/gens.cfg
+		grep -i "OpenGL Width=" $HOME/.gens/gens.cfg >> res.txt
+		grep -i "OpenGL Height=" $HOME/.gens/gens.cfg >> res.txt
 		echo "" >> res.txt
 		#Nestopia
 		#Nestopia's settings is in a binary file, so echo current manually
@@ -285,71 +285,6 @@ if [ "$choices" != "" ]; then
 	 2) 
 		clear
 		dialog --infobox "Setting resolution to 1920x768 (720p)" 3 48
-
-		########################		
-		#mupen64plus
-		########################
-
-		m_org_X=$(grep -i "ScreenWidth = " $HOME/.config/mupen64plus/mupen64plus.cfg)
-		m_org_Y=$(grep -i "ScreenHeight = " $HOME/.config/mupen64plus/mupen64plus.cfg)
-		#set new resolution(s) from configs
-		m_new_X="1920"
-		m_new_Y="1080"
-		#make the changes, prefix new_X in case NULL was entered previousey
-		#mupen64plus
-		sed -i "s|$m_org_X|ScreenWidth = $m_new_X|g" $HOME/.config/mupen64plus/mupen64plus.cfg
-		sed -i "s|$m_org_Y|ScreenHeight = $m_new_Y|g" $HOME/.config/mupen64plus/mupen64plus.cfg
-
-		########################		
-		#ZSNES
-		######################## 
-
-		#zsnes will not open properly if an improper resolution is set
-		z_org_X=$(grep -i "CustomResX=" $HOME/.zsnes/zsnesl.cfg)
-		z_org_Y=$(grep -i "CustomResY=" $HOME/.zsnes/zsnesl.cfg)
-		#set new resolution(s) from configs
-		z_new_X="1920"
-		z_new_Y="1080"
-		#make the changes, prefix new_X in case NULL was entered previously
-		#ZSNES
-		sed -i "s|$z_org_X|CustomResX="$z_new_X"|g" $HOME/.zsnes/zsnesl.cfg
-		sed -i "s|$z_org_Y|CustomResY="$z_new_Y"|g" $HOME/.zsnes/zsnesl.cfg
-
-		########################		
-		#Gens/GS
-		######################## 
-
-		#Gens/GS will not open properly if an improper resolution is set
-		g_org_X=$(grep -i "OpenGL Width=" $HOME/.gens/gens.cfg)
-		g_org_Y=$(grep -i "OpenGL Height=" $HOME/.gens/gens.cfg)
-		#set new resolution(s) from configs
-		g_new_X="1920"
-		g_new_Y="1080"
-		#make the changes, prefix new_X in case NULL was entered previously
-		#Gens/GS
-		sed -i "s|$g_org_X|OpenGL Width="$g_new_X"|g" $HOME/.gens/gens.cfg
-		sed -i "s|$g_org_Y|OpenGL Height="$g_new_Y"|g" $HOME/.gens/gens.cfg
-
-		########################		
-		#Stella
-		######################## 
-		#Stella does not support resolution changes (except the GUI), only scaling
-		#Scaling testing and configuration will be put in at some point
-		#This emulator does support OpenGL
-		#Current Scaling is reported in RetroRig, but not yet configurable
-
-		########################		
-		#Nestopia
-		######################## 
-		#Nestopia does not support resolution changes, only scaling and filtering
-		#Scaling testing and configuration will be put in at some point
-		#This emulator does support OpenGL
-		#Current Scaling is reported in RetroRig, but not yet configurable
-		;;  
-      
-	 3) 
-		clear
-		dialog --infobox "Setting resolution to 1360x768 (720p)" 3 48
 
 		########################		
 		#mupen64plus
@@ -390,6 +325,71 @@ if [ "$choices" != "" ]; then
 		#set new resolution(s) from configs
 		g_new_X="1360"
 		g_new_Y="768"
+		#make the changes, prefix new_X in case NULL was entered previously
+		#Gens/GS
+		sed -i "s|$g_org_X|OpenGL Width="$g_new_X"|g" $HOME/.gens/gens.cfg
+		sed -i "s|$g_org_Y|OpenGL Height="$g_new_Y"|g" $HOME/.gens/gens.cfg
+
+		########################		
+		#Stella
+		######################## 
+		#Stella does not support resolution changes (except the GUI), only scaling
+		#Scaling testing and configuration will be put in at some point
+		#This emulator does support OpenGL
+		#Current Scaling is reported in RetroRig, but not yet configurable
+
+		########################		
+		#Nestopia
+		######################## 
+		#Nestopia does not support resolution changes, only scaling and filtering
+		#Scaling testing and configuration will be put in at some point
+		#This emulator does support OpenGL
+		#Current Scaling is reported in RetroRig, but not yet configurable
+		;;  
+      
+	 3) 
+		clear
+		dialog --infobox "Setting resolution to 1360x768 (720p)" 3 48
+
+		########################		
+		#mupen64plus
+		########################
+
+		m_org_X=$(grep -i "ScreenWidth = " $HOME/.config/mupen64plus/mupen64plus.cfg)
+		m_org_Y=$(grep -i "ScreenHeight = " $HOME/.config/mupen64plus/mupen64plus.cfg)
+		#set new resolution(s) from configs
+		m_new_X="1920"
+		m_new_Y="1080"
+		#make the changes, prefix new_X in case NULL was entered previousey
+		#mupen64plus
+		sed -i "s|$m_org_X|ScreenWidth = $m_new_X|g" $HOME/.config/mupen64plus/mupen64plus.cfg
+		sed -i "s|$m_org_Y|ScreenHeight = $m_new_Y|g" $HOME/.config/mupen64plus/mupen64plus.cfg
+
+		########################		
+		#ZSNES
+		######################## 
+
+		#zsnes will not open properly if an improper resolution is set
+		z_org_X=$(grep -i "CustomResX=" $HOME/.zsnes/zsnesl.cfg)
+		z_org_Y=$(grep -i "CustomResY=" $HOME/.zsnes/zsnesl.cfg)
+		#set new resolution(s) from configs
+		z_new_X="1920"
+		z_new_Y="1080"
+		#make the changes, prefix new_X in case NULL was entered previously
+		#ZSNES
+		sed -i "s|$z_org_X|CustomResX="$z_new_X"|g" $HOME/.zsnes/zsnesl.cfg
+		sed -i "s|$z_org_Y|CustomResY="$z_new_Y"|g" $HOME/.zsnes/zsnesl.cfg
+
+		########################		
+		#Gens/GS
+		######################## 
+
+		#Gens/GS will not open properly if an improper resolution is set
+		g_org_X=$(grep -i "OpenGL Width=" $HOME/.gens/gens.cfg)
+		g_org_Y=$(grep -i "OpenGL Height=" $HOME/.gens/gens.cfg)
+		#set new resolution(s) from configs
+		g_new_X="1920"
+		g_new_Y="1080"
 		#make the changes, prefix new_X in case NULL was entered previously
 		#Gens/GS
 		sed -i "s|$g_org_X|OpenGL Width="$g_new_X"|g" $HOME/.gens/gens.cfg
@@ -529,6 +529,7 @@ function _software () {
 	# make decison
 	case $ret in
 	  0)
+	    #use local variable to use it later in other functions
 	    userpasswd=$(cat "$data")
 	    ;;
 	  1)
@@ -537,120 +538,60 @@ function _software () {
 	    [ -s $data ] &&  cat $data || echo "ESC pressed.";;
 	esac
 
-	#progress bar while loop
-	(
-	c=10
-	while [ $c -ne 110 ]
-	do
+	#clear screen for output
+	clear
 
 	#add multi-arch support
-	echo "-----------------------------------------------------------" >> install_log.txt
-	echo "Adding multi-arch support..." >> install_log.txt
-	echo "-----------------------------------------------------------" >> install_log.txt
-	echo $userpasswd | sudo -S dpkg --add-architecture i386 &>> install_log.txt
-	#update progres bar
-        echo $c
-        echo "###"
-        echo "$c %"
-        echo "###"
-        ((c+=10))
-	sleep 1
+	echo "-----------------------------------------------------------" | tee -a install_log.txt
+	echo "Adding multi-arch support..." | tee -a install_log.txt
+	echo "-----------------------------------------------------------" | tee -a install_log.txt
+	echo $userpasswd | sudo -S dpkg --add-architecture i386 | tee -a install_log.txt
 
 	#add repository for pcsx2 (PS2 emulator)
-	echo "-----------------------------------------------------------" >> install_log.txt
-	echo "Adding pcsx2 repository support..." >> install_log.txt
-	echo "-----------------------------------------------------------" >> install_log.txt
-	sudo add-apt-repository -y ppa:gregory-hainaut/pcsx2.official.ppa &>> install_log.txt
-	#update progres bar
-        echo $c
-        echo "###"
-        echo "$c %"
-        echo "###"
-        ((c+=10))
-	sleep 1
+	echo "-----------------------------------------------------------" | tee -a install_log.txt
+	echo "Adding pcsx2 repository support..." | tee -a install_log.txt
+	echo "-----------------------------------------------------------" | tee -a install_log.txt
+	sudo add-apt-repository -y ppa:gregory-hainaut/pcsx2.official.ppa | tee -a install_log.txt
 
 	#add repository for official team XBMC "stable"
-	echo "-----------------------------------------------------------" >> install_log.txt
-	echo "Adding XBMC Ubuntu (stable) repository..." >> install_log.txt
-	echo "-----------------------------------------------------------" >> install_log.txt
-	echo $userpasswd | sudo -S add-apt-repository -y ppa:team-xbmc/ppa &>> install_log.txt
-	#update progres bar
-        echo $c
-        echo "###"
-        echo "$c %"
-        echo "###"
-        ((c+=10))
-	sleep 1
+	echo "-----------------------------------------------------------" | tee -a install_log.txt
+	echo "Adding XBMC Ubuntu (stable) repository..." | tee -a install_log.txt
+	echo "-----------------------------------------------------------" | tee -a install_log.txt
+	echo $userpasswd | sudo -S add-apt-repository -y ppa:team-xbmc/ppa | tee -a install_log.txt
 
 	#add repository for dolphin-emu
-	echo "-----------------------------------------------------------" >> install_log.txt
-	echo "Adding Dolphin-Emu repository..." >> install_log.txt
-	echo "-----------------------------------------------------------" >> install_log.txt
-	sudo add-apt-repository -y ppa:glennric/dolphin-emu &>> install_log.txt
-	#update progres bar
-        echo $c
-        echo "###"
-        echo "$c %"
-        echo "###"
-        ((c+=10))
-	sleep 1
+	echo "-----------------------------------------------------------" | tee -a install_log.txt
+	echo "Adding Dolphin-Emu repository..." | tee -a install_log.txt
+	echo "-----------------------------------------------------------" | tee -a install_log.txt
+	sudo add-apt-repository -y ppa:glennric/dolphin-emu | tee -a install_log.txt
 
 	#install Gens/GS via deb pkg (only way I  can currently find it)
-	echo "-----------------------------------------------------------" >> install_log.txt
-	echo "Installing Gens/GS..." >> install_log.txt
-	echo "-----------------------------------------------------------" >> install_log.txt
+	echo "-----------------------------------------------------------" | tee -a install_log.txt
+	echo "Installing Gens/GS...On first run this will take some time!" | tee -a install_log.txt
+	echo "-----------------------------------------------------------" | tee -a install_log.txt
 	#need to use gdebi here to autoresolve dependencies that Gens/GS requires for i386
-	echo $userpasswd | sudo -S apt-get install -y gdebi &>> install_log.txt
-	#update progres bar
-        echo $c
-        echo "###"
-        echo "$c %"
-        echo "###"
-        ((c+=10))
-	sleep 1
-
 	#install Gens/GS using gdebi
-	echo $userpasswd | sudo -S gdebi $HOME/RetroRig/emulators/Gens-GS/Gens_2.16.7_i386.deb &>> install_log.txt
-	#update progres bar
-        echo $c
-        echo "###"
-        echo "$c %"
-        echo "###"
-        ((c+=10))
-	sleep 1
+	echo $userpasswd | sudo -S gdebi --n $HOME/RetroRig/emulators/Gens-GS/Gens_2.16.7_i386.deb | tee -a install_log.txt
 	
-	#update repository listings
-	echo "-----------------------------------------------------------" >> install_log.txt
-	echo "Updating packages..." >> install_log.txt
-	echo "-----------------------------------------------------------" >> install_log.txt	
-	echo $userpasswd | sudo -S apt-getupdate &>> install_log.txt
-	#update progres bar
-        echo $c
-        echo "###"
-        echo "$c %"
-        echo "###"
-        ((c+=30))
-	sleep 1
-
 	#install software from repositories
-	echo "-----------------------------------------------------------" >> install_log.txt
-	echo "Installing required packages..." >> install_log.txt
-	echo "-----------------------------------------------------------" >> install_log.txt
+	echo "-----------------------------------------------------------" | tee -a install_log.txt
+	echo "Installing required packages..." | tee -a install_log.txt
+	echo "-----------------------------------------------------------" | tee -a install_log.txt
 	echo $userpasswd | sudo -S apt-get install -y xboxdrv curl zsnes nestopia pcsxr pcsx2:i386 \
 	python-software-properties pkg-config software-properties-common \
 	mame mupen64plus dconf-tools qjoypad xbmc dolphin-emu-master stella \
-	build-essential &>> install_log.txt
-	#update progres bar
-        echo $c
-        echo "###"
-        echo "$c %"
-        echo "###"
-        ((c+=10))
-	sleep 3s
-done
-) | 
-dialog --title "Installing Required Programs..." --gauge "Please wait" 7 70 0
+	build-essential gdebi| tee -a install_log.txt
 
+	sleep 5s
+	
+	#update repository listings
+	echo "-----------------------------------------------------------" | tee -a install_log.txt
+	echo "Updating packages..." | tee -a install_log.txt
+	echo "-----------------------------------------------------------" | tee -a install_log.txt	
+	echo $userpasswd | sudo -S apt-get update | tee -a install_log.txt
+	
+	#clear screen
+	clear
 }
 
 #configuration function
@@ -668,8 +609,8 @@ function _configuration () {
 	response=$?
 	case $response in
 	   0) 
-	   dialog --infobox "Continuing..." 3 17
-	   sleep 2s
+	   #dialog --infobox "Continuing..." 3 17
+	   #continue on below
 	   ;;
 
 	   1) 
@@ -686,360 +627,225 @@ function _configuration () {
 
 	esac
 
-	#show progress bar
-	(
-	c=10
-	while [ $c -ne 110 ]
-	do
-
-
 	dialog --infobox "Setting up configuration files" 3 35 ; sleep 3s
+	#clear screen
 	clear
+
+	#prompt for sudo password for elevated operations
+	#The -S (stdin) option causes sudo to read the password from the standard input 
+	#instead of the terminal device. You can then use "echo <password> | sudo -S <command>" 
+	data=$(tempfile 2>/dev/null)
+ 
+	# trap it
+	trap "rm -f $data" 0 1 2 5 15
+	 
+	# get password with the --insecure option
+	dialog --title "Password" \
+	--clear \
+	--insecure \
+	--passwordbox "Enter your password" 10 30 2> $data
+	 
+	ret=$?
+	 
+	# make decison
+	case $ret in
+	  0)
+	    #use local variable to use it later in other functions
+	    local userpasswd=$(cat "$data")
+	    ;;
+	  1)
+	    echo "Cancel pressed.";;
+	  255)
+	    [ -s $data ] &&  cat $data || echo "ESC pressed.";;
+	esac
+
+	#clear screen for output
+	clear
+
+	#Note for mkdir and some settings:
+	#tee will only output/log if there is an error or the folder exists
+
 	#disable screensaver, XBMC will manage this
 	#export display to allow gsettings running in terminal window
-	echo "-----------------------------------------------------------" >> install_log.txt
-	echo "Configuring required packages..." >> install_log.txt
-	echo "-----------------------------------------------------------" >> install_log.txt
+	echo "-----------------------------------------------------------" | tee -a install_log.txt
+	echo "Configuring required packages..." | tee -a install_log.txt
+	echo "-----------------------------------------------------------" | tee -a install_log.txt
 	export DISPLAY=:0.0
-	echo "-----------------------------------------------------------" >> install_log.txt
-	echo "Configuring Unity Settings..." >> install_log.txt
-	echo "-----------------------------------------------------------" >> install_log.txt
-	gsettings set org.gnome.desktop.screensaver lock-enabled false &>> install_log.txt
-	gsettings set org.gnome.desktop.screensaver ubuntu-lock-on-suspend false &>> install_log.txt
-	gsettings set org.gnome.desktop.session idle-delay 3600 &>> install_log.txt
-	#update progress bar
-    	echo $c
-        echo "###"
-        echo "$c %"
-        echo "###"
-        ((c+=4))
-	sleep 0
-	echo "-----------------------------------------------------------" >> install_log.txt
-	echo "Setup skelton folders for RetroRig" >> install_log.txt
-	echo "-----------------------------------------------------------" >> install_log.txt
+	echo "-----------------------------------------------------------" | tee -a install_log.txt
+	echo "Configuring Unity Settings..." | tee -a install_log.txt
+	echo "-----------------------------------------------------------" | tee -a install_log.txt
+	
+	gsettings set org.gnome.desktop.screensaver lock-enabled false | tee -a install_log.txt
+	gsettings set org.gnome.desktop.screensaver ubuntu-lock-on-suspend false | tee -a install_log.txt
+	gsettings set org.gnome.desktop.session idle-delay 3600 | tee -a install_log.txt
+
+	echo "-----------------------------------------------------------" | tee -a install_log.txt
+	echo "Setup skelton folders for RetroRig, please wait..." | tee -a install_log.txt
+	echo "-----------------------------------------------------------" | tee -a install_log.txt
 	#setup skelton folders for XBMC Rom Collection Browser
 	#ROMs
-	mkdir -pv $HOME/Games/ROMs/Atari\ 2600/ &>> install_log.txt
-	mkdir -pv $HOME/Games/ROMs/Gamecube/ &>> install_log.txt
-	mkdir -pv $HOME/Games/ROMs/Mame4All/ &>> install_log.txt
-	mkdir -pv $HOME/Games/ROMs/N64/ &>> install_log.txt
-	mkdir -pv $HOME/Games/ROMs/NES/ &>> install_log.txt
-	mkdir -pv $HOME/Games/ROMs/SNES/ &>> install_log.txt
-	mkdir -pv $HOME/Games/ROMs/PS2/ &>> install_log.txt
-	mkdir -pv $HOME/Games/ROMs/PS1/ &>> install_log.txt
-	mkdir -pv $HOME/Games/ROMs/sgenroms/ &>> install_log.txt
-	mkdir -pv $HOME/Games/ROMs/SNK\ Neo\ Geo/ &>> install_log.txt
-	#update progress bar
-    	echo $c
-        echo "###"
-        echo "$c %"
-        echo "###"
-        ((c+=4))
-	sleep 0
+	mkdir -pv $HOME/Games/ROMs/Atari\ 2600/ | tee -a install_log.txt
+	mkdir -pv $HOME/Games/ROMs/Gamecube/ | tee -a install_log.txt
+	mkdir -pv $HOME/Games/ROMs/Mame4All/ | tee -a install_log.txt
+	mkdir -pv $HOME/Games/ROMs/N64/ | tee -a install_log.txt
+	mkdir -pv $HOME/Games/ROMs/NES/ | tee -a install_log.txt
+	mkdir -pv $HOME/Games/ROMs/SNES/ | tee -a install_log.txt
+	mkdir -pv $HOME/Games/ROMs/PS2/ | tee -a install_log.txt
+	mkdir -pv $HOME/Games/ROMs/PS1/ | tee -a install_log.txt
+	mkdir -pv $HOME/Games/ROMs/sgenroms/ | tee -a install_log.txt
+	mkdir -pv $HOME/Games/ROMs/SNK\ Neo\ Geo/ | tee -a install_log.txt
 
 	#Artwork 
-	mkdir -pv $HOME/Games/Artwork/Atari\ 2600 &>> install_log.txt
-	mkdir -pv $HOME/Games/Artwork/Gamecube &>> install_log.txt
-	mkdir -pv $HOME/Games/Artwork/MAME &>> install_log.txt
-	mkdir -pv $HOME/Games/Artwork/N64 &>> install_log.txt
-	mkdir -pv $HOME/Games/Artwork/NES &>> install_log.txt
-	mkdir -pv $HOME/Games/Artwork/SNES &>> install_log.txt
-	mkdir -pv $HOME/Games/Artwork/PS2 &>> install_log.txt
-	mkdir -pv $HOME/Games/Artwork/PS1 &>> install_log.txt
-	mkdir -pv $HOME/Games/Artwork/Genesis &>> install_log.txt
-	mkdir -pv $HOME/Games/Artwork/SNK\ Neo\ Geo &>> install_log.txt
-	#update progress bar
-    	echo $c
-        echo "###"
-        echo "$c %"
-        echo "###"
-        ((c+=4))
-	sleep 0
+	mkdir -pv $HOME/Games/Artwork/Atari\ 2600/ | tee -a install_log.txt
+	mkdir -pv $HOME/Games/Artwork/Gamecube | tee -a install_log.txt
+	mkdir -pv $HOME/Games/Artwork/MAME | tee -a install_log.txt
+	mkdir -pv $HOME/Games/Artwork/N64 | tee -a install_log.txt
+	mkdir -pv $HOME/Games/Artwork/NES | tee -a install_log.txt
+	mkdir -pv $HOME/Games/Artwork/SNES | tee -a install_log.txt
+	mkdir -pv $HOME/Games/Artwork/PS2 | tee -a install_log.txt
+	mkdir -pv $HOME/Games/Artwork/PS1 | tee -a install_log.txt
+	mkdir -pv $HOME/Games/Artwork/Genesis | tee -a install_log.txt
+	mkdir -pv $HOME/Games/Artwork/SNK\ Neo\ Geo | tee -a install_log.txt
 
 	#Saves (if any)
-	mkdir -pv $HOME/Games/Saves/Atari\ 2600/ &>> install_log.txt
-	mkdir -pv $HOME/Games/Saves/Gamecube/ &>> install_log.txt
-	mkdir -pv $HOME/Games/Saves/Mame4All/ &>> install_log.txt
-	mkdir -pv $HOME/Games/Saves/N64/ &>> install_log.txt
-	mkdir -pv $HOME/Games/Saves/NES/ &>> install_log.txt
-	mkdir -pv $HOME/Games/Saves/SNES/ &>> install_log.txt
-	mkdir -pv $HOME/Games/Saves/PS2/ &>> install_log.txt
-	mkdir -pv $HOME/Games/Saves/PS1/ &>> install_log.txt
-	mkdir -pv $HOME/Games/Saves/genroms/ &>> install_log.txt
-	mkdir -pv $HOME/Games/Saves/SNK\ Neo\ Geo/ &>> install_log.txt
-	#update progress bar
-    	echo $c
-        echo "###"
-        echo "$c %"
-        echo "###"
-        ((c+=4))
-	sleep 0
+	mkdir -pv $HOME/Games/Saves/Atari\ 2600/ | tee -a install_log.txt
+	mkdir -pv $HOME/Games/Saves/Gamecube/ | tee -a install_log.txt
+	mkdir -pv $HOME/Games/Saves/Mame4All/ | tee -a install_log.txt
+	mkdir -pv $HOME/Games/Saves/N64/ | tee -a install_log.txt
+	mkdir -pv $HOME/Games/Saves/NES/ | tee -a install_log.txt
+	mkdir -pv $HOME/Games/Saves/SNES/ | tee -a install_log.txt
+	mkdir -pv $HOME/Games/Saves/PS2/ | tee -a install_log.txt
+	mkdir -pv $HOME/Games/Saves/PS1/ | tee -a install_log.txt
+	mkdir -pv $HOME/Games/Saves/genroms/ | tee -a install_log.txt
+	mkdir -pv $HOME/Games/Saves/SNK\ Neo\ Geo/ | tee -a install_log.txt
 
 	#create dotfiles
-	mkdir -pv $HOME/.qjoypad3/ &>> install_log.txt
-	mkdir -pv $HOME/.dolphin-emu/Config/ &>> install_log.txt
-	mkdir -pv $HOME/.config/mupen64plus/ &>> install_log.txt
-	mkdir -pv $HOME/.nestopia/ &>> install_log.txt
-	mkdir -pv $HOME/.gens/ &>> install_log.txt
-	mkdir -pv $HOME/.zsnes/ &>> install_log.txt
-	mkdir -pv $HOME/.mame/cfg/ &>> install_log.txt
-	mkdir -pv $HOME/.pcsx/plugins/ &>> install_log.txt
-	mkdir -pv $HOME/.pcsx/patches/ &>> install_log.txt
-	mkdir -pv $HOME/.config/pcsx2/inis/ &>> install_log.txt
-	mkdir -pv $HOME/.stella/ &>> install_log.txt
-	mkdir -pv $HOME/.xbmc/ &>> install_log.txt
-	#update progress bar
-    	echo $c
-        echo "###"
-        echo "$c %"
-        echo "###"
-        ((c+=4))
-	sleep 0
-
+	mkdir -pv $HOME/.qjoypad3/ | tee -a install_log.txt
+	mkdir -pv $HOME/.dolphin-emu/Config/ | tee -a install_log.txt
+	mkdir -pv $HOME/.config/mupen64plus/ | tee -a install_log.txt
+	mkdir -pv $HOME/.nestopia/ | tee -a install_log.txt
+	mkdir -pv $HOME/.gens/ | tee -a install_log.txt
+	mkdir -pv $HOME/.zsnes/ | tee -a install_log.txt
+	mkdir -pv $HOME/.mame/cfg/ | tee -a install_log.txt
+	mkdir -pv $HOME/.pcsx/plugins/ | tee -a install_log.txt
+	mkdir -pv $HOME/.pcsx/patches/ | tee -a install_log.txt
+	mkdir -pv $HOME/.config/pcsx2/inis/ | tee -a install_log.txt
+	mkdir -pv $HOME/.stella/ | tee -a install_log.txt
+	mkdir -pv $HOME/.xbmc/ | tee -a install_log.txt
 
 	#xbmc does not (at least for Ubuntu's repo pkg) load the
 	#dot files without loading XBMC at least once
 	#copy in default folder base from first run:	
-	cp -Rv $HOME/RetroRig/XBMC-configs/* $HOME/.xbmc &>> install_log.txt
-	#update progress bar
-    	echo $c
-        echo "###"
-        echo "$c %"
-        echo "###"
-        ((c+=4))
-	sleep 0
+	cp -Rv $HOME/RetroRig/XBMC-configs/* $HOME/.xbmc | tee -a install_log.txt
 
 	#xboxdrv director located in common area for startup
 	echo "echo $userpasswd | sudo -S needed to create common xboxdrv share!"
-	sudo mkdir -pv /usr/share/xboxdrv/ &>> install_log.txt
-	#update progress bar
-    	echo $c
-        echo "###"
-        echo "$c %"
-        echo "###"
-        ((c+=4))
-	sleep 0
+	echo $userpasswd | sudo -S mkdir -pv /usr/share/xboxdrv/ | tee -a install_log.txt
 
 	#Tools
-	mkdir -pv $HOME/Games/Tools/ &>> install_log.txt
-	#update progress bar
-    	echo $c
-        echo "###"
-        echo "$c %"
-        echo "###"
-        ((c+=4))
-	sleep 0
+	mkdir -pv $HOME/Games/Tools/ | tee -a install_log.txt
 
-	echo "-----------------------------------------------------------" >> install_log.txt
-	echo "Copy software configurations" >> install_log.txt
-	echo "-----------------------------------------------------------" >> install_log.txt
+	echo "-----------------------------------------------------------" |tee -a install_log.txt
+	echo "Copy software configurations" tee -a install_log.txt
+	echo "-----------------------------------------------------------" | tee -a install_log.txt
 	#configs
-	mkdir -pv $HOME/Games/Configs/ &>> install_log.txt
-	#update progress bar
-    	echo $c
-        echo "###"
-        echo "$c %"
-        echo "###"
-        ((c+=4))
-	sleep 0
+	mkdir -pv $HOME/Games/Configs/ | tee -a install_log.txt
 
 	#Nestopia
 	#default path: /home/$USER/.nestopia
-	cp -v $HOME/RetroRig/emu-configs/Nestopia/nstcontrols $HOME/.nestopia/ &>> install_log.txt
-	cp -v $HOME/RetroRig/emu-configs/Nestopia/nstsettings $HOME/.nestopia/ &>> install_log.txt
-	#update progress bar
-    	echo $c
-        echo "###"
-        echo "$c %"
-        echo "###"
-        ((c+=4))
-	sleep 0
+	cp -v $HOME/RetroRig/emu-configs/Nestopia/nstcontrols $HOME/.nestopia/ | tee -a install_log.txt
+	cp -v $HOME/RetroRig/emu-configs/Nestopia/nstsettings $HOME/.nestopia/ | tee -a install_log.txt
 
 	#gens
 	#default path: /home/$USER/.gens
 	#Global config
-	cp -v $HOME/RetroRig/emu-configs/Gens-GS/gens.cfg $HOME/.gens/ &>> install_log.txt
-	#update progress bar
-    	echo $c
-        echo "###"
-        echo "$c %"
-        echo "###"
-        ((c+=4))
-	sleep 0
+	cp -v $HOME/RetroRig/emu-configs/Gens-GS/gens.cfg $HOME/.gens/ | tee -a install_log.txt
 
 	#ZSNES
 	#default path: /home/$USER/.zsnes
 	#Controller config
-	cp -v $HOME/RetroRig/emu-configs/ZSNES/zinput.cfg $HOME/.zsnes/ &>> install_log.txt
-	cp -v $HOME/RetroRig/emu-configs/ZSNES/zsnesl.cfg $HOME/.zsnes/ &>> install_log.txt
-	#update progress bar
-    	echo $c
-        echo "###"
-        echo "$c %"
-        echo "###"
-        ((c+=4))
-	sleep 0
+	cp -v $HOME/RetroRig/emu-configs/ZSNES/zinput.cfg $HOME/.zsnes/ | tee -a install_log.txt
+	cp -v $HOME/RetroRig/emu-configs/ZSNES/zsnesl.cfg $HOME/.zsnes/ | tee -a install_log.txt
 
 	#mame
 	#default path: /home/$USER/.mame
 	#Main config
-	cp -v $HOME/RetroRig/emu-configs/MAME/default.cfg $HOME/.mame/cfg &>> install_log.txt
-	cp -v $HOME/RetroRig/emu-configs/MAME/mame.ini $HOME/.mame &>> install_log.txt
+	cp -v $HOME/RetroRig/emu-configs/MAME/default.cfg $HOME/.mame/cfg | tee -a install_log.txt
+	cp -v $HOME/RetroRig/emu-configs/MAME/mame.ini $HOME/.mame | tee -a install_log.txt
 	#offline artwork scrapper
-	cp -v $HOME/RetroRig/emu-configs/MAME/Artwork/* $HOME/Games/Artwork/MAME &>> install_log.txt
-	#update progress bar
-    	echo $c
-        echo "###"
-        echo "$c %"
-        echo "###"
-        ((c+=4))
-	sleep 0	
+	cp -v $HOME/RetroRig/emu-configs/MAME/Artwork/* $HOME/Games/Artwork/MAME | tee -a install_log.txt
 	
 	#pcsx
 	#default path: /home/$USER/.pcsx
 	#Main config
-	cp -v $HOME/RetroRig/emu-configs/pcsx/pcsx.cfg $HOME/.pcsx/ &>> install_log.txt
-	cp -Rv $HOME/RetroRig/emu-configs/pcsx/plugins $HOME/.pcsx/ &>> install_log.txt
-	cp -Rv $HOME/RetroRig/emu-configs/pcsx/patches $HOME/.pcsx/ &>> install_log.txt
-	#update progress bar
-    	echo $c
-        echo "###"
-        echo "$c %"
-        echo "###"
-        ((c+=4))
-	sleep 0
+	cp -v $HOME/RetroRig/emu-configs/pcsx/pcsx.cfg $HOME/.pcsx/ | tee -a install_log.txt
+	cp -Rv $HOME/RetroRig/emu-configs/pcsx/plugins $HOME/.pcsx/ | tee -a install_log.txt
+	cp -Rv $HOME/RetroRig/emu-configs/pcsx/patches $HOME/.pcsx/ | tee -a install_log.txt
 
 	#pcsx2
 	#default path: /home/$USER/.config/pcsx2
 	#Main config
-	cp -v $HOME/RetroRig/emu-configs/pcsx2/PCSX2-reg.ini $HOME/.config/pcsx2/ &>> install_log.txt
-	cp -v $HOME/RetroRig/emu-configs/pcsx2/inisOnePAD.ini $HOME/.config/pcsx2/ &>> install_log.txt
-	cp -v $HOME/RetroRig/emu-configs/pcsx2/inis/* $HOME/.config/pcsx2/inis/ &>> install_log.txt
-	#update progress bar
-    	echo $c
-        echo "###"
-        echo "$c %"
-        echo "###"
-        ((c+=4))
-	sleep 0
+	cp -v $HOME/RetroRig/emu-configs/pcsx2/PCSX2-reg.ini $HOME/.config/pcsx2/ | tee -a install_log.txt
+	cp -v $HOME/RetroRig/emu-configs/pcsx2/inisOnePAD.ini $HOME/.config/pcsx2/ | tee -a install_log.txt
+	cp -v $HOME/RetroRig/emu-configs/pcsx2/inis/* $HOME/.config/pcsx2/inis/ | tee -a install_log.txt
 
 	#mupen64pluspwd
 	#default path: /home/$USER/.config/mupen64plus
 	#Main config
-	cp -v $HOME/RetroRig/emu-configs/mupen64plus/mupen64plus.cfg $HOME/.config/mupen64plus/ &>> install_log.txt
-	#update progress bar
-    	echo $c
-        echo "###"
-        echo "$c %"
-        echo "###"
-        ((c+=4))
-	sleep 0
+	cp -v $HOME/RetroRig/emu-configs/mupen64plus/mupen64plus.cfg $HOME/.config/mupen64plus/ | tee -a install_log.txt
 
 	#Stella
 	#default path: /home/$USER/.config/mupen64plus
 	#Main config
-	cp -v $HOME/RetroRig/emu-configs/Stella/stellarc $HOME/.stella/ &>> install_log.txt
-	#update progress bar
-    	echo $c
-        echo "###"
-        echo "$c %"
-        echo "###"
-        ((c+=4))
-	sleep 0
+	cp -v $HOME/RetroRig/emu-configs/Stella/stellarc $HOME/.stella/ | tee -a install_log.txt
 
 	#dolphin
 	#default path /home/$USER/.dolphin-emu/
 	#emulator config
-	cp -Rv /$HOME/RetroRig/emu-configs/Dolphin/Dolphin.ini $HOME/.dolphin-emu/Config/ &>> install_log.txt
+	cp -Rv /$HOME/RetroRig/emu-configs/Dolphin/Dolphin.ini $HOME/.dolphin-emu/Config/ | tee -a install_log.txt
 	#Gamecube controller config
-	cp -Rv /$HOME/RetroRig/emu-configs/Dolphin/GCPadNew.ini $HOME/.dolphin-emu/Config/ &>> install_log.txt
+	cp -Rv /$HOME/RetroRig/emu-configs/Dolphin/GCPadNew.ini $HOME/.dolphin-emu/Config/ | tee -a install_log.txt
 	#Wii controller config
 	#OpenGL graphics config
-	cp -Rv /$HOME/RetroRig/emu-configs/Dolphin/gfx_opengl.ini $HOME/.dolphin-emu/Config/ &>> install_log.txt
-	#update progress bar
-    	echo $c
-        echo "###"
-        echo "$c %"
-        echo "###"
-        ((c+=4))
-	sleep 0
+	cp -Rv /$HOME/RetroRig/emu-configs/Dolphin/gfx_opengl.ini $HOME/.dolphin-emu/Config/ | tee -a install_log.txt
 
 	#copy config for qjoypad setup
-	cp -v $HOME/RetroRig/controller-cfgs/retro-gaming.lyt $HOME/.qjoypad3/ &>> install_log.txt
-	#update progress bar
-    	echo $c
-        echo "###"
-        echo "$c %"
-        echo "###"
-        ((c+=4))
-	sleep 0
+	cp -v $HOME/RetroRig/controller-cfgs/retro-gaming.lyt $HOME/.qjoypad3/ | tee -a install_log.txt
 
-	echo "-----------------------------------------------------------" >> install_log.txt
-	echo "init scripts and post-configurations" >> install_log.txt
-	echo "-----------------------------------------------------------" >> install_log.txt
+	echo "-----------------------------------------------------------" | tee -a install_log.txt
+	echo "init scripts and post-configurations" | tee -a install_log.txt
+	echo "-----------------------------------------------------------" | tee -a install_log.txt
 
 	#add xbox controller init script
 	echo "echo $userpasswd | sudo -S needed to create init scripts for xboxdrv!"
-	echo $userpasswd | sudo -S cp -v $HOME/RetroRig/controller-cfgs/xpad-wireless.xboxdrv /usr/share/xboxdrv/ &>> install_log.txt
-	echo $userpasswd | sudo -S cp -v $HOME/RetroRig/init-scripts/xboxdrv /etc/init.d/ &>> install_log.txt
-	echo $userpasswd | sudo -S update-rc.d xboxdrv defaults &>> install_log.txt
-	#update progress bar
-    	echo $c
-        echo "###"
-        echo "$c %"
-        echo "###"
-        ((c+=4))
-	sleep 0
+	echo $userpasswd | sudo -S cp -v $HOME/RetroRig/controller-cfgs/xpad-wireless.xboxdrv /usr/share/xboxdrv/ | tee -a install_log.txt
+	echo $userpasswd | sudo -S cp -v $HOME/RetroRig/init-scripts/xboxdrv /etc/init.d/ | tee -a install_log.txt
+	echo $userpasswd | sudo -S update-rc.d xboxdrv defaults | tee -a install_log.txt
 
 	#copyautoexec.py in the userdata folder for autostarting RCB
 	#cp -v $HOME/RetroRig/RCB/autoexec.py $HOME/.xbmc/userdata/
 
 	#blacklist xpad
 	echo "sudo needed to blacklist xpad!"
-	echo $userpasswd | sudo -S cp -v $HOME/RetroRig/init-scripts/blacklist.conf /etc/modprobe.d/ &>> install_log.txt
-	#update progress bar
-    	echo $c
-        echo "###"
-        echo "$c %"
-        echo "###"
-        ((c+=4))
-	sleep 0
+	echo $userpasswd | sudo -S cp -v $HOME/RetroRig/init-scripts/blacklist.conf /etc/modprobe.d/ | tee -a install_log.txt
 
 	#create autostart for XBMC and qjoypad
 	echo "sudo needed to create auto-start entries!"
-	echo $userpasswd | sudo -S cp -v /usr/share/applications/xbmc.desktop /etc/xdg/autostart/ &>> install_log.txt
-	echo $userpasswd | sudo -S cp -v $HOME/RetroRig/controller-cfgs/qjoypad.desktop /etc/xdg/autostart/ &>> install_log.txt
+	echo $userpasswd | sudo -S cp -v /usr/share/applications/xbmc.desktop /etc/xdg/autostart/ | tee -a install_log.txt
+	echo $userpasswd | sudo -S cp -v $HOME/RetroRig/controller-cfgs/qjoypad.desktop /etc/xdg/autostart/ | tee -a install_log.txt
 	#If xboxdrv config file does not pick up on reboot,
 	#be sure to resync the wireless receiver!
-	#update progress bar
-    	echo $c
-        echo "###"
-        echo "$c %"
-        echo "###"
-        ((c+=6))
-	sleep 0
 
 	#set the system user to an absolute value.
 	#RCB and some config files don't like using $HOME, rather /home/test/
 	#Let's change the config files to reflect the current username
 
-	sed -i "s|/home/test/|/home/$USER/|g" $HOME/.config/pcsx2/PCSX2-reg.ini  &>> install_log.txt
-	sed -i "s|/home/test/|/home/$USER/|g" $HOME/.gens/gens.cfg &>> install_log.txt
-	sed -i "s|/home/test/|/home/$USER/|g" $HOME/.zsnes/zsnesl.cfg &>> install_log.txt
-	sed -i "s|/home/test/|/home/$USER/|g" $HOME/.pcsx/pcsx.cfg  &>> install_log.txt
-	sed -i "s|/home/test/|/home/$USER/|g" $HOME/.dolphin-emu/Config/Dolphin.ini  &>> install_log.txt
-	sed -i "s|/home/test/|/home/$USER/|g" $HOME/.xbmc/userdata/addon_data/script.games.rom.collection.browser/config.xml &>> install_log.txt
-	#update progress bar
-    	echo $c
-        echo "###"
-        echo "$c %"
-        echo "###"
-        ((c+=10))
-	sleep 3s
-
-done
-) |
-dialog --title "Configuring Programs..." --gauge "Please wait" 7 70 0
+	sed -i "s|/home/test/|/home/$USER/|g" $HOME/.config/pcsx2/PCSX2-reg.ini | tee -a install_log.txt
+	sed -i "s|/home/test/|/home/$USER/|g" $HOME/.gens/gens.cfg | tee -a install_log.txt
+	sed -i "s|/home/test/|/home/$USER/|g" $HOME/.zsnes/zsnesl.cfg | tee -a install_log.txt
+	sed -i "s|/home/test/|/home/$USER/|g" $HOME/.pcsx/pcsx.cfg | tee -a install_log.txt
+	sed -i "s|/home/test/|/home/$USER/|g" $HOME/.dolphin-emu/Config/Dolphin.ini | tee -a install_log.txt
+	sed -i "s|/home/test/|/home/$USER/|g" $HOME/.xbmc/userdata/addon_data/script.games.rom.collection.browser/config.xml | tee -a install_log.txt
 	
 	#remind user about default resolution
 	#If the default is not supported on the monitor, emulators like zsnes will fail to start!
