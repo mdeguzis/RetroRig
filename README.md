@@ -24,7 +24,7 @@ Warning! It will overwrite:
 
 -Emulator configs for supported emulators:
 
-<pre><code>ZSNES
+SNES
 Nestopia
 Gens/GS
 MAME
@@ -33,15 +33,14 @@ Mupen64Plus
 PCSX
 PCSX2
 Dolphin
-</pre></code>
 
 -Also configs related to:
 
-<pre><code>qjoypad
+joypad
 Blacklisting xpad
 Autostarted application entries (XBMC, qjoypad)
 Some folder structures under ~/Games
-xboxdrv init scripts and configurations</pre></code>
+xboxdrv init scripts and configurations
 
 ## Why XBMC and Ubuntu?
 
@@ -72,7 +71,7 @@ It is a good idea to load games before hand into the predefined folders after th
 
 Currently importing ROMs into XBMC is a keyboard-less affair for the following emulators:
 
-<pre><code>SNES
+SNES
 Nestopia
 Gens/GS
 MAME
@@ -80,7 +79,7 @@ Stella
 Mupen64Plus
 PCSX
 PCSX2
-Dolphin</pre></code>
+Dolphin
  
 All ROMs should be placed in the respective folder under "/home/$USER/Games/ROMs". In due time, I will
 add more and more emulators. But until then, you can manually add them. In a later release, I plan on
