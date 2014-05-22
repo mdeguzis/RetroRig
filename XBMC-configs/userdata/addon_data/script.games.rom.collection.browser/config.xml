@@ -5,14 +5,14 @@
       <gameclient />
       <emulatorCmd>/usr/bin/stella</emulatorCmd>
       <emulatorParams>%ROM%"</emulatorParams>
-      <romPath>/home/test/Games/ROMs/Atari 2600/*.bin</romPath>
+      <romPath>/home/test/Games/ROMs/Atari\ 2600/*.bin</romPath>
       <saveStatePath />
       <saveStateParams />
-      <mediaPath type="boxfront">/home/test/Games/Artwork/boxfront/%GAME%.*</mediaPath>
-      <mediaPath type="boxback">/home/test/Games/Artwork/boxback/%GAME%.*</mediaPath>
-      <mediaPath type="cartridge">/home/test/Games/Artwork/cartridge/%GAME%.*</mediaPath>
-      <mediaPath type="screenshot">/home/test/Games/Artwork/screenshot/%GAME%.*</mediaPath>
-      <mediaPath type="fanart">/home/test/Games/Artwork/fanart/%GAME%.*</mediaPath>
+      <mediaPath type="boxfront">/home/test/Games/Artwork/Atari\ 2600/boxfront/%GAME%.*</mediaPath>
+      <mediaPath type="boxback">/home/test/Games/Artwork/Atari\ 2600/boxback/%GAME%.*</mediaPath>
+      <mediaPath type="cartridge">/home/test/Games/Artwork/Atari\ 2600/cartridge/%GAME%.*</mediaPath>
+      <mediaPath type="screenshot">/home/test/Games/Artwork/Atari\ 2600/screenshot/%GAME%.*</mediaPath>
+      <mediaPath type="fanart">/home/test/Games/Artwork/Atari\ 2600/fanart/%GAME%.*</mediaPath>
       <preCmd />
       <postCmd />
       <useEmuSolo>False</useEmuSolo>
@@ -67,10 +67,10 @@
       <gameclient />
       <emulatorCmd>/usr/games/mame</emulatorCmd>
       <emulatorParams>"%ROM%"</emulatorParams>
-      <romPath>/home/test/Games/ROMs/Mame4All/*.zip</romPath>
+      <romPath>/home/test/Games/ROMs/MAME*.zip</romPath>
       <saveStatePath />
       <saveStateParams />
-      <mediaPath type="boxback">/home/test/Games/ROMs/Mame4All/%GAME%.*</mediaPath>
+      <mediaPath type="boxback">/home/test/Games/ROMs/MAME/%GAME%.*</mediaPath>
       <mediaPath type="boxfront">/home/test/Games/Artwork/MAME/boxfront/%GAME%.*</mediaPath>
       <mediaPath type="cabinet">/home/test/Games/Artwork/MAME/cabinet/%GAME%.*</mediaPath>
       <mediaPath type="gameplay">/home/test/Games/Artwork/MAME/gameplay (video)/%GAME%.*</mediaPath>
@@ -128,8 +128,8 @@
       <gameclient />
       <emulatorCmd>/usr/games/pcsx</emulatorCmd>
       <emulatorParams>-nogui -cdfile"%ROM%"</emulatorParams>
-      <romPath>/home/test/Games/ROMs/PSX/*.bin</romPath>
-      <romPath>/home/test/Games/ROMs/PSX/*.iso</romPath>
+      <romPath>/home/test/Games/ROMs/PS1/*.bin</romPath>
+      <romPath>/home/test/Games/ROMs/PS1/*.iso</romPath>
       <saveStatePath />
       <saveStateParams />
       <mediaPath type="boxfront">/home/test/Games/Artwork/PS1/boxfront/%GAME%.*</mediaPath>
@@ -223,14 +223,14 @@
       <gameclient />
       <emulatorCmd>/usr/bin/gens</emulatorCmd>
       <emulatorParams>--quickexit "%ROM%"</emulatorParams>
-      <romPath>/home/test/Games/ROMs/sgenroms/*.bin</romPath>
+      <romPath>/home/test/Games/ROMs/Sega\ Genesis/*.bin</romPath>
       <saveStatePath />
       <saveStateParams />
-      <mediaPath type="boxfront">/home/test/Games/Artwork/Genesis/boxfront/%GAME%.*</mediaPath>
-      <mediaPath type="boxback">/home/test/Games/Artwork/Genesis/boxback/%GAME%.*</mediaPath>
-      <mediaPath type="cartridge">/home/test/Games/Artwork/Genesis/cartridge/%GAME%.*</mediaPath>
-      <mediaPath type="screenshot">/home/test/Games/Artwork/Genesis/screenshot/%GAME%.*</mediaPath>
-      <mediaPath type="fanart">/home/test/Games/Artwork/Genesis/fanart/%GAME%.*</mediaPath>
+      <mediaPath type="boxfront">/home/test/Games/Artwork/Sega\ Genesis/%GAME%.*</mediaPath>
+      <mediaPath type="boxback">/home/test/Games/Artwork/Sega\ Genesis/boxback/%GAME%.*</mediaPath>
+      <mediaPath type="cartridge">/home/test/Games/Artwork/Sega\ Genesis/cartridge/%GAME%.*</mediaPath>
+      <mediaPath type="screenshot">/home/test/Games/Artwork/Sega\ Genesis/screenshot/%GAME%.*</mediaPath>
+      <mediaPath type="fanart">/home/test/Games/Artwork/Sega\ Genesis/fanart/%GAME%.*</mediaPath>
       <preCmd />
       <postCmd />
       <useEmuSolo>False</useEmuSolo>

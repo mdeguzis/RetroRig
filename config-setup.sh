@@ -940,13 +940,14 @@ function _configuration () {
 	#set the system user to an absolute value.
 	#RCB and some config files don't like using $HOME, rather /home/test/
 	#Let's change the config files to reflect the current username
-
 	sed -i "s|/home/test/|/home/$USER/|g" $HOME/.config/pcsx2/PCSX2-reg.ini | tee -a install_log.txt
 	sed -i "s|/home/test/|/home/$USER/|g" $HOME/.gens/gens.cfg | tee -a install_log.txt
 	sed -i "s|/home/test/|/home/$USER/|g" $HOME/.zsnes/zsnesl.cfg | tee -a install_log.txt
 	sed -i "s|/home/test/|/home/$USER/|g" $HOME/.pcsx/pcsx.cfg | tee -a install_log.txt
 	sed -i "s|/home/test/|/home/$USER/|g" $HOME/.dolphin-emu/Config/Dolphin.ini | tee -a install_log.txt
-	sed -i "s|/home/test/|/home/$USER/|g" $HOME/.xbmc/userdata/addon_data/script.games.rom.collection.browser/config.xml | tee -a install_log.txt
+	sed -i "s|/home/test/|/home/$USER/|g" $HOME/.xbmc/userdata/addon_data/script.games.rom.collection.browser/config.xml | tee -a install_log.txt	
+	echo "The user applied to configuration files was: $USER" |  tee -a install_log
+	sleep 7s
 	
 	#remind user about default resolution
 	#If the default is not supported on the monitor, emulators like zsnes will fail to start!
