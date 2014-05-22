@@ -130,6 +130,12 @@ Project notes and guide will be hosted at www.libregeek.org at some point in the
 
 ## A big thanks goes out to
 
-The authors of XBMC, Rom Collection Browser, and the various emulators in use here.
+<b>Software binaries:</b>  
+The authors of XBMC, Rom Collection Browser, and the various emulators in use here.  
+
+<b>Help and Configuration </b>  
+The great folks of #linuxactionshow (Geekshed IRC)  
+All the members of #bash (freenode.net IRC)  
+All the members of /r/LinuxActionShow  
 
 # EOF #
