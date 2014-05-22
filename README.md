@@ -24,23 +24,23 @@ Warning! It will overwrite:
 
 -Emulator configs for supported emulators:
 
- -ZSNES
- -Nestopia
- -Gens/GS
- -MAME
- -Stella
- -Mupen64Plus
- -PCSX
- -PCSX2
- -Dolphin
+    -ZSNES
+    -Nestopia
+    -Gens/GS
+    -MAME
+    -Stella
+    -Mupen64Plus
+    -PCSX
+    -PCSX2
+    -Dolphin
 
 -Also configs related to:
 
- -qjoypad
- -Blacklisting xpad
- -Autostarted application entries (XBMC, qjoypad)
- -Some folder structures under ~/Games
- -xboxdrv init scripts and configurations
+    -qjoypad
+    -Blacklisting xpad
+    -Autostarted application entries (XBMC, qjoypad)
+    -Some folder structures under ~/Games
+    -xboxdrv init scripts and configurations
 
 ## Why XBMC and Ubuntu?
 
@@ -71,15 +71,15 @@ It is a good idea to load games before hand into the predefined folders after th
 
 Currently importing ROMs into XBMC is a keyboard-less affair for the following emulators:
 
- -ZSNES
- -Nestopia
- -Gens/GS
- -MAME
- -Stella
- -Mupen64Plus
- -PCSX
- -PCSX2
- -Dolphin
+    -ZSNES
+    -Nestopia
+    -Gens/GS
+    -MAME
+    -Stella
+    -Mupen64Plus
+    -PCSX
+    -PCSX2
+    -Dolphin
 
 All ROMs should be placed in the respective folder under "/home/$USER/Games/ROMs". In due time, I will
 add more and more emulators. But until then, you can manually add them. In a later release, I plan on
@@ -93,8 +93,8 @@ Pre-requisites:
 
 You will need the following two packges:
 
- -dialog
- -git
+    -dialog
+    -git
 
 RetroRig will try to install them for you, but if you experience any issues starting the script,
 enusre they exist with the CLI commands 'which dialog' and 'which git" to ensure they report back.
