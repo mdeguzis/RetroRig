@@ -15,7 +15,7 @@ Goals for 0.7.0 release
 		-(scaling/filter only) Nestopia
 		-(scaling/filter only) Stella
 -(done) Fix script menu appearance
--(in progress) ROM loader during configuration and in settings menu
+-(done) ROM loader during configuration and in settings menu
 -(done) Establish testing snapshot on Vbox running Ubuntu 14.04 LTS
 -(done) Finish folder skelton
 -(done) Install progress bars

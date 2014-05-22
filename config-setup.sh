@@ -1,7 +1,7 @@
 #!/bin/bash
 #
 #small script to copy over configuration files for emulators
-#Version 0.6.6
+#Version 0.6.7
 #Please report any errors via a pull request
 #You can also reach me on twitter: @N3RD42
 #
@@ -12,15 +12,16 @@
 rm -f install_log.txt
 
 #start logging
-echo "-----------------------------------------------------------" tee -a install_log.txt
-echo "Starting install log..." tee -a install_log.txt
-echo "-----------------------------------------------------------" tee -a install_log.txt
+echo "-----------------------------------------------------------" | tee -a install_log.txt
+echo "Starting install log..." | tee -a install_log.txt
+echo "-----------------------------------------------------------" | tee -a install_log.txt
 
 function _main () {
 
 _prereq
 
-cmd=(dialog --backtitle "LibreGeek.org RetroRig Installer" --menu "Choose your option(s). Any required BIOS files are NOT provided!" 16 70 16)
+cmd=(dialog --backtitle "LibreGeek.org RetroRig Installer" --menu "| Main Menu | \
+			 Any required BIOS files are NOT provided!" 16 62 16)
 options=(1 "Install Software" 
 	 2 "Set up default configuration files" 
 	 3 "Retro Rig Settings" 
@@ -116,30 +117,26 @@ fi
 
 function _file-loader (){
 
-dialog --title "text" --fselect /path/to/dir height width
-FOLDER=$(dialog --stdout --title "Please choose a folder" --fselect $HOME/ 14 48)
-echo "${FOLDER} file chosen." 
-sleep 1s
-
-return $FOLDER
-
-_rom-loader
+folder=$(dialog --stdout --title "Please choose a file (spacebar to select)" --fselect $HOME/ 14 48)
+echo "${folder} file chosen."
 
 }
 
 #Load ROMs at will-call, or yes/no on configuration run
 function _rom-loader (){
 
-cmd=(dialog --backtitle "LibreGeek.org RetroRig Installer" --menu "Load ROMs for which system?" 16 70 16)
+cmd=(dialog --backtitle "LibreGeek.org RetroRig Installer" --menu "Load ROMs for which system?" 18 32 16)
 options=(1 "Atari 2600" 
 	 2 "NES" 
 	 3 "SNES" 
 	 4 "Nintendo 64"
-	 5 "MAME"
-	 6 "Sega Genesis"
-	 7 "Playstation 1"
-	 8 "Playstation 2"
-	 9 "Exit to main menu")
+	 5 "Gamecube"
+	 6 "MAME"
+	 7 "Sega Genesis"
+	 8 "Playstation 1"
+	 9 "Playstation 2"
+	 10 "Neo Geo"
+	 11 "Exit to main menu")
 
 	#make menu choice
 	selection=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
@@ -148,61 +145,159 @@ options=(1 "Atari 2600"
 	for choice in $selection
 	do
 		case $choice in
-		1)  	
+		1)
+		#call file loader  	
 		_file-loader
-		cp -Rv $FOLDER/* $HOME/Games/ROMs/Atari\ 2600
+		#copy Atari ROMs
+		clear
+		echo "-----------------------------------------------------------" | tee -a install_log.txt
+		echo "Loading Atari ROMs..." | tee -a install_log.txt
+		echo "-----------------------------------------------------------" | tee -a install_log.txt
+		cp -Rv $folder/* $HOME/Games/ROMs/Atari\ 2600/ | tee -a install_log.txt
+		#return back to menu
 		_rom-loader
 		;;
 
 		2)  
-
+		#call file loader  	
+		_file-loader
+		#copy NES ROMs
+		clear
+		echo "-----------------------------------------------------------" | tee -a install_log.txt
+		echo "Loading NES ROMs..." | tee -a install_log.txt
+		echo "-----------------------------------------------------------" | tee -a install_log.txt
+		cp -Rv $folder/* $HOME/Games/ROMs/NES/ | tee -a install_log.txt
+		#return back to menu
+		_rom-loader
 		;;
 
 		3)
-
+		#call file loader  	
+		_file-loader
+		#copy SNES ROMs
+		clear
+		echo "-----------------------------------------------------------" | tee -a install_log.txt
+		echo "Loading SNES ROMs..." | tee -a install_log.txt
+		echo "-----------------------------------------------------------" | tee -a install_log.txt
+		cp -Rv $folder/* $HOME/Games/ROMs/SNES/ | tee -a install_log.txt
+		#return back to menu
+		_rom-loader
 		;;
 
 		4)
-
+		#call file loader  	
+		_file-loader
+		#copy N64 ROMs
+		clear
+		echo "-----------------------------------------------------------" | tee -a install_log.txt
+		echo "Loading N64 ROMs..." | tee -a install_log.txt
+		echo "-----------------------------------------------------------" | tee -a install_log.txt
+		cp -Rv $folder/* $HOME/Games/ROMs/N64/ | tee -a install_log.txt
+		#return back to menu
+		_rom-loader
 		;;
 
 		5)
-
+		#call file loader  	
+		_file-loader
+		#copy Gamecube ROMs
+		clear
+		echo "-----------------------------------------------------------" | tee -a install_log.txt
+		echo "Loading Gamecube ROMs..." | tee -a install_log.txt
+		echo "-----------------------------------------------------------" | tee -a install_log.txt
+		cp -Rv $folder/* $HOME/Games/ROMs/Gamecube/ | tee -a install_log.txt
+		#return back to menu
+		_rom-loader
 		;;
 
 		6)
-
+		#call file loader  	
+		_file-loader
+		#copy MAME ROMs
+		clear
+		echo "-----------------------------------------------------------" | tee -a install_log.txt
+		echo "Loading MAME ROMs..." | tee -a install_log.txt
+		echo "-----------------------------------------------------------" | tee -a install_log.txt
+		cp -Rv $folder/* $HOME/Games/ROMs/MAME/ | tee -a install_log.txt
+		#return back to menu
+		_rom-loader
 		;;
 
 		7)
-
+		#call file loader  	
+		_file-loader
+		#copy Sega Genesis ROMs
+		clear
+		echo "-----------------------------------------------------------" | tee -a install_log.txt
+		echo "Loading Sega Genesis ROMs..." | tee -a install_log.txt
+		echo "-----------------------------------------------------------" | tee -a install_log.txt
+		cp -Rv $folder/* $HOME/Games/ROMs/Sega\ Genesis/ | tee -a install_log.txt
+		#return back to menu
+		_rom-loader
 		;;
 
 		8)
-
+		#call file loader  	
+		_file-loader
+		#copy Playstation 1 ROMs
+		clear
+		echo "-----------------------------------------------------------" | tee -a install_log.txt
+		echo "Loading Playstation 1 ROMs..." | tee -a install_log.txt
+		echo "-----------------------------------------------------------" | tee -a install_log.txt
+		cp -Rv $folder/* $HOME/Games/ROMs/PS1/ | tee -a install_log.txt
+		#return back to menu
+		_rom-loader
 		;;
 
-		9)  
+		9)
+		#call file loader  	
+		_file-loader
+		#copy Playstation 2 ROMs
+		clear
+		echo "-----------------------------------------------------------" | tee -a install_log.txt
+		echo "Loading Playstation 2 ROMs..." | tee -a install_log.txt
+		echo "-----------------------------------------------------------" | tee -a install_log.txt
+		cp -Rv $folder/* $HOME/Games/ROMs/PS2/ | tee -a install_log.txt
+		#return back to menu
+		_rom-loader
+		;;
+
+		10)
+		#call file loader  	
+		_file-loader
+		#copy Neo Geo ROMs
+		clear
+		echo "-----------------------------------------------------------" | tee -a install_log.txt
+		echo "Loading Neo Geo ROMs..." | tee -a install_log.txt
+		echo "-----------------------------------------------------------" | tee -a install_log.txt
+		cp -Rv $folder/* $HOME/Games/ROMs/SNK\ Neo\ Geo/ | tee -a install_log.txt
+		#return back to menu
+		_rom-loader
+		;;
+
+		11)  
 		_main
 		;;
-esac
-done
-
+	esac
+	done
 }
 
 #settings function
 function _remote-tools (){
-echo "nothing here yet, coming soon"
+
+clear
+dialog --infobox "Setting resolution to 1920x768 (720p)" 3 48
+
 }
 
 #settings function
 function _settings (){
 
-cmd=(dialog --backtitle "LibreGeek.org RetroRig Installer" --menu "Settings Menu" 16 46 16)
-options=(1 "Change resolution for emulators"  
-	 2 "Load ROMs (coming soon)"
-	 3 "Setup folder shares (samba) (coming soon)"
-	 3 "Back to main menu")
+cmd=(dialog --backtitle "LibreGeek.org RetroRig Installer" --menu "Settings Menu" 16 0 16)
+options=(1 "Change resolution"  
+	 2 "Load ROMs"
+	 3 "Setup folder shares"
+	 4 "Back to main menu")
 
 	#make menu choice
 	selection=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
@@ -226,8 +321,7 @@ options=(1 "Change resolution for emulators"
 		_settings
 		;;
 
-		3)  
-		clear
+		4)  
 		_main
 		;;
 esac
@@ -492,11 +586,9 @@ if [ "$choices" != "" ]; then
 		;; 
 	 5) 
 		_settings
-		return
 		;;
 	 6) 
 		_main
-		return
 		;;
 
 	 esac
@@ -519,10 +611,10 @@ function _software () {
 	trap "rm -f $data" 0 1 2 5 15
 	 
 	# get password with the --insecure option
-	dialog --title "Password" \
+	dialog --title "Gaining elevated privledges" \
 	--clear \
 	--insecure \
-	--passwordbox "Enter your password" 10 30 2> $data
+	--passwordbox "Enter your user password" 7 32 2> $data
 	 
 	ret=$?
 	 
@@ -582,7 +674,17 @@ function _software () {
 	mame mupen64plus dconf-tools qjoypad xbmc dolphin-emu-master stella \
 	build-essential gdebi| tee -a install_log.txt
 
-	sleep 5s
+	#Removal of software for related bugs
+	echo "-----------------------------------------------------------" | tee -a install_log.txt
+	echo "Removing troublesome packages..." | tee -a install_log.txt
+	echo "-----------------------------------------------------------" | tee -a install_log.txt
+	echo $userpasswd | sudo -S apt-get remove -y apport apport-gtk | tee -a install_log.txt
+	echo "" | tee -a install_log.txt
+	echo "Remove apport to avoid constant gtk bug report instances until solved" | tee -a install_log.txt
+	echo "-----------------------------------------------------------" | tee -a install_log.txt
+	echo "Please reference the following bug report:" | tee -a install_log.txt
+	echo "Reported by cecilpierce on 2012-06-05 on Launchpad" | tee -a install_log.txt
+	echo "https://bugs.launchpad.net/ubuntu/+source/plymouth/+bug/1009238" | tee -a install_log.txt
 	
 	#update repository listings
 	echo "-----------------------------------------------------------" | tee -a install_log.txt
@@ -627,7 +729,7 @@ function _configuration () {
 
 	esac
 
-	dialog --infobox "Setting up configuration files" 3 35 ; sleep 3s
+	dialog --infobox "Setting up configuration files" 3 38 ; sleep 3s
 	#clear screen
 	clear
 
@@ -640,10 +742,10 @@ function _configuration () {
 	trap "rm -f $data" 0 1 2 5 15
 	 
 	# get password with the --insecure option
-	dialog --title "Password" \
+	dialog --title "Gaining elevated privledges" \
 	--clear \
 	--insecure \
-	--passwordbox "Enter your password" 10 30 2> $data
+	--passwordbox "Enter your user password" 7 32 2> $data
 	 
 	ret=$?
 	 
@@ -667,7 +769,6 @@ function _configuration () {
 
 	#disable screensaver, XBMC will manage this
 	#export display to allow gsettings running in terminal window
-	echo "-----------------------------------------------------------" | tee -a install_log.txt
 	echo "Configuring required packages..." | tee -a install_log.txt
 	echo "-----------------------------------------------------------" | tee -a install_log.txt
 	export DISPLAY=:0.0
@@ -686,37 +787,37 @@ function _configuration () {
 	#ROMs
 	mkdir -pv $HOME/Games/ROMs/Atari\ 2600/ | tee -a install_log.txt
 	mkdir -pv $HOME/Games/ROMs/Gamecube/ | tee -a install_log.txt
-	mkdir -pv $HOME/Games/ROMs/Mame4All/ | tee -a install_log.txt
+	mkdir -pv $HOME/Games/ROMs/MAME/ | tee -a install_log.txt
 	mkdir -pv $HOME/Games/ROMs/N64/ | tee -a install_log.txt
 	mkdir -pv $HOME/Games/ROMs/NES/ | tee -a install_log.txt
 	mkdir -pv $HOME/Games/ROMs/SNES/ | tee -a install_log.txt
 	mkdir -pv $HOME/Games/ROMs/PS2/ | tee -a install_log.txt
 	mkdir -pv $HOME/Games/ROMs/PS1/ | tee -a install_log.txt
-	mkdir -pv $HOME/Games/ROMs/sgenroms/ | tee -a install_log.txt
+	mkdir -pv $HOME/Games/ROMs/Sega\ Genesis/ | tee -a install_log.txt
 	mkdir -pv $HOME/Games/ROMs/SNK\ Neo\ Geo/ | tee -a install_log.txt
 
 	#Artwork 
 	mkdir -pv $HOME/Games/Artwork/Atari\ 2600/ | tee -a install_log.txt
-	mkdir -pv $HOME/Games/Artwork/Gamecube | tee -a install_log.txt
-	mkdir -pv $HOME/Games/Artwork/MAME | tee -a install_log.txt
-	mkdir -pv $HOME/Games/Artwork/N64 | tee -a install_log.txt
-	mkdir -pv $HOME/Games/Artwork/NES | tee -a install_log.txt
-	mkdir -pv $HOME/Games/Artwork/SNES | tee -a install_log.txt
-	mkdir -pv $HOME/Games/Artwork/PS2 | tee -a install_log.txt
-	mkdir -pv $HOME/Games/Artwork/PS1 | tee -a install_log.txt
-	mkdir -pv $HOME/Games/Artwork/Genesis | tee -a install_log.txt
-	mkdir -pv $HOME/Games/Artwork/SNK\ Neo\ Geo | tee -a install_log.txt
+	mkdir -pv $HOME/Games/Artwork/Gamecube/ | tee -a install_log.txt
+	mkdir -pv $HOME/Games/Artwork/MAME/ | tee -a install_log.txt
+	mkdir -pv $HOME/Games/Artwork/N64/ | tee -a install_log.txt
+	mkdir -pv $HOME/Games/Artwork/NES/ | tee -a install_log.txt
+	mkdir -pv $HOME/Games/Artwork/SNES/ | tee -a install_log.txt
+	mkdir -pv $HOME/Games/Artwork/PS2/ | tee -a install_log.txt
+	mkdir -pv $HOME/Games/Artwork/PS1/ | tee -a install_log.txt
+	mkdir -pv $HOME/Games/Artwork/Sega\ Genesis/ | tee -a install_log.txt
+	mkdir -pv $HOME/Games/Artwork/SNK\ Neo\ Geo/ | tee -a install_log.txt
 
 	#Saves (if any)
 	mkdir -pv $HOME/Games/Saves/Atari\ 2600/ | tee -a install_log.txt
 	mkdir -pv $HOME/Games/Saves/Gamecube/ | tee -a install_log.txt
-	mkdir -pv $HOME/Games/Saves/Mame4All/ | tee -a install_log.txt
+	mkdir -pv $HOME/Games/Saves/MAME/ | tee -a install_log.txt
 	mkdir -pv $HOME/Games/Saves/N64/ | tee -a install_log.txt
 	mkdir -pv $HOME/Games/Saves/NES/ | tee -a install_log.txt
 	mkdir -pv $HOME/Games/Saves/SNES/ | tee -a install_log.txt
 	mkdir -pv $HOME/Games/Saves/PS2/ | tee -a install_log.txt
 	mkdir -pv $HOME/Games/Saves/PS1/ | tee -a install_log.txt
-	mkdir -pv $HOME/Games/Saves/genroms/ | tee -a install_log.txt
+	mkdir -pv $HOME/Games/Saves/Sega\ Genesis/ | tee -a install_log.txt
 	mkdir -pv $HOME/Games/Saves/SNK\ Neo\ Geo/ | tee -a install_log.txt
 
 	#create dotfiles
@@ -772,8 +873,8 @@ function _configuration () {
 	#Main config
 	cp -v $HOME/RetroRig/emu-configs/MAME/default.cfg $HOME/.mame/cfg | tee -a install_log.txt
 	cp -v $HOME/RetroRig/emu-configs/MAME/mame.ini $HOME/.mame | tee -a install_log.txt
-	#offline artwork scrapper
-	cp -v $HOME/RetroRig/emu-configs/MAME/Artwork/* $HOME/Games/Artwork/MAME | tee -a install_log.txt
+	#offline artwork scrapper configs
+	cp -v $HOME/RetroRig/emu-configs/MAME/parserConfig.xml $HOME/Games/Artwork/MAME | tee -a install_log.txt
 	
 	#pcsx
 	#default path: /home/$USER/.pcsx
@@ -865,9 +966,7 @@ function _configuration () {
 	response=$?
 	case $response in
 	   0) 
-	   dialog --infobox "ROM Loader Coming Soon!" 3 28 ; sleep 5s
-	   disable rom-loader until ready
-	   #_rom-loader
+	   _rom-loader
 	   ;;
 
 	   1) 
@@ -927,6 +1026,31 @@ function _start-xbmc () {
 
 function _reboot () {
 	#need to add reboot command to sudo to avoid pw prompt
+	data=$(tempfile 2>/dev/null)
+ 
+	# trap it
+	trap "rm -f $data" 0 1 2 5 15
+	 
+	# get password with the --insecure option
+	dialog --title "Gaining elevated privledges" \
+	--clear \
+	--insecure \
+	--passwordbox "Enter your user password" 7 32 2> $data
+	 
+	ret=$?
+	 
+	# make decison
+	case $ret in
+	  0)
+	    #use local variable to use it later in other functions
+	    userpasswd=$(cat "$data")
+	    ;;
+	  1)
+	    echo "Cancel pressed.";;
+	  255)
+	    [ -s $data ] &&  cat $data || echo "ESC pressed.";;
+	esac
+
         dialog --infobox "Rebooting in 5 seconds, press CTRL+C to cancel" 3 51 ; sleep 5s
         sleep 5s
         echo $userpasswd | sudo -S /sbin/reboot
