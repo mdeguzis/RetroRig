@@ -84,8 +84,8 @@ options=(1 "Install Software"
 		clear
 		exit
 		;;
-esac
-done
+		esac
+	done
 }
 
 function _prereq (){
@@ -278,7 +278,7 @@ options=(1 "Atari 2600"
 		11)  
 		_main
 		;;
-	esac
+		esac
 	done
 }
 
@@ -296,7 +296,7 @@ function _settings (){
 cmd=(dialog --backtitle "LibreGeek.org RetroRig Installer" --menu "Settings Menu" 16 0 16)
 options=(1 "Change resolution"  
 	 2 "Load ROMs"
-	 3 "Setup folder shares"
+	 3 "Change Gamepad Type"
 	 4 "Back to main menu")
 
 	#make menu choice
@@ -317,28 +317,84 @@ options=(1 "Change resolution"
 		;;
 
 		3)  	
-		_remote-tools
+		_gamepad
 		_settings
 		;;
 
 		4)  
 		_main
 		;;
-esac
-done
+	esac
+	done
+}
+
+function _res-swticher (){
+clear
+		dialog --infobox "Setting resolution to selection" 3 48
+		#resolution is set via _resolution function		
+		
+		########################		
+		#mupen64plus
+		########################
+		m_org_X=$(grep -i "ScreenWidth = " $HOME/.config/mupen64plus/mupen64plus.cfg)
+		m_org_Y=$(grep -i "ScreenHeight = " $HOME/.config/mupen64plus/mupen64plus.cfg)
+		#make the changes, prefix new_X in case NULL was entered previousey
+		sed -i "s|$m_org_X|ScreenWidth = $m_new_X|g" $HOME/.config/mupen64plus/mupen64plus.cfg
+		sed -i "s|$m_org_Y|ScreenHeight = $m_new_Y|g" $HOME/.config/mupen64plus/mupen64plus.cfg
+
+		########################		
+		#ZSNES
+		########################
+		#zsnes will not open properly if an improper resolution is set
+		z_org_X=$(grep -i "CustomResX=" $HOME/.zsnes/zsnesl.cfg)
+		z_org_Y=$(grep -i "CustomResY=" $HOME/.zsnes/zsnesl.cfg)
+		#make the changes, prefix new_X in case NULL was entered previously
+		sed -i "s|$z_org_X|CustomResX="$z_new_X"|g" $HOME/.zsnes/zsnesl.cfg
+		sed -i "s|$z_org_Y|CustomResY="$z_new_Y"|g" $HOME/.zsnes/zsnesl.cfg
+
+		########################		
+		#Gens/GS
+		######################## 
+		#Gens/GS will not open properly if an improper resolution is set
+		g_org_X=$(grep -i "OpenGL Width=" $HOME/.gens/gens.cfg)
+		g_org_Y=$(grep -i "OpenGL Height=" $HOME/.gens/gens.cfg)
+		#make the changes, prefix new_X in case NULL was entered previously
+		#Gens/GS
+		sed -i "s|$g_org_X|OpenGL Width="$g_new_X"|g" $HOME/.gens/gens.cfg
+		sed -i "s|$g_org_Y|OpenGL Height="$g_new_Y"|g" $HOME/.gens/gens.cfg
+
+		########################		
+		#Stella
+		######################## 
+		#Stella does not support resolution changes (except the GUI), only scaling
+		#Scaling testing and configuration will be put in at some point
+		#This emulator does support OpenGL
+		#Current Scaling is reported in RetroRig, but not yet configurable
+
+		########################		
+		#Nestopia
+		######################## 
+		#Nestopia does not support resolution changes, only scaling and filtering
+		#Scaling testing and configuration will be put in at some point
+		#This emulator does support OpenGL
+		#Current Scaling is reported in RetroRig, but not yet configurable
 }
 
 function _resolution () {
 
 #menu
+#add res-switcher function to make new presets more modular to add
 while true; do
-cmd=(dialog --backtitle "RetroRig Settings" --menu "Choose your resolution" 16 32 16)
+cmd=(dialog --backtitle "RetroRig Settings" --menu "Choose your resolution" 16 34 16)
 options=(1 "Current Resolution"
-	 2 "1360x768 (720p)"
-	 3 "1920x1080 (1080p)"
-	 4 "Custom"
-	 5 "Back to settings menu"
-	 6 "Back to main menu"
+	 2 "1280x720  (720p)  (5:4)"
+	 3 "1280x1024 (SXGA)  (5:4)"
+	 4 "1366x768  (720p)  (16:9)"
+	 5 "1600x900  (900p)  (16:9)"
+	 6 "1920x1080 (1080p) (16:9)"
+	 7 "Custom"
+	 8 "Back to settings menu"
+	 9 "Back to main menu"
 	)
      
 choices=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
@@ -346,6 +402,7 @@ if [ "$choices" != "" ]; then
     case $choices in
 
 	 1) 
+		#echo curent resolution
 		#mupen64plus
 		echo "mupen64plus:" >> res.txt
 		grep -i "ScreenWidth = " $HOME/.config/mupen64plus/mupen64plus.cfg >> res.txt
@@ -377,223 +434,117 @@ if [ "$choices" != "" ]; then
 		;;
 
 	 2) 
-		clear
-		dialog --infobox "Setting resolution to 1920x768 (720p)" 3 48
-
-		########################		
-		#mupen64plus
-		########################
-
-		m_org_X=$(grep -i "ScreenWidth = " $HOME/.config/mupen64plus/mupen64plus.cfg)
-		m_org_Y=$(grep -i "ScreenHeight = " $HOME/.config/mupen64plus/mupen64plus.cfg)
-		#set new resolution(s) from configs
-		m_new_X="1360"
-		m_new_Y="768"
-		#make the changes, prefix new_X in case NULL was entered previousey
-		#mupen64plus
-		sed -i "s|$m_org_X|ScreenWidth = $m_new_X|g" $HOME/.config/mupen64plus/mupen64plus.cfg
-		sed -i "s|$m_org_Y|ScreenHeight = $m_new_Y|g" $HOME/.config/mupen64plus/mupen64plus.cfg
-
-		########################		
-		#ZSNES
-		######################## 
-
-		#zsnes will not open properly if an improper resolution is set
-		z_org_X=$(grep -i "CustomResX=" $HOME/.zsnes/zsnesl.cfg)
-		z_org_Y=$(grep -i "CustomResY=" $HOME/.zsnes/zsnesl.cfg)
-		#set new resolution(s) from configs
-		z_new_X="1360"
-		z_new_Y="768"
-		#make the changes, prefix new_X in case NULL was entered previously
-		#ZSNES
-		sed -i "s|$z_org_X|CustomResX="$z_new_X"|g" $HOME/.zsnes/zsnesl.cfg
-		sed -i "s|$z_org_Y|CustomResY="$z_new_Y"|g" $HOME/.zsnes/zsnesl.cfg
-
-		########################		
-		#Gens/GS
-		######################## 
-
-		#Gens/GS will not open properly if an improper resolution is set
-		g_org_X=$(grep -i "OpenGL Width=" $HOME/.gens/gens.cfg)
-		g_org_Y=$(grep -i "OpenGL Height=" $HOME/.gens/gens.cfg)
-		#set new resolution(s) from configs
-		g_new_X="1360"
-		g_new_Y="768"
-		#make the changes, prefix new_X in case NULL was entered previously
-		#Gens/GS
-		sed -i "s|$g_org_X|OpenGL Width="$g_new_X"|g" $HOME/.gens/gens.cfg
-		sed -i "s|$g_org_Y|OpenGL Height="$g_new_Y"|g" $HOME/.gens/gens.cfg
-
-		########################		
-		#Stella
-		######################## 
-		#Stella does not support resolution changes (except the GUI), only scaling
-		#Scaling testing and configuration will be put in at some point
-		#This emulator does support OpenGL
-		#Current Scaling is reported in RetroRig, but not yet configurable
-
-		########################		
-		#Nestopia
-		######################## 
-		#Nestopia does not support resolution changes, only scaling and filtering
-		#Scaling testing and configuration will be put in at some point
-		#This emulator does support OpenGL
-		#Current Scaling is reported in RetroRig, but not yet configurable
+		#setting chosen: "1280x720  (720p)  (5:4)"
+		#set mupen64plus value
+		m_new_X="1280"
+		m_new_Y="720"
+		#set zsnes value
+		z_new_X="1280"
+		z_new_Y="720"
+		#set gens value
+		g_new_X="1280"
+		g_new_Y="720"
+		#call _res-swticher
+		_res-swticher
+		#return to menu
+		_resolution
 		;;  
-      
 	 3) 
-		clear
-		dialog --infobox "Setting resolution to 1360x768 (720p)" 3 48
-
-		########################		
-		#mupen64plus
-		########################
-
-		m_org_X=$(grep -i "ScreenWidth = " $HOME/.config/mupen64plus/mupen64plus.cfg)
-		m_org_Y=$(grep -i "ScreenHeight = " $HOME/.config/mupen64plus/mupen64plus.cfg)
-		#set new resolution(s) from configs
+		#setting chosen: "1280x1024 (SXGA)  (5:4)"
+		#set mupen64plus value
+		m_new_X="1280"
+		m_new_Y="1024"
+		#set zsnes value
+		z_new_X="1280"
+		z_new_Y="1024"
+		#set gens value
+		g_new_X="1280"
+		g_new_Y="1024"
+		#call _res-swticher
+		_res-swticher
+		#return to menu
+		_resolution
+		;;
+	 4) 
+		#setting chosen: "1366x768  (720p)  (16:9)"
+		#set mupen64plus value
+		m_new_X="1366"
+		m_new_Y="768"
+		#set zsnes value
+		z_new_X="1366"
+		z_new_Y="768"
+		#set gens value
+		g_new_X="1366"
+		g_new_Y="768"
+		#call _res-swticher
+		_res-swticher
+		#return to menu
+		_resolution
+		;;
+	 5) 
+		#setting chosen: "1600x900  (900p)  (16:9)"
+		#set mupen64plus value
+		m_new_X="1600"
+		m_new_Y="900"
+		#set zsnes value
+		z_new_X="1600"
+		z_new_Y="900"
+		#set gens value
+		g_new_X="1600"
+		g_new_Y="900"
+		#call _res-swticher
+		_res-swticher
+		#return to menu
+		_resolution
+		;;
+	 6) 
+		#setting chosen: "1920x1080 (1080p) (16:9)"
+		#set mupen64plus value
 		m_new_X="1920"
 		m_new_Y="1080"
-		#make the changes, prefix new_X in case NULL was entered previousey
-		#mupen64plus
-		sed -i "s|$m_org_X|ScreenWidth = $m_new_X|g" $HOME/.config/mupen64plus/mupen64plus.cfg
-		sed -i "s|$m_org_Y|ScreenHeight = $m_new_Y|g" $HOME/.config/mupen64plus/mupen64plus.cfg
-
-		########################		
-		#ZSNES
-		######################## 
-
-		#zsnes will not open properly if an improper resolution is set
-		z_org_X=$(grep -i "CustomResX=" $HOME/.zsnes/zsnesl.cfg)
-		z_org_Y=$(grep -i "CustomResY=" $HOME/.zsnes/zsnesl.cfg)
-		#set new resolution(s) from configs
+		#set zsnes value
 		z_new_X="1920"
 		z_new_Y="1080"
-		#make the changes, prefix new_X in case NULL was entered previously
-		#ZSNES
-		sed -i "s|$z_org_X|CustomResX="$z_new_X"|g" $HOME/.zsnes/zsnesl.cfg
-		sed -i "s|$z_org_Y|CustomResY="$z_new_Y"|g" $HOME/.zsnes/zsnesl.cfg
-
-		########################		
-		#Gens/GS
-		######################## 
-
-		#Gens/GS will not open properly if an improper resolution is set
-		g_org_X=$(grep -i "OpenGL Width=" $HOME/.gens/gens.cfg)
-		g_org_Y=$(grep -i "OpenGL Height=" $HOME/.gens/gens.cfg)
-		#set new resolution(s) from configs
+		#set gens value
 		g_new_X="1920"
 		g_new_Y="1080"
-		#make the changes, prefix new_X in case NULL was entered previously
-		#Gens/GS
-		sed -i "s|$g_org_X|OpenGL Width="$g_new_X"|g" $HOME/.gens/gens.cfg
-		sed -i "s|$g_org_Y|OpenGL Height="$g_new_Y"|g" $HOME/.gens/gens.cfg
-
-		########################		
-		#Stella
-		######################## 
-		#Stella does not support resolution changes (except the GUI), only scaling
-		#Scaling testing and configuration will be put in at some point
-		#This emulator does support OpenGL
-		#Current Scaling is reported in RetroRig, but not yet configurable
-
-		########################		
-		#Nestopia
-		######################## 
-		#Nestopia does not support resolution changes, only scaling and filtering
-		#Scaling testing and configuration will be put in at some point
-		#This emulator does support OpenGL
-		#Current Scaling is reported in RetroRig, but not yet configurable
-		;; 
-
-	 4) 
+		#call _res-swticher
+		_res-swticher
+		#return to menu
+		_resolution
+		;;    
+	 7) 
 		dialog --infobox  "Setting resolution from user input" 3 40
-
 		#set new resolution(s) from user input
 		dialog --title "Set Custom Resolution" --inputbox "Enter Width (X)" 10 4 2> /tmp/new_X
 		dialog --title "Set Custom Resolution" --inputbox "Enter Length (Y)" 10 4 2> /tmp/new_Y
 
-		########################		
-		#mupen64plus
-		########################
-
-		#grab current resolutions
-		m_org_X=$(grep -i "ScreenWidth = " $HOME/.config/mupen64plus/mupen64plus.cfg)
-		m_org_Y=$(grep -i "ScreenHeight = " $HOME/.config/mupen64plus/mupen64plus.cfg)
 		#set new resolution(s) from configs
+		#mupen64plus
 		m_new_X=$(cat '/tmp/new_X')
 		m_new_Y=$(cat '/tmp/new_Y')
-		#make the changes, prefix new_X in case NULL was entered previously
-		#mupen64plus
-		sed -i "s|$m_org_X|ScreenWidth = "$m_new_X"|g" $HOME/.config/mupen64plus/mupen64plus.cfg
-		sed -i "s|$m_org_Y|ScreenHeight = "$m_new_Y"|g" $HOME/.config/mupen64plus/mupen64plus.cfg 
-
-		########################		
-		#ZSNES
-		######################## 
-
-		#zsnes will not open properly if an improper resolution is set
-		z_org_X=$(grep -i "CustomResX=" $HOME/.zsnes/zsnesl.cfg)
-		z_org_Y=$(grep -i "CustomResY=" $HOME/.zsnes/zsnesl.cfg)
-		#set new resolution(s) from configs
+		#zsnes
 		z_new_X=$(cat '/tmp/new_X')
 		z_new_Y=$(cat '/tmp/new_Y')
-		#make the changes, prefix new_X in case NULL was entered previously
-		#ZSNES
-		sed -i "s|$z_org_X|CustomResX="$z_new_X"|g" $HOME/.zsnes/zsnesl.cfg
-		sed -i "s|$z_org_Y|CustomResY="$z_new_Y"|g" $HOME/.zsnes/zsnesl.cfg
-
-		
-		########################		
-		#Gens/GS
-		######################## 
-
-		#Gens/GS will not open properly if an improper resolution is set
-		g_org_X=$(grep -i "OpenGL Width=" $HOME/.gens/gens.cfg)
-		g_org_Y=$(grep -i "OpenGL Height=" $HOME/.gens/gens.cfg)
-		#set new resolution(s) from configs
+		#Gens
 		g_new_X=$(cat '/tmp/new_X')
 		g_new_Y=$(cat '/tmp/new_Y')
-		#make the changes, prefix new_X in case NULL was entered previously
-		#ZSNES
-		sed -i "s|$g_org_X|OpenGL Width="$g_new_X"|g" $HOME/.gens/gens.cfg
-		sed -i "s|$g_org_Y|OpenGL Height="$g_new_Y"|g" $HOME/.gens/gens.cfg
 
-		########################		
-		#Stella
-		######################## 
-		#Stella does not support resolution changes, only scaling
-		#Scaling testing and configuration will be put in at some point
-		#This emulator does support OpenGL
-		#Current Scaling is reported in RetroRig, but not yet configurable
-
-		########################		
-		#Nestopia
-		######################## 
-		#Nestopia does not support resolution changes, only scaling
-		#Scaling testing and configuration will be put in at some point
-		#This emulator does support OpenGL
-		#Current Scaling is reported in RetroRig, but not yet configurable
-
-		########################		
-		#Cleanup
-		######################## 
-
+		#call _res-swticher
+		_res-swticher
+		#remove temp files
 		rm -f /tmp/new_X
 		rm -f /tmp/new_Y
-
+		#return to menu
 		_resolution
 		;; 
-	 5) 
+	 8) 
 		_settings
 		;;
-	 6) 
+	 9) 
 		_main
 		;;
-
-	 esac
-     else
-	 break
+	esac
 fi
 done
 }
@@ -696,8 +647,75 @@ function _software () {
 	clear
 }
 
+
+function _gamepad (){
+
+	#log change in install_log.txt
+	echo "-----------------------------------------------------------" | tee -a install_log.txt
+	echo "Setting Controller Gamepad..." | tee -a install_log.txt
+	echo "-----------------------------------------------------------" | tee -a install_log.txt
+
+	#prompt for sudo password for elevated operations.  We need this again, in case a user goes directly here
+	#The -S (stdin) option causes sudo to read the password from the standard input 
+	#instead of the terminal device. You can then use "echo <password> | sudo -S <command>" 
+	data=$(tempfile 2>/dev/null)
+	# trap it
+	trap "rm -f $data" 0 1 2 5 15	 
+	# get password with the --insecure option
+	dialog --title "Gaining elevated privledges" \
+	--clear \
+	--insecure \
+	--passwordbox "Enter your user password" 7 32 2> $data	 
+	ret=$?	 
+	# make decison
+	case $ret in
+	  0)
+	    #use local variable to use it later in other functions
+	    local userpasswd=$(cat "$data")
+	    ;;
+	  1)
+	    echo "Cancel pressed.";;
+	  255)
+	    [ -s $data ] &&  cat $data || echo "ESC pressed.";;
+	esac
+
+cmd=(dialog --backtitle "LibreGeek.org RetroRig Installer" --menu "| Gamepad Select | \
+			 Request any new Gamepads via github!" 16 62 16)
+options=(1 "Xbox 360 Controller (wireless) (4-player)" 
+	 2 "Back to settings menu" 
+	 3 "Back to main menu")
+
+	#make menu choice
+	selection=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
+	#functions
+
+	for choice in $selection
+	do
+		case $choice in
+
+		1)
+		#copy xbox configuration (default) to folder
+		echo $userpasswd | sudo -S sed -v $HOME/RetroRig/controller-cfgs/xpad-wireless.xboxdrv /usr/share/xboxdrv/ | tee -a install_log.txt
+		#Inject Xbox 360 configuration to init script. The default is xpad-wireless.xbodrv, so no need to inject below!
+		#but.........commented anyway for science!!!
+		#echo $userpasswd | sudo -S sed -i "s|xpad-wireless.xboxdrv|xpad-wireless.xboxdrv|g" /etc/init.d/xboxdrv
+		#back to settings menu
+		_settings
+		;;
+
+		2)
+		_settings
+		;;
+
+		3)
+		_main
+		;;
+		esac
+	done
+}
+
 #configuration function
-function _configuration () {
+function _configuration (){
 
 	dialog --title "Confirm yes/no" \
 	--backtitle "LibreGeek.org RetroRig Installer" \
@@ -729,7 +747,7 @@ function _configuration () {
 
 	esac
 
-	dialog --infobox "Setting up configuration files" 3 38 ; sleep 3s
+	dialog --infobox "Setting up configuration files" 3 34 ; sleep 3s
 	#clear screen
 	clear
 
@@ -737,18 +755,14 @@ function _configuration () {
 	#The -S (stdin) option causes sudo to read the password from the standard input 
 	#instead of the terminal device. You can then use "echo <password> | sudo -S <command>" 
 	data=$(tempfile 2>/dev/null)
- 
 	# trap it
-	trap "rm -f $data" 0 1 2 5 15
-	 
+	trap "rm -f $data" 0 1 2 5 15	 
 	# get password with the --insecure option
 	dialog --title "Gaining elevated privledges" \
 	--clear \
 	--insecure \
-	--passwordbox "Enter your user password" 7 32 2> $data
-	 
-	ret=$?
-	 
+	--passwordbox "Enter your user password" 7 32 2> $data	 
+	ret=$?	 
 	# make decison
 	case $ret in
 	  0)
@@ -919,7 +933,8 @@ function _configuration () {
 
 	#add xbox controller init script
 	echo "echo $userpasswd | sudo -S needed to create init scripts for xboxdrv!"
-	echo $userpasswd | sudo -S cp -v $HOME/RetroRig/controller-cfgs/xpad-wireless.xboxdrv /usr/share/xboxdrv/ | tee -a install_log.txt
+	#call function to select gamepad configuration
+	_gamepad
 	echo $userpasswd | sudo -S cp -v $HOME/RetroRig/init-scripts/xboxdrv /etc/init.d/ | tee -a install_log.txt
 	echo $userpasswd | sudo -S update-rc.d xboxdrv defaults | tee -a install_log.txt
 
@@ -1018,7 +1033,7 @@ function _upgrade-system () {
 }
 
 function _start-xbmc () {
-	dialog --infobox "starting RetroRig" 3 24
+	dialog --infobox "starting RetroRig" 3 21
 	sleep 1s
 	xbmc
 	#clear
