@@ -91,13 +91,13 @@ install items.
 
 Pre-requisites:
 
-You will need the following two packges:
+You will need git and dialog to run the installer:
 
-    -dialog
-    -git
+    sudo apt-get install dialog git
 
-RetroRig will try to install them for you, but if you experience any issues starting the script,
-enusre they exist with the CLI commands 'which dialog' and 'which git" to ensure they report back.
+RetroRig will try to install them for you (for instance, if you download the zip archive), but if you
+experience any issues starting the script,enusre they exist with the CLI commands 'which dialog' 
+and 'which git" to ensure they report back.
 
 To clone this repo via the CLI:
 
@@ -105,9 +105,8 @@ To clone this repo via the CLI:
 
 To intstall:
 
-`cd RetroRig`
-
-`sudo ./config.setup.sh`
+    cd RetroRig  
+    ./config-setup.sh
 
 sudo access is needed for updates, installs, and folder creation. If you wish, you can review the script
 code beforehand to see what sudo does.You can also choose to just copy configuration filesfrom each 
@@ -130,6 +129,12 @@ Project notes and guide will be hosted at www.libregeek.org at some point in the
 
 ## A big thanks goes out to
 
-The authors of XBMC, Rom Collection Browser, and the various emulators in use here.
+<b>Software binaries:</b>  
+The authors of XBMC, Rom Collection Browser, and the various emulators in use here.  
+
+<b>Help and Configuration </b>  
+The great folks of #linuxactionshow (Geekshed IRC)  
+All the members of #bash (freenode.net IRC)  
+All the members of /r/LinuxActionShow  
 
 # EOF #
