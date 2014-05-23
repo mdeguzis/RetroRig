@@ -12,13 +12,43 @@
 rm -f install_log.txt
 
 #start logging
-echo "-----------------------------------------------------------" | tee -a install_log.txt
-echo "Starting install log..." | tee -a install_log.txt
-echo "-----------------------------------------------------------" | tee -a install_log.txt
+echo "-----------------------------------------------------------" >> install_log.txt
+echo "Starting install log..." >> install_log.txt
+echo "-----------------------------------------------------------" >> install_log.txt
+
+function _gain-root (){
+
+#prompt for sudo password for elevated operations.  We need this again, in case a user goes directly here
+#The -S (stdin) option causes sudo to read the password from the standard input 
+#instead of the terminal device. You can then use "echo <password> | sudo -S <command>" 
+	
+data=$(tempfile 2>/dev/null)
+# trap it
+trap "rm -f $data" 0 1 2 5 15	 
+# get password with the --insecure option
+dialog --title "Gaining elevated privledges" \
+--clear \
+--insecure \
+--passwordbox "Enter your user password" 7 32 2> $data	 
+ret=$?	 
+# make decison
+case $ret in
+  0)
+    #use local variable to use it later in other functions
+    local userpasswd=$(cat "$data")
+    ;;
+  1)
+    echo "Cancel pressed.";;
+  255)
+    [ -s $data ] &&  cat $data || echo "ESC pressed.";;
+esac
+
+}
+
+#gain elevated privledges for functions of install script
+_gain-root 
 
 function _main () {
-
-_prereq
 
 cmd=(dialog --backtitle "LibreGeek.org RetroRig Installer" --menu "| Main Menu | \
 			 Any required BIOS files are NOT provided!" 16 62 16)
@@ -88,33 +118,6 @@ options=(1 "Install Software"
 	done
 }
 
-function _prereq (){
-
-if ! which dialog > /dev/null; then
-   echo -e "dialog command not found! Install? (y/n) \c"
-   read DIALOG
-   if [ $DIALOG = "y" ]; then
-      echo $userpasswd | sudo -S apt-get install dialog >> /dev/null
-   elif  [ $DIALOG = "n" ]; then
-	echo "exiting!"
-	sleep 2s
-	exit
-   fi
-fi
-
-if ! which git > /dev/null; then
-   echo -e "git command not found! Install? (y/n) \c"
-   read GIT
-   if [ $GIT = "y" ]; then
-      echo $userpasswd | sudo -S apt-get install git >> /dev/null
-   elif  [ $GIT = "n" ]; then
-        echo "exiting!"
-        sleep 2s
-        exit
-   fi
-fi
-}
-
 function _file-loader (){
 
 folder=$(dialog --stdout --title "Please choose a file (spacebar to select)" --fselect $HOME/ 14 48)
@@ -125,7 +128,7 @@ echo "${folder} file chosen."
 #Load ROMs at will-call, or yes/no on configuration run
 function _rom-loader (){
 
-cmd=(dialog --backtitle "LibreGeek.org RetroRig Installer" --menu "Load ROMs for which system?" 18 32 16)
+cmd=(dialog --backtitle "LibreGeek.org RetroRig Installer" --menu "Load ROMs for which system?" 19 32 24)
 options=(1 "Atari 2600" 
 	 2 "NES" 
 	 3 "SNES" 
@@ -136,7 +139,8 @@ options=(1 "Atari 2600"
 	 8 "Playstation 1"
 	 9 "Playstation 2"
 	 10 "Neo Geo"
-	 11 "Exit to main menu")
+	 11 "Exit to settings menu"
+	 12 "Exit to main menu")
 
 	#make menu choice
 	selection=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
@@ -276,6 +280,10 @@ options=(1 "Atari 2600"
 		;;
 
 		11)  
+		return
+		;;
+
+		12)  
 		_main
 		;;
 		esac
@@ -329,7 +337,7 @@ options=(1 "Change resolution"
 }
 
 function _res-swticher (){
-clear
+		clear
 		dialog --infobox "Setting resolution to selection" 3 48
 		#resolution is set via _resolution function		
 		
@@ -447,7 +455,7 @@ if [ "$choices" != "" ]; then
 		#call _res-swticher
 		_res-swticher
 		#return to menu
-		_resolution
+		return
 		;;  
 	 3) 
 		#setting chosen: "1280x1024 (SXGA)  (5:4)"
@@ -463,7 +471,7 @@ if [ "$choices" != "" ]; then
 		#call _res-swticher
 		_res-swticher
 		#return to menu
-		_resolution
+		return
 		;;
 	 4) 
 		#setting chosen: "1366x768  (720p)  (16:9)"
@@ -479,7 +487,7 @@ if [ "$choices" != "" ]; then
 		#call _res-swticher
 		_res-swticher
 		#return to menu
-		_resolution
+		return
 		;;
 	 5) 
 		#setting chosen: "1600x900  (900p)  (16:9)"
@@ -495,7 +503,7 @@ if [ "$choices" != "" ]; then
 		#call _res-swticher
 		_res-swticher
 		#return to menu
-		_resolution
+		return
 		;;
 	 6) 
 		#setting chosen: "1920x1080 (1080p) (16:9)"
@@ -511,7 +519,7 @@ if [ "$choices" != "" ]; then
 		#call _res-swticher
 		_res-swticher
 		#return to menu
-		_resolution
+		return
 		;;    
 	 7) 
 		dialog --infobox  "Setting resolution from user input" 3 40
@@ -536,7 +544,7 @@ if [ "$choices" != "" ]; then
 		rm -f /tmp/new_X
 		rm -f /tmp/new_Y
 		#return to menu
-		_resolution
+		return
 		;; 
 	 8) 
 		_settings
@@ -551,35 +559,6 @@ done
 
 #software function
 function _software () {
-
-
-	#prompt for sudo password for elevated operations
-	#The -S (stdin) option causes sudo to read the password from the standard input 
-	#instead of the terminal device. You can then use "echo <password> | sudo -S <command>" 
-	data=$(tempfile 2>/dev/null)
- 
-	# trap it
-	trap "rm -f $data" 0 1 2 5 15
-	 
-	# get password with the --insecure option
-	dialog --title "Gaining elevated privledges" \
-	--clear \
-	--insecure \
-	--passwordbox "Enter your user password" 7 32 2> $data
-	 
-	ret=$?
-	 
-	# make decison
-	case $ret in
-	  0)
-	    #use local variable to use it later in other functions
-	    userpasswd=$(cat "$data")
-	    ;;
-	  1)
-	    echo "Cancel pressed.";;
-	  255)
-	    [ -s $data ] &&  cat $data || echo "ESC pressed.";;
-	esac
 
 	#clear screen for output
 	clear
@@ -655,30 +634,6 @@ function _gamepad (){
 	echo "Setting Controller Gamepad..." | tee -a install_log.txt
 	echo "-----------------------------------------------------------" | tee -a install_log.txt
 
-	#prompt for sudo password for elevated operations.  We need this again, in case a user goes directly here
-	#The -S (stdin) option causes sudo to read the password from the standard input 
-	#instead of the terminal device. You can then use "echo <password> | sudo -S <command>" 
-	data=$(tempfile 2>/dev/null)
-	# trap it
-	trap "rm -f $data" 0 1 2 5 15	 
-	# get password with the --insecure option
-	dialog --title "Gaining elevated privledges" \
-	--clear \
-	--insecure \
-	--passwordbox "Enter your user password" 7 32 2> $data	 
-	ret=$?	 
-	# make decison
-	case $ret in
-	  0)
-	    #use local variable to use it later in other functions
-	    local userpasswd=$(cat "$data")
-	    ;;
-	  1)
-	    echo "Cancel pressed.";;
-	  255)
-	    [ -s $data ] &&  cat $data || echo "ESC pressed.";;
-	esac
-
 cmd=(dialog --backtitle "LibreGeek.org RetroRig Installer" --menu "| Gamepad Select | \
 			 Request any new Gamepads via github!" 16 62 16)
 options=(1 "Xbox 360 Controller (wireless) (4-player)" 
@@ -703,8 +658,8 @@ options=(1 "Xbox 360 Controller (wireless) (4-player)"
 		#set qjoypad's profile to match Xbox 360 Wireless (4-player)
 		cp -v $HOME/RetroRig/controller-cfgs/x360w.lyt $HOME/.qjoypad3/ | tee -a install_log.txt
 
-		#back to settings menu
-		_settings
+		#back to previous 
+		return
 		;;
 
 		2)
@@ -753,33 +708,6 @@ function _configuration (){
 
 	dialog --infobox "Setting up configuration files" 3 34 ; sleep 3s
 	#clear screen
-	clear
-
-	#prompt for sudo password for elevated operations
-	#The -S (stdin) option causes sudo to read the password from the standard input 
-	#instead of the terminal device. You can then use "echo <password> | sudo -S <command>" 
-	data=$(tempfile 2>/dev/null)
-	# trap it
-	trap "rm -f $data" 0 1 2 5 15	 
-	# get password with the --insecure option
-	dialog --title "Gaining elevated privledges" \
-	--clear \
-	--insecure \
-	--passwordbox "Enter your user password" 7 32 2> $data	 
-	ret=$?	 
-	# make decison
-	case $ret in
-	  0)
-	    #use local variable to use it later in other functions
-	    local userpasswd=$(cat "$data")
-	    ;;
-	  1)
-	    echo "Cancel pressed.";;
-	  255)
-	    [ -s $data ] &&  cat $data || echo "ESC pressed.";;
-	esac
-
-	#clear screen for output
 	clear
 
 	#Note for mkdir and some settings:
@@ -934,8 +862,16 @@ function _configuration (){
 
 	#add xbox controller init script
 	echo "echo $userpasswd | sudo -S needed to create init scripts for xboxdrv!"
+
 	#call function to select gamepad configuration
 	_gamepad
+
+	#call function to set resolution
+	_resolution
+
+	#clear screen after functions are called
+	clear
+
 	echo $userpasswd | sudo -S cp -v $HOME/RetroRig/init-scripts/xboxdrv /etc/init.d/ | tee -a install_log.txt
 	echo $userpasswd | sudo -S update-rc.d xboxdrv defaults | tee -a install_log.txt
 
@@ -966,13 +902,6 @@ function _configuration (){
 	sed -i "s|/home/test/|/home/$USER/|g" $HOME/.dolphin-emu/Config/Dolphin.ini | tee -a install_log.txt
 	sed -i "s|/home/test/|/home/$USER/|g" $HOME/.xbmc/userdata/addon_data/script.games.rom.collection.browser/config.xml | tee -a install_log.txt	
 	echo "The user applied to configuration files was: $USER" |  tee -a install_log
-	sleep 7s
-	
-	#remind user about default resolution
-	#If the default is not supported on the monitor, emulators like zsnes will fail to start!
-	dialog --msgbox "Default Resolution is 1360x768 (720p)! Please ensure your \
-                          display supports this resolution, or change it in the settings menu! \
-                          Main Menu > Option 3 > Option 1" 12 31
 
 	#prompt user if they wish to pre-load ROMs now
 	dialog --title "Confirm yes/no" \
