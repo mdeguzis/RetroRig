@@ -42,6 +42,20 @@ Warning! It will overwrite:
     -Some folder structures under ~/Games
     -xboxdrv init scripts and configurations
 
+## Current feature set
+
+* Auto-install software, emulator configs, and required components
+* (settings menu) 4-player wireless xboxdrv userland module inserted as init script
+* (settings menu) Gamepad select menu (currently only Xbox 360 wireless is supported)
+* (settings menu) Resolution presets/custom selection for emulators that support it
+* Preset Controller mappings for supported gamepads (Xbox 360 Gamepad by default)
+* Save state, load state, exit emulators with gamepad (pcsx, pcsx2 have issues currently)
+* A cobbled together "first run" state of RCB with a blank games database and pre-set configs
+* Functions to update git repo, emulator binaries, upgrade system and more
+* Automatically start XBMC, then directly into RCB itself
+* ROM pre-loader on configuration setup
+* Logging options for install
+
 ## Why XBMC and Ubuntu?
 
 I mainly made the decision to use Ubuntu+XBMC for a few reasons. First of all is XBMC itself, which can

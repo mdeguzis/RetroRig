@@ -699,6 +699,10 @@ options=(1 "Xbox 360 Controller (wireless) (4-player)"
 		#Inject Xbox 360 configuration to init script. The default is xpad-wireless.xbodrv, so no need to inject below!
 		#but.........commented anyway for science!!!
 		#echo $userpasswd | sudo -S sed -i "s|xpad-wireless.xboxdrv|xpad-wireless.xboxdrv|g" /etc/init.d/xboxdrv
+
+		#set qjoypad's profile to match Xbox 360 Wireless (4-player)
+		cp -v $HOME/RetroRig/controller-cfgs/x360w.lyt $HOME/.qjoypad3/ | tee -a install_log.txt
+
 		#back to settings menu
 		_settings
 		;;
@@ -924,9 +928,6 @@ function _configuration (){
 	#OpenGL graphics config
 	cp -Rv /$HOME/RetroRig/emu-configs/Dolphin/gfx_opengl.ini $HOME/.dolphin-emu/Config/ | tee -a install_log.txt
 
-	#copy config for qjoypad setup
-	cp -v $HOME/RetroRig/controller-cfgs/retro-gaming.lyt $HOME/.qjoypad3/ | tee -a install_log.txt
-
 	echo "-----------------------------------------------------------" | tee -a install_log.txt
 	echo "init scripts and post-configurations" | tee -a install_log.txt
 	echo "-----------------------------------------------------------" | tee -a install_log.txt
@@ -944,6 +945,9 @@ function _configuration (){
 	#blacklist xpad
 	echo "sudo needed to blacklist xpad!"
 	echo $userpasswd | sudo -S cp -v $HOME/RetroRig/init-scripts/blacklist.conf /etc/modprobe.d/ | tee -a install_log.txt
+
+	#copy default gamepad setup for Xbox 360 Wireless (4-player)
+	cp -v $HOME/RetroRig/controller-cfgs/x360w.lyt $HOME/.qjoypad3/ | tee -a install_log.txt
 
 	#create autostart for XBMC and qjoypad
 	echo "sudo needed to create auto-start entries!"
