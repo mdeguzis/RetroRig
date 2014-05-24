@@ -52,6 +52,7 @@ Warning! It will overwrite:
 * Save state, load state, exit emulators with gamepad (pcsx, pcsx2 have issues currently)
 * A cobbled together "first run" state of RCB with a blank games database and pre-set configs
 * Functions to update git repo, emulator binaries, upgrade system and more
+* MAME offline scrapper system built in (artwork almost ready)
 * Automatically start XBMC, then directly into RCB itself
 * ROM pre-loader on configuration setup
 * Logging options for install
