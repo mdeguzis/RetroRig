@@ -673,10 +673,7 @@ options=(1 "Xbox 360 Controller (wireless) (4-player)"
 function _config-x360w () {
 
 	#copy xbox configuration (default) to folder
-	echo $userpasswd | sudo -S sed -v $HOME/RetroRig/controller-cfgs/x360w/xpad-wireless.xboxdrv /usr/share/xboxdrv/ | tee -a install_log.txt
-	#Inject Xbox 360 configuration to init script. The default is xpad-wireless.xbodrv, so no need to inject below!
-	#but.........commented anyway for science!!!
-	#echo $userpasswd | sudo -S sed -i "s|xpad-wireless.xboxdrv|xpad-wireless.xboxdrv|g" /etc/init.d/xboxdrv
+	echo $userpasswd | sudo -S cp -v $HOME/RetroRig/controller-cfgs/x360w/xpad-wireless.xboxdrv /usr/share/xboxdrv/ | tee -a install_log.txt
 
 	#set qjoypad's profile to match Xbox 360 Wireless (4-player)
 	cp -v $HOME/RetroRig/controller-cfgs/x360w.lyt $HOME/.qjoypad3/ | tee -a install_log.txt
@@ -1012,7 +1009,7 @@ function _reboot () {
 	    [ -s $data ] &&  cat $data || echo "ESC pressed.";;
 	esac
 
-        dialog --infobox "Rebooting in 5 seconds, press CTRL+C to cancel" 3 51 ; sleep 5s
+        dialog --infobox "Rebooting PC" 3 51 ; sleep 2s
         sleep 5s
         echo $userpasswd | sudo -S /sbin/reboot
 }
