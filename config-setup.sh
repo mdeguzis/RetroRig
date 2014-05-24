@@ -673,7 +673,7 @@ options=(1 "Xbox 360 Controller (wireless) (4-player)"
 function _config-x360w () {
 
 	#copy xbox configuration (default) to folder
-	echo $userpasswd | sudo -S sed -v $HOME/RetroRig/controller-cfgs/xpad-wireless.xboxdrv /usr/share/xboxdrv/ | tee -a install_log.txt
+	echo $userpasswd | sudo -S sed -v $HOME/RetroRig/controller-cfgs/x360w/xpad-wireless.xboxdrv /usr/share/xboxdrv/ | tee -a install_log.txt
 	#Inject Xbox 360 configuration to init script. The default is xpad-wireless.xbodrv, so no need to inject below!
 	#but.........commented anyway for science!!!
 	#echo $userpasswd | sudo -S sed -i "s|xpad-wireless.xboxdrv|xpad-wireless.xboxdrv|g" /etc/init.d/xboxdrv
@@ -993,7 +993,7 @@ function _reboot () {
 	trap "rm -f $data" 0 1 2 5 15
 	 
 	# get password with the --insecure option
-	dialog --title "Gaining elevated privledges" \
+	dialog --title "Enter password to confirm!" \
 	--clear \
 	--insecure \
 	--passwordbox "Enter your user password" 7 32 2> $data

@@ -48,7 +48,7 @@ Warning! It will overwrite:
 * (settings menu) 4-player wireless xboxdrv userland module inserted as init script
 * (settings menu) Gamepad select menu (currently only Xbox 360 wireless is supported)
 * (settings menu) Resolution presets/custom selection for emulators that support it
-* Preset Controller mappings for supported gamepads (Xbox 360 Gamepad by default)
+* Preset Controller mappings for supported gamepads (Xbox 360 Gamepad only at the moment)
 * Save state, load state, exit emulators with gamepad (pcsx, pcsx2 have issues currently)
 * A cobbled together "first run" state of RCB with a blank games database and pre-set configs
 * Functions to update git repo, emulator binaries, upgrade system and more
