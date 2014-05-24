@@ -31,7 +31,8 @@ Default Controller layout:
 
 Tips and Tricks:
 
-    I couldn't seem to set Esc as the button to exit the emulator, since that is reserved in the UI for exiting a configuration screen. If you know a way around this, please let me know.
+    I couldn't seem to set Esc as the button to exit the emulator, since that is reserved in the UI for exiting 
+    a configuration screen. If you know a way around this, please let me know.
     The main buttons were reversed to reflect the original gamepad
     Gamepad is enabled for navigation of menu system
 
