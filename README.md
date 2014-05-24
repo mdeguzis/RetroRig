@@ -55,6 +55,7 @@ Warning! It will overwrite:
 * Automatically start XBMC, then directly into RCB itself
 * ROM pre-loader on configuration setup
 * Logging options for install
+* Unity configuration set during config-setup to lengthen screen timeout + remove screen lock
 
 ## Why XBMC and Ubuntu?
 

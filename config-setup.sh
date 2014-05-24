@@ -34,8 +34,8 @@ ret=$?
 # make decison
 case $ret in
   0)
-    #use local variable to use it later in other functions
-    local userpasswd=$(cat "$data")
+    #variable to use later in other functions
+     userpasswd=$(cat "$data")
     ;;
   1)
     echo "Cancel pressed.";;
@@ -71,16 +71,19 @@ options=(1 "Install Software"
 		case $choice in
 		1)  	
 		_software
+		#call memu rather than return so user can choose again
 		_main
 		;;
 
 		2)  
 		_configuration
+		#call memu rather than return so user can choose again
 		_main 
 		;;
 
 		3)
 		_settings
+		#call memu rather than return so user can choose again
 		_main
 		;;
 
@@ -92,21 +95,25 @@ options=(1 "Install Software"
 
 		5)
 		_update-binaries
+		#call memu rather than return so user can choose again
 		_main
 		;;
 
 		6)
 		_upgrade-system
+		#call memu rather than return so user can choose again
 		_main
 		;;
 
 		7)
 		_start-xbmc
+		#call memu rather than return so user can choose again
 		_main
 		;;
 
 		8)
 		_reboot
+		#call memu rather than return so user can choose again
 		_main
 		;;
 
@@ -139,8 +146,7 @@ options=(1 "Atari 2600"
 	 8 "Playstation 1"
 	 9 "Playstation 2"
 	 10 "Neo Geo"
-	 11 "Exit to settings menu"
-	 12 "Exit to main menu")
+	 11 "Exit ROM Loader")
 
 	#make menu choice
 	selection=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
@@ -282,10 +288,6 @@ options=(1 "Atari 2600"
 		11)  
 		return
 		;;
-
-		12)  
-		_main
-		;;
 		esac
 	done
 }
@@ -294,7 +296,7 @@ options=(1 "Atari 2600"
 function _remote-tools (){
 
 clear
-dialog --infobox "Setting resolution to 1920x768 (720p)" 3 48
+dialog --infobox "Nothing here yet" 3 48
 
 }
 
@@ -316,21 +318,24 @@ options=(1 "Change resolution"
 		case $choice in
 		1)  	
 		_resolution
+		#call settings rather than return so user can choose again
 		_settings
 		;;
 
 		2)  	
 		_rom-loader
+		#call settings rather than return so user can choose again
 		_settings
 		;;
 
 		3)  	
 		_gamepad
+		#call settings rather than return so user can choose again
 		_settings
 		;;
 
 		4)  
-		_main
+		return
 		;;
 	esac
 	done
@@ -401,7 +406,7 @@ options=(1 "Current Resolution"
 	 5 "1600x900  (900p)  (16:9)"
 	 6 "1920x1080 (1080p) (16:9)"
 	 7 "Custom"
-	 8 "Back to settings menu"
+	 8 "Exit resolution selection"
 	 9 "Back to main menu"
 	)
      
@@ -547,7 +552,7 @@ if [ "$choices" != "" ]; then
 		return
 		;; 
 	 8) 
-		_settings
+		return
 		;;
 	 9) 
 		_main
@@ -637,7 +642,7 @@ function _gamepad (){
 cmd=(dialog --backtitle "LibreGeek.org RetroRig Installer" --menu "| Gamepad Select | \
 			 Request any new Gamepads via github!" 16 62 16)
 options=(1 "Xbox 360 Controller (wireless) (4-player)" 
-	 2 "Back to settings menu" 
+	 2 "Exit gamepad selection" 
 	 3 "Back to main menu")
 
 	#make menu choice
@@ -649,21 +654,12 @@ options=(1 "Xbox 360 Controller (wireless) (4-player)"
 		case $choice in
 
 		1)
-		#copy xbox configuration (default) to folder
-		echo $userpasswd | sudo -S sed -v $HOME/RetroRig/controller-cfgs/xpad-wireless.xboxdrv /usr/share/xboxdrv/ | tee -a install_log.txt
-		#Inject Xbox 360 configuration to init script. The default is xpad-wireless.xbodrv, so no need to inject below!
-		#but.........commented anyway for science!!!
-		#echo $userpasswd | sudo -S sed -i "s|xpad-wireless.xboxdrv|xpad-wireless.xboxdrv|g" /etc/init.d/xboxdrv
-
-		#set qjoypad's profile to match Xbox 360 Wireless (4-player)
-		cp -v $HOME/RetroRig/controller-cfgs/x360w.lyt $HOME/.qjoypad3/ | tee -a install_log.txt
-
-		#back to previous 
+		_config-x360w
 		return
 		;;
 
 		2)
-		_settings
+		return
 		;;
 
 		3)
@@ -671,6 +667,92 @@ options=(1 "Xbox 360 Controller (wireless) (4-player)"
 		;;
 		esac
 	done
+}
+
+function _config-x360w () {
+
+	#copy xbox configuration (default) to folder
+	echo $userpasswd | sudo -S sed -v $HOME/RetroRig/controller-cfgs/xpad-wireless.xboxdrv /usr/share/xboxdrv/ | tee -a install_log.txt
+	#Inject Xbox 360 configuration to init script. The default is xpad-wireless.xbodrv, so no need to inject below!
+	#but.........commented anyway for science!!!
+	#echo $userpasswd | sudo -S sed -i "s|xpad-wireless.xboxdrv|xpad-wireless.xboxdrv|g" /etc/init.d/xboxdrv
+
+	#set qjoypad's profile to match Xbox 360 Wireless (4-player)
+	cp -v $HOME/RetroRig/controller-cfgs/x360w.lyt $HOME/.qjoypad3/ | tee -a install_log.txt
+
+	#Nestopia
+	#default path: /home/$USER/.nestopia
+	cp -v $HOME/RetroRig/emu-configs/x360w/Nestopia/nstcontrols $HOME/.nestopia/ | tee -a install_log.txt
+	cp -v $HOME/RetroRig/emu-configs/x360w/Nestopia/nstsettings $HOME/.nestopia/ | tee -a install_log.txt
+
+	#gens
+	#default path: /home/$USER/.gens
+	#Global config
+	cp -v $HOME/RetroRig/emu-configs/x360w/Gens-GS/gens.cfg $HOME/.gens/ | tee -a install_log.txt
+
+	#ZSNES
+	#default path: /home/$USER/.zsnes
+	#Controller config
+	cp -v $HOME/RetroRig/emu-configs/x360w/ZSNES/zinput.cfg $HOME/.zsnes/ | tee -a install_log.txt
+	cp -v $HOME/RetroRig/emu-configs/x360w/ZSNES/zsnesl.cfg $HOME/.zsnes/ | tee -a install_log.txt
+
+	#mame
+	#default path: /home/$USER/.mame
+	#Main config
+	cp -v $HOME/RetroRig/emu-configs/x360w/MAME/default.cfg $HOME/.mame/cfg | tee -a install_log.txt
+	cp -v $HOME/RetroRig/emu-configs/x360w/MAME/mame.ini $HOME/.mame | tee -a install_log.txt
+	#offline artwork scrapper configs
+	cp -v $HOME/RetroRig/emu-configs/x360w/MAME/parserConfig.xml $HOME/Games/Artwork/MAME | tee -a install_log.txt
+	
+	#pcsx
+	#default path: /home/$USER/.pcsx
+	#Main config
+	cp -v $HOME/RetroRig/emu-configs/x360w/pcsx/pcsx.cfg $HOME/.pcsx/ | tee -a install_log.txt
+	cp -Rv $HOME/RetroRig/emu-configs/x360w/pcsx/plugins $HOME/.pcsx/ | tee -a install_log.txt
+	cp -Rv $HOME/RetroRig/emu-configs/x360w/pcsx/patches $HOME/.pcsx/ | tee -a install_log.txt
+
+	#pcsx2
+	#default path: /home/$USER/.config/pcsx2
+	#Main config
+	cp -v $HOME/RetroRig/emu-configs/x360w/pcsx2/PCSX2-reg.ini $HOME/.config/pcsx2/ | tee -a install_log.txt
+	cp -v $HOME/RetroRig/emu-configs/x360w/pcsx2/inisOnePAD.ini $HOME/.config/pcsx2/ | tee -a install_log.txt
+	cp -v $HOME/RetroRig/emu-configs/x360w/pcsx2/inis/* $HOME/.config/pcsx2/inis/ | tee -a install_log.txt
+
+	#mupen64pluspwd
+	#default path: /home/$USER/.config/mupen64plus
+	#Main config
+	cp -v $HOME/RetroRig/emu-configs/x360w/mupen64plus/mupen64plus.cfg $HOME/.config/mupen64plus/ | tee -a install_log.txt
+
+	#Stella
+	#default path: /home/$USER/.config/mupen64plus
+	#Main config
+	cp -v $HOME/RetroRig/emu-configs/x360w/Stella/stellarc $HOME/.stella/ | tee -a install_log.txt
+
+	#dolphin
+	#default path /home/$USER/.dolphin-emu/
+	#emulator config
+	cp -Rv /$HOME/RetroRig/emu-configs/x360w/Dolphin/Dolphin.ini $HOME/.dolphin-emu/Config/ | tee -a install_log.txt
+	#Gamecube controller config
+	cp -Rv /$HOME/RetroRig/emu-configs/x360w/Dolphin/GCPadNew.ini $HOME/.dolphin-emu/Config/ | tee -a install_log.txt
+	#Wii controller config
+	#OpenGL graphics config
+	cp -Rv /$HOME/RetroRig/emu-configs/x360w/Dolphin/gfx_opengl.ini $HOME/.dolphin-emu/Config/ | tee -a install_log.txt
+	
+	#inject init script
+	echo $userpasswd | sudo -S cp -v $HOME/RetroRig/init-scripts/x360w/xboxdrv /etc/init.d/ | tee -a install_log.txt
+	#update 
+	echo $userpasswd | sudo -S update-rc.d xboxdrv defaults | tee -a install_log.txt
+
+	#blacklist xpad
+	echo "sudo needed to blacklist xpad!"
+	echo $userpasswd | sudo -S cp -v $HOME/RetroRig/init-scripts/x360w/blacklist.conf /etc/modprobe.d/ | tee -a install_log.txt
+
+	#copy default gamepad setup for Xbox 360 Wireless (4-player)
+	cp -v $HOME/RetroRig/controller-cfgs/x360w/x360w.lyt $HOME/.qjoypad3/ | tee -a install_log.txt
+
+	#copy qjoypad autostart item for x360w gamepad config
+	echo $userpasswd | sudo -S cp -v $HOME/RetroRig/controller-cfgs/x360w/qjoypad.desktop /etc/xdg/autostart/ | tee -a install_log.txt
+
 }
 
 #configuration function
@@ -798,64 +880,6 @@ function _configuration (){
 	#configs
 	mkdir -pv $HOME/Games/Configs/ | tee -a install_log.txt
 
-	#Nestopia
-	#default path: /home/$USER/.nestopia
-	cp -v $HOME/RetroRig/emu-configs/Nestopia/nstcontrols $HOME/.nestopia/ | tee -a install_log.txt
-	cp -v $HOME/RetroRig/emu-configs/Nestopia/nstsettings $HOME/.nestopia/ | tee -a install_log.txt
-
-	#gens
-	#default path: /home/$USER/.gens
-	#Global config
-	cp -v $HOME/RetroRig/emu-configs/Gens-GS/gens.cfg $HOME/.gens/ | tee -a install_log.txt
-
-	#ZSNES
-	#default path: /home/$USER/.zsnes
-	#Controller config
-	cp -v $HOME/RetroRig/emu-configs/ZSNES/zinput.cfg $HOME/.zsnes/ | tee -a install_log.txt
-	cp -v $HOME/RetroRig/emu-configs/ZSNES/zsnesl.cfg $HOME/.zsnes/ | tee -a install_log.txt
-
-	#mame
-	#default path: /home/$USER/.mame
-	#Main config
-	cp -v $HOME/RetroRig/emu-configs/MAME/default.cfg $HOME/.mame/cfg | tee -a install_log.txt
-	cp -v $HOME/RetroRig/emu-configs/MAME/mame.ini $HOME/.mame | tee -a install_log.txt
-	#offline artwork scrapper configs
-	cp -v $HOME/RetroRig/emu-configs/MAME/parserConfig.xml $HOME/Games/Artwork/MAME | tee -a install_log.txt
-	
-	#pcsx
-	#default path: /home/$USER/.pcsx
-	#Main config
-	cp -v $HOME/RetroRig/emu-configs/pcsx/pcsx.cfg $HOME/.pcsx/ | tee -a install_log.txt
-	cp -Rv $HOME/RetroRig/emu-configs/pcsx/plugins $HOME/.pcsx/ | tee -a install_log.txt
-	cp -Rv $HOME/RetroRig/emu-configs/pcsx/patches $HOME/.pcsx/ | tee -a install_log.txt
-
-	#pcsx2
-	#default path: /home/$USER/.config/pcsx2
-	#Main config
-	cp -v $HOME/RetroRig/emu-configs/pcsx2/PCSX2-reg.ini $HOME/.config/pcsx2/ | tee -a install_log.txt
-	cp -v $HOME/RetroRig/emu-configs/pcsx2/inisOnePAD.ini $HOME/.config/pcsx2/ | tee -a install_log.txt
-	cp -v $HOME/RetroRig/emu-configs/pcsx2/inis/* $HOME/.config/pcsx2/inis/ | tee -a install_log.txt
-
-	#mupen64pluspwd
-	#default path: /home/$USER/.config/mupen64plus
-	#Main config
-	cp -v $HOME/RetroRig/emu-configs/mupen64plus/mupen64plus.cfg $HOME/.config/mupen64plus/ | tee -a install_log.txt
-
-	#Stella
-	#default path: /home/$USER/.config/mupen64plus
-	#Main config
-	cp -v $HOME/RetroRig/emu-configs/Stella/stellarc $HOME/.stella/ | tee -a install_log.txt
-
-	#dolphin
-	#default path /home/$USER/.dolphin-emu/
-	#emulator config
-	cp -Rv /$HOME/RetroRig/emu-configs/Dolphin/Dolphin.ini $HOME/.dolphin-emu/Config/ | tee -a install_log.txt
-	#Gamecube controller config
-	cp -Rv /$HOME/RetroRig/emu-configs/Dolphin/GCPadNew.ini $HOME/.dolphin-emu/Config/ | tee -a install_log.txt
-	#Wii controller config
-	#OpenGL graphics config
-	cp -Rv /$HOME/RetroRig/emu-configs/Dolphin/gfx_opengl.ini $HOME/.dolphin-emu/Config/ | tee -a install_log.txt
-
 	echo "-----------------------------------------------------------" | tee -a install_log.txt
 	echo "init scripts and post-configurations" | tee -a install_log.txt
 	echo "-----------------------------------------------------------" | tee -a install_log.txt
@@ -863,7 +887,7 @@ function _configuration (){
 	#add xbox controller init script
 	echo "echo $userpasswd | sudo -S needed to create init scripts for xboxdrv!"
 
-	#call function to select gamepad configuration
+	#call modular function to select specific gamepad configuration for all environments
 	_gamepad
 
 	#call function to set resolution
@@ -872,24 +896,11 @@ function _configuration (){
 	#clear screen after functions are called
 	clear
 
-	echo $userpasswd | sudo -S cp -v $HOME/RetroRig/init-scripts/xboxdrv /etc/init.d/ | tee -a install_log.txt
-	echo $userpasswd | sudo -S update-rc.d xboxdrv defaults | tee -a install_log.txt
-
-	#copyautoexec.py in the userdata folder for autostarting RCB
-	#cp -v $HOME/RetroRig/RCB/autoexec.py $HOME/.xbmc/userdata/
-
-	#blacklist xpad
-	echo "sudo needed to blacklist xpad!"
-	echo $userpasswd | sudo -S cp -v $HOME/RetroRig/init-scripts/blacklist.conf /etc/modprobe.d/ | tee -a install_log.txt
-
-	#copy default gamepad setup for Xbox 360 Wireless (4-player)
-	cp -v $HOME/RetroRig/controller-cfgs/x360w.lyt $HOME/.qjoypad3/ | tee -a install_log.txt
-
-	#create autostart for XBMC and qjoypad
+	#create autostart for XBMC (universal)
 	echo "sudo needed to create auto-start entries!"
 	echo $userpasswd | sudo -S cp -v /usr/share/applications/xbmc.desktop /etc/xdg/autostart/ | tee -a install_log.txt
-	echo $userpasswd | sudo -S cp -v $HOME/RetroRig/controller-cfgs/qjoypad.desktop /etc/xdg/autostart/ | tee -a install_log.txt
-	#If xboxdrv config file does not pick up on reboot,
+
+	#If x360w xboxdrv config file does not pick up on reboot,
 	#be sure to resync the wireless receiver!
 
 	#set the system user to an absolute value.
