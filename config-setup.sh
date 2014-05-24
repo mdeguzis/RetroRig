@@ -592,14 +592,12 @@ function _software () {
 	echo "-----------------------------------------------------------" | tee -a install_log.txt
 	sudo add-apt-repository -y ppa:glennric/dolphin-emu | tee -a install_log.txt
 
-	#install Gens/GS via deb pkg (only way I  can currently find it)
+	#update repository listings
 	echo "-----------------------------------------------------------" | tee -a install_log.txt
-	echo "Installing Gens/GS...On first run this will take some time!" | tee -a install_log.txt
-	echo "-----------------------------------------------------------" | tee -a install_log.txt
-	#need to use gdebi here to autoresolve dependencies that Gens/GS requires for i386
-	#install Gens/GS using gdebi
-	echo $userpasswd | sudo -S gdebi --n $HOME/RetroRig/emulators/Gens-GS/Gens_2.16.7_i386.deb | tee -a install_log.txt
-	
+	echo "Updating packages..." | tee -a install_log.txt
+	echo "-----------------------------------------------------------" | tee -a install_log.txt	
+	echo $userpasswd | sudo -S apt-get update | tee -a install_log.txt
+
 	#install software from repositories
 	echo "-----------------------------------------------------------" | tee -a install_log.txt
 	echo "Installing required packages..." | tee -a install_log.txt
@@ -608,6 +606,14 @@ function _software () {
 	python-software-properties pkg-config software-properties-common \
 	mame mupen64plus dconf-tools qjoypad xbmc dolphin-emu-master stella \
 	build-essential gdebi| tee -a install_log.txt
+
+	#install Gens/GS via deb pkg (only way I  can currently find it)
+	echo "-----------------------------------------------------------" | tee -a install_log.txt
+	echo "Installing Gens/GS...On first run this will take some time!" | tee -a install_log.txt
+	echo "-----------------------------------------------------------" | tee -a install_log.txt
+	#need to use gdebi here to autoresolve dependencies that Gens/GS requires for i386
+	#install Gens/GS using gdebi
+	echo $userpasswd | sudo -S gdebi --n $HOME/RetroRig/emulators/Gens-GS/Gens_2.16.7_i386.deb | tee -a install_log.txt
 
 	#Removal of software for related bugs
 	echo "-----------------------------------------------------------" | tee -a install_log.txt
@@ -621,11 +627,6 @@ function _software () {
 	echo "Reported by cecilpierce on 2012-06-05 on Launchpad" | tee -a install_log.txt
 	echo "https://bugs.launchpad.net/ubuntu/+source/plymouth/+bug/1009238" | tee -a install_log.txt
 	
-	#update repository listings
-	echo "-----------------------------------------------------------" | tee -a install_log.txt
-	echo "Updating packages..." | tee -a install_log.txt
-	echo "-----------------------------------------------------------" | tee -a install_log.txt	
-	echo $userpasswd | sudo -S apt-get update | tee -a install_log.txt
 	
 	#clear screen
 	clear
