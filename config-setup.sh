@@ -909,6 +909,7 @@ function _configuration (){
 	sed -i "s|/home/mikeyd/|/home/$USER/|g" $HOME/.config/pcsx2/PCSX2-reg.ini | tee -a install_log.txt
 	sed -i "s|/home/mikeyd/|/home/$USER/|g" $HOME/.gens/gens.cfg | tee -a install_log.txt
 	sed -i "s|/home/mikeyd/|/home/$USER/|g" $HOME/.zsnes/zsnesl.cfg | tee -a install_log.txt
+	sed -i "s|/home/mikeyd/|/home/$USER/|g" $HOME/.mame/mame.ini | tee -a install_log.txt
 	sed -i "s|/home/mikeyd/|/home/$USER/|g" $HOME/.pcsx/pcsx.cfg | tee -a install_log.txt
 	sed -i "s|/home/mikeyd/|/home/$USER/|g" $HOME/.dolphin-emu/Config/Dolphin.ini | tee -a install_log.txt
 	sed -i "s|/home/mikeyd/|/home/$USER/|g" $HOME/.xbmc/userdata/addon_data/script.games.rom.collection.browser/config.xml | tee -a install_log.txt	
