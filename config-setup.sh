@@ -701,7 +701,9 @@ function _config-x360w () {
 	cp -v $HOME/RetroRig/emu-configs/x360w/MAME/mame.ini $HOME/.mame | tee -a install_log.txt
 	#offline artwork scrapper configs
 	cp -v $HOME/RetroRig/emu-configs/x360w/MAME/parserConfig.xml $HOME/Games/Artwork/MAME | tee -a install_log.txt
-	
+	cp -v $HOME/RetroRig/emu-configs/x360w/MAME/MAME.txt $HOME/Games/Artwork/MAME | tee -a install_log.txt
+	cp -v $HOME/RetroRig/emu-configs/x360w/MAME/MAME\ synopsis\ RCB\ 201202.zip/ $HOME/Games/Artwork/MAME | tee -a install_log.txt
+
 	#pcsx
 	#default path: /home/$USER/.pcsx
 	#Main config
