@@ -307,7 +307,8 @@ cmd=(dialog --backtitle "LibreGeek.org RetroRig Installer" --menu "Settings Menu
 options=(1 "Change resolution"  
 	 2 "Load ROMs"
 	 3 "Change Gamepad Type"
-	 4 "Back to main menu")
+	 4 "Load PS2 BIOS Files"
+	 5 "Back to main menu")
 
 	#make menu choice
 	selection=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
@@ -334,7 +335,21 @@ options=(1 "Change resolution"
 		_settings
 		;;
 
-		4)  
+		4)
+		_file-loader
+		#copy BIOS files for pcsx2
+		clear
+		echo "-----------------------------------------------------------" | tee -a install_log.txt
+		echo "Loading PS2 BIOS files..." | tee -a install_log.txt
+		echo "-----------------------------------------------------------" | tee -a install_log.txt
+		cp -Rv $folder/* $HOME/.config/pcsx2/bios | tee -a install_log.txt
+		#set default BIOS file for pcsx2
+		
+		#call settings rather than return so user can choose again
+		_settings
+		;;
+
+		5)  
 		return
 		;;
 	esac
@@ -375,6 +390,12 @@ function _res-swticher (){
 		#Gens/GS
 		sed -i "s|$g_org_X|OpenGL Width="$g_new_X"|g" $HOME/.gens/gens.cfg
 		sed -i "s|$g_org_Y|OpenGL Height="$g_new_Y"|g" $HOME/.gens/gens.cfg
+
+		########################		
+		#Dolphin-emu
+		######################## 
+		#Resolution in Dolphin is set automatically via OpenGL. This can
+		#be hardcoded, but works best in auto mode.
 
 		########################		
 		#Stella
@@ -436,10 +457,15 @@ if [ "$choices" != "" ]; then
 		echo "Nestopia:" >> res.txt
 		echo "Current Scaling: hq?x 3x" >> res.txt
 		echo "" >> res.txt
+		#Dolphin-emu
+		echo "Dolphin-emu:" >> res.txt
+		echo "Resolution automatically set via OpenGL" >> res.txt
+		echo "" >> res.txt
 		#Stella
 		echo "Stella:" >> res.txt
 		grep -i "tia_filter" $HOME/.stella/stellarc >> res.txt
 		echo "" >> res.txt
+
 		#report current resolution
 		dialog --textbox res.txt 33 40
 		#remove text file
@@ -911,6 +937,8 @@ function _configuration (){
 	sed -i "s|/home/mikeyd/|/home/$USER/|g" $HOME/.zsnes/zsnesl.cfg | tee -a install_log.txt
 	sed -i "s|/home/mikeyd/|/home/$USER/|g" $HOME/.mame/mame.ini | tee -a install_log.txt
 	sed -i "s|/home/mikeyd/|/home/$USER/|g" $HOME/.pcsx/pcsx.cfg | tee -a install_log.txt
+	sed -i "s|/home/mikeyd/|/home/$USER/|g" $HOME/.config/pcsx2/PCSX2-reg.ini | tee -a install_log.txt
+	sed -i "s|/home/mikeyd/|/home/$USER/|g" $HOME/.config/pcsx2/inis/PCSX2_ui.ini | tee -a install_log.txt
 	sed -i "s|/home/mikeyd/|/home/$USER/|g" $HOME/.dolphin-emu/Config/Dolphin.ini | tee -a install_log.txt
 	sed -i "s|/home/mikeyd/|/home/$USER/|g" $HOME/.xbmc/userdata/addon_data/script.games.rom.collection.browser/config.xml | tee -a install_log.txt	
 	echo "The user applied to configuration files was: $USER" |  tee -a install_log.txt
