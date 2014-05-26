@@ -58,6 +58,7 @@ Warning! It will overwrite:
 * ROM pre-loader on configuration setup
 * Logging options for install
 * Unity configuration set during config-setup to lengthen screen timeout + remove screen lock
+* Beta branch for those wishing to see/test what I'm working on
 
 ## Why XBMC and Ubuntu?
 
