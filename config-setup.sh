@@ -292,14 +292,6 @@ options=(1 "Atari 2600"
 	done
 }
 
-#settings function
-function _remote-tools (){
-
-clear
-dialog --infobox "Nothing here yet" 3 48
-
-}
-
 #mupen64plus plugin changer
 function _config-mupen (){
 
@@ -400,7 +392,8 @@ options=(1 "Change resolution"
 	 3 "Change plugins/filters/scaling"
 	 4 "Change Gamepad Type"
 	 5 "Load PS2 BIOS Files"
-	 6 "Back to main menu")
+	 6 "Enable SSH support"
+	 7 "Back to main menu")
 
 	#make menu choice
 	selection=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
@@ -448,7 +441,27 @@ grep -i "VideoPlugin = " $HOME/.config/mupen64plus/mupen64plus.cfg >> res.txt
 		_settings
 		;;
 
-		6)  
+		6)
+		clear
+		#install openssh-server  
+		echo $userpasswd | sudo -S apt-get install -y openssh-server | tee -a install_log.txt
+		#prompt user to change default port
+		dialog --title "Set desired SSH port (typically 22)" --inputbox "Enter Port" 10 0 2> /tmp/set_ssh
+		#cat input
+		ssh_new=$(cat '/tmp/set_ssh')
+		#set orig port 
+		ssh_org=$(grep -i "Port " /etc/ssh/sshd_config)
+		#set new port from user input
+		echo $userpasswd | sudo -S sed -i "s|$ssh_org|Port "$ssh_new"|g" /etc/ssh/sshd_config
+		#restart ssh service
+		echo $userpasswd | sudo -S service ssh restart
+		#remove temp file
+		rm -f /tmp/set_ssh
+		#return to menu
+		_settings
+		;;
+
+		7)  
 		return
 		;;
 	esac
