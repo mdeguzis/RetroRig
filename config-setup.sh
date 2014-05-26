@@ -131,6 +131,7 @@ folder=$(dialog --stdout --title "Please choose a file (spacebar to select)" --f
 echo "${folder} file chosen."
 }
 
+
 #Load ROMs at will-call, or yes/no on configuration run
 function _rom-loader (){
 
@@ -299,20 +300,112 @@ dialog --infobox "Nothing here yet" 3 48
 
 }
 
+#mupen64plus plugin changer
+function _config-mupen (){
+
+#set fstart to start at specified folder directory, local var only
+local fstart
+
+cmd=(dialog --backtitle "LibreGeek.org RetroRig Installer" --menu "Default directory: ~/.config/mupen64plus" 16 0 16)
+options=(1 "Change Video Plugin"
+	 2 "Back to settings menu"  
+	 3 "Back to main menu")
+
+	#make menu choice
+	selection=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
+	#functions
+
+	for choice in $selection
+	do
+		case $choice in
+
+		1)
+		#present a different file loader here, since we want to start in a diff DIR.
+		fstart=/usr/lib/x86_64-linux-gnu/mupen64plus
+		#Maybe I can find a way to swap the dir on the fly later on
+		folder=$(dialog --stdout --title "Please choose a file (spacebar to select)" --fselect $fstart/ 10 68)
+		#change plugin
+		m_plug_orig=$(grep -i "VideoPlugin = " $HOME/.config/mupen64plus/mupen64plus.cfg)
+		sed -i "s|$m_plug_orig|VideoPlugin = "$folder"|g" $HOME/.config/mupen64plus/mupen64plus.cfg	
+		;;
+
+		2)
+		return 	 	
+		;;
+
+		1)
+		_main 	 	
+		;;
+	esac
+	done
+grep -i "VideoPlugin = " $HOME/.config/mupen64plus/mupen64plus.cfg >> res.txt
+
+}
+
+#plugin/scaling/filter switch function
+function _plugin-switcher (){
+
+cmd=(dialog --backtitle "LibreGeek.org RetroRig Installer" --menu "Plugin Configuration Menu" 16 0 16)
+options=(1 "Current configuration"
+	 2 "Mupen64plus"
+	 3 "Back to settings menu"  
+	 4 "Back to main menu")
+
+	#make menu choice
+	selection=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
+	#functions
+
+	for choice in $selection
+	do
+		case $choice in
+
+		1)
+		#echo curent plugin settings
+		#mupen64plus
+		echo "Mupen64plus:" > res.txt
+		grep -i "VideoPlugin = " $HOME/.config/mupen64plus/mupen64plus.cfg >> res.txt
+		echo "" >> res.txt
+		#Stella
+		echo "Stella:" >> res.txt
+		grep -i "tia_filter" $HOME/.stella/stellarc >> res.txt
+		echo "" >> res.txt
+		#report current resolution
+		dialog --textbox res.txt 33 0
+		#remove text file
+		rm res.txt	
+		;;
+
+		2)
+		_config-mupen 	  	 	
+		;;
+
+		3)
+		return 	  	 	
+		;;
+
+		4)
+		_main 	 	
+		;;
+	esac
+	done
+
+}
+
 #settings function
 function _settings (){
 
 cmd=(dialog --backtitle "LibreGeek.org RetroRig Installer" --menu "Settings Menu" 16 0 16)
 options=(1 "Change resolution"  
 	 2 "Load ROMs"
-	 3 "Change Gamepad Type"
-	 4 "Load PS2 BIOS Files"
-	 5 "Back to main menu")
+	 3 "Change plugins/filters/scaling"
+	 4 "Change Gamepad Type"
+	 5 "Load PS2 BIOS Files"
+	 6 "Back to main menu")
 
 	#make menu choice
 	selection=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
 	#functions
-
+grep -i "VideoPlugin = " $HOME/.config/mupen64plus/mupen64plus.cfg >> res.txt
 	for choice in $selection
 	do
 		case $choice in
@@ -328,13 +421,20 @@ options=(1 "Change resolution"
 		_settings
 		;;
 
-		3)  	
+		3)
+		dialog --msgbox "Option disabled for further testing" 5 40  	
+		#_plugin-switcher
+		#call settings rather than return so user can choose again
+		_settings
+		;;
+
+		4)  	
 		_gamepad
 		#call settings rather than return so user can choose again
 		_settings
 		;;
 
-		4)
+		5)
 		_file-loader
 		#copy BIOS files for pcsx2
 		clear
@@ -348,7 +448,7 @@ options=(1 "Change resolution"
 		_settings
 		;;
 
-		5)  
+		6)  
 		return
 		;;
 	esac
@@ -430,7 +530,7 @@ function _resolution () {
 #menu
 #add res-switcher function to make new presets more modular to add
 while true; do
-cmd=(dialog --backtitle "RetroRig Settings" --menu "Choose your resolution" 16 34 16)
+cmd=(dialog --backtitle "RetroRig Settings" --menu "Choose your resolution" 16 0 16)
 options=(1 "Current Resolution"
 	 2 "1280x720  (720p)  (5:4)"
 	 3 "1280x1024 (SXGA)  (5:4)"
@@ -449,7 +549,7 @@ if [ "$choices" != "" ]; then
 	 1) 
 		#echo curent resolution
 		#mupen64plus
-		echo "mupen64plus:" >> res.txt
+		echo "mupen64plus:" > res.txt
 		grep -i "ScreenWidth = " $HOME/.config/mupen64plus/mupen64plus.cfg >> res.txt
 		grep -i "ScreenHeight = " $HOME/.config/mupen64plus/mupen64plus.cfg >> res.txt
 		echo "" >> res.txt
@@ -463,11 +563,6 @@ if [ "$choices" != "" ]; then
 		grep -i "OpenGL Width=" $HOME/.gens/gens.cfg >> res.txt
 		grep -i "OpenGL Height=" $HOME/.gens/gens.cfg >> res.txt
 		echo "" >> res.txt
-		#Nestopia
-		#Nestopia's settings is in a binary file, so echo current manually
-		echo "Nestopia:" >> res.txt
-		echo "Current Scaling: hq?x 3x" >> res.txt
-		echo "" >> res.txt
 		#pcsx
 		echo "pcsx:" >> res.txt
 		grep -i "ResX = " $HOME/.pcsx/plugins/gpuPeopsMesaGL.cfg >> res.txt
@@ -477,12 +572,8 @@ if [ "$choices" != "" ]; then
 		echo "Dolphin-emu:" >> res.txt
 		echo "Resolution auto set via OpenGL" >> res.txt
 		echo "" >> res.txt
-		#Stella
-		echo "Stella:" >> res.txt
-		grep -i "tia_filter" $HOME/.stella/stellarc >> res.txt
-		echo "" >> res.txt
 		#report current resolution
-		dialog --textbox res.txt 33 40
+		dialog --textbox res.txt 33 0
 		#remove text file
 		rm res.txt
 		;;
