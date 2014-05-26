@@ -882,6 +882,11 @@ function _config-x360w () {
 	cp -v $HOME/RetroRig/emu-cfgs/x360w/pcsx2/inisOnePAD.ini $HOME/.config/pcsx2/ | tee -a install_log.txt
 	cp -v $HOME/RetroRig/emu-cfgs/x360w/pcsx2/inis/* $HOME/.config/pcsx2/inis/ | tee -a install_log.txt
 
+	#mednafen
+	#default path: /home/$USER/.mednafen/mednafen.cfg
+	#Main config
+	cp -v $HOME/RetroRig/emu-cfgs/x360w/mednafen/mednafen.cfg $HOME/.mednafen | tee -a install_log.txt
+
 	#mupen64pluspwd
 	#default path: /home/$USER/.config/mupen64plus
 	#Main config

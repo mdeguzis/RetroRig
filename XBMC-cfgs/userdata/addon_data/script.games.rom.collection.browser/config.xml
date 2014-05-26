@@ -280,6 +280,37 @@
       <scraper name="archive.vg" replaceKeyString="" replaceValueString="" />
       <scraper name="mobygames.com" replaceKeyString="" replaceValueString="" />
     </RomCollection>
+    <RomCollection id="11" name="GBC">
+      <useBuiltinEmulator>False</useBuiltinEmulator>
+      <gameclient />
+      <emulatorCmd>/usr/games/mednafen</emulatorCmd>
+      <emulatorParams>"%ROM%"</emulatorParams>
+      <romPath>/home/mikeyd/Games/ROMs/GBC/*.zip</romPath>
+      <saveStatePath />
+      <saveStateParams />
+      <mediaPath type="boxfront">/home/mikeyd/Games/Artwork/GBC/boxfront/%GAME%.*</mediaPath>
+      <mediaPath type="boxback">/home/mikeyd/Games/Artwork/GBC/boxback/%GAME%.*</mediaPath>
+      <mediaPath type="cartridge">/home/mikeyd/Games/Artwork/GBC/cartridge/%GAME%.*</mediaPath>
+      <mediaPath type="screenshot">/home/mikeyd/Games/Artwork/GBC/screenshot/%GAME%.*</mediaPath>
+      <mediaPath type="fanart">/home/mikeyd/Games/Artwork/PS2/GBC/%GAME%.*</mediaPath>
+      <preCmd />
+      <postCmd />
+      <useEmuSolo>False</useEmuSolo>
+      <usePopen>False</usePopen>
+      <ignoreOnScan>False</ignoreOnScan>
+      <allowUpdate>True</allowUpdate>
+      <autoplayVideoMain>True</autoplayVideoMain>
+      <autoplayVideoInfo>True</autoplayVideoInfo>
+      <useFoldernameAsGamename>False</useFoldernameAsGamename>
+      <maxFolderDepth>99</maxFolderDepth>
+      <doNotExtractZipFiles>False</doNotExtractZipFiles>
+      <diskPrefix>_Disk</diskPrefix>
+      <imagePlacingMain>gameinfobig</imagePlacingMain>
+      <imagePlacingInfo>gameinfosmall</imagePlacingInfo>
+      <scraper name="thegamesdb.net" replaceKeyString="" replaceValueString="" />
+      <scraper name="archive.vg" replaceKeyString="" replaceValueString="" />
+      <scraper name="mobygames.com" replaceKeyString="" replaceValueString="" />
+    </RomCollection>
   </RomCollections>
   <FileTypes>
     <FileType id="1" name="boxfront">
