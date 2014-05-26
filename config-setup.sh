@@ -390,6 +390,18 @@ function _res-swticher (){
 		sed -i "s|$g_org_X|OpenGL Width="$g_new_X"|g" $HOME/.gens/gens.cfg
 		sed -i "s|$g_org_Y|OpenGL Height="$g_new_Y"|g" $HOME/.gens/gens.cfg
 
+
+		########################		
+		#pcsx
+		######################## 
+		#Gens/GS will not open properly if an improper resolution is set
+		p1_org_X=$(grep -i "ResX = " $HOME/.pcsx/plugins/gpuPeopsMesaGL.cfg)
+		p1_org_Y=$(grep -i "ResY = " $HOME/.pcsx/plugins/gpuPeopsMesaGL.cfg)
+		#make the changes, prefix new_X in case NULL was entered previously
+		#Gens/GS
+		sed -i "s|$p1_org_X|ResX = "$p1_new_X"|g" $HOME/.pcsx/plugins/gpuPeopsMesaGL.cfg
+		sed -i "s|$p1_org_Y|ResY = "$p1_new_Y"|g" $HOME/.pcsx/plugins/gpuPeopsMesaGL.cfg
+
 		########################		
 		#Dolphin-emu
 		######################## 
@@ -456,15 +468,19 @@ if [ "$choices" != "" ]; then
 		echo "Nestopia:" >> res.txt
 		echo "Current Scaling: hq?x 3x" >> res.txt
 		echo "" >> res.txt
+		#pcsx
+		echo "pcsx:" >> res.txt
+		grep -i "ResX = " $HOME/.pcsx/plugins/gpuPeopsMesaGL.cfg >> res.txt
+		grep -i "ResY = " $HOME/.pcsx/plugins/gpuPeopsMesaGL.cfg >> res.txt
+		echo "" >> res.txt
 		#Dolphin-emu
 		echo "Dolphin-emu:" >> res.txt
-		echo "Resolution automatically set via OpenGL" >> res.txt
+		echo "Resolution auto set via OpenGL" >> res.txt
 		echo "" >> res.txt
 		#Stella
 		echo "Stella:" >> res.txt
 		grep -i "tia_filter" $HOME/.stella/stellarc >> res.txt
 		echo "" >> res.txt
-
 		#report current resolution
 		dialog --textbox res.txt 33 40
 		#remove text file
@@ -482,6 +498,9 @@ if [ "$choices" != "" ]; then
 		#set gens value
 		g_new_X="1280"
 		g_new_Y="720"
+		#set pcsx value
+		p1_new_X="1280"
+		p1_new_Y="720"
 		#call _res-swticher
 		_res-swticher
 		#return to menu
@@ -498,6 +517,9 @@ if [ "$choices" != "" ]; then
 		#set gens value
 		g_new_X="1280"
 		g_new_Y="1024"
+		#set pcsx value
+		p1_new_X="1280"
+		p1_new_Y="1024"
 		#call _res-swticher
 		_res-swticher
 		#return to menu
@@ -514,6 +536,9 @@ if [ "$choices" != "" ]; then
 		#set gens value
 		g_new_X="1366"
 		g_new_Y="768"
+		#set pcsx value
+		p1_new_X="1366"
+		p1_new_Y="768"
 		#call _res-swticher
 		_res-swticher
 		#return to menu
@@ -530,6 +555,9 @@ if [ "$choices" != "" ]; then
 		#set gens value
 		g_new_X="1600"
 		g_new_Y="900"
+		#set pcsx value
+		p1_new_X="1600"
+		p1_new_Y="900"
 		#call _res-swticher
 		_res-swticher
 		#return to menu
@@ -546,6 +574,9 @@ if [ "$choices" != "" ]; then
 		#set gens value
 		g_new_X="1920"
 		g_new_Y="1080"
+		#set pcsx value
+		p1_new_X="1920"
+		p1_new_Y="1080"
 		#call _res-swticher
 		_res-swticher
 		#return to menu
@@ -567,7 +598,9 @@ if [ "$choices" != "" ]; then
 		#Gens
 		g_new_X=$(cat '/tmp/new_X')
 		g_new_Y=$(cat '/tmp/new_Y')
-
+		#pcsx
+		p1_new_X=$(cat '/tmp/new_X')
+		p1_new_Y=$(cat '/tmp/new_Y')
 		#call _res-swticher
 		_res-swticher
 		#remove temp files
@@ -735,6 +768,8 @@ function _config-x360w () {
 	cp -v $HOME/RetroRig/emu-configs/x360w/pcsx/pcsx.cfg $HOME/.pcsx/ | tee -a install_log.txt
 	cp -Rv $HOME/RetroRig/emu-configs/x360w/pcsx/plugins $HOME/.pcsx/ | tee -a install_log.txt
 	cp -Rv $HOME/RetroRig/emu-configs/x360w/pcsx/patches $HOME/.pcsx/ | tee -a install_log.txt
+	cp -Rv $HOME/RetroRig/emu-configs/x360w/pcsx/memcards $HOME/.pcsx/ | tee -a install_log.txt
+
 
 	#pcsx2
 	#default path: /home/$USER/.config/pcsx2
@@ -883,6 +918,7 @@ function _configuration (){
 	mkdir -pv $HOME/.mame/cfg/ | tee -a install_log.txt
 	mkdir -pv $HOME/.pcsx/plugins/ | tee -a install_log.txt
 	mkdir -pv $HOME/.pcsx/patches/ | tee -a install_log.txt
+	mkdir -pv $HOME/.pcsx/bios/ | tee -a install_log.txt
 	mkdir -pv $HOME/.config/pcsx2/inis/ | tee -a install_log.txt
 	mkdir -pv $HOME/.config/pcsx2/bios | tee -a install_log.txt
 	mkdir -pv $HOME/.stella/ | tee -a install_log.txt
