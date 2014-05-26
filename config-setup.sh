@@ -129,7 +129,6 @@ function _file-loader (){
 
 folder=$(dialog --stdout --title "Please choose a file (spacebar to select)" --fselect $HOME/ 14 48)
 echo "${folder} file chosen."
-
 }
 
 #Load ROMs at will-call, or yes/no on configuration run
@@ -163,7 +162,7 @@ options=(1 "Atari 2600"
 		echo "-----------------------------------------------------------" | tee -a install_log.txt
 		echo "Loading Atari ROMs..." | tee -a install_log.txt
 		echo "-----------------------------------------------------------" | tee -a install_log.txt
-		cp -Rv $folder/* $HOME/Games/ROMs/Atari\ 2600/ | tee -a install_log.txt
+		cp -Rv "$folder"/* $HOME/Games/ROMs/Atari\ 2600/ | tee -a install_log.txt
 		#return back to menu
 		_rom-loader
 		;;
@@ -176,7 +175,7 @@ options=(1 "Atari 2600"
 		echo "-----------------------------------------------------------" | tee -a install_log.txt
 		echo "Loading NES ROMs..." | tee -a install_log.txt
 		echo "-----------------------------------------------------------" | tee -a install_log.txt
-		cp -Rv $folder/* $HOME/Games/ROMs/NES/ | tee -a install_log.txt
+		cp -Rv "$folder"/* $HOME/Games/ROMs/NES/ | tee -a install_log.txt
 		#return back to menu
 		_rom-loader
 		;;
@@ -189,7 +188,7 @@ options=(1 "Atari 2600"
 		echo "-----------------------------------------------------------" | tee -a install_log.txt
 		echo "Loading SNES ROMs..." | tee -a install_log.txt
 		echo "-----------------------------------------------------------" | tee -a install_log.txt
-		cp -Rv $folder/* $HOME/Games/ROMs/SNES/ | tee -a install_log.txt
+		cp -Rv "$folder"/* $HOME/Games/ROMs/SNES/ | tee -a install_log.txt
 		#return back to menu
 		_rom-loader
 		;;
@@ -202,7 +201,7 @@ options=(1 "Atari 2600"
 		echo "-----------------------------------------------------------" | tee -a install_log.txt
 		echo "Loading N64 ROMs..." | tee -a install_log.txt
 		echo "-----------------------------------------------------------" | tee -a install_log.txt
-		cp -Rv $folder/* $HOME/Games/ROMs/N64/ | tee -a install_log.txt
+		cp -Rv "$folder"/* $HOME/Games/ROMs/N64/ | tee -a install_log.txt
 		#return back to menu
 		_rom-loader
 		;;
@@ -215,7 +214,7 @@ options=(1 "Atari 2600"
 		echo "-----------------------------------------------------------" | tee -a install_log.txt
 		echo "Loading Gamecube ROMs..." | tee -a install_log.txt
 		echo "-----------------------------------------------------------" | tee -a install_log.txt
-		cp -Rv $folder/* $HOME/Games/ROMs/Gamecube/ | tee -a install_log.txt
+		cp -Rv "$folder"/* $HOME/Games/ROMs/Gamecube/ | tee -a install_log.txt
 		#return back to menu
 		_rom-loader
 		;;
@@ -228,7 +227,7 @@ options=(1 "Atari 2600"
 		echo "-----------------------------------------------------------" | tee -a install_log.txt
 		echo "Loading MAME ROMs..." | tee -a install_log.txt
 		echo "-----------------------------------------------------------" | tee -a install_log.txt
-		cp -Rv $folder/* $HOME/Games/ROMs/MAME/ | tee -a install_log.txt
+		cp -Rv "$folder"/* $HOME/Games/ROMs/MAME/ | tee -a install_log.txt
 		#return back to menu
 		_rom-loader
 		;;
@@ -241,7 +240,7 @@ options=(1 "Atari 2600"
 		echo "-----------------------------------------------------------" | tee -a install_log.txt
 		echo "Loading Sega Genesis ROMs..." | tee -a install_log.txt
 		echo "-----------------------------------------------------------" | tee -a install_log.txt
-		cp -Rv $folder/* $HOME/Games/ROMs/Sega\ Genesis/ | tee -a install_log.txt
+		cp -Rv "$folder"/* $HOME/Games/ROMs/Sega\ Genesis/ | tee -a install_log.txt
 		#return back to menu
 		_rom-loader
 		;;
@@ -254,7 +253,7 @@ options=(1 "Atari 2600"
 		echo "-----------------------------------------------------------" | tee -a install_log.txt
 		echo "Loading Playstation 1 ROMs..." | tee -a install_log.txt
 		echo "-----------------------------------------------------------" | tee -a install_log.txt
-		cp -Rv $folder/* $HOME/Games/ROMs/PS1/ | tee -a install_log.txt
+		cp -Rv "$folder"/* $HOME/Games/ROMs/PS1/ | tee -a install_log.txt
 		#return back to menu
 		_rom-loader
 		;;
@@ -267,7 +266,7 @@ options=(1 "Atari 2600"
 		echo "-----------------------------------------------------------" | tee -a install_log.txt
 		echo "Loading Playstation 2 ROMs..." | tee -a install_log.txt
 		echo "-----------------------------------------------------------" | tee -a install_log.txt
-		cp -Rv $folder/* $HOME/Games/ROMs/PS2/ | tee -a install_log.txt
+		cp -Rv "$folder"/* $HOME/Games/ROMs/PS2/ | tee -a install_log.txt
 		#return back to menu
 		_rom-loader
 		;;
@@ -280,7 +279,7 @@ options=(1 "Atari 2600"
 		echo "-----------------------------------------------------------" | tee -a install_log.txt
 		echo "Loading Neo Geo ROMs..." | tee -a install_log.txt
 		echo "-----------------------------------------------------------" | tee -a install_log.txt
-		cp -Rv $folder/* $HOME/Games/ROMs/SNK\ Neo\ Geo/ | tee -a install_log.txt
+		cp -Rv "$folder"/* $HOME/Games/ROMs/SNK\ Neo\ Geo/ | tee -a install_log.txt
 		#return back to menu
 		_rom-loader
 		;;
@@ -342,8 +341,8 @@ options=(1 "Change resolution"
 		echo "-----------------------------------------------------------" | tee -a install_log.txt
 		echo "Loading PS2 BIOS files..." | tee -a install_log.txt
 		echo "-----------------------------------------------------------" | tee -a install_log.txt
-		cp -Rv $folder/* $HOME/.config/pcsx2/bios | tee -a install_log.txt
-		#set default BIOS file for pcsx2
+		cp -Rv "$folder"/* $HOME/.config/pcsx2/bios | tee -a install_log.txt
+		#default BIOS file for pcsx2 is set already, will provide switcher later if need be
 		
 		#call settings rather than return so user can choose again
 		_settings
@@ -885,6 +884,7 @@ function _configuration (){
 	mkdir -pv $HOME/.pcsx/plugins/ | tee -a install_log.txt
 	mkdir -pv $HOME/.pcsx/patches/ | tee -a install_log.txt
 	mkdir -pv $HOME/.config/pcsx2/inis/ | tee -a install_log.txt
+	mkdir -pv $HOME/.config/pcsx2/bios | tee -a install_log.txt
 	mkdir -pv $HOME/.stella/ | tee -a install_log.txt
 	mkdir -pv $HOME/.xbmc/ | tee -a install_log.txt
 
