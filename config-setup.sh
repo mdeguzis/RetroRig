@@ -1,7 +1,7 @@
 #!/bin/bash
 #
 #small script to copy over configuration files for emulators
-#Version 0.7.0
+#Version 0.7.2
 #Please report any errors via a pull request
 #You can also reach me on twitter: @N3RD42
 #
@@ -530,6 +530,17 @@ function _res-swticher (){
 		sed -i "s|$p1_org_Y|ResY = "$p1_new_Y"|g" $HOME/.pcsx/plugins/gpuPeopsMesaGL.cfg
 
 		########################		
+		#mednafen
+		######################## 
+
+		#Mednafen (GBC)
+		gbc_org_X=$(grep -i "gb.xres " $HOME/.mednafen/mednafen.cfg)
+		gbc_org_Y=$(grep -i "gb.yres " $HOME/.mednafen/mednafen.cfg)
+		#make the changes, prefix new_X in case NULL was entered previously
+		sed -i "s|$gbc_org_X|ResX = "$gbc_new_X"|g" $HOME/.mednafen/mednafen.cfg
+		sed -i "s|$gbc_org_Y|ResY = "$gbc_new_Y"|g" $HOME/.mednafen/mednafen.cfg
+
+		########################		
 		#Dolphin-emu
 		######################## 
 		#Resolution in Dolphin is set automatically via OpenGL. This can
@@ -599,6 +610,11 @@ if [ "$choices" != "" ]; then
 		echo "Dolphin-emu:" >> res.txt
 		echo "Resolution auto set via OpenGL" >> res.txt
 		echo "" >> res.txt
+		#mednafen GBC
+		echo "Mednafen (GBC)" >> res.txt
+		grep -i "gb.xres " $HOME/.mednafen/mednafen.cfg >> res.txt
+		grep -i "gb.yres " $HOME/.mednafen/mednafen.cfg >> res.txt
+		echo "" >> res.txt
 		#report current resolution
 		dialog --textbox res.txt 33 0
 		#remove text file
@@ -619,6 +635,9 @@ if [ "$choices" != "" ]; then
 		#set pcsx value
 		p1_new_X="1280"
 		p1_new_Y="720"
+		#set mednafen (GBC) value
+		gbc_new_X="1280"
+		gbc_new_Y="720"
 		#call _res-swticher
 		_res-swticher
 		#return to menu
@@ -638,6 +657,9 @@ if [ "$choices" != "" ]; then
 		#set pcsx value
 		p1_new_X="1280"
 		p1_new_Y="1024"
+		#set mednafen (GBC) value
+		gbc_new_X="1280"
+		gbc_new_Y="1024"
 		#call _res-swticher
 		_res-swticher
 		#return to menu
@@ -657,6 +679,9 @@ if [ "$choices" != "" ]; then
 		#set pcsx value
 		p1_new_X="1366"
 		p1_new_Y="768"
+		#set mednafen (GBC) value
+		gbc_new_X="1366"
+		gbc_new_Y="768"
 		#call _res-swticher
 		_res-swticher
 		#return to menu
@@ -676,6 +701,9 @@ if [ "$choices" != "" ]; then
 		#set pcsx value
 		p1_new_X="1600"
 		p1_new_Y="900"
+		#set mednafen (GBC) value
+		gbc_new_X="1600"
+		gbc_new_Y="900"
 		#call _res-swticher
 		_res-swticher
 		#return to menu
@@ -695,6 +723,9 @@ if [ "$choices" != "" ]; then
 		#set pcsx value
 		p1_new_X="1920"
 		p1_new_Y="1080"
+		#set mednafen (GBC) value
+		gbc_new_X="1920"
+		gbc_new_Y="1080"
 		#call _res-swticher
 		_res-swticher
 		#return to menu
@@ -719,6 +750,9 @@ if [ "$choices" != "" ]; then
 		#pcsx
 		p1_new_X=$(cat '/tmp/new_X')
 		p1_new_Y=$(cat '/tmp/new_Y')
+		#pcsx
+		gbc_new_X=$(cat '/tmp/new_X')
+		gbc_new_Y=$(cat '/tmp/new_Y')
 		#call _res-swticher
 		_res-swticher
 		#remove temp files
