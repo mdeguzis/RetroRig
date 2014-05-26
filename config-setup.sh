@@ -146,7 +146,8 @@ options=(1 "Atari 2600"
 	 8 "Playstation 1"
 	 9 "Playstation 2"
 	 10 "Neo Geo"
-	 11 "Exit ROM Loader")
+	 11 "Neo Geo"
+	 12 "Exit ROM Loader")
 
 	#make menu choice
 	selection=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
@@ -285,7 +286,20 @@ options=(1 "Atari 2600"
 		_rom-loader
 		;;
 
-		11)  
+		12)
+		#call file loader  	
+		_file-loader
+		#copy GBC ROMs
+		clear
+		echo "-----------------------------------------------------------" | tee -a install_log.txt
+		echo "Loading GBC ROMs..." | tee -a install_log.txt
+		echo "-----------------------------------------------------------" | tee -a install_log.txt
+		cp -Rv "$folder"/* $HOME/Games/ROMs/GBC/ | tee -a install_log.txt
+		#return back to menu
+		_rom-loader
+		;;
+
+		12)  
 		return
 		;;
 		esac
