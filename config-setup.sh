@@ -129,7 +129,6 @@ function _file-loader (){
 
 folder=$(dialog --stdout --title "Please choose a file (spacebar to select)" --fselect $HOME/ 14 48)
 echo "${folder} file chosen."
-
 }
 
 #Load ROMs at will-call, or yes/no on configuration run
@@ -163,7 +162,7 @@ options=(1 "Atari 2600"
 		echo "-----------------------------------------------------------" | tee -a install_log.txt
 		echo "Loading Atari ROMs..." | tee -a install_log.txt
 		echo "-----------------------------------------------------------" | tee -a install_log.txt
-		cp -Rv $folder/* $HOME/Games/ROMs/Atari\ 2600/ | tee -a install_log.txt
+		cp -Rv "$folder"/* $HOME/Games/ROMs/Atari\ 2600/ | tee -a install_log.txt
 		#return back to menu
 		_rom-loader
 		;;
@@ -176,7 +175,7 @@ options=(1 "Atari 2600"
 		echo "-----------------------------------------------------------" | tee -a install_log.txt
 		echo "Loading NES ROMs..." | tee -a install_log.txt
 		echo "-----------------------------------------------------------" | tee -a install_log.txt
-		cp -Rv $folder/* $HOME/Games/ROMs/NES/ | tee -a install_log.txt
+		cp -Rv "$folder"/* $HOME/Games/ROMs/NES/ | tee -a install_log.txt
 		#return back to menu
 		_rom-loader
 		;;
@@ -189,7 +188,7 @@ options=(1 "Atari 2600"
 		echo "-----------------------------------------------------------" | tee -a install_log.txt
 		echo "Loading SNES ROMs..." | tee -a install_log.txt
 		echo "-----------------------------------------------------------" | tee -a install_log.txt
-		cp -Rv $folder/* $HOME/Games/ROMs/SNES/ | tee -a install_log.txt
+		cp -Rv "$folder"/* $HOME/Games/ROMs/SNES/ | tee -a install_log.txt
 		#return back to menu
 		_rom-loader
 		;;
@@ -202,7 +201,7 @@ options=(1 "Atari 2600"
 		echo "-----------------------------------------------------------" | tee -a install_log.txt
 		echo "Loading N64 ROMs..." | tee -a install_log.txt
 		echo "-----------------------------------------------------------" | tee -a install_log.txt
-		cp -Rv $folder/* $HOME/Games/ROMs/N64/ | tee -a install_log.txt
+		cp -Rv "$folder"/* $HOME/Games/ROMs/N64/ | tee -a install_log.txt
 		#return back to menu
 		_rom-loader
 		;;
@@ -215,7 +214,7 @@ options=(1 "Atari 2600"
 		echo "-----------------------------------------------------------" | tee -a install_log.txt
 		echo "Loading Gamecube ROMs..." | tee -a install_log.txt
 		echo "-----------------------------------------------------------" | tee -a install_log.txt
-		cp -Rv $folder/* $HOME/Games/ROMs/Gamecube/ | tee -a install_log.txt
+		cp -Rv "$folder"/* $HOME/Games/ROMs/Gamecube/ | tee -a install_log.txt
 		#return back to menu
 		_rom-loader
 		;;
@@ -228,7 +227,7 @@ options=(1 "Atari 2600"
 		echo "-----------------------------------------------------------" | tee -a install_log.txt
 		echo "Loading MAME ROMs..." | tee -a install_log.txt
 		echo "-----------------------------------------------------------" | tee -a install_log.txt
-		cp -Rv $folder/* $HOME/Games/ROMs/MAME/ | tee -a install_log.txt
+		cp -Rv "$folder"/* $HOME/Games/ROMs/MAME/ | tee -a install_log.txt
 		#return back to menu
 		_rom-loader
 		;;
@@ -241,7 +240,7 @@ options=(1 "Atari 2600"
 		echo "-----------------------------------------------------------" | tee -a install_log.txt
 		echo "Loading Sega Genesis ROMs..." | tee -a install_log.txt
 		echo "-----------------------------------------------------------" | tee -a install_log.txt
-		cp -Rv $folder/* $HOME/Games/ROMs/Sega\ Genesis/ | tee -a install_log.txt
+		cp -Rv "$folder"/* $HOME/Games/ROMs/Sega\ Genesis/ | tee -a install_log.txt
 		#return back to menu
 		_rom-loader
 		;;
@@ -254,7 +253,7 @@ options=(1 "Atari 2600"
 		echo "-----------------------------------------------------------" | tee -a install_log.txt
 		echo "Loading Playstation 1 ROMs..." | tee -a install_log.txt
 		echo "-----------------------------------------------------------" | tee -a install_log.txt
-		cp -Rv $folder/* $HOME/Games/ROMs/PS1/ | tee -a install_log.txt
+		cp -Rv "$folder"/* $HOME/Games/ROMs/PS1/ | tee -a install_log.txt
 		#return back to menu
 		_rom-loader
 		;;
@@ -267,7 +266,7 @@ options=(1 "Atari 2600"
 		echo "-----------------------------------------------------------" | tee -a install_log.txt
 		echo "Loading Playstation 2 ROMs..." | tee -a install_log.txt
 		echo "-----------------------------------------------------------" | tee -a install_log.txt
-		cp -Rv $folder/* $HOME/Games/ROMs/PS2/ | tee -a install_log.txt
+		cp -Rv "$folder"/* $HOME/Games/ROMs/PS2/ | tee -a install_log.txt
 		#return back to menu
 		_rom-loader
 		;;
@@ -280,7 +279,7 @@ options=(1 "Atari 2600"
 		echo "-----------------------------------------------------------" | tee -a install_log.txt
 		echo "Loading Neo Geo ROMs..." | tee -a install_log.txt
 		echo "-----------------------------------------------------------" | tee -a install_log.txt
-		cp -Rv $folder/* $HOME/Games/ROMs/SNK\ Neo\ Geo/ | tee -a install_log.txt
+		cp -Rv "$folder"/* $HOME/Games/ROMs/SNK\ Neo\ Geo/ | tee -a install_log.txt
 		#return back to menu
 		_rom-loader
 		;;
@@ -307,7 +306,8 @@ cmd=(dialog --backtitle "LibreGeek.org RetroRig Installer" --menu "Settings Menu
 options=(1 "Change resolution"  
 	 2 "Load ROMs"
 	 3 "Change Gamepad Type"
-	 4 "Back to main menu")
+	 4 "Load PS2 BIOS Files"
+	 5 "Back to main menu")
 
 	#make menu choice
 	selection=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
@@ -334,7 +334,21 @@ options=(1 "Change resolution"
 		_settings
 		;;
 
-		4)  
+		4)
+		_file-loader
+		#copy BIOS files for pcsx2
+		clear
+		echo "-----------------------------------------------------------" | tee -a install_log.txt
+		echo "Loading PS2 BIOS files..." | tee -a install_log.txt
+		echo "-----------------------------------------------------------" | tee -a install_log.txt
+		cp -Rv "$folder"/* $HOME/.config/pcsx2/bios | tee -a install_log.txt
+		#default BIOS file for pcsx2 is set already, will provide switcher later if need be
+		
+		#call settings rather than return so user can choose again
+		_settings
+		;;
+
+		5)  
 		return
 		;;
 	esac
@@ -375,6 +389,24 @@ function _res-swticher (){
 		#Gens/GS
 		sed -i "s|$g_org_X|OpenGL Width="$g_new_X"|g" $HOME/.gens/gens.cfg
 		sed -i "s|$g_org_Y|OpenGL Height="$g_new_Y"|g" $HOME/.gens/gens.cfg
+
+
+		########################		
+		#pcsx
+		######################## 
+		#Gens/GS will not open properly if an improper resolution is set
+		p1_org_X=$(grep -i "ResX = " $HOME/.pcsx/plugins/gpuPeopsMesaGL.cfg)
+		p1_org_Y=$(grep -i "ResY = " $HOME/.pcsx/plugins/gpuPeopsMesaGL.cfg)
+		#make the changes, prefix new_X in case NULL was entered previously
+		#Gens/GS
+		sed -i "s|$p1_org_X|ResX = "$p1_new_X"|g" $HOME/.pcsx/plugins/gpuPeopsMesaGL.cfg
+		sed -i "s|$p1_org_Y|ResY = "$p1_new_Y"|g" $HOME/.pcsx/plugins/gpuPeopsMesaGL.cfg
+
+		########################		
+		#Dolphin-emu
+		######################## 
+		#Resolution in Dolphin is set automatically via OpenGL. This can
+		#be hardcoded, but works best in auto mode.
 
 		########################		
 		#Stella
@@ -436,6 +468,15 @@ if [ "$choices" != "" ]; then
 		echo "Nestopia:" >> res.txt
 		echo "Current Scaling: hq?x 3x" >> res.txt
 		echo "" >> res.txt
+		#pcsx
+		echo "pcsx:" >> res.txt
+		grep -i "ResX = " $HOME/.pcsx/plugins/gpuPeopsMesaGL.cfg >> res.txt
+		grep -i "ResY = " $HOME/.pcsx/plugins/gpuPeopsMesaGL.cfg >> res.txt
+		echo "" >> res.txt
+		#Dolphin-emu
+		echo "Dolphin-emu:" >> res.txt
+		echo "Resolution auto set via OpenGL" >> res.txt
+		echo "" >> res.txt
 		#Stella
 		echo "Stella:" >> res.txt
 		grep -i "tia_filter" $HOME/.stella/stellarc >> res.txt
@@ -457,6 +498,9 @@ if [ "$choices" != "" ]; then
 		#set gens value
 		g_new_X="1280"
 		g_new_Y="720"
+		#set pcsx value
+		p1_new_X="1280"
+		p1_new_Y="720"
 		#call _res-swticher
 		_res-swticher
 		#return to menu
@@ -473,6 +517,9 @@ if [ "$choices" != "" ]; then
 		#set gens value
 		g_new_X="1280"
 		g_new_Y="1024"
+		#set pcsx value
+		p1_new_X="1280"
+		p1_new_Y="1024"
 		#call _res-swticher
 		_res-swticher
 		#return to menu
@@ -489,6 +536,9 @@ if [ "$choices" != "" ]; then
 		#set gens value
 		g_new_X="1366"
 		g_new_Y="768"
+		#set pcsx value
+		p1_new_X="1366"
+		p1_new_Y="768"
 		#call _res-swticher
 		_res-swticher
 		#return to menu
@@ -505,6 +555,9 @@ if [ "$choices" != "" ]; then
 		#set gens value
 		g_new_X="1600"
 		g_new_Y="900"
+		#set pcsx value
+		p1_new_X="1600"
+		p1_new_Y="900"
 		#call _res-swticher
 		_res-swticher
 		#return to menu
@@ -521,6 +574,9 @@ if [ "$choices" != "" ]; then
 		#set gens value
 		g_new_X="1920"
 		g_new_Y="1080"
+		#set pcsx value
+		p1_new_X="1920"
+		p1_new_Y="1080"
 		#call _res-swticher
 		_res-swticher
 		#return to menu
@@ -542,7 +598,9 @@ if [ "$choices" != "" ]; then
 		#Gens
 		g_new_X=$(cat '/tmp/new_X')
 		g_new_Y=$(cat '/tmp/new_Y')
-
+		#pcsx
+		p1_new_X=$(cat '/tmp/new_X')
+		p1_new_Y=$(cat '/tmp/new_Y')
 		#call _res-swticher
 		_res-swticher
 		#remove temp files
@@ -710,6 +768,8 @@ function _config-x360w () {
 	cp -v $HOME/RetroRig/emu-configs/x360w/pcsx/pcsx.cfg $HOME/.pcsx/ | tee -a install_log.txt
 	cp -Rv $HOME/RetroRig/emu-configs/x360w/pcsx/plugins $HOME/.pcsx/ | tee -a install_log.txt
 	cp -Rv $HOME/RetroRig/emu-configs/x360w/pcsx/patches $HOME/.pcsx/ | tee -a install_log.txt
+	cp -Rv $HOME/RetroRig/emu-configs/x360w/pcsx/memcards $HOME/.pcsx/ | tee -a install_log.txt
+
 
 	#pcsx2
 	#default path: /home/$USER/.config/pcsx2
@@ -858,7 +918,9 @@ function _configuration (){
 	mkdir -pv $HOME/.mame/cfg/ | tee -a install_log.txt
 	mkdir -pv $HOME/.pcsx/plugins/ | tee -a install_log.txt
 	mkdir -pv $HOME/.pcsx/patches/ | tee -a install_log.txt
+	mkdir -pv $HOME/.pcsx/bios/ | tee -a install_log.txt
 	mkdir -pv $HOME/.config/pcsx2/inis/ | tee -a install_log.txt
+	mkdir -pv $HOME/.config/pcsx2/bios | tee -a install_log.txt
 	mkdir -pv $HOME/.stella/ | tee -a install_log.txt
 	mkdir -pv $HOME/.xbmc/ | tee -a install_log.txt
 
@@ -911,6 +973,8 @@ function _configuration (){
 	sed -i "s|/home/mikeyd/|/home/$USER/|g" $HOME/.zsnes/zsnesl.cfg | tee -a install_log.txt
 	sed -i "s|/home/mikeyd/|/home/$USER/|g" $HOME/.mame/mame.ini | tee -a install_log.txt
 	sed -i "s|/home/mikeyd/|/home/$USER/|g" $HOME/.pcsx/pcsx.cfg | tee -a install_log.txt
+	sed -i "s|/home/mikeyd/|/home/$USER/|g" $HOME/.config/pcsx2/PCSX2-reg.ini | tee -a install_log.txt
+	sed -i "s|/home/mikeyd/|/home/$USER/|g" $HOME/.config/pcsx2/inis/PCSX2_ui.ini | tee -a install_log.txt
 	sed -i "s|/home/mikeyd/|/home/$USER/|g" $HOME/.dolphin-emu/Config/Dolphin.ini | tee -a install_log.txt
 	sed -i "s|/home/mikeyd/|/home/$USER/|g" $HOME/.xbmc/userdata/addon_data/script.games.rom.collection.browser/config.xml | tee -a install_log.txt	
 	echo "The user applied to configuration files was: $USER" |  tee -a install_log.txt
