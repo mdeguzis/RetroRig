@@ -1031,7 +1031,7 @@ function _configuration (){
 	#xbmc does not (at least for Ubuntu's repo pkg) load the
 	#dot files without loading XBMC at least once
 	#copy in default folder base from first run:	
-	cp -Rv $HOME/RetroRig/XBMC-configs/* $HOME/.xbmc | tee -a install_log.txt
+	cp -Rv $HOME/RetroRig/XBMC-cfgs/* $HOME/.xbmc | tee -a install_log.txt
 
 	#xboxdrv director located in common area for startup
 	echo "echo $userpasswd | sudo -S needed to create common xboxdrv share!"
