@@ -842,65 +842,65 @@ function _config-x360w () {
 
 	#Nestopia
 	#default path: /home/$USER/.nestopia
-	cp -v $HOME/RetroRig/emu-configs/x360w/Nestopia/nstcontrols $HOME/.nestopia/ | tee -a install_log.txt
-	cp -v $HOME/RetroRig/emu-configs/x360w/Nestopia/nstsettings $HOME/.nestopia/ | tee -a install_log.txt
+	cp -v $HOME/RetroRig/emu-cfgs/x360w/Nestopia/nstcontrols $HOME/.nestopia/ | tee -a install_log.txt
+	cp -v $HOME/RetroRig/emu-cfgs/x360w/Nestopia/nstsettings $HOME/.nestopia/ | tee -a install_log.txt
 
 	#gens
 	#default path: /home/$USER/.gens
 	#Global config
-	cp -v $HOME/RetroRig/emu-configs/x360w/Gens-GS/gens.cfg $HOME/.gens/ | tee -a install_log.txt
+	cp -v $HOME/RetroRig/emu-cfgs/x360w/Gens-GS/gens.cfg $HOME/.gens/ | tee -a install_log.txt
 
 	#ZSNES
 	#default path: /home/$USER/.zsnes
 	#Controller config
-	cp -v $HOME/RetroRig/emu-configs/x360w/ZSNES/zinput.cfg $HOME/.zsnes/ | tee -a install_log.txt
-	cp -v $HOME/RetroRig/emu-configs/x360w/ZSNES/zsnesl.cfg $HOME/.zsnes/ | tee -a install_log.txt
+	cp -v $HOME/RetroRig/emu-cfgs/x360w/ZSNES/zinput.cfg $HOME/.zsnes/ | tee -a install_log.txt
+	cp -v $HOME/RetroRig/emu-cfgs/x360w/ZSNES/zsnesl.cfg $HOME/.zsnes/ | tee -a install_log.txt
 
 	#mame
 	#default path: /home/$USER/.mame
 	#Main config
-	cp -v $HOME/RetroRig/emu-configs/x360w/MAME/default.cfg $HOME/.mame/cfg | tee -a install_log.txt
-	cp -v $HOME/RetroRig/emu-configs/x360w/MAME/mame.ini $HOME/.mame | tee -a install_log.txt
+	cp -v $HOME/RetroRig/emu-cfgs/x360w/MAME/default.cfg $HOME/.mame/cfg | tee -a install_log.txt
+	cp -v $HOME/RetroRig/emu-cfgs/x360w/MAME/mame.ini $HOME/.mame | tee -a install_log.txt
 	#offline artwork scrapper configs
-	cp -v $HOME/RetroRig/emu-configs/x360w/MAME/parserConfig.xml $HOME/Games/Artwork/MAME | tee -a install_log.txt
-	cp -v $HOME/RetroRig/emu-configs/x360w/MAME/MAME.txt $HOME/Games/Artwork/MAME | tee -a install_log.txt
-	cp -v $HOME/RetroRig/emu-configs/x360w/MAME/MAME\ synopsis\ RCB\ 201202.zip/ $HOME/Games/Artwork/MAME | tee -a install_log.txt
+	cp -v $HOME/RetroRig/emu-cfgs/x360w/MAME/parserConfig.xml $HOME/Games/Artwork/MAME | tee -a install_log.txt
+	cp -v $HOME/RetroRig/emu-cfgs/x360w/MAME/MAME.txt $HOME/Games/Artwork/MAME | tee -a install_log.txt
+	cp -v $HOME/RetroRig/emu-cfgs/x360w/MAME/MAME\ synopsis\ RCB\ 201202.zip/ $HOME/Games/Artwork/MAME | tee -a install_log.txt
 
 	#pcsx
 	#default path: /home/$USER/.pcsx
 	#Main config
-	cp -v $HOME/RetroRig/emu-configs/x360w/pcsx/pcsx.cfg $HOME/.pcsx/ | tee -a install_log.txt
-	cp -Rv $HOME/RetroRig/emu-configs/x360w/pcsx/plugins $HOME/.pcsx/ | tee -a install_log.txt
-	cp -Rv $HOME/RetroRig/emu-configs/x360w/pcsx/patches $HOME/.pcsx/ | tee -a install_log.txt
-	cp -Rv $HOME/RetroRig/emu-configs/x360w/pcsx/memcards $HOME/.pcsx/ | tee -a install_log.txt
+	cp -v $HOME/RetroRig/emu-cfgs/x360w/pcsx/pcsx.cfg $HOME/.pcsx/ | tee -a install_log.txt
+	cp -Rv $HOME/RetroRig/emu-cfgs/x360w/pcsx/plugins $HOME/.pcsx/ | tee -a install_log.txt
+	cp -Rv $HOME/RetroRig/emu-cfgs/x360w/pcsx/patches $HOME/.pcsx/ | tee -a install_log.txt
+	cp -Rv $HOME/RetroRig/emu-cfgs/x360w/pcsx/memcards $HOME/.pcsx/ | tee -a install_log.txt
 
 
 	#pcsx2
 	#default path: /home/$USER/.config/pcsx2
 	#Main config
-	cp -v $HOME/RetroRig/emu-configs/x360w/pcsx2/PCSX2-reg.ini $HOME/.config/pcsx2/ | tee -a install_log.txt
-	cp -v $HOME/RetroRig/emu-configs/x360w/pcsx2/inisOnePAD.ini $HOME/.config/pcsx2/ | tee -a install_log.txt
-	cp -v $HOME/RetroRig/emu-configs/x360w/pcsx2/inis/* $HOME/.config/pcsx2/inis/ | tee -a install_log.txt
+	cp -v $HOME/RetroRig/emu-cfgs/x360w/pcsx2/PCSX2-reg.ini $HOME/.config/pcsx2/ | tee -a install_log.txt
+	cp -v $HOME/RetroRig/emu-cfgs/x360w/pcsx2/inisOnePAD.ini $HOME/.config/pcsx2/ | tee -a install_log.txt
+	cp -v $HOME/RetroRig/emu-cfgs/x360w/pcsx2/inis/* $HOME/.config/pcsx2/inis/ | tee -a install_log.txt
 
 	#mupen64pluspwd
 	#default path: /home/$USER/.config/mupen64plus
 	#Main config
-	cp -v $HOME/RetroRig/emu-configs/x360w/mupen64plus/mupen64plus.cfg $HOME/.config/mupen64plus/ | tee -a install_log.txt
+	cp -v $HOME/RetroRig/emu-cfgs/x360w/mupen64plus/mupen64plus.cfg $HOME/.config/mupen64plus/ | tee -a install_log.txt
 
 	#Stella
 	#default path: /home/$USER/.config/mupen64plus
 	#Main config
-	cp -v $HOME/RetroRig/emu-configs/x360w/Stella/stellarc $HOME/.stella/ | tee -a install_log.txt
+	cp -v $HOME/RetroRig/emu-cfgs/x360w/Stella/stellarc $HOME/.stella/ | tee -a install_log.txt
 
 	#dolphin
 	#default path /home/$USER/.dolphin-emu/
 	#emulator config
-	cp -Rv /$HOME/RetroRig/emu-configs/x360w/Dolphin/Dolphin.ini $HOME/.dolphin-emu/Config/ | tee -a install_log.txt
+	cp -Rv /$HOME/RetroRig/emu-cfgs/x360w/Dolphin/Dolphin.ini $HOME/.dolphin-emu/Config/ | tee -a install_log.txt
 	#Gamecube controller config
-	cp -Rv /$HOME/RetroRig/emu-configs/x360w/Dolphin/GCPadNew.ini $HOME/.dolphin-emu/Config/ | tee -a install_log.txt
+	cp -Rv /$HOME/RetroRig/emu-cfgs/x360w/Dolphin/GCPadNew.ini $HOME/.dolphin-emu/Config/ | tee -a install_log.txt
 	#Wii controller config
 	#OpenGL graphics config
-	cp -Rv /$HOME/RetroRig/emu-configs/x360w/Dolphin/gfx_opengl.ini $HOME/.dolphin-emu/Config/ | tee -a install_log.txt
+	cp -Rv /$HOME/RetroRig/emu-cfgs/x360w/Dolphin/gfx_opengl.ini $HOME/.dolphin-emu/Config/ | tee -a install_log.txt
 	
 	#inject init script
 	echo $userpasswd | sudo -S cp -v $HOME/RetroRig/init-scripts/x360w/xboxdrv /etc/init.d/ | tee -a install_log.txt
