@@ -33,6 +33,7 @@ Warning! It will overwrite:
     -PCSX
     -PCSX2
     -Dolphin
+    -mednafen (GBC currently)
 
 -Also configs related to:
 
@@ -85,17 +86,18 @@ Please see controller-cfg-list.txt for the complete set!
 
 It is a good idea to load games before hand into the predefined folders after the configuration option is ran and you reboot your PC. On first startup Rom Collection Browser will ask for games to import. Several emulators are supported and built in for easy importing.ROMs for emualtors are NOT provided for legal reasons. Due to legal gray areas with BIOS files, they will not be provided for emulators that require them (e.g. pcsx, pcsx2).Please do not request these items be added.
 
-Currently importing ROMs into XBMC is a keyboard-less affair for the following emulators:
+Currently importing ROMs into XBMC is a keyboard-less affair for the following consoles:
 
-    -ZSNES
-    -Nestopia
-    -Gens/GS
+    -SNES
+    -NES
+    -Sega Genesis
     -MAME
-    -Stella
-    -Mupen64Plus
-    -PCSX
-    -PCSX2
-    -Dolphin
+    -Atari 2600
+    -Nintendo 64
+    -Playstation 1
+    -Playstation 2
+    -Gamecube
+    -Gameboy Color
 
 All ROMs should be placed in the respective folder under "/home/$USER/Games/ROMs". In due time, I will
 add more and more emulators. But until then, you can manually add them. In a later release, I plan on
