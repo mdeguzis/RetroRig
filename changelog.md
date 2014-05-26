@@ -35,5 +35,3 @@ Release 0.6.2
 - XBMC autostarts directly into Rom Collection Browser
 - Rom Collection browser will prompt for games to import on first run
 - Mechanisms to update github repo in the install script itself
-
-I wanted to put out something workable, even though some things like resolution selection need finished, but for the most part, most is working for a small release bump.
