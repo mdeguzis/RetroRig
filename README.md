@@ -100,8 +100,8 @@ Currently importing ROMs into XBMC is a keyboard-less affair for the following e
 All ROMs should be placed in the respective folder under "/home/$USER/Games/ROMs". In due time, I will
 add more and more emulators. But until then, you can manually add them. In a later release, I plan on
 building in a text-based file browser to locate and import games. For now, you must copy them in the
-folders under ~/Games. In the near future, I will load SSH and Samba for file transfers as optional
-install items.
+folders under ~/Games. In the near future, I will load Samba for file transfers as optional
+install items (SSH is now in).
 
 ## Installation
 
@@ -129,8 +129,7 @@ code beforehand to see what sudo does.You can also choose to just copy configura
 folder if you wish to just steal some notes on how to setup the emulators. Please reference the issues
 area on Github for current issues, or the release-roadmap for upcoming items.
 
-You can also download a zip file or by other means on the github page. This will install dialog and
-git as prequisites before running RetroRig.
+You can also download a zip file or by other means on the github page.
 
 ## Updating
 
