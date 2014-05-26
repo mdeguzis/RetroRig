@@ -1,7 +1,7 @@
 #!/bin/bash
 #
 #small script to copy over configuration files for emulators
-#Version 0.6.7
+#Version 0.7.0
 #Please report any errors via a pull request
 #You can also reach me on twitter: @N3RD42
 #
@@ -292,14 +292,6 @@ options=(1 "Atari 2600"
 	done
 }
 
-#settings function
-function _remote-tools (){
-
-clear
-dialog --infobox "Nothing here yet" 3 48
-
-}
-
 #mupen64plus plugin changer
 function _config-mupen (){
 
@@ -400,7 +392,8 @@ options=(1 "Change resolution"
 	 3 "Change plugins/filters/scaling"
 	 4 "Change Gamepad Type"
 	 5 "Load PS2 BIOS Files"
-	 6 "Back to main menu")
+	 6 "Enable SSH support"
+	 7 "Back to main menu")
 
 	#make menu choice
 	selection=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
@@ -448,7 +441,27 @@ grep -i "VideoPlugin = " $HOME/.config/mupen64plus/mupen64plus.cfg >> res.txt
 		_settings
 		;;
 
-		6)  
+		6)
+		clear
+		#install openssh-server  
+		echo $userpasswd | sudo -S apt-get install -y openssh-server | tee -a install_log.txt
+		#prompt user to change default port
+		dialog --title "Set desired SSH port (typically 22)" --inputbox "Enter Port" 10 0 2> /tmp/set_ssh
+		#cat input
+		ssh_new=$(cat '/tmp/set_ssh')
+		#set orig port 
+		ssh_org=$(grep -i "Port " /etc/ssh/sshd_config)
+		#set new port from user input
+		echo $userpasswd | sudo -S sed -i "s|$ssh_org|Port "$ssh_new"|g" /etc/ssh/sshd_config
+		#restart ssh service
+		echo $userpasswd | sudo -S service ssh restart
+		#remove temp file
+		rm -f /tmp/set_ssh
+		#return to menu
+		_settings
+		;;
+
+		7)  
 		return
 		;;
 	esac
@@ -829,65 +842,65 @@ function _config-x360w () {
 
 	#Nestopia
 	#default path: /home/$USER/.nestopia
-	cp -v $HOME/RetroRig/emu-configs/x360w/Nestopia/nstcontrols $HOME/.nestopia/ | tee -a install_log.txt
-	cp -v $HOME/RetroRig/emu-configs/x360w/Nestopia/nstsettings $HOME/.nestopia/ | tee -a install_log.txt
+	cp -v $HOME/RetroRig/emu-cfgs/x360w/Nestopia/nstcontrols $HOME/.nestopia/ | tee -a install_log.txt
+	cp -v $HOME/RetroRig/emu-cfgs/x360w/Nestopia/nstsettings $HOME/.nestopia/ | tee -a install_log.txt
 
 	#gens
 	#default path: /home/$USER/.gens
 	#Global config
-	cp -v $HOME/RetroRig/emu-configs/x360w/Gens-GS/gens.cfg $HOME/.gens/ | tee -a install_log.txt
+	cp -v $HOME/RetroRig/emu-cfgs/x360w/Gens-GS/gens.cfg $HOME/.gens/ | tee -a install_log.txt
 
 	#ZSNES
 	#default path: /home/$USER/.zsnes
 	#Controller config
-	cp -v $HOME/RetroRig/emu-configs/x360w/ZSNES/zinput.cfg $HOME/.zsnes/ | tee -a install_log.txt
-	cp -v $HOME/RetroRig/emu-configs/x360w/ZSNES/zsnesl.cfg $HOME/.zsnes/ | tee -a install_log.txt
+	cp -v $HOME/RetroRig/emu-cfgs/x360w/ZSNES/zinput.cfg $HOME/.zsnes/ | tee -a install_log.txt
+	cp -v $HOME/RetroRig/emu-cfgs/x360w/ZSNES/zsnesl.cfg $HOME/.zsnes/ | tee -a install_log.txt
 
 	#mame
 	#default path: /home/$USER/.mame
 	#Main config
-	cp -v $HOME/RetroRig/emu-configs/x360w/MAME/default.cfg $HOME/.mame/cfg | tee -a install_log.txt
-	cp -v $HOME/RetroRig/emu-configs/x360w/MAME/mame.ini $HOME/.mame | tee -a install_log.txt
+	cp -v $HOME/RetroRig/emu-cfgs/x360w/MAME/default.cfg $HOME/.mame/cfg | tee -a install_log.txt
+	cp -v $HOME/RetroRig/emu-cfgs/x360w/MAME/mame.ini $HOME/.mame | tee -a install_log.txt
 	#offline artwork scrapper configs
-	cp -v $HOME/RetroRig/emu-configs/x360w/MAME/parserConfig.xml $HOME/Games/Artwork/MAME | tee -a install_log.txt
-	cp -v $HOME/RetroRig/emu-configs/x360w/MAME/MAME.txt $HOME/Games/Artwork/MAME | tee -a install_log.txt
-	cp -v $HOME/RetroRig/emu-configs/x360w/MAME/MAME\ synopsis\ RCB\ 201202.zip/ $HOME/Games/Artwork/MAME | tee -a install_log.txt
+	cp -v $HOME/RetroRig/emu-cfgs/x360w/MAME/parserConfig.xml $HOME/Games/Artwork/MAME | tee -a install_log.txt
+	cp -v $HOME/RetroRig/emu-cfgs/x360w/MAME/MAME.txt $HOME/Games/Artwork/MAME | tee -a install_log.txt
+	cp -v $HOME/RetroRig/emu-cfgs/x360w/MAME/MAME\ synopsis\ RCB\ 201202.zip/ $HOME/Games/Artwork/MAME | tee -a install_log.txt
 
 	#pcsx
 	#default path: /home/$USER/.pcsx
 	#Main config
-	cp -v $HOME/RetroRig/emu-configs/x360w/pcsx/pcsx.cfg $HOME/.pcsx/ | tee -a install_log.txt
-	cp -Rv $HOME/RetroRig/emu-configs/x360w/pcsx/plugins $HOME/.pcsx/ | tee -a install_log.txt
-	cp -Rv $HOME/RetroRig/emu-configs/x360w/pcsx/patches $HOME/.pcsx/ | tee -a install_log.txt
-	cp -Rv $HOME/RetroRig/emu-configs/x360w/pcsx/memcards $HOME/.pcsx/ | tee -a install_log.txt
+	cp -v $HOME/RetroRig/emu-cfgs/x360w/pcsx/pcsx.cfg $HOME/.pcsx/ | tee -a install_log.txt
+	cp -Rv $HOME/RetroRig/emu-cfgs/x360w/pcsx/plugins $HOME/.pcsx/ | tee -a install_log.txt
+	cp -Rv $HOME/RetroRig/emu-cfgs/x360w/pcsx/patches $HOME/.pcsx/ | tee -a install_log.txt
+	cp -Rv $HOME/RetroRig/emu-cfgs/x360w/pcsx/memcards $HOME/.pcsx/ | tee -a install_log.txt
 
 
 	#pcsx2
 	#default path: /home/$USER/.config/pcsx2
 	#Main config
-	cp -v $HOME/RetroRig/emu-configs/x360w/pcsx2/PCSX2-reg.ini $HOME/.config/pcsx2/ | tee -a install_log.txt
-	cp -v $HOME/RetroRig/emu-configs/x360w/pcsx2/inisOnePAD.ini $HOME/.config/pcsx2/ | tee -a install_log.txt
-	cp -v $HOME/RetroRig/emu-configs/x360w/pcsx2/inis/* $HOME/.config/pcsx2/inis/ | tee -a install_log.txt
+	cp -v $HOME/RetroRig/emu-cfgs/x360w/pcsx2/PCSX2-reg.ini $HOME/.config/pcsx2/ | tee -a install_log.txt
+	cp -v $HOME/RetroRig/emu-cfgs/x360w/pcsx2/inisOnePAD.ini $HOME/.config/pcsx2/ | tee -a install_log.txt
+	cp -v $HOME/RetroRig/emu-cfgs/x360w/pcsx2/inis/* $HOME/.config/pcsx2/inis/ | tee -a install_log.txt
 
 	#mupen64pluspwd
 	#default path: /home/$USER/.config/mupen64plus
 	#Main config
-	cp -v $HOME/RetroRig/emu-configs/x360w/mupen64plus/mupen64plus.cfg $HOME/.config/mupen64plus/ | tee -a install_log.txt
+	cp -v $HOME/RetroRig/emu-cfgs/x360w/mupen64plus/mupen64plus.cfg $HOME/.config/mupen64plus/ | tee -a install_log.txt
 
 	#Stella
 	#default path: /home/$USER/.config/mupen64plus
 	#Main config
-	cp -v $HOME/RetroRig/emu-configs/x360w/Stella/stellarc $HOME/.stella/ | tee -a install_log.txt
+	cp -v $HOME/RetroRig/emu-cfgs/x360w/Stella/stellarc $HOME/.stella/ | tee -a install_log.txt
 
 	#dolphin
 	#default path /home/$USER/.dolphin-emu/
 	#emulator config
-	cp -Rv /$HOME/RetroRig/emu-configs/x360w/Dolphin/Dolphin.ini $HOME/.dolphin-emu/Config/ | tee -a install_log.txt
+	cp -Rv /$HOME/RetroRig/emu-cfgs/x360w/Dolphin/Dolphin.ini $HOME/.dolphin-emu/Config/ | tee -a install_log.txt
 	#Gamecube controller config
-	cp -Rv /$HOME/RetroRig/emu-configs/x360w/Dolphin/GCPadNew.ini $HOME/.dolphin-emu/Config/ | tee -a install_log.txt
+	cp -Rv /$HOME/RetroRig/emu-cfgs/x360w/Dolphin/GCPadNew.ini $HOME/.dolphin-emu/Config/ | tee -a install_log.txt
 	#Wii controller config
 	#OpenGL graphics config
-	cp -Rv /$HOME/RetroRig/emu-configs/x360w/Dolphin/gfx_opengl.ini $HOME/.dolphin-emu/Config/ | tee -a install_log.txt
+	cp -Rv /$HOME/RetroRig/emu-cfgs/x360w/Dolphin/gfx_opengl.ini $HOME/.dolphin-emu/Config/ | tee -a install_log.txt
 	
 	#inject init script
 	echo $userpasswd | sudo -S cp -v $HOME/RetroRig/init-scripts/x360w/xboxdrv /etc/init.d/ | tee -a install_log.txt
@@ -1018,7 +1031,7 @@ function _configuration (){
 	#xbmc does not (at least for Ubuntu's repo pkg) load the
 	#dot files without loading XBMC at least once
 	#copy in default folder base from first run:	
-	cp -Rv $HOME/RetroRig/XBMC-configs/* $HOME/.xbmc | tee -a install_log.txt
+	cp -Rv $HOME/RetroRig/XBMC-cfgs/* $HOME/.xbmc | tee -a install_log.txt
 
 	#xboxdrv director located in common area for startup
 	echo "echo $userpasswd | sudo -S needed to create common xboxdrv share!"
@@ -1028,7 +1041,7 @@ function _configuration (){
 	mkdir -pv $HOME/Games/Tools/ | tee -a install_log.txt
 
 	echo "-----------------------------------------------------------" |tee -a install_log.txt
-	echo "Copy software configurations" tee -a install_log.txt
+	echo "Copy software configurations" | tee -a install_log.txt
 	echo "-----------------------------------------------------------" | tee -a install_log.txt
 	#configs
 	mkdir -pv $HOME/Games/Configs/ | tee -a install_log.txt
@@ -1101,7 +1114,10 @@ function _configuration (){
 }
 
 function _update-git () {
-	dialog --infobox "updating git repo" 3 22
+	clear
+	echo "-----------------------------------------------------------" |tee -a install_log.txt
+	echo "Updating git repo" | tee -a install_log.txt
+	echo "-----------------------------------------------------------" | tee -a install_log.txt
 	sleep 2s
 	cd $HOME/RetroRig/
 	git pull
@@ -1115,16 +1131,24 @@ function _update-git () {
 }
 
 function _update-binaries () {
-	echo "updating binaries"
-	echo $userpasswd | sudo -S apt-get install -y xboxdrv zsnes nestopia pcsxr pcsx2:i386\
-	mame mupen64plus qjoypad xbmc dolphin-emu-master stella	
+	clear
+	echo "-----------------------------------------------------------" |tee -a install_log.txt
+	echo "Updating emulator binaries" | tee -a install_log.txt
+	echo "-----------------------------------------------------------" | tee -a install_log.txt
+	echo $userpasswd | sudo -S apt-get install -y xboxdrv curl zsnes nestopia pcsxr pcsx2:i386 \
+	python-software-properties pkg-config software-properties-common \
+	mame mupen64plus dconf-tools qjoypad xbmc dolphin-emu-master stella \
+	build-essential gdebi| tee -a install_log.txt	
 	sleep 3s
 	#clear
 	clear
 }
 
 function _upgrade-system () {
-	dialog --infobox "updating system" 3 11
+	clear
+	echo "-----------------------------------------------------------" |tee -a install_log.txt
+	echo "Upgrading system" | tee -a install_log.txt
+	echo "-----------------------------------------------------------" | tee -a install_log.txt
 	echo $userpasswd | sudo -S apt-get update
 	echo $userpasswd | sudo -S apt-get upgrade
 	sleep 3s
