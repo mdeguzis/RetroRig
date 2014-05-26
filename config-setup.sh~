@@ -987,7 +987,6 @@ function _configuration (){
 	mkdir -pv $HOME/Games/ROMs/PS1/ | tee -a install_log.txt
 	mkdir -pv $HOME/Games/ROMs/Sega\ Genesis/ | tee -a install_log.txt
 	mkdir -pv $HOME/Games/ROMs/SNK\ Neo\ Geo/ | tee -a install_log.txt
-	mkdir -pv $HOME/Games/ROMs/GBC/ | tee -a install_log.txt
 
 	#Artwork 
 	mkdir -pv $HOME/Games/Artwork/Atari\ 2600/ | tee -a install_log.txt
@@ -1000,7 +999,6 @@ function _configuration (){
 	mkdir -pv $HOME/Games/Artwork/PS1/ | tee -a install_log.txt
 	mkdir -pv $HOME/Games/Artwork/Sega\ Genesis/ | tee -a install_log.txt
 	mkdir -pv $HOME/Games/Artwork/SNK\ Neo\ Geo/ | tee -a install_log.txt
-	mkdir -pv $HOME/Games/Artwork/GBC/ | tee -a install_log.txt
 
 	#Saves (if any)
 	mkdir -pv $HOME/Games/Saves/Atari\ 2600/ | tee -a install_log.txt
@@ -1013,7 +1011,6 @@ function _configuration (){
 	mkdir -pv $HOME/Games/Saves/PS1/ | tee -a install_log.txt
 	mkdir -pv $HOME/Games/Saves/Sega\ Genesis/ | tee -a install_log.txt
 	mkdir -pv $HOME/Games/Saves/SNK\ Neo\ Geo/ | tee -a install_log.txt
-	mkdir -pv $HOME/Games/Saves/GBC/ | tee -a install_log.txt
 
 	#create dotfiles
 	mkdir -pv $HOME/.qjoypad3/ | tee -a install_log.txt
@@ -1030,7 +1027,6 @@ function _configuration (){
 	mkdir -pv $HOME/.config/pcsx2/bios | tee -a install_log.txt
 	mkdir -pv $HOME/.stella/ | tee -a install_log.txt
 	mkdir -pv $HOME/.xbmc/ | tee -a install_log.txt
-	mkdir -pv $HOME/.mednafen/ | tee -a install_log.txt
 
 	#xbmc does not (at least for Ubuntu's repo pkg) load the
 	#dot files without loading XBMC at least once
