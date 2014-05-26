@@ -1041,7 +1041,7 @@ function _configuration (){
 	mkdir -pv $HOME/Games/Tools/ | tee -a install_log.txt
 
 	echo "-----------------------------------------------------------" |tee -a install_log.txt
-	echo "Copy software configurations" tee -a install_log.txt
+	echo "Copy software configurations" | tee -a install_log.txt
 	echo "-----------------------------------------------------------" | tee -a install_log.txt
 	#configs
 	mkdir -pv $HOME/Games/Configs/ | tee -a install_log.txt
@@ -1114,7 +1114,10 @@ function _configuration (){
 }
 
 function _update-git () {
-	dialog --infobox "updating git repo" 3 22
+	clear
+	echo "-----------------------------------------------------------" |tee -a install_log.txt
+	echo "Updating git repo" | tee -a install_log.txt
+	echo "-----------------------------------------------------------" | tee -a install_log.txt
 	sleep 2s
 	cd $HOME/RetroRig/
 	git pull
@@ -1128,16 +1131,24 @@ function _update-git () {
 }
 
 function _update-binaries () {
-	echo "updating binaries"
-	echo $userpasswd | sudo -S apt-get install -y xboxdrv zsnes nestopia pcsxr pcsx2:i386\
-	mame mupen64plus qjoypad xbmc dolphin-emu-master stella	
+	clear
+	echo "-----------------------------------------------------------" |tee -a install_log.txt
+	echo "Updating emulator binaries" | tee -a install_log.txt
+	echo "-----------------------------------------------------------" | tee -a install_log.txt
+	echo $userpasswd | sudo -S apt-get install -y xboxdrv curl zsnes nestopia pcsxr pcsx2:i386 \
+	python-software-properties pkg-config software-properties-common \
+	mame mupen64plus dconf-tools qjoypad xbmc dolphin-emu-master stella \
+	build-essential gdebi| tee -a install_log.txt	
 	sleep 3s
 	#clear
 	clear
 }
 
 function _upgrade-system () {
-	dialog --infobox "updating system" 3 11
+	clear
+	echo "-----------------------------------------------------------" |tee -a install_log.txt
+	echo "Upgrading system" | tee -a install_log.txt
+	echo "-----------------------------------------------------------" | tee -a install_log.txt
 	echo $userpasswd | sudo -S apt-get update
 	echo $userpasswd | sudo -S apt-get upgrade
 	sleep 3s
