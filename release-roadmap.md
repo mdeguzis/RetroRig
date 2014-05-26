@@ -5,6 +5,9 @@ Goals for 0.8.0 release
 - (done) Establish beta branch
 - Add PS3 Controller support
 - Add GBA, GBC, GB support
+	(done) GBC 
+- Verify audio and framerate work with test PC
+	(done) GBC
 - Add Artwork for MAME titles (depends on file size)
 - Investigate requested enhancements on issues page
 - Investigate any pull requests
