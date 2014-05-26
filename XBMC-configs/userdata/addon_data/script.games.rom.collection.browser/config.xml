@@ -128,8 +128,8 @@
       <gameclient />
       <emulatorCmd>/usr/games/pcsx</emulatorCmd>
       <emulatorParams>-nogui -cdfile"%ROM%"</emulatorParams>
-      <romPath>/home/mikeyd/Games/ROMs/PSX/*.bin</romPath>
-      <romPath>/home/mikeyd/Games/ROMs/PSX/*.iso</romPath>
+      <romPath>/home/mikeyd/Games/ROMs/PS1/*.bin</romPath>
+      <romPath>/home/mikeyd/Games/ROMs/PS1/*.iso</romPath>
       <saveStatePath />
       <saveStateParams />
       <mediaPath type="boxfront">/home/mikeyd/Games/Artwork/PS1/boxfront/%GAME%.*</mediaPath>
