@@ -19,3 +19,21 @@ Version 0.7.0
 - mechanism to update git repo in script  
 - test all emulators with sample ROM  
 - import games from folder on startup to avoid manual intervention (RCB menu pop, with cancel)  
+
+
+Release 0.6.2
+-------------
+
+- Global Resolution selection for emulators that support it (in progress)
+- Custom resolution
+- Fix script menu appearance
+- Establish testing snapshot on Vbox running Ubuntu 14.04 LTS
+- Complete folder skeleton for game ROMs, Artwork, Saves
+- Add any game to an appropriate ROM folder and run RCB's import tool and you're good to go!
+- Prebuilt config files for emulators mapped to Xbox wireless controller (spot checking ongoing)
+- Dependencies are auto installed
+- XBMC autostarts directly into Rom Collection Browser
+- Rom Collection browser will prompt for games to import on first run
+- Mechanisms to update github repo in the install script itself
+
+I wanted to put out something workable, even though some things like resolution selection need finished, but for the most part, most is working for a small release bump.
