@@ -146,7 +146,7 @@ options=(1 "Atari 2600"
 	 8 "Playstation 1"
 	 9 "Playstation 2"
 	 10 "Neo Geo"
-	 11 "Neo Geo"
+	 11 "GBC"
 	 12 "Exit ROM Loader")
 
 	#make menu choice
