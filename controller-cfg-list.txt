@@ -10,13 +10,36 @@ Note Syntax:
 -Tips and Tricks
 
 #####################################
+#GameBoy Color
+#####################################
+
+Suggested emulator: mednafen
+Alternative emulators: ?
+
+######Default Controller layout:
+
+    Primary Control: Dpad
+    A (B)
+    B (A)
+    Start (Start)
+    Select (Select)
+    Exit emulator (Guide)
+    Quick Save State (Left-Thumbstick)
+    Quick Load State (Right-Thumstick)
+
+######Tips and Tricks:
+
+If folks feel the joystick works better for the old Gameboy games, I am willing to
+test that out to my better judgment/opinion.
+
+#####################################
 #Super Nintendo
 #####################################
 
 Suggested emulator: ZSNES
 Alternative emulators: SNES9X, Mednafen
 
-Default Controller layout:
+######Default Controller layout:
 
     Primary Control: Joystick
     A (B)
@@ -29,12 +52,12 @@ Default Controller layout:
     Quick Save State (Left-Thumbstick)
     Quick Load State (Right-Thumstick)
 
-Tips and Tricks:
+######Tips and Tricks:
 
-    I couldn't seem to set Esc as the button to exit the emulator, since that is reserved in the UI for exiting 
-    a configuration screen. If you know a way around this, please let me know.
-    The main buttons were reversed to reflect the original gamepad
-    Gamepad is enabled for navigation of menu system
+I couldn't seem to set Esc as the button to exit the emulator, since that is reserved in the UI for exiting 
+a configuration screen. If you know a way around this, please let me know.
+The main buttons were reversed to reflect the original gamepad
+Gamepad is enabled for navigation of menu system
 
 #####################################
 #Nestopia
@@ -43,7 +66,7 @@ Tips and Tricks:
 Suggested emulator: Nestopia
 Alternative emulators: FCE Ultra, FakeNES, Mednafen
 
-Default Controller layout:
+######Default Controller layout:
 
     Primary Control: Joystick
     A (B)
@@ -54,9 +77,9 @@ Default Controller layout:
     Quick Save State (Left-Thumbstick)
     Quick Load State (Right-Thumstick)
 
-Tips and Tricks:
+######Tips and Tricks:
 
-    The main buttons were reversed to reflect the original gamepad
+The main buttons were reversed to reflect the original gamepad
 
 #####################################
 #MAME
@@ -65,7 +88,7 @@ Tips and Tricks:
 Suggested emulator: mame
 Alternative emulators: unknown
 
-Default Controller layout:
+######Default Controller layout:
 
     Primary Control: Joystick
     P1 Button 1 (A)
@@ -84,12 +107,12 @@ Default Controller layout:
     Quick Save State (Left-Thumbstick), requires slot number 0-9!
     Quick Load State (Right-Thumstick), requires slot number 0-9!
 
-Tips and Tricks:
+######Tips and Tricks:
 
-    Gamepad is enabled for navigation of menu system
-    There is no quick save/load feature that I saw. Doing a save/load prompts for a slot number. 
-    You could work around this if you wish to give up a button on your gamepad to map to a number 
-    0-9 with the qjoypad program (future fix?)
+Gamepad is enabled for navigation of menu system
+There is no quick save/load feature that I saw. Doing a save/load prompts for a slot number. 
+You could work around this if you wish to give up a button on your gamepad to map to a number 
+0-9 with the qjoypad program (future fix?)
 
 #####################################
 #Mupen64Plus
@@ -98,7 +121,7 @@ Tips and Tricks:
 Suggested emulator: Mupen64Plus
 Alternative emulators: Project64
 
-Default Controller layout:
+######Default Controller layout:
 
     Primary Control: Joystick
     Dpad enabled
@@ -114,14 +137,14 @@ Default Controller layout:
     Quick Save State (Left-Thumbstick)
     Quick Load State (Right-Thumstick)
 
-Tips and Tricks:
+######Tips and Tricks:
 
-    The Mupen64Plus Google code site has superb documentation. Be sure to check it out for all intensive purposes.
-    There is a front end for Mupen64Plus called M64py. If you install the front-end GUI, be aware changes when 
-    opening up either Mupen64Plus via the CLI, or M64py will overwrite each other. The video plugin used is 
-    Glide64, due to video issues on Ubuntu 14.04 and my hardware. Your mileage may vary. 
-    
-    Options to change the video plugin in the RetroRig settings menu will be added at a later date.
+The Mupen64Plus Google code site has superb documentation. Be sure to check it out for all intensive purposes.
+There is a front end for Mupen64Plus called M64py. If you install the front-end GUI, be aware changes when 
+opening up either Mupen64Plus via the CLI, or M64py will overwrite each other. The video plugin used is 
+Glide64, due to video issues on Ubuntu 14.04 and my hardware. Your mileage may vary. 
+
+Options to change the video plugin in the RetroRig settings menu will be added at a later date.
 
 #####################################
 #Stella
@@ -130,7 +153,7 @@ Tips and Tricks:
 Suggested emulator: Stella
 Alternative emulators: Unknown
 
-Default Controller layout:
+######Default Controller layout:
 
     Primary Control: D-pad
     Fire (A)
@@ -141,8 +164,8 @@ Default Controller layout:
     Quick Save State (Left-Thumbstick)
     Quick Load State (Right-Thumstick)
 
-Tips and Tricks:
+######Tips and Tricks:
 
-    There are currently audio issues on my setup
-    Video is using software render (not OpenGL) due to bugs (sad crab...)
-    Gamepad is enabled for navigation of menu system
+There are currently audio issues on my setup
+Video is using software render (not OpenGL) due to bugs (sad crab...)
+Gamepad is enabled for navigation of menu system
