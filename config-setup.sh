@@ -1160,7 +1160,7 @@ function _update-binaries () {
 	echo "-----------------------------------------------------------" | tee -a install_log.txt
 	echo $userpasswd | sudo -S apt-get install -y xboxdrv curl zsnes nestopia pcsxr pcsx2:i386 \
 	python-software-properties pkg-config software-properties-common \
-	mame mupen64plus dconf-tools qjoypad xbmc dolphin-emu-master stella \
+	mame mupen64plus dconf-tools mednafen qjoypad xbmc dolphin-emu-master stella \
 	build-essential gdebi| tee -a install_log.txt	
 	sleep 3s
 	#clear
