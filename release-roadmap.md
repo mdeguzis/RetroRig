@@ -8,10 +8,7 @@ Goals for 0.8.0 release
 Issues list
 ---------------
 
-- Trouble with disabling lock/screensaver with gsettings
-- Problems with using OpenGL on Stella (Atari 2600)
-- BIOS files cannot be included for PS1, PS2 due to legal issues, user must insert them.
-- ROM Collection browser does not seem to take $HOME paths, must be absolute (/home/test) 
+- Please see issues list on github
 
 Future Goals
 ---------------
