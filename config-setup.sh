@@ -822,9 +822,9 @@ function _software () {
 	echo "-----------------------------------------------------------" | tee -a install_log.txt
 	echo "Installing required packages..." | tee -a install_log.txt
 	echo "-----------------------------------------------------------" | tee -a install_log.txt
-	echo $userpasswd | sudo -S apt-get install -y xboxdrv curl zsnes nestopia pcsxr pcsx2:i386\
-	python-software-properties pkg-config software-properties-common mednafen\
-	mame mupen64plus dconf-tools qjoypad xbmc dolphin-emu-master stella gens-gs\ 
+	echo $userpasswd | sudo -S apt-get install -y xboxdrv curl zsnes nestopia pcsxr pcsx2:i386 \
+	python-software-properties pkg-config software-properties-common mednafen \
+	mame mupen64plus dconf-tools qjoypad xbmc dolphin-emu-master stella gens-gs \ 
 	build-essential | tee -a install_log.txt
 
 
