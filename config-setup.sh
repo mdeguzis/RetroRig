@@ -1356,7 +1356,7 @@ function _reboot () {
 	    [ -s $data ] &&  cat $data || echo "ESC pressed.";;
 	esac
 
-        dialog --infobox "Rebooting PC" 3 21 ; sleep 2s
+        dialog --infobox "Rebooting PC" 3 0 ; sleep 2s
         sleep 5s
         echo $userpasswd | sudo -S /sbin/reboot
 }
