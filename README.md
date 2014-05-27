@@ -24,24 +24,24 @@ Warning! It will overwrite:
 
 -Emulator configs for supported emulators:
 
-    -ZSNES
-    -Nestopia
-    -Gens/GS
-    -MAME
-    -Stella
-    -Mupen64Plus
-    -PCSX
-    -PCSX2
-    -Dolphin
-    -mednafen (GBC currently)
+* ZSNES
+* Nestopia
+* Gens/GS
+* MAME
+* Stella
+* Mupen64Plus
+* PCSX
+* PCSX2
+* Dolphin
+* mednafen (GBC currently)
 
 -Also configs related to:
 
-    -qjoypad
-    -Blacklisting xpad
-    -Autostarted application entries (XBMC, qjoypad)
-    -Some folder structures under ~/Games
-    -xboxdrv init scripts and configurations
+* qjoypad
+* Blacklisting xpad
+* Autostarted application entries (XBMC, qjoypad)
+* Some folder structures under ~/Games
+* xboxdrv init scripts and configurations
 
 ## Current feature set
 
@@ -93,16 +93,16 @@ It is a good idea to load games before hand into the predefined folders after th
 
 Currently importing ROMs into XBMC is a keyboard-less affair for the following consoles:
 
-    -SNES
-    -NES
-    -Sega Genesis
-    -MAME
-    -Atari 2600
-    -Nintendo 64
-    -Playstation 1
-    -Playstation 2
-    -Gamecube
-    -Gameboy Color
+* SNES
+* NES
+* Sega Genesis
+* MAME
+* Atari 2600
+* Nintendo 64
+* Playstation 1
+* Playstation 2
+* Gamecube
+* Gameboy Color
 
 All ROMs should be placed in the respective folder under "/home/$USER/Games/ROMs". In due time, I will
 add more and more emulators. But until then, you can manually add them. In a later release, I plan on
