@@ -47,9 +47,9 @@ Warning! It will overwrite:
 
 * Auto-install software, emulator configs, and required components
 * (settings menu) 4-player wireless xboxdrv userland module inserted as init script
-* (settings menu) Gamepad select menu (currently only Xbox 360 wireless is supported)
+* (settings menu) Gamepad select menu
 * (settings menu) Resolution presets/custom selection for emulators that support it
-* Preset Controller mappings for supported gamepads (Xbox 360 Gamepad only at the moment)
+* Preset Controller mappings for supported gamepads
 * Save state, load state, exit emulators with gamepad (pcsx, pcsx2 have issues currently)
 * A cobbled together "first run" state of RCB with a blank games database and pre-set configs
 * Functions to update git repo, emulator binaries, upgrade system and more
@@ -81,7 +81,11 @@ I Tried to reflect the original controller as much as possible for some such as 
 save/load/exit button assignments are constant for all emulators except pcsx and pcsx2 (working on it!). In due time I will add more, with the next being the Dualshock 2/3 controller.
 
 Please see controller-cfg-list.txt for the complete set!
- 
+
+Current supported controllers:
+
+* Xbox 360 Controller (wireless)
+* Xbox 360 Controller (wired) 
 
 ## ROMs
 
