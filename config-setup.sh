@@ -808,8 +808,9 @@ function _software () {
 	echo "-----------------------------------------------------------" | tee -a install_log.txt
 	echo "deb http://archive.getdeb.net/ubuntu trusty-getdeb games" > /tmp/playdeb.list | tee -a install_log.txt
 	echo $userpasswd | sudo -S mv /tmp/playdeb.list /etc/apt/sources.list.d/playdeb.list | tee -a install_log.txt
-	wget -q -O- http://archive.getdeb.net/getdeb-archive.key | tee -a install_log.txt
-	echo $userpasswd | sudo -S sudo apt-key add getdeb-archive.key | tee -a install_log.txt
+	wget -q -O- http://archive.getdeb.net/getdeb-archive.key > getdeb.key | tee -a install_log.txt
+	echo $userpasswd | sudo -S sudo apt-key add getdeb.key | tee -a install_log.txt
+	rm -f getdeb.key | tee -a install_log.txt
 
 	#update repository listings
 	echo "-----------------------------------------------------------" | tee -a install_log.txt
