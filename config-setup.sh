@@ -853,8 +853,9 @@ function _gamepad (){
 cmd=(dialog --backtitle "LibreGeek.org RetroRig Installer" --menu "| Gamepad Select | \
 			 Request any new Gamepads via github!" 16 62 16)
 options=(1 "Xbox 360 Controller (wireless) (4-player)" 
-	 2 "Exit gamepad selection" 
-	 3 "Back to main menu")
+	 2 "Xbox 360 Controller (wired) (4-player)" 
+	 3 "Exit gamepad selection" 
+	 4 "Back to main menu")
 
 	#make menu choice
 	selection=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
@@ -865,110 +866,211 @@ options=(1 "Xbox 360 Controller (wireless) (4-player)"
 		case $choice in
 
 		1)
-		_config-x360w
+		_config-x360ws
 		return
 		;;
 
-		2)
+		1)
+		_config-x360wd
 		return
 		;;
 
 		3)
+		return
+		;;
+
+		4)
 		_main
 		;;
 		esac
 	done
 }
 
-function _config-x360w () {
+function _config-x360ws () {
+
+	#Wireless Xbox 360 Controller Config
 
 	#copy xbox configuration (default) to folder
-	echo $userpasswd | sudo -S cp -v $HOME/RetroRig/controller-cfgs/x360w/xpad-wireless.xboxdrv /usr/share/xboxdrv/ | tee -a install_log.txt
+	echo $userpasswd | sudo -S cp -v $HOME/RetroRig/controller-cfgs/x360ws/xpad-wireless.xboxdrv /usr/share/xboxdrv/ | tee -a install_log.txt
 
 	#set qjoypad's profile to match Xbox 360 Wireless (4-player)
-	cp -v $HOME/RetroRig/controller-cfgs/x360w.lyt $HOME/.qjoypad3/ | tee -a install_log.txt
+	cp -v $HOME/RetroRig/controller-cfgs/x360ws.lyt $HOME/.qjoypad3/ | tee -a install_log.txt
 
 	#Nestopia
 	#default path: /home/$USER/.nestopia
-	cp -v $HOME/RetroRig/emu-cfgs/x360w/Nestopia/nstcontrols $HOME/.nestopia/ | tee -a install_log.txt
-	cp -v $HOME/RetroRig/emu-cfgs/x360w/Nestopia/nstsettings $HOME/.nestopia/ | tee -a install_log.txt
+	cp -v $HOME/RetroRig/emu-cfgs/x360ws/Nestopia/nstcontrols $HOME/.nestopia/ | tee -a install_log.txt
+	cp -v $HOME/RetroRig/emu-cfgs/x360ws/Nestopia/nstsettings $HOME/.nestopia/ | tee -a install_log.txt
 
 	#gens
 	#default path: /home/$USER/.gens
 	#Global config
-	cp -v $HOME/RetroRig/emu-cfgs/x360w/Gens-GS/gens.cfg $HOME/.gens/ | tee -a install_log.txt
+	cp -v $HOME/RetroRig/emu-cfgs/x360ws/Gens-GS/gens.cfg $HOME/.gens/ | tee -a install_log.txt
 
 	#ZSNES
 	#default path: /home/$USER/.zsnes
 	#Controller config
-	cp -v $HOME/RetroRig/emu-cfgs/x360w/ZSNES/zinput.cfg $HOME/.zsnes/ | tee -a install_log.txt
-	cp -v $HOME/RetroRig/emu-cfgs/x360w/ZSNES/zsnesl.cfg $HOME/.zsnes/ | tee -a install_log.txt
+	cp -v $HOME/RetroRig/emu-cfgs/x360ws/ZSNES/zinput.cfg $HOME/.zsnes/ | tee -a install_log.txt
+	cp -v $HOME/RetroRig/emu-cfgs/x360ws/ZSNES/zsnesl.cfg $HOME/.zsnes/ | tee -a install_log.txt
 
 	#mame
 	#default path: /home/$USER/.mame
 	#Main config
-	cp -v $HOME/RetroRig/emu-cfgs/x360w/MAME/default.cfg $HOME/.mame/cfg | tee -a install_log.txt
-	cp -v $HOME/RetroRig/emu-cfgs/x360w/MAME/mame.ini $HOME/.mame | tee -a install_log.txt
+	cp -v $HOME/RetroRig/emu-cfgs/x360ws/MAME/default.cfg $HOME/.mame/cfg | tee -a install_log.txt
+	cp -v $HOME/RetroRig/emu-cfgs/x360ws/MAME/mame.ini $HOME/.mame | tee -a install_log.txt
 	#offline artwork scrapper configs
-	cp -v $HOME/RetroRig/emu-cfgs/x360w/MAME/parserConfig.xml $HOME/Games/Artwork/MAME | tee -a install_log.txt
-	cp -v $HOME/RetroRig/emu-cfgs/x360w/MAME/MAME.txt $HOME/Games/Artwork/MAME | tee -a install_log.txt
-	cp -v $HOME/RetroRig/emu-cfgs/x360w/MAME/MAME\ synopsis\ RCB\ 201202.zip/ $HOME/Games/Artwork/MAME | tee -a install_log.txt
+	cp -v $HOME/RetroRig/emu-cfgs/x360ws/MAME/parserConfig.xml $HOME/Games/Artwork/MAME | tee -a install_log.txt
+	cp -v $HOME/RetroRig/emu-cfgs/x360ws/MAME/MAME.txt $HOME/Games/Artwork/MAME | tee -a install_log.txt
+	cp -v $HOME/RetroRig/emu-cfgs/x360ws/MAME/MAME\ synopsis\ RCB\ 201202.zip/ $HOME/Games/Artwork/MAME | tee -a install_log.txt
 
 	#pcsx
 	#default path: /home/$USER/.pcsx
 	#Main config
-	cp -v $HOME/RetroRig/emu-cfgs/x360w/pcsx/pcsx.cfg $HOME/.pcsx/ | tee -a install_log.txt
-	cp -Rv $HOME/RetroRig/emu-cfgs/x360w/pcsx/plugins $HOME/.pcsx/ | tee -a install_log.txt
-	cp -Rv $HOME/RetroRig/emu-cfgs/x360w/pcsx/patches $HOME/.pcsx/ | tee -a install_log.txt
-	cp -Rv $HOME/RetroRig/emu-cfgs/x360w/pcsx/memcards $HOME/.pcsx/ | tee -a install_log.txt
+	cp -v $HOME/RetroRig/emu-cfgs/x360ws/pcsx/pcsx.cfg $HOME/.pcsx/ | tee -a install_log.txt
+	cp -Rv $HOME/RetroRig/emu-cfgs/x360ws/pcsx/plugins $HOME/.pcsx/ | tee -a install_log.txt
+	cp -Rv $HOME/RetroRig/emu-cfgs/x360ws/pcsx/patches $HOME/.pcsx/ | tee -a install_log.txt
+	cp -Rv $HOME/RetroRig/emu-cfgs/x360ws/pcsx/memcards $HOME/.pcsx/ | tee -a install_log.txt
 
 
 	#pcsx2
 	#default path: /home/$USER/.config/pcsx2
 	#Main config
-	cp -v $HOME/RetroRig/emu-cfgs/x360w/pcsx2/PCSX2-reg.ini $HOME/.config/pcsx2/ | tee -a install_log.txt
-	cp -v $HOME/RetroRig/emu-cfgs/x360w/pcsx2/inisOnePAD.ini $HOME/.config/pcsx2/ | tee -a install_log.txt
-	cp -v $HOME/RetroRig/emu-cfgs/x360w/pcsx2/inis/* $HOME/.config/pcsx2/inis/ | tee -a install_log.txt
+	cp -v $HOME/RetroRig/emu-cfgs/x360ws/pcsx2/PCSX2-reg.ini $HOME/.config/pcsx2/ | tee -a install_log.txt
+	cp -v $HOME/RetroRig/emu-cfgs/x360ws/pcsx2/inisOnePAD.ini $HOME/.config/pcsx2/ | tee -a install_log.txt
+	cp -v $HOME/RetroRig/emu-cfgs/x360ws/pcsx2/inis/* $HOME/.config/pcsx2/inis/ | tee -a install_log.txt
 
 	#mednafen
 	#default path: /home/$USER/.mednafen/mednafen.cfg
 	#Main config
-	cp -v $HOME/RetroRig/emu-cfgs/x360w/mednafen/mednafen.cfg $HOME/.mednafen | tee -a install_log.txt
+	cp -v $HOME/RetroRig/emu-cfgs/x360ws/mednafen/mednafen.cfg $HOME/.mednafen | tee -a install_log.txt
 
 	#mupen64pluspwd
 	#default path: /home/$USER/.config/mupen64plus
 	#Main config
-	cp -v $HOME/RetroRig/emu-cfgs/x360w/mupen64plus/mupen64plus.cfg $HOME/.config/mupen64plus/ | tee -a install_log.txt
+	cp -v $HOME/RetroRig/emu-cfgs/x360ws/mupen64plus/mupen64plus.cfg $HOME/.config/mupen64plus/ | tee -a install_log.txt
 
 	#Stella
 	#default path: /home/$USER/.config/mupen64plus
 	#Main config
-	cp -v $HOME/RetroRig/emu-cfgs/x360w/Stella/stellarc $HOME/.stella/ | tee -a install_log.txt
+	cp -v $HOME/RetroRig/emu-cfgs/x360ws/Stella/stellarc $HOME/.stella/ | tee -a install_log.txt
 
 	#dolphin
 	#default path /home/$USER/.dolphin-emu/
 	#emulator config
-	cp -Rv /$HOME/RetroRig/emu-cfgs/x360w/Dolphin/Dolphin.ini $HOME/.dolphin-emu/Config/ | tee -a install_log.txt
+	cp -Rv /$HOME/RetroRig/emu-cfgs/x360ws/Dolphin/Dolphin.ini $HOME/.dolphin-emu/Config/ | tee -a install_log.txt
 	#Gamecube controller config
-	cp -Rv /$HOME/RetroRig/emu-cfgs/x360w/Dolphin/GCPadNew.ini $HOME/.dolphin-emu/Config/ | tee -a install_log.txt
+	cp -Rv /$HOME/RetroRig/emu-cfgs/x360ws/Dolphin/GCPadNew.ini $HOME/.dolphin-emu/Config/ | tee -a install_log.txt
 	#Wii controller config
 	#OpenGL graphics config
-	cp -Rv /$HOME/RetroRig/emu-cfgs/x360w/Dolphin/gfx_opengl.ini $HOME/.dolphin-emu/Config/ | tee -a install_log.txt
+	cp -Rv /$HOME/RetroRig/emu-cfgs/x360ws/Dolphin/gfx_opengl.ini $HOME/.dolphin-emu/Config/ | tee -a install_log.txt
 	
 	#inject init script
-	echo $userpasswd | sudo -S cp -v $HOME/RetroRig/init-scripts/x360w/xboxdrv /etc/init.d/ | tee -a install_log.txt
+	echo $userpasswd | sudo -S cp -v $HOME/RetroRig/init-scripts/x360ws/xboxdrv /etc/init.d/ | tee -a install_log.txt
 	#update 
 	echo $userpasswd | sudo -S update-rc.d xboxdrv defaults | tee -a install_log.txt
 
 	#blacklist xpad
 	echo "sudo needed to blacklist xpad!"
-	echo $userpasswd | sudo -S cp -v $HOME/RetroRig/init-scripts/x360w/blacklist.conf /etc/modprobe.d/ | tee -a install_log.txt
+	echo $userpasswd | sudo -S cp -v $HOME/RetroRig/init-scripts/x360ws/blacklist.conf /etc/modprobe.d/ | tee -a install_log.txt
 
 	#copy default gamepad setup for Xbox 360 Wireless (4-player)
-	cp -v $HOME/RetroRig/controller-cfgs/x360w/x360w.lyt $HOME/.qjoypad3/ | tee -a install_log.txt
+	cp -v $HOME/RetroRig/controller-cfgs/x360ws/x360ws.lyt $HOME/.qjoypad3/ | tee -a install_log.txt
 
-	#copy qjoypad autostart item for x360w gamepad config
-	echo $userpasswd | sudo -S cp -v $HOME/RetroRig/controller-cfgs/x360w/qjoypad.desktop /etc/xdg/autostart/ | tee -a install_log.txt
+	#copy qjoypad autostart item for x360ws gamepad config
+	echo $userpasswd | sudo -S cp -v $HOME/RetroRig/controller-cfgs/x360ws/qjoypad.desktop /etc/xdg/autostart/ | tee -a install_log.txt
+
+}
+
+function _config-x360wd () {
+
+	#Wired Xbox 360 Controller Config
+
+	#copy xbox configuration (default) to folder
+	echo $userpasswd | sudo -S cp -v $HOME/RetroRig/controller-cfgs/x360wd/xpad-wired.xboxdrv /usr/share/xboxdrv/ | tee -a install_log.txt
+
+	#set qjoypad's profile to match Xbox 360 Wireless (4-player)
+	cp -v $HOME/RetroRig/controller-cfgs/x360wd.lyt $HOME/.qjoypad3/ | tee -a install_log.txt
+
+	#Nestopia
+	#default path: /home/$USER/.nestopia
+	cp -v $HOME/RetroRig/emu-cfgs/x360wd/Nestopia/nstcontrols $HOME/.nestopia/ | tee -a install_log.txt
+	cp -v $HOME/RetroRig/emu-cfgs/x360wd/Nestopia/nstsettings $HOME/.nestopia/ | tee -a install_log.txt
+
+	#gens
+	#default path: /home/$USER/.gens
+	#Global config
+	cp -v $HOME/RetroRig/emu-cfgs/x360wd/Gens-GS/gens.cfg $HOME/.gens/ | tee -a install_log.txt
+
+	#ZSNES
+	#default path: /home/$USER/.zsnes
+	#Controller config
+	cp -v $HOME/RetroRig/emu-cfgs/x360wd/ZSNES/zinput.cfg $HOME/.zsnes/ | tee -a install_log.txt
+	cp -v $HOME/RetroRig/emu-cfgs/x360wd/ZSNES/zsnesl.cfg $HOME/.zsnes/ | tee -a install_log.txt
+
+	#mame
+	#default path: /home/$USER/.mame
+	#Main config
+	cp -v $HOME/RetroRig/emu-cfgs/x360wd/MAME/default.cfg $HOME/.mame/cfg | tee -a install_log.txt
+	cp -v $HOME/RetroRig/emu-cfgs/x360wd/MAME/mame.ini $HOME/.mame | tee -a install_log.txt
+	#offline artwork scrapper configs
+	cp -v $HOME/RetroRig/emu-cfgs/x360wd/MAME/parserConfig.xml $HOME/Games/Artwork/MAME | tee -a install_log.txt
+	cp -v $HOME/RetroRig/emu-cfgs/x360wd/MAME/MAME.txt $HOME/Games/Artwork/MAME | tee -a install_log.txt
+	cp -v $HOME/RetroRig/emu-cfgs/x360wd/MAME/MAME\ synopsis\ RCB\ 201202.zip/ $HOME/Games/Artwork/MAME | tee -a install_log.txt
+
+	#pcsx
+	#default path: /home/$USER/.pcsx
+	#Main config
+	cp -v $HOME/RetroRig/emu-cfgs/x360wd/pcsx/pcsx.cfg $HOME/.pcsx/ | tee -a install_log.txt
+	cp -Rv $HOME/RetroRig/emu-cfgs/x360wd/pcsx/plugins $HOME/.pcsx/ | tee -a install_log.txt
+	cp -Rv $HOME/RetroRig/emu-cfgs/x360wd/pcsx/patches $HOME/.pcsx/ | tee -a install_log.txt
+	cp -Rv $HOME/RetroRig/emu-cfgs/x360wd/pcsx/memcards $HOME/.pcsx/ | tee -a install_log.txt
+
+
+	#pcsx2
+	#default path: /home/$USER/.config/pcsx2
+	#Main config
+	cp -v $HOME/RetroRig/emu-cfgs/x360wd/pcsx2/PCSX2-reg.ini $HOME/.config/pcsx2/ | tee -a install_log.txt
+	cp -v $HOME/RetroRig/emu-cfgs/x360wd/pcsx2/inisOnePAD.ini $HOME/.config/pcsx2/ | tee -a install_log.txt
+	cp -v $HOME/RetroRig/emu-cfgs/x360wd/pcsx2/inis/* $HOME/.config/pcsx2/inis/ | tee -a install_log.txt
+
+	#mednafen
+	#default path: /home/$USER/.mednafen/mednafen.cfg
+	#Main config
+	cp -v $HOME/RetroRig/emu-cfgs/x360wd/mednafen/mednafen.cfg $HOME/.mednafen | tee -a install_log.txt
+
+	#mupen64pluspwd
+	#default path: /home/$USER/.config/mupen64plus
+	#Main config
+	cp -v $HOME/RetroRig/emu-cfgs/x360wd/mupen64plus/mupen64plus.cfg $HOME/.config/mupen64plus/ | tee -a install_log.txt
+
+	#Stella
+	#default path: /home/$USER/.config/mupen64plus
+	#Main config
+	cp -v $HOME/RetroRig/emu-cfgs/x360wd/Stella/stellarc $HOME/.stella/ | tee -a install_log.txt
+
+	#dolphin
+	#default path /home/$USER/.dolphin-emu/
+	#emulator config
+	cp -Rv /$HOME/RetroRig/emu-cfgs/x360wd/Dolphin/Dolphin.ini $HOME/.dolphin-emu/Config/ | tee -a install_log.txt
+	#Gamecube controller config
+	cp -Rv /$HOME/RetroRig/emu-cfgs/x360wd/Dolphin/GCPadNew.ini $HOME/.dolphin-emu/Config/ | tee -a install_log.txt
+	#Wii controller config
+	#OpenGL graphics config
+	cp -Rv /$HOME/RetroRig/emu-cfgs/x360wd/Dolphin/gfx_opengl.ini $HOME/.dolphin-emu/Config/ | tee -a install_log.txt
+	
+	#inject init script
+	echo $userpasswd | sudo -S cp -v $HOME/RetroRig/init-scripts/x360wd/xboxdrv /etc/init.d/ | tee -a install_log.txt
+	#update 
+	echo $userpasswd | sudo -S update-rc.d xboxdrv defaults | tee -a install_log.txt
+
+	#blacklist xpad
+	echo "sudo needed to blacklist xpad!"
+	echo $userpasswd | sudo -S cp -v $HOME/RetroRig/init-scripts/x360wd/blacklist.conf /etc/modprobe.d/ | tee -a install_log.txt
+
+	#copy default gamepad setup for Xbox 360 Wireless (4-player)
+	cp -v $HOME/RetroRig/controller-cfgs/x360wd/x360wd.lyt $HOME/.qjoypad3/ | tee -a install_log.txt
+
+	#copy qjoypad autostart item for x360ws gamepad config
+	echo $userpasswd | sudo -S cp -v $HOME/RetroRig/controller-cfgs/x360wd/qjoypad.desktop /etc/xdg/autostart/ | tee -a install_log.txt
 
 }
 
@@ -1123,7 +1225,7 @@ function _configuration (){
 	echo "sudo needed to create auto-start entries!"
 	echo $userpasswd | sudo -S cp -v /usr/share/applications/xbmc.desktop /etc/xdg/autostart/ | tee -a install_log.txt
 
-	#If x360w xboxdrv config file does not pick up on reboot,
+	#If x360ws xboxdrv config file does not pick up on reboot,
 	#be sure to resync the wireless receiver!
 
 	#set the system user to an absolute value.

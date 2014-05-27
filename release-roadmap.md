@@ -4,7 +4,7 @@ Goals for 0.8.0 release
 - Uninstall option
 - (done) Establish beta branch
 - Add PS3 Controller support
-- Add GBA, GBC, GB support
+- Add GBA, GBC, GB, DoxBox support
 	(done) GBC 
 - Verify audio and framerate work with test PC
 	(done) GBC
