@@ -806,9 +806,10 @@ function _software () {
 	echo "-----------------------------------------------------------" | tee -a install_log.txt
 	echo "Add PlayDeb  Repository..." | tee -a install_log.txt
 	echo "-----------------------------------------------------------" | tee -a install_log.txt
-	echo 'deb http://archive.getdeb.net/ubuntu trusty-getdeb games' > /tmp/playdeb.list
-	echo $userpasswd | sudo -S mv /tmp/playdeb.list /etc/apt/sources.list.d/playdeb.list
-	wget -q -O- http://archive.getdeb.net/getdeb-archive.key | echo $userpasswd | sudo -S sudo apt-key add -
+	echo "deb http://archive.getdeb.net/ubuntu trusty-getdeb games" > /tmp/playdeb.list | tee -a install_log.txt
+	echo $userpasswd | sudo -S mv /tmp/playdeb.list /etc/apt/sources.list.d/playdeb.list | tee -a install_log.txt
+	wget -q -O- http://archive.getdeb.net/getdeb-archive.key | tee -a install_log.txt
+	echo $userpasswd | sudo -S sudo apt-key add getdeb-archive.key | tee -a install_log.txt
 
 	#update repository listings
 	echo "-----------------------------------------------------------" | tee -a install_log.txt
@@ -820,9 +821,9 @@ function _software () {
 	echo "-----------------------------------------------------------" | tee -a install_log.txt
 	echo "Installing required packages..." | tee -a install_log.txt
 	echo "-----------------------------------------------------------" | tee -a install_log.txt
-	echo $userpasswd | sudo -S apt-get install -y xboxdrv curl zsnes nestopia pcsxr pcsx2:i386 \
-	python-software-properties pkg-config software-properties-common mednafen \
-	mame mupen64plus dconf-tools qjoypad xbmc dolphin-emu-master stella gens-gs \ 
+	echo $userpasswd | sudo -S apt-get install -y xboxdrv curl zsnes nestopia pcsxr pcsx2:i386\
+	python-software-properties pkg-config software-properties-common mednafen\
+	mame mupen64plus dconf-tools qjoypad xbmc dolphin-emu-master stella gens-gs\ 
 	build-essential | tee -a install_log.txt
 
 
