@@ -2,7 +2,7 @@
 Version=1.0
 Name=qjoypad autostart
 Comment=Bolt on for added gamepad functions 
-Exec=qjoypad "x360w"
+Exec=qjoypad "x360ws"
 Icon=
 Terminal=false
 Type=Application
