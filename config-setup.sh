@@ -802,6 +802,14 @@ function _software () {
 	echo "-----------------------------------------------------------" | tee -a install_log.txt
 	sudo add-apt-repository -y ppa:glennric/dolphin-emu | tee -a install_log.txt
 
+	#Add playdeb repo for Gens/GS 
+	echo "-----------------------------------------------------------" | tee -a install_log.txt
+	echo "Add PlayDeb  Repository..." | tee -a install_log.txt
+	echo "-----------------------------------------------------------" | tee -a install_log.txt
+	echo 'deb http://archive.getdeb.net/ubuntu trusty-getdeb games' > /tmp/playdeb.list
+	echo $userpasswd | sudo -S mv /tmp/playdeb.list /etc/apt/sources.list.d/playdeb.list
+	wget -q -O- http://archive.getdeb.net/getdeb-archive.key | echo $userpasswd | sudo -S sudo apt-key add -
+
 	#update repository listings
 	echo "-----------------------------------------------------------" | tee -a install_log.txt
 	echo "Updating packages..." | tee -a install_log.txt
@@ -813,17 +821,10 @@ function _software () {
 	echo "Installing required packages..." | tee -a install_log.txt
 	echo "-----------------------------------------------------------" | tee -a install_log.txt
 	echo $userpasswd | sudo -S apt-get install -y xboxdrv curl zsnes nestopia pcsxr pcsx2:i386 \
-	python-software-properties pkg-config software-properties-common mednafen\
-	mame mupen64plus dconf-tools qjoypad xbmc dolphin-emu-master stella \
-	build-essential gdebi| tee -a install_log.txt
+	python-software-properties pkg-config software-properties-common mednafen \
+	mame mupen64plus dconf-tools qjoypad xbmc dolphin-emu-master stella gens-gs \ 
+	build-essential | tee -a install_log.txt
 
-	#install Gens/GS via deb pkg (only way I  can currently find it)
-	echo "-----------------------------------------------------------" | tee -a install_log.txt
-	echo "Installing Gens/GS...On first run this will take some time!" | tee -a install_log.txt
-	echo "-----------------------------------------------------------" | tee -a install_log.txt
-	#need to use gdebi here to autoresolve dependencies that Gens/GS requires for i386
-	#install Gens/GS using gdebi
-	echo $userpasswd | sudo -S gdebi --n $HOME/RetroRig/emulators/Gens-GS/Gens_2.16.7_i386.deb | tee -a install_log.txt
 
 	#Removal of software for related bugs
 	echo "-----------------------------------------------------------" | tee -a install_log.txt
