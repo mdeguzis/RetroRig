@@ -870,7 +870,7 @@ options=(1 "Xbox 360 Controller (wireless) (4-player)"
 		return
 		;;
 
-		1)
+		2)
 		_config-x360wd
 		return
 		;;
@@ -889,6 +889,9 @@ options=(1 "Xbox 360 Controller (wireless) (4-player)"
 function _config-x360ws () {
 
 	#Wireless Xbox 360 Controller Config
+	echo "-----------------------------------------------------------" | tee -a install_log.txt
+	echo "Configuring Xbox (Wireless) Gamepad..." | tee -a install_log.txt
+	echo "-----------------------------------------------------------" | tee -a install_log.txt
 
 	#copy xbox configuration (default) to folder
 	echo $userpasswd | sudo -S cp -v $HOME/RetroRig/controller-cfgs/x360ws/xpad-wireless.xboxdrv /usr/share/xboxdrv/ | tee -a install_log.txt
@@ -983,6 +986,9 @@ function _config-x360ws () {
 function _config-x360wd () {
 
 	#Wired Xbox 360 Controller Config
+	echo "-----------------------------------------------------------" | tee -a install_log.txt
+	echo "Configuring Xbox (Wired) Gamepad..." | tee -a install_log.txt
+	echo "-----------------------------------------------------------" | tee -a install_log.txt
 
 	#copy xbox configuration (default) to folder
 	echo $userpasswd | sudo -S cp -v $HOME/RetroRig/controller-cfgs/x360wd/xpad-wired.xboxdrv /usr/share/xboxdrv/ | tee -a install_log.txt
@@ -1334,7 +1340,7 @@ function _reboot () {
 	dialog --title "Enter password to confirm!" \
 	--clear \
 	--insecure \
-	--passwordbox "Enter your user password" 7 32 2> $data
+	--passwordbox "Enter your user password" 7 28 2> $data
 	 
 	ret=$?
 	 
