@@ -115,6 +115,33 @@ You could work around this if you wish to give up a button on your gamepad to ma
 0-9 with the qjoypad program (future fix?)
 
 #####################################
+#Gamecube
+#####################################
+
+Suggested emulator: Dolphin
+Alternative emulators: unknown
+
+######Default Controller layout:
+
+    Primary Control: Joystick
+    Dpad enabled
+    A (A)
+    B (X)
+    Y (Y)
+    X (B)
+    C Buttons (Right Joystick)
+    LT (LB)
+    RT (RB)
+    Z Trigger (RT)
+    Start (Start)
+    Select (Select)
+    Exit emulator (Guide)
+    Quick Save State (Left-Thumbstick)
+    Quick Load State (Right-Thumstick)
+
+######Tips and Tricks:
+
+#####################################
 #Mupen64Plus
 #####################################
 

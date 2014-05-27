@@ -1,0 +1,8 @@
+# QJoyPad 4.1 Layout File
+
+Joystick 1 {
+	Button 9: key 9
+	Button 10: key 71
+	Button 11: key 74
+}
+
