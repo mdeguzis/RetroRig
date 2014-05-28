@@ -118,7 +118,7 @@ options=(1 "Install Software"
 		_main
 		;;
 
-		8)
+		9)
 		#confirm uninstall is the intended action
 		dialog --title "Confirm yes/no" \
 		--backtitle "LibreGeek.org RetroRig Installer" \
