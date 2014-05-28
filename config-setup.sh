@@ -130,7 +130,7 @@ options=(1 "Install Software"
 		# 255 means user hit [Esc] key.
 		response=$?
 		case $response in
-			0) 
+			0)
 			_uninstall
 			;;
 
@@ -1401,8 +1401,9 @@ function _reboot () {
 function _uninstall () {
 
 #remove previous log, if any
-
 rm -f uninstall_log.txt
+#clear screen
+clear
 
 echo "-----------------------------------------------------------" | tee -a uninstall_log.txt
 echo "Removing RetroRig..." | tee -a install_log.txt
@@ -1450,13 +1451,11 @@ echo "-----------------------------------------------------------" | tee -a unin
 	case $response in
 
 	0) 
-	dialog --infobox "Exit"  3 12
+	#keep folders
 	sleep 2s
-	_main
 	;;
 
    	1) 
-
 	#remove dotfiles
 	echo $userpasswd | sudo rm -rf $HOME/.qjoypad3/ | tee -a uninstall_log.txt
 	echo $userpasswd | sudo rm -rf $HOME/.dolphin-emu/Config/ | tee -a uninstall_log.txt
@@ -1486,9 +1485,8 @@ echo "-----------------------------------------------------------" | tee -a unin
 	   ;;
 
 	255)
-	dialog --infobox "Exiting uninstall" 3 31
+	#Keep folders"
 	sleep 2s
-	_main
 	;;
 
 	esac	
@@ -1511,9 +1509,8 @@ echo "-----------------------------------------------------------" | tee -a unin
 	case $response in
 
 	0) 
-	dialog --infobox "Exit"  3 12
+	#Keep ROMs
 	sleep 2s
-	_main
 	;;
 
    	1) 
@@ -1559,9 +1556,8 @@ echo "-----------------------------------------------------------" | tee -a unin
 	;;
 
 	255)
-	dialog --infobox "Exiting uninstall" 3 0
+	#Keep ROMs
 	sleep 2s
-	_main
 	;;
 
 	esac	
