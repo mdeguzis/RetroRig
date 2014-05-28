@@ -1463,12 +1463,9 @@ echo "-----------------------------------------------------------" | tee -a unin
 	echo $userpasswd | sudo rm -rf $HOME/.nestopia/ | tee -a uninstall_log.txt
 	echo $userpasswd | sudo rm -rf $HOME/.gens/ | tee -a uninstall_log.txt
 	echo $userpasswd | sudo rm -rf $HOME/.zsnes/ | tee -a uninstall_log.txt
-	echo $userpasswd | sudo rm -rf $HOME/.mame/cfg/ | tee -a uninstall_log.txt
-	echo $userpasswd | sudo rm -rf $HOME/.pcsx/plugins/ | tee -a uninstall_log.txt
-	echo $userpasswd | sudo rm -rf $HOME/.pcsx/patches/ | tee -a uninstall_log.txt
-	echo $userpasswd | sudo rm -rf $HOME/.pcsx/bios/ | tee -a uninstall_log.txt
-	echo $userpasswd | sudo rm -rf $HOME/.config/pcsx2/inis/ | tee -a uninstall_log.txt
-	echo $userpasswd | sudo rm -rf $HOME/.config/pcsx2/bios | tee -a uninstall_log.txt
+	echo $userpasswd | sudo rm -rf $HOME/.mame/ | tee -a uninstall_log.txt
+	echo $userpasswd | sudo rm -rf $HOME/.pcsx/ | tee -a uninstall_log.txt
+	echo $userpasswd | sudo rm -rf $HOME/.config/pcsx2/ | tee -a uninstall_log.txt
 	echo $userpasswd | sudo rm -rf $HOME/.stella/ | tee -a uninstall_log.txt
 	echo $userpasswd | sudo rm -rf $HOME/.xbmc/ | tee -a uninstall_log.txt
 	echo $userpasswd | sudo rm -rf $HOME/.mednafen/ | tee -a uninstall_log.txt
