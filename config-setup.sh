@@ -10,6 +10,8 @@
 
 #remove previous install log to start fresh
 rm -f install_log.txt
+#remove previous uninstall log, if any
+rm -f uninstall_log.txt
 
 #start logging
 echo "-----------------------------------------------------------" >> install_log.txt
@@ -1400,8 +1402,6 @@ function _reboot () {
 
 function _uninstall () {
 
-#remove previous log, if any
-rm -f uninstall_log.txt
 #clear screen
 clear
 
@@ -1458,7 +1458,7 @@ echo "-----------------------------------------------------------" | tee -a unin
    	1) 
 	#remove dotfiles
 	echo $userpasswd | sudo rm -rf $HOME/.qjoypad3/ | tee -a uninstall_log.txt
-	echo $userpasswd | sudo rm -rf $HOME/.dolphin-emu/Config/ | tee -a uninstall_log.txt
+	echo $userpasswd | sudo rm -rf $HOME/.dolphin-emu/ | tee -a uninstall_log.txt
 	echo $userpasswd | sudo rm -rf $HOME/.config/mupen64plus/ | tee -a uninstall_log.txt
 	echo $userpasswd | sudo rm -rf $HOME/.nestopia/ | tee -a uninstall_log.txt
 	echo $userpasswd | sudo rm -rf $HOME/.gens/ | tee -a uninstall_log.txt
@@ -1530,7 +1530,7 @@ echo "Finishing uninstall..." | tee -a install_log.txt
 echo "-----------------------------------------------------------" | tee -a uninstall_log.txt
 
 #update Ubuntu repository listings
-echo $userpasswd | sudo apt-get update
+echo $userpasswd | sudo apt-get update | tee -a uninstall_log.txt
 sleep 2s
 
 }
