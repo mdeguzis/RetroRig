@@ -1,7 +1,7 @@
 #!/bin/bash
 #
 #small script to copy over configuration files for emulators
-#Version 0.7.2
+#Version 0.7.3
 #Please report any errors via a pull request
 #You can also reach me on twitter: @N3RD42
 #
