@@ -1557,9 +1557,10 @@ echo "-----------------------------------------------------------" | tee -a unin
 	echo $userpasswd | sudo rm -rf $HOME/Games/Saves/Sega\ Genesis/ | tee -a uninstall_log.txt
 	echo $userpasswd | sudo rm -rf $HOME/Games/Saves/SNK\ Neo\ Geo/ | tee -a uninstall_log.txt
 	echo $userpasswd | sudo rm -rf $HOME/Games/Saves/GBC/ | tee -a uninstall_log.txt
+	;;
 
 	255)
-	dialog --infobox "Exiting uninstall" 3 31
+	dialog --infobox "Exiting uninstall" 3 0
 	sleep 2s
 	_main
 	;;
