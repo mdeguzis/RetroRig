@@ -51,7 +51,7 @@ _gain-root
 function _main () {
 
 cmd=(dialog --backtitle "LibreGeek.org RetroRig Installer" --menu "| Main Menu | \
-			 Any required BIOS files are NOT provided!" 16 62 16)
+			 Any required BIOS files are NOT provided!" 17 62 16)
 options=(1 "Install Software" 
 	 2 "Set up default configuration files" 
 	 3 "Retro Rig Settings" 
