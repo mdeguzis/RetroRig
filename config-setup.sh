@@ -59,8 +59,9 @@ options=(1 "Install Software"
 	 5 "Update emulator binaries" 
 	 6 "Upgrade System (use with caution!)" 
 	 7 "Start RetroRig" 
-	 8 "Reboot PC" 
-	 9 "Exit")
+	 8 "Reboot PC"
+	 9 "Uninstall RetroRig"  
+	 10 "Exit")
 
 	#make menu choice
 	selection=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
@@ -117,7 +118,41 @@ options=(1 "Install Software"
 		_main
 		;;
 
-		9)
+		8)
+		#confirm uninstall is the intended action
+		dialog --title "Confirm yes/no" \
+		--backtitle "LibreGeek.org RetroRig Installer" \
+		--yesno "Are you sure you want run the configuration setup? \
+		This will* reset existing configurations!" 7 0
+
+		# Get exit status
+		# 0 means user hit [yes] button.
+		# 1 means user hit [no] button.
+		# 255 means user hit [Esc] key.
+		response=$?
+		case $response in
+			0) 
+			_uninstall
+			;;
+
+			1) 
+			dialog --infobox "Exiting Uninstall"  3 0
+			sleep 2s
+			_main
+			;;
+
+			255)
+			dialog --infobox "Exiting Uninstall" 3 0
+			sleep 2s
+			_main
+			;;
+		esac
+
+		#call memu rather than return so user can choose again
+		_main
+		;;
+
+		10)
 		clear
 		exit
 		;;
@@ -788,7 +823,7 @@ function _software () {
 	echo "-----------------------------------------------------------" | tee -a install_log.txt
 	echo "Adding pcsx2 repository support..." | tee -a install_log.txt
 	echo "-----------------------------------------------------------" | tee -a install_log.txt
-	sudo add-apt-repository -y ppa:gregory-hainaut/pcsx2.official.ppa | tee -a install_log.txt
+	echo $userpasswd | sudo add-apt-repository -y ppa:gregory-hainaut/pcsx2.official.ppa | tee -a install_log.txt
 
 	#add repository for official team XBMC "stable"
 	echo "-----------------------------------------------------------" | tee -a install_log.txt
@@ -800,7 +835,7 @@ function _software () {
 	echo "-----------------------------------------------------------" | tee -a install_log.txt
 	echo "Adding Dolphin-Emu repository..." | tee -a install_log.txt
 	echo "-----------------------------------------------------------" | tee -a install_log.txt
-	sudo add-apt-repository -y ppa:glennric/dolphin-emu | tee -a install_log.txt
+	echo $userpasswd | sudo add-apt-repository -y ppa:glennric/dolphin-emu | tee -a install_log.txt
 
 	#Add playdeb repo for Gens/GS 
 	echo "-----------------------------------------------------------" | tee -a install_log.txt
@@ -1362,6 +1397,183 @@ function _reboot () {
         dialog --infobox "Rebooting PC" 3 0 ; sleep 2s
         sleep 5s
         echo $userpasswd | sudo -S /sbin/reboot
+}
+
+function _uninstall () {
+
+#remove previous log, if any
+
+rm -f uninstall_log.txt
+
+echo "-----------------------------------------------------------" | tee -a uninstall_log.txt
+echo "Removing RetroRig..." | tee -a install_log.txt
+echo "-----------------------------------------------------------" | tee -a uninstall_log.txt
+
+#remove installed binaries
+echo $userpasswd | sudo -S apt-get autoremove -y xboxdrv curl zsnes nestopia pcsxr pcsx2:i386 \
+python-software-properties pkg-config software-properties-common mednafen \
+mame mupen64plus dconf-tools qjoypad xbmc dolphin-emu-master stella gens-gs \
+build-essential | tee -a uninstall_log.txt
+
+#add apport, apport-gtk back
+echo $userpasswd | sudo -S apt-get install -y apport apport-gtk | tee -a uninstall_log.txt
+
+echo $userpasswd | sudo -S dpkg --remove-architecture i386 | tee -a uninstall_log.txt
+
+echo "-----------------------------------------------------------" | tee -a uninstall_log.txt
+echo "Cleaning up repositories..." | tee -a install_log.txt
+echo "-----------------------------------------------------------" | tee -a uninstall_log.txt
+#pcsx
+echo $userpasswd | sudo add-apt-repository -ry ppa:gregory-hainaut/pcsx2.official.ppa | tee -a uninstall_log.txt
+#xbmc
+echo $userpasswd | sudo add-apt-repository -ry ppa:team-xbmc/ppa | tee -a uninstall_log.txt
+#dolphin
+echo $userpasswd | sudo add-apt-repository -ry ppa:glennric/dolphin-emu | tee -a uninstall_log.txt
+#gens-gs
+echo $userpasswd | sudo rm -f /etc/apt/sources.list.d/playdeb.list | tee -a uninstall_log.txt
+
+
+echo "-----------------------------------------------------------" | tee -a uninstall_log.txt
+echo "Remove RetroRig config folders..." | tee -a install_log.txt
+echo "-----------------------------------------------------------" | tee -a uninstall_log.txt
+
+#ask to keep folders
+#prompt user if they wish to keep folders from install
+	dialog --title "Confirm yes/no" \
+	--backtitle "LibreGeek.org RetroRig Installer" \
+	--yesno "Do you wish to keep configuration folders?" 5 52
+	 
+	# Get exit status
+	# 0 means user hit [yes] button.
+	# 1 means user hit [no] button.
+	# 255 means user hit [Esc] key.
+	response=$?
+	case $response in
+
+	0) 
+	dialog --infobox "Exit"  3 12
+	sleep 2s
+	_main
+	;;
+
+   	1) 
+
+	#remove dotfiles
+	echo $userpasswd | sudo rm -rf $HOME/.qjoypad3/ | tee -a uninstall_log.txt
+	echo $userpasswd | sudo rm -rf $HOME/.dolphin-emu/Config/ | tee -a uninstall_log.txt
+	echo $userpasswd | sudo rm -rf $HOME/.config/mupen64plus/ | tee -a uninstall_log.txt
+	echo $userpasswd | sudo rm -rf $HOME/.nestopia/ | tee -a uninstall_log.txt
+	echo $userpasswd | sudo rm -rf $HOME/.gens/ | tee -a uninstall_log.txt
+	echo $userpasswd | sudo rm -rf $HOME/.zsnes/ | tee -a uninstall_log.txt
+	echo $userpasswd | sudo rm -rf $HOME/.mame/cfg/ | tee -a uninstall_log.txt
+	echo $userpasswd | sudo rm -rf $HOME/.pcsx/plugins/ | tee -a uninstall_log.txt
+	echo $userpasswd | sudo rm -rf $HOME/.pcsx/patches/ | tee -a uninstall_log.txt
+	echo $userpasswd | sudo rm -rf $HOME/.pcsx/bios/ | tee -a uninstall_log.txt
+	echo $userpasswd | sudo rm -rf $HOME/.config/pcsx2/inis/ | tee -a uninstall_log.txt
+	echo $userpasswd | sudo rm -rf $HOME/.config/pcsx2/bios | tee -a uninstall_log.txt
+	echo $userpasswd | sudo rm -rf $HOME/.stella/ | tee -a uninstall_log.txt
+	echo $userpasswd | sudo rm -rf $HOME/.xbmc/ | tee -a uninstall_log.txt
+	echo $userpasswd | sudo rm -rf $HOME/.mednafen/ | tee -a uninstall_log.txt
+
+	echo "-----------------------------------------------------------" | tee -a uninstall_log.txt
+	echo "Remove init scripts and post install files..." | tee -a install_log.txt
+	echo "-----------------------------------------------------------" | tee -a uninstall_log.txt
+
+	echo $userpasswd | sudo  rm -f /etc/xdg/autostart/qjoypad.desktop
+	echo $userpasswd | sudo service xboxdrv stop | tee uninstall_log.txt
+	echo $userpasswd | sudo update-rc.d -f xboxdrv remove
+	echo $userpasswd | sudo rm -f /etc/init.d/xboxdrv
+	sed -i 's|blacklist xpad||g' /etc/modprobe.d/blacklist.conf| tee -a install_log.txt
+	   ;;
+
+	255)
+	dialog --infobox "Exiting uninstall" 3 31
+	sleep 2s
+	_main
+	;;
+
+	esac	
+
+echo "-----------------------------------------------------------" | tee -a uninstall_log.txt
+echo "Remove RetroRig ROM folders..." | tee -a install_log.txt
+echo "-----------------------------------------------------------" | tee -a uninstall_log.txt
+
+#ask to keep folders
+#prompt user if they wish to keep ROMs they loaded
+	dialog --title "Confirm yes/no" \
+	--backtitle "LibreGeek.org RetroRig Installer" \
+	--yesno "Do you wish to keep your ROMs?" 5 52
+	 
+	# Get exit status
+	# 0 means user hit [yes] button.
+	# 1 means user hit [no] button.
+	# 255 means user hit [Esc] key.
+	response=$?
+	case $response in
+
+	0) 
+	dialog --infobox "Exit"  3 12
+	sleep 2s
+	_main
+	;;
+
+   	1) 
+	#remove ROM folders
+	echo $userpasswd | sudo rm -rf $HOME/Games/ROMs/Atari\ 2600/ | tee -a uninstall_log.txt
+	echo $userpasswd | sudo rm -rf $HOME/Games/ROMs/Gamecube/ | tee -a uninstall_log.txt
+	echo $userpasswd | sudo rm -rf $HOME/Games/ROMs/MAME/ | tee -a uninstall_log.txt
+	echo $userpasswd | sudo rm -rf $HOME/Games/ROMs/N64/ | tee -a uninstall_log.txt
+	echo $userpasswd | sudo rm -rf $HOME/Games/ROMs/NES/ | tee -a uninstall_log.txt
+	echo $userpasswd | sudo rm -rf $HOME/Games/ROMs/SNES/ | tee -a uninstall_log.txt
+	echo $userpasswd | sudo rm -rf $HOME/Games/ROMs/PS2/ | tee -a uninstall_log.txt
+	echo $userpasswd | sudo rm -rf $HOME/Games/ROMs/PS1/ | tee -a uninstall_log.txt
+	echo $userpasswd | sudo rm -rf $HOME/Games/ROMs/Sega\ Genesis/ | tee -a uninstall_log.txt
+	echo $userpasswd | sudo rm -rf $HOME/Games/ROMs/SNK\ Neo\ Geo/ | tee -a uninstall_log.txt
+	echo $userpasswd | sudo rm -rf $HOME/Games/ROMs/GBC/ | tee -a uninstall_log.txt
+	echo $userpasswd | sudo rm -rf $HOME/Games/Tools/ | tee -a uninstall_log.txt
+
+	#remove Artwork 
+	echo $userpasswd | sudo rm -rf $HOME/Games/Artwork/Atari\ 2600/ | tee -a uninstall_log.txt
+	echo $userpasswd | sudo rm -rf $HOME/Games/Artwork/Gamecube/ | tee -a uninstall_log.txt
+	echo $userpasswd | sudo rm -rf $HOME/Games/Artwork/MAME/ | tee -a uninstall_log.txt
+	echo $userpasswd | sudo rm -rf $HOME/Games/Artwork/N64/ | tee -a uninstall_log.txt
+	echo $userpasswd | sudo rm -rf $HOME/Games/Artwork/NES/ | tee -a uninstall_log.txt
+	echo $userpasswd | sudo rm -rf $HOME/Games/Artwork/SNES/ | tee -a uninstall_log.txt
+	echo $userpasswd | sudo rm -rf $HOME/Games/Artwork/PS2/ | tee -a uninstall_log.txt
+	echo $userpasswd | sudo rm -rf $HOME/Games/Artwork/PS1/ | tee -a uninstall_log.txt
+	echo $userpasswd | sudo rm -rf $HOME/Games/Artwork/Sega\ Genesis/ | tee -a uninstall_log.txt
+	echo $userpasswd | sudo rm -rf $HOME/Games/Artwork/SNK\ Neo\ Geo/ | tee -a uninstall_log.txt
+	echo $userpasswd | sudo rm -rf $HOME/Games/Artwork/GBC/ | tee -a uninstall_log.txt
+
+	#remove Saves (if any)
+	echo $userpasswd | sudo rm -rf $HOME/Games/Saves/Atari\ 2600/ | tee -a uninstall_log.txt
+	echo $userpasswd | sudo rm -rf $HOME/Games/Saves/Gamecube/ | tee -a uninstall_log.txt
+	echo $userpasswd | sudo rm -rf $HOME/Games/Saves/MAME/ | tee -a uninstall_log.txt
+	echo $userpasswd | sudo rm -rf $HOME/Games/Saves/N64/ | tee -a uninstall_log.txt
+	echo $userpasswd | sudo rm -rf $HOME/Games/Saves/NES/ | tee -a uninstall_log.txt
+	echo $userpasswd | sudo rm -rf $HOME/Games/Saves/SNES/ | tee -a uninstall_log.txt
+	echo $userpasswd | sudo rm -rf $HOME/Games/Saves/PS2/ | tee -a uninstall_log.txt
+	echo $userpasswd | sudo rm -rf $HOME/Games/Saves/PS1/ | tee -a uninstall_log.txt
+	echo $userpasswd | sudo rm -rf $HOME/Games/Saves/Sega\ Genesis/ | tee -a uninstall_log.txt
+	echo $userpasswd | sudo rm -rf $HOME/Games/Saves/SNK\ Neo\ Geo/ | tee -a uninstall_log.txt
+	echo $userpasswd | sudo rm -rf $HOME/Games/Saves/GBC/ | tee -a uninstall_log.txt
+
+	255)
+	dialog --infobox "Exiting uninstall" 3 31
+	sleep 2s
+	_main
+	;;
+
+	esac	
+
+echo "-----------------------------------------------------------" | tee -a uninstall_log.txt
+echo "Finishing uninstall..." | tee -a install_log.txt
+echo "-----------------------------------------------------------" | tee -a uninstall_log.txt
+
+#update Ubuntu repository listings
+echo $userpasswd | sudo apt-get update
+sleep 2s
+
 }
 #call main
 _main
