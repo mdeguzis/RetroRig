@@ -1514,45 +1514,11 @@ echo "-----------------------------------------------------------" | tee -a unin
 	;;
 
    	1) 
-	#remove ROM folders
-	echo $userpasswd | sudo rm -rf $HOME/Games/ROMs/Atari\ 2600/ | tee -a uninstall_log.txt
-	echo $userpasswd | sudo rm -rf $HOME/Games/ROMs/Gamecube/ | tee -a uninstall_log.txt
-	echo $userpasswd | sudo rm -rf $HOME/Games/ROMs/MAME/ | tee -a uninstall_log.txt
-	echo $userpasswd | sudo rm -rf $HOME/Games/ROMs/N64/ | tee -a uninstall_log.txt
-	echo $userpasswd | sudo rm -rf $HOME/Games/ROMs/NES/ | tee -a uninstall_log.txt
-	echo $userpasswd | sudo rm -rf $HOME/Games/ROMs/SNES/ | tee -a uninstall_log.txt
-	echo $userpasswd | sudo rm -rf $HOME/Games/ROMs/PS2/ | tee -a uninstall_log.txt
-	echo $userpasswd | sudo rm -rf $HOME/Games/ROMs/PS1/ | tee -a uninstall_log.txt
-	echo $userpasswd | sudo rm -rf $HOME/Games/ROMs/Sega\ Genesis/ | tee -a uninstall_log.txt
-	echo $userpasswd | sudo rm -rf $HOME/Games/ROMs/SNK\ Neo\ Geo/ | tee -a uninstall_log.txt
-	echo $userpasswd | sudo rm -rf $HOME/Games/ROMs/GBC/ | tee -a uninstall_log.txt
+	echo $userpasswd | sudo rm -rf $HOME/Games/ROMs/ | tee -a uninstall_log.txt
 	echo $userpasswd | sudo rm -rf $HOME/Games/Tools/ | tee -a uninstall_log.txt
-
-	#remove Artwork 
-	echo $userpasswd | sudo rm -rf $HOME/Games/Artwork/Atari\ 2600/ | tee -a uninstall_log.txt
-	echo $userpasswd | sudo rm -rf $HOME/Games/Artwork/Gamecube/ | tee -a uninstall_log.txt
-	echo $userpasswd | sudo rm -rf $HOME/Games/Artwork/MAME/ | tee -a uninstall_log.txt
-	echo $userpasswd | sudo rm -rf $HOME/Games/Artwork/N64/ | tee -a uninstall_log.txt
-	echo $userpasswd | sudo rm -rf $HOME/Games/Artwork/NES/ | tee -a uninstall_log.txt
-	echo $userpasswd | sudo rm -rf $HOME/Games/Artwork/SNES/ | tee -a uninstall_log.txt
-	echo $userpasswd | sudo rm -rf $HOME/Games/Artwork/PS2/ | tee -a uninstall_log.txt
-	echo $userpasswd | sudo rm -rf $HOME/Games/Artwork/PS1/ | tee -a uninstall_log.txt
-	echo $userpasswd | sudo rm -rf $HOME/Games/Artwork/Sega\ Genesis/ | tee -a uninstall_log.txt
-	echo $userpasswd | sudo rm -rf $HOME/Games/Artwork/SNK\ Neo\ Geo/ | tee -a uninstall_log.txt
-	echo $userpasswd | sudo rm -rf $HOME/Games/Artwork/GBC/ | tee -a uninstall_log.txt
-
-	#remove Saves (if any)
-	echo $userpasswd | sudo rm -rf $HOME/Games/Saves/Atari\ 2600/ | tee -a uninstall_log.txt
-	echo $userpasswd | sudo rm -rf $HOME/Games/Saves/Gamecube/ | tee -a uninstall_log.txt
-	echo $userpasswd | sudo rm -rf $HOME/Games/Saves/MAME/ | tee -a uninstall_log.txt
-	echo $userpasswd | sudo rm -rf $HOME/Games/Saves/N64/ | tee -a uninstall_log.txt
-	echo $userpasswd | sudo rm -rf $HOME/Games/Saves/NES/ | tee -a uninstall_log.txt
-	echo $userpasswd | sudo rm -rf $HOME/Games/Saves/SNES/ | tee -a uninstall_log.txt
-	echo $userpasswd | sudo rm -rf $HOME/Games/Saves/PS2/ | tee -a uninstall_log.txt
-	echo $userpasswd | sudo rm -rf $HOME/Games/Saves/PS1/ | tee -a uninstall_log.txt
-	echo $userpasswd | sudo rm -rf $HOME/Games/Saves/Sega\ Genesis/ | tee -a uninstall_log.txt
-	echo $userpasswd | sudo rm -rf $HOME/Games/Saves/SNK\ Neo\ Geo/ | tee -a uninstall_log.txt
-	echo $userpasswd | sudo rm -rf $HOME/Games/Saves/GBC/ | tee -a uninstall_log.txt
+	echo $userpasswd | sudo rm -rf $HOME/Games/Artwork/ | tee -a uninstall_log.txt
+	echo $userpasswd | sudo rm -rf $HOME/Games/Saves/ | tee -a uninstall_log.txt
+	echo $userpasswd | sudo rm -rf $HOME/Games/Configs/ | tee -a uninstall_log.txt
 	;;
 
 	255)
