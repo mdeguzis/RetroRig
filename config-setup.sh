@@ -122,8 +122,7 @@ options=(1 "Install Software"
 		#confirm uninstall is the intended action
 		dialog --title "Confirm yes/no" \
 		--backtitle "LibreGeek.org RetroRig Installer" \
-		--yesno "Are you sure you want run the configuration setup? \
-		This will* reset existing configurations!" 7 0
+		--yesno "Are you sure you want remove RetroRig?"  6 0
 
 		# Get exit status
 		# 0 means user hit [yes] button.
@@ -136,7 +135,7 @@ options=(1 "Install Software"
 			;;
 
 			1) 
-			dialog --infobox "Exiting Uninstall"  3 0
+			dialog --infobox "Exiting Uninstall"  3 11
 			sleep 2s
 			_main
 			;;
