@@ -893,8 +893,9 @@ cmd=(dialog --backtitle "LibreGeek.org RetroRig Installer" --menu "| Gamepad Sel
 			 Request any new Gamepads via github!" 16 62 16)
 options=(1 "Xbox 360 Controller (wireless) (4-player)" 
 	 2 "Xbox 360 Controller (wired) (4-player)" 
-	 3 "Exit gamepad selection" 
-	 4 "Back to main menu")
+	 3 "Xbox 360 (VirtualBox)" 
+	 4 "Exit gamepad selection"
+	 5 "Back to main menu")
 
 	#make menu choice
 	selection=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
@@ -915,14 +916,114 @@ options=(1 "Xbox 360 Controller (wireless) (4-player)"
 		;;
 
 		3)
+		_config-VM-Xbox
 		return
 		;;
 
 		4)
+		return
+		;;
+
+		5)
 		_main
 		;;
 		esac
 	done
+}
+
+function _config-VM-Xbox () {
+
+	#Virtual Machine  Config
+	#Note: we do NOT want to transfer any controller init scripts since the host OS will 
+	#control these, not the guest OS. If you load other configs, you will have a bad time :)
+	echo "-----------------------------------------------------------" | tee -a install_log.txt
+	echo "Configuring VM settings..." | tee -a install_log.txt
+	echo "-----------------------------------------------------------" | tee -a install_log.txt
+
+	#set qjoypad's profile to match Xbox 360 Controller(4-player)
+	#We do not need to differentiate between wired and wireless, since the buttom mappings are
+	#The same, and largely due to us not inserting and init script for xboxdrv
+	cp -v $HOME/RetroRig/controller-cfgs/VM-Xbox.lyt $HOME/.qjoypad3/ | tee -a install_log.txt
+
+	#Nestopia
+	#default path: /home/$USER/.nestopia
+	cp -v $HOME/RetroRig/emu-cfgs/VM-Xbox/Nestopia/nstcontrols $HOME/.nestopia/ | tee -a install_log.txt
+	cp -v $HOME/RetroRig/emu-cfgs/VM-Xbox/Nestopia/nstsettings $HOME/.nestopia/ | tee -a install_log.txt
+
+	#gens
+	#default path: /home/$USER/.gens
+	#Global config
+	cp -v $HOME/RetroRig/emu-cfgs/VM-Xbox/Gens-GS/gens.cfg $HOME/.gens/ | tee -a install_log.txt
+
+	#ZSNES
+	#default path: /home/$USER/.zsnes
+	#Controller config
+	cp -v $HOME/RetroRig/emu-cfgs/VM-Xbox/ZSNES/zinput.cfg $HOME/.zsnes/ | tee -a install_log.txt
+	cp -v $HOME/RetroRig/emu-cfgs/VM-Xbox/ZSNES/zsnesl.cfg $HOME/.zsnes/ | tee -a install_log.txt
+
+	#mame
+	#default path: /home/$USER/.mame
+	#Main config
+	cp -v $HOME/RetroRig/emu-cfgs/VM-Xbox/MAME/default.cfg $HOME/.mame/cfg | tee -a install_log.txt
+	cp -v $HOME/RetroRig/emu-cfgs/VM-Xbox/MAME/mame.ini $HOME/.mame | tee -a install_log.txt
+	#offline artwork scrapper configs
+	cp -v $HOME/RetroRig/emu-cfgs/VM-Xbox/MAME/parserConfig.xml $HOME/Games/Artwork/MAME | tee -a install_log.txt
+	cp -v $HOME/RetroRig/emu-cfgs/VM-Xbox/MAME/MAME.txt $HOME/Games/Artwork/MAME | tee -a install_log.txt
+	cp -v $HOME/RetroRig/emu-cfgs/VM-Xbox/MAME/MAME\ synopsis\ RCB\ 201202.zip/ $HOME/Games/Artwork/MAME | tee -a install_log.txt
+
+	#pcsx
+	#default path: /home/$USER/.pcsx
+	#Main config
+	cp -v $HOME/RetroRig/emu-cfgs/VM-Xbox/pcsx/pcsx.cfg $HOME/.pcsx/ | tee -a install_log.txt
+	cp -Rv $HOME/RetroRig/emu-cfgs/VM-Xbox/pcsx/plugins $HOME/.pcsx/ | tee -a install_log.txt
+	cp -Rv $HOME/RetroRig/emu-cfgs/VM-Xbox/pcsx/patches $HOME/.pcsx/ | tee -a install_log.txt
+	cp -Rv $HOME/RetroRig/emu-cfgs/VM-Xbox/pcsx/memcards $HOME/.pcsx/ | tee -a install_log.txt
+
+
+	#pcsx2
+	#default path: /home/$USER/.config/pcsx2
+	#Main config
+	cp -v $HOME/RetroRig/emu-cfgs/VM-Xbox/pcsx2/PCSX2-reg.ini $HOME/.config/pcsx2/ | tee -a install_log.txt
+	cp -v $HOME/RetroRig/emu-cfgs/VM-Xbox/pcsx2/inisOnePAD.ini $HOME/.config/pcsx2/ | tee -a install_log.txt
+	cp -v $HOME/RetroRig/emu-cfgs/VM-Xbox/pcsx2/inis/* $HOME/.config/pcsx2/inis/ | tee -a install_log.txt
+
+	#mednafen
+	#default path: /home/$USER/.mednafen/mednafen.cfg
+	#Main config
+	cp -v $HOME/RetroRig/emu-cfgs/VM-Xbox/mednafen/mednafen.cfg $HOME/.mednafen | tee -a install_log.txt
+
+	#mupen64pluspwd
+	#default path: /home/$USER/.config/mupen64plus
+	#Main config
+	cp -v $HOME/RetroRig/emu-cfgs/VM-Xbox/mupen64plus/mupen64plus.cfg $HOME/.config/mupen64plus/ | tee -a install_log.txt
+
+	#Stella
+	#default path: /home/$USER/.config/mupen64plus
+	#Main config
+	cp -v $HOME/RetroRig/emu-cfgs/VM-Xbox/Stella/stellarc $HOME/.stella/ | tee -a install_log.txt
+
+	#dolphin
+	#default path /home/$USER/.dolphin-emu/
+	#emulator config
+	cp -Rv /$HOME/RetroRig/emu-cfgs/VM-Xbox/Dolphin/Dolphin.ini $HOME/.dolphin-emu/Config/ | tee -a install_log.txt
+	#Gamecube controller config
+	cp -Rv /$HOME/RetroRig/emu-cfgs/VM-Xbox/Dolphin/GCPadNew.ini $HOME/.dolphin-emu/Config/ | tee -a install_log.txt
+	#Wii controller config
+	#OpenGL graphics config
+	cp -Rv /$HOME/RetroRig/emu-cfgs/VM-Xbox/Dolphin/gfx_opengl.ini $HOME/.dolphin-emu/Config/ | tee -a install_log.txt
+	
+	#blacklist xpad
+	#Note: Blacklisting xpad should not be needed for the guest OS...will change if need be
+	#echo "sudo needed to blacklist xpad!" | tee -a install_log.txt
+	#echo $userpasswd | sudo -S cp -v $HOME/RetroRig/init-scripts/VM-Xbox/blacklist.conf /etc/modprobe.d/ | tee -a install_log.txt
+
+	#copy default gamepad setup for Xbox 360 Controller (VM) (4-player)
+	cp -v $HOME/RetroRig/controller-cfgs/VM-Xbox/VM-Xbox.lyt $HOME/.qjoypad3/ | tee -a install_log.txt
+
+	#copy qjoypad autostart item for VM-Xbox gamepad config
+	echo $userpasswd | sudo -S cp -v $HOME/RetroRig/controller-cfgs/VM-Xbox/qjoypad.desktop /etc/xdg/autostart/ | tee -a install_log.txt
+
+
 }
 
 function _config-x360ws () {
