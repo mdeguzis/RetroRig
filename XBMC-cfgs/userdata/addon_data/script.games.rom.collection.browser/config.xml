@@ -221,7 +221,7 @@
     <RomCollection id="8" name="Genesis">
       <useBuiltinEmulator>False</useBuiltinEmulator>
       <gameclient />
-      <emulatorCmd>/usr/bin/gens</emulatorCmd>
+      <emulatorCmd>/usr/games/gens</emulatorCmd>
       <emulatorParams>--quickexit "%ROM%"</emulatorParams>
       <romPath>/home/mikeyd/Games/ROMs/Sega Genesis/*.bin</romPath>
       <saveStatePath />
