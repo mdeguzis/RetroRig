@@ -573,7 +573,7 @@ function _res-swticher (){
 		gbc_org_X=$(grep -i "gb.xres " $HOME/.mednafen/mednafen.cfg)
 		gbc_org_Y=$(grep -i "gb.yres " $HOME/.mednafen/mednafen.cfg)
 		#make the changes, prefix new_X in case NULL was entered previously
-		sed -i "s|$gbc_org_X|gb.yres "$gbc_new_X"|g" $HOME/.mednafen/mednafen.cfg
+		sed -i "s|$gbc_org_X|gb.xres "$gbc_new_X"|g" $HOME/.mednafen/mednafen.cfg
 		sed -i "s|$gbc_org_Y|gb.yres "$gbc_new_Y"|g" $HOME/.mednafen/mednafen.cfg
 
 		########################		
