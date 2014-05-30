@@ -91,40 +91,11 @@ and is a hot target for many folks. Arch Linux, or Debian Testing were other con
 there are many pro's and con's to using Ubuntu, all of which are understandable. You can't appease
 everyone!
 
-## Controller Setup:
 
-I Tried to reflect the original controller as much as possible for some such as the NES and SNES. The
-save/load/exit button assignments are constant for all emulators except pcsx and pcsx2 (working on it!). In due time I will add more, with the next being the Dualshock 2/3 controller.
+## Wiki
 
-Please see controller-cfg-list.txt for the complete set!
-
-Current supported controllers:
-
-* Xbox 360 Controller (wireless)
-* Xbox 360 Controller (wired) 
-
-## ROMs
-
-It is a good idea to load games before hand into the predefined folders after the configuration option is ran and you reboot your PC. On first startup Rom Collection Browser will ask for games to import. Several emulators are supported and built in for easy importing.ROMs for emualtors are NOT provided for legal reasons. Due to legal gray areas with BIOS files, they will not be provided for emulators that require them (e.g. pcsx, pcsx2).Please do not request these items be added.
-
-Currently importing ROMs into XBMC is a keyboard-less affair for the following consoles:
-
-* SNES
-* NES
-* Sega Genesis
-* MAME
-* Atari 2600
-* Nintendo 64
-* Playstation 1
-* Playstation 2
-* Gamecube
-* Gameboy Color
-
-All ROMs should be placed in the respective folder under "/home/$USER/Games/ROMs". In due time, I will
-add more and more emulators. But until then, you can manually add them. In a later release, I plan on
-building in a text-based file browser to locate and import games. For now, you must copy them in the
-folders under ~/Games. In the near future, I will load Samba for file transfers as optional
-install items (SSH is now in).
+First, I must direct you to read the wiki on this github page, as it contains extra iformation outside this wiki. 
+https://github.com/ProfessorKaos64/RetroRig/wiki
 
 ## Installation
 
