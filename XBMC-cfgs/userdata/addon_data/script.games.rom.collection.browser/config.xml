@@ -221,7 +221,7 @@
     <RomCollection id="8" name="Genesis">
       <useBuiltinEmulator>False</useBuiltinEmulator>
       <gameclient />
-      <emulatorCmd>/usr/games/mednafens</emulatorCmd>
+      <emulatorCmd>/usr/games/mednafen</emulatorCmd>
       <emulatorParams>"%ROM%"</emulatorParams>
       <romPath>/home/mikeyd/Games/ROMs/Sega Genesis/*.bin</romPath>
       <saveStatePath />
