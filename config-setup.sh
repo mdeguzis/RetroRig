@@ -520,7 +520,7 @@ grep -i "VideoPlugin = " $HOME/.config/mupen64plus/mupen64plus.cfg >> res.txt
 
 function _res-swticher (){
 		clear
-		dialog --infobox "Setting resolution to selection" 3 48
+		dialog --infobox "Setting resolution to selection" 3 0
 		#resolution is set via _resolution function		
 		
 		########################		
@@ -593,15 +593,15 @@ function _res-swticher (){
 		snes_org_X=$(grep -i "snes.xres " $HOME/.mednafen/mednafen-09x.cfg)
 		snes_org_Y=$(grep -i "snes.yres " $HOME/.mednafen/mednafen-09x.cfg)
 		#make the changes, prefix new_X in case NULL was entered previously
-		sed -i "s|$snes_org_X|gb.xres "$snes_new_X"|g" $HOME/.mednafen/mednafen-09x.cfg
-		sed -i "s|$snes_org_Y|gb.yres "$snes_new_Y"|g" $HOME/.mednafen/mednafen-09x.cfg
+		sed -i "s|$snes_org_X|snes.xres "$snes_new_X"|g" $HOME/.mednafen/mednafen-09x.cfg
+		sed -i "s|$snes_org_Y|snes.yres "$snes_new_Y"|g" $HOME/.mednafen/mednafen-09x.cfg
 
 		#Mednafen (Sega Master System, aka Sega Genesis)
 		sms_org_X=$(grep -i "sms.xres " $HOME/.mednafen/mednafen-09x.cfg)
 		sms_org_Y=$(grep -i "sms.yres " $HOME/.mednafen/mednafen-09x.cfg)
 		#make the changes, prefix new_X in case NULL was entered previously
-		sed -i "s|$sms_org_X|gb.xres "$sms_new_X"|g" $HOME/.mednafen/mednafen-09x.cfg
-		sed -i "s|$sms_org_Y|gb.yres "$sms_new_Y"|g" $HOME/.mednafen/mednafen-09x.cfg
+		sed -i "s|$sms_org_X|sms.xres "$sms_new_X"|g" $HOME/.mednafen/mednafen-09x.cfg
+		sed -i "s|$sms_org_Y|sms.yres "$sms_new_Y"|g" $HOME/.mednafen/mednafen-09x.cfg
 
 
 		########################		
@@ -1422,8 +1422,9 @@ echo "Removing RetroRig..." | tee -a install_log.txt
 echo "-----------------------------------------------------------" | tee -a uninstall_log.txt
 
 #remove installed binaries
+#do not remove software-properties-common, necessary pkg!
 echo $userpasswd | sudo -S apt-get autoremove -y xboxdrv curl zsnes nestopia pcsxr pcsx2:i386 \
-python-software-properties pkg-config software-properties-common mednafen \
+python-software-properties pkg-config mednafen \
 mame mupen64plus dconf-tools qjoypad xbmc dolphin-emu-master stella \
 build-essential | tee -a uninstall_log.txt
 
