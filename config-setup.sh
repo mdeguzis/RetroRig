@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -x
 #
 #small script to copy over configuration files for emulators
 #Version 0.7.3
@@ -368,7 +368,7 @@ options=(1 "Change Video Plugin"
 		folder=$(dialog --stdout --title "Please choose a file (spacebar to select)" --fselect $fstart/ 10 68)
 		#change plugin
 		m_plug_orig=$(grep -i "VideoPlugin = " $HOME/.config/mupen64plus/mupen64plus.cfg)
-		sed -i "s|$m_plug_orig|VideoPlugin = " $folder"|g" $HOME/.config/mupen64plus/mupen64plus.cfg	
+		sed -i "s|$m_plug_orig|VideoPlugin = $folder|g" $HOME/.config/mupen64plus/mupen64plus.cfg	
 		;;
 
 		2)
@@ -535,7 +535,6 @@ function _res-swticher (){
 		########################		
 		#pcsx
 		######################## 
-		#Gens/GS will not open properly if an improper resolution is set
 		p1_org_X=$(grep -i "ResX = " $HOME/.pcsx/plugins/gpuPeopsMesaGL.cfg)
 		p1_org_Y=$(grep -i "ResY = " $HOME/.pcsx/plugins/gpuPeopsMesaGL.cfg)
 		#make the changes, prefix new_X in case NULL was entered previously
