@@ -2,6 +2,21 @@ RetroRig Project for Ubuntu 14.04 LTS
 ===================================================
 ###### [Version 0.7.3]
 
+##Important project update
+
+Throughout making my RetroRig project, I learned just how much I still love to script (in any OS), and doing it for the pure enjoyment (computers+games=win). I found out tonight and in a hard way (thanks a lot MEDNAFEN) when tackling using $vars with sed in the large fashion I was. Grepping "nes" also grepped "snes". Now I got around this with a craptastic option flag of "grep -Fx" with the literal default string to set the original value and avoid the "unterminated sed expression" errors, but reporting the current resolution was not solved (for snes/nes only).
+
+Then with the help of the #bash IRC channel, I came to realize that I need to stop being a wuss and pick up those python books I have lying around, get learning how to use libraries and more powerful expressions, and move on. Of course I won't scrap the entire project. I'll just create a new python branch and get to work duplicating the work while learn. Funny how things go.
+
+Let this be a lesson for folks tackling some projects that may work in bash, but truly should be using a more powerful language or full on complete one (such as perl or C, at least that's my guess). Time to learn python, and be happy I learned a valuable lesson in the process, rather than complain I have to sort of "start over." I am by **no** means an expert in bash scripting, but I do feel others are right, and another language is best.
+
+I will be branching the beta-branch off into a python rebuild, but will of course continue to address any withstanding problems folks have with the master, beta, and vbox-beta branches.  Thank you for your patience.
+
+-pk
+
+
+## Now on to the rest...
+
 RetroRig is shell script to setup a Linux x86_64 system  with several emulators, and XBMC as graphical
 front end.The inspiration for doing this lies almost completely with the RetroPie Project. I wanted to provide
 something similar, but with XBMC, x86_64, and my favorite interface, "Rom Collection Browser."
