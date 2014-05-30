@@ -647,7 +647,7 @@ if [ "$choices" != "" ]; then
 		#mupen64plus
 		echo "mupen64plus:" > res.txt
 		grep -i "ScreenWidth = " $HOME/.config/mupen64plus/mupen64plus.cfg >> res.txt
-		grep -i "ScreenHeight = " $HOME/.config/mupen64plus/mupen64plus.cfg >> res.txt
+		grep -i"ScreenHeight = " $HOME/.config/mupen64plus/mupen64plus.cfg >> res.txt
 		echo "" >> res.txt
 		#Dolphin-emu
 		echo "Dolphin-emu:" >> res.txt
@@ -655,28 +655,28 @@ if [ "$choices" != "" ]; then
 		echo "" >> res.txt
 		#mednafen GBC
 		echo "Mednafen (GBC)" >> res.txt
-		grep -Fx  "gb.xres " $HOME/.mednafen/mednafen-09x.cfg >> res.txt
-		grep -Fx  "gb.yres " $HOME/.mednafen/mednafen-09x.cfg >> res.txt
+		grep "gb.xres " $HOME/.mednafen/mednafen-09x.cfg >> res.txt
+		grep "gb.yres " $HOME/.mednafen/mednafen-09x.cfg >> res.txt
 		echo "" >> res.txt
 		#mednafen GBA
 		echo "Mednafen (GBA)" >> res.txt
-		grep -Fx  "gba.xres " $HOME/.mednafen/mednafen-09x.cfg >> res.txt
-		grep -Fx  "gba.yres " $HOME/.mednafen/mednafen-09x.cfg >> res.txt
+		grep "gba.xres " $HOME/.mednafen/mednafen-09x.cfg >> res.txt
+		grep "gba.yres " $HOME/.mednafen/mednafen-09x.cfg >> res.txt
 		echo "" >> res.txt
 		#mednafen Sega Genesis
 		echo "Mednafen (Sega Genesis)" >> res.txt
-		grep -Fx  "sms.xres " $HOME/.mednafen/mednafen-09x.cfg >> res.txt
-		grep -Fx  "sms.yres " $HOME/.mednafen/mednafen-09x.cfgg >> res.txt
+		grep "sms.xres " $HOME/.mednafen/mednafen-09x.cfg >> res.txt
+		grep "sms.yres " $HOME/.mednafen/mednafen-09x.cfgg >> res.txt
 		echo "" >> res.txt
 		#mednafen SNES
 		echo "Mednafen (SNES)" >> res.txt
-		grep -Fx  "snes.xres " $HOME/.mednafen/mednafen-09x.cfg >> res.txt
-		grep -Fx  "snes.yres " $HOME/.mednafen/mednafen-09x.cfg >> res.txt
+		grep  "snes.xres " $HOME/.mednafen/mednafen-09x.cfg >> res.txt
+		grep  "snes.yres " $HOME/.mednafen/mednafen-09x.cfg >> res.txt
 		echo "" >> res.txt
 		#mednafen NES
 		echo "Mednafen (NES)" >> res.txt
-		grep -Fx  "nes.xres " $HOME/.mednafen/mednafen-09x.cfg >> res.txt
-		grep -Fx  "nes.yres " $HOME/.mednafen/mednafen-09x.cfg >> res.txt
+		grep "nes.xres " $HOME/.mednafen/mednafen-09x.cfg >> res.txt
+		grep "nes.yres " $HOME/.mednafen/mednafen-09x.cfg >> res.txt
 		echo "" >> res.txt
 		#report current resolution
 		dialog --textbox res.txt 33 0
