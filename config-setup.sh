@@ -520,7 +520,7 @@ grep -i "VideoPlugin = " $HOME/.config/mupen64plus/mupen64plus.cfg >> res.txt
 
 function _res-swticher (){
 		clear
-		dialog --infobox "Setting resolution to selection" 3 0
+		dialog --infobox "Setting resolution to selection" 3 36
 		#resolution is set via _resolution function		
 		
 		########################		
