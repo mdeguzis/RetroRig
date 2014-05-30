@@ -655,28 +655,28 @@ if [ "$choices" != "" ]; then
 		echo "" >> res.txt
 		#mednafen GBC
 		echo "Mednafen (GBC)" >> res.txt
-		grep -i "gb.xres " $HOME/.mednafen/mednafen-09x.cfg >> res.txt
-		grep -i "gb.yres " $HOME/.mednafen/mednafen-09x.cfg >> res.txt
+		grep -Fx  "gb.xres " $HOME/.mednafen/mednafen-09x.cfg >> res.txt
+		grep -Fx  "gb.yres " $HOME/.mednafen/mednafen-09x.cfg >> res.txt
 		echo "" >> res.txt
 		#mednafen GBA
 		echo "Mednafen (GBA)" >> res.txt
-		grep -i "gba.xres " $HOME/.mednafen/mednafen-09x.cfg >> res.txt
-		grep -i "gba.yres " $HOME/.mednafen/mednafen-09x.cfg >> res.txt
+		grep -Fx  "gba.xres " $HOME/.mednafen/mednafen-09x.cfg >> res.txt
+		grep -Fx  "gba.yres " $HOME/.mednafen/mednafen-09x.cfg >> res.txt
 		echo "" >> res.txt
 		#mednafen Sega Genesis
 		echo "Mednafen (Sega Genesis)" >> res.txt
-		grep -i "sms.xres " $HOME/.mednafen/mednafen-09x.cfg >> res.txt
-		grep -i "sms.yres " $HOME/.mednafen/mednafen-09x.cfgg >> res.txt
+		grep -Fx  "sms.xres " $HOME/.mednafen/mednafen-09x.cfg >> res.txt
+		grep -Fx  "sms.yres " $HOME/.mednafen/mednafen-09x.cfgg >> res.txt
 		echo "" >> res.txt
 		#mednafen SNES
 		echo "Mednafen (SNES)" >> res.txt
-		grep -i "snes.xres " $HOME/.mednafen/mednafen-09x.cfg >> res.txt
-		grep -i "snes.yres " $HOME/.mednafen/mednafen-09x.cfg >> res.txt
+		grep -Fx  "snes.xres " $HOME/.mednafen/mednafen-09x.cfg >> res.txt
+		grep -Fx  "snes.yres " $HOME/.mednafen/mednafen-09x.cfg >> res.txt
 		echo "" >> res.txt
 		#mednafen NES
 		echo "Mednafen (NES)" >> res.txt
-		grep -i "nes.xres " $HOME/.mednafen/mednafen-09x.cfg >> res.txt
-		grep -i "nes.yres " $HOME/.mednafen/mednafen-09x.cfg >> res.txt
+		grep -Fx  "nes.xres " $HOME/.mednafen/mednafen-09x.cfg >> res.txt
+		grep -Fx  "nes.yres " $HOME/.mednafen/mednafen-09x.cfg >> res.txt
 		echo "" >> res.txt
 		#report current resolution
 		dialog --textbox res.txt 33 0
