@@ -368,7 +368,7 @@ options=(1 "Change Video Plugin"
 		folder=$(dialog --stdout --title "Please choose a file (spacebar to select)" --fselect $fstart/ 10 68)
 		#change plugin
 		m_plug_orig=$(grep -i "VideoPlugin = " $HOME/.config/mupen64plus/mupen64plus.cfg)
-		sed -i "s|$m_plug_orig|VideoPlugin = "$folder"|g" $HOME/.config/mupen64plus/mupen64plus.cfg	
+		sed -i "s|$m_plug_orig|VideoPlugin = " $folder"|g" $HOME/.config/mupen64plus/mupen64plus.cfg	
 		;;
 
 		2)
@@ -502,7 +502,7 @@ grep -i "VideoPlugin = " $HOME/.config/mupen64plus/mupen64plus.cfg >> res.txt
 		#set orig port 
 		ssh_org=$(grep -i "Port " /etc/ssh/sshd_config)
 		#set new port from user input
-		echo $userpasswd | sudo -S sed -i "s|$ssh_org|Port "$ssh_new"|g" /etc/ssh/sshd_config
+		echo $userpasswd | sudo -S sed -i "s|$ssh_org|Port $ssh_new|g" /etc/ssh/sshd_config
 		#restart ssh service
 		echo $userpasswd | sudo -S service ssh restart
 		#remove temp file
@@ -540,8 +540,8 @@ function _res-swticher (){
 		p1_org_Y=$(grep -i "ResY = " $HOME/.pcsx/plugins/gpuPeopsMesaGL.cfg)
 		#make the changes, prefix new_X in case NULL was entered previously
 		#Gens/GS
-		sed -i "s|$p1_org_X|ResX = "$p1_new_X"|g" $HOME/.pcsx/plugins/gpuPeopsMesaGL.cfg
-		sed -i "s|$p1_org_Y|ResY = "$p1_new_Y"|g" $HOME/.pcsx/plugins/gpuPeopsMesaGL.cfg
+		sed -i "s|$p1_org_X|ResX = $p1_new_X|g" $HOME/.pcsx/plugins/gpuPeopsMesaGL.cfg
+		sed -i "s|$p1_org_Y|ResY = $p1_new_Y|g" $HOME/.pcsx/plugins/gpuPeopsMesaGL.cfg
 
 		########################		
 		#mednafen 
@@ -572,36 +572,36 @@ function _res-swticher (){
 		gb_org_X=$(grep -i "gb.xres " $HOME/.mednafen/mednafen-09x.cfg)
 		gb_org_Y=$(grep -i "gb.yres " $HOME/.mednafen/mednafen-09x.cfg)
 		#make the changes, prefix new_X in case NULL was entered previously
-		sed -i "s|$gb_org_X|gb.xres "$gb_new_X"|g" $HOME/.mednafen/mednafen-09x.cfg
-		sed -i "s|$gb_org_Y|gb.yres "$gb_new_Y"|g" $HOME/.mednafen/mednafen-09x.cfg
+		sed -i "s|$gb_org_X|gb.xres $gb_new_X|g" $HOME/.mednafen/mednafen-09x.cfg
+		sed -i "s|$gb_org_Y|gb.yres $gb_new_Y|g" $HOME/.mednafen/mednafen-09x.cfg
 
 		#Mednafen (NES)
 		nes_org_X=$(grep -i "nes.xres " $HOME/.mednafen/mednafen-09x.cfg)
 		nes_org_Y=$(grep -i "nes.yres " $HOME/.mednafen/mednafen-09x.cfg)
 		#make the changes, prefix new_X in case NULL was entered previously
-		sed -i "s|$nes_org_X|nes.xres "$nes_new_X"|g" $HOME/.mednafen/mednafen-09x.cfg
-		sed -i "s|$nes_org_Y|nes.yres "$nes_new_Y"|g" $HOME/.mednafen/mednafen-09x.cfg
+		sed -i "s|$nes_org_X|nes.xres $nes_new_X|g" $HOME/.mednafen/mednafen-09x.cfg
+		sed -i "s|$nes_org_Y|nes.yres $nes_new_Y|g" $HOME/.mednafen/mednafen-09x.cfg
 
 		#Mednafen (GameBoy Advance)
 		gba_org_X=$(grep -i "gba.xres " $HOME/.mednafen/mednafen-09x.cfg)
 		gba_org_Y=$(grep -i "gba.yres " $HOME/.mednafen/mednafen-09x.cfg)
 		#make the changes, prefix new_X in case NULL was entered previously
-		sed -i "s|$gba_org_X|gba.xres "$gba_new_X"|g" $HOME/.mednafen/mednafen-09x.cfg
-		sed -i "s|$gba_org_Y|gba.yres "$gba_new_Y"|g" $HOME/.mednafen/mednafen-09x.cfg
+		sed -i "s|$gba_org_X|gba.xres $gba_new_X|g" $HOME/.mednafen/mednafen-09x.cfg
+		sed -i "s|$gba_org_Y|gba.yres $gba_new_Y|g" $HOME/.mednafen/mednafen-09x.cfg
 
 		#Mednafen (SNES)
 		snes_org_X=$(grep -i "snes.xres " $HOME/.mednafen/mednafen-09x.cfg)
 		snes_org_Y=$(grep -i "snes.yres " $HOME/.mednafen/mednafen-09x.cfg)
 		#make the changes, prefix new_X in case NULL was entered previously
-		sed -i "s|$snes_org_X|snes.xres "$snes_new_X"|g" $HOME/.mednafen/mednafen-09x.cfg
-		sed -i "s|$snes_org_Y|snes.yres "$snes_new_Y"|g" $HOME/.mednafen/mednafen-09x.cfg
+		sed -i "s|$snes_org_X|snes.xres $snes_new_X|g" $HOME/.mednafen/mednafen-09x.cfg
+		sed -i "s|$snes_org_Y|snes.yres $snes_new_Y|g" $HOME/.mednafen/mednafen-09x.cfg
 
 		#Mednafen (Sega Master System, aka Sega Genesis)
 		sms_org_X=$(grep -i "sms.xres " $HOME/.mednafen/mednafen-09x.cfg)
 		sms_org_Y=$(grep -i "sms.yres " $HOME/.mednafen/mednafen-09x.cfg)
 		#make the changes, prefix new_X in case NULL was entered previously
-		sed -i "s|$sms_org_X|sms.xres "$sms_new_X"|g" $HOME/.mednafen/mednafen-09x.cfg
-		sed -i "s|$sms_org_Y|sms.yres "$sms_new_Y"|g" $HOME/.mednafen/mednafen-09x.cfg
+		sed -i "s|$sms_org_X|sms.xres $sms_new_X|g" $HOME/.mednafen/mednafen-09x.cfg
+		sed -i "s|$sms_org_Y|sms.yres $sms_new_Y|g" $HOME/.mednafen/mednafen-09x.cfg
 
 
 		########################		
