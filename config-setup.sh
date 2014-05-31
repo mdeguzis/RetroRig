@@ -649,8 +649,8 @@ if [ "$choices" != "" ]; then
 		#echo curent resolution
 		#mupen64plus
 		echo "mupen64plus:" > res.txt
-		grep "\bScreenWidth = \b" $HOME/.config/mupen64plus/mupen64plus.cfg >> res.txt
-		grep "\bScreenHeight = \b" $HOME/.config/mupen64plus/mupen64plus.cfg >> res.txt
+		grep -Ee "\bScreenWidth = \b" $HOME/.config/mupen64plus/mupen64plus.cfg >> res.txt
+		grep -Ee "\bScreenHeight = \b" $HOME/.config/mupen64plus/mupen64plus.cfg >> res.txt
 		echo "" >> res.txt
 		#Dolphin-emu
 		echo "Dolphin-emu:" >> res.txt
@@ -669,7 +669,7 @@ if [ "$choices" != "" ]; then
 		#mednafen Sega Genesis
 		echo "Mednafen (Sega Genesis)" >> res.txt
 		grep -Ee "\bsms.xres\b" $HOME/.mednafen/mednafen-09x.cfg >> res.txt
-		grep -Ee "\bsms.yres\b" $HOME/.mednafen/mednafen-09x.cfgg >> res.txt
+		grep -Ee "\bsms.yres\b" $HOME/.mednafen/mednafen-09x.cfg >> res.txt
 		echo "" >> res.txt
 		#mednafen SNES
 		echo "Mednafen (SNES)" >> res.txt
