@@ -1,4 +1,4 @@
-#!/bin/bash -x
+#!/bin/bash
 #
 # append a "-x" on the end above for debugging if need be
 #
@@ -604,6 +604,11 @@ function _res-swticher (){
 		sed -ie "s|$sms_org_X|sms.xres $sms_new_X|g" $HOME/.mednafen/mednafen-09x.cfg
 		sed -ie "s|$sms_org_Y|sms.yres $sms_new_Y|g" $HOME/.mednafen/mednafen-09x.cfg
 
+		#For some reason, when I replace the resolutions, the config file is changed
+		#it is appended with an "e" as in mednafen-09x.cfge. So, the old file needs
+		#deleted, and the new file needs renamed to the original. This is tested to work
+		rm -f $HOME/.mednafen/mednafen-09x.cfg
+		mv -v $HOME/.mednafen/mednafen-09x.cfge $HOME/.mednafen/mednafen-09x.cfg
 
 		########################		
 		#Dolphin-emu
