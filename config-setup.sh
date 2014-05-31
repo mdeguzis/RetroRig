@@ -528,21 +528,21 @@ function _res-swticher (){
 		########################		
 		#mupen64plus
 		########################
-		m_org_X=$(grep -i "ScreenWidth = " $HOME/.config/mupen64plus/mupen64plus.cfg)
-		m_org_Y=$(grep -i "ScreenHeight = " $HOME/.config/mupen64plus/mupen64plus.cfg)
+		m_org_X=$(grep -Ee "\bScreenWidth = \b" $HOME/.config/mupen64plus/mupen64plus.cfg)
+		m_org_Y=$(grep -Ee "\bScreenHeight = \b" $HOME/.config/mupen64plus/mupen64plus.cfg)
 		#make the changes, prefix new_X in case NULL was entered previousey
-		sed -i "s|$m_org_X|ScreenWidth = $m_new_X|g" $HOME/.config/mupen64plus/mupen64plus.cfg
-		sed -i "s|$m_org_Y|ScreenHeight = $m_new_Y|g" $HOME/.config/mupen64plus/mupen64plus.cfg
+		sed -ei "s|$m_org_X|\bScreenWidth = \b $m_new_X|g" $HOME/.config/mupen64plus/mupen64plus.cfg
+		sed -ei "s|$m_org_Y|\bScreenHeight = \b $m_new_Y|g" $HOME/.config/mupen64plus/mupen64plus.cfg
 
 		########################		
 		#pcsx
 		######################## 
-		p1_org_X=$(grep -i "ResX = " $HOME/.pcsx/plugins/gpuPeopsMesaGL.cfg)
-		p1_org_Y=$(grep -i "ResY = " $HOME/.pcsx/plugins/gpuPeopsMesaGL.cfg)
+		p1_org_X=$(grep -Ee "\bResX = \b" $HOME/.pcsx/plugins/gpuPeopsMesaGL.cfg)
+		p1_org_Y=$(grep -Ee "\bResY = \b" $HOME/.pcsx/plugins/gpuPeopsMesaGL.cfg)
 		#make the changes, prefix new_X in case NULL was entered previously
 		#Gens/GS
-		sed -i "s|$p1_org_X|ResX = $p1_new_X|g" $HOME/.pcsx/plugins/gpuPeopsMesaGL.cfg
-		sed -i "s|$p1_org_Y|ResY = $p1_new_Y|g" $HOME/.pcsx/plugins/gpuPeopsMesaGL.cfg
+		sed -ei "s|$p1_org_X|\bResX = \b $p1_new_X|g" $HOME/.pcsx/plugins/gpuPeopsMesaGL.cfg
+		sed -ei "s|$p1_org_Y|\bResY = \b $p1_new_Y|g" $HOME/.pcsx/plugins/gpuPeopsMesaGL.cfg
 
 		########################		
 		#mednafen 
@@ -570,39 +570,39 @@ function _res-swticher (){
 		#the screen (EMU_CODE.stretch 1). The value is boolean.
 
 		#Mednafen (GBC)
-		gb_org_X=$(grep -Fx "gb.xres 1280" $HOME/.mednafen/mednafen-09x.cfg)
-		gb_org_Y=$(grep -Fx "gb.yres 1024" $HOME/.mednafen/mednafen-09x.cfg)
+		gb_org_X=$(grep -Ee "\bgb.xres \b" $HOME/.mednafen/mednafen-09x.cfg)
+		gb_org_Y=$(grep -Ee "\bgb.yres \b" $HOME/.mednafen/mednafen-09x.cfg)
 		#make the changes, prefix new_X in case NULL was entered previously
-		sed -i "s|$gb_org_X|gb.xres $gb_new_X|g" $HOME/.mednafen/mednafen-09x.cfg
-		sed -i "s|$gb_org_Y|gb.yres $gb_new_Y|g" $HOME/.mednafen/mednafen-09x.cfg
+		sed -ei "s|$gb_org_X|\bgb.xres\b $gb_new_X|g" $HOME/.mednafen/mednafen-09x.cfg
+		sed -ei "s|$gb_org_Y|\bgb.yres\b $gb_new_Y|g" $HOME/.mednafen/mednafen-09x.cfg
 
 		#Mednafen (NES)
-		nes_org_X=$(grep -Fx "nes.xres 1280" $HOME/.mednafen/mednafen-09x.cfg)
-		nes_org_Y=$(grep -Fx "nes.yres 1024" $HOME/.mednafen/mednafen-09x.cfg)
+		nes_org_X=$(grep -Ee "\bnes.xres \b" $HOME/.mednafen/mednafen-09x.cfg)
+		nes_org_Y=$(grep -Ee "\bnes.yres \b" $HOME/.mednafen/mednafen-09x.cfg)
 		#make the changes, prefix new_X in case NULL was entered previously
-		sed -i "s|$nes_org_X|nes.xres $nes_new_X|g" $HOME/.mednafen/mednafen-09x.cfg
-		sed -i "s|$nes_org_Y|nes.yres $nes_new_Y|g" $HOME/.mednafen/mednafen-09x.cfg
+		sed -ei "s|$nes_org_X|\bnes.xres\b $nes_new_X|g" $HOME/.mednafen/mednafen-09x.cfg
+		sed -ei "s|$nes_org_Y|\bnes.yres\b $nes_new_Y|g" $HOME/.mednafen/mednafen-09x.cfg
 
 		#Mednafen (GameBoy Advance)
-		gba_org_X=$(grep -Fx "gba.xres 1280" $HOME/.mednafen/mednafen-09x.cfg)
-		gba_org_Y=$(grep -Fx "gba.yres 1024" $HOME/.mednafen/mednafen-09x.cfg)
+		gba_org_X=$(grep -Ee "\bgba.xres\b " $HOME/.mednafen/mednafen-09x.cfg)
+		gba_org_Y=$(grep -Ee "\bgba.yres\b " $HOME/.mednafen/mednafen-09x.cfg)
 		#make the changes, prefix new_X in case NULL was entered previously
-		sed -i "s|$gba_org_X|gba.xres $gba_new_X|g" $HOME/.mednafen/mednafen-09x.cfg
-		sed -i "s|$gba_org_Y|gba.yres $gba_new_Y|g" $HOME/.mednafen/mednafen-09x.cfg
+		sed -ei "s|$gba_org_X|\bgba.xres\b $gba_new_X|g" $HOME/.mednafen/mednafen-09x.cfg
+		sed -ei "s|$gba_org_Y|\bgba.yres\b $gba_new_Y|g" $HOME/.mednafen/mednafen-09x.cfg
 
 		#Mednafen (SNES)
-		snes_org_X=$(grep -Fx "snes.xres 1280" $HOME/.mednafen/mednafen-09x.cfg)
-		snes_org_Y=$(grep -Fx "snes.yres 1024" $HOME/.mednafen/mednafen-09x.cfg)
+		snes_org_X=$(grep -Ee "\bsnes.xres\b " $HOME/.mednafen/mednafen-09x.cfg)
+		snes_org_Y=$(grep -Ee "\bsnes.yres\b " $HOME/.mednafen/mednafen-09x.cfg)
 		#make the changes, prefix new_X in case NULL was entered previously
-		sed -i "s|$snes_org_X|snes.xres $snes_new_X|g" $HOME/.mednafen/mednafen-09x.cfg
-		sed -i "s|$snes_org_Y|snes.yres $snes_new_Y|g" $HOME/.mednafen/mednafen-09x.cfg
+		sed -ei "s|$snes_org_X|\bsnes.xres\b $snes_new_X|g" $HOME/.mednafen/mednafen-09x.cfg
+		sed -ei "s|$snes_org_Y|\bsnes.yres\b $snes_new_Y|g" $HOME/.mednafen/mednafen-09x.cfg
 
 		#Mednafen (Sega Master System, aka Sega Genesis)
-		sms_org_X=$(grep -Fx "sms.xres 1280" $HOME/.mednafen/mednafen-09x.cfg)
-		sms_org_Y=$(grep -Fx "sms.yres 1024" $HOME/.mednafen/mednafen-09x.cfg)
+		sms_org_X=$(grep -Ee "\bsms.xres\b " $HOME/.mednafen/mednafen-09x.cfg)
+		sms_org_Y=$(grep -Ee "\bsms.yres\b " $HOME/.mednafen/mednafen-09x.cfg)
 		#make the changes, prefix new_X in case NULL was entered previously
-		sed -i "s|$sms_org_X|sms.xres $sms_new_X|g" $HOME/.mednafen/mednafen-09x.cfg
-		sed -i "s|$sms_org_Y|sms.yres $sms_new_Y|g" $HOME/.mednafen/mednafen-09x.cfg
+		sed -ei "s|$sms_org_X|\bsms.xres\b $sms_new_X|g" $HOME/.mednafen/mednafen-09x.cfg
+		sed -ei "s|$sms_org_Y|\bsms.yres\b $sms_new_Y|g" $HOME/.mednafen/mednafen-09x.cfg
 
 
 		########################		
@@ -643,11 +643,14 @@ if [ "$choices" != "" ]; then
     case $choices in
 
 	 1) 
+		#Need to use extended regexp's here because of nes being within nes
+		#grep -Ee '\bnes\b' [list of files]
+
 		#echo curent resolution
 		#mupen64plus
 		echo "mupen64plus:" > res.txt
-		grep -i "ScreenWidth = " $HOME/.config/mupen64plus/mupen64plus.cfg >> res.txt
-		grep -i"ScreenHeight = " $HOME/.config/mupen64plus/mupen64plus.cfg >> res.txt
+		grep "\bScreenWidth = \b" $HOME/.config/mupen64plus/mupen64plus.cfg >> res.txt
+		grep "\bScreenHeight = \b" $HOME/.config/mupen64plus/mupen64plus.cfg >> res.txt
 		echo "" >> res.txt
 		#Dolphin-emu
 		echo "Dolphin-emu:" >> res.txt
@@ -655,28 +658,28 @@ if [ "$choices" != "" ]; then
 		echo "" >> res.txt
 		#mednafen GBC
 		echo "Mednafen (GBC)" >> res.txt
-		grep "gb.xres " $HOME/.mednafen/mednafen-09x.cfg >> res.txt
-		grep "gb.yres " $HOME/.mednafen/mednafen-09x.cfg >> res.txt
+		grep -Ee "\bgb.xres\b" $HOME/.mednafen/mednafen-09x.cfg >> res.txt
+		grep -Ee "\bgb.yres\b" $HOME/.mednafen/mednafen-09x.cfg >> res.txt
 		echo "" >> res.txt
 		#mednafen GBA
 		echo "Mednafen (GBA)" >> res.txt
-		grep "gba.xres " $HOME/.mednafen/mednafen-09x.cfg >> res.txt
-		grep "gba.yres " $HOME/.mednafen/mednafen-09x.cfg >> res.txt
+		grep -Ee "\bgba.xres\b" $HOME/.mednafen/mednafen-09x.cfg >> res.txt
+		grep -Ee "\bgba.yres\b" $HOME/.mednafen/mednafen-09x.cfg >> res.txt
 		echo "" >> res.txt
 		#mednafen Sega Genesis
 		echo "Mednafen (Sega Genesis)" >> res.txt
-		grep "sms.xres " $HOME/.mednafen/mednafen-09x.cfg >> res.txt
-		grep "sms.yres " $HOME/.mednafen/mednafen-09x.cfgg >> res.txt
+		grep -Ee "\bsms.xres\b" $HOME/.mednafen/mednafen-09x.cfg >> res.txt
+		grep -Ee "\bsms.yres\b" $HOME/.mednafen/mednafen-09x.cfgg >> res.txt
 		echo "" >> res.txt
 		#mednafen SNES
 		echo "Mednafen (SNES)" >> res.txt
-		grep  "snes.xres " $HOME/.mednafen/mednafen-09x.cfg >> res.txt
-		grep  "snes.yres " $HOME/.mednafen/mednafen-09x.cfg >> res.txt
+		grep -Ee "\bsnes.xres\b" $HOME/.mednafen/mednafen-09x.cfg >> res.txt
+		grep -Ee "\bsnes.yres\b" $HOME/.mednafen/mednafen-09x.cfg >> res.txt
 		echo "" >> res.txt
 		#mednafen NES
 		echo "Mednafen (NES)" >> res.txt
-		grep "nes.xres " $HOME/.mednafen/mednafen-09x.cfg >> res.txt
-		grep "nes.yres " $HOME/.mednafen/mednafen-09x.cfg >> res.txt
+		grep -Ee "\bnes.xres\b" $HOME/.mednafen/mednafen-09x.cfg >> res.txt
+		grep -Ee "\bnes.yres\b" $HOME/.mednafen/mednafen-09x.cfg >> res.txt
 		echo "" >> res.txt
 		#report current resolution
 		dialog --textbox res.txt 33 0
