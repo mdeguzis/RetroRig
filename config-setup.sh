@@ -604,11 +604,12 @@ function _res-swticher (){
 		sed -ie "s|$sms_org_X|sms.xres $sms_new_X|g" $HOME/.mednafen/mednafen-09x.cfg
 		sed -ie "s|$sms_org_Y|sms.yres $sms_new_Y|g" $HOME/.mednafen/mednafen-09x.cfg
 
-		#For some reason, when I replace the resolutions, the config file is changed
-		#it is appended with an "e" as in mednafen-09x.cfge. So, the old file needs
-		#deleted, and the new file needs renamed to the original. This is tested to work
-		rm -f $HOME/.mednafen/mednafen-09x.cfg
-		mv -v $HOME/.mednafen/mednafen-09x.cfge $HOME/.mednafen/mednafen-09x.cfg
+		#For some reason, when I replace the resolutions, the config files are changed
+		#They are appended with an "e" as in mednafen-09x.cfge. These "edited" files need
+		#deleted. I will have to find out at some point why this occurs
+		rm -f $HOME/.mednafen/mednafen-09x.cfge
+		rm -f $HOME/.config/mupen64plus/mupen64plus.cfge
+		rm -f $HOME/.pcsx/plugins/gpuPeopsMesaGL.cfge
 
 		########################		
 		#Dolphin-emu
