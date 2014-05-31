@@ -3,7 +3,7 @@
 # append a "-x" on the end above for debugging if need be
 #
 #small script to copy over configuration files for emulators
-#Version 0.7.3
+#Version 0.7.5
 #Please report any errors via a pull request
 #You can also reach me on twitter: @N3RD42
 #
