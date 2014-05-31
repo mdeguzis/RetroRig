@@ -21,7 +21,7 @@
 #set -x 
 
 #change directory
-cd /home/mikeyd/github_repos/RetroRig/
+cd $HOME/github_repos/RetroRig
 
 # Shows you the largest objects in your repo's pack file.
 # Written for osx.
