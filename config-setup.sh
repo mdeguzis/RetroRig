@@ -531,8 +531,8 @@ function _res-swticher (){
 		m_org_X=$(grep -Ee "\bScreenWidth = \b" $HOME/.config/mupen64plus/mupen64plus.cfg)
 		m_org_Y=$(grep -Ee "\bScreenHeight = \b" $HOME/.config/mupen64plus/mupen64plus.cfg)
 		#make the changes, prefix new_X in case NULL was entered previousey
-		sed -ie "s|$m_org_X|\bScreenWidth = \b $m_new_X|g" $HOME/.config/mupen64plus/mupen64plus.cfg
-		sed -ie "s|$m_org_Y|\bScreenHieght = \b $m_new_Y|g" $HOME/.config/mupen64plus/mupen64plus.cfg
+		sed -ie "s|$m_org_X|ScreenWidth = $m_new_X|g" $HOME/.config/mupen64plus/mupen64plus.cfg
+		sed -ie "s|$m_org_Y|ScreenHieght = $m_new_Y|g" $HOME/.config/mupen64plus/mupen64plus.cfg
 
 		########################		
 		#pcsx
@@ -541,8 +541,8 @@ function _res-swticher (){
 		p1_org_Y=$(grep -Ee "\bResY = \b" $HOME/.pcsx/plugins/gpuPeopsMesaGL.cfg)
 		#make the changes, prefix new_X in case NULL was entered previously
 		#Gens/GS
-		sed -ie "s|$p1_org_X|\bResX = \b $p1_new_X|g" $HOME/.pcsx/plugins/gpuPeopsMesaGL.cfg
-		sed -ie "s|$p1_org_Y|\bResY = \b $p1_new_Y|g" $HOME/.pcsx/plugins/gpuPeopsMesaGL.cfg
+		sed -ie "s|$p1_org_X|ResX = $p1_new_X|g" $HOME/.pcsx/plugins/gpuPeopsMesaGL.cfg
+		sed -ie "s|$p1_org_Y|ResY = $p1_new_Y|g" $HOME/.pcsx/plugins/gpuPeopsMesaGL.cfg
 
 		########################		
 		#mednafen 
@@ -570,39 +570,39 @@ function _res-swticher (){
 		#the screen (EMU_CODE.stretch 1). The value is boolean.
 
 		#Mednafen (GBC)
-		gb_org_X=$(grep -Ee "\bgb.xres \b" $HOME/.mednafen/mednafen-09x.cfg)
-		gb_org_Y=$(grep -Ee "\bgb.yres \b" $HOME/.mednafen/mednafen-09x.cfg)
+		gb_org_X=$(grep -Ee "gb.xres " $HOME/.mednafen/mednafen-09x.cfg)
+		gb_org_Y=$(grep -Ee "gb.yres " $HOME/.mednafen/mednafen-09x.cfg)
 		#make the changes, prefix new_X in case NULL was entered previously
-		sed -ie "s|$gb_org_X|\bgb.xres\b $gb_new_X|g" $HOME/.mednafen/mednafen-09x.cfg
-		sed -ie "s|$gb_org_Y|\bgb.yres\b $gb_new_Y|g" $HOME/.mednafen/mednafen-09x.cfg
+		sed -ie "s|$gb_org_X|gb.xres $gb_new_X|g" $HOME/.mednafen/mednafen-09x.cfg
+		sed -ie "s|$gb_org_Y|gb.yres $gb_new_Y|g" $HOME/.mednafen/mednafen-09x.cfg
 
 		#Mednafen (NES)
-		nes_org_X=$(grep -Ee "\bnes.xres \b" $HOME/.mednafen/mednafen-09x.cfg)
-		nes_org_Y=$(grep -Ee "\bnes.yres \b" $HOME/.mednafen/mednafen-09x.cfg)
+		nes_org_X=$(grep -Ee "nes.xres " $HOME/.mednafen/mednafen-09x.cfg)
+		nes_org_Y=$(grep -Ee "nes.yres " $HOME/.mednafen/mednafen-09x.cfg)
 		#make the changes, prefix new_X in case NULL was entered previously
-		sed -ie "s|$nes_org_X|\bnes.xres\b $nes_new_X|g" $HOME/.mednafen/mednafen-09x.cfg
-		sed -ie "s|$nes_org_Y|\bnes.yres\b $nes_new_Y|g" $HOME/.mednafen/mednafen-09x.cfg
+		sed -ie "s|$nes_org_X|nes.xres $nes_new_X|g" $HOME/.mednafen/mednafen-09x.cfg
+		sed -ie "s|$nes_org_Y|nes.yres $nes_new_Y|g" $HOME/.mednafen/mednafen-09x.cfg
 
 		#Mednafen (GameBoy Advance)
-		gba_org_X=$(grep -Ee "\bgba.xres\b " $HOME/.mednafen/mednafen-09x.cfg)
-		gba_org_Y=$(grep -Ee "\bgba.yres\b " $HOME/.mednafen/mednafen-09x.cfg)
+		gba_org_X=$(grep -Ee "gba.xres " $HOME/.mednafen/mednafen-09x.cfg)
+		gba_org_Y=$(grep -Ee "gba.yres " $HOME/.mednafen/mednafen-09x.cfg)
 		#make the changes, prefix new_X in case NULL was entered previously
-		sed -ie "s|$gba_org_X|\bgba.xres\b $gba_new_X|g" $HOME/.mednafen/mednafen-09x.cfg
-		sed -ie "s|$gba_org_Y|\bgba.yres\b $gba_new_Y|g" $HOME/.mednafen/mednafen-09x.cfg
+		sed -ie "s|$gba_org_X|gba.xres $gba_new_X|g" $HOME/.mednafen/mednafen-09x.cfg
+		sed -ie "s|$gba_org_Y|gba.yres $gba_new_Y|g" $HOME/.mednafen/mednafen-09x.cfg
 
 		#Mednafen (SNES)
-		snes_org_X=$(grep -Ee "\bsnes.xres\b " $HOME/.mednafen/mednafen-09x.cfg)
-		snes_org_Y=$(grep -Ee "\bsnes.yres\b " $HOME/.mednafen/mednafen-09x.cfg)
+		snes_org_X=$(grep -Ee "snes.xres " $HOME/.mednafen/mednafen-09x.cfg)
+		snes_org_Y=$(grep -Ee "snes.yres " $HOME/.mednafen/mednafen-09x.cfg)
 		#make the changes, prefix new_X in case NULL was entered previously
-		sed -ie "s|$snes_org_X|\bsnes.xres\b $snes_new_X|g" $HOME/.mednafen/mednafen-09x.cfg
-		sed -ie "s|$snes_org_Y|\bsnes.yres\b $snes_new_Y|g" $HOME/.mednafen/mednafen-09x.cfg
+		sed -ie "s|$snes_org_X|snes.xres $snes_new_X|g" $HOME/.mednafen/mednafen-09x.cfg
+		sed -ie "s|$snes_org_Y|snes.yres $snes_new_Y|g" $HOME/.mednafen/mednafen-09x.cfg
 
 		#Mednafen (Sega Master System, aka Sega Genesis)
-		sms_org_X=$(grep -Ee "\bsms.xres\b " $HOME/.mednafen/mednafen-09x.cfg)
-		sms_org_Y=$(grep -Ee "\bsms.yres\b " $HOME/.mednafen/mednafen-09x.cfg)
+		sms_org_X=$(grep -Ee "sms.xres " $HOME/.mednafen/mednafen-09x.cfg)
+		sms_org_Y=$(grep -Ee "sms.yres " $HOME/.mednafen/mednafen-09x.cfg)
 		#make the changes, prefix new_X in case NULL was entered previously
-		sed -ie "s|$sms_org_X|\bsms.xres\b $sms_new_X|g" $HOME/.mednafen/mednafen-09x.cfg
-		sed -ie "s|$sms_org_Y|\bsms.yres\b $sms_new_Y|g" $HOME/.mednafen/mednafen-09x.cfg
+		sed -ie "s|$sms_org_X|sms.xres $sms_new_X|g" $HOME/.mednafen/mednafen-09x.cfg
+		sed -ie "s|$sms_org_Y|sms.yres $sms_new_Y|g" $HOME/.mednafen/mednafen-09x.cfg
 
 
 		########################		
