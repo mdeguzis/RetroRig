@@ -1,7 +1,9 @@
 #!/bin/bash
 #
+# append a "-x" on the end above for debugging if need be
+#
 #small script to copy over configuration files for emulators
-#Version 0.7.3
+#Version 0.7.5
 #Please report any errors via a pull request
 #You can also reach me on twitter: @N3RD42
 #
@@ -368,7 +370,7 @@ options=(1 "Change Video Plugin"
 		folder=$(dialog --stdout --title "Please choose a file (spacebar to select)" --fselect $fstart/ 10 68)
 		#change plugin
 		m_plug_orig=$(grep -i "VideoPlugin = " $HOME/.config/mupen64plus/mupen64plus.cfg)
-		sed -i "s|$m_plug_orig|VideoPlugin = "$folder"|g" $HOME/.config/mupen64plus/mupen64plus.cfg	
+		sed -i "s|$m_plug_orig|VideoPlugin = $folder|g" $HOME/.config/mupen64plus/mupen64plus.cfg	
 		;;
 
 		2)
@@ -502,7 +504,7 @@ grep -i "VideoPlugin = " $HOME/.config/mupen64plus/mupen64plus.cfg >> res.txt
 		#set orig port 
 		ssh_org=$(grep -i "Port " /etc/ssh/sshd_config)
 		#set new port from user input
-		echo $userpasswd | sudo -S sed -i "s|$ssh_org|Port "$ssh_new"|g" /etc/ssh/sshd_config
+		echo $userpasswd | sudo -S sed -i "s|$ssh_org|Port $ssh_new|g" /etc/ssh/sshd_config
 		#restart ssh service
 		echo $userpasswd | sudo -S service ssh restart
 		#remove temp file
@@ -520,61 +522,94 @@ grep -i "VideoPlugin = " $HOME/.config/mupen64plus/mupen64plus.cfg >> res.txt
 
 function _res-swticher (){
 		clear
-		dialog --infobox "Setting resolution to selection" 3 48
+		dialog --infobox "Setting resolution to selection" 3 36
 		#resolution is set via _resolution function		
 		
 		########################		
 		#mupen64plus
 		########################
-		m_org_X=$(grep -i "ScreenWidth = " $HOME/.config/mupen64plus/mupen64plus.cfg)
-		m_org_Y=$(grep -i "ScreenHeight = " $HOME/.config/mupen64plus/mupen64plus.cfg)
+		m_org_X=$(grep -Ee "\bScreenWidth = \b" $HOME/.config/mupen64plus/mupen64plus.cfg)
+		m_org_Y=$(grep -Ee "\bScreenHeight = \b" $HOME/.config/mupen64plus/mupen64plus.cfg)
 		#make the changes, prefix new_X in case NULL was entered previousey
-		sed -i "s|$m_org_X|ScreenWidth = $m_new_X|g" $HOME/.config/mupen64plus/mupen64plus.cfg
-		sed -i "s|$m_org_Y|ScreenHeight = $m_new_Y|g" $HOME/.config/mupen64plus/mupen64plus.cfg
-
-		########################		
-		#ZSNES
-		########################
-		#zsnes will not open properly if an improper resolution is set
-		z_org_X=$(grep -i "CustomResX=" $HOME/.zsnes/zsnesl.cfg)
-		z_org_Y=$(grep -i "CustomResY=" $HOME/.zsnes/zsnesl.cfg)
-		#make the changes, prefix new_X in case NULL was entered previously
-		sed -i "s|$z_org_X|CustomResX="$z_new_X"|g" $HOME/.zsnes/zsnesl.cfg
-		sed -i "s|$z_org_Y|CustomResY="$z_new_Y"|g" $HOME/.zsnes/zsnesl.cfg
-
-		########################		
-		#Gens/GS
-		######################## 
-		#Gens/GS will not open properly if an improper resolution is set
-		g_org_X=$(grep -i "OpenGL Width=" $HOME/.gens/gens.cfg)
-		g_org_Y=$(grep -i "OpenGL Height=" $HOME/.gens/gens.cfg)
-		#make the changes, prefix new_X in case NULL was entered previously
-		#Gens/GS
-		sed -i "s|$g_org_X|OpenGL Width="$g_new_X"|g" $HOME/.gens/gens.cfg
-		sed -i "s|$g_org_Y|OpenGL Height="$g_new_Y"|g" $HOME/.gens/gens.cfg
-
+		sed -ie "s|$m_org_X|ScreenWidth = $m_new_X|g" $HOME/.config/mupen64plus/mupen64plus.cfg
+		sed -ie "s|$m_org_Y|ScreenHeight = $m_new_Y|g" $HOME/.config/mupen64plus/mupen64plus.cfg
 
 		########################		
 		#pcsx
 		######################## 
-		#Gens/GS will not open properly if an improper resolution is set
-		p1_org_X=$(grep -i "ResX = " $HOME/.pcsx/plugins/gpuPeopsMesaGL.cfg)
-		p1_org_Y=$(grep -i "ResY = " $HOME/.pcsx/plugins/gpuPeopsMesaGL.cfg)
+		p1_org_X=$(grep -Ee "\bResX = \b" $HOME/.pcsx/plugins/gpuPeopsMesaGL.cfg)
+		p1_org_Y=$(grep -Ee "\bResY = \b" $HOME/.pcsx/plugins/gpuPeopsMesaGL.cfg)
 		#make the changes, prefix new_X in case NULL was entered previously
 		#Gens/GS
-		sed -i "s|$p1_org_X|ResX = "$p1_new_X"|g" $HOME/.pcsx/plugins/gpuPeopsMesaGL.cfg
-		sed -i "s|$p1_org_Y|ResY = "$p1_new_Y"|g" $HOME/.pcsx/plugins/gpuPeopsMesaGL.cfg
+		sed -ie "s|$p1_org_X|ResX = $p1_new_X|g" $HOME/.pcsx/plugins/gpuPeopsMesaGL.cfg
+		sed -ie "s|$p1_org_Y|ResY = $p1_new_Y|g" $HOME/.pcsx/plugins/gpuPeopsMesaGL.cfg
 
 		########################		
-		#mednafen
+		#mednafen 
 		######################## 
 
+		#Emulator Codes:
+		########################
+		#Atari Lynx [lynx]
+		#GameBoy (Color) [gb]
+		#GameBoy Advance [gba]
+		#Neo Geo Pocket (Color) [ngp]
+		#Nintendo Entertainment System/Famicom [nes]
+		#PC Engine (CD)/TurboGrafx 16 (CD)/SuperGrafx [pce]
+		#PC Engine (CD)/TurboGrafx 16 (CD)/SuperGrafx [pce_fast]
+		#PC-FX [pcfx]
+		#Sega Game Gear [gg]
+		#Sega Genesis/MegaDrive [md]
+		#Sega Master System [sms]
+		#Sony PlayStation [psx]
+		#Super Nintendo Entertainment System/Super Famicom [snes]
+		#Virtual Boy [vb]
+		#WonderSwan [wswan]
+
+		#Note: it should be noted that all emulators are set to stretch
+		#the screen (EMU_CODE.stretch 1). The value is boolean.
+
 		#Mednafen (GBC)
-		gbc_org_X=$(grep -i "gb.xres " $HOME/.mednafen/mednafen.cfg)
-		gbc_org_Y=$(grep -i "gb.yres " $HOME/.mednafen/mednafen.cfg)
+		gb_org_X=$(grep -Ee "\bgb.xres\b " $HOME/.mednafen/mednafen-09x.cfg)
+		gb_org_Y=$(grep -Ee "\bgb.yres\b " $HOME/.mednafen/mednafen-09x.cfg)
 		#make the changes, prefix new_X in case NULL was entered previously
-		sed -i "s|$gbc_org_X|gb.yres "$gbc_new_X"|g" $HOME/.mednafen/mednafen.cfg
-		sed -i "s|$gbc_org_Y|gb.yres "$gbc_new_Y"|g" $HOME/.mednafen/mednafen.cfg
+		sed -ie "s|$gb_org_X|gb.xres $gb_new_X|g" $HOME/.mednafen/mednafen-09x.cfg
+		sed -ie "s|$gb_org_Y|gb.yres $gb_new_Y|g" $HOME/.mednafen/mednafen-09x.cfg
+
+		#Mednafen (NES)
+		nes_org_X=$(grep -Ee "\bnes.xres\b " $HOME/.mednafen/mednafen-09x.cfg)
+		nes_org_Y=$(grep -Ee "\bnes.yres\b " $HOME/.mednafen/mednafen-09x.cfg)
+		#make the changes, prefix new_X in case NULL was entered previously
+		sed -ie "s|$nes_org_X|nes.xres $nes_new_X|g" $HOME/.mednafen/mednafen-09x.cfg
+		sed -ie "s|$nes_org_Y|nes.yres $nes_new_Y|g" $HOME/.mednafen/mednafen-09x.cfg
+
+		#Mednafen (GameBoy Advance)
+		gba_org_X=$(grep -Ee "\bgba.xres\b " $HOME/.mednafen/mednafen-09x.cfg)
+		gba_org_Y=$(grep -Ee "\bgba.yres\b " $HOME/.mednafen/mednafen-09x.cfg)
+		#make the changes, prefix new_X in case NULL was entered previously
+		sed -ie "s|$gba_org_X|gba.xres $gba_new_X|g" $HOME/.mednafen/mednafen-09x.cfg
+		sed -ie "s|$gba_org_Y|gba.yres $gba_new_Y|g" $HOME/.mednafen/mednafen-09x.cfg
+
+		#Mednafen (SNES)
+		snes_org_X=$(grep -Ee "\bsnes.xres\b " $HOME/.mednafen/mednafen-09x.cfg)
+		snes_org_Y=$(grep -Ee "\bsnes.yres\b " $HOME/.mednafen/mednafen-09x.cfg)
+		#make the changes, prefix new_X in case NULL was entered previously
+		sed -ie "s|$snes_org_X|snes.xres $snes_new_X|g" $HOME/.mednafen/mednafen-09x.cfg
+		sed -ie "s|$snes_org_Y|snes.yres $snes_new_Y|g" $HOME/.mednafen/mednafen-09x.cfg
+
+		#Mednafen (Sega Master System, aka Sega Genesis)
+		sms_org_X=$(grep -Ee "\bsms.xres\b " $HOME/.mednafen/mednafen-09x.cfg)
+		sms_org_Y=$(grep -Ee "\bsms.yres\b " $HOME/.mednafen/mednafen-09x.cfg)
+		#make the changes, prefix new_X in case NULL was entered previously
+		sed -ie "s|$sms_org_X|sms.xres $sms_new_X|g" $HOME/.mednafen/mednafen-09x.cfg
+		sed -ie "s|$sms_org_Y|sms.yres $sms_new_Y|g" $HOME/.mednafen/mednafen-09x.cfg
+
+		#For some reason, when I replace the resolutions, the config files are changed
+		#They are appended with an "e" as in mednafen-09x.cfge. These "edited" files need
+		#deleted. I will have to find out at some point why this occurs
+		rm -f $HOME/.mednafen/mednafen-09x.cfge
+		rm -f $HOME/.config/mupen64plus/mupen64plus.cfge
+		rm -f $HOME/.pcsx/plugins/gpuPeopsMesaGL.cfge
 
 		########################		
 		#Dolphin-emu
@@ -590,13 +625,6 @@ function _res-swticher (){
 		#This emulator does support OpenGL
 		#Current Scaling is reported in RetroRig, but not yet configurable
 
-		########################		
-		#Nestopia
-		######################## 
-		#Nestopia does not support resolution changes, only scaling and filtering
-		#Scaling testing and configuration will be put in at some point
-		#This emulator does support OpenGL
-		#Current Scaling is reported in RetroRig, but not yet configurable
 }
 
 function _resolution () {
@@ -621,35 +649,43 @@ if [ "$choices" != "" ]; then
     case $choices in
 
 	 1) 
+		#Need to use extended regexp's here because of nes being within nes
+		#grep -Ee '\bnes\b' [list of files]
+
 		#echo curent resolution
 		#mupen64plus
 		echo "mupen64plus:" > res.txt
-		grep -i "ScreenWidth = " $HOME/.config/mupen64plus/mupen64plus.cfg >> res.txt
-		grep -i "ScreenHeight = " $HOME/.config/mupen64plus/mupen64plus.cfg >> res.txt
-		echo "" >> res.txt
-		#ZSNES
-		echo "ZSNES:" >> res.txt
-		grep -i "CustomResX=" $HOME/.zsnes/zsnesl.cfg >> res.txt
-		grep -i "CustomResY=" $HOME/.zsnes/zsnesl.cfg >> res.txt
-		echo "" >> res.txt
-		#Gens/GS
-		echo "Gens/GS:" >> res.txt
-		grep -i "OpenGL Width=" $HOME/.gens/gens.cfg >> res.txt
-		grep -i "OpenGL Height=" $HOME/.gens/gens.cfg >> res.txt
-		echo "" >> res.txt
-		#pcsx
-		echo "pcsx:" >> res.txt
-		grep -i "ResX = " $HOME/.pcsx/plugins/gpuPeopsMesaGL.cfg >> res.txt
-		grep -i "ResY = " $HOME/.pcsx/plugins/gpuPeopsMesaGL.cfg >> res.txt
+		grep -Ee "\bScreenWidth = \b" $HOME/.config/mupen64plus/mupen64plus.cfg >> res.txt
+		grep -Ee "\bScreenHeight = \b" $HOME/.config/mupen64plus/mupen64plus.cfg >> res.txt
 		echo "" >> res.txt
 		#Dolphin-emu
 		echo "Dolphin-emu:" >> res.txt
-		echo "Resolution auto set via OpenGL" >> res.txt
+		echo "Auto set via OpenGL" >> res.txt
 		echo "" >> res.txt
 		#mednafen GBC
 		echo "Mednafen (GBC)" >> res.txt
-		grep -i "gb.xres " $HOME/.mednafen/mednafen.cfg >> res.txt
-		grep -i "gb.yres " $HOME/.mednafen/mednafen.cfg >> res.txt
+		grep -Ee "\bgb.xres\b" $HOME/.mednafen/mednafen-09x.cfg >> res.txt
+		grep -Ee "\bgb.yres\b" $HOME/.mednafen/mednafen-09x.cfg >> res.txt
+		echo "" >> res.txt
+		#mednafen GBA
+		echo "Mednafen (GBA)" >> res.txt
+		grep -Ee "\bgba.xres\b" $HOME/.mednafen/mednafen-09x.cfg >> res.txt
+		grep -Ee "\bgba.yres\b" $HOME/.mednafen/mednafen-09x.cfg >> res.txt
+		echo "" >> res.txt
+		#mednafen Sega Genesis
+		echo "Mednafen (Sega Genesis)" >> res.txt
+		grep -Ee "\bsms.xres\b" $HOME/.mednafen/mednafen-09x.cfg >> res.txt
+		grep -Ee "\bsms.yres\b" $HOME/.mednafen/mednafen-09x.cfg >> res.txt
+		echo "" >> res.txt
+		#mednafen SNES
+		echo "Mednafen (SNES)" >> res.txt
+		grep -Ee "\bsnes.xres\b" $HOME/.mednafen/mednafen-09x.cfg >> res.txt
+		grep -Ee "\bsnes.yres\b" $HOME/.mednafen/mednafen-09x.cfg >> res.txt
+		echo "" >> res.txt
+		#mednafen NES
+		echo "Mednafen (NES)" >> res.txt
+		grep -Ee "\bnes.xres\b" $HOME/.mednafen/mednafen-09x.cfg >> res.txt
+		grep -Ee "\bnes.yres\b" $HOME/.mednafen/mednafen-09x.cfg >> res.txt
 		echo "" >> res.txt
 		#report current resolution
 		dialog --textbox res.txt 33 0
@@ -662,18 +698,21 @@ if [ "$choices" != "" ]; then
 		#set mupen64plus value
 		m_new_X="1280"
 		m_new_Y="720"
-		#set zsnes value
-		z_new_X="1280"
-		z_new_Y="720"
-		#set gens value
-		g_new_X="1280"
-		g_new_Y="720"
-		#set pcsx value
-		p1_new_X="1280"
-		p1_new_Y="720"
 		#set mednafen (GBC) value
-		gbc_new_X="1280"
-		gbc_new_Y="720"
+		gb_new_X="1280"
+		gb_new_Y="720"
+		#set mednafen (GBA) value
+		gba_new_X="1280"
+		gba_new_Y="1024"
+		#set mednafen (NES) value
+		nes_new_X="1280"
+		nes_new_Y="720"
+		#set mednafen (SNES) value
+		snes_new_X="1280"
+		snes_new_Y="720"
+		#set mednafen (Genesis) value
+		sms_new_X="1280"
+		sms_new_Y="720"
 		#call _res-swticher
 		_res-swticher
 		#return to menu
@@ -684,18 +723,21 @@ if [ "$choices" != "" ]; then
 		#set mupen64plus value
 		m_new_X="1280"
 		m_new_Y="1024"
-		#set zsnes value
-		z_new_X="1280"
-		z_new_Y="1024"
-		#set gens value
-		g_new_X="1280"
-		g_new_Y="1024"
-		#set pcsx value
-		p1_new_X="1280"
-		p1_new_Y="1024"
 		#set mednafen (GBC) value
-		gbc_new_X="1280"
-		gbc_new_Y="1024"
+		gb_new_X="1280"
+		gb_new_Y="1024"
+		#set mednafen (GBA) value
+		gba_new_X="1280"
+		gba_new_Y="1024"
+		#set mednafen (NES) value
+		nes_new_X="1280"
+		nes_new_Y="1024"
+		#set mednafen (SNES) value
+		snes_new_X="1280"
+		snes_new_Y="1024"
+		#set mednafen (Genesis) value
+		sms_new_X="1280"
+		sms_new_Y="1024"
 		#call _res-swticher
 		_res-swticher
 		#return to menu
@@ -706,18 +748,21 @@ if [ "$choices" != "" ]; then
 		#set mupen64plus value
 		m_new_X="1366"
 		m_new_Y="768"
-		#set zsnes value
-		z_new_X="1366"
-		z_new_Y="768"
-		#set gens value
-		g_new_X="1366"
-		g_new_Y="768"
-		#set pcsx value
-		p1_new_X="1366"
-		p1_new_Y="768"
 		#set mednafen (GBC) value
-		gbc_new_X="1366"
-		gbc_new_Y="768"
+		gb_new_X="1366"
+		gb_new_Y="768"
+		#set mednafen (GBA) value
+		gba_new_X="1366"
+		gba_new_Y="768"
+		#set mednafen (NES) value
+		nes_new_X="1366"
+		nes_new_Y="768"
+		#set mednafen (SNES) value
+		snes_new_X="1366"
+		snes_new_Y="768"
+		#set mednafen (Genesis) value
+		sms_new_X="1366"
+		sms_new_Y="768"
 		#call _res-swticher
 		_res-swticher
 		#return to menu
@@ -728,18 +773,21 @@ if [ "$choices" != "" ]; then
 		#set mupen64plus value
 		m_new_X="1600"
 		m_new_Y="900"
-		#set zsnes value
-		z_new_X="1600"
-		z_new_Y="900"
-		#set gens value
-		g_new_X="1600"
-		g_new_Y="900"
-		#set pcsx value
-		p1_new_X="1600"
-		p1_new_Y="900"
 		#set mednafen (GBC) value
-		gbc_new_X="1600"
-		gbc_new_Y="900"
+		gb_new_X="1600"
+		gb_new_Y="900"
+		#set mednafen (GBA) value
+		gba_new_X="1600"
+		gba_new_Y="900"
+		#set mednafen (NES) value
+		nes_new_X="1600"
+		nes_new_Y="900"
+		#set mednafen (SNES) value
+		snes_new_X="1600"
+		snes_new_Y="900"
+		#set mednafen (Genesis) value
+		sms_new_X="1600"
+		sms_new_Y="900"
 		#call _res-swticher
 		_res-swticher
 		#return to menu
@@ -750,18 +798,21 @@ if [ "$choices" != "" ]; then
 		#set mupen64plus value
 		m_new_X="1920"
 		m_new_Y="1080"
-		#set zsnes value
-		z_new_X="1920"
-		z_new_Y="1080"
-		#set gens value
-		g_new_X="1920"
-		g_new_Y="1080"
-		#set pcsx value
-		p1_new_X="1920"
-		p1_new_Y="1080"
 		#set mednafen (GBC) value
-		gbc_new_X="1920"
-		gbc_new_Y="1080"
+		gb_new_X="1920"
+		gb_new_Y="1080"
+		#set mednafen (GBA) value
+		gba_new_X="1920"
+		gba_new_Y="1080"
+		#set mednafen (NES) value
+		nes_new_X="1920"
+		nes_new_Y="1080"
+		#set mednafen (SNES) value
+		snes_new_X="1920"
+		snes_new_Y="1080"
+		#set mednafen (Genesis) value
+		sms_new_X="1920"
+		sms_new_Y="1080"
 		#call _res-swticher
 		_res-swticher
 		#return to menu
@@ -777,18 +828,21 @@ if [ "$choices" != "" ]; then
 		#mupen64plus
 		m_new_X=$(cat '/tmp/new_X')
 		m_new_Y=$(cat '/tmp/new_Y')
-		#zsnes
-		z_new_X=$(cat '/tmp/new_X')
-		z_new_Y=$(cat '/tmp/new_Y')
-		#Gens
-		g_new_X=$(cat '/tmp/new_X')
-		g_new_Y=$(cat '/tmp/new_Y')
-		#pcsx
-		p1_new_X=$(cat '/tmp/new_X')
-		p1_new_Y=$(cat '/tmp/new_Y')
-		#pcsx
-		gbc_new_X=$(cat '/tmp/new_X')
-		gbc_new_Y=$(cat '/tmp/new_Y')
+		#mednafen (GBC)
+		gb_new_X=$(cat '/tmp/new_X')
+		gb_new_Y=$(cat '/tmp/new_Y')
+		#mednafen (GBA)
+		gba_new_X=$(cat '/tmp/new_X')
+		gba_new_Y=$(cat '/tmp/new_Y')
+		#mednafen (NES)
+		nes_new_X=$(cat '/tmp/new_X')
+		nes_new_Y=$(cat '/tmp/new_Y')
+		#mednafen (SNES)
+		snes_new_X=$(cat '/tmp/new_X')
+		snes_new_Y=$(cat '/tmp/new_Y')
+		#mednafen (Genesis)
+		sms_new_X=$(cat '/tmp/new_X')
+		sms_new_Y=$(cat '/tmp/new_Y')
 		#call _res-swticher
 		_res-swticher
 		#remove temp files
@@ -838,7 +892,7 @@ function _software () {
 	echo "-----------------------------------------------------------" | tee -a install_log.txt
 	echo $userpasswd | sudo add-apt-repository -y ppa:glennric/dolphin-emu | tee -a install_log.txt
 
-	#Add playdeb repo for Gens/GS 
+	#Add playdeb repo for later additions (very useful) 
 	echo "-----------------------------------------------------------" | tee -a install_log.txt
 	echo "Add PlayDeb  Repository..." | tee -a install_log.txt
 	echo "-----------------------------------------------------------" | tee -a install_log.txt
@@ -860,7 +914,7 @@ function _software () {
 	echo "-----------------------------------------------------------" | tee -a install_log.txt
 	echo $userpasswd | sudo -S apt-get install -y xboxdrv curl zsnes nestopia pcsxr pcsx2:i386 \
 	python-software-properties pkg-config software-properties-common mednafen \
-	mame mupen64plus dconf-tools qjoypad xbmc dolphin-emu-master stella gens-gs \
+	mame mupen64plus dconf-tools qjoypad xbmc dolphin-emu-master stella \
 	build-essential | tee -a install_log.txt
 
 
@@ -893,7 +947,7 @@ cmd=(dialog --backtitle "LibreGeek.org RetroRig Installer" --menu "| Gamepad Sel
 			 Request any new Gamepads via github!" 16 62 16)
 options=(1 "Xbox 360 Controller (wireless) (4-player)" 
 	 2 "Xbox 360 Controller (wired) (4-player)" 
-	 3 "Exit gamepad selection" 
+	 3 "Exit gamepad selection"
 	 4 "Back to main menu")
 
 	#make menu choice
@@ -938,22 +992,6 @@ function _config-x360ws () {
 	#set qjoypad's profile to match Xbox 360 Wireless (4-player)
 	cp -v $HOME/RetroRig/controller-cfgs/x360ws.lyt $HOME/.qjoypad3/ | tee -a install_log.txt
 
-	#Nestopia
-	#default path: /home/$USER/.nestopia
-	cp -v $HOME/RetroRig/emu-cfgs/x360ws/Nestopia/nstcontrols $HOME/.nestopia/ | tee -a install_log.txt
-	cp -v $HOME/RetroRig/emu-cfgs/x360ws/Nestopia/nstsettings $HOME/.nestopia/ | tee -a install_log.txt
-
-	#gens
-	#default path: /home/$USER/.gens
-	#Global config
-	cp -v $HOME/RetroRig/emu-cfgs/x360ws/Gens-GS/gens.cfg $HOME/.gens/ | tee -a install_log.txt
-
-	#ZSNES
-	#default path: /home/$USER/.zsnes
-	#Controller config
-	cp -v $HOME/RetroRig/emu-cfgs/x360ws/ZSNES/zinput.cfg $HOME/.zsnes/ | tee -a install_log.txt
-	cp -v $HOME/RetroRig/emu-cfgs/x360ws/ZSNES/zsnesl.cfg $HOME/.zsnes/ | tee -a install_log.txt
-
 	#mame
 	#default path: /home/$USER/.mame
 	#Main config
@@ -983,7 +1021,7 @@ function _config-x360ws () {
 	#mednafen
 	#default path: /home/$USER/.mednafen/mednafen.cfg
 	#Main config
-	cp -v $HOME/RetroRig/emu-cfgs/x360ws/mednafen/mednafen.cfg $HOME/.mednafen | tee -a install_log.txt
+	cp -v $HOME/RetroRig/emu-cfgs/x360ws/mednafen/mednafen-09x.cfg $HOME/.mednafen | tee -a install_log.txt
 
 	#mupen64pluspwd
 	#default path: /home/$USER/.config/mupen64plus
@@ -1035,22 +1073,6 @@ function _config-x360wd () {
 	#set qjoypad's profile to match Xbox 360 Wireless (4-player)
 	cp -v $HOME/RetroRig/controller-cfgs/x360wd.lyt $HOME/.qjoypad3/ | tee -a install_log.txt
 
-	#Nestopia
-	#default path: /home/$USER/.nestopia
-	cp -v $HOME/RetroRig/emu-cfgs/x360wd/Nestopia/nstcontrols $HOME/.nestopia/ | tee -a install_log.txt
-	cp -v $HOME/RetroRig/emu-cfgs/x360wd/Nestopia/nstsettings $HOME/.nestopia/ | tee -a install_log.txt
-
-	#gens
-	#default path: /home/$USER/.gens
-	#Global config
-	cp -v $HOME/RetroRig/emu-cfgs/x360wd/Gens-GS/gens.cfg $HOME/.gens/ | tee -a install_log.txt
-
-	#ZSNES
-	#default path: /home/$USER/.zsnes
-	#Controller config
-	cp -v $HOME/RetroRig/emu-cfgs/x360wd/ZSNES/zinput.cfg $HOME/.zsnes/ | tee -a install_log.txt
-	cp -v $HOME/RetroRig/emu-cfgs/x360wd/ZSNES/zsnesl.cfg $HOME/.zsnes/ | tee -a install_log.txt
-
 	#mame
 	#default path: /home/$USER/.mame
 	#Main config
@@ -1080,9 +1102,9 @@ function _config-x360wd () {
 	#mednafen
 	#default path: /home/$USER/.mednafen/mednafen.cfg
 	#Main config
-	cp -v $HOME/RetroRig/emu-cfgs/x360wd/mednafen/mednafen.cfg $HOME/.mednafen | tee -a install_log.txt
+	cp -v $HOME/RetroRig/emu-cfgs/x360ws/mednafen/mednafen-09x.cfg $HOME/.mednafen | tee -a install_log.txt
 
-	#mupen64pluspwd
+	#mupen64plus
 	#default path: /home/$USER/.config/mupen64plus
 	#Main config
 	cp -v $HOME/RetroRig/emu-cfgs/x360wd/mupen64plus/mupen64plus.cfg $HOME/.config/mupen64plus/ | tee -a install_log.txt
@@ -1277,8 +1299,6 @@ function _configuration (){
 	#RCB and some config files don't like using $HOME, rather /home/test/
 	#Let's change the config files to reflect the current username
 	sed -i "s|/home/mikeyd/|/home/$USER/|g" $HOME/.config/pcsx2/PCSX2-reg.ini | tee -a install_log.txt
-	sed -i "s|/home/mikeyd/|/home/$USER/|g" $HOME/.gens/gens.cfg | tee -a install_log.txt
-	sed -i "s|/home/mikeyd/|/home/$USER/|g" $HOME/.zsnes/zsnesl.cfg | tee -a install_log.txt
 	sed -i "s|/home/mikeyd/|/home/$USER/|g" $HOME/.mame/mame.ini | tee -a install_log.txt
 	sed -i "s|/home/mikeyd/|/home/$USER/|g" $HOME/.pcsx/pcsx.cfg | tee -a install_log.txt
 	sed -i "s|/home/mikeyd/|/home/$USER/|g" $HOME/.config/pcsx2/PCSX2-reg.ini | tee -a install_log.txt
@@ -1342,7 +1362,7 @@ function _update-binaries () {
 	echo $userpasswd | sudo -S apt-get install -y xboxdrv curl zsnes nestopia pcsxr pcsx2:i386 \
 	python-software-properties pkg-config software-properties-common \
 	mame mupen64plus dconf-tools mednafen qjoypad xbmc dolphin-emu-master stella \
-	build-essential gdebi| tee -a install_log.txt	
+	build-essential | tee -a install_log.txt	
 	sleep 3s
 	#clear
 	clear
@@ -1410,9 +1430,10 @@ echo "Removing RetroRig..." | tee -a install_log.txt
 echo "-----------------------------------------------------------" | tee -a uninstall_log.txt
 
 #remove installed binaries
+#do not remove software-properties-common, necessary pkg!
 echo $userpasswd | sudo -S apt-get autoremove -y xboxdrv curl zsnes nestopia pcsxr pcsx2:i386 \
-python-software-properties pkg-config software-properties-common mednafen \
-mame mupen64plus dconf-tools qjoypad xbmc dolphin-emu-master stella gens-gs \
+python-software-properties pkg-config mednafen \
+mame mupen64plus dconf-tools qjoypad xbmc dolphin-emu-master stella \
 build-essential | tee -a uninstall_log.txt
 
 #add apport, apport-gtk back
@@ -1460,9 +1481,6 @@ echo "-----------------------------------------------------------" | tee -a unin
 	echo $userpasswd | sudo rm -rf $HOME/.qjoypad3/ | tee -a uninstall_log.txt
 	echo $userpasswd | sudo rm -rf $HOME/.dolphin-emu/ | tee -a uninstall_log.txt
 	echo $userpasswd | sudo rm -rf $HOME/.config/mupen64plus/ | tee -a uninstall_log.txt
-	echo $userpasswd | sudo rm -rf $HOME/.nestopia/ | tee -a uninstall_log.txt
-	echo $userpasswd | sudo rm -rf $HOME/.gens/ | tee -a uninstall_log.txt
-	echo $userpasswd | sudo rm -rf $HOME/.zsnes/ | tee -a uninstall_log.txt
 	echo $userpasswd | sudo rm -rf $HOME/.mame/ | tee -a uninstall_log.txt
 	echo $userpasswd | sudo rm -rf $HOME/.pcsx/ | tee -a uninstall_log.txt
 	echo $userpasswd | sudo rm -rf $HOME/.config/pcsx2/ | tee -a uninstall_log.txt

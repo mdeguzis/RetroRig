@@ -34,7 +34,7 @@
     <RomCollection id="2" name="SNES">
       <useBuiltinEmulator>False</useBuiltinEmulator>
       <gameclient />
-      <emulatorCmd>/usr/bin/zsnes</emulatorCmd>
+      <emulatorCmd>/usr/games/mednafen</emulatorCmd>
       <emulatorParams>"%ROM%"</emulatorParams>
       <romPath>/home/mikeyd/Games/ROMs/SNES/*.smc</romPath>
       <saveStatePath />
@@ -95,7 +95,7 @@
     <RomCollection id="4" name="NES">
       <useBuiltinEmulator>False</useBuiltinEmulator>
       <gameclient />
-      <emulatorCmd>/usr/games/nestopia</emulatorCmd>
+      <emulatorCmd>/usr/games/mednafen</emulatorCmd>
       <emulatorParams>"%ROM%"</emulatorParams>
       <romPath>/home/mikeyd/Games/ROMs/NES/*.nes</romPath>
       <saveStatePath />
@@ -221,8 +221,8 @@
     <RomCollection id="8" name="Genesis">
       <useBuiltinEmulator>False</useBuiltinEmulator>
       <gameclient />
-      <emulatorCmd>/usr/bin/gens</emulatorCmd>
-      <emulatorParams>--quickexit "%ROM%"</emulatorParams>
+      <emulatorCmd>/usr/games/mednafen</emulatorCmd>
+      <emulatorParams>"%ROM%"</emulatorParams>
       <romPath>/home/mikeyd/Games/ROMs/Sega Genesis/*.bin</romPath>
       <saveStatePath />
       <saveStateParams />
