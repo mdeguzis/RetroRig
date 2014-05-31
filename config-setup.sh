@@ -532,7 +532,7 @@ function _res-swticher (){
 		m_org_Y=$(grep -Ee "\bScreenHeight = \b" $HOME/.config/mupen64plus/mupen64plus.cfg)
 		#make the changes, prefix new_X in case NULL was entered previousey
 		sed -ie "s|$m_org_X|ScreenWidth = $m_new_X|g" $HOME/.config/mupen64plus/mupen64plus.cfg
-		sed -ie "s|$m_org_Y|ScreenHieght = $m_new_Y|g" $HOME/.config/mupen64plus/mupen64plus.cfg
+		sed -ie "s|$m_org_Y|ScreenHeight = $m_new_Y|g" $HOME/.config/mupen64plus/mupen64plus.cfg
 
 		########################		
 		#pcsx
@@ -571,10 +571,10 @@ function _res-swticher (){
 
 		#Mednafen (GBC)
 		gb_org_X=$(grep -Ee "\bgb.xres\b " $HOME/.mednafen/mednafen-09x.cfg)
-		gb_org_Y=$(grep -Ee "gb.yres " $HOME/.mednafen/mednafen-09x.cfg)
+		gb_org_Y=$(grep -Ee "\bgb.yres\b " $HOME/.mednafen/mednafen-09x.cfg)
 		#make the changes, prefix new_X in case NULL was entered previously
-		sed -ie "s|$gb_org_X|\bgb.xres\b $gb_new_X|g" $HOME/.mednafen/mednafen-09x.cfg
-		sed -ie "s|$gb_org_Y|\bgb.yres\b $gb_new_Y|g" $HOME/.mednafen/mednafen-09x.cfg
+		sed -ie "s|$gb_org_X|gb.xres $gb_new_X|g" $HOME/.mednafen/mednafen-09x.cfg
+		sed -ie "s|$gb_org_Y|gb.yres $gb_new_Y|g" $HOME/.mednafen/mednafen-09x.cfg
 
 		#Mednafen (NES)
 		nes_org_X=$(grep -Ee "\bnes.xres\b " $HOME/.mednafen/mednafen-09x.cfg)
