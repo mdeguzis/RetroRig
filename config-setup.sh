@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -x
 #
 # append a "-x" on the end above for debugging if need be
 #
