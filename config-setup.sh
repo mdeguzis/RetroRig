@@ -185,7 +185,9 @@ options=(1 "Atari 2600"
 	 9 "Playstation 2"
 	 10 "Neo Geo"
 	 11 "GBC"
-	 12 "Exit ROM Loader")
+	 12 "Sega Game Gear"
+	 13 "GBA"
+	 14 "Exit ROM Loader")
 
 	#make menu choice
 	selection=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
@@ -324,7 +326,7 @@ options=(1 "Atari 2600"
 		_rom-loader
 		;;
 
-		12)
+		11)
 		#call file loader  	
 		_file-loader
 		#copy GBC ROMs
@@ -337,7 +339,33 @@ options=(1 "Atari 2600"
 		_rom-loader
 		;;
 
-		12)  
+		12)
+		#call file loader  	
+		_file-loader
+		#copy Game Gear ROMs
+		clear
+		echo "-----------------------------------------------------------" | tee -a install_log.txt
+		echo "Loading Game Gear ROMs..." | tee -a install_log.txt
+		echo "-----------------------------------------------------------" | tee -a install_log.txt
+		cp -Rv "$folder"/* $HOME/Games/ROMs/Game\ Gear/ | tee -a install_log.txt
+		#return back to menu
+		_rom-loader
+		;;
+
+		13)
+		#call file loader  	
+		_file-loader
+		#copy GBA ROMs
+		clear
+		echo "-----------------------------------------------------------" | tee -a install_log.txt
+		echo "Loading GBA ROMs..." | tee -a install_log.txt
+		echo "-----------------------------------------------------------" | tee -a install_log.txt
+		cp -Rv "$folder"/* $HOME/Games/ROMs/GBA/ | tee -a install_log.txt
+		#return back to menu
+		_rom-loader
+		;;
+
+		14)  
 		return
 		;;
 		esac
@@ -604,6 +632,13 @@ function _res-swticher (){
 		sed -ie "s|$sms_org_X|sms.xres $sms_new_X|g" $HOME/.mednafen/mednafen-09x.cfg
 		sed -ie "s|$sms_org_Y|sms.yres $sms_new_Y|g" $HOME/.mednafen/mednafen-09x.cfg
 
+		#Mednafen (Sega Game Gear, aka Sega Genesis)
+		gg_org_X=$(grep -Ee "\bgg.xres\b " $HOME/.mednafen/mednafen-09x.cfg)
+		gg_org_Y=$(grep -Ee "\bgg.yres\b " $HOME/.mednafen/mednafen-09x.cfg)
+		#make the changes, prefix new_X in case NULL was entered previously
+		sed -ie "s|$gg_org_X|gg.xres $gg_new_X|g" $HOME/.mednafen/mednafen-09x.cfg
+		sed -ie "s|$gg_org_Y|gg.yres $gg_new_Y|g" $HOME/.mednafen/mednafen-09x.cfg
+
 		#For some reason, when I replace the resolutions, the config files are changed
 		#They are appended with an "e" as in mednafen-09x.cfge. These "edited" files need
 		#deleted. I will have to find out at some point why this occurs
@@ -677,6 +712,11 @@ if [ "$choices" != "" ]; then
 		grep -Ee "\bsms.xres\b" $HOME/.mednafen/mednafen-09x.cfg >> res.txt
 		grep -Ee "\bsms.yres\b" $HOME/.mednafen/mednafen-09x.cfg >> res.txt
 		echo "" >> res.txt
+		#mednafen Sega Game Gear
+		echo "Mednafen (Sega Game Gear)" >> res.txt
+		grep -Ee "\bgg.xres\b" $HOME/.mednafen/mednafen-09x.cfg >> res.txt
+		grep -Ee "\bgg.yres\b" $HOME/.mednafen/mednafen-09x.cfg >> res.txt
+		echo "" >> res.txt
 		#mednafen SNES
 		echo "Mednafen (SNES)" >> res.txt
 		grep -Ee "\bsnes.xres\b" $HOME/.mednafen/mednafen-09x.cfg >> res.txt
@@ -701,6 +741,9 @@ if [ "$choices" != "" ]; then
 		#set mednafen (GBC) value
 		gb_new_X="1280"
 		gb_new_Y="720"
+		#set mednafen (Game Gear) value
+		gg_new_X="1280"
+		gg_new_Y="720"
 		#set mednafen (GBA) value
 		gba_new_X="1280"
 		gba_new_Y="1024"
@@ -726,6 +769,9 @@ if [ "$choices" != "" ]; then
 		#set mednafen (GBC) value
 		gb_new_X="1280"
 		gb_new_Y="1024"
+		#set mednafen (Game Gear) value
+		gg_new_X="1280"
+		gg_new_Y="1024"
 		#set mednafen (GBA) value
 		gba_new_X="1280"
 		gba_new_Y="1024"
@@ -751,6 +797,9 @@ if [ "$choices" != "" ]; then
 		#set mednafen (GBC) value
 		gb_new_X="1366"
 		gb_new_Y="768"
+		#set mednafen (Game Gear) value
+		gg_new_X="1366"
+		gg_new_Y="768"
 		#set mednafen (GBA) value
 		gba_new_X="1366"
 		gba_new_Y="768"
@@ -776,6 +825,9 @@ if [ "$choices" != "" ]; then
 		#set mednafen (GBC) value
 		gb_new_X="1600"
 		gb_new_Y="900"
+		#set mednafen (Game Gear) value
+		gg_new_X="1600"
+		gg_new_Y="900"
 		#set mednafen (GBA) value
 		gba_new_X="1600"
 		gba_new_Y="900"
@@ -801,6 +853,9 @@ if [ "$choices" != "" ]; then
 		#set mednafen (GBC) value
 		gb_new_X="1920"
 		gb_new_Y="1080"
+		#set mednafen (Game Gear) value
+		gg_new_X="1920"
+		gg_new_Y="1080"
 		#set mednafen (GBA) value
 		gba_new_X="1920"
 		gba_new_Y="1080"
@@ -831,6 +886,9 @@ if [ "$choices" != "" ]; then
 		#mednafen (GBC)
 		gb_new_X=$(cat '/tmp/new_X')
 		gb_new_Y=$(cat '/tmp/new_Y')
+		#mednafen (Game Gear)
+		gg_new_X=$(cat '/tmp/new_X')
+		gg_new_Y=$(cat '/tmp/new_Y')
 		#mednafen (GBA)
 		gba_new_X=$(cat '/tmp/new_X')
 		gba_new_Y=$(cat '/tmp/new_Y')
@@ -872,7 +930,7 @@ function _software () {
 	echo "-----------------------------------------------------------" | tee -a install_log.txt
 	echo "Adding multi-arch support..." | tee -a install_log.txt
 	echo "-----------------------------------------------------------" | tee -a install_log.txt
-	echo $userpasswd | sudo -S dpkg --add-architecture i386 | tee -a install_log.txt
+	echo $userpasswd | sudo -S dpkg --add-architecture i386
 
 	#add repository for pcsx2 (PS2 emulator)
 	echo "-----------------------------------------------------------" | tee -a install_log.txt
@@ -912,7 +970,7 @@ function _software () {
 	echo "-----------------------------------------------------------" | tee -a install_log.txt
 	echo "Installing required packages..." | tee -a install_log.txt
 	echo "-----------------------------------------------------------" | tee -a install_log.txt
-	echo $userpasswd | sudo -S apt-get install -y xboxdrv curl zsnes nestopia pcsxr pcsx2:i386 \
+	echo $userpasswd | sudo -S apt-get install -y xboxdrv curl pcsxr pcsx2:i386 \
 	python-software-properties pkg-config software-properties-common mednafen \
 	mame mupen64plus dconf-tools qjoypad xbmc dolphin-emu-master stella \
 	build-essential | tee -a install_log.txt
@@ -1210,6 +1268,8 @@ function _configuration (){
 	mkdir -pv $HOME/Games/ROMs/Sega\ Genesis/ | tee -a install_log.txt
 	mkdir -pv $HOME/Games/ROMs/SNK\ Neo\ Geo/ | tee -a install_log.txt
 	mkdir -pv $HOME/Games/ROMs/GBC/ | tee -a install_log.txt
+	mkdir -pv $HOME/Games/ROMs/GBA/ | tee -a install_log.txt
+	mkdir -pv $HOME/Games/ROMs/Game\ Gear/ | tee -a install_log.txt
 
 	#Artwork 
 	mkdir -pv $HOME/Games/Artwork/Atari\ 2600/ | tee -a install_log.txt
@@ -1223,6 +1283,8 @@ function _configuration (){
 	mkdir -pv $HOME/Games/Artwork/Sega\ Genesis/ | tee -a install_log.txt
 	mkdir -pv $HOME/Games/Artwork/SNK\ Neo\ Geo/ | tee -a install_log.txt
 	mkdir -pv $HOME/Games/Artwork/GBC/ | tee -a install_log.txt
+	mkdir -pv $HOME/Games/Artwork/GBA/ | tee -a install_log.txt
+	mkdir -pv $HOME/Games/Artwork/Game\ Gear/ | tee -a install_log.txt
 
 	#Saves (if any)
 	mkdir -pv $HOME/Games/Saves/Atari\ 2600/ | tee -a install_log.txt
@@ -1236,14 +1298,13 @@ function _configuration (){
 	mkdir -pv $HOME/Games/Saves/Sega\ Genesis/ | tee -a install_log.txt
 	mkdir -pv $HOME/Games/Saves/SNK\ Neo\ Geo/ | tee -a install_log.txt
 	mkdir -pv $HOME/Games/Saves/GBC/ | tee -a install_log.txt
+	mkdir -pv $HOME/Games/Saves/GBA/ | tee -a install_log.txt
+	mkdir -pv $HOME/Games/Saves/Game\ Gear/ | tee -a install_log.txt
 
 	#create dotfiles
 	mkdir -pv $HOME/.qjoypad3/ | tee -a install_log.txt
 	mkdir -pv $HOME/.dolphin-emu/Config/ | tee -a install_log.txt
 	mkdir -pv $HOME/.config/mupen64plus/ | tee -a install_log.txt
-	mkdir -pv $HOME/.nestopia/ | tee -a install_log.txt
-	mkdir -pv $HOME/.gens/ | tee -a install_log.txt
-	mkdir -pv $HOME/.zsnes/ | tee -a install_log.txt
 	mkdir -pv $HOME/.mame/cfg/ | tee -a install_log.txt
 	mkdir -pv $HOME/.pcsx/plugins/ | tee -a install_log.txt
 	mkdir -pv $HOME/.pcsx/patches/ | tee -a install_log.txt
