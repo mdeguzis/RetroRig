@@ -1043,8 +1043,9 @@ function _config-x360ws () {
 	#OpenGL graphics config
 	cp -Rv /$HOME/RetroRig/emu-cfgs/x360ws/Dolphin/gfx_opengl.ini $HOME/.dolphin-emu/Config/ | tee -a install_log.txt
 	
-	#inject init script
+	#inject init script and default config
 	echo $userpasswd | sudo -S cp -v $HOME/RetroRig/init-scripts/x360ws/xboxdrv /etc/init.d/ | tee -a install_log.txt
+	echo $userpasswd | sudo -S cp -v $HOME/RetroRig/init-scripts/x360ws/daemon/xboxdrv /etc/default/xboxdrv | tee -a install_log.txt
 	#update 
 	echo $userpasswd | sudo -S update-rc.d xboxdrv defaults | tee -a install_log.txt
 
