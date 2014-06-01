@@ -1045,7 +1045,7 @@ function _config-x360ws () {
 	
 	#inject init script and default config
 	echo $userpasswd | sudo -S cp -v $HOME/RetroRig/init-scripts/x360ws/xboxdrv /etc/init.d/ | tee -a install_log.txt
-	echo $userpasswd | sudo -S cp -v $HOME/RetroRig/init-scripts/x360ws/daemon/xboxdrv /etc/default/xboxdrv | tee -a install_log.txt
+	echo $userpasswd | sudo -S cp -v $HOME/RetroRig/init-scripts/x360ws/default/xboxdrv /etc/default/xboxdrv | tee -a install_log.txt
 	#update 
 	echo $userpasswd | sudo -S update-rc.d xboxdrv defaults | tee -a install_log.txt
 
@@ -1497,6 +1497,7 @@ echo "-----------------------------------------------------------" | tee -a unin
 	echo $userpasswd | sudo service xboxdrv stop | tee uninstall_log.txt
 	echo $userpasswd | sudo update-rc.d -f xboxdrv remove
 	echo $userpasswd | sudo rm -f /etc/init.d/xboxdrv
+	echo $userpasswd | sudo rm -f /etc/default/xboxdrv
 	sed -i 's|blacklist xpad||g' /etc/modprobe.d/blacklist.conf| tee -a install_log.txt
 	   ;;
 
