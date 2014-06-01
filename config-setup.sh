@@ -178,6 +178,7 @@ options=(1 "Atari 2600"
 	 2 "NES" 
 	 3 "SNES" 
 	 4 "Nintendo 64"
+<<<<<<< HEAD
 	 5 "Gamecube"
 	 6 "MAME"
 	 7 "Sega Genesis"
@@ -188,6 +189,12 @@ options=(1 "Atari 2600"
 	 12 "Sega Game Gear"
 	 13 "GBA"
 	 14 "Exit ROM Loader")
+=======
+	 5 "MAME"
+	 6 "Sega Genesis"
+	 7 "GBC"
+	 8 "Exit ROM Loader")
+>>>>>>> beta
 
 	#make menu choice
 	selection=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
@@ -251,19 +258,6 @@ options=(1 "Atari 2600"
 		5)
 		#call file loader  	
 		_file-loader
-		#copy Gamecube ROMs
-		clear
-		echo "-----------------------------------------------------------" | tee -a install_log.txt
-		echo "Loading Gamecube ROMs..." | tee -a install_log.txt
-		echo "-----------------------------------------------------------" | tee -a install_log.txt
-		cp -Rv "$folder"/* $HOME/Games/ROMs/Gamecube/ | tee -a install_log.txt
-		#return back to menu
-		_rom-loader
-		;;
-
-		6)
-		#call file loader  	
-		_file-loader
 		#copy MAME ROMs
 		clear
 		echo "-----------------------------------------------------------" | tee -a install_log.txt
@@ -274,7 +268,7 @@ options=(1 "Atari 2600"
 		_rom-loader
 		;;
 
-		7)
+		6)
 		#call file loader  	
 		_file-loader
 		#copy Sega Genesis ROMs
@@ -287,6 +281,7 @@ options=(1 "Atari 2600"
 		_rom-loader
 		;;
 
+<<<<<<< HEAD
 		8)
 		#call file loader  	
 		_file-loader
@@ -327,6 +322,9 @@ options=(1 "Atari 2600"
 		;;
 
 		11)
+=======
+		17)
+>>>>>>> beta
 		#call file loader  	
 		_file-loader
 		#copy GBC ROMs
@@ -339,6 +337,7 @@ options=(1 "Atari 2600"
 		_rom-loader
 		;;
 
+<<<<<<< HEAD
 		12)
 		#call file loader  	
 		_file-loader
@@ -366,6 +365,9 @@ options=(1 "Atari 2600"
 		;;
 
 		14)  
+=======
+		8)  
+>>>>>>> beta
 		return
 		;;
 		esac
@@ -471,9 +473,8 @@ options=(1 "Change resolution"
 	 2 "Load ROMs"
 	 3 "Change plugins/filters/scaling"
 	 4 "Change Gamepad Type"
-	 5 "Load PS2 BIOS Files"
-	 6 "Enable SSH support"
-	 7 "Back to main menu")
+	 5 "Enable SSH support"
+	 6 "Back to main menu")
 
 	#make menu choice
 	selection=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
@@ -508,20 +509,6 @@ grep -i "VideoPlugin = " $HOME/.config/mupen64plus/mupen64plus.cfg >> res.txt
 		;;
 
 		5)
-		_file-loader
-		#copy BIOS files for pcsx2
-		clear
-		echo "-----------------------------------------------------------" | tee -a install_log.txt
-		echo "Loading PS2 BIOS files..." | tee -a install_log.txt
-		echo "-----------------------------------------------------------" | tee -a install_log.txt
-		cp -Rv "$folder"/* $HOME/.config/pcsx2/bios | tee -a install_log.txt
-		#default BIOS file for pcsx2 is set already, will provide switcher later if need be
-		
-		#call settings rather than return so user can choose again
-		_settings
-		;;
-
-		6)
 		clear
 		#install openssh-server  
 		echo $userpasswd | sudo -S apt-get install -y openssh-server | tee -a install_log.txt
@@ -541,7 +528,7 @@ grep -i "VideoPlugin = " $HOME/.config/mupen64plus/mupen64plus.cfg >> res.txt
 		_settings
 		;;
 
-		7)  
+		6)  
 		return
 		;;
 	esac
@@ -563,6 +550,7 @@ function _res-swticher (){
 		sed -i "s|$m_org_Y|ScreenHeight = $m_new_Y|g" $HOME/.config/mupen64plus/mupen64plus.cfg
 
 		########################		
+<<<<<<< HEAD
 		#pcsx
 		######################## 
 		p1_org_X=$(grep -Ee "\bResX = \b" $HOME/.pcsx/plugins/gpuPeopsMesaGL.cfg)
@@ -573,6 +561,8 @@ function _res-swticher (){
 		sed -i "s|$p1_org_Y|ResY = $p1_new_Y|g" $HOME/.pcsx/plugins/gpuPeopsMesaGL.cfg
 
 		########################		
+=======
+>>>>>>> beta
 		#mednafen 
 		######################## 
 
@@ -925,23 +915,12 @@ function _software () {
 	echo "-----------------------------------------------------------" | tee -a install_log.txt
 	echo $userpasswd | sudo -S dpkg --add-architecture i386
 
-	#add repository for pcsx2 (PS2 emulator)
-	echo "-----------------------------------------------------------" | tee -a install_log.txt
-	echo "Adding pcsx2 repository support..." | tee -a install_log.txt
-	echo "-----------------------------------------------------------" | tee -a install_log.txt
-	echo $userpasswd | sudo add-apt-repository -y ppa:gregory-hainaut/pcsx2.official.ppa | tee -a install_log.txt
 
 	#add repository for official team XBMC "stable"
 	echo "-----------------------------------------------------------" | tee -a install_log.txt
 	echo "Adding XBMC Ubuntu (stable) repository..." | tee -a install_log.txt
 	echo "-----------------------------------------------------------" | tee -a install_log.txt
 	echo $userpasswd | sudo -S add-apt-repository -y ppa:team-xbmc/ppa | tee -a install_log.txt
-
-	#add repository for dolphin-emu
-	echo "-----------------------------------------------------------" | tee -a install_log.txt
-	echo "Adding Dolphin-Emu repository..." | tee -a install_log.txt
-	echo "-----------------------------------------------------------" | tee -a install_log.txt
-	echo $userpasswd | sudo add-apt-repository -y ppa:glennric/dolphin-emu | tee -a install_log.txt
 
 	#Add playdeb repo for later additions (very useful) 
 	echo "-----------------------------------------------------------" | tee -a install_log.txt
@@ -963,9 +942,13 @@ function _software () {
 	echo "-----------------------------------------------------------" | tee -a install_log.txt
 	echo "Installing required packages..." | tee -a install_log.txt
 	echo "-----------------------------------------------------------" | tee -a install_log.txt
+<<<<<<< HEAD
 	echo $userpasswd | sudo -S apt-get install -y xboxdrv curl pcsxr pcsx2:i386 \
+=======
+	echo $userpasswd | sudo -S apt-get install -y xboxdrv curl \
+>>>>>>> beta
 	python-software-properties pkg-config software-properties-common mednafen \
-	mame mupen64plus dconf-tools qjoypad xbmc dolphin-emu-master stella \
+	mame mupen64plus dconf-tools jstest-gtk qjoypad xbmc stella \
 	build-essential | tee -a install_log.txt
 
 
@@ -1053,28 +1036,12 @@ function _config-x360ws () {
 	cp -v $HOME/RetroRig/emu-cfgs/x360ws/MAME/MAME.txt $HOME/Games/Artwork/MAME | tee -a install_log.txt
 	cp -v $HOME/RetroRig/emu-cfgs/x360ws/MAME/MAME\ synopsis\ RCB\ 201202.zip/ $HOME/Games/Artwork/MAME | tee -a install_log.txt
 
-	#pcsx
-	#default path: /home/$USER/.pcsx
-	#Main config
-	cp -v $HOME/RetroRig/emu-cfgs/x360ws/pcsx/pcsx.cfg $HOME/.pcsx/ | tee -a install_log.txt
-	cp -Rv $HOME/RetroRig/emu-cfgs/x360ws/pcsx/plugins $HOME/.pcsx/ | tee -a install_log.txt
-	cp -Rv $HOME/RetroRig/emu-cfgs/x360ws/pcsx/patches $HOME/.pcsx/ | tee -a install_log.txt
-	cp -Rv $HOME/RetroRig/emu-cfgs/x360ws/pcsx/memcards $HOME/.pcsx/ | tee -a install_log.txt
-
-
-	#pcsx2
-	#default path: /home/$USER/.config/pcsx2
-	#Main config
-	cp -v $HOME/RetroRig/emu-cfgs/x360ws/pcsx2/PCSX2-reg.ini $HOME/.config/pcsx2/ | tee -a install_log.txt
-	cp -v $HOME/RetroRig/emu-cfgs/x360ws/pcsx2/inisOnePAD.ini $HOME/.config/pcsx2/ | tee -a install_log.txt
-	cp -v $HOME/RetroRig/emu-cfgs/x360ws/pcsx2/inis/* $HOME/.config/pcsx2/inis/ | tee -a install_log.txt
-
 	#mednafen
 	#default path: /home/$USER/.mednafen/mednafen.cfg
 	#Main config
 	cp -v $HOME/RetroRig/emu-cfgs/x360ws/mednafen/mednafen-09x.cfg $HOME/.mednafen | tee -a install_log.txt
 
-	#mupen64pluspwd
+	#mupen64plus
 	#default path: /home/$USER/.config/mupen64plus
 	#Main config
 	cp -v $HOME/RetroRig/emu-cfgs/x360ws/mupen64plus/mupen64plus.cfg $HOME/.config/mupen64plus/ | tee -a install_log.txt
@@ -1083,19 +1050,10 @@ function _config-x360ws () {
 	#default path: /home/$USER/.config/mupen64plus
 	#Main config
 	cp -v $HOME/RetroRig/emu-cfgs/x360ws/Stella/stellarc $HOME/.stella/ | tee -a install_log.txt
-
-	#dolphin
-	#default path /home/$USER/.dolphin-emu/
-	#emulator config
-	cp -Rv /$HOME/RetroRig/emu-cfgs/x360ws/Dolphin/Dolphin.ini $HOME/.dolphin-emu/Config/ | tee -a install_log.txt
-	#Gamecube controller config
-	cp -Rv /$HOME/RetroRig/emu-cfgs/x360ws/Dolphin/GCPadNew.ini $HOME/.dolphin-emu/Config/ | tee -a install_log.txt
-	#Wii controller config
-	#OpenGL graphics config
-	cp -Rv /$HOME/RetroRig/emu-cfgs/x360ws/Dolphin/gfx_opengl.ini $HOME/.dolphin-emu/Config/ | tee -a install_log.txt
 	
-	#inject init script
+	#inject init script and default config
 	echo $userpasswd | sudo -S cp -v $HOME/RetroRig/init-scripts/x360ws/xboxdrv /etc/init.d/ | tee -a install_log.txt
+	echo $userpasswd | sudo -S cp -v $HOME/RetroRig/init-scripts/x360ws/default/xboxdrv /etc/default/xboxdrv | tee -a install_log.txt
 	#update 
 	echo $userpasswd | sudo -S update-rc.d xboxdrv defaults | tee -a install_log.txt
 
@@ -1134,22 +1092,6 @@ function _config-x360wd () {
 	cp -v $HOME/RetroRig/emu-cfgs/x360wd/MAME/MAME.txt $HOME/Games/Artwork/MAME | tee -a install_log.txt
 	cp -v $HOME/RetroRig/emu-cfgs/x360wd/MAME/MAME\ synopsis\ RCB\ 201202.zip/ $HOME/Games/Artwork/MAME | tee -a install_log.txt
 
-	#pcsx
-	#default path: /home/$USER/.pcsx
-	#Main config
-	cp -v $HOME/RetroRig/emu-cfgs/x360wd/pcsx/pcsx.cfg $HOME/.pcsx/ | tee -a install_log.txt
-	cp -Rv $HOME/RetroRig/emu-cfgs/x360wd/pcsx/plugins $HOME/.pcsx/ | tee -a install_log.txt
-	cp -Rv $HOME/RetroRig/emu-cfgs/x360wd/pcsx/patches $HOME/.pcsx/ | tee -a install_log.txt
-	cp -Rv $HOME/RetroRig/emu-cfgs/x360wd/pcsx/memcards $HOME/.pcsx/ | tee -a install_log.txt
-
-
-	#pcsx2
-	#default path: /home/$USER/.config/pcsx2
-	#Main config
-	cp -v $HOME/RetroRig/emu-cfgs/x360wd/pcsx2/PCSX2-reg.ini $HOME/.config/pcsx2/ | tee -a install_log.txt
-	cp -v $HOME/RetroRig/emu-cfgs/x360wd/pcsx2/inisOnePAD.ini $HOME/.config/pcsx2/ | tee -a install_log.txt
-	cp -v $HOME/RetroRig/emu-cfgs/x360wd/pcsx2/inis/* $HOME/.config/pcsx2/inis/ | tee -a install_log.txt
-
 	#mednafen
 	#default path: /home/$USER/.mednafen/mednafen.cfg
 	#Main config
@@ -1164,16 +1106,6 @@ function _config-x360wd () {
 	#default path: /home/$USER/.config/mupen64plus
 	#Main config
 	cp -v $HOME/RetroRig/emu-cfgs/x360wd/Stella/stellarc $HOME/.stella/ | tee -a install_log.txt
-
-	#dolphin
-	#default path /home/$USER/.dolphin-emu/
-	#emulator config
-	cp -Rv /$HOME/RetroRig/emu-cfgs/x360wd/Dolphin/Dolphin.ini $HOME/.dolphin-emu/Config/ | tee -a install_log.txt
-	#Gamecube controller config
-	cp -Rv /$HOME/RetroRig/emu-cfgs/x360wd/Dolphin/GCPadNew.ini $HOME/.dolphin-emu/Config/ | tee -a install_log.txt
-	#Wii controller config
-	#OpenGL graphics config
-	cp -Rv /$HOME/RetroRig/emu-cfgs/x360wd/Dolphin/gfx_opengl.ini $HOME/.dolphin-emu/Config/ | tee -a install_log.txt
 	
 	#inject init script
 	echo $userpasswd | sudo -S cp -v $HOME/RetroRig/init-scripts/x360wd/xboxdrv /etc/init.d/ | tee -a install_log.txt
@@ -1251,59 +1183,41 @@ function _configuration (){
 	#setup skelton folders for XBMC Rom Collection Browser
 	#ROMs
 	mkdir -pv $HOME/Games/ROMs/Atari\ 2600/ | tee -a install_log.txt
-	mkdir -pv $HOME/Games/ROMs/Gamecube/ | tee -a install_log.txt
 	mkdir -pv $HOME/Games/ROMs/MAME/ | tee -a install_log.txt
 	mkdir -pv $HOME/Games/ROMs/N64/ | tee -a install_log.txt
 	mkdir -pv $HOME/Games/ROMs/NES/ | tee -a install_log.txt
 	mkdir -pv $HOME/Games/ROMs/SNES/ | tee -a install_log.txt
-	mkdir -pv $HOME/Games/ROMs/PS2/ | tee -a install_log.txt
-	mkdir -pv $HOME/Games/ROMs/PS1/ | tee -a install_log.txt
 	mkdir -pv $HOME/Games/ROMs/Sega\ Genesis/ | tee -a install_log.txt
-	mkdir -pv $HOME/Games/ROMs/SNK\ Neo\ Geo/ | tee -a install_log.txt
 	mkdir -pv $HOME/Games/ROMs/GBC/ | tee -a install_log.txt
 	mkdir -pv $HOME/Games/ROMs/GBA/ | tee -a install_log.txt
 	mkdir -pv $HOME/Games/ROMs/Game\ Gear/ | tee -a install_log.txt
 
 	#Artwork 
 	mkdir -pv $HOME/Games/Artwork/Atari\ 2600/ | tee -a install_log.txt
-	mkdir -pv $HOME/Games/Artwork/Gamecube/ | tee -a install_log.txt
 	mkdir -pv $HOME/Games/Artwork/MAME/ | tee -a install_log.txt
 	mkdir -pv $HOME/Games/Artwork/N64/ | tee -a install_log.txt
 	mkdir -pv $HOME/Games/Artwork/NES/ | tee -a install_log.txt
 	mkdir -pv $HOME/Games/Artwork/SNES/ | tee -a install_log.txt
-	mkdir -pv $HOME/Games/Artwork/PS2/ | tee -a install_log.txt
-	mkdir -pv $HOME/Games/Artwork/PS1/ | tee -a install_log.txt
 	mkdir -pv $HOME/Games/Artwork/Sega\ Genesis/ | tee -a install_log.txt
-	mkdir -pv $HOME/Games/Artwork/SNK\ Neo\ Geo/ | tee -a install_log.txt
 	mkdir -pv $HOME/Games/Artwork/GBC/ | tee -a install_log.txt
 	mkdir -pv $HOME/Games/Artwork/GBA/ | tee -a install_log.txt
 	mkdir -pv $HOME/Games/Artwork/Game\ Gear/ | tee -a install_log.txt
 
 	#Saves (if any)
 	mkdir -pv $HOME/Games/Saves/Atari\ 2600/ | tee -a install_log.txt
-	mkdir -pv $HOME/Games/Saves/Gamecube/ | tee -a install_log.txt
 	mkdir -pv $HOME/Games/Saves/MAME/ | tee -a install_log.txt
 	mkdir -pv $HOME/Games/Saves/N64/ | tee -a install_log.txt
 	mkdir -pv $HOME/Games/Saves/NES/ | tee -a install_log.txt
 	mkdir -pv $HOME/Games/Saves/SNES/ | tee -a install_log.txt
-	mkdir -pv $HOME/Games/Saves/PS2/ | tee -a install_log.txt
-	mkdir -pv $HOME/Games/Saves/PS1/ | tee -a install_log.txt
 	mkdir -pv $HOME/Games/Saves/Sega\ Genesis/ | tee -a install_log.txt
-	mkdir -pv $HOME/Games/Saves/SNK\ Neo\ Geo/ | tee -a install_log.txt
 	mkdir -pv $HOME/Games/Saves/GBC/ | tee -a install_log.txt
 	mkdir -pv $HOME/Games/Saves/GBA/ | tee -a install_log.txt
 	mkdir -pv $HOME/Games/Saves/Game\ Gear/ | tee -a install_log.txt
 
 	#create dotfiles
 	mkdir -pv $HOME/.qjoypad3/ | tee -a install_log.txt
-	mkdir -pv $HOME/.dolphin-emu/Config/ | tee -a install_log.txt
 	mkdir -pv $HOME/.config/mupen64plus/ | tee -a install_log.txt
 	mkdir -pv $HOME/.mame/cfg/ | tee -a install_log.txt
-	mkdir -pv $HOME/.pcsx/plugins/ | tee -a install_log.txt
-	mkdir -pv $HOME/.pcsx/patches/ | tee -a install_log.txt
-	mkdir -pv $HOME/.pcsx/bios/ | tee -a install_log.txt
-	mkdir -pv $HOME/.config/pcsx2/inis/ | tee -a install_log.txt
-	mkdir -pv $HOME/.config/pcsx2/bios | tee -a install_log.txt
 	mkdir -pv $HOME/.stella/ | tee -a install_log.txt
 	mkdir -pv $HOME/.xbmc/ | tee -a install_log.txt
 	mkdir -pv $HOME/.mednafen/ | tee -a install_log.txt
@@ -1352,12 +1266,7 @@ function _configuration (){
 	#set the system user to an absolute value.
 	#RCB and some config files don't like using $HOME, rather /home/test/
 	#Let's change the config files to reflect the current username
-	sed -i "s|/home/mikeyd/|/home/$USER/|g" $HOME/.config/pcsx2/PCSX2-reg.ini | tee -a install_log.txt
 	sed -i "s|/home/mikeyd/|/home/$USER/|g" $HOME/.mame/mame.ini | tee -a install_log.txt
-	sed -i "s|/home/mikeyd/|/home/$USER/|g" $HOME/.pcsx/pcsx.cfg | tee -a install_log.txt
-	sed -i "s|/home/mikeyd/|/home/$USER/|g" $HOME/.config/pcsx2/PCSX2-reg.ini | tee -a install_log.txt
-	sed -i "s|/home/mikeyd/|/home/$USER/|g" $HOME/.config/pcsx2/inis/PCSX2_ui.ini | tee -a install_log.txt
-	sed -i "s|/home/mikeyd/|/home/$USER/|g" $HOME/.dolphin-emu/Config/Dolphin.ini | tee -a install_log.txt
 	sed -i "s|/home/mikeyd/|/home/$USER/|g" $HOME/.xbmc/userdata/addon_data/script.games.rom.collection.browser/config.xml | tee -a install_log.txt	
 	echo "The user applied to configuration files was: $USER" |  tee -a install_log.txt
 
@@ -1456,22 +1365,29 @@ function _reboot () {
 	--passwordbox "Enter your user password" 7 28 2> $data
 	 
 	ret=$?
-	 
-	# make decison
+       #Exit status is subject to being overridden  by  environment  variables.
+       #Normally they are:
+       #0    if dialog is exited by pressing the Yes or OK button.
+       #1    if the No or Cancel button is pressed.
+       #2    if the Help button is pressed.
+       #3    if the Extra button is pressed.
+       #-1   if  errors occur inside dialog or dialog is exited by pressing the
+       #     ESC key.
+
 	case $ret in
 	  0)
-	    #use local variable to use it later in other functions
-	    userpasswd=$(cat "$data")
+	    dialog --infobox "Rebooting PC" 3 0 ; sleep 2s
+	    sleep 5s
+	    echo $userpasswd | sudo -S /sbin/reboot
 	    ;;
 	  1)
-	    echo "Cancel pressed.";;
+	    echo "Cancel pressed."
+	    sleep 2s
+	    ;;
 	  255)
 	    [ -s $data ] &&  cat $data || echo "ESC pressed.";;
 	esac
 
-        dialog --infobox "Rebooting PC" 3 0 ; sleep 2s
-        sleep 5s
-        echo $userpasswd | sudo -S /sbin/reboot
 }
 
 function _uninstall () {
@@ -1485,9 +1401,9 @@ echo "-----------------------------------------------------------" | tee -a unin
 
 #remove installed binaries
 #do not remove software-properties-common, necessary pkg!
-echo $userpasswd | sudo -S apt-get autoremove -y xboxdrv curl zsnes nestopia pcsxr pcsx2:i386 \
+echo $userpasswd | sudo -S apt-get autoremove -y xboxdrv curl  \
 python-software-properties pkg-config mednafen \
-mame mupen64plus dconf-tools qjoypad xbmc dolphin-emu-master stella \
+mame mupen64plus dconf-tools qjoypad xbmc stella \
 build-essential | tee -a uninstall_log.txt
 
 #add apport, apport-gtk back
@@ -1498,15 +1414,8 @@ echo $userpasswd | sudo -S dpkg --remove-architecture i386 | tee -a uninstall_lo
 echo "-----------------------------------------------------------" | tee -a uninstall_log.txt
 echo "Cleaning up repositories..." | tee -a install_log.txt
 echo "-----------------------------------------------------------" | tee -a uninstall_log.txt
-#pcsx
-echo $userpasswd | sudo add-apt-repository -ry ppa:gregory-hainaut/pcsx2.official.ppa | tee -a uninstall_log.txt
 #xbmc
 echo $userpasswd | sudo add-apt-repository -ry ppa:team-xbmc/ppa | tee -a uninstall_log.txt
-#dolphin
-echo $userpasswd | sudo add-apt-repository -ry ppa:glennric/dolphin-emu | tee -a uninstall_log.txt
-#gens-gs
-echo $userpasswd | sudo rm -f /etc/apt/sources.list.d/playdeb.list | tee -a uninstall_log.txt
-
 
 echo "-----------------------------------------------------------" | tee -a uninstall_log.txt
 echo "Remove RetroRig config folders..." | tee -a install_log.txt
@@ -1533,11 +1442,8 @@ echo "-----------------------------------------------------------" | tee -a unin
    	1) 
 	#remove dotfiles
 	echo $userpasswd | sudo rm -rf $HOME/.qjoypad3/ | tee -a uninstall_log.txt
-	echo $userpasswd | sudo rm -rf $HOME/.dolphin-emu/ | tee -a uninstall_log.txt
 	echo $userpasswd | sudo rm -rf $HOME/.config/mupen64plus/ | tee -a uninstall_log.txt
 	echo $userpasswd | sudo rm -rf $HOME/.mame/ | tee -a uninstall_log.txt
-	echo $userpasswd | sudo rm -rf $HOME/.pcsx/ | tee -a uninstall_log.txt
-	echo $userpasswd | sudo rm -rf $HOME/.config/pcsx2/ | tee -a uninstall_log.txt
 	echo $userpasswd | sudo rm -rf $HOME/.stella/ | tee -a uninstall_log.txt
 	echo $userpasswd | sudo rm -rf $HOME/.xbmc/ | tee -a uninstall_log.txt
 	echo $userpasswd | sudo rm -rf $HOME/.mednafen/ | tee -a uninstall_log.txt
@@ -1550,6 +1456,7 @@ echo "-----------------------------------------------------------" | tee -a unin
 	echo $userpasswd | sudo service xboxdrv stop | tee uninstall_log.txt
 	echo $userpasswd | sudo update-rc.d -f xboxdrv remove
 	echo $userpasswd | sudo rm -f /etc/init.d/xboxdrv
+	echo $userpasswd | sudo rm -f /etc/default/xboxdrv
 	sed -i 's|blacklist xpad||g' /etc/modprobe.d/blacklist.conf| tee -a install_log.txt
 
 	   ;;
