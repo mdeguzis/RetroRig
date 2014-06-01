@@ -27,10 +27,7 @@ Warning! It will overwrite:
 * MAME
 * Stella
 * Mupen64Plus
-* PCSX
-* PCSX2
-* Dolphin
-* mednafen (GBC currently)
+* mednafen
 
 -Also configs related to:
 
@@ -44,9 +41,9 @@ Warning! It will overwrite:
 
 * Auto-install software, emulator configs, and required components
 * Many supported consoles (Please see the wiki, under 
-* (settings menu) 4-player wireless xboxdrv userland module inserted as init script
-* (settings menu) Gamepad select menu
-* (settings menu) Resolution presets/custom selection for emulators that support it
+* 4-player wireless xboxdrv userland module inserted as init script
+* Gamepad select menu
+* Resolution presets/custom selection for emulators that support it
 * Preset Controller mappings for supported gamepads
 * Save state, load state, exit emulators with gamepad (pcsx, pcsx2 have issues currently)
 * A cobbled together "first run" state of RCB with a blank games database and pre-set configs
