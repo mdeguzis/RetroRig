@@ -24,9 +24,6 @@ Warning! It will overwrite:
 
 -Emulator configs for supported emulators:
 
-* ZSNES
-* Nestopia
-* Gens/GS
 * MAME
 * Stella
 * Mupen64Plus
@@ -46,6 +43,7 @@ Warning! It will overwrite:
 ## Current feature set
 
 * Auto-install software, emulator configs, and required components
+* Many supported consoles (Please see the wiki, under 
 * (settings menu) 4-player wireless xboxdrv userland module inserted as init script
 * (settings menu) Gamepad select menu
 * (settings menu) Resolution presets/custom selection for emulators that support it
