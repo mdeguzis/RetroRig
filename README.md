@@ -22,19 +22,7 @@ It is mainly targeted at folks wishing to repurpose an old PC.
 
 Warning! It will overwrite:
 
--Emulator configs for supported emulators:
-
-* ZSNES
-* Nestopia
-* Gens/GS
-* MAME
-* Stella
-* Mupen64Plus
-* PCSX
-* PCSX2
-* Dolphin
-* mednafen (GBC currently)
-
+-Emulator configs for supported emulators (see Section 1: Installation of the wiki)
 -Also configs related to:
 
 * qjoypad
@@ -46,11 +34,12 @@ Warning! It will overwrite:
 ## Current feature set
 
 * Auto-install software, emulator configs, and required components
-* (settings menu) 4-player wireless xboxdrv userland module inserted as init script
-* (settings menu) Gamepad select menu
-* (settings menu) Resolution presets/custom selection for emulators that support it
+* Many supported consoles (Please see the wiki, under 
+* 4-player wireless xboxdrv userland module inserted as init script
+* Gamepad select menu
+* Resolution presets/custom selection for emulators that support it
 * Preset Controller mappings for supported gamepads
-* Save state, load state, exit emulators with gamepad (pcsx, pcsx2 have issues currently)
+* Save state, load state, exit emulators with gamepad
 * A cobbled together "first run" state of RCB with a blank games database and pre-set configs
 * Functions to update git repo, emulator binaries, upgrade system and more
 * MAME offline scrapper system built in (artwork almost ready)
@@ -76,40 +65,11 @@ and is a hot target for many folks. Arch Linux, or Debian Testing were other con
 there are many pro's and con's to using Ubuntu, all of which are understandable. You can't appease
 everyone!
 
-## Controller Setup:
 
-I Tried to reflect the original controller as much as possible for some such as the NES and SNES. The
-save/load/exit button assignments are constant for all emulators except pcsx and pcsx2 (working on it!). In due time I will add more, with the next being the Dualshock 2/3 controller.
+## Wiki
 
-Please see controller-cfg-list.txt for the complete set!
-
-Current supported controllers:
-
-* Xbox 360 Controller (wireless)
-* Xbox 360 Controller (wired) 
-
-## ROMs
-
-It is a good idea to load games before hand into the predefined folders after the configuration option is ran and you reboot your PC. On first startup Rom Collection Browser will ask for games to import. Several emulators are supported and built in for easy importing.ROMs for emualtors are NOT provided for legal reasons. Due to legal gray areas with BIOS files, they will not be provided for emulators that require them (e.g. pcsx, pcsx2).Please do not request these items be added.
-
-Currently importing ROMs into XBMC is a keyboard-less affair for the following consoles:
-
-* SNES
-* NES
-* Sega Genesis
-* MAME
-* Atari 2600
-* Nintendo 64
-* Playstation 1
-* Playstation 2
-* Gamecube
-* Gameboy Color
-
-All ROMs should be placed in the respective folder under "/home/$USER/Games/ROMs". In due time, I will
-add more and more emulators. But until then, you can manually add them. In a later release, I plan on
-building in a text-based file browser to locate and import games. For now, you must copy them in the
-folders under ~/Games. In the near future, I will load Samba for file transfers as optional
-install items (SSH is now in).
+First, I must direct you to read the wiki on this github page, as it contains extra iformation outside this wiki. 
+https://github.com/ProfessorKaos64/RetroRig/wiki
 
 ## Installation
 
@@ -146,9 +106,8 @@ emulator binaries, and also a way to pull the latest files from github.
 
 ## Please Note
 
-This project is not yet complete!
-
-Project notes and guide will be hosted at www.libregeek.org at some point in the near future.
+This project is not yet complete! Project notes and guide will be hosted at 
+www.libregeek.org at some point in the near future.
 
 ## A big thanks goes out to
 
