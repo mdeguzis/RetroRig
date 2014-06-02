@@ -17,6 +17,7 @@
 #button id 1 = dpad up
 #button id 2 = dpad down
 #button id 3 = dpad left
+#button id 4 = dpad right
 #button id 5 = A
 #button id 6 = B
 #button id 7 = X
@@ -42,27 +43,27 @@
 <keymap>
   <global>
     <joystick name="Xbox Gamepad (userspace driver)">
-      <altname>Controller (Xbox 360 Wireless Receiver for Windows)</altname>
-      <button id="1">Up</button> 
-      <button id="2">Down</button> 
-      <button id="3">Left</button>
-      <button id="4">Right</button>
-      <button id="5">Select</button>
-      <button id="6">Back</button>
-      <button id="7">ContextMenu</button>
-      <button id="8">FullScreen</button>
-      <button id="9">ScrollUp</button>
-      <button id="10">ScrollDown</button>
+<altname>Controller (Xbox 360 Wireless Receiver for Windows)</altname>
+<button id="1">Up</button> 
+<button id="2">Down</button> 
+<button id="3">Left</button>
+<button id="4">Right</button>
+<button id="5">Select</button>
+<button id="6">Back</button>
+<button id="7">ContextMenu</button>
+<button id="8">FullScreen</button>
+<button id="9">ScrollUp</button>
+<button id="10">ScrollDown</button>
 
-      <hat id="1" position="up">Up</hat>
-      <hat id="1" position="down">Down</hat>
-      <hat id="1" position="right">Right</hat>
-      <hat id="1" position="left">Left</hat>
-	  
-      <axis limit="-1" id="4">VolumeUp</axis>
-      <axis limit="+1" id="4">VolumeDown</axis>
-      <axis limit="-1" id="3">AnalogSeekBack</axis>
-      <axis limit="+1" id="3">AnalogSeekForward</axis> 
+<hat id="1" position="up">Up</hat>
+<hat id="1" position="down">Down</hat>
+<hat id="1" position="right">Right</hat>
+<hat id="1" position="left">Left</hat>
+  
+<axis limit="-1" id="4">VolumeUp</axis>
+<axis limit="+1" id="4">VolumeDown</axis>
+<axis limit="-1" id="3">AnalogSeekBack</axis>
+<axis limit="+1" id="3">AnalogSeekForward</axis> 
 
     </joystick>
   </global>
@@ -83,8 +84,8 @@
       <button id="10">ShowTime</button>
       <button id="13">Info</button>
       <button id="14">OSD</button>
-      <button id="11">AnalogFastForward</button>
-      <button id="12">AnalogRewind</button>
+      <button id="12">AnalogFastForward</button>
+      <button id="11">AnalogRewind</button>
       <button id="1">BigStepForward</button>
       <button id="2">BigStepBack</button>
       <button id="3">StepBack</button>
