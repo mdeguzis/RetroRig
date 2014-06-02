@@ -1296,7 +1296,7 @@ function _reboot () {
 	    echo $userpasswd | sudo -S /sbin/reboot
 	    ;;
 	  1)
-	    dialog --infobox "Cancel Pressed" 3 0 ; sleep 2s
+	    dialog --infobox "Cancel Pressed" 3 22 ; sleep 2s
 	    sleep 2s
 	    ;;
 	  255)
