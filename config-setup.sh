@@ -179,7 +179,7 @@ options=(1 "Atari 2600"
 	 3 "SNES" 
 	 4 "Nintendo 64"
 	 5 "MAME"
-	 6 "Sega Genesis"
+	 6 "Sega Master System"
 	 7 "GBC"
 	 8 "GBC"
 	 9 "Exit ROM Loader")
@@ -259,12 +259,12 @@ options=(1 "Atari 2600"
 		6)
 		#call file loader  	
 		_file-loader
-		#copy Sega Genesis ROMs
+		#copy Sega Sega Master ROMs
 		clear
 		echo "-----------------------------------------------------------" | tee -a install_log.txt
-		echo "Loading Sega Genesis ROMs..." | tee -a install_log.txt
+		echo "Loading Sega Sega Master ROMs..." | tee -a install_log.txt
 		echo "-----------------------------------------------------------" | tee -a install_log.txt
-		cp -Rv "$folder"/* $HOME/Games/ROMs/Sega\ Genesis/ | tee -a install_log.txt
+		cp -Rv "$folder"/* $HOME/Games/ROMs/Sega\ Master\ System/ | tee -a install_log.txt
 		#return back to menu
 		_rom-loader
 		;;
@@ -537,7 +537,7 @@ function _res-swticher (){
 		sed -ie "s|$snes_org_X|snes.xres $snes_new_X|g" $HOME/.mednafen/mednafen-09x.cfg
 		sed -ie "s|$snes_org_Y|snes.yres $snes_new_Y|g" $HOME/.mednafen/mednafen-09x.cfg
 
-		#Mednafen (Sega Master System, aka Sega Genesis)
+		#Mednafen (Sega Master System, aka Sega Sega Master)
 		sms_org_X=$(grep -Ee "\bsms.xres\b " $HOME/.mednafen/mednafen-09x.cfg)
 		sms_org_Y=$(grep -Ee "\bsms.yres\b " $HOME/.mednafen/mednafen-09x.cfg)
 		#make the changes, prefix new_X in case NULL was entered previously
@@ -609,8 +609,8 @@ if [ "$choices" != "" ]; then
 		grep -Ee "\bgba.xres\b" $HOME/.mednafen/mednafen-09x.cfg >> res.txt
 		grep -Ee "\bgba.yres\b" $HOME/.mednafen/mednafen-09x.cfg >> res.txt
 		echo "" >> res.txt
-		#mednafen Sega Genesis
-		echo "Mednafen (Sega Genesis)" >> res.txt
+		#mednafen Sega Sega Master System
+		echo "Mednafen (Sega Master System)" >> res.txt
 		grep -Ee "\bsms.xres\b" $HOME/.mednafen/mednafen-09x.cfg >> res.txt
 		grep -Ee "\bsms.yres\b" $HOME/.mednafen/mednafen-09x.cfg >> res.txt
 		echo "" >> res.txt
@@ -647,7 +647,7 @@ if [ "$choices" != "" ]; then
 		#set mednafen (SNES) value
 		snes_new_X="1280"
 		snes_new_Y="720"
-		#set mednafen (Genesis) value
+		#set mednafen (Sega Master System) value
 		sms_new_X="1280"
 		sms_new_Y="720"
 		#set stella (Atari 2600)
@@ -674,7 +674,7 @@ if [ "$choices" != "" ]; then
 		#set mednafen (SNES) value
 		snes_new_X="1280"
 		snes_new_Y="1024"
-		#set mednafen (Genesis) value
+		#set mednafen (Sega Master System) value
 		sms_new_X="1280"
 		sms_new_Y="1024"
 		#set stella (Atari 2600)
@@ -701,7 +701,7 @@ if [ "$choices" != "" ]; then
 		#set mednafen (SNES) value
 		snes_new_X="1366"
 		snes_new_Y="768"
-		#set mednafen (Genesis) value
+		#set mednafen (Sega Master System) value
 		sms_new_X="1366"
 		sms_new_Y="768"
 		#set stella (Atari 2600)
@@ -728,7 +728,7 @@ if [ "$choices" != "" ]; then
 		#set mednafen (SNES) value
 		snes_new_X="1600"
 		snes_new_Y="900"
-		#set mednafen (Genesis) value
+		#set mednafen (Sega Master System) value
 		sms_new_X="1600"
 		sms_new_Y="900"
 		#set stella (Atari 2600)
@@ -755,7 +755,7 @@ if [ "$choices" != "" ]; then
 		#set mednafen (SNES) value
 		snes_new_X="1920"
 		snes_new_Y="1080"
-		#set mednafen (Genesis) value
+		#set mednafen (Sega Master System) value
 		sms_new_X="1920"
 		sms_new_Y="1080"
 		#set stella (Atari 2600)
@@ -787,7 +787,7 @@ if [ "$choices" != "" ]; then
 		#mednafen (SNES)
 		snes_new_X=$(cat '/tmp/new_X')
 		snes_new_Y=$(cat '/tmp/new_Y')
-		#mednafen (Genesis)
+		#mednafen (Sega Master System)
 		sms_new_X=$(cat '/tmp/new_X')
 		sms_new_Y=$(cat '/tmp/new_Y')
 		#set stella (Atari 2600)
@@ -1105,7 +1105,7 @@ function _configuration (){
 	mkdir -pv $HOME/Games/ROMs/N64/ | tee -a install_log.txt
 	mkdir -pv $HOME/Games/ROMs/NES/ | tee -a install_log.txt
 	mkdir -pv $HOME/Games/ROMs/SNES/ | tee -a install_log.txt
-	mkdir -pv $HOME/Games/ROMs/Sega\ Genesis/ | tee -a install_log.txt
+	mkdir -pv $HOME/Games/ROMs/Sega\ Master\ System/ | tee -a install_log.txt
 	mkdir -pv $HOME/Games/ROMs/GBC/ | tee -a install_log.txt
 	mkdir -pv $HOME/Games/ROMs/GBA/ | tee -a install_log.txt
 
@@ -1115,7 +1115,7 @@ function _configuration (){
 	mkdir -pv $HOME/Games/Artwork/N64/ | tee -a install_log.txt
 	mkdir -pv $HOME/Games/Artwork/NES/ | tee -a install_log.txt
 	mkdir -pv $HOME/Games/Artwork/SNES/ | tee -a install_log.txt
-	mkdir -pv $HOME/Games/Artwork/Sega\ Genesis/ | tee -a install_log.txt
+	mkdir -pv $HOME/Games/Artwork/Sega\ Master\ System/ | tee -a install_log.txt
 	mkdir -pv $HOME/Games/Artwork/GBC/ | tee -a install_log.txt
 	mkdir -pv $HOME/Games/Artwork/GBA/ | tee -a install_log.txt
 
@@ -1125,7 +1125,7 @@ function _configuration (){
 	mkdir -pv $HOME/Games/Saves/N64/ | tee -a install_log.txt
 	mkdir -pv $HOME/Games/Saves/NES/ | tee -a install_log.txt
 	mkdir -pv $HOME/Games/Saves/SNES/ | tee -a install_log.txt
-	mkdir -pv $HOME/Games/Saves/Sega\ Genesis/ | tee -a install_log.txt
+	mkdir -pv $HOME/Games/Saves/Sega\ Master\ System/ | tee -a install_log.txt
 	mkdir -pv $HOME/Games/Saves/GBC/ | tee -a install_log.txt
 	mkdir -pv $HOME/Games/Saves/GBA/ | tee -a install_log.txt
 

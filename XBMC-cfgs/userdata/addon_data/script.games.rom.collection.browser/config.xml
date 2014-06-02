@@ -160,14 +160,14 @@
       <gameclient />
       <emulatorCmd>/usr/games/mednafen</emulatorCmd>
       <emulatorParams>"%ROM%"</emulatorParams>
-      <romPath>/home/test/Games/ROMs/Sega Genesis/*.bin</romPath>
+      <romPath>/home/test/Games/ROMs/Sega Master System/*.bin</romPath>
       <saveStatePath />
       <saveStateParams />
-      <mediaPath type="boxfront">/home/test/Games/Artwork/Sega Genesis/boxfront/%GAME%.*</mediaPath>
-      <mediaPath type="boxback">/home/test/Games/Artwork/Sega Genesis/boxback/%GAME%.*</mediaPath>
-      <mediaPath type="cartridge">/home/test/Games/Artwork/Sega Genesis/cartridge/%GAME%.*</mediaPath>
-      <mediaPath type="screenshot">/home/test/Games/Artwork/Sega Genesis/screenshot/%GAME%.*</mediaPath>
-      <mediaPath type="fanart">/home/test/Games/Artwork/Sega Genesis/fanart/%GAME%.*</mediaPath>
+      <mediaPath type="boxfront">/home/test/Games/Artwork/Sega Master System/boxfront/%GAME%.*</mediaPath>
+      <mediaPath type="boxback">/home/test/Games/Artwork/Sega Master System/boxback/%GAME%.*</mediaPath>
+      <mediaPath type="cartridge">/home/test/Games/Artwork/Sega Master System/cartridge/%GAME%.*</mediaPath>
+      <mediaPath type="screenshot">/home/test/Games/Artwork/Sega Master System/screenshot/%GAME%.*</mediaPath>
+      <mediaPath type="fanart">/home/test/Games/Artwork/Sega Master System/fanart/%GAME%.*</mediaPath>
       <preCmd />
       <postCmd />
       <useEmuSolo>False</useEmuSolo>
