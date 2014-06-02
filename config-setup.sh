@@ -471,9 +471,9 @@ function _res-swticher (){
 		########################		
 		#Stella
 		########################
-		st_org_X=$(grep -Ee "\bfullres = \b" $HOME/.stella/stellarc)
+		st_org=$(grep -Ee "\bfullres = \b" $HOME/.stella/stellarc)
 		#make the changes, prefix new_X in case NULL was entered previously
-		sed -ie "s|$st_org|fullres = $st_new_X|g" $HOME/.stella/stellarc
+		sed -ie "s|$st_org|fullres = $st_new|g" $HOME/.stella/stellarc
 
 		########################		
 		#mupen64plus
