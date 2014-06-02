@@ -899,7 +899,7 @@ function _config-x360ws () {
 	
 	# copy keyboard.xml file for XBMC 
 	# Button id numbers are totally diffferent, due to the use of the use-dpad-as-button, and use-trigger-as-button options used.
-	mkdir -pv $HOME/.xbmc/userdata/keymaps | tee -a install_log.txt
+	mkdir -pv $HOME/.xbmc/userdata/keymaps. | tee -a install_log.txt
 	echo $userpasswd | sudo -S cp -v $HOME/RetroRig/controller-cfgs/x360ws/keyboard.xml $HOME/.xmbc/userdata/keymaps
 	
 	echo $userpasswd | sudo -S cp -v $HOME/RetroRig/controller-cfgs/x360ws/keyboard.xml $HOME/.xmbc/userdata/keymaps
@@ -962,7 +962,7 @@ function _config-x360wd () {
 
 	# copy keyboard.xml file for XBMC 
 	# Button id numbers are totally diffferent, due to the use of the use-dpad-as-button, and use-trigger-as-button options used.
-	mkdir -pv $HOME/.xbmc/userdata/keymaps | tee -a install_log.txt
+	mkdir -pv $HOME/.xbmc/userdata/keymaps/ | tee -a install_log.txt
 	echo $userpasswd | sudo -S cp -v $HOME/RetroRig/controller-cfgs/x360wd/keyboard.xml $HOME/.xmbc/userdata/keymaps
 
 	#set qjoypad's profile to match Xbox 360 Wireless (4-player)
