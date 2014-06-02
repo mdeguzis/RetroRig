@@ -182,7 +182,7 @@ options=(1 "Atari 2600"
 	 6 "Sega Master System"
 	 7 "GBC"
 	 8 "GBC"
-	 9 "Turbo Graphix 16"
+	 9 "TurboGraphix 16"
 	 10 "Exit ROM Loader")
 
 	#make menu choice
@@ -296,7 +296,7 @@ options=(1 "Atari 2600"
 		_rom-loader
 		;;
 
-		8)
+		9)
 		#call file loader  	
 		_file-loader
 		#copy Turbographx 16 ROMs
