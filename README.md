@@ -22,13 +22,7 @@ It is mainly targeted at folks wishing to repurpose an old PC.
 
 Warning! It will overwrite:
 
--Emulator configs for supported emulators:
-
-* MAME
-* Stella
-* Mupen64Plus
-* mednafen
-
+-Emulator configs for supported emulators (see Section 1: Installation of the wiki)
 -Also configs related to:
 
 * qjoypad
@@ -45,7 +39,7 @@ Warning! It will overwrite:
 * Gamepad select menu
 * Resolution presets/custom selection for emulators that support it
 * Preset Controller mappings for supported gamepads
-* Save state, load state, exit emulators with gamepad (pcsx, pcsx2 have issues currently)
+* Save state, load state, exit emulators with gamepad
 * A cobbled together "first run" state of RCB with a blank games database and pre-set configs
 * Functions to update git repo, emulator binaries, upgrade system and more
 * MAME offline scrapper system built in (artwork almost ready)
@@ -112,9 +106,8 @@ emulator binaries, and also a way to pull the latest files from github.
 
 ## Please Note
 
-This project is not yet complete!
-
-Project notes and guide will be hosted at www.libregeek.org at some point in the near future.
+This project is not yet complete! Project notes and guide will be hosted at 
+www.libregeek.org at some point in the near future.
 
 ## A big thanks goes out to
 
