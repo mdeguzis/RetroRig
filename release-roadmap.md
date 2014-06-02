@@ -1,11 +1,13 @@
 Goals for 0.8.0 release
 ----------------
 
-- Uninstall option
+- (done) Uninstall option
 - (done) Establish beta branch
-- Add PS3 Controller support
-- Add GBA, GBC, GB, DoxBox support
-	(done) GBC 
+- Add PS3 Controller support (wired)
+- Add GBA, GBC, DoxBox support
+	(done) GBC
+	(done) GBA 
+	(done) GBC  
 - Verify audio and framerate work with test PC
 	(done) GBC
 - Add Artwork for MAME titles (depends on file size)

@@ -181,7 +181,8 @@ options=(1 "Atari 2600"
 	 5 "MAME"
 	 6 "Sega Genesis"
 	 7 "GBC"
-	 8 "Exit ROM Loader")
+	 8 "GBC"
+	 9 "Exit ROM Loader")
 
 	#make menu choice
 	selection=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
@@ -268,7 +269,7 @@ options=(1 "Atari 2600"
 		_rom-loader
 		;;
 
-		17)
+		7)
 		#call file loader  	
 		_file-loader
 		#copy GBC ROMs
@@ -281,7 +282,20 @@ options=(1 "Atari 2600"
 		_rom-loader
 		;;
 
-		8)  
+		8)
+		#call file loader  	
+		_file-loader
+		#copy GBA ROMs
+		clear
+		echo "-----------------------------------------------------------" | tee -a install_log.txt
+		echo "Loading GBA ROMs..." | tee -a install_log.txt
+		echo "-----------------------------------------------------------" | tee -a install_log.txt
+		cp -Rv "$folder"/* $HOME/Games/ROMs/GBA/ | tee -a install_log.txt
+		#return back to menu
+		_rom-loader
+		;;
+
+		9)  
 		return
 		;;
 		esac
@@ -455,6 +469,13 @@ function _res-swticher (){
 		#resolution is set via _resolution function		
 		
 		########################		
+		#Stella
+		########################
+		st_org=$(grep -Ee "\bfullres = \b" $HOME/.stella/stellarc)
+		#make the changes, prefix new_X in case NULL was entered previously
+		sed -ie "s|$st_org|fullres = $st_new|g" $HOME/.stella/stellarc
+
+		########################		
 		#mupen64plus
 		########################
 		m_org_X=$(grep -Ee "\bScreenWidth = \b" $HOME/.config/mupen64plus/mupen64plus.cfg)
@@ -539,10 +560,7 @@ function _res-swticher (){
 		########################		
 		#Stella
 		######################## 
-		#Stella does not support resolution changes (except the GUI), only scaling
-		#Scaling testing and configuration will be put in at some point
-		#This emulator does support OpenGL
-		#Current Scaling is reported in RetroRig, but not yet configurable
+
 
 }
 
@@ -577,9 +595,9 @@ if [ "$choices" != "" ]; then
 		grep -Ee "\bScreenWidth = \b" $HOME/.config/mupen64plus/mupen64plus.cfg >> res.txt
 		grep -Ee "\bScreenHeight = \b" $HOME/.config/mupen64plus/mupen64plus.cfg >> res.txt
 		echo "" >> res.txt
-		#Dolphin-emu
-		echo "Dolphin-emu:" >> res.txt
-		echo "Auto set via OpenGL" >> res.txt
+		#Stella
+		echo "Stella" >> res.txt
+		grep -Ee "\bfullres = \b" $HOME/.stella/stellarc >> res.txt
 		echo "" >> res.txt
 		#mednafen GBC
 		echo "Mednafen (GBC)" >> res.txt
@@ -632,6 +650,8 @@ if [ "$choices" != "" ]; then
 		#set mednafen (Genesis) value
 		sms_new_X="1280"
 		sms_new_Y="720"
+		#set stella (Atari 2600)
+		st_new="1280x720"
 		#call _res-swticher
 		_res-swticher
 		#return to menu
@@ -657,6 +677,8 @@ if [ "$choices" != "" ]; then
 		#set mednafen (Genesis) value
 		sms_new_X="1280"
 		sms_new_Y="1024"
+		#set stella (Atari 2600)
+		st_new="1280x1024"
 		#call _res-swticher
 		_res-swticher
 		#return to menu
@@ -682,6 +704,8 @@ if [ "$choices" != "" ]; then
 		#set mednafen (Genesis) value
 		sms_new_X="1366"
 		sms_new_Y="768"
+		#set stella (Atari 2600)
+		st_new="1366x768"
 		#call _res-swticher
 		_res-swticher
 		#return to menu
@@ -707,6 +731,8 @@ if [ "$choices" != "" ]; then
 		#set mednafen (Genesis) value
 		sms_new_X="1600"
 		sms_new_Y="900"
+		#set stella (Atari 2600)
+		st_new="1600x900"
 		#call _res-swticher
 		_res-swticher
 		#return to menu
@@ -732,6 +758,8 @@ if [ "$choices" != "" ]; then
 		#set mednafen (Genesis) value
 		sms_new_X="1920"
 		sms_new_Y="1080"
+		#set stella (Atari 2600)
+		st_new="1920x1080"
 		#call _res-swticher
 		_res-swticher
 		#return to menu
@@ -762,6 +790,12 @@ if [ "$choices" != "" ]; then
 		#mednafen (Genesis)
 		sms_new_X=$(cat '/tmp/new_X')
 		sms_new_Y=$(cat '/tmp/new_Y')
+		#set stella (Atari 2600)
+		st1=$(cat '/tmp/new_X')
+		stdelim=$('x')
+		st2=$(cat '/tmp/new_Y')
+		st_new=$($st1$stdelim$st2)
+
 		#call _res-swticher
 		_res-swticher
 		#remove temp files
@@ -896,6 +930,11 @@ function _config-x360ws () {
 
 	#copy xbox configuration (default) to folder
 	echo $userpasswd | sudo -S cp -v $HOME/RetroRig/controller-cfgs/x360ws/xpad-wireless.xboxdrv /usr/share/xboxdrv/ | tee -a install_log.txt
+	
+	# copy keyboard.xml file for XBMC 
+	# Button id numbers are totally diffferent, due to the use of the use-dpad-as-button, and use-trigger-as-button options used.
+	mkdir -pv $HOME/.xbmc/userdata/keymaps/ | tee -a install_log.txt
+	echo $userpasswd | sudo -S cp -v $HOME/RetroRig/controller-cfgs/x360ws/keyboard.xml $HOME/.xbmc/userdata/keymaps
 
 	#set qjoypad's profile to match Xbox 360 Wireless (4-player)
 	cp -v $HOME/RetroRig/controller-cfgs/x360ws.lyt $HOME/.qjoypad3/ | tee -a install_log.txt
@@ -952,6 +991,11 @@ function _config-x360wd () {
 
 	#copy xbox configuration (default) to folder
 	echo $userpasswd | sudo -S cp -v $HOME/RetroRig/controller-cfgs/x360wd/xpad-wired.xboxdrv /usr/share/xboxdrv/ | tee -a install_log.txt
+
+	# copy keyboard.xml file for XBMC 
+	# Button id numbers are totally diffferent, due to the use of the use-dpad-as-button, and use-trigger-as-button options used.
+	mkdir -pv $HOME/.xbmc/userdata/keymaps/ | tee -a install_log.txt
+	echo $userpasswd | sudo -S cp -v $HOME/RetroRig/controller-cfgs/x360wd/keyboard.xml $HOME/.xbmc/userdata/keymaps
 
 	#set qjoypad's profile to match Xbox 360 Wireless (4-player)
 	cp -v $HOME/RetroRig/controller-cfgs/x360wd.lyt $HOME/.qjoypad3/ | tee -a install_log.txt
@@ -1063,6 +1107,7 @@ function _configuration (){
 	mkdir -pv $HOME/Games/ROMs/SNES/ | tee -a install_log.txt
 	mkdir -pv $HOME/Games/ROMs/Sega\ Genesis/ | tee -a install_log.txt
 	mkdir -pv $HOME/Games/ROMs/GBC/ | tee -a install_log.txt
+	mkdir -pv $HOME/Games/ROMs/GBA/ | tee -a install_log.txt
 
 	#Artwork 
 	mkdir -pv $HOME/Games/Artwork/Atari\ 2600/ | tee -a install_log.txt
@@ -1072,6 +1117,7 @@ function _configuration (){
 	mkdir -pv $HOME/Games/Artwork/SNES/ | tee -a install_log.txt
 	mkdir -pv $HOME/Games/Artwork/Sega\ Genesis/ | tee -a install_log.txt
 	mkdir -pv $HOME/Games/Artwork/GBC/ | tee -a install_log.txt
+	mkdir -pv $HOME/Games/Artwork/GBA/ | tee -a install_log.txt
 
 	#Saves (if any)
 	mkdir -pv $HOME/Games/Saves/Atari\ 2600/ | tee -a install_log.txt
@@ -1081,6 +1127,7 @@ function _configuration (){
 	mkdir -pv $HOME/Games/Saves/SNES/ | tee -a install_log.txt
 	mkdir -pv $HOME/Games/Saves/Sega\ Genesis/ | tee -a install_log.txt
 	mkdir -pv $HOME/Games/Saves/GBC/ | tee -a install_log.txt
+	mkdir -pv $HOME/Games/Saves/GBA/ | tee -a install_log.txt
 
 	#create dotfiles
 	mkdir -pv $HOME/.qjoypad3/ | tee -a install_log.txt
@@ -1249,7 +1296,7 @@ function _reboot () {
 	    echo $userpasswd | sudo -S /sbin/reboot
 	    ;;
 	  1)
-	    echo "Cancel pressed."
+	    dialog --infobox "Cancel Pressed" 3 18 ; sleep 2s
 	    sleep 2s
 	    ;;
 	  255)
