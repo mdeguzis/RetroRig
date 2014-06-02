@@ -182,7 +182,8 @@ options=(1 "Atari 2600"
 	 6 "Sega Master System"
 	 7 "GBC"
 	 8 "GBC"
-	 9 "Exit ROM Loader")
+	 9 "Turbo Graphix 16"
+	 10 "Exit ROM Loader")
 
 	#make menu choice
 	selection=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
@@ -295,7 +296,20 @@ options=(1 "Atari 2600"
 		_rom-loader
 		;;
 
-		9)  
+		8)
+		#call file loader  	
+		_file-loader
+		#copy Turbographx 16 ROMs
+		clear
+		echo "-----------------------------------------------------------" | tee -a install_log.txt
+		echo "Loading Turbographx 16 ROMs..." | tee -a install_log.txt
+		echo "-----------------------------------------------------------" | tee -a install_log.txt
+		cp -Rv "$folder"/* $HOME/Games/ROMs/TurboGraphx\ 16/ | tee -a install_log.txt
+		#return back to menu
+		_rom-loader
+		;;
+
+		10)  
 		return
 		;;
 		esac
@@ -544,6 +558,13 @@ function _res-swticher (){
 		sed -ie "s|$sms_org_X|sms.xres $sms_new_X|g" $HOME/.mednafen/mednafen-09x.cfg
 		sed -ie "s|$sms_org_Y|sms.yres $sms_new_Y|g" $HOME/.mednafen/mednafen-09x.cfg
 
+		#Mednafen (Turbographx 16)
+		pce_org_X=$(grep -Ee "\bpce.xres\b " $HOME/.mednafen/mednafen-09x.cfg)
+		pce_org_Y=$(grep -Ee "\bpce.yres\b " $HOME/.mednafen/mednafen-09x.cfg)
+		#make the changes, prefix new_X in case NULL was entered previously
+		sed -ie "s|$pce_org_X|pce.xres $pce_new_X|g" $HOME/.mednafen/mednafen-09x.cfg
+		sed -ie "s|$pce_org_Y|pce.yres $pce_new_Y|g" $HOME/.mednafen/mednafen-09x.cfg
+
 		#For some reason, when I replace the resolutions, the config files are changed
 		#They are appended with an "e" as in mednafen-09x.cfge. These "edited" files need
 		#deleted. I will have to find out at some point why this occurs
@@ -624,6 +645,11 @@ if [ "$choices" != "" ]; then
 		grep -Ee "\bnes.xres\b" $HOME/.mednafen/mednafen-09x.cfg >> res.txt
 		grep -Ee "\bnes.yres\b" $HOME/.mednafen/mednafen-09x.cfg >> res.txt
 		echo "" >> res.txt
+		#mednafen Turbographx 16
+		echo "Mednafen (Turbographx 16)" >> res.txt
+		grep -Ee "\bpce.xres\b" $HOME/.mednafen/mednafen-09x.cfg >> res.txt
+		grep -Ee "\bpce.yres\b" $HOME/.mednafen/mednafen-09x.cfg >> res.txt
+		echo "" >> res.txt
 		#report current resolution
 		dialog --textbox res.txt 33 0
 		#remove text file
@@ -650,6 +676,9 @@ if [ "$choices" != "" ]; then
 		#set mednafen (Sega Master System) value
 		sms_new_X="1280"
 		sms_new_Y="720"
+		#set mednafen (Turbographx 16) value
+		pce_new_X="1280"
+		pce_new_Y="720"
 		#set stella (Atari 2600)
 		st_new="1280x720"
 		#call _res-swticher
@@ -677,6 +706,9 @@ if [ "$choices" != "" ]; then
 		#set mednafen (Sega Master System) value
 		sms_new_X="1280"
 		sms_new_Y="1024"
+		#set mednafen (Turbographx 16) value
+		pce_new_X="1280"
+		pce_new_Y="1024"
 		#set stella (Atari 2600)
 		st_new="1280x1024"
 		#call _res-swticher
@@ -704,6 +736,9 @@ if [ "$choices" != "" ]; then
 		#set mednafen (Sega Master System) value
 		sms_new_X="1366"
 		sms_new_Y="768"
+		#set mednafen (Turbographx 16) value
+		pce_new_X="1366"
+		pce_new_Y="768"
 		#set stella (Atari 2600)
 		st_new="1366x768"
 		#call _res-swticher
@@ -731,6 +766,9 @@ if [ "$choices" != "" ]; then
 		#set mednafen (Sega Master System) value
 		sms_new_X="1600"
 		sms_new_Y="900"
+		#set mednafen (Turbographx 16) value
+		pce_new_X="1600"
+		pce_new_Y="900"
 		#set stella (Atari 2600)
 		st_new="1600x900"
 		#call _res-swticher
@@ -758,6 +796,9 @@ if [ "$choices" != "" ]; then
 		#set mednafen (Sega Master System) value
 		sms_new_X="1920"
 		sms_new_Y="1080"
+		#set mednafen (Turbographx 16) value
+		pce_new_X="1920"
+		pce_new_Y="1080"
 		#set stella (Atari 2600)
 		st_new="1920x1080"
 		#call _res-swticher
@@ -790,6 +831,9 @@ if [ "$choices" != "" ]; then
 		#mednafen (Sega Master System)
 		sms_new_X=$(cat '/tmp/new_X')
 		sms_new_Y=$(cat '/tmp/new_Y')
+		#mednafen (Turbographx 16)
+		pce_new_X=$(cat '/tmp/new_X')
+		pce_new_Y=$(cat '/tmp/new_Y')
 		#set stella (Atari 2600)
 		st1=$(cat '/tmp/new_X')
 		stdelim=$('x')
@@ -1108,6 +1152,7 @@ function _configuration (){
 	mkdir -pv $HOME/Games/ROMs/Sega\ Master\ System/ | tee -a install_log.txt
 	mkdir -pv $HOME/Games/ROMs/GBC/ | tee -a install_log.txt
 	mkdir -pv $HOME/Games/ROMs/GBA/ | tee -a install_log.txt
+	mkdir -pv $HOME/Games/ROMs/TurboGraphx\ 16/ | tee -a install_log.txt
 
 	#Artwork 
 	mkdir -pv $HOME/Games/Artwork/Atari\ 2600/ | tee -a install_log.txt
@@ -1118,6 +1163,7 @@ function _configuration (){
 	mkdir -pv $HOME/Games/Artwork/Sega\ Master\ System/ | tee -a install_log.txt
 	mkdir -pv $HOME/Games/Artwork/GBC/ | tee -a install_log.txt
 	mkdir -pv $HOME/Games/Artwork/GBA/ | tee -a install_log.txt
+	mkdir -pv $HOME/Games/Artwork/TurboGraphx\ 16/ | tee -a install_log.txt
 
 	#Saves (if any)
 	mkdir -pv $HOME/Games/Saves/Atari\ 2600/ | tee -a install_log.txt
@@ -1128,6 +1174,7 @@ function _configuration (){
 	mkdir -pv $HOME/Games/Saves/Sega\ Master\ System/ | tee -a install_log.txt
 	mkdir -pv $HOME/Games/Saves/GBC/ | tee -a install_log.txt
 	mkdir -pv $HOME/Games/Saves/GBA/ | tee -a install_log.txt
+	mkdir -pv $HOME/Games/Saves/TurboGraphx\ 16/ | tee -a install_log.txt
 
 	#create dotfiles
 	mkdir -pv $HOME/.qjoypad3/ | tee -a install_log.txt
