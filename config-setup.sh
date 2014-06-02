@@ -181,7 +181,8 @@ options=(1 "Atari 2600"
 	 5 "MAME"
 	 6 "Sega Genesis"
 	 7 "GBC"
-	 8 "Exit ROM Loader")
+	 8 "GBC"
+	 9 "Exit ROM Loader")
 
 	#make menu choice
 	selection=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
@@ -268,7 +269,7 @@ options=(1 "Atari 2600"
 		_rom-loader
 		;;
 
-		17)
+		7)
 		#call file loader  	
 		_file-loader
 		#copy GBC ROMs
@@ -281,7 +282,20 @@ options=(1 "Atari 2600"
 		_rom-loader
 		;;
 
-		8)  
+		8)
+		#call file loader  	
+		_file-loader
+		#copy GBA ROMs
+		clear
+		echo "-----------------------------------------------------------" | tee -a install_log.txt
+		echo "Loading GBA ROMs..." | tee -a install_log.txt
+		echo "-----------------------------------------------------------" | tee -a install_log.txt
+		cp -Rv "$folder"/* $HOME/Games/ROMs/GBA/ | tee -a install_log.txt
+		#return back to menu
+		_rom-loader
+		;;
+
+		9)  
 		return
 		;;
 		esac
@@ -1073,6 +1087,7 @@ function _configuration (){
 	mkdir -pv $HOME/Games/ROMs/SNES/ | tee -a install_log.txt
 	mkdir -pv $HOME/Games/ROMs/Sega\ Genesis/ | tee -a install_log.txt
 	mkdir -pv $HOME/Games/ROMs/GBC/ | tee -a install_log.txt
+	mkdir -pv $HOME/Games/ROMs/GBA/ | tee -a install_log.txt
 
 	#Artwork 
 	mkdir -pv $HOME/Games/Artwork/Atari\ 2600/ | tee -a install_log.txt
@@ -1082,6 +1097,7 @@ function _configuration (){
 	mkdir -pv $HOME/Games/Artwork/SNES/ | tee -a install_log.txt
 	mkdir -pv $HOME/Games/Artwork/Sega\ Genesis/ | tee -a install_log.txt
 	mkdir -pv $HOME/Games/Artwork/GBC/ | tee -a install_log.txt
+	mkdir -pv $HOME/Games/Artwork/GBA/ | tee -a install_log.txt
 
 	#Saves (if any)
 	mkdir -pv $HOME/Games/Saves/Atari\ 2600/ | tee -a install_log.txt
@@ -1091,6 +1107,7 @@ function _configuration (){
 	mkdir -pv $HOME/Games/Saves/SNES/ | tee -a install_log.txt
 	mkdir -pv $HOME/Games/Saves/Sega\ Genesis/ | tee -a install_log.txt
 	mkdir -pv $HOME/Games/Saves/GBC/ | tee -a install_log.txt
+	mkdir -pv $HOME/Games/Saves/GBA/ | tee -a install_log.txt
 
 	#create dotfiles
 	mkdir -pv $HOME/.qjoypad3/ | tee -a install_log.txt
