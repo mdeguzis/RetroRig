@@ -22,7 +22,7 @@ It is mainly targeted at folks wishing to repurpose an old PC.
 
 Warning! It will overwrite:
 
--Emulator configs for supported emulators (see Section 1: Installation of the wiki)  
+-Emulator configs for supported emulators (see "Section 1: Installation" of the wiki)  
 -Also configs related to:  
 
 * qjoypad
