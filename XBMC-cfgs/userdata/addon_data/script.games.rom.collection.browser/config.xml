@@ -4,7 +4,7 @@
       <useBuiltinEmulator>False</useBuiltinEmulator>
       <gameclient />
       <emulatorCmd>/usr/bin/stella</emulatorCmd>
-      <emulatorParams>%ROM%"</emulatorParams>
+      <emulatorParams>"%ROM%"</emulatorParams>
       <romPath>/home/test/Games/ROMs/Atari 2600/*.bin</romPath>
       <saveStatePath />
       <saveStateParams />
