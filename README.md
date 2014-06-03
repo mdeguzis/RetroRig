@@ -31,23 +31,22 @@ Warning! It will overwrite:
 * Some folder structures under ~/Games
 * xboxdrv init scripts and configurations
 
-## Current feature set
+## Some current features include
+
+For all other features, please see the [wiki](https://github.com/ProfessorKaos64/RetroRig/wiki)
+
 
 * Auto-install software, emulator configs, and required components
-* Many supported consoles (Please see the wiki, under 
-* 4-player wireless xboxdrv userland module inserted as init script
+* Many supported consoles 
 * Gamepad select menu
 * Resolution presets/custom selection for emulators that support it
 * Preset Controller mappings for supported gamepads
 * Save state, load state, exit emulators with gamepad
 * A cobbled together "first run" state of RCB with a blank games database and pre-set configs
 * Functions to update git repo, emulator binaries, upgrade system and more
-* MAME offline scrapper system built in (artwork almost ready)
 * Automatically start XBMC, then directly into RCB itself
-* ROM pre-loader on configuration setup
-* Logging options for install
+* ROM pre-loader
 * Unity configuration set during config-setup to lengthen screen timeout + remove screen lock
-* Beta branch for those wishing to see/test what I'm working on
 * Uninstall option
 
 ## Why XBMC and Ubuntu?
