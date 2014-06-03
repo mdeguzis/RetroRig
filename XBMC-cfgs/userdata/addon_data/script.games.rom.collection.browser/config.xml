@@ -248,6 +248,37 @@
       <scraper name="archive.vg" replaceKeyString="" replaceValueString="" />
       <scraper name="mobygames.com" replaceKeyString="" replaceValueString="" />
     </RomCollection>
+    <RomCollection id="13" name="Game Gear">
+      <useBuiltinEmulator>False</useBuiltinEmulator>
+      <gameclient />
+      <emulatorCmd>/usr/games/mednafen</emulatorCmd>
+      <emulatorParams>"%ROM%"</emulatorParams>
+      <romPath>/home/test/Games/ROMs/Game Gear/*.zip</romPath>
+      <saveStatePath />
+      <saveStateParams />
+      <mediaPath type="boxfront">/home/test/Games/Artwork/Game Gear/boxfront/%GAME%.*</mediaPath>
+      <mediaPath type="boxback">/home/test/Games/Artwork/Game Gear/boxback/%GAME%.*</mediaPath>
+      <mediaPath type="cartridge">/home/test/Games/Artwork/Game Gear/cartridge/%GAME%.*</mediaPath>
+      <mediaPath type="screenshot">/home/test/Games/Artwork/Game Gear/screenshot/%GAME%.*</mediaPath>
+      <mediaPath type="fanart">/home/test/Games/Artwork/Game Gear/fanart/%GAME%.*</mediaPath>
+      <preCmd />
+      <postCmd />
+      <useEmuSolo>False</useEmuSolo>
+      <usePopen>False</usePopen>
+      <ignoreOnScan>False</ignoreOnScan>
+      <allowUpdate>True</allowUpdate>
+      <autoplayVideoMain>True</autoplayVideoMain>
+      <autoplayVideoInfo>True</autoplayVideoInfo>
+      <useFoldernameAsGamename>False</useFoldernameAsGamename>
+      <maxFolderDepth>99</maxFolderDepth>
+      <doNotExtractZipFiles>False</doNotExtractZipFiles>
+      <diskPrefix>_Disk</diskPrefix>
+      <imagePlacingMain>gameinfobig</imagePlacingMain>
+      <imagePlacingInfo>gameinfosmall</imagePlacingInfo>
+      <scraper name="thegamesdb.net" replaceKeyString="" replaceValueString="" />
+      <scraper name="archive.vg" replaceKeyString="" replaceValueString="" />
+      <scraper name="mobygames.com" replaceKeyString="" replaceValueString="" />
+    </RomCollection>
   </RomCollections>
   <FileTypes>
     <FileType id="1" name="boxfront">
