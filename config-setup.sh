@@ -180,10 +180,11 @@ options=(1 "Atari 2600"
 	 4 "Nintendo 64"
 	 5 "MAME"
 	 6 "Sega Master System"
-	 7 "GBC"
+	 7 "Sega Game Gear"
 	 8 "GBC"
-	 9 "TurboGraphix 16"
-	 10 "Exit ROM Loader")
+	 9 "GBC"
+	 10 "TurboGraphix 16"
+	 11 "Exit ROM Loader")
 
 	#make menu choice
 	selection=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
@@ -260,10 +261,10 @@ options=(1 "Atari 2600"
 		6)
 		#call file loader  	
 		_file-loader
-		#copy Sega Sega Master ROMs
+		#copy Sega Master System ROMs
 		clear
 		echo "-----------------------------------------------------------" | tee -a install_log.txt
-		echo "Loading Sega Sega Master ROMs..." | tee -a install_log.txt
+		echo "Loading Sega Master System ROMs..." | tee -a install_log.txt
 		echo "-----------------------------------------------------------" | tee -a install_log.txt
 		cp -Rv "$folder"/* $HOME/Games/ROMs/Sega\ Master\ System/ | tee -a install_log.txt
 		#return back to menu
@@ -271,6 +272,19 @@ options=(1 "Atari 2600"
 		;;
 
 		7)
+		#call file loader  	
+		_file-loader
+		#copy Sega Game Gear ROMs
+		clear
+		echo "-----------------------------------------------------------" | tee -a install_log.txt
+		echo "Loading Sega Game Gear ROMs..." | tee -a install_log.txt
+		echo "-----------------------------------------------------------" | tee -a install_log.txt
+		cp -Rv "$folder"/* $HOME/Games/ROMs/Sega\ Game\ Gear/ | tee -a install_log.txt
+		#return back to menu
+		_rom-loader
+		;;
+
+		8)
 		#call file loader  	
 		_file-loader
 		#copy GBC ROMs
@@ -283,7 +297,7 @@ options=(1 "Atari 2600"
 		_rom-loader
 		;;
 
-		8)
+		9)
 		#call file loader  	
 		_file-loader
 		#copy GBA ROMs
@@ -296,7 +310,7 @@ options=(1 "Atari 2600"
 		_rom-loader
 		;;
 
-		9)
+		10)
 		#call file loader  	
 		_file-loader
 		#copy Turbographx 16 ROMs
@@ -309,7 +323,7 @@ options=(1 "Atari 2600"
 		_rom-loader
 		;;
 
-		10)  
+		11)  
 		return
 		;;
 		esac
@@ -558,12 +572,19 @@ function _res-swticher (){
 		sed -ie "s|$sms_org_X|sms.xres $sms_new_X|g" $HOME/.mednafen/mednafen-09x.cfg
 		sed -ie "s|$sms_org_Y|sms.yres $sms_new_Y|g" $HOME/.mednafen/mednafen-09x.cfg
 
-		#Mednafen (Turbographx 16)
-		pce_org_X=$(grep -Ee "\bpce.xres\b " $HOME/.mednafen/mednafen-09x.cfg)
-		pce_org_Y=$(grep -Ee "\bpce.yres\b " $HOME/.mednafen/mednafen-09x.cfg)
+		#Mednafen (Sega Gane Gear)
+		sms_org_X=$(grep -Ee "\bsms.xres\b " $HOME/.mednafen/mednafen-09x.cfg)
+		sms_org_Y=$(grep -Ee "\bsms.yres\b " $HOME/.mednafen/mednafen-09x.cfg)
 		#make the changes, prefix new_X in case NULL was entered previously
-		sed -ie "s|$pce_org_X|pce.xres $pce_new_X|g" $HOME/.mednafen/mednafen-09x.cfg
-		sed -ie "s|$pce_org_Y|pce.yres $pce_new_Y|g" $HOME/.mednafen/mednafen-09x.cfg
+		sed -ie "s|$sms_org_X|sms.xres $sms_new_X|g" $HOME/.mednafen/mednafen-09x.cfg
+		sed -ie "s|$sms_org_Y|sms.yres $sms_new_Y|g" $HOME/.mednafen/mednafen-09x.cfg
+
+		#Mednafen (Turbographx 16)
+		gg_org_X=$(grep -Ee "\bgg.xres\b " $HOME/.mednafen/mednafen-09x.cfg)
+		gg_org_Y=$(grep -Ee "\bgg.yres\b " $HOME/.mednafen/mednafen-09x.cfg)
+		#make the changes, prefix new_X in case NULL was entered previously
+		sed -ie "s|$gg_org_X|gg.xres $gg_new_X|g" $HOME/.mednafen/mednafen-09x.cfg
+		sed -ie "s|$gg_org_Y|gg.yres $gg_new_Y|g" $HOME/.mednafen/mednafen-09x.cfg
 
 		#For some reason, when I replace the resolutions, the config files are changed
 		#They are appended with an "e" as in mednafen-09x.cfge. These "edited" files need
@@ -571,17 +592,6 @@ function _res-swticher (){
 		rm -f $HOME/.mednafen/mednafen-09x.cfge
 		rm -f $HOME/.config/mupen64plus/mupen64plus.cfge
 		rm -f $HOME/.pcsx/plugins/gpuPeopsMesaGL.cfge
-
-		########################		
-		#Dolphin-emu
-		######################## 
-		#Resolution in Dolphin is set automatically via OpenGL. This can
-		#be hardcoded, but works best in auto mode.
-
-		########################		
-		#Stella
-		######################## 
-
 
 }
 
@@ -635,6 +645,11 @@ if [ "$choices" != "" ]; then
 		grep -Ee "\bsms.xres\b" $HOME/.mednafen/mednafen-09x.cfg >> res.txt
 		grep -Ee "\bsms.yres\b" $HOME/.mednafen/mednafen-09x.cfg >> res.txt
 		echo "" >> res.txt
+		#mednafen Sega Game Gear
+		echo "Mednafen (Sega Game Gear)" >> res.txt
+		grep -Ee "\bgg.xres\b" $HOME/.mednafen/mednafen-09x.cfg >> res.txt
+		grep -Ee "\bgg.yres\b" $HOME/.mednafen/mednafen-09x.cfg >> res.txt
+		echo "" >> res.txt
 		#mednafen SNES
 		echo "Mednafen (SNES)" >> res.txt
 		grep -Ee "\bsnes.xres\b" $HOME/.mednafen/mednafen-09x.cfg >> res.txt
@@ -676,6 +691,9 @@ if [ "$choices" != "" ]; then
 		#set mednafen (Sega Master System) value
 		sms_new_X="1280"
 		sms_new_Y="720"
+		#set mednafen (Sega Game Gear) value
+		gg_new_X="1280"
+		gg_new_Y="720"
 		#set mednafen (Turbographx 16) value
 		pce_new_X="1280"
 		pce_new_Y="720"
@@ -706,6 +724,9 @@ if [ "$choices" != "" ]; then
 		#set mednafen (Sega Master System) value
 		sms_new_X="1280"
 		sms_new_Y="1024"
+		#set mednafen (Sega Game Gear) value
+		gg_new_X="1280"
+		gg_new_Y="1024"
 		#set mednafen (Turbographx 16) value
 		pce_new_X="1280"
 		pce_new_Y="1024"
@@ -736,6 +757,9 @@ if [ "$choices" != "" ]; then
 		#set mednafen (Sega Master System) value
 		sms_new_X="1366"
 		sms_new_Y="768"
+		#set mednafen (Sega Game Gear) value
+		gg_new_X="1366"
+		gg_new_Y="768"
 		#set mednafen (Turbographx 16) value
 		pce_new_X="1366"
 		pce_new_Y="768"
@@ -766,6 +790,9 @@ if [ "$choices" != "" ]; then
 		#set mednafen (Sega Master System) value
 		sms_new_X="1600"
 		sms_new_Y="900"
+		#set mednafen (Sega Game Gear) value
+		gg_new_X="1600"
+		gg_new_Y="900"
 		#set mednafen (Turbographx 16) value
 		pce_new_X="1600"
 		pce_new_Y="900"
@@ -796,6 +823,9 @@ if [ "$choices" != "" ]; then
 		#set mednafen (Sega Master System) value
 		sms_new_X="1920"
 		sms_new_Y="1080"
+		#set mednafen (Sega Game Gear) value
+		gg_new_X="1920"
+		gg_new_Y="1080"
 		#set mednafen (Turbographx 16) value
 		pce_new_X="1920"
 		pce_new_Y="1080"
@@ -831,6 +861,9 @@ if [ "$choices" != "" ]; then
 		#mednafen (Sega Master System)
 		sms_new_X=$(cat '/tmp/new_X')
 		sms_new_Y=$(cat '/tmp/new_Y')
+		#mednafen (Sega Game Gear)
+		gg_new_X=$(cat '/tmp/new_X')
+		gg_new_Y=$(cat '/tmp/new_Y')
 		#mednafen (Turbographx 16)
 		pce_new_X=$(cat '/tmp/new_X')
 		pce_new_Y=$(cat '/tmp/new_Y')
@@ -1150,6 +1183,7 @@ function _configuration (){
 	mkdir -pv $HOME/Games/ROMs/NES/ | tee -a install_log.txt
 	mkdir -pv $HOME/Games/ROMs/SNES/ | tee -a install_log.txt
 	mkdir -pv $HOME/Games/ROMs/Sega\ Master\ System/ | tee -a install_log.txt
+	mkdir -pv $HOME/Games/ROMs/Sega\ Game\ Gear/ | tee -a install_log.txt
 	mkdir -pv $HOME/Games/ROMs/GBC/ | tee -a install_log.txt
 	mkdir -pv $HOME/Games/ROMs/GBA/ | tee -a install_log.txt
 	mkdir -pv $HOME/Games/ROMs/TurboGraphx\ 16/ | tee -a install_log.txt
@@ -1161,6 +1195,7 @@ function _configuration (){
 	mkdir -pv $HOME/Games/Artwork/NES/ | tee -a install_log.txt
 	mkdir -pv $HOME/Games/Artwork/SNES/ | tee -a install_log.txt
 	mkdir -pv $HOME/Games/Artwork/Sega\ Master\ System/ | tee -a install_log.txt
+	mkdir -pv $HOME/Games/Artwork/Sega\ Game\ Gear/ | tee -a install_log.txt
 	mkdir -pv $HOME/Games/Artwork/GBC/ | tee -a install_log.txt
 	mkdir -pv $HOME/Games/Artwork/GBA/ | tee -a install_log.txt
 	mkdir -pv $HOME/Games/Artwork/TurboGraphx\ 16/ | tee -a install_log.txt
@@ -1172,6 +1207,7 @@ function _configuration (){
 	mkdir -pv $HOME/Games/Saves/NES/ | tee -a install_log.txt
 	mkdir -pv $HOME/Games/Saves/SNES/ | tee -a install_log.txt
 	mkdir -pv $HOME/Games/Saves/Sega\ Master\ System/ | tee -a install_log.txt
+	mkdir -pv $HOME/Games/Saves/Sega\ Game\ Gear/ | tee -a install_log.txt
 	mkdir -pv $HOME/Games/Saves/GBC/ | tee -a install_log.txt
 	mkdir -pv $HOME/Games/Saves/GBA/ | tee -a install_log.txt
 	mkdir -pv $HOME/Games/Saves/TurboGraphx\ 16/ | tee -a install_log.txt
