@@ -933,7 +933,7 @@ function _software () {
 	echo "-----------------------------------------------------------" | tee -a install_log.txt
 	echo $userpasswd | sudo -S apt-get install -y xboxdrv curl \
 	python-software-properties pkg-config software-properties-common mednafen \
-	mame mupen64plus dconf-tools jstest-gtk qjoypad xbmc stella \
+	mame mupen64plus dconf-tools mess jstest-gtk qjoypad xbmc stella \
 	build-essential | tee -a install_log.txt
 
 
