@@ -1097,6 +1097,8 @@ function _config-x360ws () {
 	# Main config
 	cp -v $HOME/RetroRig/emu-cfgs/x360ws/MESS/mess.ini $HOME/.mess/ | tee -a install_log.txt
 	cp -v $HOME/RetroRig/emu-cfgs/x360ws/MESS/default.cfg $HOME/.mess/cfg | tee -a install_log.txt
+	# Copy over system config for: Neo Geo CDZ config 
+	cp -v $HOME/RetroRig/emu-cfgs/x360ws/MESS/neocdz.cfg $HOME/.mess/cfg | tee -a install_log.txt
 
 	# mednafen
 	# default path: /home/$USER/.mednafen/mednafen.cfg
@@ -1164,6 +1166,8 @@ function _config-x360wd () {
 	# Main config
 	cp -v $HOME/RetroRig/emu-cfgs/x360ws/MESS/mess.ini $HOME/.mess/ | tee -a install_log.txt
 	cp -v $HOME/RetroRig/emu-cfgs/x360ws/MESS/default.cfg $HOME/.mess/cfg | tee -a install_log.txt
+	# Copy over system config for: Neo Geo CDZ config 
+	cp -v $HOME/RetroRig/emu-cfgs/x360ws/MESS/neocdz.cfg $HOME/.mess/cfg | tee -a install_log.txt
 
 	# mednafen
 	# default path: /home/$USER/.mednafen/mednafen.cfg
@@ -1265,7 +1269,7 @@ function _configuration (){
 	mkdir -pv $HOME/Games/ROMs/GBC/ | tee -a install_log.txt
 	mkdir -pv $HOME/Games/ROMs/GBA/ | tee -a install_log.txt
 	mkdir -pv $HOME/Games/ROMs/TurboGraphx\ 16/ | tee -a install_log.txt
-	mkdir -pv $HOME/Games/ROMs/Neo-Geo/AES/ | tee -a install_log.txt
+	mkdir -pv $HOME/Games/ROMs/Neo-Geo/CDZ/ | tee -a install_log.txt
 
 
 	# Artwork 
@@ -1279,7 +1283,7 @@ function _configuration (){
 	mkdir -pv $HOME/Games/Artwork/GBC/ | tee -a install_log.txt
 	mkdir -pv $HOME/Games/Artwork/GBA/ | tee -a install_log.txt
 	mkdir -pv $HOME/Games/Artwork/TurboGraphx\ 16/ | tee -a install_log.txt
-	mkdir -pv $HOME/Games/Artwork/Neo-Geo/AES/ | tee -a install_log.txt
+	mkdir -pv $HOME/Games/Artwork/Neo-Geo/CDZ/ | tee -a install_log.txt
 
 	# Saves (if any)
 	mkdir -pv $HOME/Games/Saves/Atari\ 2600/ | tee -a install_log.txt
@@ -1292,7 +1296,7 @@ function _configuration (){
 	mkdir -pv $HOME/Games/Saves/GBC/ | tee -a install_log.txt
 	mkdir -pv $HOME/Games/Saves/GBA/ | tee -a install_log.txt
 	mkdir -pv $HOME/Games/Saves/TurboGraphx\ 16/ | tee -a install_log.txt
-	mkdir -pv $HOME/Games/Saves/Neo-Geo/AES/ | tee -a install_log.txt
+	mkdir -pv $HOME/Games/Saves/Neo-Geo/CDZ/ | tee -a install_log.txt
 
 	# create dotfiles
 	mkdir -pv $HOME/.qjoypad3/ | tee -a install_log.txt
