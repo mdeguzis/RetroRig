@@ -48,6 +48,7 @@ For all other features, please see the [wiki](https://github.com/ProfessorKaos64
 * ROM pre-loader
 * Unity configuration set during config-setup to lengthen screen timeout + remove screen lock
 * Uninstall option
+* Load BIOS files for emulators that need them (no need to remeber where to put them!)
 
 ## Why XBMC and Ubuntu?
 
