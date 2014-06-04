@@ -1,13 +1,16 @@
 #!/bin/bash
 #
-# RetroRig main resolution module
+# RetroRig setup modules
 # This is a small script to copy over configuration files for emulators
 # append a "-x" on the end above for debugging if need be
 # Please report any errors via a pull request
 # You can also reach me on twitter: @N3RD42
 #
 
-function _resolution () {
+
+
+
+function set_resolution () {
 
 #menu
 #add res-switcher function to make new presets more modular to add
@@ -28,7 +31,7 @@ choices=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
 if [ "$choices" != "" ]; then
     case $choices in
 
-	 1) 
+	1) 
 		#Need to use extended regexp's here because of nes being within nes
 		#grep -Ee '\bnes\b' [list of files]
 
@@ -83,7 +86,7 @@ if [ "$choices" != "" ]; then
 		rm res.txt
 		;;
 
-	 2) 
+	2) 
 		#setting chosen: "1280x720  (720p)  (5:4)"
 		#set mupen64plus value
 		m_new_X="1280"
@@ -116,7 +119,7 @@ if [ "$choices" != "" ]; then
 		#return to menu
 		return
 		;;  
-	 3) 
+	3) 
 		#setting chosen: "1280x1024 (SXGA)  (5:4)"
 		#set mupen64plus value
 		m_new_X="1280"
@@ -149,7 +152,7 @@ if [ "$choices" != "" ]; then
 		#return to menu
 		return
 		;;
-	 4) 
+	4) 
 		#setting chosen: "1366x768  (720p)  (16:9)"
 		#set mupen64plus value
 		m_new_X="1366"
@@ -182,7 +185,7 @@ if [ "$choices" != "" ]; then
 		#return to menu
 		return
 		;;
-	 5) 
+	5) 
 		#setting chosen: "1600x900  (900p)  (16:9)"
 		#set mupen64plus value
 		m_new_X="1600"
@@ -215,7 +218,7 @@ if [ "$choices" != "" ]; then
 		#return to menu
 		return
 		;;
-	 6) 
+	6) 
 		#setting chosen: "1920x1080 (1080p) (16:9)"
 		#set mupen64plus value
 		m_new_X="1920"
@@ -248,7 +251,7 @@ if [ "$choices" != "" ]; then
 		#return to menu
 		return
 		;;    
-	 7) 
+	7) 
 		dialog --infobox  "Setting resolution from user input" 3 40
 		#set new resolution(s) from user input
 		dialog --title "Set Custom Resolution" --inputbox "Enter Width (X)" 10 4 2> /tmp/new_X
@@ -293,10 +296,10 @@ if [ "$choices" != "" ]; then
 		#return to menu
 		return
 		;; 
-	 8) 
+	8) 
 		return
 		;;
-	 9) 
+	9) 
 		_main
 		;;
 	esac
@@ -304,106 +307,42 @@ fi
 done
 }
 
-function _res-swticher (){
-		clear
-		dialog --infobox "Setting resolution to selection" 3 36
-		#resolution is set via _resolution function		
-		
-		########################		
-		#Stella
-		########################
-		st_org=$(grep -Ee "\bfullres = \b" $HOME/.stella/stellarc)
-		#make the changes, prefix new_X in case NULL was entered previously
-		sed -ie "s|$st_org|fullres = $st_new|g" $HOME/.stella/stellarc
+function set_gamepad_x360 () 
+{
 
-		########################		
-		#mupen64plus
-		########################
-		m_org_X=$(grep -Ee "\bScreenWidth = \b" $HOME/.config/mupen64plus/mupen64plus.cfg)
-		m_org_Y=$(grep -Ee "\bScreenHeight = \b" $HOME/.config/mupen64plus/mupen64plus.cfg)
-		#make the changes, prefix new_X in case NULL was entered previousey
-		sed -ie "s|$m_org_X|ScreenWidth = $m_new_X|g" $HOME/.config/mupen64plus/mupen64plus.cfg
-		sed -ie "s|$m_org_Y|ScreenHeight = $m_new_Y|g" $HOME/.config/mupen64plus/mupen64plus.cfg
+	#Wireless Xbox 360 Controller Config
 
-		########################		
-		#mednafen 
-		######################## 
+	#copy xbox configuration (default) to folder
+	cp -v $HOME/RetroRig/gamepad-cfgs/x360_controller/xpad-wireless.xboxdrv /usr/share/xboxdrv/
+	
+	# copy keyboard.xml file for XBMC. Button id numbers are totally diffferent, due to the use of the use-dpad-as-button, and use-trigger-as-button options used.
+	cp -v $HOME/RetroRig/gamepad-cfgs/x360_controller/keyboard.xml $HOME/.xbmc/userdata/keymaps
 
-		#Emulator Codes:
-		########################
-		#Atari Lynx [lynx]
-		#GameBoy (Color) [gb]
-		#GameBoy Advance [gba]
-		#Neo Geo Pocket (Color) [ngp]
-		#Nintendo Entertainment System/Famicom [nes]
-		#PC Engine (CD)/TurboGrafx 16 (CD)/SuperGrafx [pce]
-		#PC Engine (CD)/TurboGrafx 16 (CD)/SuperGrafx [pce_fast]
-		#PC-FX [pcfx]
-		#Sega Game Gear [gg]
-		#Sega Genesis/MegaDrive [md]
-		#Sega Master System [sms]
-		#Sony PlayStation [psx]
-		#Super Nintendo Entertainment System/Super Famicom [snes]
-		#Virtual Boy [vb]
-		#WonderSwan [wswan]
+	#set qjoypad's profile to match Xbox 360 Wireless (4-player)
+	cp -v $HOME/RetroRig/gamepad-cfgs/x360_controller.lyt $HOME/.qjoypad3/ 
+	
+	#inject init script and default config
+	cp -v $HOME/RetroRig/init-scripts/x360_controller/xboxdrv /etc/init.d/
+	cp -v $HOME/RetroRig/init-scripts/x360_controller/default/xboxdrv /etc/default/xboxdrv
+	
+	#update init scripts
+	update-rc.d xboxdrv defaults | tee -a install_log.txt
 
-		#Note: it should be noted that all emulators are set to stretch
-		#the screen (EMU_CODE.stretch 1). The value is boolean.
+	#blacklist xpad
+	echo "sudo needed to blacklist xpad!"
+	cp -v $scriptdir/init-scripts/x360_controller/blacklist.conf /etc/modprobe.d/
 
-		#Mednafen (GBC)
-		gb_org_X=$(grep -Ee "\bgb.xres\b " $HOME/.mednafen/mednafen-09x.cfg)
-		gb_org_Y=$(grep -Ee "\bgb.yres\b " $HOME/.mednafen/mednafen-09x.cfg)
-		#make the changes, prefix new_X in case NULL was entered previously
-		sed -ie "s|$gb_org_X|gb.xres $gb_new_X|g" $HOME/.mednafen/mednafen-09x.cfg
-		sed -ie "s|$gb_org_Y|gb.yres $gb_new_Y|g" $HOME/.mednafen/mednafen-09x.cfg
+	#copy default gamepad setup for Xbox 360 Wireless (4-player)
+	cp -v $scriptdir/controller-cfgs/x360_controller/x360_controller.lyt $HOME/.qjoypad3/
 
-		#Mednafen (NES)
-		nes_org_X=$(grep -Ee "\bnes.xres\b " $HOME/.mednafen/mednafen-09x.cfg)
-		nes_org_Y=$(grep -Ee "\bnes.yres\b " $HOME/.mednafen/mednafen-09x.cfg)
-		#make the changes, prefix new_X in case NULL was entered previously
-		sed -ie "s|$nes_org_X|nes.xres $nes_new_X|g" $HOME/.mednafen/mednafen-09x.cfg
-		sed -ie "s|$nes_org_Y|nes.yres $nes_new_Y|g" $HOME/.mednafen/mednafen-09x.cfg
+	#copy qjoypad autostart item for x360_controller gamepad config
+	cp -v $scriptdir/gamepad-cfgs/x360_controller/qjoypad.desktop /etc/xdg/autostart/
 
-		#Mednafen (GameBoy Advance)
-		gba_org_X=$(grep -Ee "\bgba.xres\b " $HOME/.mednafen/mednafen-09x.cfg)
-		gba_org_Y=$(grep -Ee "\bgba.yres\b " $HOME/.mednafen/mednafen-09x.cfg)
-		#make the changes, prefix new_X in case NULL was entered previously
-		sed -ie "s|$gba_org_X|gba.xres $gba_new_X|g" $HOME/.mednafen/mednafen-09x.cfg
-		sed -ie "s|$gba_org_Y|gba.yres $gba_new_Y|g" $HOME/.mednafen/mednafen-09x.cfg
+}
 
-		#Mednafen (SNES)
-		snes_org_X=$(grep -Ee "\bsnes.xres\b " $HOME/.mednafen/mednafen-09x.cfg)
-		snes_org_Y=$(grep -Ee "\bsnes.yres\b " $HOME/.mednafen/mednafen-09x.cfg)
-		#make the changes, prefix new_X in case NULL was entered previously
-		sed -ie "s|$snes_org_X|snes.xres $snes_new_X|g" $HOME/.mednafen/mednafen-09x.cfg
-		sed -ie "s|$snes_org_Y|snes.yres $snes_new_Y|g" $HOME/.mednafen/mednafen-09x.cfg
+function set_mupen_vido ()
+{
 
-		#Mednafen (Sega Master System, aka Sega Sega Master)
-		sms_org_X=$(grep -Ee "\bsms.xres\b " $HOME/.mednafen/mednafen-09x.cfg)
-		sms_org_Y=$(grep -Ee "\bsms.yres\b " $HOME/.mednafen/mednafen-09x.cfg)
-		#make the changes, prefix new_X in case NULL was entered previously
-		sed -ie "s|$sms_org_X|sms.xres $sms_new_X|g" $HOME/.mednafen/mednafen-09x.cfg
-		sed -ie "s|$sms_org_Y|sms.yres $sms_new_Y|g" $HOME/.mednafen/mednafen-09x.cfg
-
-		#Mednafen (Sega Gane Gear)
-		sms_org_X=$(grep -Ee "\bsms.xres\b " $HOME/.mednafen/mednafen-09x.cfg)
-		sms_org_Y=$(grep -Ee "\bsms.yres\b " $HOME/.mednafen/mednafen-09x.cfg)
-		#make the changes, prefix new_X in case NULL was entered previously
-		sed -ie "s|$sms_org_X|sms.xres $sms_new_X|g" $HOME/.mednafen/mednafen-09x.cfg
-		sed -ie "s|$sms_org_Y|sms.yres $sms_new_Y|g" $HOME/.mednafen/mednafen-09x.cfg
-
-		#Mednafen (Turbographx 16)
-		gg_org_X=$(grep -Ee "\bgg.xres\b " $HOME/.mednafen/mednafen-09x.cfg)
-		gg_org_Y=$(grep -Ee "\bgg.yres\b " $HOME/.mednafen/mednafen-09x.cfg)
-		#make the changes, prefix new_X in case NULL was entered previously
-		sed -ie "s|$gg_org_X|gg.xres $gg_new_X|g" $HOME/.mednafen/mednafen-09x.cfg
-		sed -ie "s|$gg_org_Y|gg.yres $gg_new_Y|g" $HOME/.mednafen/mednafen-09x.cfg
-
-		#For some reason, when I replace the resolutions, the config files are changed
-		#They are appended with an "e" as in mednafen-09x.cfge. These "edited" files need
-		#deleted. I will have to find out at some point why this occurs
-		rm -f $HOME/.mednafen/mednafen-09x.cfge
-		rm -f $HOME/.config/mupen64plus/mupen64plus.cfge
-		rm -f $HOME/.pcsx/plugins/gpuPeopsMesaGL.cfge
+echo "nothing here yet"
 
 }
