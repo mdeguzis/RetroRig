@@ -1,0 +1,78 @@
+#!/bin/bash
+#
+# RetroRig configuration modules
+# This is a small script to copy over configuration files for emulators
+# append a "-x" on the end above for debugging if need be
+# Please report any errors via a pull request
+# You can also reach me on twitter: @N3RD42
+#
+# prepare folder structure for emulator, cores, front end, and roms
+
+function cfg_confirm ()
+{
+
+	dialog --title "Confirm yes/no" \
+	--backtitle "LibreGeek.org RetroRig Installer" \
+	--yesno "Are you sure you want run the configuration setup? \
+	This will* reset existing configurations!" 7 50
+	 
+	# Get exit status
+	# 0 means user hit [yes] button.
+	# 1 means user hit [no] button.
+	# 255 means user hit [Esc] key.
+	response=$?
+	case $response in
+	   0) 
+	   #dialog --infobox "Continuing..." 3 17
+	   #continue on below
+	   ;;
+
+	   1) 
+	   dialog --infobox "Exiting Configuration Setup"  3 31
+	   sleep 2s
+	   _main
+	   ;;
+
+	   255)
+	   dialog --infobox "Exiting Configuration Setup" 3 31
+	   sleep 2s
+	   _main
+	   ;;
+
+	esac
+}
+
+function cfg_Unity ()
+{
+
+#disable screensaver, XBMC will manage this
+#export display to allow gsettings running in terminal window
+export DISPLAY=:0.0
+gsettings set org.gnome.desktop.screensaver lock-enabled false
+gsettings set org.gnome.desktop.screensaver ubuntu-lock-on-suspend false
+gsettings set org.gnome.desktop.session idle-delay 3600
+
+}
+
+function cfg_xbmc ()
+{
+
+#xbmc does not (at least for Ubuntu's repo pkg) load the
+#dot files without loading XBMC at least once
+#copy in default folder base from first run:	
+cp -Rv $HOME/RetroRig/XBMC-cfgs/* $HOME/.xbmc | tee -a install_log.txt
+
+}
+
+function cfg_correct_perms ()
+{
+
+#this may not even be needed
+#set the system user to an absolute value.
+#RCB and some config files don't like using $HOME, rather /home/test/
+#Let's change the config files to reflect the current username
+sed -i "s|/home/mikeyd/|/home/$USER/|g" "$HOME/.mame/mame.ini"
+sed -i "s|/home/mikeyd/|/home/$USER/|g" "$HOME/.xbmc/userdata/addon_data/script.games.rom.collection.browser/config.xml"
+echo "The user applied to configuration files was: $USER"
+
+}

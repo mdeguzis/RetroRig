@@ -1,29 +1,30 @@
 #!/bin/bash
 #
-# RetroRig settings module
+# RetroRig menu modules
 # This is a small script to copy over configuration files for emulators
 # append a "-x" on the end above for debugging if need be
 # Please report any errors via a pull request
 # You can also reach me on twitter: @N3RD42
 #
+function m_settings ()
+{
+	
 
-function _settings (){
-
-cmd=(dialog --backtitle "LibreGeek.org RetroRig Installer" --menu "Settings Menu" 16 0 16)
-options=(1 "Change resolution"  
-	 2 "Load ROMs"
-	 3 "Change plugins/filters/scaling"
-	 4 "Change Gamepad Type"
-	 5 "Enable SSH support"
-	 6 "Back to main menu")
+while true; do
+	cmd=(dialog --backtitle "LibreGeek.org RetroRig Installer" --menu "Settings Menu" 16 0 16)
+	options=(1 "Change resolution"  
+		 2 "Load ROMs"
+		 3 "Change plugins/filters/scaling"
+		 4 "Change Gamepad Type"
+		 5 "Enable SSH support"
+ 		 6 "Back to main menu")
 
 	#make menu choice
-	selection=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
-	#functions
-grep -i "VideoPlugin = " $HOME/.config/mupen64plus/mupen64plus.cfg >> res.txt
-	for choice in $selection
-	do
-		case $choice in
+	choices=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
+	
+	if [ "$choices" != "" ]; then
+		case $choices in
+
 		1)  	
 		_resolution
 		#call settings rather than return so user can choose again
@@ -72,6 +73,10 @@ grep -i "VideoPlugin = " $HOME/.config/mupen64plus/mupen64plus.cfg >> res.txt
 		6)  
 		return
 		;;
-	esac
-	done
+
+		esac
+	else
+		break
+	fi
+done
 }

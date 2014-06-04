@@ -1,0 +1,298 @@
+#!/bin/bash
+#
+# RetroRig setup modules
+# This is a small script to copy over configuration files for emulators
+# append a "-x" on the end above for debugging if need be
+# Please report any errors via a pull request
+# You can also reach me on twitter: @N3RD42
+#
+
+function rrs_prepareFolders()
+{
+	printMsg "Creating folders for ROMs, Artwork, Saves, and dotfiles"
+
+	pathlist=()
+	pathlist+=("$rootdir/roms")
+	pathlist+=("$rootdir/roms/atari800")
+
+	#setup skelton folders for XBMC Rom Collection Browser
+	#ROMs
+	pathlist+=("$rootdir/ROMs/Atari 2600")
+	pathlist+=("$rootdir/ROMs/MAME")
+	pathlist+=("$rootdir/ROMs/N64")
+	pathlist+=("$rootdir/ROMs/NES")
+	pathlist+=("$rootdir/ROMs/SNES/")
+	pathlist+=("$rootdir/ROMs/Sega Master System")
+	pathlist+=("$rootdir/ROMs/Sega Game Gear")
+	pathlist+=("$rootdir/ROMs/GBC")
+	pathlist+=("$rootdir/ROMs/GBA")
+	pathlist+=("$rootdir/ROMs/TurboGraphx 16")
+	pathlist+=("$rootdir/ROMs/Neo-Geo/CDZ")
+	pathlist+=("$rootdir/ROMs/Neo-Geo/BIOS")
+
+	#Artwork 
+	pathlist+=("$rootdir/Artwork/Atari 2600")
+	pathlist+=("$rootdir/Artwork/MAME")
+	pathlist+=("$rootdir/Artwork/N64")
+	pathlist+=("$rootdir/Artwork/NES")
+	pathlist+=("$rootdir/Artwork/SNES")
+	pathlist+=("$rootdir/Artwork/Sega Master System")
+	pathlist+=("$rootdir/Artwork/Sega Game Gear")
+	pathlist+=("$rootdir/Artwork/GBC")
+	pathlist+=("$rootdir/Artwork/GBA")
+	pathlist+=("$rootdir/Artwork/TurboGraphx")
+	pathlist+=("$rootdir/Artwork/Neo-Geo/CDZ")
+
+	#Saves (if any)
+	pathlist+=("$rootdir/Saves/Atari 2600")
+	pathlist+=("$rootdir/Saves/MAME")
+	pathlist+=("$rootdir/Saves/N64")
+	pathlist+=("$rootdir/Saves/NES")
+	pathlist+=("$rootdir/Saves/SNES")
+	pathlist+=("$rootdir/Saves/Sega Master System")
+	pathlist+=("$rootdir/Saves/Sega Game Gear")
+	pathlist+=("$rootdir/Saves/GBC")
+	pathlist+=("$rootdir/Saves/GBA")
+	pathlist+=("$rootdir/Saves/TurboGraphx")
+	pathlist+=("$rootdir/Saves/Neo-Geo/CDZ")
+
+	#create dotfiles
+	pathlist+=("$HOME/.qjoypad3")
+	pathlist+=("$HOME/.config/mupen64plus")
+	pathlist+=("$HOME/.mame/cfg")
+	pathlist+=("$HOME/.stella")
+	pathlist+=("$HOME/.xbmc/userdata/keymaps"
+	pathlist+=("$HOME/.mednafen")
+
+	#Other
+	pathlist+=("$rootdir/Configs")
+
+	for entry in "${pathlist[@]}"
+	do
+	    if [[ ! -d $entry ]]; then
+                mkdir -p $entry
+                chown $user $entry
+                chgrp $user $entry
+        fi
+	done
+}
+
+function rrs_emu_configs ()
+{
+
+#mame
+	# default path: /home/$USER/.mame
+	# Main config
+	cp -v $scriptdir/emu-cfgs/x360_controller/MAME/default.cfg $HOME/.mame/cfg 
+	cp -v $scriptdir/emu-cfgs/x360_controller/MAME/mame.ini $HOME/.mame
+ 
+	# offline artwork scrapper configs
+	cp -v $scriptdir/emu-cfgs/x360_controller/MAME/parserConfig.xml $HOME/Games/Artwork/MAME
+	cp -v $scriptdir/emu-cfgs/x360_controller/MAME/MAME.txt $HOME/Games/Artwork/MAME
+	cp -v $scriptdir/emu-cfgs/x360_controller/MAME/MAME\ synopsis\ RCB\ 201202.zip/ $HOME/Games/Artwork/MAME
+
+	# mednafen
+	# default path: /home/$USER/.mednafen/mednafen.cfg
+	# Main config
+	cp -v $scriptdir/emu-cfgs/x360_controller/mednafen/mednafen-09x.cfg $HOME/.mednafen
+
+	# mupen64plus
+	# default path: /home/$USER/.config/mupen64plus
+	# Main config
+	cp -v $scriptdir/emu-cfgs/x360_controller/mupen64plus/mupen64plus.cfg $HOME/.config/mupen64plus/
+
+	#Stella
+	#default path: /home/$USER/.config/mupen64plus
+	#Main config
+	cp -v $scriptdir/emu-cfgs/x360_controller/Stella/stellarc $HOME/.stella/
+}
+
+function rrs_software () {
+
+	clear
+   	printMsg "Binaries-based installation"
+
+	# add multi-arch support
+	dpkg --add-architecture i386 | tee -a install_log.txt
+
+	#add repository for official team XBMC "stable"
+	add-apt-repository -y ppa:team-xbmc/ppa | tee -a install_log.txt
+
+	# Add playdeb repo for later additions (very useful) 
+
+	echo "deb http://archive.getdeb.net/ubuntu trusty-getdeb games" > /tmp/playdeb.list 
+	mv "/tmp/playdeb.list" "/etc/apt/sources.list.d/playdeb.list"
+	wget -q -O- http://archive.getdeb.net/getdeb-archive.key > getdeb.key 
+	sudo apt-key add getdeb.key | tee -a install_log.txt
+	rm -f getdeb.key
+
+	#update repository listings
+	apt-get update | tee -a install_log.txt
+
+	#install software from repositories
+	apt-get install -y xboxdrv curl \
+	python-software-properties pkg-config software-properties-common mednafen \
+	mame mupen64plus dconf-tools mess jstest-gtk qjoypad xbmc stella \
+	build-essential
+
+	#Removal of software for related bugs
+	apt-get remove -y apport apport-gtk | tee -a install_log.txt
+	echo "Please reference the following bug report:"
+	echo "Reported by cecilpierce on 2012-06-05 on Launchpad"
+	echo "https://bugs.launchpad.net/ubuntu/+source/plymouth/+bug/1009238" install_log.txt
+
+	#permissions
+    	chgrp -R $user $rootdir
+    	chown -R $user $rootdir
+
+	# Run Debug checks
+	rrs_debug
+
+	# Inform user about post-install tasks
+    	__postMSGs="$__postMSGs You need to copy Neo Geo CDZ BIOS files to the folder '$rootdir/ROMs/Neo-Geo/BIOS'."
+
+	# Output postMSGs to screen
+	
+        if [[ ! -z $__postMSGs ]]; then
+            dialog --backtitle "LibreGeek.org - RetroRig Setup. Installation folder: $rootdir for user $user" --msgbox "$__postMSGs See debug.log for more details." 20 60
+        fi
+
+        if [[ ! -z $__postMSGs ]]; then
+            dialog --backtitle "LibreGeek.org - RetroRig Setup. Installation folder: $rootdir for user $user" --msgbox "$__postMSGs" 20 60
+        fi
+
+        dialog --backtitle "LibreGeek.org - RetroRig Setup. Installation folder: $rootdir for user $user" --msgbox "Finished tasks.\nYou now have to copy roms to the roms folders. \nThis can be done via SSH, Samba, or via your graphic folder manager (please see settings menu for more)" 20 60
+
+        chown -R $user $scriptdir/logs/run_$now.log.gz
+        chgrp -R $user $scriptdir/logs/run_$now.log.gz
+    fi
+
+
+}
+
+function rrs_xboxdrv ()
+{
+	echo "nothing here"
+}
+
+function rrs_autostart ()
+{
+	#create autostart for XBMC (universal)
+	cp -v "/usr/share/applications/xbmc.desktop" "/etc/xdg/autostart/"
+}
+
+function rrs_debug ()
+{
+	clear
+	printMsg "Generating debug log"
+
+	# Check for existance of essential files
+	echo "Essential files:" > "$rootdir/debug.log"
+	h_filecheck "$HOME/.xbmc/userdata"
+	h_filecheck "$HOME/.xbmc/addons/script.games.rom.collection.browser"
+	h_filecheck "$HOME/.xbmc/userdata/addon_data/script.games.rom.collection.browser/"
+	h_filecheck "/etc/init.d/xboxdrv"
+	h_filecheck "/etc/default/xboxdrv"
+
+	# Check unity settings:
+	echo "Unity settings (if applicable):" > "$rootdir/debug.log"
+	gsettings list-recursively "org.gnome.desktop.screensaver" | grep "lock-enabled" >> "$rootdir/debug.log"
+	gsettings list-recursively "org.gnome.desktop.screensaver" | grep "ubuntu-lock-on-suspend" >> "$rootdir/debug.log"
+	gsettings list-recursively "org.gnome.desktop.session" | grep "idle-delay" >> "$rootdir/debug.log"
+
+	#APT pkg checks
+	echo -e "\nCheck for needed pkgs installed via apt: " >> "$rootdir/debug.log"
+	h_pkgcheck "stella"
+	h_pkgcheck "python-software-properties"
+	h_pkgcheck "xbmc"
+	h_pkgcheck "dconf-tools"
+	h_pkgcheck "xboxdrv"
+	h_pkgcheck "curl"
+	h_pkgcheck "xbmc"
+	h_pkgcheck "medanfen"
+	h_pkgcheck "mess"
+	h_pkgcheck "mame"
+	h_pkgcheck "qjoypad"
+	h_pkgcheck "jstest-gtk"
+
+	# BIOS file checks
+	echo -e "\nCheck for Bios files (if applicable): " >> "$rootdir/debug.log"
+	# Neo-Geo BIOS files
+	h_filecheck "$HOME/Games/ROMs/Neo-Geo/BIOS"
+	# If MESS is loaded already, verify BIOS files
+	mess neocdz -verifyroms >> "$rootdir/debug.log"
+
+   	echo -e "\nEnd of log file" >> "$rootdir/debug.log" >> "$rootdir/debug.log"
+	
+	dialog --backtitle "LibreGeek.org - RetroRig Setup. Installation folder: $rootdir for user $	user" --msgbox "Debug log was generated in $rootdir/debug.log. Additional logs can be found in the folder $scriptdir/logs/." 22 76 
+
+}
+
+function rrs_showHelp ()
+{
+
+# shows help information in the console
+function rps_showHelp()
+{
+    echo ""
+    echo "========================="
+    echo "RetroRig Setup script"
+    echo "========================="
+    echo ""
+    echo "The script installs XBMC as a backend, many emulators, and ROM Collection Browser as the graphical front end."
+    echo "Because it needs to install some APT packages it has to be run with root priviliges."
+    echo ""
+    echo "Usage:"
+    echo "sudo ./retrorig_setup.sh: The installation directory is $HOME/RetroPie for the current user"
+    echo "sudo ./retrorig_setup.sh USERNAME: The installation directory is /home/USERNAME/RetroRig for user USERNAME"
+    echo "sudo ./retrorig_setup.sh USERNAME ABSPATH: The installation directory is ABSPATH for user USERNAME"
+    echo ""
+}
+
+function rrs_prereq()
+{
+    if [[ -z $(type -P git) || -z $(type -P dialog) ]]; then
+        echo "Did not find needed packages 'git' and/or 'dialog'. Attempting to install these now."
+        apt-get update
+        apt-get install -y git dialog
+        if [ $? == '0' ]; then
+            echo "Successfully installed 'git' and/or 'dialog'."
+        else
+            echo "Could not install 'git' and/or 'dialog'. Exiting..."
+            exit 1
+        fi
+    else
+        echo "Found needed packages 'git' and 'dialog'."
+    fi
+}
+
+function rrs_main_reboot()
+{
+
+	#confirm reboot is the intended action
+	dialog --title "Confirm yes/no" \
+	--backtitle "LibreGeek.org RetroRig Installer" \
+	--yesno "Are you sure you want to Reboot?"  6 0
+
+	# Get exit status
+	# 0 means user hit [yes] button.
+	# 1 means user hit [no] button.
+	# 255 means user hit [Esc] key.
+	response=$?
+	case $response in
+		0)
+		clear
+		reboot
+		;;
+
+		1)
+		return 
+		;;
+
+		255)
+		return
+		;;
+	esac
+
+}
+

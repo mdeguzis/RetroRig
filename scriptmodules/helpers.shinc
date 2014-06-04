@@ -1,0 +1,441 @@
+#!/bin/bash
+#
+# RetroRig helper modules
+# This is a small script to copy over configuration files for emulators
+# append a "-x" on the end above for debugging if need be
+# Please report any errors via a pull request
+# You can also reach me on twitter: @N3RD42
+#
+
+function h_plugin-switcher ()
+
+{
+
+cmd=(dialog --backtitle "LibreGeek.org RetroRig Installer" --menu "Plugin Configuration Menu" 16 0 16)
+options=(1 "Current configuration"
+	 2 "Mupen64plus"
+	 3 "Back to settings menu"  
+	 4 "Back to main menu")
+
+	#make menu choice
+	selection=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
+	#functions
+
+	for choice in $selection
+	do
+		case $choice in
+
+		1)
+		#echo curent plugin settings
+		#mupen64plus
+		echo "Mupen64plus:" > res.txt
+		grep -i "VideoPlugin = " $HOME/.config/mupen64plus/mupen64plus.cfg >> res.txt
+		echo "" >> res.txt
+		#Stella
+		echo "Stella:" >> res.txt
+		grep -i "tia_filter" $HOME/.stella/stellarc >> res.txt
+		echo "" >> res.txt
+		#report current resolution
+		dialog --textbox res.txt 33 0
+		#remove text file
+		rm res.txt	
+		;;
+
+		2)
+		_config-mupen 	  	 	
+		;;
+
+		3)
+		return 	  	 	
+		;;
+
+		4)
+		_main 	 	
+		;;
+	esac
+	done
+
+}
+
+
+function h_config-mupen ()
+{
+
+#set fstart to start at specified folder directory, local var only
+local fstart
+
+cmd=(dialog --backtitle "LibreGeek.org RetroRig Installer" --menu "Default directory: ~/.config/mupen64plus" 16 0 16)
+options=(1 "Change Video Plugin"
+	 2 "Back to settings menu"  
+	 3 "Back to main menu")
+
+	#make menu choice
+	selection=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
+	#functions
+
+	for choice in $selection
+	do
+		case $choice in
+
+		1)
+		#present a different file loader here, since we want to start in a diff DIR.
+		fstart=/usr/lib/x86_64-linux-gnu/mupen64plus
+		#Maybe I can find a way to swap the dir on the fly later on
+		folder=$(dialog --stdout --title "Please choose a file (spacebar to select)" --fselect $fstart/ 10 68)
+		#change plugin
+		m_plug_orig=$(grep -i "VideoPlugin = " $HOME/.config/mupen64plus/mupen64plus.cfg)
+		sed -i "s|$m_plug_orig|VideoPlugin = $folder|g" $HOME/.config/mupen64plus/mupen64plus.cfg	
+		;;
+
+		2)
+		return 	 	
+		;;
+
+		1)
+		_main 	 	
+		;;
+	esac
+	done
+grep -i "VideoPlugin = " $HOME/.config/mupen64plus/mupen64plus.cfg >> res.txt
+
+}
+
+function h_file-loader ()
+{
+
+folder=$(dialog --stdout --title "Please choose a file (spacebar to select)" --fselect $HOME/ 14 48)
+echo "${folder} file chosen."
+}
+
+
+function _rom-loader ()
+{
+
+cmd=(dialog --backtitle "LibreGeek.org RetroRig Installer" --menu "Load ROMs for which system?" 19 32 24)
+options=(1 "Atari 2600" 
+	 2 "NES" 
+	 3 "SNES" 
+	 4 "Nintendo 64"
+	 5 "MAME"
+	 6 "Sega Master System"
+	 7 "Sega Game Gear"
+	 8 "GBC"
+	 9 "GBC"
+	 10 "TurboGraphix 16"
+	 11 "Exit ROM Loader")
+
+	#make menu choice
+	selection=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
+	#functions
+
+	for choice in $selection
+	do
+		case $choice in
+		1)
+		#call file loader  	
+		_file-loader
+		#copy Atari ROMs
+		cp -Rv "$folder"/* $HOME/Games/ROMs/Atari\ 2600/ | tee -a install_log.txt
+		_rom-loader
+		;;
+
+		2)  
+		_file-loader
+		cp -Rv "$folder"/* $HOME/Games/ROMs/NES/ | tee -a install_log.txt
+		#return back to menu
+		_rom-loader
+		;;
+
+		3)
+		#call file loader  	
+		_file-loader
+		#copy SNES ROMs
+		cp -Rv "$folder"/* $HOME/Games/ROMs/SNES/ | tee -a install_log.txt
+		#return back to menu
+		_rom-loader
+		;;
+
+		4)
+		#call file loader  	
+		_file-loader
+		#copy N64 ROMs
+		cp -Rv "$folder"/* $HOME/Games/ROMs/N64/ | tee -a install_log.txt
+		#return back to menu
+		_rom-loader
+		;;
+
+		5)
+		#call file loader  	
+		_file-loader
+		#copy MAME ROMs
+		cp -Rv "$folder"/* $HOME/Games/ROMs/MAME/ | tee -a install_log.txt
+		#return back to menu
+		_rom-loader
+		;;
+
+		6)
+		#call file loader  	
+		_file-loader
+		#copy Sega Master System ROMs
+		cp -Rv "$folder"/* $HOME/Games/ROMs/Sega\ Master\ System/ | tee -a install_log.txt
+		#return back to menu
+		_rom-loader
+		;;
+
+		7)
+		#call file loader  	
+		_file-loader
+		#copy Sega Game Gear ROMs
+		cp -Rv "$folder"/* $HOME/Games/ROMs/Sega\ Game\ Gear/ | tee -a install_log.txt
+		#return back to menu
+		_rom-loader
+		;;
+
+		8)
+		#call file loader  	
+		_file-loader
+		#copy GBC ROMs
+		cp -Rv "$folder"/* $HOME/Games/ROMs/GBC/ | tee -a install_log.txt
+		#return back to menu
+		_rom-loader
+		;;
+
+		9)
+		#call file loader  	
+		_file-loader
+		#copy GBA ROMs
+		cp -Rv "$folder"/* $HOME/Games/ROMs/GBA/ | tee -a install_log.txt
+		#return back to menu
+		_rom-loader
+		;;
+
+		10)
+		#call file loader  	
+		_file-loader
+		#copy Turbographx 16 ROMs
+		cp -Rv "$folder"/* $HOME/Games/ROMs/TurboGraphx\ 16/ | tee -a install_log.txt
+		#return back to menu
+		_rom-loader
+		;;
+
+		11)  
+		return
+		;;
+		esac
+	done
+}
+
+
+function _res-swticher ()
+{
+	dialog --infobox "Setting resolution to selection" 3 36
+	#resolution is set via _resolution function		
+	
+	########################		
+	#Stella
+	########################
+	st_org=$(grep -Ee "\bfullres = \b" $HOME/.stella/stellarc)
+	#make the changes, prefix new_X in case NULL was entered previously
+	sed -ie "s|$st_org|fullres = $st_new|g" $HOME/.stella/stellarc
+
+	########################		
+	#mupen64plus
+	########################
+	m_org_X=$(grep -Ee "\bScreenWidth = \b" $HOME/.config/mupen64plus/mupen64plus.cfg)
+	m_org_Y=$(grep -Ee "\bScreenHeight = \b" $HOME/.config/mupen64plus/mupen64plus.cfg)
+	#make the changes, prefix new_X in case NULL was entered previousey
+	sed -ie "s|$m_org_X|ScreenWidth = $m_new_X|g" $HOME/.config/mupen64plus/mupen64plus.cfg
+	sed -ie "s|$m_org_Y|ScreenHeight = $m_new_Y|g" $HOME/.config/mupen64plus/mupen64plus.cfg
+
+	########################		
+	#mednafen 
+	######################## 
+
+	#Emulator Codes:
+	########################
+	#Atari Lynx [lynx]
+	#GameBoy (Color) [gb]
+	#GameBoy Advance [gba]
+	#Neo Geo Pocket (Color) [ngp]
+	#Nintendo Entertainment System/Famicom [nes]
+	#PC Engine (CD)/TurboGrafx 16 (CD)/SuperGrafx [pce]
+	#PC Engine (CD)/TurboGrafx 16 (CD)/SuperGrafx [pce_fast]
+	#PC-FX [pcfx]
+	#Sega Game Gear [gg]
+	#Sega Genesis/MegaDrive [md]
+	#Sega Master System [sms]
+	#Sony PlayStation [psx]
+	#Super Nintendo Entertainment System/Super Famicom [snes]
+	#Virtual Boy [vb]
+	#WonderSwan [wswan]
+
+	#Note: it should be noted that all emulators are set to stretch
+	#the screen (EMU_CODE.stretch 1). The value is boolean.
+
+	#Mednafen (GBC)
+	gb_org_X=$(grep -Ee "\bgb.xres\b " $HOME/.mednafen/mednafen-09x.cfg)
+	gb_org_Y=$(grep -Ee "\bgb.yres\b " $HOME/.mednafen/mednafen-09x.cfg)
+	#make the changes, prefix new_X in case NULL was entered previously
+	sed -ie "s|$gb_org_X|gb.xres $gb_new_X|g" $HOME/.mednafen/mednafen-09x.cfg
+	sed -ie "s|$gb_org_Y|gb.yres $gb_new_Y|g" $HOME/.mednafen/mednafen-09x.cfg
+
+	#Mednafen (NES)
+	nes_org_X=$(grep -Ee "\bnes.xres\b " $HOME/.mednafen/mednafen-09x.cfg)
+	nes_org_Y=$(grep -Ee "\bnes.yres\b " $HOME/.mednafen/mednafen-09x.cfg)
+	#make the changes, prefix new_X in case NULL was entered previously
+	sed -ie "s|$nes_org_X|nes.xres $nes_new_X|g" $HOME/.mednafen/mednafen-09x.cfg
+	sed -ie "s|$nes_org_Y|nes.yres $nes_new_Y|g" $HOME/.mednafen/mednafen-09x.cfg
+
+	#Mednafen (GameBoy Advance)
+	gba_org_X=$(grep -Ee "\bgba.xres\b " $HOME/.mednafen/mednafen-09x.cfg)
+	gba_org_Y=$(grep -Ee "\bgba.yres\b " $HOME/.mednafen/mednafen-09x.cfg)
+	#make the changes, prefix new_X in case NULL was entered previously
+	sed -ie "s|$gba_org_X|gba.xres $gba_new_X|g" $HOME/.mednafen/mednafen-09x.cfg
+	sed -ie "s|$gba_org_Y|gba.yres $gba_new_Y|g" $HOME/.mednafen/mednafen-09x.cfg
+
+	#Mednafen (SNES)
+	snes_org_X=$(grep -Ee "\bsnes.xres\b " $HOME/.mednafen/mednafen-09x.cfg)
+	snes_org_Y=$(grep -Ee "\bsnes.yres\b " $HOME/.mednafen/mednafen-09x.cfg)
+	#make the changes, prefix new_X in case NULL was entered previously
+	sed -ie "s|$snes_org_X|snes.xres $snes_new_X|g" $HOME/.mednafen/mednafen-09x.cfg
+	sed -ie "s|$snes_org_Y|snes.yres $snes_new_Y|g" $HOME/.mednafen/mednafen-09x.cfg
+
+	#Mednafen (Sega Master System, aka Sega Sega Master)
+	sms_org_X=$(grep -Ee "\bsms.xres\b " $HOME/.mednafen/mednafen-09x.cfg)
+	sms_org_Y=$(grep -Ee "\bsms.yres\b " $HOME/.mednafen/mednafen-09x.cfg)
+	#make the changes, prefix new_X in case NULL was entered previously
+	sed -ie "s|$sms_org_X|sms.xres $sms_new_X|g" $HOME/.mednafen/mednafen-09x.cfg
+	sed -ie "s|$sms_org_Y|sms.yres $sms_new_Y|g" $HOME/.mednafen/mednafen-09x.cfg
+
+	#Mednafen (Sega Gane Gear)
+	sms_org_X=$(grep -Ee "\bsms.xres\b " $HOME/.mednafen/mednafen-09x.cfg)
+	sms_org_Y=$(grep -Ee "\bsms.yres\b " $HOME/.mednafen/mednafen-09x.cfg)
+	#make the changes, prefix new_X in case NULL was entered previously
+	sed -ie "s|$sms_org_X|sms.xres $sms_new_X|g" $HOME/.mednafen/mednafen-09x.cfg
+	sed -ie "s|$sms_org_Y|sms.yres $sms_new_Y|g" $HOME/.mednafen/mednafen-09x.cfg
+
+	#Mednafen (Turbographx 16)
+	gg_org_X=$(grep -Ee "\bgg.xres\b " $HOME/.mednafen/mednafen-09x.cfg)
+	gg_org_Y=$(grep -Ee "\bgg.yres\b " $HOME/.mednafen/mednafen-09x.cfg)
+	#make the changes, prefix new_X in case NULL was entered previously
+	sed -ie "s|$gg_org_X|gg.xres $gg_new_X|g" $HOME/.mednafen/mednafen-09x.cfg
+	sed -ie "s|$gg_org_Y|gg.yres $gg_new_Y|g" $HOME/.mednafen/mednafen-09x.cfg
+
+	#For some reason, when I replace the resolutions, the config files are changed
+	#They are appended with an "e" as in mednafen-09x.cfge. These "edited" files need
+	#deleted. I will have to find out at some point why this occurs
+	rm -f $HOME/.mednafen/mednafen-09x.cfge
+	rm -f $HOME/.config/mupen64plus/mupen64plus.cfge
+	rm -f $HOME/.pcsx/plugins/gpuPeopsMesaGL.cfge
+
+}
+
+function h_rom_loader ()
+{
+
+	#prompt user if they wish to pre-load ROMs now
+	dialog --title "Confirm yes/no" \
+	--backtitle "LibreGeek.org RetroRig Installer" \
+	--yesno "Do you wish to load your ROMs now? (reccomended)" 5 52
+	 
+	# Get exit status
+	# 0 means user hit [yes] button.
+	# 1 means user hit [no] button.
+	# 255 means user hit [Esc] key.
+	response=$?
+	case $response in
+
+	   0);;
+
+	   1) 
+	   dialog --infobox "Finished"  3 12
+	   sleep 2s
+	   return
+	   ;;
+
+	   255)
+	   dialog --infobox "Exiting Configuration Setup" 3 31
+	   sleep 2s
+	   return
+	   ;;
+
+	esac	
+
+}
+
+function h_filechecker()
+{
+    if [[ -e "$1" ]]; then
+        ls -lh "$1" >> "$rootdir/debug.log"
+    else
+        echo "$1 does not exist!" >> "$rootdir/debug.log"
+    fi
+}
+
+function h_pkgcheck ()
+{
+    PKG_OK=$(dpkg-query -s $1 | egrep -w "Status|Package|Version")
+    echo "Checking for somelib: $PKG_OK"
+    if [ "" == "$PKG_OK" ]; then
+        echo "NOT INSTALLED: $1" >> "$rootdir/debug.log"
+    else
+        echo "installed: $1" >> "$rootdir/debug.log"
+    fi
+}
+
+function h_update_git () 
+{
+	clear
+	echo "-----------------------------------------------------------" |tee -a install_log.txt
+	echo "Updating git repo" | tee -a install_log.txt
+	echo "-----------------------------------------------------------" | tee -a install_log.txt
+	sleep 2s
+	cd $HOME/RetroRig/
+	git pull
+	#pause for reviewing changes
+	sleep 5s
+	
+	#clear
+	clear
+
+	bash config-setup.sh
+}
+
+function h_update_binaries () 
+{
+
+	clear
+	echo "-----------------------------------------------------------" |tee -a install_log.txt
+	echo "Updating emulator binaries" | tee -a install_log.txt
+	echo "-----------------------------------------------------------" | tee -a install_log.txt
+	apt-get install -y xboxdrv curl zsnes nestopia pcsxr pcsx2:i386 \
+	python-software-properties pkg-config software-properties-common mess \
+	mame mupen64plus dconf-tools mednafen qjoypad xbmc dolphin-emu-master stella \
+	build-essential | tee -a install_log.txt	
+	sleep 3s
+	#clear
+	clear
+}
+
+function h_upgrade_system () 
+{
+	clear
+	echo "-----------------------------------------------------------" |tee -a install_log.txt
+	echo "Upgrading system" | tee -a install_log.txt
+	echo "-----------------------------------------------------------" | tee -a install_log.txt
+	apt-get update
+	apt-get upgrade
+	sleep 3s
+	#clear
+	clear
+}
+
+function h_start_xbmc () 
+{
+	dialog --infobox "starting RetroRig" 3 21
+	sleep 1s
+	xbmc
+	#clear
+	clear
+}
+
