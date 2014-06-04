@@ -195,7 +195,7 @@ options=(1 "Neo Geo BIOS files"
 		echo "-----------------------------------------------------------" | tee -a install_log.txt
 		echo "Loading Neo Geo BIOS files..." | tee -a install_log.txt
 		echo "-----------------------------------------------------------" | tee -a install_log.txt
-		cp -Rv "$folder"/* $HOME/Games/ROMs/Neo-Geo/BIOS/ | tee -a install_log.txt
+		cp -Rv "$folder" $HOME/Games/ROMs/Neo-Geo/BIOS/ | tee -a install_log.txt
 		#  return back to menu
 		_bios-loader
 		;;
@@ -1092,6 +1092,12 @@ function _config-x360ws () {
 	cp -v $HOME/RetroRig/emu-cfgs/x360ws/MAME/MAME.txt $HOME/Games/Artwork/MAME | tee -a install_log.txt
 	cp -v $HOME/RetroRig/emu-cfgs/x360ws/MAME/MAME\ synopsis\ RCB\ 201202.zip/ $HOME/Games/Artwork/MAME | tee -a install_log.txt
 
+	# MESS
+	# default path: /home/$USER/.mess
+	# Main config
+	cp -v $HOME/RetroRig/emu-cfgs/x360ws/MESS/mess.ini $HOME/.mess/ | tee -a install_log.txt
+	cp -v $HOME/RetroRig/emu-cfgs/x360ws/MESS/default.cfg $HOME/.mess/cfg | tee -a install_log.txt
+
 	# mednafen
 	# default path: /home/$USER/.mednafen/mednafen.cfg
 	# Main config
@@ -1106,12 +1112,6 @@ function _config-x360ws () {
 	# default path: /home/$USER/.config/mupen64plus
 	# Main config
 	cp -v $HOME/RetroRig/emu-cfgs/x360ws/Stella/stellarc $HOME/.stella/ | tee -a install_log.txt
-	
-	# MESS
-	# default path: /home/$USER/.mess
-	# Main config
-	cp -v $HOME/RetroRig/emu-cfgs/x360ws/MESS/mess.ini $HOME/.mess/ | tee -a install_log.txt
-	cp -v $HOME/RetroRig/emu-cfgs/x360ws/MESS/default.cfg $HOME/.mess/cfg | tee -a install_log.txt
 
 	# inject init script and default config
 	echo $userpasswd | sudo -S cp -v $HOME/RetroRig/init-scripts/x360ws/xboxdrv /etc/init.d/ | tee -a install_log.txt
@@ -1158,6 +1158,12 @@ function _config-x360wd () {
 	cp -v $HOME/RetroRig/emu-cfgs/x360wd/MAME/parserConfig.xml $HOME/Games/Artwork/MAME | tee -a install_log.txt
 	cp -v $HOME/RetroRig/emu-cfgs/x360wd/MAME/MAME.txt $HOME/Games/Artwork/MAME | tee -a install_log.txt
 	cp -v $HOME/RetroRig/emu-cfgs/x360wd/MAME/MAME\ synopsis\ RCB\ 201202.zip/ $HOME/Games/Artwork/MAME | tee -a install_log.txt
+
+	# MESS
+	# default path: /home/$USER/.mess
+	# Main config
+	cp -v $HOME/RetroRig/emu-cfgs/x360ws/MESS/mess.ini $HOME/.mess/ | tee -a install_log.txt
+	cp -v $HOME/RetroRig/emu-cfgs/x360ws/MESS/default.cfg $HOME/.mess/cfg | tee -a install_log.txt
 
 	# mednafen
 	# default path: /home/$USER/.mednafen/mednafen.cfg
