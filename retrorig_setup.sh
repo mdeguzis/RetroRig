@@ -158,86 +158,46 @@ options=(1 "Install Software"
 	if [ "$choices" != "10" ]; then
 		case $choices in
 
-		1)  	
-		_software
-		#call memu rather than return so user can choose again
-		_main
-		;;
+		1) 
+		   rrs_software	
+		   ;;
 
-		2)  
-		bash scriptmodules/configuration.sh
-		#call memu rather than return so user can choose again
-		_main 
-		;;
+		2) 
+		   cfg_confirm
+		   rrs_prepareFolders
+		   rrs_emu_configs
+		   m_gamepad
+		   set_resolution
+		   rrs_autostart
+		   ;;
 
-		3)
-		bash scriptmodules/settings.sh
-		#call memu rather than return so user can choose again
-		_main
-		;;
+		3) 
+		   m_settings
+		   ;;
 
 		4)
-		_update-git
-		#reload script with changes
-		bash config-setup.sh
-		;;
+		   h_update_git
+		   ;;
 
 		5)
-		_update-binaries
-		#call memu rather than return so user can choose again
-		_main
-		;;
+		   h_update_binaries
+		   ;;
 
 		6)
-		_upgrade-system
-		#call memu rather than return so user can choose again
-		_main
-		;;
+		   h_upgrade_system
+		   ;;
 
 		7)
-		_start-xbmc
-		#call memu rather than return so user can choose again
-		_main
-		;;
+		   h_start_xbmc
+		   ;;
 
-		8)
-		_reboot
-		#call memu rather than return so user can choose again
-		_main
-		;;
+		8) 
+		   rrs_reboot
+		   ;;
 
 		9)
-		#confirm uninstall is the intended action
-		dialog --title "Confirm yes/no" \
-		--backtitle "LibreGeek.org RetroRig Installer" \
-		--yesno "Are you sure you want remove RetroRig?"  6 0
-
-		# Get exit status
-		# 0 means user hit [yes] button.
-		# 1 means user hit [no] button.
-		# 255 means user hit [Esc] key.
-		response=$?
-		case $response in
-			0)
-			_uninstall
-			;;
-
-			1) 
-			dialog --infobox "Exiting Uninstall"  3 11
-			sleep 2s
-			_main
-			;;
-
-			255)
-			dialog --infobox "Exiting Uninstall" 3 0
-			sleep 2s
-			_main
-			;;
-		esac
-
-		#call memu rather than return so user can choose again
-		_main
-		;;
+		   cfg_uninstall
+           	   ;;
 
 		10)
 		clear

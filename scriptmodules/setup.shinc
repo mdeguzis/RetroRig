@@ -289,7 +289,7 @@ function rrs_prereq()
     fi
 }
 
-function rrs_main_reboot()
+function rrs_reboot()
 {
 
 	#confirm reboot is the intended action
