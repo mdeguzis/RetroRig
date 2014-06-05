@@ -72,7 +72,7 @@ First, I must direct you to read the wiki on this github page, as it contains ex
 https://github.com/ProfessorKaos64/RetroRig/wiki
 
 **Please also note**  
-You may add the `--help` flag to the script for a quick help file
+You may add the `--help` flag to the script for a quick help file. Come on, do it, it has psychedelic colorrrrsss!
 
 ## Installation
 
