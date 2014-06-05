@@ -92,13 +92,13 @@ options=(1 "Atari 2600"
 		#call file loader  	
 		_file-loader
 		#copy Atari ROMs
-		cp -Rv "$folder"/* $HOME/Games/ROMs/Atari\ 2600/ | tee -a install_log.txt
+		cp -Rv "$folder"/* $HOME/Games/ROMs/Atari\ 2600/
 		_rom-loader
 		;;
 
 		2)  
 		_file-loader
-		cp -Rv "$folder"/* $HOME/Games/ROMs/NES/ | tee -a install_log.txt
+		cp -Rv "$folder"/* $HOME/Games/ROMs/NES/
 		#return back to menu
 		_rom-loader
 		;;
@@ -107,7 +107,7 @@ options=(1 "Atari 2600"
 		#call file loader  	
 		_file-loader
 		#copy SNES ROMs
-		cp -Rv "$folder"/* $HOME/Games/ROMs/SNES/ | tee -a install_log.txt
+		cp -Rv "$folder"/* $HOME/Games/ROMs/SNES/
 		#return back to menu
 		_rom-loader
 		;;
@@ -116,7 +116,7 @@ options=(1 "Atari 2600"
 		#call file loader  	
 		_file-loader
 		#copy N64 ROMs
-		cp -Rv "$folder"/* $HOME/Games/ROMs/N64/ | tee -a install_log.txt
+		cp -Rv "$folder"/* $HOME/Games/ROMs/N64/
 		#return back to menu
 		_rom-loader
 		;;
@@ -125,7 +125,7 @@ options=(1 "Atari 2600"
 		#call file loader  	
 		_file-loader
 		#copy MAME ROMs
-		cp -Rv "$folder"/* $HOME/Games/ROMs/MAME/ | tee -a install_log.txt
+		cp -Rv "$folder"/* $HOME/Games/ROMs/MAME/
 		#return back to menu
 		_rom-loader
 		;;
@@ -134,7 +134,7 @@ options=(1 "Atari 2600"
 		#call file loader  	
 		_file-loader
 		#copy Sega Master System ROMs
-		cp -Rv "$folder"/* $HOME/Games/ROMs/Sega\ Master\ System/ | tee -a install_log.txt
+		cp -Rv "$folder"/* $HOME/Games/ROMs/Sega\ Master\ System/
 		#return back to menu
 		_rom-loader
 		;;
@@ -143,7 +143,7 @@ options=(1 "Atari 2600"
 		#call file loader  	
 		_file-loader
 		#copy Sega Game Gear ROMs
-		cp -Rv "$folder"/* $HOME/Games/ROMs/Sega\ Game\ Gear/ | tee -a install_log.txt
+		cp -Rv "$folder"/* $HOME/Games/ROMs/Sega\ Game\ Gear/
 		#return back to menu
 		_rom-loader
 		;;
@@ -152,7 +152,7 @@ options=(1 "Atari 2600"
 		#call file loader  	
 		_file-loader
 		#copy GBC ROMs
-		cp -Rv "$folder"/* $HOME/Games/ROMs/GBC/ | tee -a install_log.txt
+		cp -Rv "$folder"/* $HOME/Games/ROMs/GBC/
 		#return back to menu
 		_rom-loader
 		;;
@@ -161,7 +161,7 @@ options=(1 "Atari 2600"
 		#call file loader  	
 		_file-loader
 		#copy GBA ROMs
-		cp -Rv "$folder"/* $HOME/Games/ROMs/GBA/ | tee -a install_log.txt
+		cp -Rv "$folder"/* $HOME/Games/ROMs/GBA/
 		#return back to menu
 		_rom-loader
 		;;
@@ -170,7 +170,7 @@ options=(1 "Atari 2600"
 		#call file loader  	
 		_file-loader
 		#copy Turbographx 16 ROMs
-		cp -Rv "$folder"/* $HOME/Games/ROMs/TurboGraphx\ 16/ | tee -a install_log.txt
+		cp -Rv "$folder"/* $HOME/Games/ROMs/TurboGraphx\ 16/
 		#return back to menu
 		_rom-loader
 		;;
