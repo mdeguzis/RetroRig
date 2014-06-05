@@ -23,14 +23,14 @@ function getScriptAbsoluteDir() {
     # @description used to get the script path
     # @param $1 the script $0 parameter
     local script_invoke_path="$1"
-    local cwd=`pwd`
+    local cwd=$(pwd)
 
     # absolute path ? if so, the first character is a /
     if test "x${script_invoke_path:0:1}" = 'x/'
     then
-	RESULT=`dirname "$script_invoke_path"`
+	RESULT=$(dirname "$script_invoke_path")
     else
-	RESULT=`dirname "$cwd/$script_invoke_path"`
+	RESULT=$(dirname "$cwd/$script_invoke_path")
     fi
 }
 
@@ -105,7 +105,7 @@ function loadConfig()
 }
 
 script_invoke_path="$0"
-script_name=`basename "$0"`
+script_name=$(basename "$0")
 getScriptAbsoluteDir "$script_invoke_path"
 script_absolute_dir=$RESULT
 
@@ -121,8 +121,8 @@ import "scriptmodules/gamepads"
 # Start main script
 ######################################
 
-scriptdir=`dirname $0`
-scriptdir=`cd $scriptdir && pwd`
+scriptdir=$(dirname "$0")
+scriptdir=$(cd "$scriptdir" && pwd)
 
 #check for pre-requisites
 rrs_prereq
@@ -132,7 +132,7 @@ if [[ "$1" == "--help" ]]; then
     exit 0
 fi
 
-if [ $(id -u) -ne 0 ]; then
+if [ "$(id -u)" -ne 0 ]; then
     printf "Script must be run as root. Try 'sudo ./retropie_setup' or ./retropie_setup --help for further information\n"
     exit 1
 fi
@@ -152,10 +152,10 @@ options=(1 "Install Software"
 	 10 "Exit")
 
 	#make menu choice
-	choices=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
+	choices=$("${cmd[@]}" "${options[@]}" > /dev/tty 2>&1)
 	#functions
 
-	if [ "$choices" != "10" ]; then
+	if [ "$choices" != "" ]; then
 		case $choices in
 
 		1) 
@@ -200,13 +200,11 @@ options=(1 "Install Software"
            	   ;;
 
 		10)
-		clear
-		exit
-		;;
+		   ;;
 
 		esac
 	else
 		break
 	fi
 done
-}
+clear
