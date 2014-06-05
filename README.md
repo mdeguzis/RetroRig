@@ -1,6 +1,6 @@
 RetroRig Project for Ubuntu 14.04 LTS
 ===================================================
-###### [Version 0.7.5]
+###### [Version 0.7.7]
 
 RetroRig is shell script to setup a Linux x86_64 system  with several emulators, and XBMC as graphical
 front end.The inspiration for doing this lies almost completely with the RetroPie Project. I wanted to provide
@@ -71,6 +71,9 @@ everyone!
 First, I must direct you to read the wiki on this github page, as it contains extra iformation outside this wiki. 
 https://github.com/ProfessorKaos64/RetroRig/wiki
 
+**Please also note**  
+You may add the `--help` flag to the script for a quick help file
+
 ## Installation
 
 Pre-requisites:
@@ -90,12 +93,7 @@ To clone this repo via the CLI:
 To intstall:
 
     cd RetroRig  
-    ./config-setup.sh
-
-sudo access is needed for updates, installs, and folder creation. If you wish, you can review the script
-code beforehand to see what sudo does.You can also choose to just copy configuration filesfrom each 
-folder if you wish to just steal some notes on how to setup the emulators. Please reference the issues
-area on Github for current issues, or the release-roadmap for upcoming items.
+    sudo ./config-setup.sh
 
 You can also download a zip file or by other means on the github page.
 

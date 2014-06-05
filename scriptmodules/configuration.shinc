@@ -113,14 +113,13 @@ dialog --title "Confirm yes/no" \
 
    	1)
 	;; 
-
+	esac
 
 #ask to keep folders
 #prompt user if they wish to keep folders from install
-	
 dialog --title "Confirm yes/no" \
 	--backtitle "LibreGeek.org RetroRig Installer" \
-	--yesno "Do you wish to keep configuration folders?" 5 52
+	--yesno "Do you wish to keep configuration folders?" 22 76	
 	 
 	# Get exit status
 	# 0 means user hit [yes] button.

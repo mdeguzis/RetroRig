@@ -61,7 +61,7 @@ function rrs_prepareFolders()
 	pathlist+=("$HOME/.config/mupen64plus")
 	pathlist+=("$HOME/.mame/cfg")
 	pathlist+=("$HOME/.stella")
-	pathlist+=("$HOME/.xbmc/userdata/keymaps"
+	pathlist+=("$HOME/.xbmc/userdata/keymaps")
 	pathlist+=("$HOME/.mednafen")
 
 	#Other
@@ -160,16 +160,11 @@ function rrs_software () {
             dialog --backtitle "LibreGeek.org - RetroRig Setup. Installation folder: $rootdir for user $user" --msgbox "$__postMSGs See debug.log for more details." 20 60
         fi
 
-        if [[ ! -z $__postMSGs ]]; then
-            dialog --backtitle "LibreGeek.org - RetroRig Setup. Installation folder: $rootdir for user $user" --msgbox "$__postMSGs" 20 60
-        fi
 
         dialog --backtitle "LibreGeek.org - RetroRig Setup. Installation folder: $rootdir for user $user" --msgbox "Finished tasks.\nYou now have to copy roms to the roms folders. \nThis can be done via SSH, Samba, or via your graphic folder manager (please see settings menu for more)" 20 60
 
         chown -R $user $scriptdir/logs/run_$now.log.gz
         chgrp -R $user $scriptdir/logs/run_$now.log.gz
-    fi
-
 
 }
 
@@ -233,22 +228,47 @@ function rrs_debug ()
 
 function rrs_showHelp ()
 {
+    #set color for highlights
+    # Arch Linux wiki color listing: http://bit.ly/1nhkU8Y
+    PATHCOLOR="36m"  #Cyan text
+    TITLECOLOR="33m"  #Yellow text
+    BARCOLOR="35m"  #Yellow text
 
-# shows help information in the console
-function rps_showHelp()
-{
+    #Console help file
+    clear
     echo ""
-    echo "========================="
-    echo "RetroRig Setup script"
-    echo "========================="
+    echo -e "\e[0"$BARCOLOR$"============================================================\e[0m"
+    echo -e "\e[0"$TITLECOLOR$"RetroRig Help File\e[0m"
+    echo -e "\e[0"$BARCOLOR$"============================================================\e[0m"
     echo ""
-    echo "The script installs XBMC as a backend, many emulators, and ROM Collection Browser as the graphical front end."
-    echo "Because it needs to install some APT packages it has to be run with root priviliges."
+    echo "This script installs XBMC as a backend, many emulators, 
+and ROM Collection Browser as the graphical front end. 
+Because it needs to install some APT packages it has to be 
+run with root priviliges."
+
     echo ""
-    echo "Usage:"
-    echo "sudo ./retrorig_setup.sh: The installation directory is $HOME/RetroPie for the current user"
-    echo "sudo ./retrorig_setup.sh USERNAME: The installation directory is /home/USERNAME/RetroRig for user USERNAME"
-    echo "sudo ./retrorig_setup.sh USERNAME ABSPATH: The installation directory is ABSPATH for user USERNAME"
+    echo "When using..."
+    echo "sudo ./retrorig_setup.sh
+The installation directory is:"
+echo -e "\e[0$PATHCOLOR$HOME/RetroRig for the current user\e[0m"
+
+    echo ""
+    echo "When using..."
+    echo "sudo ./retrorig_setup.sh USERNAME
+The installation directory is:"
+echo -e "\e[0$PATHCOLOR/home/USERNAME/RetroRig for user USERNAME\e[0m"
+
+    echo ""
+    echo "When using..."
+    echo "sudo ./retrorig_setup.sh USERNAME ABSPATH
+The installation directory is:"
+echo -e "\e[0"$PATHCOLOR"ABSPATH for user USERNAME\e[0m"
+    echo ""
+    echo "Please submit all issues to GitHub: bit.ly/1ocT0we"
+    
+    echo -e "\e[0"$BARCOLOR$"============================================================\e[0m"
+    echo "End Help File"
+    echo -e "\e[0"$BARCOLOR$"============================================================\e[0m"
     echo ""
 }
 
