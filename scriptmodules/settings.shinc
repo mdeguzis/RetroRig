@@ -340,9 +340,3 @@ function set_gamepad_x360 ()
 
 }
 
-function set_mupen_vido ()
-{
-
-echo "nothing here yet"
-
-}
