@@ -76,3 +76,132 @@ sed -i "s|/home/mikeyd/|/home/$USER/|g" "$HOME/.xbmc/userdata/addon_data/script.
 echo "The user applied to configuration files was: $USER"
 
 }
+
+function cfg_uninstall () 
+{
+
+#Confirm with user
+
+dialog --title "Confirm yes/no" \
+	--backtitle "LibreGeek.org RetroRig Installer" \
+	--yesno "Do you REALLY want to uninstall RetroRig?" 5 52
+	 
+	# Get exit status
+	# 0 means user hit [yes] button.
+	# 1 means user hit [no] button.
+	# 255 means user hit [Esc] key.
+	response=$?
+	case $response in
+
+	0) 
+	# remove installed binaries
+	# do not remove software-properties-common, necessary pkg!
+	apt-get autoremove -y xboxdrv curl python-software-properties \
+	pkg-config mednafen mame mupen64plus dconf-tools qjoypad xbmc \
+	stella build-essential
+
+	# add apport, apport-gtk back
+	apt-get install -y apport apport-gtk | tee -a uninstall_log.txt
+	dpkg --remove-architecture i386 | tee -a uninstall_log.txt
+
+	apt-get -y autoremove
+
+	# repositories
+	add-apt-repository -ry ppa:team-xbmc/ppa
+	rm -f /etc/apt/sources.list.d/playdeb.list
+	;;
+
+   	1)
+	;; 
+
+
+#ask to keep folders
+#prompt user if they wish to keep folders from install
+	
+dialog --title "Confirm yes/no" \
+	--backtitle "LibreGeek.org RetroRig Installer" \
+	--yesno "Do you wish to keep configuration folders?" 5 52
+	 
+	# Get exit status
+	# 0 means user hit [yes] button.
+	# 1 means user hit [no] button.
+	# 255 means user hit [Esc] key.
+	response=$?
+	case $response in
+
+	0) 
+	#keep folders
+	sleep 2s
+	;;
+
+   	1) 
+	#remove dotfiles
+	rm -rf $HOME/.qjoypad3/ 
+	rm -rf $HOME/.config/mupen64plus/ 
+	rm -rf $HOME/.mame/ 
+	rm -rf $HOME/.stella/ 
+	rm -rf $HOME/.xbmc/
+	rm -rf $HOME/.mednafen/ 
+	rm -rf $HOME/.mess/ 
+
+	#system objects
+	rm -f /etc/xdg/autostart/qjoypad.desktop
+	service xboxdrv stop | tee uninstall_log.txt
+	# remove init services	
+	update-rc.d -f xboxdrv remove
+	rm -f /etc/init.d/xboxdrv
+	rm -f /etc/default/xboxdrv
+	sed -i 's|blacklist xpad||g' /etc/modprobe.d/blacklist.conf
+	;;
+
+	255)
+	#Keep folders and continue on"
+	sleep 2s
+	;;
+
+	esac	
+
+#ask to keep folders
+#prompt user if they wish to keep ROMs they loaded
+
+	dialog --title "Confirm yes/no" \
+	--backtitle "LibreGeek.org RetroRig Installer" \
+	--yesno "Do you wish to keep your ROMs?" 5 52
+	 
+	# Get exit status
+	# 0 means user hit [yes] button.
+	# 1 means user hit [no] button.
+	# 255 means user hit [Esc] key.
+	response=$?
+	case $response in
+
+	0) 
+	#Keep ROMs
+	sleep 2s
+	;;
+
+   	1) 
+	echo $userpasswd | sudo rm -rf $rootdir/Games/ROMs/
+	echo $userpasswd | sudo rm -rf $rootdir/Games/Tools/
+	echo $userpasswd | sudo rm -rf $rootdir/Games/Artwork/
+	echo $userpasswd | sudo rm -rf $rootdir/Games/Saves/
+	echo $userpasswd | sudo rm -rf $rootdir/Games/Configs/
+	;;
+
+	255)
+	#Keep ROMs
+	sleep 2s
+	;;
+
+	esac	
+
+#remove $rootdir
+rm -rf $rootdir
+
+#update Ubuntu repository listings
+apt-get update | tee -a uninstall_log.txt
+sleep 2s
+
+}
+
+

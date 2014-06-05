@@ -80,3 +80,88 @@ while true; do
 	fi
 done
 }
+
+function m_gamepad (){
+
+	#log change in install_log.txt
+	echo "-----------------------------------------------------------" | tee -a install_log.txt
+	echo "Setting Controller Gamepad..." | tee -a install_log.txt
+	echo "-----------------------------------------------------------" | tee -a install_log.txt
+
+cmd=(dialog --backtitle "LibreGeek.org RetroRig Installer" --menu "| Gamepad Select | \
+			 Request any new Gamepads via github!" 16 62 16)
+options=(1 "Xbox 360 Controller (wireless) (4-player)" 
+	 2 "Xbox 360 Controller (wired) (4-player)" 
+	 3 "Exit gamepad selection"
+	 4 "Back to main menu")
+
+	#make menu choice
+	selection=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
+	#functions
+
+	for choice in $selection
+	do
+		case $choice in
+
+		1)
+		_config-x360ws
+		return
+		;;
+
+		2)
+		_config-x360wd
+		return
+		;;
+
+		3)
+		return
+		;;
+
+		4)
+		_main
+		;;
+		esac
+	done
+}
+
+function m_config-mupen ()
+{
+
+#set fstart to start at specified folder directory, local var only
+local fstart
+
+cmd=(dialog --backtitle "LibreGeek.org RetroRig Installer" --menu "Default directory: ~/.config/mupen64plus" 16 0 16)
+options=(1 "Change Video Plugin"
+	 2 "Back to settings menu"  
+	 3 "Back to main menu")
+
+	#make menu choice
+	selection=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
+	#functions
+
+	for choice in $selection
+	do
+		case $choice in
+
+		1)
+		#present a different file loader here, since we want to start in a diff DIR.
+		fstart=/usr/lib/x86_64-linux-gnu/mupen64plus
+		#Maybe I can find a way to swap the dir on the fly later on
+		folder=$(dialog --stdout --title "Please choose a file (spacebar to select)" --fselect $fstart/ 10 68)
+		#change plugin
+		m_plug_orig=$(grep -i "VideoPlugin = " $HOME/.config/mupen64plus/mupen64plus.cfg)
+		sed -i "s|$m_plug_orig|VideoPlugin = $folder|g" $HOME/.config/mupen64plus/mupen64plus.cfg	
+		;;
+
+		2)
+		return 	 	
+		;;
+
+		1)
+		_main 	 	
+		;;
+	esac
+	done
+grep -i "VideoPlugin = " $HOME/.config/mupen64plus/mupen64plus.cfg >> res.txt
+
+}

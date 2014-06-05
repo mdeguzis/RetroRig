@@ -109,8 +109,11 @@ function rrs_emu_configs ()
 
 function rrs_software () {
 
+	# clear post install messages
+	__postMSGs=""
 	clear
-   	printMsg "Binaries-based installation"
+   	
+	printMsg "Binaries-based installation"
 
 	# add multi-arch support
 	dpkg --add-architecture i386 | tee -a install_log.txt
@@ -123,7 +126,7 @@ function rrs_software () {
 	echo "deb http://archive.getdeb.net/ubuntu trusty-getdeb games" > /tmp/playdeb.list 
 	mv "/tmp/playdeb.list" "/etc/apt/sources.list.d/playdeb.list"
 	wget -q -O- http://archive.getdeb.net/getdeb-archive.key > getdeb.key 
-	sudo apt-key add getdeb.key | tee -a install_log.txt
+	sudo apt-key add getdeb.key 
 	rm -f getdeb.key
 
 	#update repository listings
@@ -139,7 +142,7 @@ function rrs_software () {
 	apt-get remove -y apport apport-gtk | tee -a install_log.txt
 	echo "Please reference the following bug report:"
 	echo "Reported by cecilpierce on 2012-06-05 on Launchpad"
-	echo "https://bugs.launchpad.net/ubuntu/+source/plymouth/+bug/1009238" install_log.txt
+	echo "https://bugs.launchpad.net/ubuntu/+source/plymouth/+bug/1009238"
 
 	#permissions
     	chgrp -R $user $rootdir

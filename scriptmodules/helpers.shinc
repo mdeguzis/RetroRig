@@ -57,49 +57,6 @@ options=(1 "Current configuration"
 
 }
 
-
-function h_config-mupen ()
-{
-
-#set fstart to start at specified folder directory, local var only
-local fstart
-
-cmd=(dialog --backtitle "LibreGeek.org RetroRig Installer" --menu "Default directory: ~/.config/mupen64plus" 16 0 16)
-options=(1 "Change Video Plugin"
-	 2 "Back to settings menu"  
-	 3 "Back to main menu")
-
-	#make menu choice
-	selection=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
-	#functions
-
-	for choice in $selection
-	do
-		case $choice in
-
-		1)
-		#present a different file loader here, since we want to start in a diff DIR.
-		fstart=/usr/lib/x86_64-linux-gnu/mupen64plus
-		#Maybe I can find a way to swap the dir on the fly later on
-		folder=$(dialog --stdout --title "Please choose a file (spacebar to select)" --fselect $fstart/ 10 68)
-		#change plugin
-		m_plug_orig=$(grep -i "VideoPlugin = " $HOME/.config/mupen64plus/mupen64plus.cfg)
-		sed -i "s|$m_plug_orig|VideoPlugin = $folder|g" $HOME/.config/mupen64plus/mupen64plus.cfg	
-		;;
-
-		2)
-		return 	 	
-		;;
-
-		1)
-		_main 	 	
-		;;
-	esac
-	done
-grep -i "VideoPlugin = " $HOME/.config/mupen64plus/mupen64plus.cfg >> res.txt
-
-}
-
 function h_file-loader ()
 {
 
