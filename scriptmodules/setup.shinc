@@ -131,7 +131,7 @@ function rrs_software() {
 	rm -f getdeb.key
 
 	#update repository listings
-	apt-get update | tee -a install_log.txt
+	apt-get update
 
 	#install software from repositories
 	apt-get install -y xboxdrv curl \
@@ -153,12 +153,12 @@ function rrs_software() {
 	rrs_debug
 
 	# Inform user about post-install tasks
-    	__postMSGs="$__postMSGs You need to copy Neo Geo CDZ BIOS files to the folder '$rootdir/ROMs/Neo-Geo/BIOS' if you wish to use it!"
+    	__postMSGs="$__postMSGs If you need to copy BIOS files and do not know where or how, please see the wiki on GitHub under 'Installation!'"
 
 	# Output postMSGs to screen
 	
         if [[ ! -z $__postMSGs ]]; then
-            dialog --backtitle "LibreGeek.org - RetroRig Setup. Installation folder: $rootdir for user $user" --msgbox "$__postMSGs See debug.log for more details." 30 66
+            dialog --backtitle "LibreGeek.org - RetroRig Setup. Installation folder: $rootdir for user $user" --msgbox "$__postMSGs See debug.log for more details." 20 66
         fi
 
 
@@ -218,6 +218,8 @@ function rrs_debug()
 	
 	dialog --backtitle "LibreGeek.org - RetroRig Setup. Installation folder: $rootdir for user $	user" --msgbox "Debug log was generated in $rootdir/debug.log. Additional logs can be found in the folder $scriptdir/logs/." 8 40 
 
+	chown -R $user $scriptdir/debug.log
+	chgrp -R $user $scriptdir/debug.log
 }
 
 function rrs_showHelp()
