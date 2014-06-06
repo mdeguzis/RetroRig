@@ -17,7 +17,8 @@ while true; do
 	     3 "Change plugins/filters/scaling"
 	     4 "Change Gamepad Type"
 	     5 "Enable SSH support"
- 	     6 "Back to main menu")
+	     6 "Enable SSH support"
+ 	     7 "Back to main menu")
 
 	#make menu choice
 	choices=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
@@ -70,8 +71,11 @@ while true; do
 		_settings
 		;;
 
-		6)  
-		return
+		6)
+		h_bios_checker
+		;;
+
+		7)  
 		;;
 
 		esac

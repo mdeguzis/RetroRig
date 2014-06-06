@@ -320,6 +320,19 @@ function h_rom_loader()
 
 }
 
+
+function h_bios-checker()
+{
+
+# BIOS file checks
+echo -e "\nCheck for Bios files (if applicable): " >> "$rootdir/debug.log"
+# Neo-Geo BIOS files
+h_filecheck "$HOME/Games/ROMs/Neo-Geo/BIOS"
+# If MESS is loaded already, verify BIOS files
+mess neocdz -verifyroms >> "$rootdir/debug.log"
+
+}
+
 function h_filechecker()
 {
     if [[ -e "$1" ]]; then
