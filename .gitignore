@@ -11,6 +11,7 @@ ehthumbs.db
 Thumbs.db
 
 ######################################################## 
-# Ignore log folder so it is not uploaded during commits  
+# Ignore logs so they are not uploaded during commits  
 ########################################################
 logs/*
+debug.log
