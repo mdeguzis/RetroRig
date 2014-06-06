@@ -110,12 +110,13 @@ getScriptAbsoluteDir "$script_invoke_path"
 script_absolute_dir=$RESULT
 
 # load script modules
+
 import "scriptmodules/helpers"
 import "scriptmodules/configuration"
 import "scriptmodules/menus"
 import "scriptmodules/settings"
 import "scriptmodules/setup"
-import "scriptmodules/gamepads"
+import "scriptmodules/gamepads"           	
 
 ######################################
 # Start main script
