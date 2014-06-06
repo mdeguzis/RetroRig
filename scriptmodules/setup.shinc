@@ -187,11 +187,11 @@ function rrs_debug()
 
 	# Check for existance of essential files
 	echo "Essential files: XBMC:" > "$rootdir/debug.log"
-	echo "Path(s): '$HOME/.xbmc/userdata'" > "$rootdir/debug.log"
+	echo "Path(s): '$HOME/.xbmc/userdata'" >> "$rootdir/debug.log"
 	h_filechecker "$HOME/.xbmc/userdata"
 	echo "Essential files: ROM Collection Browser:" >> "$rootdir/debug.log"
-	echo "Path(s): '$HOME/.xbmc/addons/script.games.rom.collection.browser'" > "$rootdir/debug.log"
-	echo "Path(s): '$HOME/.xbmc/userdata/addon_data/script.games.rom.collection.browser'" > "$rootdir/debug.log"
+	echo "Path(s): '$HOME/.xbmc/addons/script.games.rom.collection.browser'" >> "$rootdir/debug.log"
+	echo "Path(s): '$HOME/.xbmc/userdata/addon_data/script.games.rom.collection.browser'" >> "$rootdir/debug.log"
 	h_filechecker "$HOME/.xbmc/addons/script.games.rom.collection.browser"
 	h_filechecker "$HOME/.xbmc/userdata/addon_data/script.games.rom.collection.browser"
 	echo "Available init files:" >> "$rootdir/debug.log"
