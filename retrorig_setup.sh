@@ -137,6 +137,54 @@ if [ "$(id -u)" -ne 0 ]; then
     exit 1
 fi
 
+# if called with sudo ./retropie_setup.sh, the installation directory is /home/CURRENTUSER/RetroPie for the current user
+# if called with sudo ./retropie_setup.sh USERNAME, the installation directory is /home/USERNAME/RetroPie for user USERNAME
+# if called with sudo ./retropie_setup.sh USERNAME ABSPATH, the installation directory is ABSPATH for user USERNAME
+    
+if [[ $# -lt 1 ]]; then
+    user=$SUDO_USER
+    if [ -z "$user" ]
+    then
+        user=$(whoami)
+    fi
+    rootdir=/home/$user/RetroPie
+elif [[ $# -lt 2 ]]; then
+    user=$1
+    rootdir=/home/$user/RetroPie
+elif [[ $# -lt 3 ]]; then
+    user=$1
+    rootdir=$2
+fi
+
+if [[ $user == "root" ]]; then
+echo "Please start the RetroPie Setup Script not as user 'root', but, e.g., as user 'pi'."
+    exit
+fi
+
+esscrapimgw=275 # width in pixel for EmulationStation games scraper
+
+home=$(eval echo ~$user)
+
+# make sure that RetroPie root directory exists
+if [[ ! -d $rootdir ]]; then
+    mkdir -p "$rootdir"
+    if [[ ! -d $rootdir ]]; then
+      echo "Couldn't make directory $rootdir"
+      exit 1
+    fi
+fi
+
+# make sure that RetroPie-Setup log directory exists
+if [[ ! -d $scriptdir/logs ]]; then
+    mkdir -p "$scriptdir/logs"
+    chown $user "$scriptdir/logs"
+    chgrp $user "$scriptdir/logs"
+    if [[ ! -d $scriptdir/logs ]]; then
+      echo "Couldn't make directory $scriptdir/logs"
+      exit 1
+    fi
+fi
+
 while true; do
 cmd=(dialog --backtitle "LibreGeek.org RetroRig Installer" --menu "| Main Menu | \
 			 Any required BIOS files are NOT provided!" 17 62 16)
@@ -159,16 +207,26 @@ options=(1 "Install Software"
 		case $choices in
 
 		1) 
+		   now=$(date +'%d%m%Y_%H%M%S')
+                   {
 		   rrs_software	
+		   } 2>&1 | tee >(gzip --stdout > $scriptdir/logs/run_$now.log.gz)	               	
+		   chown -R $user $scriptdir/logs/install_$now.log.gz
+                   chgrp -R $user $scriptdir/logs/install_$now.log.gz
 		   ;;
 
 		2) 
+		   now=$(date +'%d%m%Y_%H%M%S')
+		   {
 		   cfg_confirm
 		   rrs_prepareFolders
 		   rrs_emu_configs
 		   m_gamepad
 		   set_resolution
 		   rrs_autostart
+		   } 2>&1 | tee >(gzip --stdout > $scriptdir/logs/install_$now.log.gz)	               	
+		   chown -R $user $scriptdir/logs/cfg_$now.log.gz
+                   chgrp -R $user $scriptdir/logs/cfg_$now.log.gz
 		   ;;
 
 		3) 
@@ -180,11 +238,21 @@ options=(1 "Install Software"
 		   ;;
 
 		5)
+		   now=$(date +'%d%m%Y_%H%M%S')
+                   {
 		   h_update_binaries
+		   } 2>&1 | tee >(gzip --stdout > $scriptdir/logs/update_$now.log.gz)	               	
+		   chown -R $user $scriptdir/logs/update_$now.log.gz
+                   chgrp -R $user $scriptdir/logs/update_$now.log.gz
 		   ;;
 
 		6)
+		   now=$(date +'%d%m%Y_%H%M%S')
+                   {
 		   h_upgrade_system
+		   } 2>&1 | tee >(gzip --stdout > $scriptdir/logs/upgrade_$now.log.gz)	               	
+		   chown -R $user $scriptdir/logs/upgrade_$now.log.gz
+                   chgrp -R $user $scriptdir/logs/upgrade_$now.log.gz
 		   ;;
 
 		7)
@@ -196,7 +264,12 @@ options=(1 "Install Software"
 		   ;;
 
 		9)
+		   now=$(date +'%d%m%Y_%H%M%S')
+                   {
 		   cfg_uninstall
+		   } 2>&1 | tee >(gzip --stdout > $scriptdir/logs/uninstall_$now.log.gz)	               	
+		   chown -R $user $scriptdir/logs/uninstall_$now.log.gz
+                   chgrp -R $user $scriptdir/logs/uninstall_$now.log.gz
            	   ;;
 
 		10)

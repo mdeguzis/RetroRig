@@ -7,6 +7,7 @@
 # You can also reach me on twitter: @N3RD42
 #
 
+clear
 function rrs_prepareFolders()
 {
 	printMsg "Creating folders for ROMs, Artwork, Saves, and dotfiles"
@@ -287,6 +288,12 @@ function rrs_prereq()
     else
         echo "Found needed packages 'git' and 'dialog'."
     fi
+
+# Debug informatin only!
+echo "Current install user: $SUDO_USER"
+echo "Current install rootdir is: $rootdir"
+echo "Current script dir is:  $scriptdir"
+sleep 4s
 }
 
 function rrs_reboot()
