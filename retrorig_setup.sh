@@ -134,19 +134,19 @@ if [ "$(id -u)" -ne 0 ]; then
     printf "Script must be run as root! Try:"
     echo ""
     echo ""
-    printf "'sudo ./retropie_setup'" 
+    printf "'sudo ./retrorig_setup'" 
     echo ""
     echo "OR"
-    printf "'./retropie_setup --help'"
+    printf "'./retrorig_setup --help'"
     echo ""
     echo ""
     printf "for further information\n"
     exit 1
 fi
 
-# if called with sudo ./retropie_setup.sh, the installation directory is /home/CURRENTUSER/RetroPie for the current user
-# if called with sudo ./retropie_setup.sh USERNAME, the installation directory is /home/USERNAME/RetroPie for user USERNAME
-# if called with sudo ./retropie_setup.sh USERNAME ABSPATH, the installation directory is ABSPATH for user USERNAME
+# if called with sudo ./retrorig_setup.sh, the installation directory is /home/CURRENTUSER/RetroRig for the current user
+# if called with sudo ./retrorig_setup.sh USERNAME, the installation directory is /home/USERNAME/RetroRig for user USERNAME
+# if called with sudo ./retrorig_setup.sh USERNAME ABSPATH, the installation directory is ABSPATH for user USERNAME
     
 if [[ $# -lt 1 ]]; then
     user=$SUDO_USER
@@ -154,17 +154,17 @@ if [[ $# -lt 1 ]]; then
     then
         user=$(whoami)
     fi
-    rootdir=/home/$user/RetroPie
+    rootdir=/home/$user/RetroRig
 elif [[ $# -lt 2 ]]; then
     user=$1
-    rootdir=/home/$user/RetroPie
+    rootdir=/home/$user/RetroRig
 elif [[ $# -lt 3 ]]; then
     user=$1
     rootdir=$2
 fi
 
 if [[ $user == "root" ]]; then
-echo "Please start the RetroPie Setup Script not as user 'root', but, e.g., as user 'pi'."
+echo "Please start the RetroRig Setup Script not as user 'root', but, e.g., as user 'pi'."
     exit
 fi
 
@@ -172,7 +172,7 @@ esscrapimgw=275 # width in pixel for EmulationStation games scraper
 
 home=$(eval echo ~$user)
 
-# make sure that RetroPie root directory exists
+# make sure that RetroRig root directory exists
 if [[ ! -d $rootdir ]]; then
     mkdir -p "$rootdir"
     if [[ ! -d $rootdir ]]; then
@@ -181,7 +181,7 @@ if [[ ! -d $rootdir ]]; then
     fi
 fi
 
-# make sure that RetroPie-Setup log directory exists
+# make sure that RetroRig-Setup log directory exists
 if [[ ! -d $scriptdir/logs ]]; then
     mkdir -p "$scriptdir/logs"
     chown $user "$scriptdir/logs"
