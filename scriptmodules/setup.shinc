@@ -166,7 +166,7 @@ function rrs_software() {
 
         chown -R $user $scriptdir/logs/install_$now.log.gz
         chgrp -R $user $scriptdir/logs/install_$now.log.gz
-
+	#END
 }
 
 function rrs_xboxdrv()
