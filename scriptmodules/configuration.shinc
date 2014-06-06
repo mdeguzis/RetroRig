@@ -13,8 +13,7 @@ function cfg_confirm ()
 
 	dialog --title "Confirm yes/no" \
 	--backtitle "LibreGeek.org RetroRig Installer" \
-	--yesno "Are you sure you want run the configuration setup? \
-	This will* reset existing configurations!" 7 50
+	--yesno "Are you sure you want run the this option?"  7 50
 	 
 	# Get exit status
 	# 0 means user hit [yes] button.
@@ -24,44 +23,22 @@ function cfg_confirm ()
 	case $response in
 	   0) 
 	   #dialog --infobox "Continuing..." 3 17
-	   #continue on below
+	   #continue on below function
 	   ;;
 
 	   1) 
-	   dialog --infobox "Exiting Configuration Setup"  3 31
+	   dialog --infobox "Exiting..."  3 31
 	   sleep 2s
 	   _main
 	   ;;
 
 	   255)
-	   dialog --infobox "Exiting Configuration Setup" 3 31
+	   dialog --infobox "Exiting..." 3 31
 	   sleep 2s
 	   _main
 	   ;;
 
 	esac
-}
-
-function cfg_Unity ()
-{
-
-#disable screensaver, XBMC will manage this
-#export display to allow gsettings running in terminal window
-export DISPLAY=:0.0
-gsettings set org.gnome.desktop.screensaver lock-enabled false
-gsettings set org.gnome.desktop.screensaver ubuntu-lock-on-suspend false
-gsettings set org.gnome.desktop.session idle-delay 3600
-
-}
-
-function cfg_xbmc ()
-{
-
-#xbmc does not (at least for Ubuntu's repo pkg) load the
-#dot files without loading XBMC at least once
-#copy in default folder base from first run:	
-cp -Rv $HOME/RetroRig/XBMC-cfgs/* $HOME/.xbmc | tee -a install_log.txt
-
 }
 
 function cfg_correct_perms ()
@@ -101,8 +78,8 @@ dialog --title "Confirm yes/no" \
 	stella build-essential
 
 	# add apport, apport-gtk back
-	apt-get install -y apport apport-gtk | tee -a uninstall_log.txt
-	dpkg --remove-architecture i386 | tee -a uninstall_log.txt
+	apt-get install -y apport apport-gtk
+	dpkg --remove-architecture i386
 
 	apt-get -y autoremove
 
@@ -145,7 +122,7 @@ dialog --title "Confirm yes/no" \
 
 	#system objects
 	rm -f /etc/xdg/autostart/qjoypad.desktop
-	service xboxdrv stop | tee uninstall_log.txt
+	service xboxdrv stop
 	# remove init services	
 	update-rc.d -f xboxdrv remove
 	rm -f /etc/init.d/xboxdrv
@@ -180,11 +157,11 @@ dialog --title "Confirm yes/no" \
 	;;
 
    	1) 
-	echo $userpasswd | sudo rm -rf $rootdir/Games/ROMs/
-	echo $userpasswd | sudo rm -rf $rootdir/Games/Tools/
-	echo $userpasswd | sudo rm -rf $rootdir/Games/Artwork/
-	echo $userpasswd | sudo rm -rf $rootdir/Games/Saves/
-	echo $userpasswd | sudo rm -rf $rootdir/Games/Configs/
+	echo $userpasswd | sudo rm -rf $rootdir/ROMs/
+	echo $userpasswd | sudo rm -rf $rootdir/Tools/
+	echo $userpasswd | sudo rm -rf $rootdir/Artwork/
+	echo $userpasswd | sudo rm -rf $rootdir/Saves/
+	echo $userpasswd | sudo rm -rf $rootdir/Configs/
 	;;
 
 	255)
@@ -198,7 +175,7 @@ dialog --title "Confirm yes/no" \
 rm -rf $rootdir
 
 #update Ubuntu repository listings
-apt-get update | tee -a uninstall_log.txt
+apt-get update
 sleep 2s
 
 }

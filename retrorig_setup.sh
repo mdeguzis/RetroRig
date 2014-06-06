@@ -198,37 +198,29 @@ rrs_prereq
 while true; do
     cmd=(dialog --backtitle "LibreGeek.org RetroRig Installer" --menu "| Main Menu | \
  			 Any required BIOS files are NOT provided!" 17 62 16)
-    options=(1 "Install Software" 
-	     2 "Set up default configuration files" 
-	     3 "Retro Rig Settings" 
-	     4 "Pull latest files from git" 
-	     5 "Update emulator binaries" 
-	     6 "Upgrade System (use with caution!)" 
-	     7 "Start RetroRig" 
-	     8 "Reboot PC"
-	     9 "Uninstall RetroRig"  
-	     10 "Exit")
+    options=(1 "Install RetroRig" 
+	     2 "Retro Rig Settings" 
+	     3 "Pull latest files from git" 
+	     4 "Update emulator binaries" 
+	     5 "Upgrade System (use with caution!)" 
+	     6 "Start RetroRig" 
+	     7 "Reboot PC"
+	     8 "Uninstall RetroRig"  
+	     9 "Exit")
 
 	#make menu choice
     choices=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)    
     if [ "$choices" != "" ]; then
 	case $choices in
 
-	    1)  now=$(date +'%d%m%Y_%H%M%S')
-		{
-		rrs_software	
-		} 2>&1 | tee >(gzip --stdout > $scriptdir/logs/install_$now.log.gz)	               	
-		chown -R $user $scriptdir/logs/install_$now.log.gz
-		chgrp -R $user $scriptdir/logs/install_$now.log.gz
-		;;
-
-	    2) 
+	    1) 
 		now=$(date +'%d%m%Y_%H%M%S')
 		{
-		cfg_confirm
+		rrs_software
 		rrs_prepareFolders
-		rrs_emu_configs
-		m_gamepad
+		rrs_unity
+		rrs_xbmc
+		rrs_gamepad
 		set_resolution
 		rrs_autostart
 		} 2>&1 | tee >(gzip --stdout > $scriptdir/logs/install_$now.log.gz)	               	
@@ -236,15 +228,15 @@ while true; do
 		chgrp -R $user $scriptdir/logs/cfg_$now.log.gz
 		;;
 
-	    3) 
-		m_settings
+	    2) 
+		set_menu
 		;;
 
-	    4)
+	    3)
 		h_update_git
 		;;
 
-	    5)
+	    4)
 		now=$(date +'%d%m%Y_%H%M%S')
 		{
 		h_update_binaries
@@ -253,7 +245,7 @@ while true; do
 		chgrp -R $user $scriptdir/logs/update_$now.log.gz
 		;;
 
-	    6)
+	    5)
 		now=$(date +'%d%m%Y_%H%M%S')
 		{
 		h_upgrade_system
@@ -262,15 +254,15 @@ while true; do
 		chgrp -R $user $scriptdir/logs/upgrade_$now.log.gz
 		;;
 
-	    7)
+	    6)
 		h_start_xbmc
 		;;
 
-	    8) 
+	    7) 
 		rrs_reboot
 		;;
 
-	    9)
+	    8)
 		now=$(date +'%d%m%Y_%H%M%S')
 		{
 		cfg_uninstall

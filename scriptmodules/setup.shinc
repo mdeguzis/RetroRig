@@ -78,34 +78,58 @@ function rrs_prepareFolders()
 
 }
 
-function rrs_emu_configs ()
+function rrs_Unity ()
 {
 
-#mame
-	# default path: /home/$USER/.mame
-	# Main config
-	cp -v $scriptdir/emu-cfgs/x360_controller/MAME/default.cfg $HOME/.mame/cfg 
-	cp -v $scriptdir/emu-cfgs/x360_controller/MAME/mame.ini $HOME/.mame
- 
-	# offline artwork scrapper configs
-	cp -v $scriptdir/emu-cfgs/x360_controller/MAME/parserConfig.xml $HOME/Games/Artwork/MAME
-	cp -v $scriptdir/emu-cfgs/x360_controller/MAME/MAME.txt $HOME/Games/Artwork/MAME
-	cp -v $scriptdir/emu-cfgs/x360_controller/MAME/MAME\ synopsis\ RCB\ 201202.zip/ $HOME/Games/Artwork/MAME
+#disable screensaver, XBMC will manage this
+#export display to allow gsettings running in terminal window
+export DISPLAY=:0.0
+gsettings set org.gnome.desktop.screensaver lock-enabled false
+gsettings set org.gnome.desktop.screensaver ubuntu-lock-on-suspend false
+gsettings set org.gnome.desktop.session idle-delay 3600
 
-	# mednafen
-	# default path: /home/$USER/.mednafen/mednafen.cfg
-	# Main config
-	cp -v $scriptdir/emu-cfgs/x360_controller/mednafen/mednafen-09x.cfg $HOME/.mednafen
+}
 
-	# mupen64plus
-	# default path: /home/$USER/.config/mupen64plus
-	# Main config
-	cp -v $scriptdir/emu-cfgs/x360_controller/mupen64plus/mupen64plus.cfg $HOME/.config/mupen64plus/
+function rrs_xbmc ()
+{
 
-	#Stella
-	#default path: /home/$USER/.config/mupen64plus
-	#Main config
-	cp -v $scriptdir/emu-cfgs/x360_controller/Stella/stellarc $HOME/.stella/
+#xbmc does not (at least for Ubuntu's repo pkg) load the
+#dot files without loading XBMC at least once
+#copy in default folder base from first run:	
+cp -Rv $HOME/RetroRig/XBMC-cfgs/* $HOME/.xbmc
+
+}
+
+function rrs_gamepad (){
+
+
+cmd=(dialog --backtitle "LibreGeek.org RetroRig Installer" --menu "| Gamepad Select | \
+			 Request any new Gamepads via github!" 16 62 16)
+options=(1 "Xbox 360 Controller (wireless) (4-player)" 
+	 2 "Exit gamepad selection"
+	 3 "Back to main menu")
+
+	#make menu choice
+	selection=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
+	#functions
+
+	for choice in $selection
+	do
+		case $choice in
+
+		1)
+		gp_x360
+		;;
+
+		2)
+		return
+		;;
+
+		4)
+		_
+		;;
+		esac
+	done
 }
 
 function rrs_software() {
@@ -169,15 +193,46 @@ function rrs_software() {
 	#END
 }
 
-function rrs_xboxdrv()
+function rrs_xboxdrv () 
 {
-	echo "nothing here"
+
+	#Wireless Xbox 360 Controller Config
+
+	#copy xbox configuration (default) to folder
+	cp -v $HOME/RetroRig/gamepad-cfgs/x360_controller/xpad-wireless.xboxdrv /usr/share/xboxdrv/
+	
+	# copy keyboard.xml file for XBMC. Button id numbers are totally diffferent, due to the use of the use-dpad-as-button, and use-trigger-as-button options used.
+	cp -v $HOME/RetroRig/gamepad-cfgs/x360_controller/keyboard.xml $HOME/.xbmc/userdata/keymaps
+
+	#set qjoypad's profile to match Xbox 360 Wireless (4-player)
+	cp -v $HOME/RetroRig/gamepad-cfgs/x360_controller.lyt $HOME/.qjoypad3/ 
+	
+	#inject init script and default config
+	cp -v $HOME/RetroRig/init-scripts/x360_controller/xboxdrv /etc/init.d/
+	cp -v $HOME/RetroRig/init-scripts/x360_controller/default/xboxdrv /etc/default/xboxdrv
+	
+	#update init scripts
+	update-rc.d xboxdrv defaults
+
+	#blacklist xpad
+	echo "sudo needed to blacklist xpad!"
+	cp -v $scriptdir/init-scripts/x360_controller/blacklist.conf /etc/modprobe.d/
+
+	#copy default gamepad setup for Xbox 360 Wireless (4-player)
+	cp -v $scriptdir/controller-cfgs/x360_controller/x360_controller.lyt $HOME/.qjoypad3/
+
+	#copy qjoypad autostart item for x360_controller gamepad config
+	cp -v $scriptdir/gamepad-cfgs/x360_controller/qjoypad.desktop /etc/xdg/autostart/
+
 }
 
 function rrs_autostart()
 {
-	#create autostart for XBMC (universal)
+	# create autostart for XBMC (universal)
 	cp -v "/usr/share/applications/xbmc.desktop" "/etc/xdg/autostart/"
+
+	# later this section will configure LightDM (login manager for Ubuntu) to log into
+	# the XBMC session and skip Unity altogether. Provide an option to do so, yes/no...
 }
 
 function rrs_debug()
@@ -189,11 +244,13 @@ function rrs_debug()
 	echo "Essential files: XBMC:" > "$rootdir/debug.log"
 	echo "Path(s): '$HOME/.xbmc/userdata'" >> "$rootdir/debug.log"
 	h_filechecker "$HOME/.xbmc/userdata"
+	# RCB
 	echo "Essential files: ROM Collection Browser:" >> "$rootdir/debug.log"
-	echo "Path(s): '$HOME/.xbmc/addons/script.games.rom.collection.browser'" >> "$rootdir/debug.log"
-	echo "Path(s): '$HOME/.xbmc/userdata/addon_data/script.games.rom.collection.browser'" >> "$rootdir/debug.log"
-	h_filechecker "$HOME/.xbmc/addons/script.games.rom.collection.browser"
+	echo "Path: '$HOME/.xbmc/addons/script.games.rom.collection.browser'" >> "$rootdir/debug.log"
+	h_filechecker "$HOME/.xbmc/addons/script.games.rom.collection.browser"	
+	echo "Path: '$HOME/.xbmc/userdata/addon_data/script.games.rom.collection.browser'" >>
 	h_filechecker "$HOME/.xbmc/userdata/addon_data/script.games.rom.collection.browser"
+	# init file checks	
 	echo "Available init files:" >> "$rootdir/debug.log"
 	echo "Has xboxdrv been loaded?" >> "$rootdir/debug.log"
 	h_filechecker "/etc/init.d/xboxdrv"

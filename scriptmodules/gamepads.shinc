@@ -7,35 +7,32 @@
 # You can also reach me on twitter: @N3RD42
 #
 
-function gp_x360 () 
+function gp_x360()
 {
 
-	#Wireless Xbox 360 Controller Config
+	#mame
+	# default path: /home/$USER/.mame
+	# Main config
+	cp -v $scriptdir/emu-cfgs/x360_controller/MAME/default.cfg $HOME/.mame/cfg 
+	cp -v $scriptdir/emu-cfgs/x360_controller/MAME/mame.ini $HOME/.mame
+ 
+	# offline artwork scrapper configs
+	cp -v $scriptdir/emu-cfgs/x360_controller/MAME/parserConfig.xml $HOME/Games/Artwork/MAME
+	cp -v $scriptdir/emu-cfgs/x360_controller/MAME/MAME.txt $HOME/Games/Artwork/MAME
+	cp -v $scriptdir/emu-cfgs/x360_controller/MAME/MAME\ synopsis\ RCB\ 201202.zip/ $HOME/Games/Artwork/MAME
 
-	#copy xbox configuration (default) to folder
-	cp -v $HOME/RetroRig/gamepad-cfgs/x360_controller/xpad-wireless.xboxdrv /usr/share/xboxdrv/
-	
-	# copy keyboard.xml file for XBMC. Button id numbers are totally diffferent, due to the use of the use-dpad-as-button, and use-trigger-as-button options used.
-	cp -v $HOME/RetroRig/gamepad-cfgs/x360_controller/keyboard.xml $HOME/.xbmc/userdata/keymaps
+	# mednafen
+	# default path: /home/$USER/.mednafen/mednafen.cfg
+	# Main config
+	cp -v $scriptdir/emu-cfgs/x360_controller/mednafen/mednafen-09x.cfg $HOME/.mednafen
 
-	#set qjoypad's profile to match Xbox 360 Wireless (4-player)
-	cp -v $HOME/RetroRig/gamepad-cfgs/x360_controller.lyt $HOME/.qjoypad3/ 
-	
-	#inject init script and default config
-	cp -v $HOME/RetroRig/init-scripts/x360_controller/xboxdrv /etc/init.d/
-	cp -v $HOME/RetroRig/init-scripts/x360_controller/default/xboxdrv /etc/default/xboxdrv
-	
-	#update init scripts
-	update-rc.d xboxdrv defaults | tee -a install_log.txt
+	# mupen64plus
+	# default path: /home/$USER/.config/mupen64plus
+	# Main config
+	cp -v $scriptdir/emu-cfgs/x360_controller/mupen64plus/mupen64plus.cfg $HOME/.config/mupen64plus/
 
-	#blacklist xpad
-	echo "sudo needed to blacklist xpad!"
-	cp -v $scriptdir/init-scripts/x360_controller/blacklist.conf /etc/modprobe.d/
-
-	#copy default gamepad setup for Xbox 360 Wireless (4-player)
-	cp -v $scriptdir/controller-cfgs/x360_controller/x360_controller.lyt $HOME/.qjoypad3/
-
-	#copy qjoypad autostart item for x360_controller gamepad config
-	cp -v $scriptdir/gamepad-cfgs/x360_controller/qjoypad.desktop /etc/xdg/autostart/
-
+	#Stella
+	#default path: /home/$USER/.config/mupen64plus
+	#Main config
+	cp -v $scriptdir/emu-cfgs/x360_controller/Stella/stellarc $HOME/.stella/
 }
