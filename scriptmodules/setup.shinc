@@ -158,7 +158,7 @@ function rrs_software() {
 	# Output postMSGs to screen
 	
         if [[ ! -z $__postMSGs ]]; then
-            dialog --backtitle "LibreGeek.org - RetroRig Setup. Installation folder: $rootdir for user $user" --msgbox "$__postMSGs See debug.log for more details." 20 66
+            dialog --backtitle "LibreGeek.org - RetroRig Setup. Installation folder: $rootdir for user $user" --msgbox "$__postMSGs See debug.log for more details." 14 66
         fi
 
 
@@ -191,7 +191,7 @@ function rrs_debug()
 	h_filechecker "$HOME/.xbmc/addons/script.games.rom.collection.browser"
 	echo "Essential files: ROM Collection Browser:" > "$rootdir/debug.log"
 	h_filechecker "$HOME/.xbmc/userdata/addon_data/script.games.rom.collection.browser/"
-	echo "Available init files:" > "$rootdir/debug.log"
+	echo "Available init files:" >> "$rootdir/debug.log"
 	h_filechecker "/etc/init.d/xboxdrv"
 	h_filechecker "/etc/default/xboxdrv"
 
