@@ -164,8 +164,8 @@ function rrs_software() {
 
         dialog --backtitle "LibreGeek.org - RetroRig Setup. Installation folder: $rootdir for user $user" --msgbox "Finished tasks.\nYou now have to copy roms to the roms folders. \nThis can be done via SSH, Samba, or via your graphic folder manager (please see settings menu for more)" 10 50
 
-        chown -R $user $scriptdir/logs/run_$now.log.gz
-        chgrp -R $user $scriptdir/logs/run_$now.log.gz
+        chown -R $user $scriptdir/logs/install_$now.log.gz
+        chgrp -R $user $scriptdir/logs/install_$now.log.gz
 
 }
 
@@ -186,10 +186,12 @@ function rrs_debug()
 	echo "Generating debug log"
 
 	# Check for existance of essential files
-	echo "Essential files:" > "$rootdir/debug.log"
+	echo "Essential files: XBMC:" > "$rootdir/debug.log"
 	h_filechecker "$HOME/.xbmc/userdata"
 	h_filechecker "$HOME/.xbmc/addons/script.games.rom.collection.browser"
+	echo "Essential files: ROM Collection Browser:" > "$rootdir/debug.log"
 	h_filechecker "$HOME/.xbmc/userdata/addon_data/script.games.rom.collection.browser/"
+	echo "Available init files:" > "$rootdir/debug.log"
 	h_filechecker "/etc/init.d/xboxdrv"
 	h_filechecker "/etc/default/xboxdrv"
 
