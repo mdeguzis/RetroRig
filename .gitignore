@@ -13,5 +13,4 @@ Thumbs.db
 ######################################################## 
 # Ignore log folder so it is not uploaded during commits  
 ########################################################
-
-logs/
+logs/*

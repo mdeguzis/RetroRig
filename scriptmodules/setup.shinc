@@ -280,28 +280,25 @@ function rrs_prereq()
         apt-get update
         apt-get install -y git dialog
         if [ $? == '0' ]; then
-            echo "Successfully installed 'git' and/or 'dialog'."
-	    prereqs = true
+            echo "Successfully installed 'git' and/or 'dialog'." > "$scriptdir/logs/prechecks.log"
+	    prereqs="true"
         else
-            echo "Could not install 'git' and/or 'dialog'. Exiting..."
-	    prereqs = false
+            echo "Could not install 'git' and/or 'dialog'. Exiting..." > "$scriptdir/logs/prechecks.log"
+	    prereqs="false"
             exit 1
         fi
     else
-        echo "Found needed packages 'git' and 'dialog'."
-	prereqs = true
+        echo "Found needed packages 'git' and 'dialog'." > "$scriptdir/logs/prechecks.log"
+	prereqs="true"
     fi
 
-##############################
-# debug informatin only!
-##############################
 
-echo "Current install user: $SUDO_USER" > "$scriptdir/logs/prechecks.log"
+echo "Current install user: $SUDO_USER" >> "$scriptdir/logs/prechecks.log"
 echo "Current install rootdir is: $rootdir" >>"$scriptdir/logs/prechecks.log"
 echo "Current script dir is:  $scriptdir" >>"$scriptdir/logs/prechecks.log"
 
-if [ $prereqs -e true ]; then
-    echo "Pre-checks were sucessful" >> "$scriptdir/logs/prechecks.log"
+if [ "$prereqs" == "true" ]; then
+    echo "Pre-checks were sucessful!!!" >> "$scriptdir/logs/prechecks.log"
 else
     echo "Pre-checks were NOT sucessful. Sad crab!" >> "$scriptdir/logs/prechecks.log"
 fi
@@ -309,9 +306,7 @@ fi
 chown -R $user $scriptdir/logs/prechecks.log
 chgrp -R $user $scriptdir/logs/prechecks.log
 
-##############################
-# End Debug 
-##############################
+
 
 }
 
