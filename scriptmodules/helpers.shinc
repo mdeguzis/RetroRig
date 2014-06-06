@@ -7,7 +7,7 @@
 # You can also reach me on twitter: @N3RD42
 #
 
-function h_plugin-switcher ()
+function h_plugin-switcher()
 
 {
 
@@ -57,7 +57,7 @@ options=(1 "Current configuration"
 
 }
 
-function h_file-loader ()
+function h_file-loader()
 {
 
 folder=$(dialog --stdout --title "Please choose a file (spacebar to select)" --fselect $HOME/ 14 48)
@@ -65,7 +65,7 @@ echo "${folder} file chosen."
 }
 
 
-function _rom-loader ()
+function h_rom-loader()
 {
 
 cmd=(dialog --backtitle "LibreGeek.org RetroRig Installer" --menu "Load ROMs for which system?" 19 32 24)
@@ -183,7 +183,7 @@ options=(1 "Atari 2600"
 }
 
 
-function _res-swticher ()
+function _res-swticher()
 {
 	dialog --infobox "Setting resolution to selection" 3 36
 	#resolution is set via _resolution function		
@@ -287,7 +287,7 @@ function _res-swticher ()
 
 }
 
-function h_rom_loader ()
+function h_rom_loader()
 {
 
 	#prompt user if they wish to pre-load ROMs now
