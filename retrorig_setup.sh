@@ -217,9 +217,9 @@ while true; do
 	    1)  now=$(date +'%d%m%Y_%H%M%S')
 		{
 		rrs_software	
-		} 2>&1 | tee > $scriptdir/logs/install_$now.log           	
-		chown -R $user $scriptdir/logs/install_$now.log
-		chgrp -R $user $scriptdir/logs/install_$now.log
+		} 2>&1 | tee >(gzip --stdout > $scriptdir/logs/install_$now.log.gz)	               	
+		chown -R $user $scriptdir/logs/install_$now.log.gz
+		chgrp -R $user $scriptdir/logs/install_$now.log.gz
 		;;
 
 	    2) 
