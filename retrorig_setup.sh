@@ -130,7 +130,16 @@ if [[ "$1" == "--help" ]]; then
 fi
 
 if [ "$(id -u)" -ne 0 ]; then
-    printf "Script must be run as root. Try 'sudo ./retropie_setup' or ./retropie_setup --help for further information\n"
+    printf "Script must be run as root! Try:"
+    echo ""
+    echo ""
+    printf "'sudo ./retropie_setup'" 
+    echo ""
+    echo "OR"
+    printf "'./retropie_setup --help'"
+    echo ""
+    echo ""
+    printf "for further information\n"
     exit 1
 fi
 
