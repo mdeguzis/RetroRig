@@ -124,9 +124,6 @@ import "scriptmodules/gamepads"
 scriptdir=$(dirname "$0")
 scriptdir=$(cd "$scriptdir" && pwd)
 
-#check for pre-requisites
-rrs_prereq
-
 if [[ "$1" == "--help" ]]; then
     rrs_showHelp
     exit 0
@@ -184,6 +181,9 @@ if [[ ! -d $scriptdir/logs ]]; then
       exit 1
     fi
 fi
+
+#check for pre-requisites, output to log folder
+rrs_prereq
 
 while true; do
 cmd=(dialog --backtitle "LibreGeek.org RetroRig Installer" --menu "| Main Menu | \

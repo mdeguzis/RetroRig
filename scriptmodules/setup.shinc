@@ -281,19 +281,38 @@ function rrs_prereq()
         apt-get install -y git dialog
         if [ $? == '0' ]; then
             echo "Successfully installed 'git' and/or 'dialog'."
+	    prereqs = true
         else
             echo "Could not install 'git' and/or 'dialog'. Exiting..."
+	    prereqs = false
             exit 1
         fi
     else
         echo "Found needed packages 'git' and 'dialog'."
+	prereqs = true
     fi
 
-# Debug informatin only!
-echo "Current install user: $SUDO_USER"
-echo "Current install rootdir is: $rootdir"
-echo "Current script dir is:  $scriptdir"
-sleep 4s
+##############################
+# debug informatin only!
+##############################
+
+echo "Current install user: $SUDO_USER" > "$scriptdir/logs/prechecks.log"
+echo "Current install rootdir is: $rootdir" >>"$scriptdir/logs/prechecks.log"
+echo "Current script dir is:  $scriptdir" >>"$scriptdir/logs/prechecks.log"
+
+if [ $prereqs -e true ]; then
+    echo "Pre-checks were sucessful" >> "$scriptdir/logs/prechecks.log"
+else
+    echo "Pre-checks were NOT sucessful. Sad crab!" >> "$scriptdir/logs/prechecks.log"
+fi
+
+chown -R $user $scriptdir/logs/prechecks.log
+chgrp -R $user $scriptdir/logs/prechecks.log
+
+##############################
+# End Debug 
+##############################
+
 }
 
 function rrs_reboot()
