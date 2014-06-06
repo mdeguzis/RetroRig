@@ -75,6 +75,7 @@ function rrs_prepareFolders()
                 chgrp $user $entry
         fi
 	done
+
 }
 
 function rrs_emu_configs ()
@@ -116,10 +117,10 @@ function rrs_software() {
 	echo "Binaries-based installation"
 
 	# add multi-arch support
-	dpkg --add-architecture i386 | tee -a install_log.txt
+	dpkg --add-architecture i386
 
 	#add repository for official team XBMC "stable"
-	add-apt-repository -y ppa:team-xbmc/ppa | tee -a install_log.txt
+	add-apt-repository -y ppa:team-xbmc/ppa
 
 	# Add playdeb repo for later additions (very useful) 
 
@@ -139,7 +140,7 @@ function rrs_software() {
 	build-essential
 
 	#Removal of software for related bugs
-	apt-get remove -y apport apport-gtk | tee -a install_log.txt
+	apt-get remove -y apport apport-gtk
 	echo "Please reference the following bug report:"
 	echo "Reported by cecilpierce on 2012-06-05 on Launchpad"
 	echo "https://bugs.launchpad.net/ubuntu/+source/plymouth/+bug/1009238"
@@ -152,7 +153,7 @@ function rrs_software() {
 	rrs_debug
 
 	# Inform user about post-install tasks
-    	__postMSGs="$__postMSGs You need to copy Neo Geo CDZ BIOS files to the folder '$rootdir/ROMs/Neo-Geo/BIOS'. If you wish to use it!"
+    	__postMSGs="$__postMSGs You need to copy Neo Geo CDZ BIOS files to the folder '$rootdir/ROMs/Neo-Geo/BIOS' if you wish to use it!"
 
 	# Output postMSGs to screen
 	
@@ -193,7 +194,7 @@ function rrs_debug()
 	h_filechecker "/etc/default/xboxdrv"
 
 	# Check unity settings:
-	echo "Unity settings (if applicable):" > "$rootdir/debug.log"
+	echo "Unity settings (if applicable):" >> "$rootdir/debug.log"
 	gsettings list-recursively "org.gnome.desktop.screensaver" | grep "lock-enabled" >> "$rootdir/debug.log"
 	gsettings list-recursively "org.gnome.desktop.screensaver" | grep "ubuntu-lock-on-suspend" >> "$rootdir/debug.log"
 	gsettings list-recursively "org.gnome.desktop.session" | grep "idle-delay" >> "$rootdir/debug.log"
@@ -207,18 +208,11 @@ function rrs_debug()
 	h_pkgcheck "xboxdrv"
 	h_pkgcheck "curl"
 	h_pkgcheck "xbmc"
-	h_pkgcheck "medanfen"
+	h_pkgcheck "mednafen"
 	h_pkgcheck "mess"
 	h_pkgcheck "mame"
 	h_pkgcheck "qjoypad"
 	h_pkgcheck "jstest-gtk"
-
-	# BIOS file checks
-	echo -e "\nCheck for Bios files (if applicable): " >> "$rootdir/debug.log"
-	# Neo-Geo BIOS files
-	h_filecheck "$HOME/Games/ROMs/Neo-Geo/BIOS"
-	# If MESS is loaded already, verify BIOS files
-	mess neocdz -verifyroms >> "$rootdir/debug.log"
 
    	echo -e "\nEnd of log file" >> "$rootdir/debug.log" >> "$rootdir/debug.log"
 	
