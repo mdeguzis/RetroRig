@@ -7,7 +7,6 @@
 # You can also reach me on twitter: @N3RD42
 #
 
-clear
 function rrs_prepareFolders()
 {
 	printMsg "Creating folders for ROMs, Artwork, Saves, and dotfiles"
@@ -108,7 +107,7 @@ function rrs_emu_configs ()
 	cp -v $scriptdir/emu-cfgs/x360_controller/Stella/stellarc $HOME/.stella/
 }
 
-function rrs_software () {
+function rrs_software() {
 
 	# clear post install messages
 	__postMSGs=""
@@ -169,18 +168,18 @@ function rrs_software () {
 
 }
 
-function rrs_xboxdrv ()
+function rrs_xboxdrv()
 {
 	echo "nothing here"
 }
 
-function rrs_autostart ()
+function rrs_autostart()
 {
 	#create autostart for XBMC (universal)
 	cp -v "/usr/share/applications/xbmc.desktop" "/etc/xdg/autostart/"
 }
 
-function rrs_debug ()
+function rrs_debug()
 {
 	clear
 	printMsg "Generating debug log"
@@ -227,7 +226,7 @@ function rrs_debug ()
 
 }
 
-function rrs_showHelp ()
+function rrs_showHelp()
 {
     #set color for highlights
     # Arch Linux wiki color listing: http://bit.ly/1nhkU8Y
