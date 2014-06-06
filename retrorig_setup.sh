@@ -196,98 +196,95 @@ fi
 rrs_prereq
 
 while true; do
-cmd=(dialog --backtitle "LibreGeek.org RetroRig Installer" --menu "| Main Menu | \
-			 Any required BIOS files are NOT provided!" 17 62 16)
-options=(1 "Install Software" 
-	 2 "Set up default configuration files" 
-	 3 "Retro Rig Settings" 
-	 4 "Pull latest files from git" 
-	 5 "Update emulator binaries" 
-	 6 "Upgrade System (use with caution!)" 
-	 7 "Start RetroRig" 
-	 8 "Reboot PC"
-	 9 "Uninstall RetroRig"  
-	 10 "Exit")
+    cmd=(dialog --backtitle "LibreGeek.org RetroRig Installer" --menu "| Main Menu | \
+ 			 Any required BIOS files are NOT provided!" 17 62 16)
+    options=(1 "Install Software" 
+	     2 "Set up default configuration files" 
+	     3 "Retro Rig Settings" 
+	     4 "Pull latest files from git" 
+	     5 "Update emulator binaries" 
+	     6 "Upgrade System (use with caution!)" 
+	     7 "Start RetroRig" 
+	     8 "Reboot PC"
+	     9 "Uninstall RetroRig"  
+	     10 "Exit")
 
 	#make menu choice
-	choices=$("${cmd[@]}" "${options[@]}" > /dev/tty 2>&1)
-	#functions
+    choices=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)    
+    if [ "$choices" != "" ]; then
+	case $choices in
 
-	if [ "$choices" != "" ]; then
-		case $choices in
+	    1)  now=$(date +'%d%m%Y_%H%M%S')
+		{
+		rrs_software	
+		} 2>&1 | tee >(gzip --stdout > $scriptdir/logs/run_$now.log.gz)	               	
+		chown -R $user $scriptdir/logs/install_$now.log.gz
+		chgrp -R $user $scriptdir/logs/install_$now.log.gz
+		;;
 
-		1) 
-		   now=$(date +'%d%m%Y_%H%M%S')
-                   {
-		   rrs_software	
-		   } 2>&1 | tee >(gzip --stdout > $scriptdir/logs/run_$now.log.gz)	               	
-		   chown -R $user $scriptdir/logs/install_$now.log.gz
-                   chgrp -R $user $scriptdir/logs/install_$now.log.gz
-		   ;;
+	    2) 
+		now=$(date +'%d%m%Y_%H%M%S')
+		{
+		cfg_confirm
+		rrs_prepareFolders
+		rrs_emu_configs
+		m_gamepad
+		set_resolution
+		rrs_autostart
+		} 2>&1 | tee >(gzip --stdout > $scriptdir/logs/install_$now.log.gz)	               	
+		chown -R $user $scriptdir/logs/cfg_$now.log.gz
+		chgrp -R $user $scriptdir/logs/cfg_$now.log.gz
+		;;
 
-		2) 
-		   now=$(date +'%d%m%Y_%H%M%S')
-		   {
-		   cfg_confirm
-		   rrs_prepareFolders
-		   rrs_emu_configs
-		   m_gamepad
-		   set_resolution
-		   rrs_autostart
-		   } 2>&1 | tee >(gzip --stdout > $scriptdir/logs/install_$now.log.gz)	               	
-		   chown -R $user $scriptdir/logs/cfg_$now.log.gz
-                   chgrp -R $user $scriptdir/logs/cfg_$now.log.gz
-		   ;;
+	    3) 
+		m_settings
+		;;
 
-		3) 
-		   m_settings
-		   ;;
+	    4)
+		h_update_git
+		;;
 
-		4)
-		   h_update_git
-		   ;;
+	    5)
+		now=$(date +'%d%m%Y_%H%M%S')
+		{
+		h_update_binaries
+		} 2>&1 | tee >(gzip --stdout > $scriptdir/logs/update_$now.log.gz)	               	
+		chown -R $user $scriptdir/logs/update_$now.log.gz
+		chgrp -R $user $scriptdir/logs/update_$now.log.gz
+		;;
 
-		5)
-		   now=$(date +'%d%m%Y_%H%M%S')
-                   {
-		   h_update_binaries
-		   } 2>&1 | tee >(gzip --stdout > $scriptdir/logs/update_$now.log.gz)	               	
-		   chown -R $user $scriptdir/logs/update_$now.log.gz
-                   chgrp -R $user $scriptdir/logs/update_$now.log.gz
-		   ;;
+	    6)
+		now=$(date +'%d%m%Y_%H%M%S')
+		{
+		h_upgrade_system
+		} 2>&1 | tee >(gzip --stdout > $scriptdir/logs/upgrade_$now.log.gz)	               	
+		chown -R $user $scriptdir/logs/upgrade_$now.log.gz
+		chgrp -R $user $scriptdir/logs/upgrade_$now.log.gz
+		;;
 
-		6)
-		   now=$(date +'%d%m%Y_%H%M%S')
-                   {
-		   h_upgrade_system
-		   } 2>&1 | tee >(gzip --stdout > $scriptdir/logs/upgrade_$now.log.gz)	               	
-		   chown -R $user $scriptdir/logs/upgrade_$now.log.gz
-                   chgrp -R $user $scriptdir/logs/upgrade_$now.log.gz
-		   ;;
+	    7)
+		h_start_xbmc
+		;;
 
-		7)
-		   h_start_xbmc
-		   ;;
+	    8) 
+		rrs_reboot
+		;;
 
-		8) 
-		   rrs_reboot
-		   ;;
+	    9)
+		now=$(date +'%d%m%Y_%H%M%S')
+		{
+		cfg_uninstall
+		} 2>&1 | tee >(gzip --stdout > $scriptdir/logs/uninstall_$now.log.gz)	               	
+		chown -R $user $scriptdir/logs/uninstall_$now.log.gz
+		chgrp -R $user $scriptdir/logs/uninstall_$now.log.gz
+		;;
 
-		9)
-		   now=$(date +'%d%m%Y_%H%M%S')
-                   {
-		   cfg_uninstall
-		   } 2>&1 | tee >(gzip --stdout > $scriptdir/logs/uninstall_$now.log.gz)	               	
-		   chown -R $user $scriptdir/logs/uninstall_$now.log.gz
-                   chgrp -R $user $scriptdir/logs/uninstall_$now.log.gz
-           	   ;;
-
-		10)
-		   ;;
+	    10)
+		;;
 
 		esac
 	else
 		break
-	fi
-done
+    fi
+	done
 clear

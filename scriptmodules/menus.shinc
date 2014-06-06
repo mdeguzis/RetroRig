@@ -6,24 +6,24 @@
 # Please report any errors via a pull request
 # You can also reach me on twitter: @N3RD42
 #
-function m_settings ()
+function m_settings()
 {
 	
 
 while true; do
-	cmd=(dialog --backtitle "LibreGeek.org RetroRig Installer" --menu "Settings Menu" 16 0 16)
-	options=(1 "Change resolution"  
-		 2 "Load ROMs"
-		 3 "Change plugins/filters/scaling"
-		 4 "Change Gamepad Type"
-		 5 "Enable SSH support"
- 		 6 "Back to main menu")
+    cmd=(dialog --backtitle "LibreGeek.org RetroRig Installer" --menu "Settings Menu" 16 0 16)
+    options=(1 "Change resolution"  
+	     2 "Load ROMs"
+	     3 "Change plugins/filters/scaling"
+	     4 "Change Gamepad Type"
+	     5 "Enable SSH support"
+ 	     6 "Back to main menu")
 
 	#make menu choice
 	choices=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
 	
 	if [ "$choices" != "" ]; then
-		case $choices in
+	    case $choices in
 
 		1)  	
 		_resolution
