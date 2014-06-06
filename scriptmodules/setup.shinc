@@ -189,7 +189,7 @@ function rrs_debug()
 	echo "Essential files: XBMC:" > "$rootdir/debug.log"
 	h_filechecker "$HOME/.xbmc/userdata"
 	h_filechecker "$HOME/.xbmc/addons/script.games.rom.collection.browser"
-	echo "Essential files: ROM Collection Browser:" > "$rootdir/debug.log"
+	echo "Essential files: ROM Collection Browser:" >> "$rootdir/debug.log"
 	h_filechecker "$HOME/.xbmc/userdata/addon_data/script.games.rom.collection.browser/"
 	echo "Available init files:" >> "$rootdir/debug.log"
 	h_filechecker "/etc/init.d/xboxdrv"
