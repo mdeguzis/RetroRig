@@ -9,7 +9,7 @@
 
 function rrs_prepareFolders()
 {
-	printMsg "Creating folders for ROMs, Artwork, Saves, and dotfiles"
+	echo "Creating folders for ROMs, Artwork, Saves, and dotfiles"
 
 	pathlist=()
 	pathlist+=("$rootdir/roms")
@@ -113,7 +113,7 @@ function rrs_software() {
 	__postMSGs=""
 	clear
    	
-	printMsg "Binaries-based installation"
+	echo "Binaries-based installation"
 
 	# add multi-arch support
 	dpkg --add-architecture i386 | tee -a install_log.txt
@@ -157,11 +157,11 @@ function rrs_software() {
 	# Output postMSGs to screen
 	
         if [[ ! -z $__postMSGs ]]; then
-            dialog --backtitle "LibreGeek.org - RetroRig Setup. Installation folder: $rootdir for user $user" --msgbox "$__postMSGs See debug.log for more details." 20 60
+            dialog --backtitle "LibreGeek.org - RetroRig Setup. Installation folder: $rootdir for user $user" --msgbox "$__postMSGs See debug.log for more details." 5 40
         fi
 
 
-        dialog --backtitle "LibreGeek.org - RetroRig Setup. Installation folder: $rootdir for user $user" --msgbox "Finished tasks.\nYou now have to copy roms to the roms folders. \nThis can be done via SSH, Samba, or via your graphic folder manager (please see settings menu for more)" 20 60
+        dialog --backtitle "LibreGeek.org - RetroRig Setup. Installation folder: $rootdir for user $user" --msgbox "Finished tasks.\nYou now have to copy roms to the roms folders. \nThis can be done via SSH, Samba, or via your graphic folder manager (please see settings menu for more)" 10 50
 
         chown -R $user $scriptdir/logs/run_$now.log.gz
         chgrp -R $user $scriptdir/logs/run_$now.log.gz
@@ -182,15 +182,15 @@ function rrs_autostart()
 function rrs_debug()
 {
 	clear
-	printMsg "Generating debug log"
+	echo "Generating debug log"
 
 	# Check for existance of essential files
 	echo "Essential files:" > "$rootdir/debug.log"
-	h_filecheck "$HOME/.xbmc/userdata"
-	h_filecheck "$HOME/.xbmc/addons/script.games.rom.collection.browser"
-	h_filecheck "$HOME/.xbmc/userdata/addon_data/script.games.rom.collection.browser/"
-	h_filecheck "/etc/init.d/xboxdrv"
-	h_filecheck "/etc/default/xboxdrv"
+	h_filechecker "$HOME/.xbmc/userdata"
+	h_filechecker "$HOME/.xbmc/addons/script.games.rom.collection.browser"
+	h_filechecker "$HOME/.xbmc/userdata/addon_data/script.games.rom.collection.browser/"
+	h_filechecker "/etc/init.d/xboxdrv"
+	h_filechecker "/etc/default/xboxdrv"
 
 	# Check unity settings:
 	echo "Unity settings (if applicable):" > "$rootdir/debug.log"
@@ -222,7 +222,7 @@ function rrs_debug()
 
    	echo -e "\nEnd of log file" >> "$rootdir/debug.log" >> "$rootdir/debug.log"
 	
-	dialog --backtitle "LibreGeek.org - RetroRig Setup. Installation folder: $rootdir for user $	user" --msgbox "Debug log was generated in $rootdir/debug.log. Additional logs can be found in the folder $scriptdir/logs/." 22 76 
+	dialog --backtitle "LibreGeek.org - RetroRig Setup. Installation folder: $rootdir for user $	user" --msgbox "Debug log was generated in $rootdir/debug.log. Additional logs can be found in the folder $scriptdir/logs/." 8 40 
 
 }
 
