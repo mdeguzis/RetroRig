@@ -152,12 +152,12 @@ function rrs_software() {
 	rrs_debug
 
 	# Inform user about post-install tasks
-    	__postMSGs="$__postMSGs You need to copy Neo Geo CDZ BIOS files to the folder '$rootdir/ROMs/Neo-Geo/BIOS'."
+    	__postMSGs="$__postMSGs You need to copy Neo Geo CDZ BIOS files to the folder '$rootdir/ROMs/Neo-Geo/BIOS'. If you wish to use it!"
 
 	# Output postMSGs to screen
 	
         if [[ ! -z $__postMSGs ]]; then
-            dialog --backtitle "LibreGeek.org - RetroRig Setup. Installation folder: $rootdir for user $user" --msgbox "$__postMSGs See debug.log for more details." 5 40
+            dialog --backtitle "LibreGeek.org - RetroRig Setup. Installation folder: $rootdir for user $user" --msgbox "$__postMSGs See debug.log for more details." 30 66
         fi
 
 
