@@ -18,9 +18,10 @@ while true; do
 	     3 "Change plugins/filters/scaling"
 	     4 "Change Gamepad Type"
 	     5 "Enable SSH support"
-	     6 "BIOS checker"
-	     7 "Enable XBMC Session (autostart)"
- 	     8 "Back to main menu")
+	     6 "BIOS loader"
+	     7 "BIOS checker"
+	     8 "Enable XBMC Session (autostart)"
+ 	     9 "Back to main menu")
 
 	#make menu choice
 	choices=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
@@ -50,14 +51,18 @@ while true; do
 		;;
 
 		6)
+		h_bios_loader
+		;;
+
+		7)
 		h_bios_checker
 		;;
 
-		6)
+		8)
 		set_xbmc_session
 		;;
 
-		8)  
+		9)  
 		;;
 
 		esac
