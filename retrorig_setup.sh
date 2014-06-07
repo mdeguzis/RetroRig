@@ -159,15 +159,12 @@ if [[ $# -lt 1 ]]; then
         user=$(whoami)
     fi
     rootdir=/home/$user/RetroRig
-    home=/home/$user
 elif [[ $# -lt 2 ]]; then
     user=$1
     rootdir=/home/$user/RetroRig
-    home=/home/$user
 elif [[ $# -lt 3 ]]; then
     user=$1
     rootdir=$2
-    home=/home/$1
 fi
 
 if [[ $user == "root" ]]; then
@@ -178,6 +175,7 @@ fi
 esscrapimgw=275 # width in pixel for EmulationStation games scraper
 
 home=$(eval echo ~$user)
+export $home
 
 # make sure that RetroRig root directory exists
 if [[ ! -d $rootdir ]]; then
@@ -191,8 +189,8 @@ fi
 # make sure that RetroRig-Setup log directory exists
 if [[ ! -d $scriptdir/logs ]]; then
     mkdir -p "$scriptdir/logs"
-    chown $user "$scriptdir/logs"
-    chgrp $user "$scriptdir/logs"
+    chown "$user" "$scriptdir/logs"
+    chgrp "$user" "$scriptdir/logs"
     if [[ ! -d $scriptdir/logs ]]; then
       echo "Couldn't make directory $scriptdir/logs"
       exit 1
@@ -216,6 +214,7 @@ while true; do
 	     9 "Exit")
 
 	#make menu choice
+	# Expanding arrays involves [@] and {}
     choices=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)    
     if [ "$choices" != "" ]; then
 	case $choices in
@@ -232,8 +231,8 @@ while true; do
 		set_resolution
 		rrs_autostart
 		} 2>&1 | tee >(gzip --stdout > $scriptdir/logs/install_$now.log.gz)	               	
-		chown -R $user $scriptdir/logs/install_$now.log.gz
-		chgrp -R $user $scriptdir/logs/install_$now.log.gz
+		chown -R "$user" "$scriptdir/logs/install_$now.log.gz"
+		chgrp -R "$user" "$scriptdir/logs/install_$now.log.gz"
 		;;
 
 	    2) 
@@ -248,18 +247,18 @@ while true; do
 		now=$(date +'%d%m%Y_%H%M%S')
 		{
 		h_update_binaries
-		} 2>&1 | tee >(gzip --stdout > $scriptdir/logs/update_$now.log.gz)	               	
-		chown -R $user $scriptdir/logs/update_$now.log.gz
-		chgrp -R $user $scriptdir/logs/update_$now.log.gz
+		} 2>&1 | tee >(gzip --stdout > $scriptdir/logs/update_$now.log.gz)              	
+		chown -R "$user" "$scriptdir/logs/update_$now.log.gz"
+		chgrp -R "$user" "$scriptdir/logs/update_$now.log.gz"
 		;;
 
 	    5)
 		now=$(date +'%d%m%Y_%H%M%S')
 		{
 		h_upgrade_system
-		} 2>&1 | tee >(gzip --stdout > $scriptdir/logs/upgrade_$now.log.gz)	               	
-		chown -R $user $scriptdir/logs/upgrade_$now.log.gz
-		chgrp -R $user $scriptdir/logs/upgrade_$now.log.gz
+		} 2>&1 | tee >(gzip --stdout > "$scriptdir/logs/upgrade_$now.log.gz)"	               	
+		chown -R "$user" "$scriptdir/logs/upgrade_$now.log.gz"
+		chgrp -R "$user" "$scriptdir/logs/upgrade_$now.log.gz"
 		;;
 
 	    6)
@@ -274,9 +273,9 @@ while true; do
 		now=$(date +'%d%m%Y_%H%M%S')
 		{
 		cfg_uninstall
-		} 2>&1 | tee >(gzip --stdout > $scriptdir/logs/uninstall_$now.log.gz)	               	
-		chown -R $user $scriptdir/logs/uninstall_$now.log.gz
-		chgrp -R $user $scriptdir/logs/uninstall_$now.log.gz
+		} 2>&1 | tee >(gzip --stdout > "$scriptdir/logs/uninstall_$now.log.gz)"	               	
+		chown -R "$user "$scriptdir/logs/uninstall_$now.log.gz"
+		chgrp -R "$user "$scriptdir/logs/uninstall_$now.log.gz"
 		;;
 
 	    10)

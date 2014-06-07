@@ -17,16 +17,23 @@ function em_add_repos()
 	rm -f getdeb.key
 }
 
-function em_install_mupen64plus()
+function em_install_stella()
 {
 	echo "Installing Atari 2600 emulator Stella"
 	apt-get install -y stella
 }
 
-function em_install_mame()
+function em_install_mupen64plus()
 {
 	echo "Installing MAME emulator"
 	apt-get install -y mupen64plus
+}
+
+
+function em_install_mame()
+{
+	echo "Installing MAME emulator"
+	apt-get install -y mame
 }
 
 function em_install_mednafen()
