@@ -99,13 +99,13 @@ dialog --title "Confirm yes/no" \
 
    	1) 
 	#remove dotfiles
-	rm -rf $HOME/.qjoypad3/ 
-	rm -rf $HOME/.config/mupen64plus/ 
-	rm -rf $HOME/.mame/ 
-	rm -rf $HOME/.stella/ 
-	rm -rf $HOME/.xbmc/
-	rm -rf $HOME/.mednafen/ 
-	rm -rf $HOME/.mess/ 
+	rm -rf "$HOME/.qjoypad3" 
+	rm -rf "$HOME/.config/mupen64plus" 
+	rm -rf "$HOME/.mame" 
+	rm -rf "$HOME/.stella" 
+	rm -rf "$HOME/.xbmc"
+	rm -rf "$HOME/.mednafen" 
+	rm -rf "$HOME/.mess" 
 
 	#system objects
 	rm -f /etc/xdg/autostart/qjoypad.desktop
@@ -144,11 +144,11 @@ dialog --title "Confirm yes/no" \
 	;;
 
    	1) 
-	echo $userpasswd | sudo rm -rf $rootdir/ROMs/
-	echo $userpasswd | sudo rm -rf $rootdir/Tools/
-	echo $userpasswd | sudo rm -rf $rootdir/Artwork/
-	echo $userpasswd | sudo rm -rf $rootdir/Saves/
-	echo $userpasswd | sudo rm -rf $rootdir/Configs/
+	rm -rf "$rootdir/ROMs"
+	rm -rf "$rootdir/Tools"
+	rm -rf "$rootdir/Artwork"
+	rm -rf "$rootdir/Saves"
+	rm -rf "$rootdir/Configs"
 	;;
 
 	255)
@@ -159,7 +159,7 @@ dialog --title "Confirm yes/no" \
 	esac	
 
 #remove $rootdir
-rm -rf $rootdir
+rm -rf "$rootdir"
 
 #update Ubuntu repository listings
 apt-get update
