@@ -232,8 +232,8 @@ while true; do
 		set_resolution
 		rrs_autostart
 		} 2>&1 | tee >(gzip --stdout > $scriptdir/logs/install_$now.log.gz)	               	
-		chown -R $user $scriptdir/logs/cfg_$now.log.gz
-		chgrp -R $user $scriptdir/logs/cfg_$now.log.gz
+		chown -R $user $scriptdir/logs/install_$now.log.gz
+		chgrp -R $user $scriptdir/logs/install_$now.log.gz
 		;;
 
 	    2) 
