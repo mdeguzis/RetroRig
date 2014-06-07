@@ -73,7 +73,7 @@ function rrs_prepareFolders()
 	for entry in "${pathlist[@]}"
 	do
 	    if [[ ! -d $entry ]]; then
-                mkdir -p $entry
+                mkdir -pv $entry
                 chown $user $entry
                 chgrp $user $entry
         fi
@@ -84,7 +84,7 @@ function rrs_prepareFolders()
 
 }
 
-function rrs_Unity ()
+function rrs_unity()
 {
 
 #disable screensaver, XBMC will manage this
@@ -253,7 +253,7 @@ function rrs_xboxdrv ()
 	cp -v $rootdir/init-scripts/x360_controller/blacklist.conf /etc/modprobe.d/
 
 	#copy default gamepad setup for Xbox 360 Wireless (4-player)
-	cp -v $rootdir/controller-cfgs/x360_controller/x360_controller.lyt $home/.qjoypad3/
+	cp -v $rootdir/gamepad-cfgs/x360_controller/x360_controller.lyt $home/.qjoypad3/
 
 	#copy qjoypad autostart item for x360_controller gamepad config
 	cp -v $rootdir/gamepad-cfgs/x360_controller/qjoypad.desktop /etc/xdg/autostart/
