@@ -165,7 +165,7 @@ function rrs_emulators()
 	# Run Debug checks
 	rrs_debug
 
-	__postMSGs="$__postMSGs  The Neo-Geo CDZ requires BIOS files be placed under '$rootdir/ROMs/Neo-Geo/BIOS'"
+	__postMSGs="$__postMSGs  This MESS configuration requires Neo-Geo CDZ BIOS files be placed under '$rootdir/ROMs/Neo-Geo/BIOS'"
 	# inject a space to seperate messages?
 	__postMSGs="$__postMSGs "
 
@@ -273,29 +273,29 @@ function rrs_debug()
 	echo "Generating debug log"
 
 	# Check for existance of essential files
-	echo "Essential files: XBMC:" > "$rootdir/debug.log"
-	echo "Path(s): '$HOME/.xbmc/userdata'" >> "$rootdir/debug.log"
-	h_filechecker "$HOME/.xbmc/userdata" "$rootdir/debug.log"
+	echo "Essential files: XBMC:" > "$rootdir/logs/debug.log"
+	echo "Path(s): '$HOME/.xbmc/userdata'" >> "$rootdir/logs/debug.log"
+	h_filechecker "$HOME/.xbmc/userdata" "$rootdir/logs/debug.log"
 	# RCB
-	echo "Essential files: ROM Collection Browser:" >> "$rootdir/debug.log"
-	echo "Path: '$HOME/.xbmc/addons/script.games.rom.collection.browser'" >> "$rootdir/debug.log"
+	echo "Essential files: ROM Collection Browser:" >> "$rootdir/logs/debug.log"
+	echo "Path: '$HOME/.xbmc/addons/script.games.rom.collection.browser'" >> "$rootdir/logs/debug.log"
 	h_filechecker "$HOME/.xbmc/addons/script.games.rom.collection.browser"	
-	echo "Path: '$HOME/.xbmc/userdata/addon_data/script.games.rom.collection.browser'" >> "$rootdir/debug.log"
-	h_filechecker "$HOME/.xbmc/userdata/addon_data/script.games.rom.collection.browser" "$rootdir/debug.log"
+	echo "Path: '$HOME/.xbmc/userdata/addon_data/script.games.rom.collection.browser'" >> "$rootdir/logs/debug.log"
+	h_filechecker "$HOME/.xbmc/userdata/addon_data/script.games.rom.collection.browser" "$rootdir/logs/debug.log"
 	# init file checks	
-	echo "Available init files:" >> "$rootdir/debug.log"
-	echo "Has xboxdrv been loaded?" >> "$rootdir/debug.log"
+	echo "Available init files:" >> "$rootdir/logs/debug.log"
+	echo "Has xboxdrv been loaded?" >> "$rootdir/logs/debug.log"
 	h_filechecker "/etc/init.d/xboxdrv"
 	h_filechecker "/etc/default/xboxdrv"
 
 	# Check unity settings:
-	echo "Unity settings (if applicable):" >> "$rootdir/debug.log"
-	gsettings list-recursively "org.gnome.desktop.screensaver" | grep "lock-enabled" >> "$rootdir/debug.log"
-	gsettings list-recursively "org.gnome.desktop.screensaver" | grep "ubuntu-lock-on-suspend" >> "$rootdir/debug.log"
-	gsettings list-recursively "org.gnome.desktop.session" | grep "idle-delay" >> "$rootdir/debug.log"
+	echo "Unity settings (if applicable):" >> "$rootdir/logs/debug.log"
+	gsettings list-recursively "org.gnome.desktop.screensaver" | grep "lock-enabled" >> "$rootdir/logs/debug.log"
+	gsettings list-recursively "org.gnome.desktop.screensaver" | grep "ubuntu-lock-on-suspend" >> "$rootdir/logs/debug.log"
+	gsettings list-recursively "org.gnome.desktop.session" | grep "idle-delay" >> "$rootdir/logs/debug.log"
 
 	#APT pkg checks
-	echo -e "\nCheck for needed pkgs installed via apt: " >> "$rootdir/debug.log"
+	echo -e "\nCheck for needed pkgs installed via apt: " >> "$rootdir/logs/debug.log"
 	h_pkgcheck "stella"
 	h_pkgcheck "python-software-properties"
 	h_pkgcheck "xbmc"
@@ -309,9 +309,9 @@ function rrs_debug()
 	h_pkgcheck "qjoypad"
 	h_pkgcheck "jstest-gtk"
 
-   	echo -e "\nEnd of log file" >> "$rootdir/debug.log" >> "$rootdir/debug.log"
+   	echo -e "\nEnd of log file" >> "$rootdir/logs/debug.log" >> "$rootdir/logs/debug.log"
 	
-	dialog --backtitle "LibreGeek.org - RetroRig Setup. Installation folder: $rootdir for user $	user" --msgbox "Debug log was generated in $rootdir/debug.log. Additional logs can be found in the folder $scriptdir/logs/." 8 40 
+	dialog --backtitle "LibreGeek.org - RetroRig Setup. Installation folder: $rootdir for user $	user" --msgbox "Debug log was generated in $rootdir/logs/debug.log. Additional logs can be found in the folder $scriptdir/logs/." 8 40 
 
 	chown -R "$user $scriptdir/debug.log"
 	chgrp -R "$user $scriptdir/debug.log"
