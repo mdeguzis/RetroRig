@@ -79,7 +79,8 @@ options=(1 "Atari 2600"
 	 8 "GBC"
 	 9 "GBC"
 	 10 "TurboGraphx 16"
-	 11 "Exit ROM Loader")
+	 11 "Neo-Geo CDZ"
+	 12 "Exit ROM Loader")
 
 	#make menu choice
 	selection=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
@@ -90,71 +91,56 @@ options=(1 "Atari 2600"
 		case $choice in
 		1)
 		#call file loader  	
-		_file-loader
+		h_file_loader
 		#copy Atari ROMs
 		cp -Rv "$folder"/* "$rootdir/Games/ROMs/Atari 2600/"
-		_rom-loader
 		;;
 
 		2)  
-		_file-loader
+		h_file_loader
 		cp -Rv "$folder"/* "$rootdir/Games/ROMs/NES/"
-		#return back to menu
-		_rom-loader
 		;;
 
 		3)
 		#call file loader  	
-		_file-loader
+		h_file_loader
 		#copy SNES ROMs
 		cp -Rv "$folder"/* "$rootdir/Games/ROMs/SNES/"
-		#return back to menu
-		_rom-loader
 		;;
 
 		4)
 		#call file loader  	
-		_file-loader
+		h_file_loader
 		#copy N64 ROMs
 		cp -Rv "$folder"/* "$rootdir/Games/ROMs/N64/"
-		#return back to menu
-		_rom-loader
 		;;
 
 		5)
 		#call file loader  	
-		_file-loader
+		h_file_loader
 		#copy MAME ROMs
 		cp -Rv "$folder"/* "$rootdir/Games/ROMs/MAME/"
-		#return back to menu
-		_rom-loader
 		;;
 
 		6)
 		#call file loader  	
-		_file-loader
+		h_file_loader
 		#copy Sega Master System ROMs
 		cp -Rv "$folder"/* "$rootdir/Games/ROMs/Sega Master System"
-		#return back to menu
-		_rom-loader
 		;;
 
 		7)
 		#call file loader  	
-		_file-loader
+		h_file_loader
 		#copy Sega Game Gear ROMs
 		cp -Rv "$folder"/* "$rootdir/Games/ROMs/Sega Game Gear"
-		#return back to menu
-		_rom-loader
 		;;
 
 		8)
 		#call file loader  	
-		_file-loader
+		h_file_loader
 		#copy GBC ROMs
 		cp -Rv "$folder"/* "$rootdir/Games/ROMs/GBC/"
-		#return back to menu
-		_rom-loader
 		;;
 
 		9)
@@ -162,20 +148,23 @@ options=(1 "Atari 2600"
 		_file-loader
 		#copy GBA ROMs
 		cp -Rv "$folder"/* "$rootdir/Games/ROMs/GBA/"
-		#return back to menu
-		_rom-loader
 		;;
 
 		10)
 		#call file loader  	
-		_file-loader
+		h_file_loader
 		#copy Turbographx 16 ROMs
 		cp -Rv "$folder"/* "$rootdir/Games/ROMs/TurboGraphx 16/"
-		#return back to menu
-		_rom-loader
 		;;
 
 		11)  
+		#call file loader  	
+		h_file_loader
+		#copy Neo-Geo CDZ
+		cp -Rv "$folder"/* "$rootdir/Games/ROMs/Neo-Geo/CDZ/"
+		;;
+
+		12)  
 		return
 		;;
 		esac
@@ -279,49 +268,16 @@ function h_res_swticher()
 	sed -i "s|$gg_org_Y|gg.yres $gg_new_Y|g" "$home/.mednafen/mednafen-09x.cfg"
 }
 
-function h_rom_loader()
-{
-
-	#prompt user if they wish to pre-load ROMs now
-	dialog --title "Confirm yes/no" \
-	--backtitle "LibreGeek.org RetroRig Installer" \
-	--yesno "Do you wish to load your ROMs now? (reccomended)" 5 52
-	 
-	# Get exit status
-	# 0 means user hit [yes] button.
-	# 1 means user hit [no] button.
-	# 255 means user hit [Esc] key.
-	response=$?
-	case $response in
-
-	   0);;
-
-	   1) 
-	   dialog --infobox "Finished"  3 12
-	   sleep 2s
-	   return
-	   ;;
-
-	   255)
-	   dialog --infobox "Exiting Configuration Setup" 3 31
-	   sleep 2s
-	   return
-	   ;;
-
-	esac	
-
-}
-
-
 function h_bios_checker()
 {
 
 # BIOS file checks
 clear
-echo -e "\nCheck for Bios files (if applicable): " >> "$rootdir/logs/debug.log"
+echo "Checking for Bios files (if applicable)..." >> "$rootdir/logs/debug.log"
+echo ""
 sleep 2s
 # Neo-Geo BIOS files
-h_filecheck "$rootdir/Games/ROMs/Neo-Geo/BIOS"
+h_filechecker "$rootdir/Games/ROMs/Neo-Geo/BIOS"
 # If MESS is loaded already, verify BIOS files
 mess neocdz -verifyroms | tee >> "$rootdir/logs/debug.log"
 sleep 4s
