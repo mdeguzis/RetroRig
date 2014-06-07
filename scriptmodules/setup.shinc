@@ -74,8 +74,9 @@ function rrs_prepareFolders()
 	do
 	    if [[ ! -d $entry ]]; then
                 mkdir -pv $entry
-                chown $user $entry
-                chgrp $user $entry
+		# quotes need to preven globbing on directory creation!
+                chown $user "$entry"
+                chgrp $user "$entry"
         fi
 	done
 
