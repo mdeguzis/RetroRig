@@ -22,11 +22,11 @@ function rrs_prepareFolders()
 	pathlist+=("$rootdir/ROMs/N64")
 	pathlist+=("$rootdir/ROMs/NES")
 	pathlist+=("$rootdir/ROMs/SNES")
-	pathlist+=("$rootdir/ROMs/Sega\ Master\ System")
-	pathlist+=("$rootdir/ROMs/Sega\ Game\ Gear")
+	pathlist+=("$rootdir/ROMs/Sega Master System")
+	pathlist+=("$rootdir/ROMs/Sega Game Gear")
 	pathlist+=("$rootdir/ROMs/GBC")
 	pathlist+=("$rootdir/ROMs/GBA")
-	pathlist+=("$rootdir/ROMs/TurboGraphx\ 16")
+	pathlist+=("$rootdir/ROMs/TurboGraphx 16")
 	pathlist+=("$rootdir/ROMs/Neo-Geo/CDZ")
 	pathlist+=("$rootdir/ROMs/Neo-Geo/BIOS")
 
@@ -36,11 +36,11 @@ function rrs_prepareFolders()
 	pathlist+=("$rootdir/Artwork/N64")
 	pathlist+=("$rootdir/Artwork/NES")
 	pathlist+=("$rootdir/Artwork/SNES")
-	pathlist+=("$rootdir/Artwork/Sega\ Master\ System")
-	pathlist+=("$rootdir/Artwork/Sega\ Game\ Gear")
+	pathlist+=("$rootdir/Artwork/Sega Master System")
+	pathlist+=("$rootdir/Artwork/Sega Game Gear")
 	pathlist+=("$rootdir/Artwork/GBC")
 	pathlist+=("$rootdir/Artwork/GBA")
-	pathlist+=("$rootdir/Artwork/TurboGraphx\ 16")
+	pathlist+=("$rootdir/Artwork/TurboGraphx 16")
 	pathlist+=("$rootdir/Artwork/Neo-Geo/CDZ")
 
 	#Saves (if any)
@@ -49,11 +49,11 @@ function rrs_prepareFolders()
 	pathlist+=("$rootdir/Saves/N64")
 	pathlist+=("$rootdir/Saves/NES")
 	pathlist+=("$rootdir/Saves/SNES")
-	pathlist+=("$rootdir/Saves/Sega\ Master\ System")
-	pathlist+=("$rootdir/Saves/Sega\ Game\ Gear")
+	pathlist+=("$rootdir/Saves/Sega Master System")
+	pathlist+=("$rootdir/Saves/Sega Game Gear")
 	pathlist+=("$rootdir/Saves/GBC")
 	pathlist+=("$rootdir/Saves/GBA")
-	pathlist+=("$rootdir/Saves/TurboGraphx\ 16")
+	pathlist+=("$rootdir/Saves/TurboGraphx 16")
 	pathlist+=("$rootdir/Saves/Neo-Geo/CDZ")
 
 	#create dotfiles
@@ -149,10 +149,7 @@ function rrs_emulators()
 	__INFMSGS=""
 
 	clear
-	printMsg "Binaries-based installation"
-
-	# add extra repostories to the em_add_repos function!
-	em_add_repos
+	echo "Binaries-based installation"
 
 	# install emulators
 	em_install_mupen64plus 
@@ -167,6 +164,8 @@ function rrs_emulators()
 	rrs_debug
 
 	__postMSGs="$__postMSGs  The Neo-Geo CDZ requires BIOS files be placed under '$rootdir/ROMs/Neo-Geo/BIOS'"
+	# inject a space to seperate messages?
+	__postMSGs="$__postMSGs "
 
 	if [[ ! -z $__postMSGs ]]; then
 	dialog --backtitle "LibreGeek.org - RetroRig Setup. Installation folder: $rootdir for user $user" --msgbox "$__postMSGs" 15 60
@@ -190,6 +189,9 @@ function rrs_software() {
 	#add repository for official team XBMC "stable"
 	add-apt-repository -y ppa:team-xbmc/ppa
 
+	# add extra repostories to the em_add_repos function!
+	em_add_repos
+
 	#update repository listings
 	h_update_system
 
@@ -209,7 +211,7 @@ function rrs_software() {
 	rrs_debug
 
 	# Inform user about post-install tasks
-    	__postMSGs="$__postMSGs If you need to copy BIOS files and do not know where or how, please see the wiki on GitHub under 'Installation!'"
+	# ...none for now...
 
 	# Output postMSGs to screen
 	
