@@ -41,20 +41,7 @@ function cfg_confirm ()
 	esac
 }
 
-function cfg_correct_perms ()
-{
-
-#this may not even be needed
-#set the system user to an absolute value.
-#RCB and some config files don't like using $HOME, rather /home/test/
-#Let's change the config files to reflect the current username
-sed -i "s|/home/mikeyd/|/home/$USER/|g" "$HOME/.mame/mame.ini"
-sed -i "s|/home/mikeyd/|/home/$USER/|g" "$HOME/.xbmc/userdata/addon_data/script.games.rom.collection.browser/config.xml"
-echo "The user applied to configuration files was: $USER"
-
-}
-
-function cfg_uninstall () 
+function cfg_uninstall() 
 {
 
 #Confirm with user
