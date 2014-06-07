@@ -33,38 +33,20 @@ while true; do
 		;;
 
 		2)  	
-		h_rom-loader
+		h_rom_loader
 		;;
 
 		3)
-		dialog --msgbox "Option disabled for further testing" 5 40  	
-		#set_plugin-_witcher
+		dialog --msgbox "Option disabled for further testing" 5 40 
+		sleep 2s 	
 		;;
 
 		4)  	
-		_gamepad
-		#call settings rather than return so user can choose again
-		_settings
+		rrs_gamepad
 		;;
 
 		5)
-		clear
-		#install openssh-server  
-		apt-get install -y openssh-server
-		#prompt user to change default port
-		dialog --title "Set desired SSH port (typically 22)" --inputbox "Enter Port" 10 0 2> /tmp/set_ssh
-		#cat input
-		ssh_new=$(cat '/tmp/set_ssh')
-		#set orig port 
-		ssh_org=$(grep -i "Port " /etc/ssh/sshd_config)
-		#set new port from user input
-		sed -i "s|$ssh_org|Port $ssh_new|g" /etc/ssh/sshd_config
-		#restart ssh service
-		service ssh restart
-		#remove temp file
-		rm -f /tmp/set_ssh
-		#return to menu
-		_settings
+		set_enable_ssh
 		;;
 
 		6)
@@ -83,6 +65,24 @@ while true; do
 		break
 	fi
 done
+}
+
+function set_enable_ssh()
+{
+	#install openssh-server  
+	apt-get install -y openssh-server
+	#prompt user to change default port
+	dialog --title "Set desired SSH port (typically 22)" --inputbox "Enter Port" 10 0 2> /tmp/set_ssh
+	#cat input
+	ssh_new=$(cat '/tmp/set_ssh')
+	#set orig port 
+	ssh_org=$(grep -i "Port " /etc/ssh/sshd_config)
+	#set new port from user input
+	sed -i "s|$ssh_org|Port $ssh_new|g" /etc/ssh/sshd_config
+	#restart ssh service
+	service ssh restart
+	#remove temp file
+	rm -f /tmp/set_ssh
 }
 
 function set_xbmc_session()

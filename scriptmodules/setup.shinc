@@ -182,7 +182,7 @@ function rrs_emulators()
 	__postMSGs="$__postMSGs "
 
 	if [[ ! -z $__postMSGs ]]; then
-	dialog --backtitle "LibreGeek.org - RetroRig Setup. Installation folder: $rootdir for user $user" --msgbox "$__postMSGs" 15 60
+	dialog --backtitle "LibreGeek.org - RetroRig Setup. Installation folder: $rootdir for user $user" --msgbox "$__postMSGs" 15 70
 	fi
 
 	dialog --backtitle "LibreGeek.org - RetroRig Setup. Installation folder: $rootdir for user $user" --msgbox "Finished emulator installs.\nYou now have to copy roms to the roms folders. You may also use the 'ROM loader' in settings menu" 15 60
@@ -228,16 +228,13 @@ function rrs_software() {
 	# ...none for now...
 
 	# Output postMSGs to screen
-	_postMSGs="$__postMSGs  If you wish to start XBMC as a session ONLY, and not Unity whatsover, enabled the 'XBMC Session' option in the settings menu!"
+	__postMSGs="$__postMSGs  If you wish to start XBMC as a session ONLY, and not Unity whatsover, enabled the 'XBMC Session' option in the settings menu!"
 	# inject a space to seperate messages?
 	__postMSGs="$__postMSGs "
 	
         if [[ ! -z $__postMSGs ]]; then
             dialog --backtitle "LibreGeek.org - RetroRig Setup. Installation folder: $rootdir for user $user" --msgbox "$__postMSGs See debug.log for more details." 15 50
         fi
-
-
-        dialog --backtitle "LibreGeek.org - RetroRig Setup. Installation folder: $rootdir for user $user" --msgbox "Finished tasks.\nYou now have to copy roms to the roms folders. \nThis can be done via SSH, Samba, or via your graphic folder manager (please see settings menu for more)" 10 50
 
         chown -R "$user" "$scriptdir/logs/install_$now.log.gz"
         chgrp -R "$user" "$scriptdir/logs/install_$now.log.gz"
@@ -279,6 +276,9 @@ function rrs_autostart()
 
 	# later this section will configure LightDM (login manager for Ubuntu) to log into
 	# the XBMC session and skip Unity altogether. Provide an option to do so, yes/no...
+
+	# inform user install is done (this is the last step of main, option 1)
+        dialog --backtitle "LibreGeek.org - RetroRig Setup. Installation folder: $rootdir for user $user" --msgbox "Finished main install tasks.\nYou now have to copy roms to the roms folders. \nThis can be done via SSH, Samba, or via your graphic folder manager (please see settings menu for more)" 10 50
 }
 
 function rrs_debug()
@@ -380,20 +380,24 @@ echo -e "\e[0"$PATHCOLOR"ABSPATH for user USERNAME\e[0m"
 function rrs_prereq()
 {
     if [[ -z $(type -P git) || -z $(type -P dialog) || -z $(type -P figlet) ]]; then
-        echo "Did not find needed packages 'git' and/or 'dialog'. Attempting to install these now."
+        echo "Did not find needed packages 'git' and/or 'dialog/figlet'. Attempting to install these now."
+	sleep 2s
         apt-get update
         apt-get install -y git dialog figlet
         if [ $? == '0' ]; then
             echo "Successfully installed 'git/dialog/figlet'." > "$scriptdir/logs/prechecks.log"
+	    sleep 2s
 	    prereqs="true"
         else
             echo "Could not install 'git' and/or 'dialog/figlet'. Exiting..." > "$scriptdir/logs/prechecks.log"
 	    prereqs="false"
+	    sleep 2s
             exit 1
         fi
     else
         echo "Found needed packages 'git/dialog/figlet'." > "$scriptdir/logs/prechecks.log"
 	prereqs="true"
+	sleep 2s
     fi
 
 

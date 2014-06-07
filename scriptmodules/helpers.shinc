@@ -317,12 +317,14 @@ function h_bios_checker()
 {
 
 # BIOS file checks
+clear
 echo -e "\nCheck for Bios files (if applicable): " >> "$rootdir/logs/debug.log"
+sleep 2s
 # Neo-Geo BIOS files
 h_filecheck "$rootdir/Games/ROMs/Neo-Geo/BIOS"
 # If MESS is loaded already, verify BIOS files
-mess neocdz -verifyroms >> "$rootdir/logs/debug.log"
-
+mess neocdz -verifyroms | tee >> "$rootdir/logs/debug.log"
+sleep 4s
 }
 
 function h_correct_perms()
