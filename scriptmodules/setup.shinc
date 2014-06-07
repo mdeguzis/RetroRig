@@ -376,20 +376,20 @@ echo -e "\e[0"$PATHCOLOR"ABSPATH for user USERNAME\e[0m"
 
 function rrs_prereq()
 {
-    if [[ -z $(type -P git) || -z $(type -P dialog) ]]; then
+    if [[ -z $(type -P git) || -z $(type -P dialog) || -z $(type -P figlet) ]]; then
         echo "Did not find needed packages 'git' and/or 'dialog'. Attempting to install these now."
         apt-get update
-        apt-get install -y git dialog
+        apt-get install -y git dialog figlet
         if [ $? == '0' ]; then
-            echo "Successfully installed 'git' and/or 'dialog'." > "$scriptdir/logs/prechecks.log"
+            echo "Successfully installed 'git/dialog/figlet'." > "$scriptdir/logs/prechecks.log"
 	    prereqs="true"
         else
-            echo "Could not install 'git' and/or 'dialog'. Exiting..." > "$scriptdir/logs/prechecks.log"
+            echo "Could not install 'git' and/or 'dialog/figlet'. Exiting..." > "$scriptdir/logs/prechecks.log"
 	    prereqs="false"
             exit 1
         fi
     else
-        echo "Found needed packages 'git' and 'dialog'." > "$scriptdir/logs/prechecks.log"
+        echo "Found needed packages 'git/dialog/figlet'." > "$scriptdir/logs/prechecks.log"
 	prereqs="true"
     fi
 
