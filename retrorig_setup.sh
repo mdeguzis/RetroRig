@@ -8,7 +8,7 @@
 # You can also reach me on twitter: @N3RD42
 #
 
-
+clear
 #set up errmsgs and postmsgs
 __ERRMSGS=""
 __postMSGs=""
