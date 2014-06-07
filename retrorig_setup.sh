@@ -113,10 +113,10 @@ script_absolute_dir=$RESULT
 
 import "scriptmodules/helpers"
 import "scriptmodules/configuration"
-import "scriptmodules/menus"
 import "scriptmodules/settings"
 import "scriptmodules/setup"
-import "scriptmodules/gamepads"           	
+import "scriptmodules/gamepads"
+import "scriptmodules/emulators"           	
 
 ######################################
 # Start main script
@@ -144,9 +144,13 @@ if [ "$(id -u)" -ne 0 ]; then
     exit 1
 fi
 
-# if called with sudo ./retrorig_setup.sh, the installation directory is /home/CURRENTUSER/RetroRig for the current user
-# if called with sudo ./retrorig_setup.sh USERNAME, the installation directory is /home/USERNAME/RetroRig for user USERNAME
+# if called with sudo ./retrorig_setup.sh, the installation directory is /$HOME/CURRENTUSER/RetroRig for the current user
+# if called with sudo ./retrorig_setup.sh USERNAME, the installation directory is /$HOME/USERNAME/RetroRig for user USERNAME
 # if called with sudo ./retrorig_setup.sh USERNAME ABSPATH, the installation directory is ABSPATH for user USERNAME
+
+# We need to set "$home" for two reasons:
+# 1. $HOME is a system reserved var
+# 2. This path is needed to copy the dotfile configuration to the "real" home folder.
     
 if [[ $# -lt 1 ]]; then
     user=$SUDO_USER
@@ -155,12 +159,15 @@ if [[ $# -lt 1 ]]; then
         user=$(whoami)
     fi
     rootdir=/home/$user/RetroRig
+    home=/home/$user
 elif [[ $# -lt 2 ]]; then
     user=$1
     rootdir=/home/$user/RetroRig
+    home=/home/$user
 elif [[ $# -lt 3 ]]; then
     user=$1
     rootdir=$2
+    home=/home/$1
 fi
 
 if [[ $user == "root" ]]; then
@@ -217,6 +224,7 @@ while true; do
 		now=$(date +'%d%m%Y_%H%M%S')
 		{
 		rrs_software
+		rrs_emulators
 		rrs_prepareFolders
 		rrs_unity
 		rrs_xbmc

@@ -28,22 +28,16 @@ while true; do
 	    case $choices in
 
 		1)  	
-		_resolution
-		#call settings rather than return so user can choose again
-		_settings
+		set_resolution
 		;;
 
 		2)  	
-		bash scriptmodules/rom-loader.sh
-		#call settings rather than return so user can choose again
-		_settings
+		h_rom-loader
 		;;
 
 		3)
 		dialog --msgbox "Option disabled for further testing" 5 40  	
-		#_plugin-switcher
-		#call settings rather than return so user can choose again
-		_settings
+		#set_plugin-_witcher
 		;;
 
 		4)  	
@@ -114,47 +108,47 @@ if [ "$choices" != "" ]; then
 		#echo curent resolution
 		#mupen64plus
 		echo "mupen64plus:" > res.txt
-		grep -Ee "\bScreenWidth = \b" $HOME/.config/mupen64plus/mupen64plus.cfg >> res.txt
-		grep -Ee "\bScreenHeight = \b" $HOME/.config/mupen64plus/mupen64plus.cfg >> res.txt
+		grep -Ee "\bScreenWidth = \b" $home/.config/mupen64plus/mupen64plus.cfg >> res.txt
+		grep -Ee "\bScreenHeight = \b" $home/.config/mupen64plus/mupen64plus.cfg >> res.txt
 		echo "" >> res.txt
 		#Stella
 		echo "Stella" >> res.txt
-		grep -Ee "\bfullres = \b" $HOME/.stella/stellarc >> res.txt
+		grep -Ee "\bfullres = \b" $home/.stella/stellarc >> res.txt
 		echo "" >> res.txt
 		#mednafen GBC
 		echo "Mednafen (GBC)" >> res.txt
-		grep -Ee "\bgb.xres\b" $HOME/.mednafen/mednafen-09x.cfg >> res.txt
-		grep -Ee "\bgb.yres\b" $HOME/.mednafen/mednafen-09x.cfg >> res.txt
+		grep -Ee "\bgb.xres\b" $home/.mednafen/mednafen-09x.cfg >> res.txt
+		grep -Ee "\bgb.yres\b" $home/.mednafen/mednafen-09x.cfg >> res.txt
 		echo "" >> res.txt
 		#mednafen GBA
 		echo "Mednafen (GBA)" >> res.txt
-		grep -Ee "\bgba.xres\b" $HOME/.mednafen/mednafen-09x.cfg >> res.txt
-		grep -Ee "\bgba.yres\b" $HOME/.mednafen/mednafen-09x.cfg >> res.txt
+		grep -Ee "\bgba.xres\b" $home/.mednafen/mednafen-09x.cfg >> res.txt
+		grep -Ee "\bgba.yres\b" $home/.mednafen/mednafen-09x.cfg >> res.txt
 		echo "" >> res.txt
 		#mednafen Sega Sega Master System
 		echo "Mednafen (Sega Master System)" >> res.txt
-		grep -Ee "\bsms.xres\b" $HOME/.mednafen/mednafen-09x.cfg >> res.txt
-		grep -Ee "\bsms.yres\b" $HOME/.mednafen/mednafen-09x.cfg >> res.txt
+		grep -Ee "\bsms.xres\b" $home/.mednafen/mednafen-09x.cfg >> res.txt
+		grep -Ee "\bsms.yres\b" $home/.mednafen/mednafen-09x.cfg >> res.txt
 		echo "" >> res.txt
 		#mednafen Sega Game Gear
 		echo "Mednafen (Sega Game Gear)" >> res.txt
-		grep -Ee "\bgg.xres\b" $HOME/.mednafen/mednafen-09x.cfg >> res.txt
-		grep -Ee "\bgg.yres\b" $HOME/.mednafen/mednafen-09x.cfg >> res.txt
+		grep -Ee "\bgg.xres\b" $home/.mednafen/mednafen-09x.cfg >> res.txt
+		grep -Ee "\bgg.yres\b" $home/.mednafen/mednafen-09x.cfg >> res.txt
 		echo "" >> res.txt
 		#mednafen SNES
 		echo "Mednafen (SNES)" >> res.txt
-		grep -Ee "\bsnes.xres\b" $HOME/.mednafen/mednafen-09x.cfg >> res.txt
-		grep -Ee "\bsnes.yres\b" $HOME/.mednafen/mednafen-09x.cfg >> res.txt
+		grep -Ee "\bsnes.xres\b" $home/.mednafen/mednafen-09x.cfg >> res.txt
+		grep -Ee "\bsnes.yres\b" $home/.mednafen/mednafen-09x.cfg >> res.txt
 		echo "" >> res.txt
 		#mednafen NES
 		echo "Mednafen (NES)" >> res.txt
-		grep -Ee "\bnes.xres\b" $HOME/.mednafen/mednafen-09x.cfg >> res.txt
-		grep -Ee "\bnes.yres\b" $HOME/.mednafen/mednafen-09x.cfg >> res.txt
+		grep -Ee "\bnes.xres\b" $home/.mednafen/mednafen-09x.cfg >> res.txt
+		grep -Ee "\bnes.yres\b" $home/.mednafen/mednafen-09x.cfg >> res.txt
 		echo "" >> res.txt
 		#mednafen Turbographx 16
 		echo "Mednafen (Turbographx 16)" >> res.txt
-		grep -Ee "\bpce.xres\b" $HOME/.mednafen/mednafen-09x.cfg >> res.txt
-		grep -Ee "\bpce.yres\b" $HOME/.mednafen/mednafen-09x.cfg >> res.txt
+		grep -Ee "\bpce.xres\b" $home/.mednafen/mednafen-09x.cfg >> res.txt
+		grep -Ee "\bpce.yres\b" $home/.mednafen/mednafen-09x.cfg >> res.txt
 		echo "" >> res.txt
 		#report current resolution
 		dialog --textbox res.txt 33 0
@@ -384,7 +378,7 @@ done
 }
 
 
-function set_config-mupen ()
+function set_config_mupen()
 {
 
 #set fstart to start at specified folder directory, local var only
@@ -409,8 +403,8 @@ options=(1 "Change Video Plugin"
 		#Maybe I can find a way to swap the dir on the fly later on
 		folder=$(dialog --stdout --title "Please choose a file (spacebar to select)" --fselect $fstart/ 10 68)
 		#change plugin
-		m_plug_orig=$(grep -i "VideoPlugin = " $HOME/.config/mupen64plus/mupen64plus.cfg)
-		sed -i "s|$m_plug_orig|VideoPlugin = $folder|g" $HOME/.config/mupen64plus/mupen64plus.cfg	
+		m_plug_orig=$(grep -i "VideoPlugin = " $home/.config/mupen64plus/mupen64plus.cfg)
+		sed -i "s|$m_plug_orig|VideoPlugin = $folder|g" $home/.config/mupen64plus/mupen64plus.cfg	
 		;;
 
 		2)
@@ -422,7 +416,7 @@ options=(1 "Change Video Plugin"
 		;;
 	esac
 	done
-grep -i "VideoPlugin = " $HOME/.config/mupen64plus/mupen64plus.cfg >> res.txt
+grep -i "VideoPlugin = " $home/.config/mupen64plus/mupen64plus.cfg >> res.txt
 
 }
 

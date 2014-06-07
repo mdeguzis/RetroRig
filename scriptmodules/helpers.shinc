@@ -29,11 +29,11 @@ options=(1 "Current configuration"
 		#echo curent plugin settings
 		#mupen64plus
 		echo "Mupen64plus:" > res.txt
-		grep -i "VideoPlugin = " $HOME/.config/mupen64plus/mupen64plus.cfg >> res.txt
+		grep -i "VideoPlugin = " $home/.config/mupen64plus/mupen64plus.cfg >> res.txt
 		echo "" >> res.txt
 		#Stella
 		echo "Stella:" >> res.txt
-		grep -i "tia_filter" $HOME/.stella/stellarc >> res.txt
+		grep -i "tia_filter" $home/.stella/stellarc >> res.txt
 		echo "" >> res.txt
 		#report current resolution
 		dialog --textbox res.txt 33 0
@@ -57,15 +57,15 @@ options=(1 "Current configuration"
 
 }
 
-function h_file-loader()
+function h_file_loader()
 {
 
-folder=$(dialog --stdout --title "Please choose a file (spacebar to select)" --fselect $HOME/ 14 48)
+folder=$(dialog --stdout --title "Please choose a file (spacebar to select)" --fselect $home/ 14 48)
 echo "${folder} file chosen."
 }
 
 
-function h_rom-loader()
+function h_rom_loader()
 {
 
 cmd=(dialog --backtitle "LibreGeek.org RetroRig Installer" --menu "Load ROMs for which system?" 19 32 24)
@@ -92,13 +92,13 @@ options=(1 "Atari 2600"
 		#call file loader  	
 		_file-loader
 		#copy Atari ROMs
-		cp -Rv "$folder"/* $HOME/Games/ROMs/Atari\ 2600/
+		cp -Rv "$folder"/* $rootdir/Games/ROMs/Atari\ 2600/
 		_rom-loader
 		;;
 
 		2)  
 		_file-loader
-		cp -Rv "$folder"/* $HOME/Games/ROMs/NES/
+		cp -Rv "$folder"/* $rootdir/Games/ROMs/NES/
 		#return back to menu
 		_rom-loader
 		;;
@@ -107,7 +107,7 @@ options=(1 "Atari 2600"
 		#call file loader  	
 		_file-loader
 		#copy SNES ROMs
-		cp -Rv "$folder"/* $HOME/Games/ROMs/SNES/
+		cp -Rv "$folder"/* $rootdir/Games/ROMs/SNES/
 		#return back to menu
 		_rom-loader
 		;;
@@ -116,7 +116,7 @@ options=(1 "Atari 2600"
 		#call file loader  	
 		_file-loader
 		#copy N64 ROMs
-		cp -Rv "$folder"/* $HOME/Games/ROMs/N64/
+		cp -Rv "$folder"/* $rootdir/Games/ROMs/N64/
 		#return back to menu
 		_rom-loader
 		;;
@@ -125,7 +125,7 @@ options=(1 "Atari 2600"
 		#call file loader  	
 		_file-loader
 		#copy MAME ROMs
-		cp -Rv "$folder"/* $HOME/Games/ROMs/MAME/
+		cp -Rv "$folder"/* $rootdir/Games/ROMs/MAME/
 		#return back to menu
 		_rom-loader
 		;;
@@ -134,7 +134,7 @@ options=(1 "Atari 2600"
 		#call file loader  	
 		_file-loader
 		#copy Sega Master System ROMs
-		cp -Rv "$folder"/* $HOME/Games/ROMs/Sega\ Master\ System/
+		cp -Rv "$folder"/* $rootdir/Games/ROMs/Sega\ Master\ System/
 		#return back to menu
 		_rom-loader
 		;;
@@ -143,7 +143,7 @@ options=(1 "Atari 2600"
 		#call file loader  	
 		_file-loader
 		#copy Sega Game Gear ROMs
-		cp -Rv "$folder"/* $HOME/Games/ROMs/Sega\ Game\ Gear/
+		cp -Rv "$folder"/* $rootdir/Games/ROMs/Sega\ Game\ Gear/
 		#return back to menu
 		_rom-loader
 		;;
@@ -152,7 +152,7 @@ options=(1 "Atari 2600"
 		#call file loader  	
 		_file-loader
 		#copy GBC ROMs
-		cp -Rv "$folder"/* $HOME/Games/ROMs/GBC/
+		cp -Rv "$folder"/* $rootdir/Games/ROMs/GBC/
 		#return back to menu
 		_rom-loader
 		;;
@@ -161,7 +161,7 @@ options=(1 "Atari 2600"
 		#call file loader  	
 		_file-loader
 		#copy GBA ROMs
-		cp -Rv "$folder"/* $HOME/Games/ROMs/GBA/
+		cp -Rv "$folder"/* $rootdir/Games/ROMs/GBA/
 		#return back to menu
 		_rom-loader
 		;;
@@ -170,7 +170,7 @@ options=(1 "Atari 2600"
 		#call file loader  	
 		_file-loader
 		#copy Turbographx 16 ROMs
-		cp -Rv "$folder"/* $HOME/Games/ROMs/TurboGraphx\ 16/
+		cp -Rv "$folder"/* $rootdir/Games/ROMs/TurboGraphx\ 16/
 		#return back to menu
 		_rom-loader
 		;;
@@ -183,7 +183,7 @@ options=(1 "Atari 2600"
 }
 
 
-function _res-swticher()
+function h_res_swticher()
 {
 	dialog --infobox "Setting resolution to selection" 3 36
 	#resolution is set via _resolution function		
@@ -191,18 +191,18 @@ function _res-swticher()
 	########################		
 	#Stella
 	########################
-	st_org=$(grep -Ee "\bfullres = \b" $HOME/.stella/stellarc)
+	st_org=$(grep -Ee "\bfullres = \b" $home/.stella/stellarc)
 	#make the changes, prefix new_X in case NULL was entered previously
-	sed -ie "s|$st_org|fullres = $st_new|g" $HOME/.stella/stellarc
+	sed -ie "s|$st_org|fullres = $st_new|g" $home/.stella/stellarc
 
 	########################		
 	#mupen64plus
 	########################
-	m_org_X=$(grep -Ee "\bScreenWidth = \b" $HOME/.config/mupen64plus/mupen64plus.cfg)
-	m_org_Y=$(grep -Ee "\bScreenHeight = \b" $HOME/.config/mupen64plus/mupen64plus.cfg)
+	m_org_X=$(grep -Ee "\bScreenWidth = \b" $home/.config/mupen64plus/mupen64plus.cfg)
+	m_org_Y=$(grep -Ee "\bScreenHeight = \b" $home/.config/mupen64plus/mupen64plus.cfg)
 	#make the changes, prefix new_X in case NULL was entered previousey
-	sed -ie "s|$m_org_X|ScreenWidth = $m_new_X|g" $HOME/.config/mupen64plus/mupen64plus.cfg
-	sed -ie "s|$m_org_Y|ScreenHeight = $m_new_Y|g" $HOME/.config/mupen64plus/mupen64plus.cfg
+	sed -ie "s|$m_org_X|ScreenWidth = $m_new_X|g" $home/.config/mupen64plus/mupen64plus.cfg
+	sed -ie "s|$m_org_Y|ScreenHeight = $m_new_Y|g" $home/.config/mupen64plus/mupen64plus.cfg
 
 	########################		
 	#mednafen 
@@ -230,60 +230,60 @@ function _res-swticher()
 	#the screen (EMU_CODE.stretch 1). The value is boolean.
 
 	#Mednafen (GBC)
-	gb_org_X=$(grep -Ee "\bgb.xres\b " $HOME/.mednafen/mednafen-09x.cfg)
-	gb_org_Y=$(grep -Ee "\bgb.yres\b " $HOME/.mednafen/mednafen-09x.cfg)
+	gb_org_X=$(grep -Ee "\bgb.xres\b " $home/.mednafen/mednafen-09x.cfg)
+	gb_org_Y=$(grep -Ee "\bgb.yres\b " $home/.mednafen/mednafen-09x.cfg)
 	#make the changes, prefix new_X in case NULL was entered previously
-	sed -ie "s|$gb_org_X|gb.xres $gb_new_X|g" $HOME/.mednafen/mednafen-09x.cfg
-	sed -ie "s|$gb_org_Y|gb.yres $gb_new_Y|g" $HOME/.mednafen/mednafen-09x.cfg
+	sed -ie "s|$gb_org_X|gb.xres $gb_new_X|g" $home/.mednafen/mednafen-09x.cfg
+	sed -ie "s|$gb_org_Y|gb.yres $gb_new_Y|g" $home/.mednafen/mednafen-09x.cfg
 
 	#Mednafen (NES)
-	nes_org_X=$(grep -Ee "\bnes.xres\b " $HOME/.mednafen/mednafen-09x.cfg)
-	nes_org_Y=$(grep -Ee "\bnes.yres\b " $HOME/.mednafen/mednafen-09x.cfg)
+	nes_org_X=$(grep -Ee "\bnes.xres\b " $home/.mednafen/mednafen-09x.cfg)
+	nes_org_Y=$(grep -Ee "\bnes.yres\b " $home/.mednafen/mednafen-09x.cfg)
 	#make the changes, prefix new_X in case NULL was entered previously
-	sed -ie "s|$nes_org_X|nes.xres $nes_new_X|g" $HOME/.mednafen/mednafen-09x.cfg
-	sed -ie "s|$nes_org_Y|nes.yres $nes_new_Y|g" $HOME/.mednafen/mednafen-09x.cfg
+	sed -ie "s|$nes_org_X|nes.xres $nes_new_X|g" $home/.mednafen/mednafen-09x.cfg
+	sed -ie "s|$nes_org_Y|nes.yres $nes_new_Y|g" $home/.mednafen/mednafen-09x.cfg
 
 	#Mednafen (GameBoy Advance)
-	gba_org_X=$(grep -Ee "\bgba.xres\b " $HOME/.mednafen/mednafen-09x.cfg)
-	gba_org_Y=$(grep -Ee "\bgba.yres\b " $HOME/.mednafen/mednafen-09x.cfg)
+	gba_org_X=$(grep -Ee "\bgba.xres\b " $home/.mednafen/mednafen-09x.cfg)
+	gba_org_Y=$(grep -Ee "\bgba.yres\b " $home/.mednafen/mednafen-09x.cfg)
 	#make the changes, prefix new_X in case NULL was entered previously
-	sed -ie "s|$gba_org_X|gba.xres $gba_new_X|g" $HOME/.mednafen/mednafen-09x.cfg
-	sed -ie "s|$gba_org_Y|gba.yres $gba_new_Y|g" $HOME/.mednafen/mednafen-09x.cfg
+	sed -ie "s|$gba_org_X|gba.xres $gba_new_X|g" $home/.mednafen/mednafen-09x.cfg
+	sed -ie "s|$gba_org_Y|gba.yres $gba_new_Y|g" $home/.mednafen/mednafen-09x.cfg
 
 	#Mednafen (SNES)
-	snes_org_X=$(grep -Ee "\bsnes.xres\b " $HOME/.mednafen/mednafen-09x.cfg)
-	snes_org_Y=$(grep -Ee "\bsnes.yres\b " $HOME/.mednafen/mednafen-09x.cfg)
+	snes_org_X=$(grep -Ee "\bsnes.xres\b " $home/.mednafen/mednafen-09x.cfg)
+	snes_org_Y=$(grep -Ee "\bsnes.yres\b " $home/.mednafen/mednafen-09x.cfg)
 	#make the changes, prefix new_X in case NULL was entered previously
-	sed -ie "s|$snes_org_X|snes.xres $snes_new_X|g" $HOME/.mednafen/mednafen-09x.cfg
-	sed -ie "s|$snes_org_Y|snes.yres $snes_new_Y|g" $HOME/.mednafen/mednafen-09x.cfg
+	sed -ie "s|$snes_org_X|snes.xres $snes_new_X|g" $home/.mednafen/mednafen-09x.cfg
+	sed -ie "s|$snes_org_Y|snes.yres $snes_new_Y|g" $home/.mednafen/mednafen-09x.cfg
 
 	#Mednafen (Sega Master System, aka Sega Sega Master)
-	sms_org_X=$(grep -Ee "\bsms.xres\b " $HOME/.mednafen/mednafen-09x.cfg)
-	sms_org_Y=$(grep -Ee "\bsms.yres\b " $HOME/.mednafen/mednafen-09x.cfg)
+	sms_org_X=$(grep -Ee "\bsms.xres\b " $home/.mednafen/mednafen-09x.cfg)
+	sms_org_Y=$(grep -Ee "\bsms.yres\b " $home/.mednafen/mednafen-09x.cfg)
 	#make the changes, prefix new_X in case NULL was entered previously
-	sed -ie "s|$sms_org_X|sms.xres $sms_new_X|g" $HOME/.mednafen/mednafen-09x.cfg
-	sed -ie "s|$sms_org_Y|sms.yres $sms_new_Y|g" $HOME/.mednafen/mednafen-09x.cfg
+	sed -ie "s|$sms_org_X|sms.xres $sms_new_X|g" $home/.mednafen/mednafen-09x.cfg
+	sed -ie "s|$sms_org_Y|sms.yres $sms_new_Y|g" $home/.mednafen/mednafen-09x.cfg
 
 	#Mednafen (Sega Gane Gear)
-	sms_org_X=$(grep -Ee "\bsms.xres\b " $HOME/.mednafen/mednafen-09x.cfg)
-	sms_org_Y=$(grep -Ee "\bsms.yres\b " $HOME/.mednafen/mednafen-09x.cfg)
+	sms_org_X=$(grep -Ee "\bsms.xres\b " $home/.mednafen/mednafen-09x.cfg)
+	sms_org_Y=$(grep -Ee "\bsms.yres\b " $home/.mednafen/mednafen-09x.cfg)
 	#make the changes, prefix new_X in case NULL was entered previously
-	sed -ie "s|$sms_org_X|sms.xres $sms_new_X|g" $HOME/.mednafen/mednafen-09x.cfg
-	sed -ie "s|$sms_org_Y|sms.yres $sms_new_Y|g" $HOME/.mednafen/mednafen-09x.cfg
+	sed -ie "s|$sms_org_X|sms.xres $sms_new_X|g" $home/.mednafen/mednafen-09x.cfg
+	sed -ie "s|$sms_org_Y|sms.yres $sms_new_Y|g" $home/.mednafen/mednafen-09x.cfg
 
 	#Mednafen (Turbographx 16)
-	gg_org_X=$(grep -Ee "\bgg.xres\b " $HOME/.mednafen/mednafen-09x.cfg)
-	gg_org_Y=$(grep -Ee "\bgg.yres\b " $HOME/.mednafen/mednafen-09x.cfg)
+	gg_org_X=$(grep -Ee "\bgg.xres\b " $home/.mednafen/mednafen-09x.cfg)
+	gg_org_Y=$(grep -Ee "\bgg.yres\b " $home/.mednafen/mednafen-09x.cfg)
 	#make the changes, prefix new_X in case NULL was entered previously
-	sed -ie "s|$gg_org_X|gg.xres $gg_new_X|g" $HOME/.mednafen/mednafen-09x.cfg
-	sed -ie "s|$gg_org_Y|gg.yres $gg_new_Y|g" $HOME/.mednafen/mednafen-09x.cfg
+	sed -ie "s|$gg_org_X|gg.xres $gg_new_X|g" $home/.mednafen/mednafen-09x.cfg
+	sed -ie "s|$gg_org_Y|gg.yres $gg_new_Y|g" $home/.mednafen/mednafen-09x.cfg
 
 	#For some reason, when I replace the resolutions, the config files are changed
 	#They are appended with an "e" as in mednafen-09x.cfge. These "edited" files need
 	#deleted. I will have to find out at some point why this occurs
-	rm -f $HOME/.mednafen/mednafen-09x.cfge
-	rm -f $HOME/.config/mupen64plus/mupen64plus.cfge
-	rm -f $HOME/.pcsx/plugins/gpuPeopsMesaGL.cfge
+	rm -f $home/.mednafen/mednafen-09x.cfge
+	rm -f $home/.config/mupen64plus/mupen64plus.cfge
+	rm -f $home/.pcsx/plugins/gpuPeopsMesaGL.cfge
 
 }
 
@@ -321,16 +321,25 @@ function h_rom_loader()
 }
 
 
-function h_bios-checker()
+function h_bios_checker()
 {
 
 # BIOS file checks
 echo -e "\nCheck for Bios files (if applicable): " >> "$rootdir/debug.log"
 # Neo-Geo BIOS files
-h_filecheck "$HOME/Games/ROMs/Neo-Geo/BIOS"
+h_filecheck "$rootdir/Games/ROMs/Neo-Geo/BIOS"
 # If MESS is loaded already, verify BIOS files
 mess neocdz -verifyroms >> "$rootdir/debug.log"
 
+}
+
+function h_correct_perms()
+{
+	# correct permissions since we use sudo
+	chgrp -R $user $rootdir
+    	chown -R $user $rootdir
+    	chgrp -R $user $home
+    	chown -R $user $home
 }
 
 function h_filechecker()
@@ -342,7 +351,7 @@ function h_filechecker()
     fi
 }
 
-function h_pkgcheck ()
+function h_pkgcheck()
 {
     PKG_OK=$(dpkg-query -s $1 | egrep -w "Status|Package|Version")
     echo "Checking for somelib: $PKG_OK"
@@ -353,7 +362,7 @@ function h_pkgcheck ()
     fi
 }
 
-function h_update_git () 
+function h_update_git() 
 {
 
 printMsg "Fetching latest version of the RetroPie Setup Script."
@@ -373,20 +382,15 @@ popd
 dialog --backtitle "LibreGeek.org - RetroRig Setup." --msgbox "Fetched the latest version of the RetroRig repository. Please exit and restart the script." 20 60 
 }
 
-function h_update_binaries () 
+function h_update_system() 
 {
-
-
-apt-get install -y xboxdrv curl zsnes nestopia pcsxr pcsx2:i386 \
-python-software-properties pkg-config software-properties-common mess \
-mame mupen64plus dconf-tools mednafen qjoypad xbmc dolphin-emu-master stella \
-build-essential	
+apt-get update
 sleep 3s
 clear
 
 }
 
-function h_upgrade_system () 
+function h_upgrade_system() 
 {
 
 clear
@@ -397,7 +401,7 @@ clear
 
 }
 
-function h_start_xbmc () 
+function h_start_xbmc() 
 {
 
 dialog --infobox "starting RetroRig" 3 21
