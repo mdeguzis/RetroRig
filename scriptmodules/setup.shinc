@@ -278,13 +278,13 @@ function rrs_debug()
 	# Check for existance of essential files
 	echo "Essential files: XBMC:" > "$rootdir/debug.log"
 	echo "Path(s): '$HOME/.xbmc/userdata'" >> "$rootdir/debug.log"
-	h_filechecker "$HOME/.xbmc/userdata"
+	h_filechecker "$HOME/.xbmc/userdata" "$rootdir/debug.log"
 	# RCB
 	echo "Essential files: ROM Collection Browser:" >> "$rootdir/debug.log"
 	echo "Path: '$HOME/.xbmc/addons/script.games.rom.collection.browser'" >> "$rootdir/debug.log"
 	h_filechecker "$HOME/.xbmc/addons/script.games.rom.collection.browser"	
-	echo "Path: '$HOME/.xbmc/userdata/addon_data/script.games.rom.collection.browser'" >>
-	h_filechecker "$HOME/.xbmc/userdata/addon_data/script.games.rom.collection.browser"
+	echo "Path: '$HOME/.xbmc/userdata/addon_data/script.games.rom.collection.browser'" >> "$rootdir/debug.log"
+	h_filechecker "$HOME/.xbmc/userdata/addon_data/script.games.rom.collection.browser" "$rootdir/debug.log"
 	# init file checks	
 	echo "Available init files:" >> "$rootdir/debug.log"
 	echo "Has xboxdrv been loaded?" >> "$rootdir/debug.log"
