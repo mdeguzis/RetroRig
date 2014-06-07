@@ -233,30 +233,30 @@ function rrs_xboxdrv ()
 	#Wireless Xbox 360 Controller Config
 
 	#copy xbox configuration (default) to folder
-	cp -v $scriptdir/RetroRig/gamepad-cfgs/x360_controller/xpad-wireless.xboxdrv /usr/share/xboxdrv/
+	cp -v $rootdir/gamepad-cfgs/x360_controller/xpad-wireless.xboxdrv /usr/share/xboxdrv/
 	
 	# copy keyboard.xml file for XBMC. Button id numbers are totally diffferent, due to the use of the use-dpad-as-button, and use-trigger-as-button options used.
-	cp -v $scriptdir/RetroRig/gamepad-cfgs/x360_controller/keyboard.xml $home/.xbmc/userdata/keymaps
+	cp -v $rootdir/gamepad-cfgs/x360_controller/keyboard.xml $home/.xbmc/userdata/keymaps
 
 	#set qjoypad's profile to match Xbox 360 Wireless (4-player)
-	cp -v $scriptdir/RetroRig/gamepad-cfgs/x360_controller.lyt $home/.qjoypad3/ 
+	cp -v $rootdir/gamepad-cfgs/x360_controller.lyt $home/.qjoypad3/ 
 	
 	#inject init script and default config
-	cp -v $scriptdir/RetroRig/init-scripts/x360_controller/xboxdrv /etc/init.d/
-	cp -v $scriptdir/RetroRig/init-scripts/x360_controller/default/xboxdrv /etc/default/xboxdrv
+	cp -v $rootdir/init-scripts/x360_controller/xboxdrv /etc/init.d/
+	cp -v $rootdir/init-scripts/x360_controller/default/xboxdrv /etc/default/xboxdrv
 	
 	#update init scripts
 	update-rc.d xboxdrv defaults
 
 	#blacklist xpad
 	echo "sudo needed to blacklist xpad!"
-	cp -v $scriptdir/init-scripts/x360_controller/blacklist.conf /etc/modprobe.d/
+	cp -v $rootdir/init-scripts/x360_controller/blacklist.conf /etc/modprobe.d/
 
 	#copy default gamepad setup for Xbox 360 Wireless (4-player)
-	cp -v $scriptdir/controller-cfgs/x360_controller/x360_controller.lyt $home/.qjoypad3/
+	cp -v $rootdir/controller-cfgs/x360_controller/x360_controller.lyt $home/.qjoypad3/
 
 	#copy qjoypad autostart item for x360_controller gamepad config
-	cp -v $scriptdir/gamepad-cfgs/x360_controller/qjoypad.desktop /etc/xdg/autostart/
+	cp -v $rootdir/gamepad-cfgs/x360_controller/qjoypad.desktop /etc/xdg/autostart/
 
 	#fix permissions since we are running as sudo
 	h_correct_perms
