@@ -175,7 +175,6 @@ fi
 esscrapimgw=275 # width in pixel for EmulationStation games scraper
 
 home=$(eval echo ~$user)
-export $home
 
 # make sure that RetroRig root directory exists
 if [[ ! -d $rootdir ]]; then
@@ -197,8 +196,23 @@ if [[ ! -d $scriptdir/logs ]]; then
     fi
 fi
 
-#check for pre-requisites, output to log folder
+# check for pre-requisites, output to log folder
 rrs_prereq
+
+# Show lame logo (take this out?)
+# subtitle 1
+clear
+COLUMNS=$(tput cols) 
+title1="Welcome To" 
+printf "%*s\n" $(((${#title1}+$COLUMNS)/2)) "$title1"
+figlet -c "_.= RetroRig=._"
+echo ""
+# subtitle 2
+COLUMNS=$(tput cols) 
+title2="www.libregeek.org" 
+printf "%*s\n" $(((${#title2}+$COLUMNS)/2)) "$title2"
+sleep 5s
+
 
 while true; do
     cmd=(dialog --backtitle "LibreGeek.org RetroRig Installer" --menu "| Main Menu | \
