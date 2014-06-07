@@ -96,7 +96,8 @@ options=(1 "Current Resolution"
 	 8 "Exit resolution selection"
 	 9 "Back to main menu"
 	)
-     
+	
+# Expanding arrays involves [@] and {}
 choices=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
 if [ "$choices" != "" ]; then
     case $choices in
@@ -107,207 +108,207 @@ if [ "$choices" != "" ]; then
 
 		#echo curent resolution
 		#mupen64plus
-		echo "mupen64plus:" > $scriptdir/logs/res.txt
-		grep -Ee "\bScreenWidth = \b" $home/.config/mupen64plus/mupen64plus.cfg >> $scriptdir/logs/res.txt
-		grep -Ee "\bScreenHeight = \b" $home/.config/mupen64plus/mupen64plus.cfg >> $scriptdir/logs/res.txt
-		echo "" >> $scriptdir/logs/res.txt
+		echo "mupen64plus:" > "$scriptdir/logs/res.txt"
+		grep -Ee "\bScreenWidth = \b" "$home/.config/mupen64plus/mupen64plus.cfg" >> "$scriptdir/logs/res.txt"
+		grep -Ee "\bScreenHeight = \b" "$home/.config/mupen64plus/mupen64plus.cfg" >> "$scriptdir/logs/res.txt"
+		echo "" >> "$scriptdir/logs/res.txt"
 		#Stella
-		echo "Stella" >> $scriptdir/logs/res.txt
-		grep -Ee "\bfullres = \b" $home/.stella/stellarc >> $scriptdir/logs/$scriptdir/logs/res.txt
-		echo "" >> $scriptdir/logs/res.txt
+		echo "Stella" >> "$scriptdir/logs/res.txt"
+		grep -Ee "\bfullres = \b" "$home/.stella/stellarc" >> "$scriptdir/logs/res.txt"
+		echo "" >> "$scriptdir/logs/res.txt"
 		#mednafen GBC
-		echo "Mednafen (GBC)" >> $scriptdir/logs/res.txt
-		grep -Ee "\bgb.xres\b" $home/.mednafen/mednafen-09x.cfg >> $scriptdir/logs/res.txt
-		grep -Ee "\bgb.yres\b" $home/.mednafen/mednafen-09x.cfg >> $scriptdir/logs/res.txt
-		echo "" >> $scriptdir/logs/res.txt
+		echo "Mednafen (GBC)" >> "$scriptdir/logs/res.txt"
+		grep -Ee "\bgb.xres\b" "$home/.mednafen/mednafen-09x.cfg" >> "$scriptdir/logs/res.txt"
+		grep -Ee "\bgb.yres\b" "$home/.mednafen/mednafen-09x.cfg" >> "$scriptdir/logs/res.txt"
+		echo "" >> "$scriptdir/logs/res.txt"
 		#mednafen GBA
-		echo "Mednafen (GBA)" >> $scriptdir/logs/res.txt
-		grep -Ee "\bgba.xres\b" $home/.mednafen/mednafen-09x.cfg >> $scriptdir/logs/res.txt
-		grep -Ee "\bgba.yres\b" $home/.mednafen/mednafen-09x.cfg >> $scriptdir/logs/res.txt
-		echo "" >> $scriptdir/logs/res.txt
+		echo "Mednafen (GBA)" >> "$scriptdir/logs/res.txt"
+		grep -Ee "\bgba.xres\b" "$home/.mednafen/mednafen-09x.cfg" >> "$scriptdir/logs/res.txt"
+		grep -Ee "\bgba.yres\b" "$home/.mednafen/mednafen-09x.cfg" >> "$scriptdir/logs/res.txt"
+		echo "" >> "$scriptdir/logs/res.txt"
 		#mednafen Sega Sega Master System
-		echo "Mednafen (Sega Master System)" >> $scriptdir/logs/res.txt
-		grep -Ee "\bsms.xres\b" $home/.mednafen/mednafen-09x.cfg >> $scriptdir/logs/res.txt
-		grep -Ee "\bsms.yres\b" $home/.mednafen/mednafen-09x.cfg >> $scriptdir/logs/res.txt
-		echo "" >> $scriptdir/logs/res.txt
+		echo "Mednafen (Sega Master System)" >> "$scriptdir/logs/res.txt"
+		grep -Ee "\bsms.xres\b" "$home/.mednafen/mednafen-09x.cfg" >> "$scriptdir/logs/res.txt"
+		grep -Ee "\bsms.yres\b" "$home/.mednafen/mednafen-09x.cfg" >> "$scriptdir/logs/res.txt"
+		echo "" >> "$scriptdir/logs/res.txt"
 		#mednafen Sega Game Gear
-		echo "Mednafen (Sega Game Gear)" >> $scriptdir/logs/res.txt
-		grep -Ee "\bgg.xres\b" $home/.mednafen/mednafen-09x.cfg >> $scriptdir/logs/res.txt
-		grep -Ee "\bgg.yres\b" $home/.mednafen/mednafen-09x.cfg >> $scriptdir/logs/res.txt
-		echo "" >> $scriptdir/logs/res.txt
+		echo "Mednafen (Sega Game Gear)" >> "$scriptdir/logs/res.txt"
+		grep -Ee "\bgg.xres\b" "$home/.mednafen/mednafen-09x.cfg" >> "$scriptdir/logs/res.txt"
+		grep -Ee "\bgg.yres\b" "$home/.mednafen/mednafen-09x.cfg" >> "$scriptdir/logs/res.txt"
+		echo "" >> "$scriptdir/logs/res.txt"
 		#mednafen SNES
-		echo "Mednafen (SNES)" >> $scriptdir/logs/res.txt
-		grep -Ee "\bsnes.xres\b" $home/.mednafen/mednafen-09x.cfg >> $scriptdir/logs/res.txt
-		grep -Ee "\bsnes.yres\b" $home/.mednafen/mednafen-09x.cfg >> $scriptdir/logs/res.txt
-		echo "" >> $scriptdir/logs/res.txt
+		echo "Mednafen (SNES)" >> "$scriptdir/logs/res.txt"
+		grep -Ee "\bsnes.xres\b" "$home/.mednafen/mednafen-09x.cfg" >> "$scriptdir/logs/res.txt"
+		grep -Ee "\bsnes.yres\b" "$home/.mednafen/mednafen-09x.cfg" >> "$scriptdir/logs/res.txt"
+		echo "" >> "$scriptdir/logs/res.txt"
 		#mednafen NES
-		echo "Mednafen (NES)" >> $scriptdir/logs/res.txt
-		grep -Ee "\bnes.xres\b" $home/.mednafen/mednafen-09x.cfg >> $scriptdir/logs/res.txt
-		grep -Ee "\bnes.yres\b" $home/.mednafen/mednafen-09x.cfg >> $scriptdir/logs/res.txt
-		echo "" >> $scriptdir/logs/res.txt
+		echo "Mednafen (NES)" >> "$scriptdir/logs/res.txt"
+		grep -Ee "\bnes.xres\b" "$home/.mednafen/mednafen-09x.cfg" >> "$scriptdir/logs/res.txt"
+		grep -Ee "\bnes.yres\b" "$home/.mednafen/mednafen-09x.cfg" >> "$scriptdir/logs/res.txt"
+		echo "" >> "$scriptdir/logs/res.txt"
 		#mednafen Turbographx 16
-		echo "Mednafen (Turbographx 16)" >> $scriptdir/logs/res.txt
-		grep -Ee "\bpce.xres\b" $home/.mednafen/mednafen-09x.cfg >> $scriptdir/logs/res.txt
-		grep -Ee "\bpce.yres\b" $home/.mednafen/mednafen-09x.cfg >> $scriptdir/logs/res.txt
-		echo "" >> $scriptdir/logs/res.txt
+		echo "Mednafen (Turbographx 16)" >> "$scriptdir/logs/res.txt"
+		grep -Ee "\bpce.xres\b" "$home/.mednafen/mednafen-09x.cfg" >> "$scriptdir/logs/res.txt"
+		grep -Ee "\bpce.yres\b" "$home/.mednafen/mednafen-09x.cfg" >> "$scriptdir/logs/res.txt"
+		echo "" >> "$scriptdir/logs/res.txt"
 		#report current resolution
-		dialog --textbox $scriptdir/logs/res.txt 33 0
+		dialog --textbox "$scriptdir/logs/res.txt" 33 0
 		#remove text file
-		rm $scriptdir/logs/res.txt
+		rm "$scriptdir/logs/res.txt"
 		;;
 
 	2) 
 		#setting chosen: "1280x720  (720p)  (5:4)"
 		#set mupen64plus value
-		m_new_X="1280"
-		m_new_Y="720"
+		export m_new_X="1280"
+		export m_new_Y="720"
 		#set mednafen (GBC) value
-		gb_new_X="1280"
-		gb_new_Y="720"
+		export gb_new_X="1280"
+		export gb_new_Y="720"
 		#set mednafen (GBA) value
-		gba_new_X="1280"
-		gba_new_Y="1024"
+		export gba_new_X="1280"
+		export gba_new_Y="1024"
 		#set mednafen (NES) value
-		nes_new_X="1280"
-		nes_new_Y="720"
+		export nes_new_X="1280"
+		export nes_new_Y="720"
 		#set mednafen (SNES) value
-		snes_new_X="1280"
-		snes_new_Y="720"
+		export snes_new_X="1280"
+		export snes_new_Y="720"
 		#set mednafen (Sega Master System) value
-		sms_new_X="1280"
-		sms_new_Y="720"
+		export sms_new_X="1280"
+		export sms_new_Y="720"
 		#set mednafen (Sega Game Gear) value
-		gg_new_X="1280"
-		gg_new_Y="720"
+		export gg_new_X="1280"
+		export gg_new_Y="720"
 		#set mednafen (Turbographx 16) value
-		pce_new_X="1280"
-		pce_new_Y="720"
+		export pce_new_X="1280"
+		export pce_new_Y="720"
 		#set stella (Atari 2600)
-		st_new="1280x720"
+		export st_new="1280x720"
 		#return to menu
 		return
 		;;  
 	3) 
 		#setting chosen: "1280x1024 (SXGA)  (5:4)"
 		#set mupen64plus value
-		m_new_X="1280"
-		m_new_Y="1024"
+		export m_new_X="1280"
+		export m_new_Y="1024"
 		#set mednafen (GBC) value
-		gb_new_X="1280"
-		gb_new_Y="1024"
+		export gb_new_X="1280"
+		export gb_new_Y="1024"
 		#set mednafen (GBA) value
-		gba_new_X="1280"
-		gba_new_Y="1024"
+		export gba_new_X="1280"
+		export gba_new_Y="1024"
 		#set mednafen (NES) value
-		nes_new_X="1280"
-		nes_new_Y="1024"
+		export nes_new_X="1280"
+		export nes_new_Y="1024"
 		#set mednafen (SNES) value
-		snes_new_X="1280"
-		snes_new_Y="1024"
+		export snes_new_X="1280"
+		export snes_new_Y="1024"
 		#set mednafen (Sega Master System) value
-		sms_new_X="1280"
-		sms_new_Y="1024"
+		export sms_new_X="1280"
+		export sms_new_Y="1024"
 		#set mednafen (Sega Game Gear) value
-		gg_new_X="1280"
-		gg_new_Y="1024"
+		export gg_new_X="1280"
+		export gg_new_Y="1024"
 		#set mednafen (Turbographx 16) value
-		pce_new_X="1280"
-		pce_new_Y="1024"
+		export pce_new_X="1280"
+		export pce_new_Y="1024"
 		#set stella (Atari 2600)
-		st_new="1280x1024"
+		export st_new="1280x1024"
 		#return to menu
 		return
 		;;
 	4) 
 		#setting chosen: "1366x768  (720p)  (16:9)"
 		#set mupen64plus value
-		m_new_X="1366"
-		m_new_Y="768"
+		export m_new_X="1366"
+		export m_new_Y="768"
 		#set mednafen (GBC) value
-		gb_new_X="1366"
-		gb_new_Y="768"
+		export gb_new_X="1366"
+		export gb_new_Y="768"
 		#set mednafen (GBA) value
-		gba_new_X="1366"
-		gba_new_Y="768"
+		export gba_new_X="1366"
+		export gba_new_Y="768"
 		#set mednafen (NES) value
-		nes_new_X="1366"
-		nes_new_Y="768"
+		export nes_new_X="1366"
+		export nes_new_Y="768"
 		#set mednafen (SNES) value
-		snes_new_X="1366"
-		snes_new_Y="768"
+		export snes_new_X="1366"
+		export snes_new_Y="768"
 		#set mednafen (Sega Master System) value
-		sms_new_X="1366"
-		sms_new_Y="768"
+		export sms_new_X="1366"
+		export sms_new_Y="768"
 		#set mednafen (Sega Game Gear) value
-		gg_new_X="1366"
-		gg_new_Y="768"
+		export gg_new_X="1366"
+		export gg_new_Y="768"
 		#set mednafen (Turbographx 16) value
-		pce_new_X="1366"
-		pce_new_Y="768"
+		export pce_new_X="1366"
+		export pce_new_Y="768"
 		#set stella (Atari 2600)
-		st_new="1366x768"
+		export st_new="1366x768"
 		#return to menu
 		return
 		;;
 	5) 
 		#setting chosen: "1600x900  (900p)  (16:9)"
 		#set mupen64plus value
-		m_new_X="1600"
-		m_new_Y="900"
+		export m_new_X="1600"
+		export m_new_Y="900"
 		#set mednafen (GBC) value
-		gb_new_X="1600"
-		gb_new_Y="900"
+		export gb_new_X="1600"
+		export gb_new_Y="900"
 		#set mednafen (GBA) value
-		gba_new_X="1600"
-		gba_new_Y="900"
+		export gba_new_X="1600"
+		export gba_new_Y="900"
 		#set mednafen (NES) value
-		nes_new_X="1600"
-		nes_new_Y="900"
+		export nes_new_X="1600"
+		export nes_new_Y="900"
 		#set mednafen (SNES) value
-		snes_new_X="1600"
-		snes_new_Y="900"
+		export snes_new_X="1600"
+		export snes_new_Y="900"
 		#set mednafen (Sega Master System) value
-		sms_new_X="1600"
-		sms_new_Y="900"
+		export sms_new_X="1600"
+		export sms_new_Y="900"
 		#set mednafen (Sega Game Gear) value
-		gg_new_X="1600"
-		gg_new_Y="900"
+		export gg_new_X="1600"
+		export gg_new_Y="900"
 		#set mednafen (Turbographx 16) value
-		pce_new_X="1600"
-		pce_new_Y="900"
+		export pce_new_X="1600"
+		export pce_new_Y="900"
 		#set stella (Atari 2600)
-		st_new="1600x900"
+		export st_new="1600x900"
 		#return to menu
 		return
 		;;
 	6) 
 		#setting chosen: "1920x1080 (1080p) (16:9)"
 		#set mupen64plus value
-		m_new_X="1920"
-		m_new_Y="1080"
+		export m_new_X="1920"
+		export m_new_Y="1080"
 		#set mednafen (GBC) value
-		gb_new_X="1920"
-		gb_new_Y="1080"
+		export gb_new_X="1920"
+		export gb_new_Y="1080"
 		#set mednafen (GBA) value
-		gba_new_X="1920"
-		gba_new_Y="1080"
+		export gba_new_X="1920"
+		export gba_new_Y="1080"
 		#set mednafen (NES) value
-		nes_new_X="1920"
-		nes_new_Y="1080"
+		export nes_new_X="1920"
+		export nes_new_Y="1080"
 		#set mednafen (SNES) value
-		snes_new_X="1920"
-		snes_new_Y="1080"
+		export snes_new_X="1920"
+		export snes_new_Y="1080"
 		#set mednafen (Sega Master System) value
-		sms_new_X="1920"
-		sms_new_Y="1080"
+		export sms_new_X="1920"
+		export sms_new_Y="1080"
 		#set mednafen (Sega Game Gear) value
-		gg_new_X="1920"
-		gg_new_Y="1080"
+		export gg_new_X="1920"
+		export gg_new_Y="1080"
 		#set mednafen (Turbographx 16) value
-		pce_new_X="1920"
-		pce_new_Y="1080"
+		export pce_new_X="1920"
+		export pce_new_Y="1080"
 		#set stella (Atari 2600)
-		st_new="1920x1080"
+		export st_new="1920x1080"
 		#return to menu
 		return
 		;;    
@@ -319,34 +320,34 @@ if [ "$choices" != "" ]; then
 
 		#set new resolution(s) from configs
 		#mupen64plus
-		m_new_X=$(cat '/tmp/new_X')
-		m_new_Y=$(cat '/tmp/new_Y')
+		export m_new_X=$(cat '/tmp/new_X')
+		export m_new_Y=$(cat '/tmp/new_Y')
 		#mednafen (GBC)
-		gb_new_X=$(cat '/tmp/new_X')
-		gb_new_Y=$(cat '/tmp/new_Y')
+		export gb_new_X=$(cat '/tmp/new_X')
+		export gb_new_Y=$(cat '/tmp/new_Y')
 		#mednafen (GBA)
-		gba_new_X=$(cat '/tmp/new_X')
-		gba_new_Y=$(cat '/tmp/new_Y')
+		export gba_new_X=$(cat '/tmp/new_X')
+		export gba_new_Y=$(cat '/tmp/new_Y')
 		#mednafen (NES)
-		nes_new_X=$(cat '/tmp/new_X')
-		nes_new_Y=$(cat '/tmp/new_Y')
+		export nes_new_X=$(cat '/tmp/new_X')
+		export nes_new_Y=$(cat '/tmp/new_Y')
 		#mednafen (SNES)
-		snes_new_X=$(cat '/tmp/new_X')
-		snes_new_Y=$(cat '/tmp/new_Y')
+		export snes_new_X=$(cat '/tmp/new_X')
+		export snes_new_Y=$(cat '/tmp/new_Y')
 		#mednafen (Sega Master System)
-		sms_new_X=$(cat '/tmp/new_X')
-		sms_new_Y=$(cat '/tmp/new_Y')
+		export sms_new_X=$(cat '/tmp/new_X')
+		export sms_new_Y=$(cat '/tmp/new_Y')
 		#mednafen (Sega Game Gear)
-		gg_new_X=$(cat '/tmp/new_X')
-		gg_new_Y=$(cat '/tmp/new_Y')
+		export gg_new_X=$(cat '/tmp/new_X')
+		export gg_new_Y=$(cat '/tmp/new_Y')
 		#mednafen (Turbographx 16)
-		pce_new_X=$(cat '/tmp/new_X')
-		pce_new_Y=$(cat '/tmp/new_Y')
+		export pce_new_X=$(cat '/tmp/new_X')
+		export pce_new_Y=$(cat '/tmp/new_Y')
 		#set stella (Atari 2600)
-		st1=$(cat '/tmp/new_X')
-		stdelim=$('x')
-		st2=$(cat '/tmp/new_Y')
-		st_new=$($st1$stdelim$st2)
+		export st1=$(cat '/tmp/new_X')
+		export stdelim=$('x')
+		export st2=$(cat '/tmp/new_Y')
+		export st_new=$("$st1""$stdelim""$st2")
 
 		#remove temp files
 		rm -f /tmp/new_X
@@ -391,8 +392,8 @@ options=(1 "Change Video Plugin"
 		#Maybe I can find a way to swap the dir on the fly later on
 		folder=$(dialog --stdout --title "Please choose a file (spacebar to select)" --fselect $fstart/ 10 68)
 		#change plugin
-		m_plug_orig=$(grep -i "VideoPlugin = " $home/.config/mupen64plus/mupen64plus.cfg)
-		sed -i "s|$m_plug_orig|VideoPlugin = $folder|g" $home/.config/mupen64plus/mupen64plus.cfg	
+		m_plug_orig=$(grep -i "VideoPlugin = " "$home/.config/mupen64plus/mupen64plus.cfg")
+		sed -i "s|$m_plug_orig|VideoPlugin = $folder|g" "$home/.config/mupen64plus/mupen64plus.cfg"
 		;;
 
 		2)
@@ -404,7 +405,7 @@ options=(1 "Change Video Plugin"
 		;;
 	esac
 	done
-grep -i "VideoPlugin = " $home/.config/mupen64plus/mupen64plus.cfg >> $scriptdir/logs/res.txt
+grep -i "VideoPlugin = " "$home/.config/mupen64plus/mupen64plus.cfg" >> "$scriptdir/logs/res.txt"
 
 }
 
