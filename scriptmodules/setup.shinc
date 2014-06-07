@@ -114,7 +114,8 @@ function rrs_xbmc ()
 #xbmc does not (at least for Ubuntu's repo pkg) load the
 #dot files without loading XBMC at least once
 #copy in default folder base from first run:	
-cp -Rv "$HOME/RetroRig/XBMC-cfgs/." "$HOME/.xbmc"
+cp -Rv "$HOME/RetroRig/XBMC-cfgs/addons" "$HOME/.xbmc"
+cp -Rv "$HOME/RetroRig/XBMC-cfgs/userdata" "$HOME/.xbmc"
 
 # set the system user to an absolute value.
 # RCB and some config files don't like using $HOME, rather /home/test/
@@ -227,6 +228,9 @@ function rrs_software() {
 	# ...none for now...
 
 	# Output postMSGs to screen
+	_postMSGs="$__postMSGs  If you wish to start XBMC as a session ONLY, and not Unity whatsover, enabled the 'XBMC Session' option in the settings menu!"
+	# inject a space to seperate messages?
+	__postMSGs="$__postMSGs "
 	
         if [[ ! -z $__postMSGs ]]; then
             dialog --backtitle "LibreGeek.org - RetroRig Setup. Installation folder: $rootdir for user $user" --msgbox "$__postMSGs See debug.log for more details." 15 50
@@ -261,7 +265,6 @@ function rrs_xboxdrv ()
 	update-rc.d xboxdrv defaults
 
 	#blacklist xpad
-	echo "sudo needed to blacklist xpad!"
 	cp -v "$rootdir/init-scripts/x360_controller/blacklist.conf" "/etc/modprobe.d/"
 
 	#fix permissions since we are running as sudo
