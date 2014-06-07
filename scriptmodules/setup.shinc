@@ -12,8 +12,8 @@ function rrs_prepareFolders()
 	echo "Creating folders for ROMs, Artwork, Saves, and dotfiles"
 
 	pathlist=()
-	pathlist+=("$rootdir/roms")
-	pathlist+=("$rootdir/roms/atari800")
+	#emulator base directory
+	pathlist+=("$rootdir/emulators")
 
 	#setup skelton folders for XBMC Rom Collection Browser
 	#ROMs
@@ -64,7 +64,10 @@ function rrs_prepareFolders()
 	pathlist+=("$HOME/.xbmc/userdata/keymaps")
 	pathlist+=("$HOME/.mednafen")
 
-	#Other
+	#BIOS folder(s)
+	pathlist+=("$rootdir/ROMs/Neo-Geo/BIOS")
+
+	#Configs
 	pathlist+=("$rootdir/Configs")
 
 	for entry in "${pathlist[@]}"
@@ -97,6 +100,12 @@ function rrs_xbmc ()
 #dot files without loading XBMC at least once
 #copy in default folder base from first run:	
 cp -Rv $HOME/RetroRig/XBMC-cfgs/* $HOME/.xbmc
+
+# set the system user to an absolute value.
+# RCB and some config files don't like using $HOME, rather /home/test/
+# Let's change the config files to reflect the current username
+sed -i "s|/home/test/|/home/$user/|g" $home/.xbmc/userdata/addon_data/script.games.rom.collection.browser/config.xml 
+echo "The user applied to configuration files was: $user"
 
 }
 
@@ -132,6 +141,41 @@ options=(1 "Xbox 360 Controller (wireless) (4-player)"
 	done
 }
 
+function rrs_emulators()
+{
+	__INFMSGS=""
+
+	clear
+	printMsg "Binaries-based installation"
+
+	# update first
+	h_update_system
+
+	# add extra repostories to the em_add_repos function!
+	em_add_repos
+
+	# install emulators
+	em_install_mupen64plus 
+	em_install_mame
+	em_install_mess
+	em_install_stella
+
+	#fix permissions since we are running as sudo
+	h_correct_perms
+
+	# Run Debug checks
+	rrs_debug
+
+	__postMSGs="$__postMSGs  The Neo-Geo CDZ requires BIOS files be placed under "
+
+	if [[ ! -z $__postMSGs ]]; then
+	dialog --backtitle "LibreGeek.org - RetroRig Setup. Installation folder: $rootdir for user $user" --msgbox "$__postMSGs" 20 60
+	fi
+
+	dialog --backtitle "LibreGeek.org - RetroRig Setup. Installation folder: $rootdir for user $user" --msgbox "Finished emulator installs.\nYou now have to copy roms to the roms folders. You may also use the 'ROM loader' in settings menu" 22 76
+
+}
+
 function rrs_software() {
 
 	# clear post install messages
@@ -146,32 +190,20 @@ function rrs_software() {
 	#add repository for official team XBMC "stable"
 	add-apt-repository -y ppa:team-xbmc/ppa
 
-	# Add playdeb repo for later additions (very useful) 
-
-	echo "deb http://archive.getdeb.net/ubuntu trusty-getdeb games" > /tmp/playdeb.list 
-	mv "/tmp/playdeb.list" "/etc/apt/sources.list.d/playdeb.list"
-	wget -q -O- http://archive.getdeb.net/getdeb-archive.key > getdeb.key 
-	sudo apt-key add getdeb.key 
-	rm -f getdeb.key
-
 	#update repository listings
-	apt-get update
+	h_update_system
 
 	#install software from repositories
-	apt-get install -y xboxdrv curl \
-	python-software-properties pkg-config software-properties-common mednafen \
-	mame mupen64plus dconf-tools mess jstest-gtk qjoypad xbmc stella \
-	build-essential
+	apt-get install -y xboxdrv curl python-software-properties \
+	pkg-config software-properties-common dconf-tools jstest-gtk \
+	qjoypad xbmc build-essential
 
-	#Removal of software for related bugs
+	# Remove apport, as bug apport-gtk does nothing but interrupt
+	# XBMC and emulators
 	apt-get remove -y apport apport-gtk
-	echo "Please reference the following bug report:"
-	echo "Reported by cecilpierce on 2012-06-05 on Launchpad"
-	echo "https://bugs.launchpad.net/ubuntu/+source/plymouth/+bug/1009238"
 
-	#permissions
-    	chgrp -R $user $rootdir
-    	chown -R $user $rootdir
+        #fix permissions since we are running as sudo
+        h_correct_perms
 
 	# Run Debug checks
 	rrs_debug
@@ -199,17 +231,17 @@ function rrs_xboxdrv ()
 	#Wireless Xbox 360 Controller Config
 
 	#copy xbox configuration (default) to folder
-	cp -v $HOME/RetroRig/gamepad-cfgs/x360_controller/xpad-wireless.xboxdrv /usr/share/xboxdrv/
+	cp -v $scriptdir/RetroRig/gamepad-cfgs/x360_controller/xpad-wireless.xboxdrv /usr/share/xboxdrv/
 	
 	# copy keyboard.xml file for XBMC. Button id numbers are totally diffferent, due to the use of the use-dpad-as-button, and use-trigger-as-button options used.
-	cp -v $HOME/RetroRig/gamepad-cfgs/x360_controller/keyboard.xml $HOME/.xbmc/userdata/keymaps
+	cp -v $scriptdir/RetroRig/gamepad-cfgs/x360_controller/keyboard.xml $home/.xbmc/userdata/keymaps
 
 	#set qjoypad's profile to match Xbox 360 Wireless (4-player)
-	cp -v $HOME/RetroRig/gamepad-cfgs/x360_controller.lyt $HOME/.qjoypad3/ 
+	cp -v $scriptdir/RetroRig/gamepad-cfgs/x360_controller.lyt $home/.qjoypad3/ 
 	
 	#inject init script and default config
-	cp -v $HOME/RetroRig/init-scripts/x360_controller/xboxdrv /etc/init.d/
-	cp -v $HOME/RetroRig/init-scripts/x360_controller/default/xboxdrv /etc/default/xboxdrv
+	cp -v $scriptdir/RetroRig/init-scripts/x360_controller/xboxdrv /etc/init.d/
+	cp -v $scriptdir/RetroRig/init-scripts/x360_controller/default/xboxdrv /etc/default/xboxdrv
 	
 	#update init scripts
 	update-rc.d xboxdrv defaults
@@ -219,10 +251,13 @@ function rrs_xboxdrv ()
 	cp -v $scriptdir/init-scripts/x360_controller/blacklist.conf /etc/modprobe.d/
 
 	#copy default gamepad setup for Xbox 360 Wireless (4-player)
-	cp -v $scriptdir/controller-cfgs/x360_controller/x360_controller.lyt $HOME/.qjoypad3/
+	cp -v $scriptdir/controller-cfgs/x360_controller/x360_controller.lyt $home/.qjoypad3/
 
 	#copy qjoypad autostart item for x360_controller gamepad config
 	cp -v $scriptdir/gamepad-cfgs/x360_controller/qjoypad.desktop /etc/xdg/autostart/
+
+	#fix permissions since we are running as sudo
+	h_correct_perms
 
 }
 
@@ -395,6 +430,5 @@ function rrs_reboot()
 		return
 		;;
 	esac
-
 }
 
