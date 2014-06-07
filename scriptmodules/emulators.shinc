@@ -15,7 +15,6 @@ function em_add_repos()
 	wget -q -O- http://archive.getdeb.net/getdeb-archive.key > getdeb.key 
 	sudo apt-key add getdeb.key 
 	rm -f getdeb.key
-	h_update_system
 }
 
 function em_install_mupen64plus()
