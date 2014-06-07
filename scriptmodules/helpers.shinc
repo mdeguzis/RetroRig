@@ -398,7 +398,7 @@ function h_start_xbmc()
 
 dialog --infobox "starting RetroRig" 3 21
 sleep 1s
-xbmc
+/usr/bin/xbmc
 #clear
 clear
 
