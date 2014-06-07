@@ -256,7 +256,7 @@ while true; do
 		now=$(date +'%d%m%Y_%H%M%S')
 		{
 		h_upgrade_system
-		} 2>&1 | tee >(gzip --stdout > "$scriptdir/logs/upgrade_$now.log.gz)"	               	
+		} 2>&1 | tee >(gzip --stdout > "$scriptdir/logs/upgrade_$now.log.gz")	               	
 		chown -R "$user" "$scriptdir/logs/upgrade_$now.log.gz"
 		chgrp -R "$user" "$scriptdir/logs/upgrade_$now.log.gz"
 		;;
@@ -273,7 +273,7 @@ while true; do
 		now=$(date +'%d%m%Y_%H%M%S')
 		{
 		cfg_uninstall
-		} 2>&1 | tee >(gzip --stdout > "$scriptdir/logs/uninstall_$now.log.gz)"	               	
+		} 2>&1 | tee >(gzip --stdout > "$scriptdir/logs/uninstall_$now.log.gz")               	
 		chown -R "$user "$scriptdir/logs/uninstall_$now.log.gz"
 		chgrp -R "$user "$scriptdir/logs/uninstall_$now.log.gz"
 		;;
