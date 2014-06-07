@@ -70,11 +70,11 @@ function rrs_prepareFolders()
 	#Configs
 	pathlist+=("$rootdir/Configs")
 
+	# quotes needed on entry to preven globbing on directory creation!
 	for entry in "${pathlist[@]}"
 	do
-	    if [[ ! -d $entry ]]; then
-                mkdir -pv $entry
-		# quotes need to preven globbing on directory creation!
+	    if [[ ! -d "$entry" ]]; then
+                mkdir -pv "$entry"
                 chown $user "$entry"
                 chgrp $user "$entry"
         fi
@@ -240,7 +240,7 @@ function rrs_xboxdrv ()
 	cp -v $rootdir/gamepad-cfgs/x360_controller/keyboard.xml $home/.xbmc/userdata/keymaps
 
 	#set qjoypad's profile to match Xbox 360 Wireless (4-player)
-	cp -v $rootdir/gamepad-cfgs/x360_controller.lyt $home/.qjoypad3/ 
+	cp -v $rootdir/gamepad-cfgs/x360_controller/x360_controller.lyt $home/.qjoypad3/ 
 	
 	#inject init script and default config
 	cp -v $rootdir/init-scripts/x360_controller/xboxdrv /etc/init.d/
