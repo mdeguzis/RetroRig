@@ -62,7 +62,7 @@ function h_file_loader()
 
 dialog --msgbox "Usage:\n\n(spacebar)              select file\n(double-tap spacebar) \
   enter new directory\n(Enter)                 confirm selection\n(Arrow keys)            Navigate" 11 48
-folder=$(dialog --stdout --cr-wrap --title "Please choose a file" --fselect "$home" 14 48)
+folder=$(dialog --stdout --cr-wrap --title "Please choose a file" --fselect "$home/" 14 48)
 echo "${folder} file chosen."
 }
 
