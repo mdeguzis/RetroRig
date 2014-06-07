@@ -317,11 +317,11 @@ function h_bios_checker()
 {
 
 # BIOS file checks
-echo -e "\nCheck for Bios files (if applicable): " >> "$rootdir/debug.log"
+echo -e "\nCheck for Bios files (if applicable): " >> "$rootdir/logs/debug.log"
 # Neo-Geo BIOS files
 h_filecheck "$rootdir/Games/ROMs/Neo-Geo/BIOS"
 # If MESS is loaded already, verify BIOS files
-mess neocdz -verifyroms >> "$rootdir/debug.log"
+mess neocdz -verifyroms >> "$rootdir/logs/debug.log"
 
 }
 
@@ -337,9 +337,9 @@ function h_correct_perms()
 function h_filechecker()
 {
     if [[ -e "$1" ]]; then
-        ls -lh "$1" >> "$rootdir/debug.log"
+        ls -lh "$1" >> "$rootdir/logs/debug.log"
     else
-        echo "$1 does not exist!" >> "$rootdir/debug.log"
+        echo "$1 does not exist!" >> "$rootdir/logs/debug.log"
     fi
 }
 
@@ -348,9 +348,9 @@ function h_pkgcheck()
     PKG_OK=$(dpkg-query -s "$1" | egrep -w "Status|Package|Version")
     echo "Checking for somelib: $PKG_OK"
     if [ "" == "$PKG_OK" ]; then
-        echo "NOT INSTALLED: $1" >> "$rootdir/debug.log"
+        echo "NOT INSTALLED: $1" >> "$rootdir/logs/debug.log"
     else
-        echo "installed: $1" >> "$rootdir/debug.log"
+        echo "installed: $1" >> "$rootdir/logs/debug.log"
     fi
 }
 
