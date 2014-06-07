@@ -32,7 +32,6 @@ function rrs_prepareFolders()
 
 	#Artwork 
 	pathlist+=("$rootdir/Artwork/Atari 2600")
-	pathlist+=("$rootdir/Artwork/MAME")
 	pathlist+=("$rootdir/Artwork/N64")
 	pathlist+=("$rootdir/Artwork/NES")
 	pathlist+=("$rootdir/Artwork/SNES")
@@ -42,6 +41,15 @@ function rrs_prepareFolders()
 	pathlist+=("$rootdir/Artwork/GBA")
 	pathlist+=("$rootdir/Artwork/TurboGraphx 16")
 	pathlist+=("$rootdir/Artwork/Neo-Geo/CDZ")
+	#Artwork - MAME offline scraper
+	pathlist+=("$rootdir/Artwork/MAME")
+	pathlist+=("$rootdir/Artwork/MAME/boxfront")
+	pathlist+=("$rootdir/Artwork/MAME/RCB")
+	pathlist+=("$rootdir/Artwork/MAME/cabinet")
+	pathlist+=("$rootdir/Artwork/MAME/marquee")
+	pathlist+=("$rootdir/Artwork/MAME/action")
+	pathlist+=("$rootdir/Artwork/MAME/title")
+	pathlist+=("$rootdir/Artwork/MAME/gameplay")
 
 	#Saves (if any)
 	pathlist+=("$rootdir/Saves/Atari 2600")
@@ -60,6 +68,8 @@ function rrs_prepareFolders()
 	pathlist+=("$HOME/.qjoypad3")
 	pathlist+=("$HOME/.config/mupen64plus")
 	pathlist+=("$HOME/.mame/cfg")
+	pathlist+=("$HOME/.mess")
+	pathlist+=("$HOME/.mess/cfg")
 	pathlist+=("$HOME/.stella")
 	pathlist+=("$HOME/.xbmc/userdata/keymaps")
 	pathlist+=("$HOME/.mednafen")
@@ -158,6 +168,7 @@ function rrs_emulators()
 	em_install_mame
 	em_install_mess
 	em_install_stella
+	em_install_mednafen
 
 	#fix permissions since we are running as sudo
 	h_correct_perms

@@ -21,6 +21,13 @@ function gp_x360()
 	cp -v "$scriptdir/emu-cfgs/x360_controller/MAME/MAME.txt" "$rootdir/Artwork/MAME"
 	cp -v "$scriptdir/emu-cfgs/x360_controller/MAME/MAME synopsis RCB 201202.zip" "$rootdir/Artwork/MAME"
 
+	# mess
+	# default path: /home/$USER/.mednafen/mednafen.cfg
+	# Main config
+	cp -v "$scriptdir/emu-cfgs/x360_controller/MESS/mess.ini" "$home/.mess"
+	cp -v "$scriptdir/emu-cfgs/x360_controller/MESS/default.cfg" "$home/.mess/cfg"
+	cp -v "$scriptdir/emu-cfgs/x360_controller/MESS/neocdz.cfg" "$home/.mess/cfg"
+
 	# mednafen
 	# default path: /home/$USER/.mednafen/mednafen.cfg
 	# Main config

@@ -1,6 +1,6 @@
 <config version="2.0.8">
   <RomCollections>
-    <RomCollection id="11" name="GBC">
+    <RomCollection id="1" name="Game Boy Color">
       <useBuiltinEmulator>False</useBuiltinEmulator>
       <gameclient />
       <emulatorCmd>/usr/games/mednafen</emulatorCmd>
@@ -12,7 +12,7 @@
       <mediaPath type="boxback">/home/test/RetroRig/Artwork/GBC/boxback/%GAME%.*</mediaPath>
       <mediaPath type="cartridge">/home/test/RetroRig/Artwork/GBC/cartridge/%GAME%.*</mediaPath>
       <mediaPath type="screenshot">/home/test/RetroRig/Artwork/GBC/screenshot/%GAME%.*</mediaPath>
-      <mediaPath type="fanart">/home/test/RetroRig/Artwork/PS2/GBC/%GAME%.*</mediaPath>
+      <mediaPath type="fanart">/home/test/RetroRig/Artwork/GBC/fanart/%GAME%.*</mediaPath>
       <preCmd />
       <postCmd />
       <useEmuSolo>False</useEmuSolo>
@@ -31,19 +31,19 @@
       <scraper name="archive.vg" replaceKeyString="" replaceValueString="" />
       <scraper name="mobygames.com" replaceKeyString="" replaceValueString="" />
     </RomCollection>
-    <RomCollection id="13" name="Game Gear">
+    <RomCollection id="2" name="Game Gear">
       <useBuiltinEmulator>False</useBuiltinEmulator>
       <gameclient />
       <emulatorCmd>/usr/games/mednafen</emulatorCmd>
       <emulatorParams>"%ROM%"</emulatorParams>
-      <romPath>/home/test/RetroRig/ROMs/Game Gear/*.zip</romPath>
+      <romPath>/home/test/RetroRig/ROMs/Sega Game Gear/*.zip</romPath>
       <saveStatePath />
       <saveStateParams />
-      <mediaPath type="boxfront">/home/test/RetroRig/Artwork/Game Gear/boxfront/%GAME%.*</mediaPath>
-      <mediaPath type="boxback">/home/test/RetroRig/Artwork/Game Gear/boxback/%GAME%.*</mediaPath>
-      <mediaPath type="cartridge">/home/test/RetroRig/Artwork/Game Gear/cartridge/%GAME%.*</mediaPath>
-      <mediaPath type="screenshot">/home/test/RetroRig/Artwork/Game Gear/screenshot/%GAME%.*</mediaPath>
-      <mediaPath type="fanart">/home/test/RetroRig/Artwork/Game Gear/fanart/%GAME%.*</mediaPath>
+      <mediaPath type="boxfront">/home/test/RetroRig/Artwork/Sega Game Gear/boxfront/%GAME%.*</mediaPath>
+      <mediaPath type="boxback">/home/test/RetroRig/Artwork/Sega Game Gear/boxback/%GAME%.*</mediaPath>
+      <mediaPath type="cartridge">/home/test/RetroRig/Artwork/Sega Game Gear/cartridge/%GAME%.*</mediaPath>
+      <mediaPath type="screenshot">/home/test/RetroRig/Artwork/Sega Game Gear/screenshot/%GAME%.*</mediaPath>
+      <mediaPath type="fanart">/home/test/RetroRig/Artwork/Sega Game Gear/fanart/%GAME%.*</mediaPath>
       <preCmd />
       <postCmd />
       <useEmuSolo>False</useEmuSolo>
@@ -62,7 +62,7 @@
       <scraper name="archive.vg" replaceKeyString="" replaceValueString="" />
       <scraper name="mobygames.com" replaceKeyString="" replaceValueString="" />
     </RomCollection>
-    <RomCollection id="12" name="TurboGrafx-16">
+    <RomCollection id="3" name="TurboGrafx-16">
       <useBuiltinEmulator>False</useBuiltinEmulator>
       <gameclient />
       <emulatorCmd>/usr/games/mednafen</emulatorCmd>
@@ -70,11 +70,11 @@
       <romPath>/home/test/RetroRig/ROMs/TurboGraphx 16/*.zip</romPath>
       <saveStatePath />
       <saveStateParams />
-      <mediaPath type="boxfront">/home/test/RetroRig/Artwork/TurboGraphx 16/boxfront/%GAME%.*</mediaPath>
-      <mediaPath type="boxback">/home/test/RetroRig/Artwork/TurboGraphx 16/boxback/%GAME%.*</mediaPath>
-      <mediaPath type="cartridge">/home/test/RetroRig/Artwork/TurboGraphx 16/cartridge/%GAME%.*</mediaPath>
-      <mediaPath type="screenshot">/home/test/RetroRig/Artwork/TurboGraphx 16/screenshot/%GAME%.*</mediaPath>
-      <mediaPath type="fanart">/home/test/RetroRig/Artwork/TurboGraphx 16/fanart/%GAME%.*</mediaPath>
+      <mediaPath type="boxfront">/home/test/RetroRig/ROMs/TurboGraphx 16/boxfront/%GAME%.*</mediaPath>
+      <mediaPath type="boxback">/home/test/RetroRig/ROMs/TurboGraphx 16/boxback/%GAME%.*</mediaPath>
+      <mediaPath type="cartridge">/home/test/RetroRig/ROMs/TurboGraphx 16/cartridge/%GAME%.*</mediaPath>
+      <mediaPath type="screenshot">/home/test/RetroRig/ROMs/TurboGraphx 16/screenshot/%GAME%.*</mediaPath>
+      <mediaPath type="fanart">/home/test/RetroRig/ROMs/TurboGraphx 16/fanart/%GAME%.*</mediaPath>
       <preCmd />
       <postCmd />
       <useEmuSolo>False</useEmuSolo>
@@ -93,7 +93,7 @@
       <scraper name="archive.vg" replaceKeyString="" replaceValueString="" />
       <scraper name="mobygames.com" replaceKeyString="" replaceValueString="" />
     </RomCollection>
-    <RomCollection id="14" name="Neo Geo CD">
+    <RomCollection id="4" name="Neo Geo CD">
       <useBuiltinEmulator>False</useBuiltinEmulator>
       <gameclient />
       <emulatorCmd>/usr/games/mess</emulatorCmd>
@@ -101,11 +101,11 @@
       <romPath>/home/test/RetroRig/ROMs/Neo-Geo/CDZ/*.cue</romPath>
       <saveStatePath />
       <saveStateParams />
-      <mediaPath type="boxfront">/home/test/RetroRig/Artwork/Neo-Geo/boxfront/%GAME%.*</mediaPath>
-      <mediaPath type="boxback">/home/test/RetroRig/Artwork/Neo-Geo/boxback/%GAME%.*</mediaPath>
-      <mediaPath type="cartridge">/home/test/RetroRig/Artwork/Neo-Geo/cartridge/%GAME%.*</mediaPath>
-      <mediaPath type="screenshot">/home/test/RetroRig/Artwork/Neo-Geo/screenshot/%GAME%.*</mediaPath>
-      <mediaPath type="fanart">/home/test/RetroRig/Artwork/Neo-Geo/fanart/%GAME%.*</mediaPath>
+      <mediaPath type="boxfront">/home/test/RetroRig/Artwork/Neo-Geo/CDZ/boxfront/%GAME%.*</mediaPath>
+      <mediaPath type="boxback">/home/test/RetroRig/Artwork/Neo-Geo/CDZ/boxback/%GAME%.*</mediaPath>
+      <mediaPath type="cartridge">/home/test/RetroRig/Artwork/Neo-Geo/CDZ/cartridge/%GAME%.*</mediaPath>
+      <mediaPath type="screenshot">/home/test/RetroRig/Artwork/Neo-Geo/CDZ/screenshot/%GAME%.*</mediaPath>
+      <mediaPath type="fanart">/home/test/RetroRig/Artwork/Neo-Geo/CDZ/fanart/%GAME%.*</mediaPath>
       <preCmd />
       <postCmd />
       <useEmuSolo>False</useEmuSolo>
@@ -124,19 +124,19 @@
       <scraper name="archive.vg" replaceKeyString="" replaceValueString="" />
       <scraper name="mobygames.com" replaceKeyString="" replaceValueString="" />
     </RomCollection>
-    <RomCollection id="1" name="Atari 2600">
+    <RomCollection id="5" name="Atari 2600">
       <useBuiltinEmulator>False</useBuiltinEmulator>
       <gameclient />
       <emulatorCmd>/usr/bin/stella</emulatorCmd>
       <emulatorParams>"%ROM%"</emulatorParams>
-      <romPath>/home/test/RetroRig/Games/ROMs/Atari 2600/*.bin</romPath>
+      <romPath>/home/test/RetroRig/ROMs/Atari 2600/*.bin</romPath>
       <saveStatePath />
       <saveStateParams />
-      <mediaPath type="boxfront">/home/test/RetroRig/Artwork/Atari 2600/boxfront/%GAME%.*</mediaPath>
-      <mediaPath type="boxback">/home/test/RetroRig/Artwork/Atari 2600/boxback/%GAME%.*</mediaPath>
-      <mediaPath type="cartridge">/home/test/RetroRig/Artwork/Atari 2600/cartridge/%GAME%.*</mediaPath>
-      <mediaPath type="screenshot">/home/test/RetroRig/Artwork/Atari 2600/screenshot/%GAME%.*</mediaPath>
-      <mediaPath type="fanart">/home/test/RetroRig/Artwork/Atari 2600/fanart/%GAME%.*</mediaPath>
+      <mediaPath type="boxfront">/home/test/RetroRig/ROMs/Atari 2600/boxfront/%GAME%.*</mediaPath>
+      <mediaPath type="boxback">/home/test/RetroRig/ROMs/Atari 2600/boxback/%GAME%.*</mediaPath>
+      <mediaPath type="cartridge">/home/test/RetroRig/ROMs/Atari 2600/cartridge/%GAME%.*</mediaPath>
+      <mediaPath type="screenshot">/home/test/RetroRig/ROMs/Atari 2600/screenshot/%GAME%.*</mediaPath>
+      <mediaPath type="fanart">/home/test/RetroRig/ROMs/Atari 2600/fanart/%GAME%.*</mediaPath>
       <preCmd />
       <postCmd />
       <useEmuSolo>False</useEmuSolo>
@@ -155,7 +155,7 @@
       <scraper name="archive.vg" replaceKeyString="" replaceValueString="" />
       <scraper name="mobygames.com" replaceKeyString="" replaceValueString="" />
     </RomCollection>
-    <RomCollection id="2" name="SNES">
+    <RomCollection id="6" name="SNES">
       <useBuiltinEmulator>False</useBuiltinEmulator>
       <gameclient />
       <emulatorCmd>/usr/games/mednafen</emulatorCmd>
@@ -186,37 +186,7 @@
       <scraper name="archive.vg" replaceKeyString="" replaceValueString="" />
       <scraper name="mobygames.com" replaceKeyString="" replaceValueString="" />
     </RomCollection>
-    <RomCollection id="5" name="MAME">
-      <useBuiltinEmulator>False</useBuiltinEmulator>
-      <gameclient />
-      <emulatorCmd>/usr/games/mame</emulatorCmd>
-      <emulatorParams>"%ROM%"</emulatorParams>
-      <romPath>/home/test/RetroRig/ROMs/MAME/*.zip</romPath>
-      <saveStatePath />
-      <saveStateParams />
-      <mediaPath type="boxback">/home/test/RetroRig/ROMs/MAME/%GAME%.*</mediaPath>
-      <mediaPath type="boxfront">/home/test/RetroRig/Artwork/MAME/boxfront/%GAME%.*</mediaPath>
-      <mediaPath type="cabinet">/home/test/RetroRig/Artwork/MAME/cabinet/%GAME%.*</mediaPath>
-      <mediaPath type="gameplay">/home/test/RetroRig/Artwork/MAME/gameplay (video)/%GAME%.*</mediaPath>
-      <mediaPath type="title">/home/test/RetroRig/Artwork/MAME/title/%GAME%.*</mediaPath>
-      <mediaPath type="romcollection">/home/test/RetroRig/Artwork/MAME/RCB/%ROMCOLLECTION%.*</mediaPath>
-      <preCmd />
-      <postCmd />
-      <useEmuSolo>False</useEmuSolo>
-      <usePopen>False</usePopen>
-      <ignoreOnScan>False</ignoreOnScan>
-      <allowUpdate>True</allowUpdate>
-      <autoplayVideoMain>True</autoplayVideoMain>
-      <autoplayVideoInfo>True</autoplayVideoInfo>
-      <useFoldernameAsGamename>False</useFoldernameAsGamename>
-      <maxFolderDepth>99</maxFolderDepth>
-      <doNotExtractZipFiles>True</doNotExtractZipFiles>
-      <diskPrefix>_Disk</diskPrefix>
-      <imagePlacingMain>gameinfomamecabinet</imagePlacingMain>
-      <imagePlacingInfo>gameinfosmall</imagePlacingInfo>
-      <scraper name="MAME" replaceKeyString="" replaceValueString="" />
-    </RomCollection>
-    <RomCollection id="4" name="NES">
+    <RomCollection id="8" name="NES">
       <useBuiltinEmulator>False</useBuiltinEmulator>
       <gameclient />
       <emulatorCmd>/usr/games/mednafen</emulatorCmd>
@@ -247,7 +217,7 @@
       <scraper name="archive.vg" replaceKeyString="" replaceValueString="" />
       <scraper name="mobygames.com" replaceKeyString="" replaceValueString="" />
     </RomCollection>
-    <RomCollection id="6" name="Nintendo 64">
+    <RomCollection id="9" name="Nintendo 64">
       <useBuiltinEmulator>False</useBuiltinEmulator>
       <gameclient />
       <emulatorCmd>/usr/games/mupen64plus</emulatorCmd>
@@ -279,7 +249,7 @@
       <scraper name="archive.vg" replaceKeyString="" replaceValueString="" />
       <scraper name="mobygames.com" replaceKeyString="" replaceValueString="" />
     </RomCollection>
-    <RomCollection id="8" name="Sega Master System">
+    <RomCollection id="10" name="SEGA Master System">
       <useBuiltinEmulator>False</useBuiltinEmulator>
       <gameclient />
       <emulatorCmd>/usr/games/mednafen</emulatorCmd>
@@ -309,6 +279,37 @@
       <scraper name="thegamesdb.net" replaceKeyString="" replaceValueString="" />
       <scraper name="archive.vg" replaceKeyString="" replaceValueString="" />
       <scraper name="mobygames.com" replaceKeyString="" replaceValueString="" />
+    </RomCollection>
+    <RomCollection id="11" name="MAME">
+      <useBuiltinEmulator>False</useBuiltinEmulator>
+      <gameclient />
+      <emulatorCmd>/usr/games/mame</emulatorCmd>
+      <emulatorParams>"%ROM%"</emulatorParams>
+      <romPath>/home/test/RetroRig/ROMs/MAME/*.zip</romPath>
+      <saveStatePath />
+      <saveStateParams />
+      <mediaPath type="boxfront">/home/test/RetroRig/Artwork/MAME/boxfront/%GAME%.*</mediaPath>
+      <mediaPath type="title">/home/test/RetroRig/Artwork/MAME/title/%GAME%.*</mediaPath>
+      <mediaPath type="gameplay">/home/test/RetroRig/Artwork/MAME/gameplay/%GAME%.*</mediaPath>
+      <mediaPath type="action">/home/test/RetroRig/Artwork/MAME/action/%GAME%.*</mediaPath>
+      <mediaPath type="marquee">/home/test/RetroRig/Artwork/MAME/marquee/%GAME%.*</mediaPath>
+      <mediaPath type="romcollection">/home/test/RetroRig/Artwork/MAME/RCB/%ROMCOLLECTION%.*</mediaPath>
+      <mediaPath type="cabinet">/home/test/RetroRig/Artwork/MAME/cabinet/%GAME%.*</mediaPath>
+      <preCmd />
+      <postCmd />
+      <useEmuSolo>False</useEmuSolo>
+      <usePopen>False</usePopen>
+      <ignoreOnScan>False</ignoreOnScan>
+      <allowUpdate>True</allowUpdate>
+      <autoplayVideoMain>True</autoplayVideoMain>
+      <autoplayVideoInfo>True</autoplayVideoInfo>
+      <useFoldernameAsGamename>False</useFoldernameAsGamename>
+      <maxFolderDepth>99</maxFolderDepth>
+      <doNotExtractZipFiles>True</doNotExtractZipFiles>
+      <diskPrefix>_Disk</diskPrefix>
+      <imagePlacingMain>gameinfomamecabinet</imagePlacingMain>
+      <imagePlacingInfo>gameinfosmall</imagePlacingInfo>
+      <scraper name="MAME" replaceKeyString="" replaceValueString="" />
     </RomCollection>
   </RomCollections>
   <FileTypes>
