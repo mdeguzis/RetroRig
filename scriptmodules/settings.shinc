@@ -18,8 +18,9 @@ while true; do
 	     3 "Change plugins/filters/scaling"
 	     4 "Change Gamepad Type"
 	     5 "Enable SSH support"
-	     6 "Enable SSH support"
- 	     7 "Back to main menu")
+	     6 "BIOS checker"
+	     7 "Enable XBMC Session (autostart)"
+ 	     8 "Back to main menu")
 
 	#make menu choice
 	choices=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
@@ -70,7 +71,11 @@ while true; do
 		h_bios_checker
 		;;
 
-		7)  
+		6)
+		set_xbmc_session
+		;;
+
+		8)  
 		;;
 
 		esac
@@ -80,7 +85,18 @@ while true; do
 done
 }
 
-function set_resolution () {
+function set_xbmc_session()
+{
+	# Allow user to choose whether or not they want to boot directly to an
+	# XBMC session, rather than boot Unity and load XBMC.
+	
+	cp -v "$rootdir/XBMC-cfgs/XBMC-session/xbmc.desktop" "/usr/share/xsessions"
+	cp -v "$rootdir/XBMC-cfgs/XBMC-session/xbmc-session" "/usr/bin"
+	chmod +x "/usr/bin/xbmc-session"
+	chmod +x "/usr/share/xessions/xbmc.desktop"
+}
+
+function set_resolution() {
 
 #menu
 #add res-switcher function to make new presets more modular to add

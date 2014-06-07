@@ -115,6 +115,9 @@ dialog --title "Confirm yes/no" \
 	rm -f /etc/init.d/xboxdrv
 	rm -f /etc/default/xboxdrv
 	sed -i 's|blacklist xpad||g' /etc/modprobe.d/blacklist.conf
+	# XBMC session (if applicable)
+	rm -f "/usr/share/xsessions/xbmc.desktop"
+	rm -f "/usr/bin/xbmc-session"
 	;;
 
 	255)
