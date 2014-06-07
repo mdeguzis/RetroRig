@@ -479,7 +479,7 @@
       <Scraper encoding="iso-8859-1" parseInstruction="06 - maws.xml" returnUrl="False" source="http://maws.mameworld.info/maws/romset/%GAME%" />
     </Site>
     <Site descFilePerGame="False" name="MAME" searchGameByCRC="True" useFilenameAsCRC="True" useFoldernameAsCRC="False">
-      <Scraper encoding="iso-8859-1" parseInstruction="/home/test/RetroRig/Games/Artwork/MAME/parserConfig.xml" returnUrl="False" source="/home/test/RetroRig/Games/Artwork/MAME/MAME.txt" />
+      <Scraper encoding="iso-8859-1" parseInstruction="/home/test/RetroRig/Artwork/MAME/parserConfig.xml" returnUrl="False" source="/home/test/RetroRig/Artwork/MAME/MAME.txt" />
     </Site>
     <Site descFilePerGame="True" name="giantbomb.com" searchGameByCRC="False" useFilenameAsCRC="False" useFoldernameAsCRC="False">
       <Scraper encoding="utf-8" parseInstruction="03.01 - giantbomb - search.xml" returnUrl="True" source="http://api.giantbomb.com/search/?api_key=%GIANTBOMBAPIKey%&amp;query=%GAME%&amp;resources=game&amp;field_list=api_detail_url,name&amp;format=xml" />
