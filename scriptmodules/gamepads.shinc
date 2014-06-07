@@ -17,9 +17,9 @@ function gp_x360()
 	cp -v $scriptdir/emu-cfgs/x360_controller/MAME/mame.ini $home/.mame
  
 	# offline artwork scrapper configs
-	cp -v $scriptdir/emu-cfgs/x360_controller/MAME/parserConfig.xml $rootdir/Games/Artwork/MAME
-	cp -v $scriptdir/emu-cfgs/x360_controller/MAME/MAME.txt $rootdir/Games/Artwork/MAME
-	cp -v $scriptdir/emu-cfgs/x360_controller/MAME/MAME\ synopsis\ RCB\ 201202.zip/ $rootdir/Games/Artwork/MAME
+	cp -v $scriptdir/emu-cfgs/x360_controller/MAME/parserConfig.xml $rootdir/Artwork/MAME
+	cp -v $scriptdir/emu-cfgs/x360_controller/MAME/MAME.txt $rootdir/Artwork/MAME
+	cp -v $scriptdir/emu-cfgs/x360_controller/MAME\ synopsis\ RCB\ 201202.zip/ $rootdir/Artwork/MAME
 
 	# mednafen
 	# default path: /home/$USER/.mednafen/mednafen.cfg

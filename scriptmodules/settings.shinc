@@ -107,53 +107,53 @@ if [ "$choices" != "" ]; then
 
 		#echo curent resolution
 		#mupen64plus
-		echo "mupen64plus:" > res.txt
-		grep -Ee "\bScreenWidth = \b" $home/.config/mupen64plus/mupen64plus.cfg >> res.txt
-		grep -Ee "\bScreenHeight = \b" $home/.config/mupen64plus/mupen64plus.cfg >> res.txt
-		echo "" >> res.txt
+		echo "mupen64plus:" > $scriptdir/logs/res.txt
+		grep -Ee "\bScreenWidth = \b" $home/.config/mupen64plus/mupen64plus.cfg >> $scriptdir/logs/res.txt
+		grep -Ee "\bScreenHeight = \b" $home/.config/mupen64plus/mupen64plus.cfg >> $scriptdir/logs/res.txt
+		echo "" >> $scriptdir/logs/res.txt
 		#Stella
-		echo "Stella" >> res.txt
-		grep -Ee "\bfullres = \b" $home/.stella/stellarc >> res.txt
-		echo "" >> res.txt
+		echo "Stella" >> $scriptdir/logs/res.txt
+		grep -Ee "\bfullres = \b" $home/.stella/stellarc >> $scriptdir/logs/$scriptdir/logs/res.txt
+		echo "" >> $scriptdir/logs/res.txt
 		#mednafen GBC
-		echo "Mednafen (GBC)" >> res.txt
-		grep -Ee "\bgb.xres\b" $home/.mednafen/mednafen-09x.cfg >> res.txt
-		grep -Ee "\bgb.yres\b" $home/.mednafen/mednafen-09x.cfg >> res.txt
-		echo "" >> res.txt
+		echo "Mednafen (GBC)" >> $scriptdir/logs/res.txt
+		grep -Ee "\bgb.xres\b" $home/.mednafen/mednafen-09x.cfg >> $scriptdir/logs/res.txt
+		grep -Ee "\bgb.yres\b" $home/.mednafen/mednafen-09x.cfg >> $scriptdir/logs/res.txt
+		echo "" >> $scriptdir/logs/res.txt
 		#mednafen GBA
-		echo "Mednafen (GBA)" >> res.txt
-		grep -Ee "\bgba.xres\b" $home/.mednafen/mednafen-09x.cfg >> res.txt
-		grep -Ee "\bgba.yres\b" $home/.mednafen/mednafen-09x.cfg >> res.txt
-		echo "" >> res.txt
+		echo "Mednafen (GBA)" >> $scriptdir/logs/res.txt
+		grep -Ee "\bgba.xres\b" $home/.mednafen/mednafen-09x.cfg >> $scriptdir/logs/res.txt
+		grep -Ee "\bgba.yres\b" $home/.mednafen/mednafen-09x.cfg >> $scriptdir/logs/res.txt
+		echo "" >> $scriptdir/logs/res.txt
 		#mednafen Sega Sega Master System
-		echo "Mednafen (Sega Master System)" >> res.txt
-		grep -Ee "\bsms.xres\b" $home/.mednafen/mednafen-09x.cfg >> res.txt
-		grep -Ee "\bsms.yres\b" $home/.mednafen/mednafen-09x.cfg >> res.txt
-		echo "" >> res.txt
+		echo "Mednafen (Sega Master System)" >> $scriptdir/logs/res.txt
+		grep -Ee "\bsms.xres\b" $home/.mednafen/mednafen-09x.cfg >> $scriptdir/logs/res.txt
+		grep -Ee "\bsms.yres\b" $home/.mednafen/mednafen-09x.cfg >> $scriptdir/logs/res.txt
+		echo "" >> $scriptdir/logs/res.txt
 		#mednafen Sega Game Gear
-		echo "Mednafen (Sega Game Gear)" >> res.txt
-		grep -Ee "\bgg.xres\b" $home/.mednafen/mednafen-09x.cfg >> res.txt
-		grep -Ee "\bgg.yres\b" $home/.mednafen/mednafen-09x.cfg >> res.txt
-		echo "" >> res.txt
+		echo "Mednafen (Sega Game Gear)" >> $scriptdir/logs/res.txt
+		grep -Ee "\bgg.xres\b" $home/.mednafen/mednafen-09x.cfg >> $scriptdir/logs/res.txt
+		grep -Ee "\bgg.yres\b" $home/.mednafen/mednafen-09x.cfg >> $scriptdir/logs/res.txt
+		echo "" >> $scriptdir/logs/res.txt
 		#mednafen SNES
-		echo "Mednafen (SNES)" >> res.txt
-		grep -Ee "\bsnes.xres\b" $home/.mednafen/mednafen-09x.cfg >> res.txt
-		grep -Ee "\bsnes.yres\b" $home/.mednafen/mednafen-09x.cfg >> res.txt
-		echo "" >> res.txt
+		echo "Mednafen (SNES)" >> $scriptdir/logs/res.txt
+		grep -Ee "\bsnes.xres\b" $home/.mednafen/mednafen-09x.cfg >> $scriptdir/logs/res.txt
+		grep -Ee "\bsnes.yres\b" $home/.mednafen/mednafen-09x.cfg >> $scriptdir/logs/res.txt
+		echo "" >> $scriptdir/logs/res.txt
 		#mednafen NES
-		echo "Mednafen (NES)" >> res.txt
-		grep -Ee "\bnes.xres\b" $home/.mednafen/mednafen-09x.cfg >> res.txt
-		grep -Ee "\bnes.yres\b" $home/.mednafen/mednafen-09x.cfg >> res.txt
-		echo "" >> res.txt
+		echo "Mednafen (NES)" >> $scriptdir/logs/res.txt
+		grep -Ee "\bnes.xres\b" $home/.mednafen/mednafen-09x.cfg >> $scriptdir/logs/res.txt
+		grep -Ee "\bnes.yres\b" $home/.mednafen/mednafen-09x.cfg >> $scriptdir/logs/res.txt
+		echo "" >> $scriptdir/logs/res.txt
 		#mednafen Turbographx 16
-		echo "Mednafen (Turbographx 16)" >> res.txt
-		grep -Ee "\bpce.xres\b" $home/.mednafen/mednafen-09x.cfg >> res.txt
-		grep -Ee "\bpce.yres\b" $home/.mednafen/mednafen-09x.cfg >> res.txt
-		echo "" >> res.txt
+		echo "Mednafen (Turbographx 16)" >> $scriptdir/logs/res.txt
+		grep -Ee "\bpce.xres\b" $home/.mednafen/mednafen-09x.cfg >> $scriptdir/logs/res.txt
+		grep -Ee "\bpce.yres\b" $home/.mednafen/mednafen-09x.cfg >> $scriptdir/logs/res.txt
+		echo "" >> $scriptdir/logs/res.txt
 		#report current resolution
-		dialog --textbox res.txt 33 0
+		dialog --textbox $scriptdir/logs/res.txt 33 0
 		#remove text file
-		rm res.txt
+		rm $scriptdir/logs/res.txt
 		;;
 
 	2) 
@@ -184,8 +184,6 @@ if [ "$choices" != "" ]; then
 		pce_new_Y="720"
 		#set stella (Atari 2600)
 		st_new="1280x720"
-		#call _res-swticher
-		_res-swticher
 		#return to menu
 		return
 		;;  
@@ -217,8 +215,6 @@ if [ "$choices" != "" ]; then
 		pce_new_Y="1024"
 		#set stella (Atari 2600)
 		st_new="1280x1024"
-		#call _res-swticher
-		_res-swticher
 		#return to menu
 		return
 		;;
@@ -250,8 +246,6 @@ if [ "$choices" != "" ]; then
 		pce_new_Y="768"
 		#set stella (Atari 2600)
 		st_new="1366x768"
-		#call _res-swticher
-		_res-swticher
 		#return to menu
 		return
 		;;
@@ -283,8 +277,6 @@ if [ "$choices" != "" ]; then
 		pce_new_Y="900"
 		#set stella (Atari 2600)
 		st_new="1600x900"
-		#call _res-swticher
-		_res-swticher
 		#return to menu
 		return
 		;;
@@ -316,8 +308,6 @@ if [ "$choices" != "" ]; then
 		pce_new_Y="1080"
 		#set stella (Atari 2600)
 		st_new="1920x1080"
-		#call _res-swticher
-		_res-swticher
 		#return to menu
 		return
 		;;    
@@ -358,8 +348,6 @@ if [ "$choices" != "" ]; then
 		st2=$(cat '/tmp/new_Y')
 		st_new=$($st1$stdelim$st2)
 
-		#call _res-swticher
-		_res-swticher
 		#remove temp files
 		rm -f /tmp/new_X
 		rm -f /tmp/new_Y
@@ -416,7 +404,7 @@ options=(1 "Change Video Plugin"
 		;;
 	esac
 	done
-grep -i "VideoPlugin = " $home/.config/mupen64plus/mupen64plus.cfg >> res.txt
+grep -i "VideoPlugin = " $home/.config/mupen64plus/mupen64plus.cfg >> $scriptdir/logs/res.txt
 
 }
 
