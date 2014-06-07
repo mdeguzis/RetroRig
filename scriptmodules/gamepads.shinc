@@ -35,4 +35,7 @@ function gp_x360()
 	#default path: /home/$USER/.config/mupen64plus
 	#Main config
 	cp -v $scriptdir/emu-cfgs/x360_controller/Stella/stellarc $home/.stella/
+
+	#configure xboxdrv for gamepad
+	rrs_xboxdrv
 }
