@@ -323,6 +323,9 @@ options=(1 "Neo-Geo CDZ"
 
 		esac
 	done
+	
+	#fix persmissions, post-copy
+	h_correct_perms
 
 }
 
