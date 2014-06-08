@@ -44,8 +44,9 @@ For all other features, please see the [wiki](https://github.com/ProfessorKaos64
 * Save state, load state, exit emulators with gamepad
 * A cobbled together "first run" state of RCB with a blank games database and pre-set configs
 * Functions to update git repo, emulator binaries, upgrade system and more
-* Automatically start XBMC, then directly into RCB itself
+* Automatically start XBMC, then directly into RCB itself (option to boot to XBMC session in settings menu)
 * ROM pre-loader
+* BIOS pre-loader
 * Unity configuration set during config-setup to lengthen screen timeout + remove screen lock
 * Uninstall option
 * Load BIOS files for emulators that need them (no need to remeber where to put them!)
