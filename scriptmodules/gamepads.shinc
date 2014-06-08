@@ -13,7 +13,7 @@ function gp_x360()
 	#mame
 	# default path: /home/$USER/.mame
 	# Main config
-	cp -v "$scriptdir/emu-cfgs/x360_controller/MAME/default.cfg" "$home/.mame/cfg "
+	cp -v "$scriptdir/emu-cfgs/x360_controller/MAME/default.cfg" "$home/.mame/cfg"
 	cp -v "$scriptdir/emu-cfgs/x360_controller/MAME/mame.ini" "$home/.mame"
  
 	# offline artwork scrapper configs
