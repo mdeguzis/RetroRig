@@ -296,9 +296,6 @@ function h_bios_checker()
 
 function h_bios_loader()
 {
-
-	# call file loader
-	h_file_loader
 	
 # present menu
 
@@ -318,7 +315,7 @@ options=(1 "Neo-Geo CDZ"
 		#call file loader  	
 		h_file_loader
 		#copy Neo-Geo BIOS file over
-		cp -Rv "$folder"/* "$rootdir/ROMs/Neo-Geo/BIOS"
+		cp -Rv "$folder" "$rootdir/ROMs/Neo-Geo/BIOS"
 		;;
 
 		2)  
