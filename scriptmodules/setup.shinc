@@ -132,9 +132,9 @@ function rrs_gamepad (){
 
 cmd=(dialog --backtitle "LibreGeek.org RetroRig Installer" --menu "| Gamepad Select | \
 			 Request any new Gamepads via github!" 16 62 16)
-options=(1 "Xbox 360 Controller (wireless) (4-player)" 
-	 2 "Exit gamepad selection"
-	 3 "Back to main menu")
+options=(1 "Xbox 360 Controller (standard)"
+	 2 "Xbox 360 Controller (Virtual Box)"
+	 3 "Exit gamepad selection")
 
 	#make menu choice
 	selection=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
@@ -149,12 +149,13 @@ options=(1 "Xbox 360 Controller (wireless) (4-player)"
 		;;
 
 		2)
-		return
+		gp_vbox_x360
 		;;
 
 		3)
 		return
 		;;
+
 		esac
 	done
 }
