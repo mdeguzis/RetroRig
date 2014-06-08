@@ -45,4 +45,7 @@ function gp_x360()
 
 	#configure xboxdrv for gamepad
 	rrs_xboxdrv
+
+	# correct permissions
+	h_correct_perms
 }
