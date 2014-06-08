@@ -263,18 +263,18 @@ function rrs_init_xboxdrv()
 function rrs_xboxdrv () 
 {
 
-	# Xbox 360 Controller Config
+	# xboxdrv settings
 
 	#set qjoypad's profile to match Xbox 360 Wireless (4-player)
-	cp -v "$rootdir/gamepad-cfgs/x360_controller/x360_controller.lyt" "$home/.qjoypad3"
+	cp -v "$rootdir/gamepad-cfgs/vbox_x360_controller/x360_controller.lyt" "$home/.qjoypad3"
 	#copy qjoypad autostart item for x360_controller gamepad config
-	cp -v "$rootdir/gamepad-cfgs/x360_controller/qjoypad.desktop" "/etc/xdg/autostart/"
+	cp -v "$rootdir/gamepad-cfgs/vbox_x360_controller/qjoypad.desktop" "/etc/xdg/autostart/"
 	
 	#update init scripts
 	update-rc.d xboxdrv defaults
 
 	#blacklist xpad
-	cp -v "$rootdir/init-scripts/x360_controller/blacklist.conf" "/etc/modprobe.d/"
+	cp -v "$rootdir/init-scripts/vbox_x360_controller/blacklist.conf" "/etc/modprobe.d/"
 
 	#fix permissions since we are running as sudo
 	h_correct_perms
