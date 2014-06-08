@@ -1,6 +1,6 @@
 RetroRig Project for Ubuntu 14.04 LTS
 ===================================================
-![alt text]("https://github.com/ProfessorKaos64/RetroRig/blob/master/supplimental/wiki logo.png" "RetroRig")
+![alt text](https://github.com/ProfessorKaos64/RetroRig/blob/master/supplimental/wiki-logo.png "RetroRig")
 ###### [Version 0.7.7]
 
 RetroRig is shell script to setup a Linux x86_64 system  with several emulators, and XBMC as graphical
