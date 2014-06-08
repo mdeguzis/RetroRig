@@ -138,21 +138,6 @@
                         <thumb>-</thumb>
                         <onclick>RunAddon(script.games.rom.collection.browser)</onclick>
                     </item>
-                    <item>
-						<visible>!Skin.HasSetting(hideMusic)</visible>
-                        <label>31001</label>
-                        <label2></label2>
-                        <thumb>-</thumb>
-                        <onclick>ActivateWindow(musiclibrary)</onclick>
-                        <onclick>Skin.SetString(showRecentMusicItems,true)</onclick>
-                    </item>
-                    <item>
-						<visible>!Skin.HasSetting(hidePictures)</visible>
-                        <label>31002</label>
-                        <label2></label2>
-                        <thumb>-</thumb>
-                        <onclick>ActivateWindow(pictures)</onclick>
-                    </item>
 					
                     <item>
                         <label>5</label>
