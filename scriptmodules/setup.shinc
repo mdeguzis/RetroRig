@@ -231,9 +231,9 @@ function rrs_software() {
 	# ...none for now...
 
 	# Output postMSGs to screen
-	#__postMSGs="$__postMSGs If you wish to start XBMC as a session ONLY, and not Unity whatsover, enable the 'XBMC Session' option in the settings menu!"
+	__postMSGs="$__postMSGs If you wish to start XBMC as a session ONLY, and not Unity whatsover, enable the 'XBMC Session' option in the settings menu!"
 	# inject a space to seperate messages?
-	#__postMSGs="$__postMSGs "
+	__postMSGs="$__postMSGs "
 	
         if [[ ! -z $__postMSGs ]]; then
             dialog --backtitle "LibreGeek.org - RetroRig Setup. Installation folder: $rootdir for user $user" --msgbox "$__postMSGs\n\nSoftware install complete. \

@@ -116,8 +116,21 @@ dialog --title "Confirm yes/no" \
 	rm -f /etc/default/xboxdrv
 	sed -i 's|blacklist xpad||g' /etc/modprobe.d/blacklist.conf
 	# XBMC session (if applicable)
-	rm -f "/usr/share/xsessions/xbmc.desktop"
-	rm -f "/usr/bin/xbmc-session"
+
+	# change default xsession
+	session_org="user-session=XBMC"
+	session_new="user-session=ubuntu"
+
+	# change the session
+	# NOTE! As of Ubuntu Trusy 14.04, lightdm-set-defaults is no longer available. This is because 
+	# lightdm now using a configuration directory /etc/lightdm/lightdm.conf.d/ rather than a 
+	# single configuration file. The files in this directory can be edited by hand, new files 
+	# can be added, or files can be removed. There is no longer any need for a command that 
+	# edits the single configuration file.
+
+	sed -i "s|$session_org|$session_new|g" "/usr/share/lightdm/lightdm.conf.d/50-ubuntu.conf"
+	# correct permissions
+	h_correct_perms
 	;;
 
 	255)
