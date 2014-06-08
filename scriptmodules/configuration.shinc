@@ -29,13 +29,13 @@ function cfg_confirm()
 	   1) 
 	   dialog --infobox "Exiting..."  3 31
 	   sleep 2s
-	   _main
+	   return
 	   ;;
 
 	   255)
 	   dialog --infobox "Exiting..." 3 31
 	   sleep 2s
-	   _main
+	   return
 	   ;;
 
 	esac
