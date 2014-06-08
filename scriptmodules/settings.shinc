@@ -62,7 +62,8 @@ while true; do
 		set_xbmc_session
 		;;
 
-		9)  
+		9)
+		return
 		;;
 
 		esac
@@ -396,8 +397,7 @@ local fstart
 
 cmd=(dialog --backtitle "LibreGeek.org RetroRig Installer" --menu "Default directory: ~/.config/mupen64plus" 16 0 16)
 options=(1 "Change Video Plugin"
-	 2 "Back to settings menu"  
-	 3 "Back to main menu")
+	 2 "Back to settings menu")  
 
 	#make menu choice
 	selection=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
@@ -421,9 +421,6 @@ options=(1 "Change Video Plugin"
 		return 	 	
 		;;
 
-		1)
-		_main 	 	
-		;;
 	esac
 	done
 grep -i "VideoPlugin = " "$home/.config/mupen64plus/mupen64plus.cfg" >> "$scriptdir/logs/res.txt"
