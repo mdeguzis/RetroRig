@@ -76,6 +76,7 @@ done
 
 function set_enable_ssh()
 {
+	clear
 	#install openssh-server  
 	apt-get install -y openssh-server
 	#prompt user to change default port

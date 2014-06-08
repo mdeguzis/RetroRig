@@ -246,6 +246,13 @@ See debug.log for more details. Continuing on to emulator installs..." 15 60
 	#END
 }
 
+function rrs_init_xboxdrv()
+{
+	#inject init script and default config
+	cp -v "$rootdir/init-scripts/x360_controller/xboxdrv" "/etc/init.d/"
+	cp -v "$rootdir/init-scripts/x360_controller/default/xboxdrv" "/etc/default/xboxdrv"
+}
+
 function rrs_xboxdrv () 
 {
 
@@ -258,10 +265,6 @@ function rrs_xboxdrv ()
 	cp -v "$rootdir/gamepad-cfgs/x360_controller/x360_controller.lyt" "$home/.qjoypad3"
 	#copy qjoypad autostart item for x360_controller gamepad config
 	cp -v "$rootdir/gamepad-cfgs/x360_controller/qjoypad.desktop" "/etc/xdg/autostart/"
-	
-	#inject init script and default config
-	cp -v "$rootdir/init-scripts/x360_controller/xboxdrv" "/etc/init.d/"
-	cp -v "$rootdir/init-scripts/x360_controller/default/xboxdrv" "/etc/default/xboxdrv"
 	
 	#update init scripts
 	update-rc.d xboxdrv defaults
