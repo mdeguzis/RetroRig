@@ -235,6 +235,9 @@ function rrs_software() {
 	__postMSGs="$__postMSGs If you wish to start XBMC as a session ONLY, and not Unity whatsover, enable the 'XBMC Session' option in the settings menu! Please be advised that using RetroRig with the xbmc session enabled may result in odd behavior with some emulators. I am doing my best to help/correct this."
 	# inject a space to seperate messages?
 	__postMSGs="$__postMSGs "
+
+	# inject a space to seperate messages?
+	__postMSGs="$__postMSGs For VirtualBox users, please see the wiki under 'Installation' for notes on running RetroRig under a virtual machine! "
 	
         if [[ ! -z $__postMSGs ]]; then
             dialog --backtitle "LibreGeek.org - RetroRig Setup. Installation folder: $rootdir for user $user" --msgbox "$__postMSGs\n\nSoftware install complete. \
@@ -251,15 +254,16 @@ function rrs_init_xboxdrv()
 	#inject init script and default config
 	cp -v "$rootdir/init-scripts/x360_controller/xboxdrv" "/etc/init.d/"
 	cp -v "$rootdir/init-scripts/x360_controller/default/xboxdrv" "/etc/default/xboxdrv"
+
+	# copy keyboard.xml file for XBMC. Button id numbers are totally diffferent, due to the use of 
+	# the use-dpad-as-button, and use-trigger-as-button options used.
+	cp -v "$rootdir/gamepad-cfgs/x360_controller/keyboard.xml" "$home/.xbmc/userdata/keymaps"
 }
 
 function rrs_xboxdrv () 
 {
 
-	#Wireless Xbox 360 Controller Config
-	
-	# copy keyboard.xml file for XBMC. Button id numbers are totally diffferent, due to the use of the use-dpad-as-button, and use-trigger-as-button options used.
-	cp -v "$rootdir/gamepad-cfgs/x360_controller/keyboard.xml" "$home/.xbmc/userdata/keymaps"
+	# Xbox 360 Controller Config
 
 	#set qjoypad's profile to match Xbox 360 Wireless (4-player)
 	cp -v "$rootdir/gamepad-cfgs/x360_controller/x360_controller.lyt" "$home/.qjoypad3"
