@@ -383,7 +383,7 @@ git pull
 sleep 3s
 popd
 
-dialog --backtitle "LibreGeek.org - RetroRig Setup." --msgbox "Fetched the latest version of the RetroRig repository. Please exit and restart the script." 20 60 
+dialog --backtitle "LibreGeek.org - RetroRig Setup." --msgbox "Fetched the latest version of the RetroRig repository. Please exit and restart the script." 7 60 
 }
 
 function h_update_system() 
