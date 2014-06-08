@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <includes>
     <!--default text list 1 row-->
-    <include name="viewMusicList">
+    <include name="viewFavorites">
         <control type="group">
             <posx>0</posx>
             <posy>3-row</posy>
