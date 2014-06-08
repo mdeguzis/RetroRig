@@ -150,8 +150,8 @@ options=(1 "Xbox 360 Controller (wireless) (4-player)"
 		return
 		;;
 
-		4)
-		_
+		3)
+		return
 		;;
 		esac
 	done
