@@ -8,7 +8,7 @@
 #
 # prepare folder structure for emulator, cores, front end, and roms
 
-function cfg_confirm ()
+function cfg_confirm()
 {
 
 	dialog --title "Confirm yes/no" \

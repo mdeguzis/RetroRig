@@ -20,8 +20,7 @@ while true; do
 	     5 "Enable SSH support"
 	     6 "BIOS loader"
 	     7 "BIOS checker"
-	     8 "Enable XBMC Session (autostart)"
- 	     9 "Back to main menu")
+ 	     8 "Back to main menu")
 
 	#make menu choice
 	choices=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
@@ -59,10 +58,6 @@ while true; do
 		;;
 
 		8)
-		set_xbmc_session
-		;;
-
-		9)
 		return
 		;;
 
@@ -96,6 +91,9 @@ function set_xbmc_session()
 	# Allow user to choose whether or not they want to boot directly to an
 	# XBMC session, rather than boot Unity and load XBMC.
 	
+	# confirm with user first
+	cfg_confirm
+
 	clear
 	# copy config files
 	cp -v "$rootdir/XBMC-cfgs/XBMC-session/xbmc.desktop" "/usr/share/xsessions"
@@ -106,7 +104,14 @@ function set_xbmc_session()
 	# change default xsession
 	session_org=$(grep "autologin-session" /etc/lightdm/lightdm.conf)
 	session_new="autologin-session=xbmc-session"
+
 	# change the session
+	# NOTE! As of Ubuntu Trusy 14.04, lightdm-set-defaults is no longer available. This is because 
+	# lightdm now using a configuration directory /etc/lightdm/lightdm.conf.d/ rather than a 
+	# single configuration file. The files in this directory can be edited by hand, new files 
+	# can be added, or files can be removed. There is no longer any need for a command that 
+	# edits the single configuration file.
+
 	sed -i "s|$session_org|$session_new|g" "/etc/lightdm/lightdm.conf"
 	# correct permissions
 	h_correct_perms
