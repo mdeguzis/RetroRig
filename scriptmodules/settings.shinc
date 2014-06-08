@@ -60,7 +60,6 @@ while true; do
 
 		8)
 		dialog --msgbox "This option will skip the Unity desktop, and load XBMC directly. You can still go back to the Ubuntu desktop by exiting XBMC, and choosing 'Ubuntu Desktop' Uninstalling RetroRig will revert this option, or you can merely change '/usr/share/lightdm.conf.d/50-ubuntu.conf's 'user-session' back to 'ubuntu' Please be advised that using RetroRig with the xbmc session enabled may result in odd behavior with some emulators. I am doing my best to help/correct this." 14 60
-		cfg_confirm
 		set_xbmc_session
 		;;
 
