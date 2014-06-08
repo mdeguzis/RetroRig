@@ -35,9 +35,8 @@ Warning! It will overwrite:
 
 For all other features, please see the [wiki](https://github.com/ProfessorKaos64/RetroRig/wiki)
 
-
 * Auto-install software, emulator configs, and required components
-* Many supported consoles 
+* Many supported consoles (more added frequently)
 * Gamepad select menu
 * Resolution presets/custom selection for emulators that support it
 * Preset Controller mappings for supported gamepads
@@ -47,9 +46,10 @@ For all other features, please see the [wiki](https://github.com/ProfessorKaos64
 * Automatically start XBMC, then directly into RCB itself (option to boot to XBMC session in settings menu)
 * ROM pre-loader
 * BIOS pre-loader
+* A super lame logo on startup!
+* Modular design for expandability
 * Unity configuration set during config-setup to lengthen screen timeout + remove screen lock
 * Uninstall option
-* Load BIOS files for emulators that need them (no need to remeber where to put them!)
 
 ## Why XBMC and Ubuntu?
 
