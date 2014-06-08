@@ -103,11 +103,11 @@ function set_xbmc_session()
 	# make executable
 	chmod +x "/usr/bin/xbmc-session"
 	chmod +x "/usr/share/xsessions/xbmc.desktop"
-	#change default xsession
+	# change default xsession
 	session_org=$(grep "autologin-session" /etc/lightdm/lightdm.conf)
 	session_new="autologin-session=xbmc-session"
-	sed -i "s|"$session_org"|"$session_new"|g" "/etc/lightdm/lightdm.conf"
-
+	# change the session
+	sed -i "s|$session_org|$session_new|g" "/etc/lightdm/lightdm.conf"
 	# correct permissions
 	h_correct_perms
 }
