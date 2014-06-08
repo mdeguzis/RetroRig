@@ -42,7 +42,7 @@ options=(1 "Current configuration"
 		;;
 
 		2)
-		_config-mupen 	  	 	
+		#cfg_mupen 	  	 	
 		;;
 
 		3)
@@ -173,6 +173,9 @@ options=(1 "Atari 2600"
 		;;
 		esac
 	done
+
+	# correct permissions
+	h_correct_perms
 }
 
 
@@ -270,6 +273,9 @@ function h_res_swticher()
 	#make the changes, prefix new_X in case NULL was entered previously
 	sed -i "s|$gg_org_X|gg.xres $gg_new_X|g" "$home/.mednafen/mednafen-09x.cfg"
 	sed -i "s|$gg_org_Y|gg.yres $gg_new_Y|g" "$home/.mednafen/mednafen-09x.cfg"
+
+	# correct permissions
+	h_correct_perms
 }
 
 function h_bios_checker()

@@ -105,23 +105,25 @@ export DISPLAY=:0.0
 gsettings set org.gnome.desktop.screensaver lock-enabled false
 gsettings set org.gnome.desktop.screensaver ubuntu-lock-on-suspend false
 gsettings set org.gnome.desktop.session idle-delay 3600
-
 }
 
 function rrs_xbmc ()
 {
 
-#xbmc does not (at least for Ubuntu's repo pkg) load the
-#dot files without loading XBMC at least once
-#copy in default folder base from first run:	
-cp -Rv "$HOME/RetroRig/XBMC-cfgs/addons" "$HOME/.xbmc"
-cp -Rv "$HOME/RetroRig/XBMC-cfgs/userdata" "$HOME/.xbmc"
+	#xbmc does not (at least for Ubuntu's repo pkg) load the
+	#dot files without loading XBMC at least once
+	#copy in default folder base from first run:	
+	cp -Rv "$HOME/RetroRig/XBMC-cfgs/addons" "$HOME/.xbmc"
+	cp -Rv "$HOME/RetroRig/XBMC-cfgs/userdata" "$HOME/.xbmc"
 
-# set the system user to an absolute value.
-# RCB and some config files don't like using $HOME, rather /home/test/
-# Let's change the config files to reflect the current username
-sed -i "s|/home/test/|/home/$user/|g" "$home/.xbmc/userdata/addon_data/script.games.rom.collection.browser/config.xml"
-echo "The user applied to configuration files was: $user"
+	# set the system user to an absolute value.
+	# RCB and some config files don't like using $HOME, rather /home/test/
+	# Let's change the config files to reflect the current username
+	sed -i "s|/home/test/|/home/$user/|g" "$home/.xbmc/userdata/addon_data/script.games.rom.collection.browser/config.xml"
+	echo "The user applied to configuration files was: $user"
+
+	# correct permissions
+	h_correct_perms
 
 }
 
@@ -280,6 +282,9 @@ function rrs_autostart()
 
 	# inform user install is done (this is the last step of main, option 1)
         dialog --backtitle "LibreGeek.org - RetroRig Setup. Installation folder: $rootdir for user $user" --msgbox "Finished main install tasks.\nYou now have to copy roms to the roms folders. \nThis can be done via SSH, Samba, or via your graphic folder manager (please see settings menu for more)" 10 50
+
+	# correct permissions
+	h_correct_perms
 }
 
 function rrs_debug()

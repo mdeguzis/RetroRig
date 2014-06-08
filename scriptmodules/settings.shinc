@@ -100,6 +100,9 @@ function set_xbmc_session()
 	cp -v "$rootdir/XBMC-cfgs/XBMC-session/xbmc-session" "/usr/bin"
 	chmod +x "/usr/bin/xbmc-session"
 	chmod +x "/usr/share/xessions/xbmc.desktop"
+
+	# correct permissions
+	h_correct_perms
 }
 
 function set_resolution() {
@@ -386,6 +389,10 @@ if [ "$choices" != "" ]; then
 	esac
 fi
 done
+
+	# correct permissions
+	h_correct_perms
+
 }
 
 
@@ -423,7 +430,8 @@ options=(1 "Change Video Plugin"
 
 	esac
 	done
-grep -i "VideoPlugin = " "$home/.config/mupen64plus/mupen64plus.cfg" >> "$scriptdir/logs/res.txt"
 
+	# correct permissions
+	h_correct_perms
 }
 
