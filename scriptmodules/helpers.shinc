@@ -178,7 +178,7 @@ options=(1 "Atari 2600"
 	h_correct_perms
 }
 
-function h_res_swticher()
+function h_res_switcher()
 {
 	dialog --infobox "Setting resolution to selection" 3 36
 	#resolution is set via _resolution function		
