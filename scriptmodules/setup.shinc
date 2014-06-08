@@ -388,17 +388,17 @@ function rrs_prereq()
 {
     if [[ -z $(type -P git) || -z $(type -P dialog) || -z $(type -P figlet) ]]; then
         echo "Did not find needed packages 'git' and/or 'dialog/figlet'. Attempting to install these now."
-	sleep 2s
+	sleep 3s
         apt-get update
         apt-get install -y git dialog figlet
         if [ $? == '0' ]; then
             echo "Successfully installed 'git/dialog/figlet'." > "$scriptdir/logs/prechecks.log"
-	    sleep 2s
+	    sleep 3s
 	    prereqs="true"
         else
             echo "Could not install 'git' and/or 'dialog/figlet'. Exiting..." > "$scriptdir/logs/prechecks.log"
 	    prereqs="false"
-	    sleep 2s
+	    sleep 3s
             exit 1
         fi
     else
