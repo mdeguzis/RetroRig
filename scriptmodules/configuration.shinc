@@ -76,7 +76,13 @@ dialog --title "Confirm yes/no" \
 	;;
 
    	1)
+	return
 	;; 
+
+	255)
+	return
+	;;
+
 	esac
 
 #ask to keep folders

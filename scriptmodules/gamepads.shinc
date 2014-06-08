@@ -43,8 +43,10 @@ function gp_x360()
 	#Main config
 	cp -v "$scriptdir/emu-cfgs/x360_controller/Stella/stellarc" "$home/.stella/"
 
-	#configure xboxdrv for gamepad
+	# configure xboxdrv for gamepad
 	rrs_xboxdrv
+	# inject init modules
+	rrs_init_xboxdrv
 
 	# correct permissions
 	h_correct_perms
@@ -86,10 +88,10 @@ function gp_vbox_x360()
 	#Main config
 	cp -v "$scriptdir/emu-cfgs/x360_controller/Stella/stellarc" "$home/.stella/"
 
-	# Do not add rrs_xboxdrv, no init modules needed for vbox, since it shares the host USB controller
+	# Do not add rrs_init_xboxdrv, no init modules needed for vbox, since it shares the host USB controller
 	# This seciton may seem redundant, but it will stay until Virtual Box support is solid and this extra
 	# section is deemed unecessary
-	# rrs_xboxdrv
+	rrs_xboxdrv
 
 	# correct permissions
 	h_correct_perms
