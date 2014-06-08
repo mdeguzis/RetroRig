@@ -98,7 +98,7 @@ function set_xbmc_session()
 	
 	clear
 	cp -v "$rootdir/XBMC-cfgs/XBMC-session/xbmc.desktop" "/usr/share/xsessions"
-	cp -v "$rootdir/XBMC-cfgs/XBMC-session/xbmc-session" "/usr/bin"
+	cp -v "$rootdir/XBMC-cfgs/XBMC-session/xbmc-xsession" "/usr/bin"
 	chmod +x "/usr/bin/xbmc-xsession"
 	chmod +x "/usr/share/xsessions/xbmc.desktop"
 
