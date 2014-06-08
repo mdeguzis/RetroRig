@@ -153,14 +153,7 @@
                         <thumb>-</thumb>
                         <onclick>ActivateWindow(pictures)</onclick>
                     </item>
-					<item>
-                        <label>137</label>
-                        <label2></label2>
-                        <thumb>-</thumb>
-                        <onclick>RunScript(script.globalsearch)</onclick>
-						<onclick>Skin.SetString(showRecentMusicItems,false)</onclick>
-						<onclick>Skin.SetString(showRecentVideoItems,false)</onclick>
-                    </item>
+					
                     <item>
                         <label>5</label>
                         <label2></label2>
