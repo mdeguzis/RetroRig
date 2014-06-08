@@ -20,7 +20,8 @@ while true; do
 	     5 "Enable SSH support"
 	     6 "BIOS loader"
 	     7 "BIOS checker"
- 	     8 "Back to main menu")
+	     8 "Enable XBMC session"
+ 	     9 "Back to main menu")
 
 	#make menu choice
 	choices=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
@@ -58,6 +59,11 @@ while true; do
 		;;
 
 		8)
+		dialog --msgbox "This option will skip the Unity desktop, and load XBMC directly. You can still go back to the Ubuntu desktop by exiting XBMC, and choosing 'Ubuntu Desktop' Uninstalling RetroRig will revert this option, or you can merely change '/usr/share/lightdm.conf.d/50-ubuntu.conf's 'user-session' back to 'ubuntu'" 11 60
+		set_xbmc_session
+		;;
+
+		9)
 		return
 		;;
 
@@ -102,8 +108,8 @@ function set_xbmc_session()
 	chmod +x "/usr/bin/xbmc-session"
 	chmod +x "/usr/share/xsessions/xbmc.desktop"
 	# change default xsession
-	session_org=$(grep "autologin-session" /etc/lightdm/lightdm.conf)
-	session_new="autologin-session=xbmc-session"
+	session_org=$(grep "session" /usr/share/lightdm/lightdm.conf.d/50-ubuntu.conf)
+	session_new="user-session=XBMC"
 
 	# change the session
 	# NOTE! As of Ubuntu Trusy 14.04, lightdm-set-defaults is no longer available. This is because 
@@ -112,7 +118,7 @@ function set_xbmc_session()
 	# can be added, or files can be removed. There is no longer any need for a command that 
 	# edits the single configuration file.
 
-	sed -i "s|$session_org|$session_new|g" "/etc/lightdm/lightdm.conf"
+	sed -i "s|$session_org|$session_new|g" "/usr/share/lightdm/lightdm.conf.d/50-ubuntu.conf"
 	# correct permissions
 	h_correct_perms
 }
