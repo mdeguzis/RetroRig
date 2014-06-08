@@ -27,15 +27,15 @@ function cfg_confirm()
 	   ;;
 
 	   1) 
-	   dialog --infobox "Exiting..."  3 31
+	   dialog --infobox "Exiting..."  3 15
 	   sleep 2s
-	   return
+	   set_menu
 	   ;;
 
 	   255)
-	   dialog --infobox "Exiting..." 3 31
+	   dialog --infobox "Exiting..." 3 15
 	   sleep 2s
-	   return
+	   set_menu
 	   ;;
 
 	esac
