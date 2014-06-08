@@ -1,0 +1,30 @@
+<parserConfig>
+    <GameGrammar type="multiline">
+        <SkippableContent skipTo="LineStart*#*#*#*LineEnd"></SkippableContent>
+        <SkippableContent>LineStart*#*#*#*LineEnd</SkippableContent>
+        <SkippableContent>Game: </SkippableContent>
+        <Game restOfLine="true"></Game>
+        <SkippableContent>CRC: </SkippableContent>
+        <crcOld optional="true" restOfLine="true" delimiter=","></crcOld>
+        <SkippableContent>Platform: </SkippableContent>
+        <Platform optional="true" delimiter="," restOfLine="true"></Platform>
+        <SkippableContent>Region: </SkippableContent>
+        <Region optional="true" delimiter="," restOfLine="true"></Region>
+        <SkippableContent>Genre: </SkippableContent>
+        <Genre optional="true" delimiter="," restOfLine="true"></Genre>
+        <SkippableContent>Release Year: </SkippableContent>
+        <ReleaseYear optional="true" delimiter="," restOfLine="true"></ReleaseYear>
+        <SkippableContent>Developer: </SkippableContent>
+        <Developer optional="true" delimiter="," restOfLine="true"></Developer>
+        <SkippableContent>Publisher: </SkippableContent>
+        <Publisher optional="true" restOfLine="true"></Publisher>
+        <SkippableContent>Players: </SkippableContent>
+        <Players optional="true" delimiter="," restOfLine="true"></Players>
+        <SkippableContent>Hacked By:</SkippableContent>
+        <HackedBy optional="true" delimiter="," restOfLine="true"></HackedBy>
+		<SkippableContent>Game Filename:</SkippableContent>
+		<crc optional="true" restOfLine="true"></crc>
+        <Description optional="true" skipTo="LineStart*#*#*#*LineEnd"></Description>
+        <SkippableContent restOfLine="true"></SkippableContent>
+    </GameGrammar>
+</parserConfig>

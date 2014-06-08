@@ -1,0 +1,49 @@
+#!/bin/bash
+#
+# RetroRig emulator modules
+# This is a small script to copy over configuration files for emulators
+# append a "-x" on the end above for debugging if need be
+# Please report any errors via a pull request
+# You can also reach me on twitter: @N3RD42
+#
+
+function em_add_repos()
+{
+	# Add playdeb repo for later additions (very useful) 
+	echo "deb http://archive.getdeb.net/ubuntu trusty-getdeb games" > /tmp/playdeb.list 
+	mv "/tmp/playdeb.list" "/etc/apt/sources.list.d/playdeb.list"
+	wget -q -O- http://archive.getdeb.net/getdeb-archive.key > getdeb.key 
+	sudo apt-key add getdeb.key 
+	rm -f getdeb.key
+}
+
+function em_install_stella()
+{
+	echo "Installing Atari 2600 emulator Stella"
+	apt-get install -y stella
+}
+
+function em_install_mupen64plus()
+{
+	echo "Installing MAME emulator"
+	apt-get install -y mupen64plus
+}
+
+
+function em_install_mame()
+{
+	echo "Installing MAME emulator"
+	apt-get install -y mame
+}
+
+function em_install_mednafen()
+{
+	echo "Installing Mednafen emulator"
+	apt-get install -y mednafen
+}
+
+function em_install_mess()
+{
+	echo "Installing MESS emulator"
+	apt-get install -y mess
+}

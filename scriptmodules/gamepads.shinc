@@ -1,0 +1,51 @@
+#!/bin/bash
+#
+# RetroRig menu modules
+# This is a small script to copy over configuration files for emulators
+# append a "-x" on the end above for debugging if need be
+# Please report any errors via a pull request
+# You can also reach me on twitter: @N3RD42
+#
+
+function gp_x360()
+{
+
+	#mame
+	# default path: /home/$USER/.mame
+	# Main config
+	cp -v "$scriptdir/emu-cfgs/x360_controller/MAME/default.cfg" "$home/.mame/cfg "
+	cp -v "$scriptdir/emu-cfgs/x360_controller/MAME/mame.ini" "$home/.mame"
+ 
+	# offline artwork scrapper configs
+	cp -v "$scriptdir/emu-cfgs/x360_controller/MAME/parserConfig.xml" "$rootdir/Artwork/MAME"
+	cp -v "$scriptdir/emu-cfgs/x360_controller/MAME/MAME.txt" "$rootdir/Artwork/MAME"
+	cp -v "$scriptdir/emu-cfgs/x360_controller/MAME/MAME synopsis RCB 201202.zip" "$rootdir/Artwork/MAME"
+
+	# mess
+	# default path: /home/$USER/.mednafen/mednafen.cfg
+	# Main config
+	cp -v "$scriptdir/emu-cfgs/x360_controller/MESS/mess.ini" "$home/.mess"
+	cp -v "$scriptdir/emu-cfgs/x360_controller/MESS/default.cfg" "$home/.mess/cfg"
+	cp -v "$scriptdir/emu-cfgs/x360_controller/MESS/neocdz.cfg" "$home/.mess/cfg"
+
+	# mednafen
+	# default path: /home/$USER/.mednafen/mednafen.cfg
+	# Main config
+	cp -v "$scriptdir/emu-cfgs/x360_controller/mednafen/mednafen-09x.cfg" "$home/.mednafen"
+
+	# mupen64plus
+	# default path: /home/$USER/.config/mupen64plus
+	# Main config
+	cp -v "$scriptdir/emu-cfgs/x360_controller/mupen64plus/mupen64plus.cfg" "$home/.config/mupen64plus/"
+
+	#Stella
+	#default path: /home/$USER/.config/mupen64plus
+	#Main config
+	cp -v "$scriptdir/emu-cfgs/x360_controller/Stella/stellarc" "$home/.stella/"
+
+	#configure xboxdrv for gamepad
+	rrs_xboxdrv
+
+	# correct permissions
+	h_correct_perms
+}
