@@ -136,8 +136,7 @@
                         <label>31000</label>
                         <label2></label2>
                         <thumb>-</thumb>
-                        <onclick>activateWindow(videolibrary)</onclick>
-                        <onclick>Skin.SetString(showRecentVideoItems,true)</onclick>
+                        <onclick>RunAddon(script.games.rom.collection.browser)</onclick>
                     </item>
                     <item>
 						<visible>!Skin.HasSetting(hideMusic)</visible>
