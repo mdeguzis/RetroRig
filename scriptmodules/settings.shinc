@@ -96,9 +96,10 @@ function set_xbmc_session()
 	# Allow user to choose whether or not they want to boot directly to an
 	# XBMC session, rather than boot Unity and load XBMC.
 	
+	clear
 	cp -v "$rootdir/XBMC-cfgs/XBMC-session/xbmc.desktop" "/usr/share/xsessions"
 	cp -v "$rootdir/XBMC-cfgs/XBMC-session/xbmc-session" "/usr/bin"
-	chmod +x "/usr/bin/xbmc-session"
+	chmod +x "/usr/bin/xbmc-xsession"
 	chmod +x "/usr/share/xsessions/xbmc.desktop"
 
 	# correct permissions
