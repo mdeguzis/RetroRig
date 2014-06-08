@@ -179,7 +179,8 @@ function rrs_emulators()
 	# Run Debug checks
 	rrs_debug
 
-	__postMSGs="$__postMSGs This MESS configuration requires Neo-Geo CDZ BIOS files be placed under '$rootdir/ROMs/Neo-Geo/BIOS'"
+	__postMSGs="$__postMSGs This MESS configuration requires Neo-Geo CDZ BIOS files be placed under '$rootdir/ROMs/Neo-Geo/BIOS'. You may also \
+use the BIOS Loader under the settings menu."
 	# inject a space to seperate messages?
 	__postMSGs="$__postMSGs "
 
@@ -230,13 +231,13 @@ function rrs_software() {
 	# ...none for now...
 
 	# Output postMSGs to screen
-	__postMSGs="$__postMSGs  If you wish to start XBMC as a session ONLY, and not Unity whatsover, enabled the 'XBMC Session' option in the settings menu!"
+	__postMSGs="$__postMSGs If you wish to start XBMC as a session ONLY, and not Unity whatsover, enabled the 'XBMC Session' option in the settings menu!"
 	# inject a space to seperate messages?
 	__postMSGs="$__postMSGs "
 	
         if [[ ! -z $__postMSGs ]]; then
-            dialog --backtitle "LibreGeek.org - RetroRig Setup. Installation folder: $rootdir for user $user" --msgbox "$__postMSGs\n\nSoftware install complete.\ 
-				See debug.log for more details. Continuing on to emulator installs..." 15 50
+            dialog --backtitle "LibreGeek.org - RetroRig Setup. Installation folder: $rootdir for user $user" --msgbox "$__postMSGs\n\nSoftware install complete. \
+See debug.log for more details. Continuing on to emulator installs..." 15 50
         fi
 
         chown -R "$user" "$scriptdir/logs/install_$now.log.gz"

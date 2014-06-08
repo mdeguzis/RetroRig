@@ -292,7 +292,8 @@ while true; do
 		chgrp -R "$user "$scriptdir/logs/uninstall_$now.log.gz"
 		;;
 
-	    10)
+	    10) 
+		exit
 		;;
 
 		esac
