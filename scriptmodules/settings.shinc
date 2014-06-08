@@ -119,7 +119,6 @@ options=(1 "Current Resolution"
 	 6 "1920x1080 (1080p) (16:9)"
 	 7 "Custom"
 	 8 "Exit resolution selection"
-	 9 "Back to main menu"
 	)
 	
 # Expanding arrays involves [@] and {}
@@ -394,9 +393,6 @@ if [ "$choices" != "" ]; then
 		;; 
 	8) 
 		return
-		;;
-	9) 
-		_main
 		;;
 	esac
 fi
