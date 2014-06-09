@@ -266,12 +266,13 @@ function h_res_switcher()
 	sed -i "s|$sms_org_X|sms.xres $sms_new_X|g" "$home/.mednafen/mednafen-09x.cfg"
 	sed -i "s|$sms_org_Y|sms.yres $sms_new_Y|g" "$home/.mednafen/mednafen-09x.cfg"
 
+
 	#Mednafen (Turbographx 16)
-	gg_org_X=$(grep -Ee "\bgg.xres\b " "$home/.mednafen/mednafen-09x.cfg")
-	gg_org_Y=$(grep -Ee "\bgg.yres\b " "$home/.mednafen/mednafen-09x.cfg")
+	pce_org_X=$(grep -Ee "\bpce.xres\b " "$home/.mednafen/mednafen-09x.cfg")
+	pce_org_Y=$(grep -Ee "\bpce.yres\b " "$home/.mednafen/mednafen-09x.cfg")
 	#make the changes, prefix new_X in case NULL was entered previously
-	sed -i "s|$gg_org_X|gg.xres $gg_new_X|g" "$home/.mednafen/mednafen-09x.cfg"
-	sed -i "s|$gg_org_Y|gg.yres $gg_new_Y|g" "$home/.mednafen/mednafen-09x.cfg"
+	sed -i "s|$pce_org_X|pce.xres $pce_new_X|g" "$home/.mednafen/mednafen-09x.cfg"
+	sed -i "s|$pce_org_Y|pce.yres $pce_new_Y|g" "$home/.mednafen/mednafen-09x.cfg"
 
 	# correct permissions
 	h_correct_perms
@@ -295,7 +296,7 @@ function h_bios_checker()
 	echo ""
 
 	# If MESS is loaded already, verify BIOS files
-	/usr/games/mess neocdz -verifyroms | tee >> "$rootdir/logs/debug.log"
+	/usr/games/mess neocdz -verifyroms
 
 	#hold for review
 	sleep 5s
