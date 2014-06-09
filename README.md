@@ -18,8 +18,10 @@ Thank you for your patience.
 
 ## Warning
 
-RetroRig is meant to be a standalone setup for XBMC on Ubuntu
-It is mainly targeted at folks wishing to repurpose an old PC.
+RetroRig is meant to be a standalone setup for XBMC on Ubuntu.
+It is mainly targeted at folks wishing to repurpose an old physical PC. VirtualBox support exists, 
+(to an extent), but can behave erratcially with emulator speed/framerates and is not advised. I do
+hope to corrrect some of that in due time, but right now, it is more of an "extra" or a "test bed."
 
 Warning! It will overwrite:
 
