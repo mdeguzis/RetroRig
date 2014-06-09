@@ -60,6 +60,7 @@ dialog --title "Confirm yes/no" \
 	0) 
 	# remove installed binaries
 	# do not remove software-properties-common, necessary pkg!
+	clear
 	apt-get autoremove -y xboxdrv curl python-software-properties \
 	pkg-config mednafen mame mupen64plus dconf-tools qjoypad xbmc \
 	stella build-essential
