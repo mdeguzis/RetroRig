@@ -370,7 +370,7 @@ function h_pkgcheck()
 function h_update_git() 
 {
 
-printMsg "Fetching latest version of the RetroPie Setup Script."
+echo "Fetching latest version of the RetroPie Setup Script."
 pushd "$scriptdir"
 
 if [[ ! -d ".git" ]]; then
