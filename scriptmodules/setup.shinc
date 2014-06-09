@@ -246,7 +246,7 @@ See debug.log for more details. Continuing on to emulator installs..." 18 60
 
 function rrs_xboxdrv() 
 {
-
+	clear
 	# xboxdrv settings
 
 	#set qjoypad's profile to match Xbox 360 Wireless (4-player)
@@ -275,8 +275,9 @@ function rrs_xboxdrv()
 
 function rrs_autostart()
 {
+	clear
 	# create autostart for XBMC (universal)
-	cp -v "/usr/share/applications/xbmc.desktop" "/etc/xdg/autostart/"
+	cp -v "/usr/share/applications/xbmc.desktop" "/etc/xdg/autostart/" 
 
 	# later this section will configure LightDM (login manager for Ubuntu) to log into
 	# the XBMC session and skip Unity altogether. Provide an option to do so, yes/no...

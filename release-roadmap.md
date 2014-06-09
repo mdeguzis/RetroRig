@@ -13,7 +13,6 @@ Goals for 0.8.0 release
 	(done) Neo-Geo CDZ  
 	(done) Sega Game Gear
 - Verify audio and framerate work with test PC
-	(done) GBC
 - Add Artwork for MAME titles (depends on file size)
 - Investigate requested enhancements on issues page
 - Investigate any pull requests
