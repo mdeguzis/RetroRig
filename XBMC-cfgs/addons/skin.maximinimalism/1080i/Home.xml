@@ -44,7 +44,6 @@
                 <align>center</align>
                 <font>Large</font>
                 <textcolor>selected</textcolor>
-
             </control>
             <control type="label">
                 <visible>!IsEmpty(Weather.location)</visible>
