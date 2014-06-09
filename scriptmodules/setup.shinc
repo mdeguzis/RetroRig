@@ -133,8 +133,7 @@ function rrs_gamepad (){
 cmd=(dialog --backtitle "LibreGeek.org RetroRig Installer" --menu "| Gamepad Select | \
 			 Request any new Gamepads via github!" 16 62 16)
 options=(1 "Xbox 360 Controller (standard)"
-	 2 "Xbox 360 Controller (Virtual Box)"
-	 3 "Exit gamepad selection")
+	 2 "Exit gamepad selection")
 
 	#make menu choice
 	selection=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
@@ -149,10 +148,6 @@ options=(1 "Xbox 360 Controller (standard)"
 		;;
 
 		2)
-		gp_vbox_x360
-		;;
-
-		3)
 		return
 		;;
 
@@ -237,27 +232,16 @@ function rrs_software() {
 	__postMSGs="$__postMSGs "
 
 	# inject a space to seperate messages?
-	__postMSGs="$__postMSGs For VirtualBox users, please see the wiki under 'Installation' for notes on running RetroRig under a virtual machine! "
+	__postMSGs="$__postMSGs For VirtualBox users, please see the wiki under 'Installation' for notes on running RetroRig under a virtual machine! At the minimum, you will need to add a filter for your controller. "
 	
         if [[ ! -z $__postMSGs ]]; then
             dialog --backtitle "LibreGeek.org - RetroRig Setup. Installation folder: $rootdir for user $user" --msgbox "$__postMSGs\n\nSoftware install complete. \
-See debug.log for more details. Continuing on to emulator installs..." 15 60
+See debug.log for more details. Continuing on to emulator installs..." 18 60
         fi
 
         chown -R "$user" "$scriptdir/logs/install_$now.log.gz"
         chgrp -R "$user" "$scriptdir/logs/install_$now.log.gz"
 	#END
-}
-
-function rrs_init_xboxdrv()
-{
-	#inject init script and default config
-	cp -v "$rootdir/init-scripts/x360_controller/xboxdrv" "/etc/init.d/"
-	cp -v "$rootdir/init-scripts/x360_controller/default/xboxdrv" "/etc/default/xboxdrv"
-
-	# copy keyboard.xml file for XBMC. Button id numbers are totally diffferent, due to the use of 
-	# the use-dpad-as-button, and use-trigger-as-button options used.
-	cp -v "$rootdir/gamepad-cfgs/x360_controller/keyboard.xml" "$home/.xbmc/userdata/keymaps"
 }
 
 function rrs_xboxdrv() 
@@ -275,6 +259,14 @@ function rrs_xboxdrv()
 
 	#blacklist xpad
 	cp -v "$rootdir/init-scripts/x360_controller/blacklist.conf" "/etc/modprobe.d/"
+
+	#inject init script and default config
+	cp -v "$rootdir/init-scripts/x360_controller/xboxdrv" "/etc/init.d/"
+	cp -v "$rootdir/init-scripts/x360_controller/default/xboxdrv" "/etc/default/xboxdrv"
+
+	# copy keyboard.xml file for XBMC. Button id numbers are totally diffferent, due to the use of 
+	# the use-dpad-as-button, and use-trigger-as-button options used.
+	cp -v "$rootdir/gamepad-cfgs/x360_controller/keyboard.xml" "$home/.xbmc/userdata/keymaps"
 
 	#fix permissions since we are running as sudo
 	h_correct_perms
