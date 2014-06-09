@@ -28,7 +28,6 @@ function rrs_prepareFolders()
 	pathlist+=("$rootdir/ROMs/GBA")
 	pathlist+=("$rootdir/ROMs/TurboGraphx 16")
 	pathlist+=("$rootdir/ROMs/Neo-Geo/CDZ")
-	pathlist+=("$rootdir/ROMs/Neo-Geo/BIOS")
 	pathlist+=("$rootdir/ROMs/Commodore 64")
 
 	#Artwork 
@@ -78,7 +77,7 @@ function rrs_prepareFolders()
 	pathlist+=("$HOME/.mednafen")
 
 	#BIOS folder(s)
-	pathlist+=("$rootdir/ROMs/Neo-Geo/BIOS")
+	pathlist+=("$rootdir/MESS/BIOS")
 
 	#Configs
 	pathlist+=("$rootdir/Configs")
@@ -178,7 +177,10 @@ function rrs_emulators()
 	# Run Debug checks
 	rrs_debug
 
-	__postMSGs="$__postMSGs This MESS configuration requires Neo-Geo CDZ BIOS files be placed under '$rootdir/ROMs/Neo-Geo/BIOS'. You may also \
+	__postMSGs="$__postMSGs This MESS 
+configuration requires BIOS files be placed 
+under '$rootdir/ROMs/BIOS/MESS'. You may also 
+\
 use the BIOS Loader under the settings menu."
 	# inject a space to seperate messages?
 	__postMSGs="$__postMSGs "

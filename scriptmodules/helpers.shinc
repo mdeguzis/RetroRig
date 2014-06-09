@@ -305,11 +305,12 @@ function h_bios_checker()
 	echo ""
 	sleep 3s
 
-	# Neo-Geo BIOS files
-	h_filechecker "$rootdir/ROMs/Neo-Geo/BIOS" 
+	# MESS -g BIOS files
+	h_filechecker 
+"$rootdir/ROMs/BIOS/MESS" 
 	# output something to user, so they don't necessarily have to check the debug log
 	echo "BIOS directory contains: "
-	tail -n 1 "$rootdir/logs/debug.log"
+	ls "$rootdir/BIOS/MESS"
 	echo ""
 
 	# If MESS is loaded already, verify BIOS files
@@ -326,8 +327,9 @@ function h_bios_loader()
 # present menu
 
 cmd=(dialog --backtitle "LibreGeek.org RetroRig Installer" --menu "Load BIOS files for which system?" 19 32 24)
-options=(1 "Neo-Geo CDZ" 
-	 12 "Exit BIOS Loader")
+options=(1 "Neo-Geo CDZ"
+	 2 "Commodore 64" 
+	 3 "Exit BIOS Loader")
 
 	#make menu choice
 	selection=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
@@ -338,13 +340,24 @@ options=(1 "Neo-Geo CDZ"
 		case $choice in
 
 		1)
-		#call file loader  	
+		# call file loader  	
 		h_file_loader
-		#copy Neo-Geo BIOS file over
-		cp -Rv "$folder/." "$rootdir/ROMs/Neo-Geo/BIOS"
+		# copy Neo-Geo BIOS file over
+		cp -v "$folder" 
+"$rootdir/BIOS/MESS"
 		;;
 
-		2)  
+		2)
+		#call file loader
+		h_file_loader
+		# copy Commodore 64 BIOS file 
+over
+		cp -v "$folder" 
+"$rootdir/BIOS/MESS"
+		;;
+
+		3)
+		return
 		;;
 
 		esac
