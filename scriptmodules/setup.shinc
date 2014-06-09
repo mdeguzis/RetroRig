@@ -232,7 +232,7 @@ function rrs_software() {
 	__postMSGs="$__postMSGs "
 
 	# inject a space to seperate messages?
-	__postMSGs="$__postMSGs For VirtualBox users, please see the wiki under 'Installation' for notes on running RetroRig under a virtual machine! At the minimum, you will need to add a filter for your controller. "
+	__postMSGs="$__postMSGs For VirtualBox users, please see the wiki under 'Installation' for notes on running RetroRig under a virtual machine! At the minimum, you will need to add a filter for your controller "
 	
         if [[ ! -z $__postMSGs ]]; then
             dialog --backtitle "LibreGeek.org - RetroRig Setup. Installation folder: $rootdir for user $user" --msgbox "$__postMSGs\n\nSoftware install complete. \
@@ -254,9 +254,6 @@ function rrs_xboxdrv()
 	#copy qjoypad autostart item for x360_controller gamepad config
 	cp -v "$rootdir/gamepad-cfgs/x360_controller/qjoypad.desktop" "/etc/xdg/autostart/"
 	
-	#update init scripts
-	update-rc.d xboxdrv defaults
-
 	#blacklist xpad
 	cp -v "$rootdir/init-scripts/x360_controller/blacklist.conf" "/etc/modprobe.d/"
 
@@ -267,6 +264,9 @@ function rrs_xboxdrv()
 	# copy keyboard.xml file for XBMC. Button id numbers are totally diffferent, due to the use of 
 	# the use-dpad-as-button, and use-trigger-as-button options used.
 	cp -v "$rootdir/gamepad-cfgs/x360_controller/keyboard.xml" "$home/.xbmc/userdata/keymaps"
+
+	#update init scripts
+	update-rc.d xboxdrv defaults
 
 	#fix permissions since we are running as sudo
 	h_correct_perms
