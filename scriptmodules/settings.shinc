@@ -149,6 +149,10 @@ if [ "$choices" != "" ]; then
 		#Need to use extended regexp's here because of nes being within nes
 		#grep -Ee '\bnes\b' [list of files]
 
+		# inform user that emulators like MESS automatically adjust resolution
+		dialog --msgbox "Please Note: emulators, such as MESS, will automatically adjust their resolution \
+				and do not require or need resolution input." 8 60
+
 		#echo curent resolution
 		#mupen64plus
 		echo "mupen64plus:" > "$scriptdir/logs/res.txt"

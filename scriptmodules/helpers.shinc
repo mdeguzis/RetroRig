@@ -84,7 +84,8 @@ options=(1 "Atari 2600"
 	 9 "GBC"
 	 10 "TurboGraphx 16"
 	 11 "Neo-Geo CDZ"
-	 12 "Exit ROM Loader")
+	 12 "Commodore 64"
+	 13 "Exit ROM Loader")
 
 	#make menu choice
 	selection=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
@@ -97,78 +98,85 @@ options=(1 "Atari 2600"
 		#call file loader  	
 		h_file_loader
 		#copy Atari ROMs
-		cp -Rv "$folder"/* "$rootdir/ROMs/Atari 2600/"
+		cp -Rv "$folder/." "$rootdir/ROMs/Atari 2600/"
 		;;
 
 		2)  
 		h_file_loader
-		cp -Rv "$folder"/* "$rootdir/ROMs/NES/"
+		cp -Rv "$folder/." "$rootdir/ROMs/NES/"
 		;;
 
 		3)
 		#call file loader  	
 		h_file_loader
 		#copy SNES ROMs
-		cp -Rv "$folder"/* "$rootdir/ROMs/SNES/"
+		cp -Rv "$folder/." "$rootdir/ROMs/SNES/"
 		;;
 
 		4)
 		#call file loader  	
 		h_file_loader
 		#copy N64 ROMs
-		cp -Rv "$folder"/* "$rootdir/ROMs/N64/"
+		cp -Rv "$folder/." "$rootdir/ROMs/N64/"
 		;;
 
 		5)
 		#call file loader  	
 		h_file_loader
 		#copy MAME ROMs
-		cp -Rv "$folder"/* "$rootdir/ROMs/MAME/"
+		cp -Rv "$folder/." "$rootdir/ROMs/MAME/"
 		;;
 
 		6)
 		#call file loader  	
 		h_file_loader
 		#copy Sega Master System ROMs
-		cp -Rv "$folder"/* "$rootdir/ROMs/Sega Master System"
+		cp -Rv "$folder/." "$rootdir/ROMs/Sega Master System"
 		;;
 
 		7)
 		#call file loader  	
 		h_file_loader
 		#copy Sega Game Gear ROMs
-		cp -Rv "$folder"/* "$rootdir/ROMs/Sega Game Gear"
+		cp -Rv "$folder/." "$rootdir/ROMs/Sega Game Gear"
 		;;
 
 		8)
 		#call file loader  	
 		h_file_loader
 		#copy GBC ROMs
-		cp -Rv "$folder"/* "$rootdir/ROMs/GBC/"
+		cp -Rv "$folder/." "$rootdir/ROMs/GBC/"
 		;;
 
 		9)
 		#call file loader  	
 		_file-loader
 		#copy GBA ROMs
-		cp -Rv "$folder"/* "$rootdir/ROMs/GBA/"
+		cp -Rv "$folder/." "$rootdir/ROMs/GBA/"
 		;;
 
 		10)
 		#call file loader  	
 		h_file_loader
 		#copy Turbographx 16 ROMs
-		cp -Rv "$folder"/* "$rootdir/ROMs/TurboGraphx 16/"
+		cp -Rv "$folder/." "$rootdir/ROMs/TurboGraphx 16/"
 		;;
 
 		11)  
 		#call file loader  	
 		h_file_loader
 		#copy Neo-Geo CDZ
-		cp -Rv "$folder"/* "$rootdir/ROMs/Neo-Geo/CDZ/"
+		cp -Rv "$folder/." "$rootdir/ROMs/Neo-Geo/CDZ/"
 		;;
 
 		12)  
+		#call file loader  	
+		h_file_loader
+		#copy Neo-Geo CDZ
+		cp -Rv "$folder/." "$rootdir/ROMs/C64/"
+		;;
+
+		13)  
 		return
 		;;
 		esac
@@ -324,7 +332,7 @@ options=(1 "Neo-Geo CDZ"
 		#call file loader  	
 		h_file_loader
 		#copy Neo-Geo BIOS file over
-		cp -Rv "$folder" "$rootdir/ROMs/Neo-Geo/BIOS"
+		cp -Rv "$folder/." "$rootdir/ROMs/Neo-Geo/BIOS"
 		;;
 
 		2)  
