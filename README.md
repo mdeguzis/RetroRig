@@ -1,5 +1,6 @@
 RetroRig Project for Ubuntu 14.04 LTS
 ===================================================
+![alt text](http://i.imgur.com/Irgv0Fx.png "RetroRig")
 ###### [Version 0.7.7]
 
 RetroRig is shell script to setup a Linux x86_64 system  with several emulators, and XBMC as graphical
@@ -33,22 +34,23 @@ Warning! It will overwrite:
 
 ## Some current features include
 
-For all other features, please see the [wiki](https://github.com/ProfessorKaos64/RetroRig/wiki)
-
+For all other features, please see the [wiki](https://github.com/ProfessorKaos64/RetroRig/wiki/Features)
 
 * Auto-install software, emulator configs, and required components
-* Many supported consoles 
+* Many supported consoles (more added frequently)
 * Gamepad select menu
 * Resolution presets/custom selection for emulators that support it
 * Preset Controller mappings for supported gamepads
 * Save state, load state, exit emulators with gamepad
 * A cobbled together "first run" state of RCB with a blank games database and pre-set configs
 * Functions to update git repo, emulator binaries, upgrade system and more
-* Automatically start XBMC, then directly into RCB itself
+* Automatically start XBMC, then directly into RCB itself (option to boot to XBMC session in settings menu)
 * ROM pre-loader
+* BIOS pre-loader
+* A super lame logo on startup!
+* Modular design for expandability
 * Unity configuration set during config-setup to lengthen screen timeout + remove screen lock
 * Uninstall option
-* Load BIOS files for emulators that need them (no need to remeber where to put them!)
 
 ## Why XBMC and Ubuntu?
 
@@ -78,9 +80,9 @@ You may add the `--help` flag to the script for a quick help file. Come on, do i
 
 Pre-requisites:
 
-You will need git and dialog to run the installer:
+You will need git,figlet and dialog to run the installer:
 
-    sudo apt-get install dialog git
+    sudo apt-get install dialog git figlet
 
 RetroRig will try to install them for you (for instance, if you download the zip archive), but if you
 experience any issues starting the script,enusre they exist with the CLI commands 'which dialog' 

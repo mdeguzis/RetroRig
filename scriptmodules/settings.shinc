@@ -20,7 +20,7 @@ while true; do
 	     5 "Enable SSH support"
 	     6 "BIOS loader"
 	     7 "BIOS checker"
-	     8 "Enable XBMC Session (autostart)"
+	     8 "Enable XBMC session (beta feature)"
  	     9 "Back to main menu")
 
 	#make menu choice
@@ -59,6 +59,7 @@ while true; do
 		;;
 
 		8)
+		dialog --msgbox "This option will skip the Unity desktop, and load XBMC directly. You can still go back to the Ubuntu desktop by exiting XBMC, and choosing 'Ubuntu Desktop' Uninstalling RetroRig will revert this option, or you can merely change '/usr/share/lightdm.conf.d/50-ubuntu.conf's 'user-session' back to 'ubuntu' Please be advised that using RetroRig with the xbmc session enabled may result in odd behavior with some emulators. I am doing my best to help/correct this." 14 60
 		set_xbmc_session
 		;;
 
@@ -75,6 +76,7 @@ done
 
 function set_enable_ssh()
 {
+	clear
 	#install openssh-server  
 	apt-get install -y openssh-server
 	#prompt user to change default port
@@ -96,11 +98,28 @@ function set_xbmc_session()
 	# Allow user to choose whether or not they want to boot directly to an
 	# XBMC session, rather than boot Unity and load XBMC.
 	
+	# confirm with user first
+	cfg_confirm
+
+	clear
+	# copy config files
 	cp -v "$rootdir/XBMC-cfgs/XBMC-session/xbmc.desktop" "/usr/share/xsessions"
 	cp -v "$rootdir/XBMC-cfgs/XBMC-session/xbmc-session" "/usr/bin"
+	# make executable
 	chmod +x "/usr/bin/xbmc-session"
-	chmod +x "/usr/share/xessions/xbmc.desktop"
+	chmod +x "/usr/share/xsessions/xbmc.desktop"
+	# change default xsession
+	session_org=$(grep "session" /usr/share/lightdm/lightdm.conf.d/50-ubuntu.conf)
+	session_new="user-session=XBMC"
 
+	# change the session
+	# NOTE! As of Ubuntu Trusy 14.04, lightdm-set-defaults is no longer available. This is because 
+	# lightdm now using a configuration directory /etc/lightdm/lightdm.conf.d/ rather than a 
+	# single configuration file. The files in this directory can be edited by hand, new files 
+	# can be added, or files can be removed. There is no longer any need for a command that 
+	# edits the single configuration file.
+
+	sed -i "s|$session_org|$session_new|g" "/usr/share/lightdm/lightdm.conf.d/50-ubuntu.conf"
 	# correct permissions
 	h_correct_perms
 }

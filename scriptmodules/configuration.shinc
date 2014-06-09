@@ -8,7 +8,7 @@
 #
 # prepare folder structure for emulator, cores, front end, and roms
 
-function cfg_confirm ()
+function cfg_confirm()
 {
 
 	dialog --title "Confirm yes/no" \
@@ -27,15 +27,15 @@ function cfg_confirm ()
 	   ;;
 
 	   1) 
-	   dialog --infobox "Exiting..."  3 31
+	   dialog --infobox "Exiting..."  3 15
 	   sleep 2s
-	   _main
+	   set_menu
 	   ;;
 
 	   255)
-	   dialog --infobox "Exiting..." 3 31
+	   dialog --infobox "Exiting..." 3 15
 	   sleep 2s
-	   _main
+	   set_menu
 	   ;;
 
 	esac
@@ -76,14 +76,20 @@ dialog --title "Confirm yes/no" \
 	;;
 
    	1)
+	return
 	;; 
+
+	255)
+	return
+	;;
+
 	esac
 
 #ask to keep folders
 #prompt user if they wish to keep folders from install
 dialog --title "Confirm yes/no" \
 	--backtitle "LibreGeek.org RetroRig Installer" \
-	--yesno "Do you wish to keep configuration folders?" 22 76	
+	--yesno "Do you wish to keep configuration folders?" 6 30	
 	 
 	# Get exit status
 	# 0 means user hit [yes] button.
@@ -116,8 +122,21 @@ dialog --title "Confirm yes/no" \
 	rm -f /etc/default/xboxdrv
 	sed -i 's|blacklist xpad||g' /etc/modprobe.d/blacklist.conf
 	# XBMC session (if applicable)
-	rm -f "/usr/share/xsessions/xbmc.desktop"
-	rm -f "/usr/bin/xbmc-session"
+
+	# change default xsession
+	session_org="user-session=XBMC"
+	session_new="user-session=ubuntu"
+
+	# change the session
+	# NOTE! As of Ubuntu Trusy 14.04, lightdm-set-defaults is no longer available. This is because 
+	# lightdm now using a configuration directory /etc/lightdm/lightdm.conf.d/ rather than a 
+	# single configuration file. The files in this directory can be edited by hand, new files 
+	# can be added, or files can be removed. There is no longer any need for a command that 
+	# edits the single configuration file.
+
+	sed -i "s|$session_org|$session_new|g" "/usr/share/lightdm/lightdm.conf.d/50-ubuntu.conf"
+	# correct permissions
+	h_correct_perms
 	;;
 
 	255)
@@ -132,7 +151,7 @@ dialog --title "Confirm yes/no" \
 
 	dialog --title "Confirm yes/no" \
 	--backtitle "LibreGeek.org RetroRig Installer" \
-	--yesno "Do you wish to keep your ROMs?" 5 52
+	--yesno "Do you wish to keep your ROMs?" 6 30
 	 
 	# Get exit status
 	# 0 means user hit [yes] button.

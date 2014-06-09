@@ -132,9 +132,8 @@ function rrs_gamepad (){
 
 cmd=(dialog --backtitle "LibreGeek.org RetroRig Installer" --menu "| Gamepad Select | \
 			 Request any new Gamepads via github!" 16 62 16)
-options=(1 "Xbox 360 Controller (wireless) (4-player)" 
-	 2 "Exit gamepad selection"
-	 3 "Back to main menu")
+options=(1 "Xbox 360 Controller (standard)"
+	 2 "Exit gamepad selection")
 
 	#make menu choice
 	selection=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
@@ -152,9 +151,6 @@ options=(1 "Xbox 360 Controller (wireless) (4-player)"
 		return
 		;;
 
-		3)
-		return
-		;;
 		esac
 	done
 }
@@ -231,13 +227,16 @@ function rrs_software() {
 	# ...none for now...
 
 	# Output postMSGs to screen
-	__postMSGs="$__postMSGs If you wish to start XBMC as a session ONLY, and not Unity whatsover, enabled the 'XBMC Session' option in the settings menu!"
+	__postMSGs="$__postMSGs If you wish to start XBMC as a session ONLY, and not Unity whatsover, enable the 'XBMC Session' option in the settings menu! Please be advised that using RetroRig with the xbmc session enabled may result in odd behavior with some emulators. I am doing my best to help/correct this."
 	# inject a space to seperate messages?
 	__postMSGs="$__postMSGs "
+
+	# inject a space to seperate messages?
+	__postMSGs="$__postMSGs For VirtualBox users, please see the wiki under 'Installation' for notes on running RetroRig under a virtual machine! At the minimum, you will need to add a filter for your controller "
 	
         if [[ ! -z $__postMSGs ]]; then
             dialog --backtitle "LibreGeek.org - RetroRig Setup. Installation folder: $rootdir for user $user" --msgbox "$__postMSGs\n\nSoftware install complete. \
-See debug.log for more details. Continuing on to emulator installs..." 15 50
+See debug.log for more details. Continuing on to emulator installs..." 18 60
         fi
 
         chown -R "$user" "$scriptdir/logs/install_$now.log.gz"
@@ -245,28 +244,29 @@ See debug.log for more details. Continuing on to emulator installs..." 15 50
 	#END
 }
 
-function rrs_xboxdrv () 
+function rrs_xboxdrv() 
 {
 
-	#Wireless Xbox 360 Controller Config
-	
-	# copy keyboard.xml file for XBMC. Button id numbers are totally diffferent, due to the use of the use-dpad-as-button, and use-trigger-as-button options used.
-	cp -v "$rootdir/gamepad-cfgs/x360_controller/keyboard.xml" "$home/.xbmc/userdata/keymaps"
+	# xboxdrv settings
 
 	#set qjoypad's profile to match Xbox 360 Wireless (4-player)
 	cp -v "$rootdir/gamepad-cfgs/x360_controller/x360_controller.lyt" "$home/.qjoypad3"
 	#copy qjoypad autostart item for x360_controller gamepad config
 	cp -v "$rootdir/gamepad-cfgs/x360_controller/qjoypad.desktop" "/etc/xdg/autostart/"
 	
+	#blacklist xpad
+	cp -v "$rootdir/init-scripts/x360_controller/blacklist.conf" "/etc/modprobe.d/"
+
 	#inject init script and default config
 	cp -v "$rootdir/init-scripts/x360_controller/xboxdrv" "/etc/init.d/"
 	cp -v "$rootdir/init-scripts/x360_controller/default/xboxdrv" "/etc/default/xboxdrv"
-	
+
+	# copy keyboard.xml file for XBMC. Button id numbers are totally diffferent, due to the use of 
+	# the use-dpad-as-button, and use-trigger-as-button options used.
+	cp -v "$rootdir/gamepad-cfgs/x360_controller/keyboard.xml" "$home/.xbmc/userdata/keymaps"
+
 	#update init scripts
 	update-rc.d xboxdrv defaults
-
-	#blacklist xpad
-	cp -v "$rootdir/init-scripts/x360_controller/blacklist.conf" "/etc/modprobe.d/"
 
 	#fix permissions since we are running as sudo
 	h_correct_perms
@@ -388,17 +388,17 @@ function rrs_prereq()
 {
     if [[ -z $(type -P git) || -z $(type -P dialog) || -z $(type -P figlet) ]]; then
         echo "Did not find needed packages 'git' and/or 'dialog/figlet'. Attempting to install these now."
-	sleep 2s
+	sleep 3s
         apt-get update
         apt-get install -y git dialog figlet
         if [ $? == '0' ]; then
             echo "Successfully installed 'git/dialog/figlet'." > "$scriptdir/logs/prechecks.log"
-	    sleep 2s
+	    sleep 3s
 	    prereqs="true"
         else
             echo "Could not install 'git' and/or 'dialog/figlet'. Exiting..." > "$scriptdir/logs/prechecks.log"
 	    prereqs="false"
-	    sleep 2s
+	    sleep 3s
             exit 1
         fi
     else

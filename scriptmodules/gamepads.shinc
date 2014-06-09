@@ -13,7 +13,7 @@ function gp_x360()
 	#mame
 	# default path: /home/$USER/.mame
 	# Main config
-	cp -v "$scriptdir/emu-cfgs/x360_controller/MAME/default.cfg" "$home/.mame/cfg "
+	cp -v "$scriptdir/emu-cfgs/x360_controller/MAME/default.cfg" "$home/.mame/cfg"
 	cp -v "$scriptdir/emu-cfgs/x360_controller/MAME/mame.ini" "$home/.mame"
  
 	# offline artwork scrapper configs
@@ -43,7 +43,7 @@ function gp_x360()
 	#Main config
 	cp -v "$scriptdir/emu-cfgs/x360_controller/Stella/stellarc" "$home/.stella/"
 
-	#configure xboxdrv for gamepad
+	# configure xboxdrv for gamepad
 	rrs_xboxdrv
 
 	# correct permissions
