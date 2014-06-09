@@ -60,8 +60,10 @@ options=(1 "Current configuration"
 function h_file_loader()
 {
 
-	dialog --msgbox "Usage:\n\n(spacebar)              select file\n(double-tap spacebar) \
-	  enter new directory\n(Enter)                 confirm selection\n(Arrow keys)            Navigate" 11 48
+	dialog --msgbox "Usage:\n\nChoose the *FOLDER*, not the file(s) you wish to load ROMs from\n\n
+	(spacebar)          
+	    select file\n(double-tap spacebar) \
+	  enter new directory\n(Enter)                 confirm selection\n(Arrow keys)            Navigate" 15 48
 	folder=$(dialog --stdout --cr-wrap --title "Please choose a file" --fselect "$home/" 14 48)
 
 	# debugging only
@@ -72,7 +74,7 @@ function h_file_loader()
 function h_rom_loader()
 {
 
-cmd=(dialog --backtitle "LibreGeek.org RetroRig Installer" --menu "Load ROMs for which system?" 19 32 24)
+cmd=(dialog --backtitle "LibreGeek.org RetroRig Installer" --menu "Load ROMs for which system?" 20 32 24)
 options=(1 "Atari 2600" 
 	 2 "NES" 
 	 3 "SNES" 
@@ -98,88 +100,95 @@ options=(1 "Atari 2600"
 		#call file loader  	
 		h_file_loader
 		#copy Atari ROMs
-		cp -Rv "$folder/." "$rootdir/ROMs/Atari 2600/"
+		cp -Rv "$folder"/* "$rootdir/ROMs/Atari 2600/"
 		;;
 
 		2)  
 		h_file_loader
-		cp -Rv "$folder/." "$rootdir/ROMs/NES/"
+		cp -Rv "$folder"/* "$rootdir/ROMs/NES/"
 		;;
 
 		3)
 		#call file loader  	
 		h_file_loader
 		#copy SNES ROMs
-		cp -Rv "$folder/." "$rootdir/ROMs/SNES/"
+		cp -Rv "$folder"/* "$rootdir/ROMs/SNES/"
 		;;
 
 		4)
 		#call file loader  	
 		h_file_loader
 		#copy N64 ROMs
-		cp -Rv "$folder/." "$rootdir/ROMs/N64/"
+		cp -Rv "$folder"/* "$rootdir/ROMs/N64/"
 		;;
 
 		5)
 		#call file loader  	
 		h_file_loader
 		#copy MAME ROMs
-		cp -Rv "$folder/." "$rootdir/ROMs/MAME/"
+		cp -Rv "$folder"/* "$rootdir/ROMs/MAME/"
 		;;
 
 		6)
 		#call file loader  	
 		h_file_loader
 		#copy Sega Master System ROMs
-		cp -Rv "$folder/." "$rootdir/ROMs/Sega Master System"
+		cp -Rv "$folder"/* "$rootdir/ROMs/Sega Master System"
 		;;
 
 		7)
 		#call file loader  	
 		h_file_loader
 		#copy Sega Game Gear ROMs
-		cp -Rv "$folder/." "$rootdir/ROMs/Sega Game Gear"
+		cp -Rv "$folder"/* "$rootdir/ROMs/Sega Game Gear"
 		;;
 
 		8)
 		#call file loader  	
 		h_file_loader
 		#copy GBC ROMs
-		cp -Rv "$folder/." "$rootdir/ROMs/GBC/"
+		cp -Rv "$folder"/* "$rootdir/ROMs/GBC/"
 		;;
 
 		9)
 		#call file loader  	
 		_file-loader
 		#copy GBA ROMs
-		cp -Rv "$folder/." "$rootdir/ROMs/GBA/"
+		cp -Rv "$folder"/* "$rootdir/ROMs/GBA/"
 		;;
 
 		10)
 		#call file loader  	
 		h_file_loader
 		#copy Turbographx 16 ROMs
-		cp -Rv "$folder/." "$rootdir/ROMs/TurboGraphx 16/"
+		cp -Rv "$folder"/* "$rootdir/ROMs/TurboGraphx 16/"
 		;;
 
 		11)  
 		#call file loader  	
 		h_file_loader
 		#copy Neo-Geo CDZ
-		cp -Rv "$folder/." "$rootdir/ROMs/Neo-Geo/CDZ/"
+		cp -Rv "$folder"/* "$rootdir/ROMs/Neo-Geo/CDZ/"
 		;;
 
 		12)  
 		#call file loader  	
 		h_file_loader
 		#copy Neo-Geo CDZ
-		cp -Rv "$folder/." "$rootdir/ROMs/C64/"
+		cp -Rv "$folder"/* "$rootdir/ROMs/C64/"
 		;;
 
 		13)  
 		return
 		;;
+
+		255)
+		return
+		;;
+
 		esac
+		
+
 	done
 
 	# correct permissions
