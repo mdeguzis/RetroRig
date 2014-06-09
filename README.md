@@ -80,9 +80,9 @@ You may add the `--help` flag to the script for a quick help file. Come on, do i
 
 Pre-requisites:
 
-You will need git and dialog to run the installer:
+You will need git,figlet and dialog to run the installer:
 
-    sudo apt-get install dialog git
+    sudo apt-get install dialog git figlet
 
 RetroRig will try to install them for you (for instance, if you download the zip archive), but if you
 experience any issues starting the script,enusre they exist with the CLI commands 'which dialog' 
