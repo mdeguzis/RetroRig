@@ -58,7 +58,7 @@ package!
 
 	# Since ppsspp-0.9.8-SDL-pk64 is already in $rootdir/emulators, we just
 	# need to untar it:
-	tar -xzvf $rootdir/emulators/ppsspp-0.9.8-SDL-pk64
+	tar -xzvf $rootdir/emulators/PPSSPP/ppsspp-0.9.8-SDL-pk64
 	# Symlink  binary to common location 
 to avoid path errors based on where
 	# user installs RetroRig...
