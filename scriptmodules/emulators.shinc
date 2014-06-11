@@ -62,7 +62,7 @@ package!
 	# Symlink  binary to common location to avoid path errors based on where
 	# user installs RetroRig. Remove link if it exists first.
 	rm -f "/usr/bin/PPSSPPSDL"
-	ln -s "$rootdit/emulators/ppsspp-0.9.8-SDL-pk64/PPSSPPSDL" "/usr/bin"
+	ln -s "$rootdit/emulators/PPSSPP/ppsspp-0.9.8-SDL-pk64/PPSSPPSDL" "/usr/bin"
 	chmod +x "/usr/bin/PPSSPPSDL"
 	
 	# XBMC will run the compiled executable file directly from this path
