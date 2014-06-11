@@ -26,6 +26,8 @@ Issues list
 Future Goals
 ---------------
 
+- Now that XBMC will get the SteamOS treatment, add 
+module to hook into that for ultimate awesome-sauce
 - Provide "Uninstall option" (saving configs before hand, restoring after)
 - Exit every emulator with Esc (pcsx, pcsx2, dolphin problematic)
 - (done) Establish and maintain "Beta" git branch for newer changes
