@@ -242,6 +242,7 @@ while true; do
 		rrs_unity
 		rrs_xbmc
 		rrs_gamepad
+		h_emu_user_fixes
 		set_resolution
 		rrs_autostart
 		} 2>&1 | tee >(gzip --stdout > $scriptdir/logs/install_$now.log.gz)	               	

@@ -378,16 +378,19 @@ function h_correct_perms()
 
 	# replace "test" username in config files here to ensure games
 	# and emulators function and start properly
+}
 
+function h_emu_user_fixes()
+{
 
 	# set the system user to an absolute value for files that require it
 	# RCB and some config files don't like using $HOME, rather /home/test/
 	# Let's change the config files to reflect the current username
 
 	# mame
-	sed -i "s|/home/mikeyd/|/home/$USER/|g" $HOME/.mame/mame.ini | tee >> "$rootdir/logs/debug.log"
+	sed -i "s|/home/mikeyd/|/home/$USER/|g" $home/.mame/mame.ini | tee >> "$rootdir/logs/debug.log"
 	# XBMC
-	sed -i "s|/home/mikeyd/|/home/$USER/|g" $HOME/.xbmc/userdata/addon_data/script.games.rom.collection.browser/config.xml | tee >> "$rootdir/logs/debug.log"
+	sed -i "s|/home/mikeyd/|/home/$USER/|g" $home/.xbmc/userdata/addon_data/script.games.rom.collection.browser/config.xml | tee >> "$rootdir/logs/debug.log"
 	# PPSSPP	
 	sed -i 's|test|$user|g' "scriptdir/emu-cfgs/x360_controller/PPSSPP/ppsspp.ini"
 	echo "The user applied to configuration files was: $user" | tee >> "$rootdir/logs/debug.log"
