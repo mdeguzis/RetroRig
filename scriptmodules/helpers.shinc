@@ -86,7 +86,7 @@ options=(1 "Atari 2600"
 	 9 "GBC"
 	 10 "TurboGraphx 16"
 	 11 "Neo-Geo CDZ"
-	 12 "Commodore 64"
+	 12 "PSP"
 	 13 "Exit ROM Loader")
 
 	#make menu choice
@@ -167,15 +167,15 @@ options=(1 "Atari 2600"
 		11)  
 		#call file loader  	
 		h_file_loader
-		#copy Neo-Geo CDZ
+		#copy Neo-Geo CDZ ROMs
 		cp -Rv "$folder"/* "$rootdir/ROMs/Neo-Geo/CDZ/"
 		;;
 
 		12)  
 		#call file loader  	
 		h_file_loader
-		#copy Neo-Geo CDZ
-		cp -Rv "$folder"/* "$rootdir/ROMs/C64/"
+		#copy PSP ROMs
+		cp -Rv "$folder"/* "$rootdir/ROMs/PSP/"
 		;;
 
 		13)  
@@ -375,6 +375,23 @@ function h_correct_perms()
     	chown -R "$user" "$rootdir"
     	chgrp -R "$user" "$home"
     	chown -R "$user" "$home"
+
+	# replace "test" username in config files here to ensure games
+	# and emulators function and start properly
+
+
+	# set the system user to an absolute value for files that require it
+	# RCB and some config files don't like using $HOME, rather /home/test/
+	# Let's change the config files to reflect the current username
+
+	# mame
+	sed -i "s|/home/mikeyd/|/home/$USER/|g" $HOME/.mame/mame.ini | tee >> "$rootdir/logs/debug.log"
+	# XBMC
+	sed -i "s|/home/mikeyd/|/home/$USER/|g" $HOME/.xbmc/userdata/addon_data/script.games.rom.collection.browser/config.xml | tee >> "$rootdir/logs/debug.log"
+	# PPSSPP	
+	sed -i 's|test|$user|g' "scriptdir/emu-cfgs/x360_controller/PPSSPP/ppsspp.ini"
+	echo "The user applied to configuration files was: $user" | tee >> "$rootdir/logs/debug.log"
+
 }
 
 function h_filechecker()

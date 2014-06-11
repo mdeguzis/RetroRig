@@ -28,7 +28,7 @@ function rrs_prepareFolders()
 	pathlist+=("$rootdir/ROMs/GBA")
 	pathlist+=("$rootdir/ROMs/TurboGraphx 16")
 	pathlist+=("$rootdir/ROMs/Neo-Geo/CDZ")
-	pathlist+=("$rootdir/ROMs/Commodore 64")
+	pathlist+=("$rootdir/ROMs/PSP")
 
 	#Artwork 
 	pathlist+=("$rootdir/Artwork/Atari 2600")
@@ -41,7 +41,7 @@ function rrs_prepareFolders()
 	pathlist+=("$rootdir/Artwork/GBA")
 	pathlist+=("$rootdir/Artwork/TurboGraphx 16")
 	pathlist+=("$rootdir/Artwork/Neo-Geo/CDZ")
-	pathlist+=("$rootdir/Artwork/Commodore 64")
+	pathlist+=("$rootdir/Artwork/PSP")
 	#Artwork - MAME offline scraper
 	pathlist+=("$rootdir/Artwork/MAME")
 	pathlist+=("$rootdir/Artwork/MAME/boxfront")
@@ -64,7 +64,7 @@ function rrs_prepareFolders()
 	pathlist+=("$rootdir/Saves/GBA")
 	pathlist+=("$rootdir/Saves/TurboGraphx 16")
 	pathlist+=("$rootdir/Saves/Neo-Geo/CDZ")
-	pathlist+=("$rootdir/Saves/Commodore 64")
+	pathlist+=("$rootdir/Saves/PSP")
 
 	#create dotfiles
 	pathlist+=("$HOME/.qjoypad3")
@@ -170,6 +170,7 @@ function rrs_emulators()
 	em_install_mess
 	em_install_stella
 	em_install_mednafen
+	em_install_ppsspp
 
 	#fix permissions since we are running as sudo
 	h_correct_perms

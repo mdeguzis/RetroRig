@@ -311,19 +311,19 @@
       <imagePlacingInfo>gameinfosmall</imagePlacingInfo>
       <scraper name="MAME" replaceKeyString="" replaceValueString="" />
     </RomCollection>
-    <RomCollection id="12" name="Commodore 64">
+    <RomCollection id="12" name="PSP">
       <useBuiltinEmulator>False</useBuiltinEmulator>
       <gameclient />
-      <emulatorCmd>/usr/games/mess</emulatorCmd>
-      <emulatorParams>"%ROM%"</emulatorParams>
-      <romPath>/home/test/RetroRig/ROMs/Commodore 64/*.zip</romPath>
+      <emulatorCmd>/usr/bin/PPSSPPSDL</emulatorCmd>
+      <emulatorParams>--fullscreen --escape-exit "%ROM%"</emulatorParams>
+      <romPath>/home/test/RetroRig/ROMs/PSP/*.iso</romPath>
       <saveStatePath />
       <saveStateParams />
-      <mediaPath type="boxfront">/home/test/RetroRig/Artwork/Commodore 64/boxfront/%GAME%.*</mediaPath>
-      <mediaPath type="boxback">/home/test/RetroRig/Artwork/Commodore 64/boxback/%GAME%.*</mediaPath>
-      <mediaPath type="cartridge">/home/test/RetroRig/Artwork/Commodore 64/cartridge/%GAME%.*</mediaPath>
-      <mediaPath type="screenshot">/home/test/RetroRig/Artwork/Commodore 64/screenshot/%GAME%.*</mediaPath>
-      <mediaPath type="fanart">/home/test/RetroRig/Artwork/Commodore 64/fanart/%GAME%.*</mediaPath>
+      <mediaPath type="boxfront">/home/test/RetroRig/Artwork/PSP/boxfront/%GAME%.*</mediaPath>
+      <mediaPath type="boxback">/home/test/RetroRig/Artwork/PSP/boxback/%GAME%.*</mediaPath>
+      <mediaPath type="cartridge">/home/test/RetroRig/Artwork/PSP/cartridge/%GAME%.*</mediaPath>
+      <mediaPath type="screenshot">/home/test/RetroRig/Artwork/PSP/screenshot/%GAME%.*</mediaPath>
+      <mediaPath type="fanart">/home/test/RetroRig/Artwork/PSP/fanart/%GAME%.*</mediaPath>
       <preCmd />
       <postCmd />
       <useEmuSolo>False</useEmuSolo>
