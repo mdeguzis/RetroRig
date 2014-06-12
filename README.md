@@ -31,7 +31,7 @@ It is mainly targeted at folks wishing to repurpose an old physical PC. VirtualB
 (to an extent), but can behave erratcially with emulator speed/framerates and is not advised. I do
 hope to corrrect some of that in due time, but right now, it is more of an "extra" or a "test bed."
 
-Warning! It will overwrite:
+It will overwrite:
 
 * Emulator configs for supported emulators (see 
 "Section 1: Installation" of the wiki)  
@@ -41,9 +41,8 @@ Also configs related to:
 * qjoypad
 * Blacklisting xpad
 * Autostarted application entries (XBMC, qjoypad)
-* Some folder structures under ~/Games
 * xboxdrv init scripts and configurations
-
+* The XBMC xsession (if used)
 ## Some current features include
 
 For all other features and future plans, please see the [wiki](https://github.com/ProfessorKaos64/RetroRig/wiki/Features)
