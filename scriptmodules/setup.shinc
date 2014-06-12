@@ -69,6 +69,8 @@ function rrs_prepareFolders()
 	#create dotfiles
 	pathlist+=("$HOME/.qjoypad3")
 	pathlist+=("$HOME/.config/mupen64plus")
+	
+pathlist+=("$HOME/.config/ppsspp/PSP/SYSTEM")
 	pathlist+=("$HOME/.mame/cfg")
 	pathlist+=("$HOME/.mess")
 	pathlist+=("$HOME/.mess/cfg")
