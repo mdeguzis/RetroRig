@@ -14,6 +14,12 @@ I invite you to challenge the configs and scripts to help improve my ultimate go
 an easy way to get up and running with RetroGaming on x86_64 Linux systems. Pull requests or
 Issues are very much welcome!
 
+**Please be advised:**      
+RetroRig requires sudo access to inject the xboxdrv 
+init sripts, install softwate via apt-get, and other 
+various items. All script code and config files are 
+available for review.
+
 Thank you for your patience.
 
 ## Demo Video (Version 0.7.9)
@@ -27,7 +33,8 @@ hope to corrrect some of that in due time, but right now, it is more of an "extr
 
 Warning! It will overwrite:
 
--Emulator configs for supported emulators (see "Section 1: Installation" of the wiki)  
+* Emulator configs for supported emulators (see 
+"Section 1: Installation" of the wiki)  
 -Also configs related to:  
 
 * qjoypad
