@@ -17,7 +17,7 @@ Issues are very much welcome!
 Thank you for your patience.
 
 ## Demo Video (Version 0.7.9)
-[[youtube-{http://youtu.be/W2diF4EJBU4}-{650}x{517}]]
+{media}(youtube::2diF4EJBU4::420)
 
 ## Warning
 
