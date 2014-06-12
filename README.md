@@ -36,7 +36,7 @@ Warning! It will overwrite:
 
 ## Some current features include
 
-For all other features, please see the [wiki](https://github.com/ProfessorKaos64/RetroRig/wiki/Features)
+For all other features and future plans, please see the [wiki](https://github.com/ProfessorKaos64/RetroRig/wiki/Features)
 
 * Auto-install software, emulator configs, and required components
 * Many supported consoles (more added frequently)
