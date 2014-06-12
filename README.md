@@ -31,18 +31,9 @@ It is mainly targeted at folks wishing to repurpose an old physical PC. VirtualB
 (to an extent), but can behave erratcially with emulator speed/framerates and is not advised. I do
 hope to corrrect some of that in due time, but right now, it is more of an "extra" or a "test bed."
 
-It will overwrite:
-
-* Emulator configs for supported emulators (see 
-"Section 1: Installation" of the wiki)  
-
-Also configs related to:  
-
-* qjoypad
-* Blacklisting xpad
-* Autostarted application entries (XBMC, qjoypad)
-* xboxdrv init scripts and configurations
-* The XBMC xsession (if used)
+It will overwrite some folders for supported 
+emulators and a few system files. Please see the 
+wiki entries under "Installation," and "Advanced Configuration."
 
 ## Some current features include
 
