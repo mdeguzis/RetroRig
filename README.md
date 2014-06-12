@@ -17,8 +17,7 @@ Issues are very much welcome!
 Thank you for your patience.
 
 ## Demo Video (Version 0.7.9)
-{media}(youtube::2diF4EJBU4::420)
-
+[![ScreenShot](http://http://i.imgur.com/3DtjqJm.png)](http://youtu.be/W2diF4EJBU4)
 ## Warning
 
 RetroRig is meant to be a standalone setup for XBMC on Ubuntu.
