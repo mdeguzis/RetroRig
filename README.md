@@ -43,6 +43,7 @@ Also configs related to:
 * Autostarted application entries (XBMC, qjoypad)
 * xboxdrv init scripts and configurations
 * The XBMC xsession (if used)
+
 ## Some current features include
 
 For all other features and future plans, please see the [wiki](https://github.com/ProfessorKaos64/RetroRig/wiki/Features)
