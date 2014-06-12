@@ -321,8 +321,12 @@ function rrs_debug()
 	# Check unity settings:
 	echo "Unity settings (if applicable):" >> "$rootdir/logs/debug.log"
 	gsettings list-recursively "org.gnome.desktop.screensaver" | grep "lock-enabled" >> "$rootdir/logs/debug.log"
-	gsettings list-recursively "org.gnome.desktop.screensaver" | grep "ubuntu-lock-on-suspend" >> "$rootdir/logs/debug.log"
+	gsettings list-recursively "org.gnome.desktop.screensaver" | grep "ubuntu-lock-on-suspend" >> "$rootdir/logs/debug.log"	
 	gsettings list-recursively "org.gnome.desktop.session" | grep "idle-delay" >> "$rootdir/logs/debug.log"
+
+	# Source built / pre-built
+	h_filechecker "$rootdir/emulators/PPSSPP/ppsspp-0.9.8-SDL-pk64
+	h_filechecker "/ust/bir/PPSSPPSDL"
 
 	#APT pkg checks
 	echo -e "\nCheck for needed pkgs installed via apt: " >> "$rootdir/logs/debug.log"
