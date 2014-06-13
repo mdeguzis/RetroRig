@@ -53,8 +53,8 @@ function em_install_ppsspp()
 	# See: https://github.com/hrydgard/ppsspp/tree/master/SDL
 
 	# I took that, compiled it from source, kept only the necessary files 
-	# (this means I removed the CMAKE files left over). Once a tar.gz file, this resulted in a 21.8 MB "mobile" 
-package!
+	# (this means I removed the CMAKE files left over). Once a tar.gz file, 
+	# this resulted in a 21.8 MB "mobile" pkg :)
 
 	# Since ppsspp-0.9.8-SDL-pk64 is already in $rootdir/emulators, we just
 	# need to untar it:
