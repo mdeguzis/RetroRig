@@ -510,7 +510,7 @@ function rrs_first_reboot()
 	#confirm reboot is the intended action
 	dialog --title "Confirm yes/no" \
 	--backtitle "LibreGeek.org RetroRig Installer" \
-	--yesno "RetroRig needs to reboot in order to complete the installation. Reboot now?If not, please select 'Reboot PC' from the main menu"  6 0
+	--yesno "RetroRig needs to reboot in order to complete the installation. Reboot now?If not, please select 'Reboot PC' from the main menu"  10 35
 
 	# Get exit status
 	# 0 means user hit [yes] button.

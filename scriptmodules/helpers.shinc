@@ -20,7 +20,7 @@ h_autosave_configs()
 	mv "$home/.stella" "$home/.stella.old" 2>  "/dev/null"
 	mv "$home/.mednafen" "$home/.mednafen.old" 2>  "/dev/null"
 	mv "$home/.xbmc" "$home/.xbmc.old" 2>  "/dev/null"
-	mv "$home/.qjoypad3" "$home/.qjoypad.old" 2>  "/dev/null"
+	mv "$home/.qjoypad3" "$home/.qjoypad3.old" 2>  "/dev/null"
 	# .config dotfiles
 	mv "$home/.config/mupen64plus/mupen64plus.cfg" "$home/.config/mupen64plus.cfg.old" 2>  "/dev/null"
 	mv "$home/.config/ppsspp" "$home/.config/ppsspp.old" 2>  "/dev/null"
@@ -56,7 +56,7 @@ h_restore_configs()
 	mv "$home/.stella.old" "$home/.stella" 2>  "/dev/null"
 	mv "$home/.mednafen.old" "$home/.mednafen" 2>  "/dev/null"
 	mv "$home/.xbmc.old" "$home/.xbmc" 2>  "/dev/null"
-	mv "$home/.qjoypad3.old" "$home/.qjoypad" 2>  "/dev/null"
+	mv "$home/.qjoypad3.old" "$home/.qjoypad3" 2>  "/dev/null"
 	# .config dotfiles
 	mv "$home/.config/mupen64plus/mupen64plus.old" "$home/.config/mupen64plus.cfg" 2>  "/dev/null"
 	mv "$home/.config/ppsspp.old" "$home/.config/ppsspp.old" 2>  "/dev/null"
