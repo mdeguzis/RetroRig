@@ -25,7 +25,6 @@ h_autosave_configs()
 	mv "$home/.config/mupen64plus/mupen64plus.cfg" "$home/.config/mupen64plus.cfg.old"
 	mv "$home/.config/ppsspp" "$home/.config/ppsspp.old"
 	mv "$home/.ssh" "$home/.ssh.old"
-	# controller configs:
 
 	# system configs:
 	mv "/etc/xdg/autostart/xbmc" "/etc/xdg/autostart/xbmc.old"
@@ -37,6 +36,45 @@ h_autosave_configs()
 
 	# correct permissions after tar archive is created
 	h_correct_perms
+
+	# inform user
+	dialog --msgbox "All existing configs appended with .old" 5 43
+
+}
+
+
+h_restore_configs()
+{
+
+	# This section serves to restore existing configs when a user starts the install
+	# Directory checks will likely be put in soon.
+	# new files, aka new when installed, will be renamed without".old"
+
+	# home dotfiles:
+	mv "$home/.mame.old" "$home/.mame"
+	mv "$home/.mess.old" "$home/.mess"
+	mv "$home/.stella.old" "$home/.stella"
+	mv "$home/.mednafen.old" "$home/.mednafen"
+	mv "$home/.xbmc.old" "$home/.xbmc"
+	mv "$home/.qjoypad3.old" "$home/.qjoypad"
+	# .config dotfiles
+	mv "$home/.config/mupen64plus/mupen64plus.old" "$home/.config/mupen64plus.cfg"
+	mv "$home/.config/ppsspp.old" "$home/.config/ppsspp.old"
+	mv "$home/.ssh.old" "$home/.ssh"
+
+	# system configs:
+	mv "/etc/xdg/autostart/xbmc.old" "/etc/xdg/autostart/xbmc"
+	mv "/etc/init.d/xboxdrv.old" "/etc/init.d/xboxdrv"
+	mv "/etc/modprobe.d/blacklist.conf.old" "/etc/modprobe.d/blacklist.conf"
+	mv "/usr/share/xsessions/xbmc.desktop.old" "/usr/share/xsessions/xbmc.desktop"
+	mv "/usr/bin/xbmc-session.old" "/usr/bin/xbmc-session"
+	mv "/usr/share/lightdm/lightdm.conf.d/50-ubuntu.conf.old" "/usr/share/lightdm/lightdm.conf.d/50-ubuntu.conf"
+
+	# correct permissions after tar archive is created
+	h_correct_perms
+
+	#inform user
+	dialog --msgbox "All existing .old configs restored sans .old" 5 48
 
 }
 

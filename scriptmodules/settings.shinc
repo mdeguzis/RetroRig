@@ -12,7 +12,7 @@ function set_menu()
 	
 
 while true; do
-    cmd=(dialog --backtitle "LibreGeek.org RetroRig Installer" --menu "Settings Menu" 16 0 16)
+    cmd=(dialog --backtitle "LibreGeek.org RetroRig Installer" --menu "Settings Menu" 20 0 16)
     options=(1 "Change resolution"  
 	     2 "Load ROMs"
 	     3 "Change plugins/filters/scaling"
@@ -21,7 +21,9 @@ while true; do
 	     6 "BIOS loader"
 	     7 "BIOS checker"
 	     8 "Enable XBMC session (beta feature)"
- 	     9 "Back to main menu")
+	     9 "Backup existing configs (appended with .old)"
+	     10 "Restore first run configs"
+ 	     11 "Back to main menu")
 
 	#make menu choice
 	choices=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
@@ -64,6 +66,14 @@ while true; do
 		;;
 
 		9)
+		h_autosave_configs
+		;;
+
+		10)
+		h_restore_configs
+		;;
+
+		11)
 		return
 		;;
 
