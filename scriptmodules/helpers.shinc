@@ -15,25 +15,25 @@ h_autosave_configs()
 	# Old files, aka originals when ran, will be appended with ".old"
 
 	# home dotfiles:
-	cp -mv "$home/.mame" "$home/.mame.old"
+	mv "$home/.mame" "$home/.mame.old"
 	cp -mv "$home/.mess" "$home/.mess.old"
-	cp -mv "$home/.stella" "$home/.stella.old"
-	cp -mv "$home/.mednafen" "$home/.mednafen.old"
-	cp -mv "$home/.xbmc" "$home/.xbmc.old"
-	cp -rv "$home/.qjoypad3" "$home/.qjoypad.old"
+	mv "$home/.stella" "$home/.stella.old"
+	mv "$home/.mednafen" "$home/.mednafen.old"
+	mv "$home/.xbmc" "$home/.xbmc.old"
+	mv "$home/.qjoypad3" "$home/.qjoypad.old"
 	# .config dotfiles
-	cp -mv "$home/.config/mupen64plus/mupen64plus.cfg" "$home/.config/mupen64plus.cfg.old"
-	cp -mv "$home/.config/ppsspp/PSP/SYSTEM/controls.ini" "$home/.config/ppsspp/PSP/SYSTEM/controls.ini.old"
-	cp -mv "$home/.config/ppsspp/PSP/SYSTEM/ppsspp.ini" "$home/.config/ppsspp/PSP/SYSTEM/ppsspp.ini.old"
+	mv "$home/.config/mupen64plus/mupen64plus.cfg" "$home/.config/mupen64plus.cfg.old"
+	mv "$home/.config/ppsspp/PSP/SYSTEM/controls.ini" "$home/.config/ppsspp/PSP/SYSTEM/controls.ini.old"
+	mv "$home/.config/ppsspp/PSP/SYSTEM/ppsspp.ini" "$home/.config/ppsspp/PSP/SYSTEM/ppsspp.ini.old"
 	# controller configs:
 
 	# system configs:
-	cp -mv "/etc/xdg/autostart/xbmc" "/etc/xdg/autostart/xbmc.old"
-	cp -mv "/etc/init.d/xboxdrv" "/etc/init.d/xboxdrv.old"
-	cp -mv "/etc/modprobe.d/blacklist.conf" "/etc/modprobe.d/blacklist.conf.old"
-	cp -mv "/usr/share/xsessions/xbmc.desktop" "/usr/share/xsessions/xbmc.desktop.old"
-	cp -mv "/usr/bin/xbmc-session" "/usr/bin/xbmc-session.old"
-	cp -mv "/usr/share/lightdm/lightdm.conf.d/50-ubuntu.conf" "/usr/share/lightdm/lightdm.conf.d/50-ubuntu.conf.old"
+	mv "/etc/xdg/autostart/xbmc" "/etc/xdg/autostart/xbmc.old"
+	mv "/etc/init.d/xboxdrv" "/etc/init.d/xboxdrv.old"
+	mv "/etc/modprobe.d/blacklist.conf" "/etc/modprobe.d/blacklist.conf.old"
+	mv "/usr/share/xsessions/xbmc.desktop" "/usr/share/xsessions/xbmc.desktop.old"
+	mv "/usr/bin/xbmc-session" "/usr/bin/xbmc-session.old"
+	mv "/usr/share/lightdm/lightdm.conf.d/50-ubuntu.conf" "/usr/share/lightdm/lightdm.conf.d/50-ubuntu.conf.old"
 
 	# correct permissions after tar archive is created
 	h_correct_perms
