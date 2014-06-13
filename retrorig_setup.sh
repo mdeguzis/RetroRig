@@ -236,6 +236,7 @@ while true; do
 	    1) 
 		now=$(date +'%d%m%Y_%H%M%S')
 		{
+		h_autosave_configs
 		rrs_software
 		rrs_emulators
 		rrs_prepareFolders
