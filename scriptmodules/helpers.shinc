@@ -22,7 +22,7 @@ h_autosave_configs()
 	mv "$home/.xbmc" "$home/.xbmc.old" 2>  "/dev/null"
 	mv "$home/.qjoypad3" "$home/.qjoypad.old" 2>  "/dev/null"
 	# .config dotfiles
-	mv "$home/.config/mupen64plus/mupen64plus.cfg" "$home/.config/mupen64plus.cfg.old"
+	mv "$home/.config/mupen64plus/mupen64plus.cfg" "$home/.config/mupen64plus.cfg.old" 2>  "/dev/null"
 	mv "$home/.config/ppsspp" "$home/.config/ppsspp.old" 2>  "/dev/null"
 	mv "$home/.ssh" "$home/.ssh.old" 2>  "/dev/null"
 
