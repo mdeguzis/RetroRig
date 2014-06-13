@@ -38,13 +38,13 @@ h_autosave_configs()
 	done
 
 	# copy home dotfiles:
-	cp -rv "$home/.mame" "$rootdir/backups/home_dir"
-	cp -rv "$home/.mess" "$rootdir/backups/home_dir"
-	cp -rv "$home/.stella" "$rootdir/backups/home_dir"
-	cp -rv "$home/.stella" "$rootdir/backups/home_dir"
-	cp -rv "$home/.mednafen" "$rootdir/backups/home_dir"
-	cp -rv "$home/.xbmc" "$rootdir/backups/home_dir"
-	cp -rv "$home/.qjoypad3" "$rootdir/backups/home_dir"
+	cp -rv "$home/.mame" "$rootdir/backups/home"
+	cp -rv "$home/.mess" "$rootdir/backups/home"
+	cp -rv "$home/.stella" "$rootdir/backups/home"
+	cp -rv "$home/.stella" "$rootdir/backups/home"
+	cp -rv "$home/.mednafen" "$rootdir/backups/home"
+	cp -rv "$home/.xbmc" "$rootdir/backups/home"
+	cp -rv "$home/.qjoypad3" "$rootdir/backups/home"
 	# copy .config dotfiles
 	cp -rv "$home/.config/mupen64plus" "$rootdir/backups/home/.config"
 	cp -rv "$home/.config/ppsspp" "$rootdir/backups/home/.config"
@@ -63,6 +63,7 @@ h_autosave_configs()
 	h_correct_perms
 
 	# create tar archive
+	cd "$rootdir/backups"
 	tar -pczf "auto_backup.tar.gz" "$rootdir/backups"
 
 	# clean up original folder now that tar.gz is created
@@ -89,6 +90,12 @@ h_autosave_configs()
                 chgrp "$user" "$entry"
         fi
 	done
+
+	# correct permissions after tar archive is created
+	h_correct_perms
+
+	# return to rootdir
+	cd $"rootdir"
 
 }
 
