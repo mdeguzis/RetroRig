@@ -16,15 +16,14 @@ h_autosave_configs()
 
 	# home dotfiles:
 	mv "$home/.mame" "$home/.mame.old"
-	cp -mv "$home/.mess" "$home/.mess.old"
+	mv "$home/.mess" "$home/.mess.old"
 	mv "$home/.stella" "$home/.stella.old"
 	mv "$home/.mednafen" "$home/.mednafen.old"
 	mv "$home/.xbmc" "$home/.xbmc.old"
 	mv "$home/.qjoypad3" "$home/.qjoypad.old"
 	# .config dotfiles
 	mv "$home/.config/mupen64plus/mupen64plus.cfg" "$home/.config/mupen64plus.cfg.old"
-	mv "$home/.config/ppsspp/PSP/SYSTEM/controls.ini" "$home/.config/ppsspp/PSP/SYSTEM/controls.ini.old"
-	mv "$home/.config/ppsspp/PSP/SYSTEM/ppsspp.ini" "$home/.config/ppsspp/PSP/SYSTEM/ppsspp.ini.old"
+	mv "$home/.config/ppsspp" "$home/.config/ppsspp.old"
 	# controller configs:
 
 	# system configs:
