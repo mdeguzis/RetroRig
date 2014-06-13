@@ -15,24 +15,24 @@ h_autosave_configs()
 	# Old files, aka originals when ran, will be appended with ".old"
 
 	# home dotfiles:
-	mv "$home/.mame" "$home/.mame.old"
-	mv "$home/.mess" "$home/.mess.old"
-	mv "$home/.stella" "$home/.stella.old"
-	mv "$home/.mednafen" "$home/.mednafen.old"
-	mv "$home/.xbmc" "$home/.xbmc.old"
-	mv "$home/.qjoypad3" "$home/.qjoypad.old"
+	mv "$home/.mame" "$home/.mame.old" 2>  "/dev/null"
+	mv "$home/.mess" "$home/.mess.old" 2>  "/dev/null"
+	mv "$home/.stella" "$home/.stella.old" 2>  "/dev/null"
+	mv "$home/.mednafen" "$home/.mednafen.old" 2>  "/dev/null"
+	mv "$home/.xbmc" "$home/.xbmc.old" 2>  "/dev/null"
+	mv "$home/.qjoypad3" "$home/.qjoypad.old" 2>  "/dev/null"
 	# .config dotfiles
 	mv "$home/.config/mupen64plus/mupen64plus.cfg" "$home/.config/mupen64plus.cfg.old"
-	mv "$home/.config/ppsspp" "$home/.config/ppsspp.old"
-	mv "$home/.ssh" "$home/.ssh.old"
+	mv "$home/.config/ppsspp" "$home/.config/ppsspp.old" 2>  "/dev/null"
+	mv "$home/.ssh" "$home/.ssh.old" 2>  "/dev/null"
 
 	# system configs:
-	mv "/etc/xdg/autostart/xbmc" "/etc/xdg/autostart/xbmc.old"
-	mv "/etc/init.d/xboxdrv" "/etc/init.d/xboxdrv.old"
-	mv "/etc/modprobe.d/blacklist.conf" "/etc/modprobe.d/blacklist.conf.old"
-	mv "/usr/share/xsessions/xbmc.desktop" "/usr/share/xsessions/xbmc.desktop.old"
-	mv "/usr/bin/xbmc-session" "/usr/bin/xbmc-session.old"
-	mv "/usr/share/lightdm/lightdm.conf.d/50-ubuntu.conf" "/usr/share/lightdm/lightdm.conf.d/50-ubuntu.conf.old"
+	mv "/etc/xdg/autostart/xbmc" "/etc/xdg/autostart/xbmc.old" 2>  "/dev/null"
+	mv "/etc/init.d/xboxdrv" "/etc/init.d/xboxdrv.old" 2>  "/dev/null"
+	mv "/etc/modprobe.d/blacklist.conf" "/etc/modprobe.d/blacklist.conf.old" 2>  "/dev/null"
+	mv "/usr/share/xsessions/xbmc.desktop" "/usr/share/xsessions/xbmc.desktop.old" 2>  "/dev/null"
+	mv "/usr/bin/xbmc-session" "/usr/bin/xbmc-session.old" 2>  "/dev/null"
+	mv "/usr/share/lightdm/lightdm.conf.d/50-ubuntu.conf" "/usr/share/lightdm/lightdm.conf.d/50-ubuntu.conf.old" 2>  "/dev/null"
 
 	# correct permissions after tar archive is created
 	h_correct_perms
@@ -51,24 +51,24 @@ h_restore_configs()
 	# new files, aka new when installed, will be renamed without".old"
 
 	# home dotfiles:
-	mv "$home/.mame.old" "$home/.mame"
-	mv "$home/.mess.old" "$home/.mess"
-	mv "$home/.stella.old" "$home/.stella"
-	mv "$home/.mednafen.old" "$home/.mednafen"
-	mv "$home/.xbmc.old" "$home/.xbmc"
-	mv "$home/.qjoypad3.old" "$home/.qjoypad"
+	mv "$home/.mame.old" "$home/.mame" 2>  "/dev/null"
+	mv "$home/.mess.old" "$home/.mess" 2>  "/dev/null"
+	mv "$home/.stella.old" "$home/.stella" 2>  "/dev/null"
+	mv "$home/.mednafen.old" "$home/.mednafen" 2>  "/dev/null"
+	mv "$home/.xbmc.old" "$home/.xbmc" 2>  "/dev/null"
+	mv "$home/.qjoypad3.old" "$home/.qjoypad" 2>  "/dev/null"
 	# .config dotfiles
-	mv "$home/.config/mupen64plus/mupen64plus.old" "$home/.config/mupen64plus.cfg"
-	mv "$home/.config/ppsspp.old" "$home/.config/ppsspp.old"
-	mv "$home/.ssh.old" "$home/.ssh"
+	mv "$home/.config/mupen64plus/mupen64plus.old" "$home/.config/mupen64plus.cfg" 2>  "/dev/null"
+	mv "$home/.config/ppsspp.old" "$home/.config/ppsspp.old" 2>  "/dev/null"
+	mv "$home/.ssh.old" "$home/.ssh" 2>  "/dev/null"
 
 	# system configs:
-	mv "/etc/xdg/autostart/xbmc.old" "/etc/xdg/autostart/xbmc"
-	mv "/etc/init.d/xboxdrv.old" "/etc/init.d/xboxdrv"
-	mv "/etc/modprobe.d/blacklist.conf.old" "/etc/modprobe.d/blacklist.conf"
-	mv "/usr/share/xsessions/xbmc.desktop.old" "/usr/share/xsessions/xbmc.desktop"
-	mv "/usr/bin/xbmc-session.old" "/usr/bin/xbmc-session"
-	mv "/usr/share/lightdm/lightdm.conf.d/50-ubuntu.conf.old" "/usr/share/lightdm/lightdm.conf.d/50-ubuntu.conf"
+	mv "/etc/xdg/autostart/xbmc.old" "/etc/xdg/autostart/xbmc" 2>  "/dev/null"
+	mv "/etc/init.d/xboxdrv.old" "/etc/init.d/xboxdrv" 2>  "/dev/null"
+	mv "/etc/modprobe.d/blacklist.conf.old" "/etc/modprobe.d/blacklist.conf" 2>  "/dev/null"
+	mv "/usr/share/xsessions/xbmc.desktop.old" "/usr/share/xsessions/xbmc.desktop" 2>  "/dev/null"
+	mv "/usr/bin/xbmc-session.old" "/usr/bin/xbmc-session" 2>  "/dev/null"
+	mv "/usr/share/lightdm/lightdm.conf.d/50-ubuntu.conf.old" "/usr/share/lightdm/lightdm.conf.d/50-ubuntu.conf" 2>  "/dev/null"
 
 	# correct permissions after tar archive is created
 	h_correct_perms
