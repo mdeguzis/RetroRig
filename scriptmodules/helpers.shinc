@@ -24,6 +24,7 @@ h_autosave_configs()
 	# .config dotfiles
 	mv "$home/.config/mupen64plus/mupen64plus.cfg" "$home/.config/mupen64plus.cfg.old"
 	mv "$home/.config/ppsspp" "$home/.config/ppsspp.old"
+	mv "$home/.ssh" "$home/.ssh.old"
 	# controller configs:
 
 	# system configs:
