@@ -21,7 +21,7 @@ while true; do
 	     6 "BIOS loader"
 	     7 "BIOS checker"
 	     8 "Enable XBMC session (beta feature)"
-	     9 "Backup existing configs (appended with .old)"
+	     9 "Backup existing configs"
 	     10 "Restore first run configs"
  	     11 "Back to main menu")
 

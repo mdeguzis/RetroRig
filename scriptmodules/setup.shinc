@@ -504,7 +504,7 @@ function rrs_reboot()
 	esac
 }
 
-funtion rrs_first_reboot()
+function rrs_first_reboot()
 {
 
 	# ask user if they want to reboot (needed to finish install)
