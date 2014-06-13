@@ -78,7 +78,7 @@ h_autosave_configs()
 	# Expanding arrays involves [@] and {}
 	for entry in "${r_pathlist[@]}"
 	do
-	    if [[ ! -d "$entry" ]]; then
+	    if [[ -d "$entry" ]]; then
                 rm -rf "$entry"
                 chown "$user" "$entry"
                 chgrp "$user" "$entry"
