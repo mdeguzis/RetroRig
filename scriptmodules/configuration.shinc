@@ -182,7 +182,7 @@ dialog --title "Confirm yes/no" \
 
 	esac	
 
-#remove $rootdir
+#remove $rootdir , i.e. "RetroRig" wherever it was created
 rm -rf "$rootdir"
 
 #update Ubuntu repository listings

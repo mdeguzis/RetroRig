@@ -151,6 +151,11 @@ options=(1 "Xbox 360 Controller (standard)"
 		gp_x360
 		;;
 
+		222)
+		# not used until ready
+		# gp_ps3_blu
+		;;
+
 		2)
 		return
 		;;
@@ -252,7 +257,7 @@ See debug.log for more details. Continuing on to emulator installs..." 18 60
 	#END
 }
 
-function rrs_xboxdrv() 
+function rrs_x360_xboxdrv() 
 {
 	clear
 	# xboxdrv settings
@@ -272,6 +277,38 @@ function rrs_xboxdrv()
 	# copy keyboard.xml file for XBMC. Button id numbers are totally diffferent, due to the use of 
 	# the use-dpad-as-button, and use-trigger-as-button options used.
 	cp -v "$rootdir/gamepad-cfgs/x360_controller/keyboard.xml" "$home/.xbmc/userdata/keymaps"
+
+	#update init scripts
+	update-rc.d xboxdrv defaults
+
+	#fix permissions since we are running as sudo
+	h_correct_perms
+
+}
+
+function rrs_ps3_blu_gimx() 
+{
+
+	# !!! THIS SECTION IS NOT USED AT THE MOMENT !!! #
+
+	clear
+	# xboxdrv settings
+
+	#set qjoypad's profile to match Xbox 360 Wireless (4-player)
+	cp -v "$rootdir/gamepad-cfgs/ps3_usb_controller/ps3_usb_controller.lyt" "$home/.qjoypad3"
+	#copy qjoypad autostart item for x360_controller gamepad config
+	cp -v "$rootdir/gamepad-cfgs/ps3_usb_controller/qjoypad.desktop" "/etc/xdg/autostart/"
+	
+	#blacklist xpad
+	cp -v "$rootdir/init-scripts/x360_controller/blacklist.conf" "/etc/modprobe.d/"
+
+	#inject init script and default config
+	cp -v "$rootdir/init-scripts/ps3_usb_controller/xboxdrv" "/etc/init.d/"
+	cp -v "$rootdir/init-scripts/ps3_usb_controller/default/xboxdrv" "/etc/default/xboxdrv"
+
+	# copy keyboard.xml file for XBMC. Button id numbers are totally diffferent, due to the use of 
+	# the use-dpad-as-button, and use-trigger-as-button options used.
+	cp -v "$rootdir/gamepad-cfgs/ps3_usb_controller/keyboard.xml" "$home/.xbmc/userdata/keymaps"
 
 	#update init scripts
 	update-rc.d xboxdrv defaults
@@ -325,7 +362,7 @@ function rrs_debug()
 	gsettings list-recursively "org.gnome.desktop.session" | grep "idle-delay" >> "$rootdir/logs/debug.log"
 
 	# Source built / pre-built
-	h_filechecker "$rootdir/emulators/PPSSPP/ppsspp-0.9.8-SDL-pk64
+	h_filechecker "$rootdir/emulators/PPSSPP/ppsspp-0.9.8-SDL-pk64"
 	h_filechecker "/ust/bir/PPSSPPSDL"
 
 	#APT pkg checks
