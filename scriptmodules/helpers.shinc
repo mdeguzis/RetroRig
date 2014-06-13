@@ -80,8 +80,6 @@ h_autosave_configs()
 	do
 	    if [[ -d "$entry" ]]; then
                 rm -rf "$entry"
-                chown "$user" "$entry"
-                chgrp "$user" "$entry"
         fi
 	done
 
