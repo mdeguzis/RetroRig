@@ -504,3 +504,34 @@ function rrs_reboot()
 	esac
 }
 
+funtion rrs_first_reboot()
+{
+
+	# ask user if they want to reboot (needed to finish install)
+	dialog --title "Confirm yes/no" \
+	--backtitle "LibreGeek.org RetroRig Installer" \
+	--yesno "RetroRig needs to reboot in order to complete the \
+		 installation. Reboot now? If not, please select from the main menu"  7 50
+
+	# Get exit status
+	# 0 means user hit [yes] button.
+	# 1 means user hit [no] button.
+	# 255 means user hit [Esc] key.
+	response=$?
+	case $response in
+		0)
+		clear
+		reboot
+		;;
+
+		1)
+		# do nothing 
+		;;
+
+		255)
+		# do nothing
+		;;
+	esac
+
+}
+
