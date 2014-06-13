@@ -92,8 +92,8 @@ function gp_x360()
 	cp -v "$scriptdir/emu-cfgs/x360_controller/Stella/stellarc" "$home/.stella/"
 
 	# PPSSPP
-	cp -v "scriptdir/emu-cfgs/x360_controller/PPSSPP/ppsspp.ini" "$home/.config/ppsspp/PSP/SYSTEM"
-	cp -v "scriptdir/emu-cfgs/x360_controller/PPSSPP/controls.ini" "$home/.config/ppsspp/PSP/SYSTEM"
+	cp -v "$scriptdir/emu-cfgs/x360_controller/PPSSPP/ppsspp.ini" "$home/.config/ppsspp/PSP/SYSTEM"
+	cp -v "$scriptdir/emu-cfgs/x360_controller/PPSSPP/controls.ini" "$home/.config/ppsspp/PSP/SYSTEM"
 
 	# configure xboxdrv for gamepad
 	rrs_x360_xboxdrv
