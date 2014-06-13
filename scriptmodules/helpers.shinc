@@ -12,82 +12,31 @@ h_autosave_configs()
 
 	# This section serves to backup existing configs when a user starts the install
 	# Directory checks will likely be put in soon.
+	# Old files, aka originals when ran, will be appended with ".old"
 
-	c_pathlist=()
-	c_pathlist+=("$rootdir/backups")
-	c_pathlist+=("$rootdir/backups/home")
-	c_pathlist+=("$rootdir/backups/home/.config")
-	c_pathlist+=("$rootdir/backups/etc")
-	c_pathlist+=("$rootdir/backups/etc/xdg/autostart")
-	c_pathlist+=("$rootdir/backups/etc/init.d/")
-	c_pathlist+=("$rootdir/backups/etc/modprobe.d")
-	c_pathlist+=("$rootdir/backups/usr/share/xsessions")
-	c_pathlist+=("$rootdir/backups/usr/bin")
-	c_pathlist+=("$rootdir/backups/usr/share/lightdm/lightdm.conf.d")
+	# home dotfiles:
+	cp -mv "$home/.mame" "$home/.mame.old"
+	cp -mv "$home/.mess" "$home/.mess.old"
+	cp -mv "$home/.stella" "$home/.stella.old"
+	cp -mv "$home/.mednafen" "$home/.mednafen.old"
+	cp -mv "$home/.xbmc" "$home/.xbmc.old"
+	cp -rv "$home/.qjoypad3" "$home/.qjoypad.old"
+	# .config dotfiles
+	cp -mv "$home/.config/mupen64plus/mupen64plus.cfg" "$home/.config/mupen64plus.cfg.old"
+	cp -mv "$home/.config/ppsspp/PSP/SYSTEM/controls.ini" "$home/.config/ppsspp/PSP/SYSTEM/controls.ini.old"
+	cp -mv "$home/.config/ppsspp/PSP/SYSTEM/ppsspp.ini" "$home/.config/ppsspp/PSP/SYSTEM/ppsspp.ini.old"
+	# controller configs:
 
-
-	# quotes needed on entry to preven globbing on directory creation!
-	# Expanding arrays involves [@] and {}
-	for entry in "${c_pathlist[@]}"
-	do
-	    if [[ ! -d "$entry" ]]; then
-                mkdir -pv "$entry"
-                chown "$user" "$entry"
-                chgrp "$user" "$entry"
-        fi
-	done
-
-	# copy home dotfiles:
-	cp -rv "$home/.mame" "$rootdir/backups/home"
-	cp -rv "$home/.mess" "$rootdir/backups/home"
-	cp -rv "$home/.stella" "$rootdir/backups/home"
-	cp -rv "$home/.stella" "$rootdir/backups/home"
-	cp -rv "$home/.mednafen" "$rootdir/backups/home"
-	cp -rv "$home/.xbmc" "$rootdir/backups/home"
-	cp -rv "$home/.qjoypad3" "$rootdir/backups/home"
-	# copy .config dotfiles
-	cp -rv "$home/.config/mupen64plus" "$rootdir/backups/home/.config"
-	cp -rv "$home/.config/ppsspp" "$rootdir/backups/home/.config"
-	# copy controller configs:
-
-	# copy system configs:
-	cp -rv "/etc/xdg/autostart" "$rootdir/backups/etc/xdg/autostart"	
-	cp -rv "/etc/init.d/xboxdrv" "$rootdir/backups/etc/init.d"
-	cp -rv "/etc/modprobe.d/blacklist.conf" "$rootdir/backups/etc/modprobe.d"
-	cp -rv "/usr/share/xsessions/xbmc.desktop" "$rootdir/backups/usr/share/xsessions"
-	cp -rv "/usr/bin/xbmc-session" "$rootdir/usr/bin"
-	cp -rv "/usr/share/lightdm/lightdm.conf.d/50-ubuntu.conf" "$rootdir/backups/usr/share/lightdm/lightdm.conf.d"
-
-	# correct permissions before tar archive for internal contents first
-	# -p will preserve the permissions below on creation
-	h_correct_perms
-
-	# create tar archive
-	cd "$rootdir/backups"
-	tar -pczf "auto_backup.tar.gz" *
-
-	# clean up original folder now that tar.gz is created
-	# do not add the $rootdir/backups directory, since that is where
-	# the tar.gz file goes
-	r_pathlist=()
-	r_pathlist+=("$rootdir/backups/home")
-	r_pathlist+=("$rootdir/backups/etc")
-	r_pathlist+=("$rootdir/backups/usr")
-
-	# quotes needed on entry to preven globbing on directory creation!
-	# Expanding arrays involves [@] and {}
-	for entry in "${r_pathlist[@]}"
-	do
-	    if [[ -d "$entry" ]]; then
-                rm -rf "$entry"
-        fi
-	done
+	# system configs:
+	cp -mv "/etc/xdg/autostart/xbmc" "/etc/xdg/autostart/xbmc.old"
+	cp -mv "/etc/init.d/xboxdrv" "/etc/init.d/xboxdrv.old"
+	cp -mv "/etc/modprobe.d/blacklist.conf" "/etc/modprobe.d/blacklist.conf.old"
+	cp -mv "/usr/share/xsessions/xbmc.desktop" "/usr/share/xsessions/xbmc.desktop.old"
+	cp -mv "/usr/bin/xbmc-session" "/usr/bin/xbmc-session.old"
+	cp -mv "/usr/share/lightdm/lightdm.conf.d/50-ubuntu.conf" "/usr/share/lightdm/lightdm.conf.d/50-ubuntu.conf.old"
 
 	# correct permissions after tar archive is created
 	h_correct_perms
-
-	# return to rootdir
-	cd "$rootdir"
 
 }
 
