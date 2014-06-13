@@ -516,8 +516,8 @@ function rrs_first_reboot()
 	# 0 means user hit [yes] button.
 	# 1 means user hit [no] button.
 	# 255 means user hit [Esc] key.
-	response=$?
-	case $response in
+	response2=$?
+	case $response2 in
 		0)
 		clear
 		reboot
