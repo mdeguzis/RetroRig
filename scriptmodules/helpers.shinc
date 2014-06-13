@@ -64,21 +64,15 @@ h_autosave_configs()
 
 	# create tar archive
 	cd "$rootdir/backups"
-	tar -pczf "auto_backup.tar.gz" "$rootdir/backups"
+	tar -pczf "auto_backup.tar.gz" *
 
 	# clean up original folder now that tar.gz is created
 	# do not add the $rootdir/backups directory, since that is where
 	# the tar.gz file goes
 	r_pathlist=()
 	r_pathlist+=("$rootdir/backups/home")
-	r_pathlist+=("$rootdir/backups/home/.config")
 	r_pathlist+=("$rootdir/backups/etc")
-	r_pathlist+=("$rootdir/backups/etc/xdg/autostart")
-	r_pathlist+=("$rootdir/backups/etc/init.d/")
-	r_pathlist+=("$rootdir/backups/etc/modprobe.d")
-	r_pathlist+=("$rootdir/backups/usr/share/xsessions")
-	r_pathlist+=("$rootdir/backups/usr/bin")
-	r_pathlist+=("$rootdir/backups/usr/share/lightdm/lightdm.conf.d")
+	r_pathlist+=("$rootdir/backups/usr")
 
 	# quotes needed on entry to preven globbing on directory creation!
 	# Expanding arrays involves [@] and {}
@@ -95,7 +89,7 @@ h_autosave_configs()
 	h_correct_perms
 
 	# return to rootdir
-	cd $"rootdir"
+	cd "$rootdir"
 
 }
 
