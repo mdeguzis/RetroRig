@@ -322,7 +322,7 @@ function rrs_autostart()
 {
 	clear
 	# create autostart for XBMC (universal)
-	cp -v "/usr/share/applications/xbmc.desktop" "/etc/xdg/autostart/" 
+	cp -v "/usr/share/applications/xbmc.desktop" "/etc/xdg/autostart/" >> "$rootdir/logs/debug.log"
 
 	# later this section will configure LightDM (login manager for Ubuntu) to log into
 	# the XBMC session and skip Unity altogether. Provide an option to do so, yes/no...
@@ -511,7 +511,7 @@ function rrs_first_reboot()
 	dialog --title "Confirm yes/no" \
 	--backtitle "LibreGeek.org RetroRig Installer" \
 	--yesno "RetroRig needs to reboot in order to complete the \
-		 installation. Reboot now? If not, please select from the main menu"  7 50
+		 installation. Reboot now? If not, please select ' Reboot PC'from the main menu"  7 50
 
 	# Get exit status
 	# 0 means user hit [yes] button.
