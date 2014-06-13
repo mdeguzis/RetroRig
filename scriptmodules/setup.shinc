@@ -328,7 +328,7 @@ function rrs_autostart()
 	# the XBMC session and skip Unity altogether. Provide an option to do so, yes/no...
 
 	# inform user install is done (this is the last step of main, option 1)
-        dialog --backtitle "LibreGeek.org - RetroRig Setup. Installation folder: $rootdir for user $user" --msgbox "Finished main install tasks.\n\nYou now have to copy roms to the roms folders. \nThis can be done via SSH, Samba, or via your graphic folder manager (please see settings menu for more)\n\nAll current config folders used appeneded with .old for restoration purposes" 15 50
+        dialog --backtitle "LibreGeek.org - RetroRig Setup. Installation folder: $rootdir for user $user" --msgbox "Finished main install tasks.\n\nYou now have to copy roms to the roms folders. \nThis can be done via SSH, Samba, or via your graphic folder manager (please see settings menu for more)\n\nAll current config folders used appeneded with .old for restoration purposes.\n\nPlease reboot to complete the installation." 17 50
 
 	# correct permissions
 	h_correct_perms
@@ -502,35 +502,5 @@ function rrs_reboot()
 		return
 		;;
 	esac
-}
-
-function rrs_first_reboot()
-{
-
-	#confirm reboot is the intended action
-	dialog --title "Confirm yes/no" \
-	--backtitle "LibreGeek.org RetroRig Installer" \
-	--yesno "RetroRig needs to reboot in order to complete the installation. Reboot now?If not, please select 'Reboot PC' from the main menu"  10 35
-
-	# Get exit status
-	# 0 means user hit [yes] button.
-	# 1 means user hit [no] button.
-	# 255 means user hit [Esc] key.
-	response2=$?
-	case $response2 in
-		0)
-		clear
-		reboot
-		;;
-
-		1)
-		return 
-		;;
-
-		255)
-		return
-		;;
-	esac
-
 }
 
