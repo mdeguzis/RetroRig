@@ -246,7 +246,6 @@ while true; do
 		h_emu_user_fixes
 		set_resolution
 		rrs_autostart
-		rrs_reboot
 		} 2>&1 | tee >(gzip --stdout > $scriptdir/logs/install_$now.log.gz)	               	
 		chown -R "$user" "$scriptdir/logs/install_$now.log.gz"
 		chgrp -R "$user" "$scriptdir/logs/install_$now.log.gz"
