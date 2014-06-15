@@ -132,46 +132,62 @@ options=(1 "Current configuration"
 function h_file_loader()
 {
 
-dialog --msgbox "Usage:\n\nChoose the *FOLDER*, not the file(s) you wish to
-load ROMs from. Esc or Cancel to abort\n\n
-(spacebar)                Select file\n
-(double-tap spacebar)     Enter new directory\n
-(Enter)                   Confirm selection\n
-(Arrow keys)              Navigate" 15 50
-        folder=$(dialog --stdout --cr-wrap --title "Please choose a file" --fselect "$home/" 14 48)
+	dialog --msgbox "Usage:\n\nChoose the *FOLDER*, not the file(s) you wish to
+	load ROMs from. Esc or Cancel to abort\n\n
+	(spacebar)                Select file\n
+	(double-tap spacebar)     Enter new directory\n
+	(Enter)                   Confirm selection\n
+	(Arrow keys)              Navigate" 15 50
+        
+
+	folder=$(dialog --stdout --cr-wrap --title "Please choose a file" --fselect "$home/" 14 48)
 
         # Get exit status
         # 0 means user hit [yes] button.
         # 1 means user hit [no] button.
         # 255 means user hit [Esc] key.
 
-        response=$?
-        case $response in
+        selection=$?
+        case $selection in
            0)
-           echo $folder
-           sleep 3s
-           #continue on below function
+	   # The two lines are for debugging only!!!
+           # echo $folder
+           # sleep 3s
+           # continue on to next function
            ;;
 
            1)
            dialog --infobox "Cancelled..."  3 16
-           sleep 2s
+           sleep 1s
+	   # call rom loader again on abort, set folder to NULL
+	   folder=""
+	   h_rom_loader
            ;;
 
            255)
            dialog --infobox "Esc hit..." 3 14
-           sleep 2s
+           sleep 1s
+	   # call rom loader again on abort, set folder to NULL
+	   folder=""
+	   h_rom_loader
 
 	esac
 
 	# debugging only
-	echo "${folder} file chosen." >> "$rootdir/logs/debug.log"
+	# echo "${folder} file chosen." >> "$rootdir/logs/debug.log"
+
+
+	# correct permissions
+	h_correct_perms
+
 }
 
 
 function h_rom_loader()
 {
 
+
+while true; do
 cmd=(dialog --backtitle "LibreGeek.org RetroRig Installer" --menu "Load ROMs for which system?" 20 32 24)
 options=(1 "Atari 2600" 
 	 2 "NES" 
@@ -188,24 +204,24 @@ options=(1 "Atari 2600"
 	 13 "Exit ROM Loader")
 
 	#make menu choice
-	selection=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
+	choices=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
 	#functions
 
-	for choice in $selection
-	do
-		case $choice in
+	if [ "$choices" != "" ]; then
+	    case $choices in
+
 		1)
 		#call file loader  	
 		h_file_loader
 		#copy Atari ROMs
 		clear
-		cp -Rv "$folder"/* "$rootdir/ROMs/Atari 2600/" 
+		cp -R "$folder"/* "/home/mikeyd/RetroRig/ROMs/Atari 2600"
 		;;
 
 		2)  
 		h_file_loader
 		clear
-		cp -Rv "$folder"/* "$rootdir/ROMs/NES/"
+		cp -R "$folder"/* "$rootdir/ROMs/NES/"
 		;;
 
 		3)
@@ -213,7 +229,7 @@ options=(1 "Atari 2600"
 		h_file_loader
 		#copy SNES ROMs
 		clear
-		cp -Rv "$folder"/* "$rootdir/ROMs/SNES/"
+		cp -R "$folder"/* "$rootdir/ROMs/SNES/"
 		;;
 
 		4)
@@ -221,7 +237,7 @@ options=(1 "Atari 2600"
 		h_file_loader
 		#copy N64 ROMs
 		clear
-		cp -Rv "$folder"/* "$rootdir/ROMs/N64/"
+		cp -R "$folder"/* "$rootdir/ROMs/N64/"
 		;;
 
 		5)
@@ -229,7 +245,7 @@ options=(1 "Atari 2600"
 		h_file_loader
 		#copy MAME ROMs
 		clear
-		cp -Rv "$folder"/* "$rootdir/ROMs/MAME/"
+		cp -R "$folder"/* "$rootdir/ROMs/MAME/"
 		;;
 
 		6)
@@ -237,7 +253,7 @@ options=(1 "Atari 2600"
 		h_file_loader
 		#copy Sega Master System ROMs
 		clear
-		cp -Rv "$folder"/* "$rootdir/ROMs/Sega Master System"
+		cp -R "$folder"/* "$rootdir/ROMs/Sega Master System"
 		;;
 
 		7)
@@ -245,7 +261,7 @@ options=(1 "Atari 2600"
 		h_file_loader
 		#copy Sega Game Gear ROMs
 		clear
-		cp -Rv "$folder"/* "$rootdir/ROMs/Sega Game Gear"
+		cp -R "$folder"/* "$rootdir/ROMs/Sega Game Gear"
 		;;
 
 		8)
@@ -253,7 +269,7 @@ options=(1 "Atari 2600"
 		h_file_loader
 		#copy GBC ROMs
 		clear
-		cp -Rv "$folder"/* "$rootdir/ROMs/GBC/"
+		cp -R "$folder"/* "$rootdir/ROMs/GBC/"
 		;;
 
 		9)
@@ -269,7 +285,7 @@ options=(1 "Atari 2600"
 		h_file_loader
 		#copy Turbographx 16 ROMs
 		clear
-		cp -Rv "$folder"/* "$rootdir/ROMs/TurboGraphx 16/"
+		cp -R "$folder"/* "$rootdir/ROMs/TurboGraphx 16/"
 		;;
 
 		11)  
@@ -277,7 +293,7 @@ options=(1 "Atari 2600"
 		h_file_loader
 		#copy Neo-Geo CDZ ROMs
 		clear
-		cp -Rv "$folder"/* "$rootdir/ROMs/Neo-Geo/CDZ/"
+		cp -R "$folder"/* "$rootdir/ROMs/Neo-Geo/CDZ/"
 		;;
 
 		12)  
@@ -292,14 +308,16 @@ options=(1 "Atari 2600"
 		return
 		;;
 
-		255)
-		return
+		255)  
+           	dialog --infobox "Esc hit..." 3 14
+           	sleep 1s
 		;;
 
 		esac
-		
-
-	done
+	else
+		break
+	fi
+done
 
 	# correct permissions
 	h_correct_perms
