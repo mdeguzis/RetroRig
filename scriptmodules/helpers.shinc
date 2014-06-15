@@ -156,7 +156,7 @@ function h_file_loader()
 	folder=$(dialog --stdout --cr-wrap --title "Please choose a file" --fselect "$home/" 14 48)
 
 	# debugging only
-	# echo "${folder} file chosen." >> "$rootdir/logs/debug.log"
+	echo "${folder} file chosen." >> "$rootdir/logs/debug.log"
 
 	clear
 }
