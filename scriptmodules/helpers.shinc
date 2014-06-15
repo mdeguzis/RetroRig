@@ -131,20 +131,6 @@ options=(1 "Current configuration"
 
 function h_file_loader()
 {
- 
-        dialog --msgbox "Usage:\n\nChoose the *FOLDER*, not the file(s) you wish to load ROMs from\n\n
-        (spacebar)          
-            select file\n(double-tap spacebar) \
-          enter new directory\n(Enter)                 confirm selection\n(Arrow keys)            Navigate" 15 48
-        folder=$(dialog --stdout --cr-wrap --title "Please choose a file" --fselect "$home/" 14 48)
- 
-        # debugging only
-        echo "${folder} file chosen." >> "$rootdir/logs/debug.log"
-}
-
-
-function h_file_loader()
-{
 
 	dialog --msgbox "Usage:\n\nChoose the *FOLDER*, not the file(s) you wish to load ROMs from. Esc or Cancel to abort\n\n
 	(spacebar)                Select file\n
