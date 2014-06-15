@@ -132,8 +132,7 @@ options=(1 "Current configuration"
 function h_file_loader()
 {
 
-	dialog --msgbox "Usage:\n\nChoose the *FOLDER*, not the file(s) you wish to
-	load ROMs from. Esc or Cancel to abort\n\n
+	dialog --msgbox "Usage:\n\nChoose the *FOLDER*, not the file(s) you wish to load ROMs from. Esc or Cancel to abort\n\n
 	(spacebar)                Select file\n
 	(double-tap spacebar)     Enter new directory\n
 	(Enter)                   Confirm selection\n
@@ -142,46 +141,11 @@ function h_file_loader()
 
 	folder=$(dialog --stdout --cr-wrap --title "Please choose a file" --fselect "$home/" 14 48)
 
-        # Get exit status
-        # 0 means user hit [yes] button.
-        # 1 means user hit [no] button.
-        # 255 means user hit [Esc] key.
-
-        selection=$?
-        case $selection in
-           0)
-	   # The two lines are for debugging only!!!
-           # echo $folder
-           # sleep 3s
-           # continue on to next function
-           ;;
-
-           1)
-           dialog --infobox "Cancelled..."  3 16
-           sleep 1s
-	   # call rom loader again on abort, set folder to NULL
-	   folder=""
-	   h_rom_loader
-           ;;
-
-           255)
-           dialog --infobox "Esc hit..." 3 14
-           sleep 1s
-	   # call rom loader again on abort, set folder to NULL
-	   folder=""
-	   h_rom_loader
-
-	esac
-
 	# debugging only
-	# echo "${folder} file chosen." >> "$rootdir/logs/debug.log"
+	echo "${folder} file chosen." >> "$rootdir/logs/debug.log"
 
-
-	# correct permissions
-	h_correct_perms
-
+	clear
 }
-
 
 function h_rom_loader()
 {
@@ -214,94 +178,108 @@ options=(1 "Atari 2600"
 		#call file loader  	
 		h_file_loader
 		#copy Atari ROMs
-		clear
-		cp -R "$folder"/* "/home/mikeyd/RetroRig/ROMs/Atari 2600"
+		if [ -n "$folder" ]; then
+			cp -R "$folder"/* "/home/mikeyd/RetroRig/ROMs/Atari 2600"
+		fi
 		;;
 
-		2)  
+		2)
+		#call file loader
 		h_file_loader
-		clear
-		cp -R "$folder"/* "$rootdir/ROMs/NES/"
+		#copy NES ROMs
+		if [ -n "$folder" ]; then
+			cp -R "$folder"/* "$rootdir/ROMs/NES/"
+		fi
 		;;
 
 		3)
 		#call file loader  	
 		h_file_loader
 		#copy SNES ROMs
-		clear
-		cp -R "$folder"/* "$rootdir/ROMs/SNES/"
+		if [ -n "$folder" ]; then
+			cp -R "$folder"/* "$rootdir/ROMs/SNES/"
+		fi
 		;;
 
 		4)
 		#call file loader  	
 		h_file_loader
 		#copy N64 ROMs
-		clear
-		cp -R "$folder"/* "$rootdir/ROMs/N64/"
+		if [ -n "$folder" ]; then
+			cp -R "$folder"/* "$rootdir/ROMs/N64/"
+		fi
 		;;
 
 		5)
 		#call file loader  	
 		h_file_loader
 		#copy MAME ROMs
-		clear
-		cp -R "$folder"/* "$rootdir/ROMs/MAME/"
+		if [ -n "$folder" ]; then
+			cp -R "$folder"/* "$rootdir/ROMs/MAME/"
+		fi
 		;;
 
 		6)
 		#call file loader  	
 		h_file_loader
 		#copy Sega Master System ROMs
-		clear
-		cp -R "$folder"/* "$rootdir/ROMs/Sega Master System"
+		if [ -n "$folder" ]; then
+			cp -R "$folder"/* "$rootdir/ROMs/Sega Master System"
+		fi
 		;;
 
 		7)
 		#call file loader  	
 		h_file_loader
 		#copy Sega Game Gear ROMs
-		clear
-		cp -R "$folder"/* "$rootdir/ROMs/Sega Game Gear"
+		if [ -n "$folder" ]; then
+			cp -R "$folder"/* "$rootdir/ROMs/Sega Game Gear"
+		fi
 		;;
 
 		8)
 		#call file loader  	
 		h_file_loader
 		#copy GBC ROMs
-		clear
-		cp -R "$folder"/* "$rootdir/ROMs/GBC/"
+		if [ -n "$folder" ]; then
+			cp -R "$folder"/* "$rootdir/ROMs/GBC/"
+		fi
 		;;
 
 		9)
 		#call file loader  	
-		_file-loader
+		h_file-loader
 		#copy GBA ROMs
-		clear
-		cp -Rv "$folder"/* "$rootdir/ROMs/GBA/"
+		if [ -n "$folder" ]; then
+			cp -Rv "$folder"/* "$rootdir/ROMs/GBA/"
+		fi
 		;;
 
 		10)
 		#call file loader  	
 		h_file_loader
 		#copy Turbographx 16 ROMs
-		clear
-		cp -R "$folder"/* "$rootdir/ROMs/TurboGraphx 16/"
+		if [ -n "$folder" ]; then
+			cp -R "$folder"/* "$rootdir/ROMs/TurboGraphx 16/"
+		fi
 		;;
 
 		11)  
 		#call file loader  	
 		h_file_loader
 		#copy Neo-Geo CDZ ROMs
-		clear
-		cp -R "$folder"/* "$rootdir/ROMs/Neo-Geo/CDZ/"
+		if [ -n "$folder" ]; then
+			cp -R "$folder"/* "$rootdir/ROMs/Neo-Geo/CDZ/"
+		fi
 		;;
 
 		12)  
 		#call file loader  	
 		h_file_loader
 		#copy PSP ROMs
-		clear
-		cp -Rv "$folder"/* "$rootdir/ROMs/PSP/"
+		if [ -n "$folder" ]; then
+			cp -Rv "$folder"/* "$rootdir/ROMs/PSP/"
+		fi
 		;;
 
 		13)  
@@ -471,17 +449,18 @@ options=(1 "Neo-Geo CDZ"
 		# call file loader  	
 		h_file_loader
 		# copy Neo-Geo BIOS file over
-		cp -v "$folder" 
-"$rootdir/BIOS/MESS"
+		if [ -n "$folder" ]; then
+			cp -v "$folder" "$rootdir/BIOS/MESS"
+		fi
 		;;
 
 		2)
 		#call file loader
 		h_file_loader
-		# copy Commodore 64 BIOS file 
-over
-		cp -v "$folder" 
-"$rootdir/BIOS/MESS"
+		# copy Commodore 64 BIOS file over
+		if [ -n "$folder" ]; then
+			cp -v "$folder" "$rootdir/BIOS/MESS"
+		fi
 		;;
 
 		3)
@@ -501,8 +480,6 @@ function h_correct_perms()
 	# correct permissions since we use sudo
 	chgrp -R "$user" "$rootdir"
     	chown -R "$user" "$rootdir"
-    	chgrp -R "$user" "$home"
-    	chown -R "$user" "$home"
 
 	# replace "test" username in config files here to ensure games
 	# and emulators function and start properly
@@ -594,4 +571,3 @@ su - $user -c '/usr/bin/xbmc'
 clear
 
 }
-
