@@ -141,8 +141,30 @@ function h_file_loader()
 
 	folder=$(dialog --stdout --cr-wrap --title "Please choose a file" --fselect "$home/" 14 48)
 
+	response=$?
+        case $response in
+           0)
+           #echo $folder
+           #sleep 3s
+           #continue on to next function
+           ;;
+
+           1)
+           dialog --infobox "Cancelled..."  3 16
+           sleep 2s
+           # set folder to blank
+           folder=""
+           ;;
+
+           255)
+           dialog --infobox "Esc hit..." 3 14
+           folder=""
+           sleep 2s
+
+	esac
+
 	# debugging only
-	echo "${folder} file chosen." >> "$rootdir/logs/debug.log"
+	# echo "${folder} file chosen." >> "$rootdir/logs/debug.log"
 
 	clear
 }
