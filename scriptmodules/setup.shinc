@@ -1,0 +1,506 @@
+#!/bin/bash
+#
+# RetroRig setup modules
+# This is a small script to copy over configuration files for emulators
+# append a "-x" on the end above for debugging if need be
+# Please report any errors via a pull request
+# You can also reach me on twitter: @N3RD42
+#
+
+function rrs_prepareFolders()
+{
+	echo "Creating folders for ROMs, Artwork, Saves, and dotfiles"
+
+	pathlist=()
+	#emulator base directory
+	pathlist+=("$rootdir/emulators")
+
+	#setup skelton folders for XBMC Rom Collection Browser
+	#ROMs
+	pathlist+=("$rootdir/ROMs/Atari 2600")
+	pathlist+=("$rootdir/ROMs/MAME")
+	pathlist+=("$rootdir/ROMs/N64")
+	pathlist+=("$rootdir/ROMs/NES")
+	pathlist+=("$rootdir/ROMs/SNES")
+	pathlist+=("$rootdir/ROMs/Sega Master System")
+	pathlist+=("$rootdir/ROMs/Sega Game Gear")
+	pathlist+=("$rootdir/ROMs/GBC")
+	pathlist+=("$rootdir/ROMs/GBA")
+	pathlist+=("$rootdir/ROMs/TurboGraphx 16")
+	pathlist+=("$rootdir/ROMs/Neo-Geo/CDZ")
+	pathlist+=("$rootdir/ROMs/PSP")
+
+	#Artwork 
+	pathlist+=("$rootdir/Artwork/Atari 2600")
+	pathlist+=("$rootdir/Artwork/N64")
+	pathlist+=("$rootdir/Artwork/NES")
+	pathlist+=("$rootdir/Artwork/SNES")
+	pathlist+=("$rootdir/Artwork/Sega Master System")
+	pathlist+=("$rootdir/Artwork/Sega Game Gear")
+	pathlist+=("$rootdir/Artwork/GBC")
+	pathlist+=("$rootdir/Artwork/GBA")
+	pathlist+=("$rootdir/Artwork/TurboGraphx 16")
+	pathlist+=("$rootdir/Artwork/Neo-Geo/CDZ")
+	pathlist+=("$rootdir/Artwork/PSP")
+	#Artwork - MAME offline scraper
+	pathlist+=("$rootdir/Artwork/MAME")
+	pathlist+=("$rootdir/Artwork/MAME/boxfront")
+	pathlist+=("$rootdir/Artwork/MAME/RCB")
+	pathlist+=("$rootdir/Artwork/MAME/cabinet")
+	pathlist+=("$rootdir/Artwork/MAME/marquee")
+	pathlist+=("$rootdir/Artwork/MAME/action")
+	pathlist+=("$rootdir/Artwork/MAME/title")
+	pathlist+=("$rootdir/Artwork/MAME/gameplay")
+
+	#Saves (if any)
+	pathlist+=("$rootdir/Saves/Atari 2600")
+	pathlist+=("$rootdir/Saves/MAME")
+	pathlist+=("$rootdir/Saves/N64")
+	pathlist+=("$rootdir/Saves/NES")
+	pathlist+=("$rootdir/Saves/SNES")
+	pathlist+=("$rootdir/Saves/Sega Master System")
+	pathlist+=("$rootdir/Saves/Sega Game Gear")
+	pathlist+=("$rootdir/Saves/GBC")
+	pathlist+=("$rootdir/Saves/GBA")
+	pathlist+=("$rootdir/Saves/TurboGraphx 16")
+	pathlist+=("$rootdir/Saves/Neo-Geo/CDZ")
+	pathlist+=("$rootdir/Saves/PSP")
+
+	#create dotfiles
+	pathlist+=("$HOME/.qjoypad3")
+	pathlist+=("$HOME/.config/mupen64plus")
+	
+pathlist+=("$HOME/.config/ppsspp/PSP/SYSTEM")
+	pathlist+=("$HOME/.mame/cfg")
+	pathlist+=("$HOME/.mess")
+	pathlist+=("$HOME/.mess/cfg")
+	pathlist+=("$HOME/.stella")
+	pathlist+=("$HOME/.xbmc/userdata/keymaps")
+	pathlist+=("$HOME/.mednafen")
+
+	#BIOS folder(s)
+	pathlist+=("$rootdir/MESS/BIOS")
+
+	#Configs
+	pathlist+=("$rootdir/Configs")
+
+	# quotes needed on entry to preven globbing on directory creation!
+	# Expanding arrays involves [@] and {}
+	for entry in "${pathlist[@]}"
+	do
+	    if [[ ! -d "$entry" ]]; then
+                mkdir -pv "$entry"
+                chown "$user" "$entry"
+                chgrp "$user" "$entry"
+        fi
+	done
+
+	# correct permissions
+	h_correct_perms
+
+}
+
+function rrs_unity()
+{
+
+#disable screensaver, XBMC will manage this
+#export display to allow gsettings running in terminal window
+export DISPLAY=:0.0
+gsettings set org.gnome.desktop.screensaver lock-enabled false
+gsettings set org.gnome.desktop.screensaver ubuntu-lock-on-suspend false
+gsettings set org.gnome.desktop.session idle-delay 3600
+}
+
+function rrs_xbmc ()
+{
+
+	#xbmc does not (at least for Ubuntu's repo pkg) load the
+	#dot files without loading XBMC at least once
+	#copy in default folder base from first run:	
+	cp -Rv "$HOME/RetroRig/XBMC-cfgs/addons" "$HOME/.xbmc"
+	cp -Rv "$HOME/RetroRig/XBMC-cfgs/userdata" "$HOME/.xbmc"
+
+	# set the system user to an absolute value.
+	# RCB and some config files don't like using $HOME, rather /home/test/
+	# Let's change the config files to reflect the current username
+	sed -i "s|/home/test/|/home/$user/|g" "$home/.xbmc/userdata/addon_data/script.games.rom.collection.browser/config.xml"
+	echo "The user applied to configuration files was: $user"
+
+	# correct permissions
+	h_correct_perms
+
+}
+
+function rrs_gamepad (){
+
+
+cmd=(dialog --backtitle "LibreGeek.org RetroRig Installer" --menu "| Gamepad Select | \
+			 Request any new Gamepads via github!" 16 62 16)
+options=(1 "Xbox 360 Controller (standard)"
+	 2 "Exit gamepad selection")
+
+	#make menu choice
+	selection=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
+	#functions
+
+	for choice in $selection
+	do
+		case $choice in
+
+		1)
+		gp_x360
+		;;
+
+		222)
+		# not used until ready
+		# gp_ps3_blu
+		;;
+
+		2)
+		return
+		;;
+
+		esac
+	done
+}
+
+function rrs_emulators()
+{
+	__postMSGs=""
+
+	clear
+	echo "Binaries-based installation"
+
+	# install emulators
+	em_install_mupen64plus 
+	em_install_mame
+	em_install_mess
+	em_install_stella
+	em_install_mednafen
+	em_install_ppsspp
+
+	#fix permissions since we are running as sudo
+	h_correct_perms
+
+	# Run Debug checks
+	rrs_debug
+
+	__postMSGs="$__postMSGs This MESS 
+configuration requires BIOS files be placed 
+under '$rootdir/ROMs/BIOS/MESS'. You may also 
+\
+use the BIOS Loader under the settings menu."
+	# inject a space to seperate messages?
+	__postMSGs="$__postMSGs "
+
+	if [[ ! -z $__postMSGs ]]; then
+	dialog --backtitle "LibreGeek.org - RetroRig Setup. Installation folder: $rootdir for user $user" --msgbox "$__postMSGs" 15 70
+	fi
+
+	dialog --backtitle "LibreGeek.org - RetroRig Setup. Installation folder: $rootdir for user $user" --msgbox "Finished emulator installs.\nYou now have to copy roms to the roms folders. You may also use the 'ROM loader' in settings menu" 15 60
+
+}
+
+function rrs_software() {
+
+	# clear post install messages
+	__postMSGs=""
+	clear
+   	
+	echo "Binaries-based installation"
+
+	# add multi-arch support
+	dpkg --add-architecture i386
+
+	#add repository for official team XBMC "stable"
+	add-apt-repository -y ppa:team-xbmc/ppa
+
+	# add extra repostories to the em_add_repos function!
+	em_add_repos
+
+	#update repository listings
+	h_update_system
+
+	#install software from repositories
+	apt-get install -y xboxdrv curl python-software-properties \
+	pkg-config software-properties-common dconf-tools jstest-gtk \
+	qjoypad xbmc build-essential
+
+	# Remove apport, as bug apport-gtk does nothing but interrupt
+	# XBMC and emulators
+	apt-get remove -y apport apport-gtk
+
+        #fix permissions since we are running as sudo
+        h_correct_perms
+
+	# Run Debug checks
+	rrs_debug
+
+	# Inform user about post-install tasks
+	# ...none for now...
+
+	# Output postMSGs to screen
+	__postMSGs="$__postMSGs If you wish to start XBMC as a session ONLY, and not Unity whatsover, enable the 'XBMC Session' option in the settings menu! Please be advised that using RetroRig with the xbmc session enabled may result in odd behavior with some emulators. I am doing my best to help/correct this."
+	# inject a space to seperate messages?
+	__postMSGs="$__postMSGs "
+
+	# inject a space to seperate messages?
+	__postMSGs="$__postMSGs For VirtualBox users, please see the wiki under 'Installation' for notes on running RetroRig under a virtual machine! At the minimum, you will need to add a filter for your controller "
+	
+        if [[ ! -z $__postMSGs ]]; then
+            dialog --backtitle "LibreGeek.org - RetroRig Setup. Installation folder: $rootdir for user $user" --msgbox "$__postMSGs\n\nSoftware install complete. \
+See debug.log for more details. Continuing on to emulator installs..." 18 60
+        fi
+
+        chown -R "$user" "$scriptdir/logs/install_$now.log.gz"
+        chgrp -R "$user" "$scriptdir/logs/install_$now.log.gz"
+	#END
+}
+
+function rrs_x360_xboxdrv() 
+{
+	clear
+	# xboxdrv settings
+
+	#set qjoypad's profile to match Xbox 360 Wireless (4-player)
+	cp -v "$rootdir/gamepad-cfgs/x360_controller/x360_controller.lyt" "$home/.qjoypad3"
+	#copy qjoypad autostart item for x360_controller gamepad config
+	cp -v "$rootdir/gamepad-cfgs/x360_controller/qjoypad.desktop" "/etc/xdg/autostart/"
+	
+	#blacklist xpad
+	cp -v "$rootdir/init-scripts/x360_controller/blacklist.conf" "/etc/modprobe.d/"
+
+	#inject init script and default config
+	cp -v "$rootdir/init-scripts/x360_controller/xboxdrv" "/etc/init.d/"
+	cp -v "$rootdir/init-scripts/x360_controller/default/xboxdrv" "/etc/default/xboxdrv"
+
+	# copy keyboard.xml file for XBMC. Button id numbers are totally diffferent, due to the use of 
+	# the use-dpad-as-button, and use-trigger-as-button options used.
+	cp -v "$rootdir/gamepad-cfgs/x360_controller/keyboard.xml" "$home/.xbmc/userdata/keymaps"
+
+	#update init scripts
+	update-rc.d xboxdrv defaults
+
+	#fix permissions since we are running as sudo
+	h_correct_perms
+
+}
+
+function rrs_ps3_blu_gimx() 
+{
+
+	# !!! THIS SECTION IS NOT USED AT THE MOMENT !!! #
+
+	clear
+	# xboxdrv settings
+
+	#set qjoypad's profile to match Xbox 360 Wireless (4-player)
+	cp -v "$rootdir/gamepad-cfgs/ps3_usb_controller/ps3_usb_controller.lyt" "$home/.qjoypad3"
+	#copy qjoypad autostart item for x360_controller gamepad config
+	cp -v "$rootdir/gamepad-cfgs/ps3_usb_controller/qjoypad.desktop" "/etc/xdg/autostart/"
+	
+	#blacklist xpad
+	cp -v "$rootdir/init-scripts/x360_controller/blacklist.conf" "/etc/modprobe.d/"
+
+	#inject init script and default config
+	cp -v "$rootdir/init-scripts/ps3_usb_controller/xboxdrv" "/etc/init.d/"
+	cp -v "$rootdir/init-scripts/ps3_usb_controller/default/xboxdrv" "/etc/default/xboxdrv"
+
+	# copy keyboard.xml file for XBMC. Button id numbers are totally diffferent, due to the use of 
+	# the use-dpad-as-button, and use-trigger-as-button options used.
+	cp -v "$rootdir/gamepad-cfgs/ps3_usb_controller/keyboard.xml" "$home/.xbmc/userdata/keymaps"
+
+	#update init scripts
+	update-rc.d xboxdrv defaults
+
+	#fix permissions since we are running as sudo
+	h_correct_perms
+
+}
+
+function rrs_autostart()
+{
+	clear
+	# create autostart for XBMC (universal)
+	cp -v "/usr/share/applications/xbmc.desktop" "/etc/xdg/autostart/" >> "$rootdir/logs/debug.log"
+
+	# later this section will configure LightDM (login manager for Ubuntu) to log into
+	# the XBMC session and skip Unity altogether. Provide an option to do so, yes/no...
+
+	# inform user install is done (this is the last step of main, option 1)
+        dialog --backtitle "LibreGeek.org - RetroRig Setup. Installation folder: $rootdir for user $user" --msgbox "Finished main install tasks.\n\nYou now have to copy roms to the roms folders. \nThis can be done via SSH, Samba, or via your graphic folder manager (please see settings menu for more)\n\nAll current config folders used were appended with .old for restoration purposes.\n\nPlease reboot to complete the installation." 17 50
+
+	# correct permissions
+	h_correct_perms
+}
+
+function rrs_debug()
+{
+	clear
+	echo "Generating debug log"
+
+	# Check for existance of essential files
+	echo "Essential files: XBMC:" > "$rootdir/logs/debug.log"
+	echo "Path(s): '$HOME/.xbmc/userdata'" >> "$rootdir/logs/debug.log"
+	h_filechecker "$HOME/.xbmc/userdata" "$rootdir/logs/debug.log"
+	# RCB
+	echo "Essential files: ROM Collection Browser:" >> "$rootdir/logs/debug.log"
+	echo "Path: '$HOME/.xbmc/addons/script.games.rom.collection.browser'" >> "$rootdir/logs/debug.log"
+	h_filechecker "$HOME/.xbmc/addons/script.games.rom.collection.browser"	
+	echo "Path: '$HOME/.xbmc/userdata/addon_data/script.games.rom.collection.browser'" >> "$rootdir/logs/debug.log"
+	h_filechecker "$HOME/.xbmc/userdata/addon_data/script.games.rom.collection.browser" "$rootdir/logs/debug.log"
+	# init file checks	
+	echo "Available init files:" >> "$rootdir/logs/debug.log"
+	echo "Has xboxdrv been loaded?" >> "$rootdir/logs/debug.log"
+	h_filechecker "/etc/init.d/xboxdrv"
+	h_filechecker "/etc/default/xboxdrv"
+
+	# Check unity settings:
+	echo "Unity settings (if applicable):" >> "$rootdir/logs/debug.log"
+	gsettings list-recursively "org.gnome.desktop.screensaver" | grep "lock-enabled" >> "$rootdir/logs/debug.log"
+	gsettings list-recursively "org.gnome.desktop.screensaver" | grep "ubuntu-lock-on-suspend" >> "$rootdir/logs/debug.log"	
+	gsettings list-recursively "org.gnome.desktop.session" | grep "idle-delay" >> "$rootdir/logs/debug.log"
+
+	# Source built / pre-built
+	h_filechecker "$rootdir/emulators/PPSSPP/ppsspp-0.9.8-SDL-pk64"
+	h_filechecker "/ust/bir/PPSSPPSDL"
+
+	#APT pkg checks
+	echo -e "\nCheck for needed pkgs installed via apt: " >> "$rootdir/logs/debug.log"
+	h_pkgcheck "stella"
+	h_pkgcheck "python-software-properties"
+	h_pkgcheck "xbmc"
+	h_pkgcheck "dconf-tools"
+	h_pkgcheck "xboxdrv"
+	h_pkgcheck "curl"
+	h_pkgcheck "xbmc"
+	h_pkgcheck "mednafen"
+	h_pkgcheck "mess"
+	h_pkgcheck "mame"
+	h_pkgcheck "qjoypad"
+	h_pkgcheck "jstest-gtk"
+
+   	echo -e "\nEnd of log file" >> "$rootdir/logs/debug.log" >> "$rootdir/logs/debug.log"
+	
+	dialog --backtitle "LibreGeek.org - RetroRig Setup. Installation folder: $rootdir for user $	user" --msgbox "Debug log was generated in $rootdir/logs/debug.log. Additional logs can be found in the folder $scriptdir/logs/." 8 40 
+
+	#corect permissions
+	h_correct_perms
+}
+
+function rrs_showHelp()
+{
+    #set color for highlights
+    # Arch Linux wiki color listing: http://bit.ly/1nhkU8Y
+    PATHCOLOR="36m"  #Cyan text
+    TITLECOLOR="33m"  #Yellow text
+    BARCOLOR="35m"  #Yellow text
+
+    #Console help file
+    clear
+    echo ""
+    echo -e "\e[0"$BARCOLOR$"============================================================\e[0m"
+    echo -e "\e[0"$TITLECOLOR$"RetroRig Help File\e[0m"
+    echo -e "\e[0"$BARCOLOR$"============================================================\e[0m"
+    echo ""
+    echo "This script installs XBMC as a backend, many emulators, 
+and ROM Collection Browser as the graphical front end. 
+Because it needs to install some APT packages it has to be 
+run with root priviliges."
+
+    echo ""
+    echo "When using..."
+    echo "sudo ./retrorig_setup.sh
+The installation directory is:"
+echo -e "\e[0$PATHCOLOR$HOME/RetroRig for the current user\e[0m"
+
+    echo ""
+    echo "When using..."
+    echo "sudo ./retrorig_setup.sh USERNAME
+The installation directory is:"
+echo -e "\e[0$PATHCOLOR/home/USERNAME/RetroRig for user USERNAME\e[0m"
+
+    echo ""
+    echo "When using..."
+    echo "sudo ./retrorig_setup.sh USERNAME ABSPATH
+The installation directory is:"
+echo -e "\e[0"$PATHCOLOR"ABSPATH for user USERNAME\e[0m"
+    echo ""
+    echo "Please submit all issues to GitHub: bit.ly/1ocT0we"
+    
+    echo -e "\e[0"$BARCOLOR$"============================================================\e[0m"
+    echo "End Help File"
+    echo -e "\e[0"$BARCOLOR$"============================================================\e[0m"
+    echo ""
+}
+
+function rrs_prereq()
+{
+    if [[ -z $(type -P git) || -z $(type -P dialog) || -z $(type -P figlet) ]]; then
+        echo "Did not find needed packages 'git' and/or 'dialog/figlet'. Attempting to install these now."
+	sleep 3s
+        apt-get update
+        apt-get install -y git dialog figlet
+        if [ $? == '0' ]; then
+            echo "Successfully installed 'git/dialog/figlet'." > "$scriptdir/logs/prechecks.log"
+	    sleep 3s
+	    prereqs="true"
+        else
+            echo "Could not install 'git' and/or 'dialog/figlet'. Exiting..." > "$scriptdir/logs/prechecks.log"
+	    prereqs="false"
+	    sleep 3s
+            exit 1
+        fi
+    else
+        echo "Found needed packages 'git/dialog/figlet'." > "$scriptdir/logs/prechecks.log"
+	prereqs="true"
+	sleep 2s
+    fi
+
+
+echo "Current install user: $SUDO_USER" >> "$scriptdir/logs/prechecks.log"
+echo "Current install rootdir is: $rootdir" >>"$scriptdir/logs/prechecks.log"
+echo "Current script dir is:  $scriptdir" >>"$scriptdir/logs/prechecks.log"
+
+if [ "$prereqs" == "true" ]; then
+    echo "Pre-checks were sucessful!!!" >> "$scriptdir/logs/prechecks.log"
+else
+    echo "Pre-checks were NOT sucessful. Sad crab!" >> "$scriptdir/logs/prechecks.log"
+fi
+
+chown -R "$user" "$scriptdir/logs/prechecks.log"
+chgrp -R "$user" "$scriptdir/logs/prechecks.log"
+
+
+
+}
+
+function rrs_reboot()
+{
+
+	#confirm reboot is the intended action
+	dialog --title "Confirm yes/no" \
+	--backtitle "LibreGeek.org RetroRig Installer" \
+	--yesno "Are you sure you want to Reboot?"  6 0
+
+	# Get exit status
+	# 0 means user hit [yes] button.
+	# 1 means user hit [no] button.
+	# 255 means user hit [Esc] key.
+	response=$?
+	case $response in
+		0)
+		clear
+		reboot
+		;;
+
+		1)
+		return 
+		;;
+
+		255)
+		return
+		;;
+	esac
+}
+
