@@ -1,3 +1,0 @@
-#!/bin/bash
-# add some initialization stuff here (if necessary)
-xbmc --standalone
