@@ -201,7 +201,7 @@ options=(1 "Atari 2600"
 		h_file_loader
 		#copy Atari ROMs
 		if [ -n "$folder" ]; then
-			cp -R "$folder"/* "/home/mikeyd/RetroRig/ROMs/Atari 2600"
+			cp -R "$folder"/* "$rootdir/ROMs/Atari 2600"
 		fi
 		;;
 
