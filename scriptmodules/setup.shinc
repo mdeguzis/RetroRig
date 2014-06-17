@@ -152,13 +152,8 @@ options=(1 "Xbox 360 Controller (standard)"
 		gp_x360
 		;;
 
-		222)
-		# not used until ready
-		# gp_ps3_blu
-		;;
-
 		2)
-		gp_ps3_blu
+		gp_ps3_blu_main
 		;;
 
 		2)
