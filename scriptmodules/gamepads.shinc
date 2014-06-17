@@ -134,7 +134,7 @@ function ps3_pair_blu_p1()
 	# Set up player 1 controller
 	###############################
 
-	dialog --msgbox "Please plug these items now:\n\n1)The USB cable\n2)Player 1 PS3 controller\n \
+	dialog --msgbox "Please plug these items now:\n\n1)The USB cable\n2)Player 1 PS3 controller\n3)Bluetooth dongle\n\n \
 			Additional controllers can be added in the settings menu"  10 40
 	# Grab player 1 controller MAC Address of wired device
 	sixpair
