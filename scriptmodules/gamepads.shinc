@@ -55,7 +55,7 @@ function gp_ps3_blu()
 }
 
 
-function ps3_pair_blu()
+function gp_ps3_blu_main()
 {
 
 	#set qjoypad's profile to match Xbox 360 Wireless (4-player)
@@ -87,91 +87,25 @@ function ps3_pair_blu()
 		case $choice in
 
 		1)
-		###############################
-		# Set up player 1 controller
-		###############################
-
-		dialog --msgbox "Please plug these items now:\n\n1)The USB cable\n2)Player 1 PS3 controller \
-				Additional controllers can be added in the settings menu"  10 40
-		# Grab player 1 controller MAC Address of wired device
-		ps3_p1=$(sixpair | grep "Current" | cut -c 27-43)
-		# Inform player 1 controller user to disconnect USB cord
-		dialog --msgbox "Please unplug the the USB cable and press the PS Center button now\n\n \
-				 The controller will rumble and LED 1 should light. If it does not, \
-				 please hold in the PS button to turn it off, then back on." 10 60
-		# grab player 1 controller MAC Address of bluetooth pairing process
-		PS3_MAC_P1_blu=$(grep "PLAYSTATION(R)3" "/proc/bus/input/devices" | cut -c38-54)
-		# As a last step, inform user to hold down PS Button until it turns off for next controller
-		# This msg  will be commented out for this section as we only have 1 controller
-
-		#dialog --msgbox "Please hold down the PS Button on the Player 1 controller until \
-		#		 it turns off. This will take about 5-10 seconds." 8 40
+		ps3_pair_blu_p1
 		;;
 
 		2)
-		###############################
-		# Set up player 1 controller
-		###############################
-
-		dialog --msgbox "Please plug these items now:\n\n1)The USB cable\n2)Player 1 PS3 controller \
-				Additional controllers can be added in the settings menu"  10 40
-
-		# Grab player 1 controller MAC Address of wired device
-		ps3_p1=$(sixpair | grep "Current" | cut -c 27-43)
-
-		# Inform player 1 controller user to disconnect USB cord
-		dialog --msgbox "Please unplug the the USB cable and press the PS Center button now\n\n \
-				 The controller will rumble and LED 1 should light. If it does not, \
-				 please hold in the PS button to turn it off, then back on." 10 60
-
-		# grab player 1 controller MAC Address of bluetooth pairing process
-		PS3_MAC_P1_blu=$(grep "PLAYSTATION(R)3" "/proc/bus/input/devices" | cut -c38-54)
-
-		# As a last step, inform user to hold down PS Button until it turns off for next controller
-		# This msg  will be commented out for this section as we only have 1 controller
-
-		#dialog --msgbox "Please hold down the PS Button on the Player 1 controller until \
-		#		 it turns off. This will take about 5-10 seconds." 8 40
-
-		# check that controller is off for safety...
-		# set blue check to "0" for false now...
-		ps3_blu_complete="0"
-		# loop until controller is unplugged. When value becomes 1, this will get skipped
-		while [[ $ps3_blu_compete == "0" ]]; do
-			h_ps3_blu_check
-		done
-		
-		###############################
-		# Set up player 2 controller
-		###############################
-
+		ps3_pair_blu_p1
+		#ps3_pair_blu_p2
 		;;
 
 		3)
-		###############################
-		# Set up player 1 controller
-		###############################
-		###############################
-		# Set up player 2 controller
-		###############################
-		###############################
-		# Set up player 3 controller
-		###############################
+		ps3_pair_blu_p1
+		#ps3_pair_blu_p2
+		#ps3_pair_blu_p3
 		;;
 
 		4)
-		###############################
-		# Set up player 1 controller
-		###############################
-		###############################
-		# Set up player 2 controller
-		###############################
-		###############################
-		# Set up player 3 controller
-		###############################
-		###############################
-		# Set up player 4 controller
-		###############################
+		ps3_pair_blu_p1
+		#ps3_pair_blu_p2
+		#ps3_pair_blu_p3
+		#ps3_pair_blu_p4
 		;;
 
 		esac
@@ -191,6 +125,45 @@ function ps3_pair_blu()
 	# Replace MAC Address for ***CONTROLLER 1 ONLY!*** This will be used to control XBMC		
 	sed -i "s|$PS3_MAC_OLD|$PS3_MAC_P1_blu|g" "$home/.xbmc/userdata/keymaps/keyboard.xml"
 
+}
+
+
+function ps3_pair_blu_p1()
+{
+	###############################
+	# Set up player 1 controller
+	###############################
+
+	dialog --msgbox "Please plug these items now:\n\n1)The USB cable\n2)Player 1 PS3 controller \
+			Additional controllers can be added in the settings menu"  10 40
+	# Grab player 1 controller MAC Address of wired device
+	ps3_p1=$(sixpair | grep "Current" | cut -c 27-43)
+	# Inform player 1 controller user to disconnect USB cord
+	dialog --msgbox "Please unplug the the USB cable and press the PS Center button now\n\n \
+			 The controller will rumble and LED 1 should light. If it does not, \
+			 please hold in the PS button to turn it off, then back on." 10 60
+	# grab player 1 controller MAC Address of bluetooth pairing process
+	PS3_MAC_P1_blu=$(grep "PLAYSTATION(R)3" "/proc/bus/input/devices" | cut -c38-54)
+	# As a last step, inform user to hold down PS Button until it turns off for next controller
+	# This msg  will be commented out for this section as we only have 1 controller
+
+	#dialog --msgbox "Please hold down the PS Button on the Player 1 controller until \
+	#		 it turns off. This will take about 5-10 seconds." 8 40
+
+	# As a last step, inform user to hold down PS Button until it turns off for next controller
+	# This msg  will be commented out for this section as we only have 1 controller
+
+	#dialog --msgbox "Please hold down the PS Button on the Player 1 controller until \
+	#		 it turns off. This will take about 5-10 seconds." 8 40
+
+
+	# check that controller is off
+	# set blu check to "0" as starting $var value
+	ps3_blu_complete="0"
+	# loop until controller is unplugged. When value becomes 1, this will get skipped
+	while [[ $ps3_blu_compete == "0" ]]; do
+		h_ps3_blu_check
+	done	
 }
 
 function gp_x360()
