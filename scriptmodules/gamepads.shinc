@@ -58,6 +58,10 @@ function gp_ps3_blu()
 function gp_x360()
 {
 
+	############################################
+	# configure emulator configs for 360 gamepad
+	############################################
+
 	#mame
 	# default path: /home/$USER/.mame
 	# Main config
@@ -95,8 +99,31 @@ function gp_x360()
 	cp -v "$scriptdir/emu-cfgs/x360_controller/PPSSPP/ppsspp.ini" "$home/.config/ppsspp/PSP/SYSTEM"
 	cp -v "$scriptdir/emu-cfgs/x360_controller/PPSSPP/controls.ini" "$home/.config/ppsspp/PSP/SYSTEM"
 
-	# configure xboxdrv for gamepad
-	rrs_x360_xboxdrv
+	############################################
+	# configure xboxdrv for 360 gamepad
+	############################################
+
+	#set qjoypad's profile to match Xbox 360 Wireless (4-player)
+	cp -v "$rootdir/gamepad-cfgs/x360_controller/x360_controller.lyt" "$home/.qjoypad3"
+	#copy qjoypad autostart item for x360_controller gamepad config
+	cp -v "$rootdir/gamepad-cfgs/x360_controller/qjoypad.desktop" "/etc/xdg/autostart/"
+	
+	#blacklist xpad
+	cp -v "$rootdir/init-scripts/x360_controller/blacklist.conf" "/etc/modprobe.d/"
+
+	#inject init script and default config
+	cp -v "$rootdir/init-scripts/x360_controller/xboxdrv" "/etc/init.d/"
+	cp -v "$rootdir/init-scripts/x360_controller/default/xboxdrv" "/etc/default/xboxdrv"
+
+	# copy keyboard.xml file for XBMC. Button id numbers are totally diffferent, due to the use of 
+	# the use-dpad-as-button, and use-trigger-as-button options used.
+	cp -v "$rootdir/gamepad-cfgs/x360_controller/keyboard.xml" "$home/.xbmc/userdata/keymaps"
+
+	#update init scripts
+	update-rc.d xboxdrv defaults
+
+	#fix permissions since we are running as sudo
+	h_correct_perms
 
 	# correct permissions
 	h_correct_perms
