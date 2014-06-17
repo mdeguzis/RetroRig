@@ -1,5 +1,5 @@
 <!--
-# This file is for use with a PS3 Sixaxis (*USB) Controller under RetroRig
+# This file is for use with a PS3 Sixaxis (Bluetooth) Controller under RetroRig
 # Button id numbers are totally diffferent, due to the use of
 # the use-dpad-as-button, and use-trigger-as-button options used.
 # To use please replace the joystickname with the one you find 
@@ -14,20 +14,22 @@
 # The Buttons of the controller are mapped as the following list shows:
 # add +1, since id's start at 0!
 #
-#button id 1 = dpad up
-#button id 2 = dpad down
-#button id 3 = dpad left
-#button id 4 = dpad right
-#button id 5 = A
-#button id 6 = B
-#button id 7 = X
-#button id 8 = Y
-#button id 9 = Left Shoulder Button
-#button id 10 = Right Shoulder Button
-#button id 11 = Left Trigger
-#button id 12 = Right Trigger
-#button id 13 = back
-#button id 14 = start
+#button id 1 = Select
+#button id 2 = Left thumbstick click
+#button id 3 = Start
+#button id 4 = dpad up
+#button id 5 = dpad right
+#button id 6 = dpad down
+#button id 7 = dpad left
+#button id 9 = L2
+#button id 10 = R2
+#button id 11 = L1
+#button id 12 = R1
+#button id 13 = △
+#button id 14 = ○
+#button id 15 = ×
+#button id 16 = □
+#button id 17 = PS Button
 #
 #axis limit="1" id="2"   Up on left stick
 #axis limit="+1" id="2"   Down on left stick
@@ -42,18 +44,18 @@
 -->
 <keymap>
   <global>
-    <joystick name="Xbox Gamepad (userspace driver)">
+    <joystick name="PLAYSTATION(R)3 Controller (04:76:6E:90:8E:9F)">
 <altname>Controller (Xbox 360 Wireless Receiver for Windows)</altname>
-<button id="1">Up</button> 
-<button id="2">Down</button> 
-<button id="3">Left</button>
-<button id="4">Right</button>
-<button id="5">Select</button>
-<button id="6">Back</button>
-<button id="7">ContextMenu</button>
-<button id="8">FullScreen</button>
-<button id="9">ScrollUp</button>
-<button id="10">ScrollDown</button>
+<button id="4">Up</button> 
+<button id="6">Down</button> 
+<button id="7">Left</button>
+<button id="5">Right</button>
+<button id="1">Select</button>
+<button id="14">Back</button>
+<button id="16">ContextMenu</button>
+<button id="13">FullScreen</button>
+<button id="11">ScrollUp</button>
+<button id="12">ScrollDown</button>
 
 <hat id="1" position="up">Up</hat>
 <hat id="1" position="down">Down</hat>

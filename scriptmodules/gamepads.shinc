@@ -46,12 +46,37 @@ function gp_ps3_blu()
 	cp -v "scriptdir/emu-cfgs/ps3_usb_controller/PPSSPP/ppsspp.ini" "$home/.config/ppsspp/PSP/SYSTEM"
 	cp -v "scriptdir/emu-cfgs/ps3_usb_controller/PPSSPP/controls.ini" "$home/.config/ppsspp/PSP/SYSTEM"
 
-	# configure xboxdrv for PS3 USB gamepad
-	rrs_ps3_usb_xboxdrv
+	############################################
+	# configure PS3 (bluetooth) controller
+	############################################
 
-	# correct permissions
+	#set qjoypad's profile to match Xbox 360 Wireless (4-player)
+	cp -v "$rootdir/gamepad-cfgs/ps3_blu_controller/ps3_sixaxis_blu.lyt" "$home/.qjoypad3"
+	#copy qjoypad autostart item for x360_controller gamepad config
+	cp -v "$rootdir/gamepad-cfgs/ps3_blu_controller/qjoypad.desktop" "/etc/xdg/autostart/"
+	
+	#blacklist xpad
+	cp -v "$rootdir/init-scripts/ps3_blu_controller/blacklist.conf" "/etc/modprobe.d/"
+
+
+	# copy keyboard.xml file for XBMC. Button id numbers are totally diffferent, due to the use of 
+	# the use-dpad-as-button, and use-trigger-as-button options used.
+
+	### !!! BELOW NOT DONE YET  !!! ###
+
+	# !!! INFORM USER ONLY TO PLUG IN CONTROLLER 1 for setup purposes so correct MAC is grabbed !!!
+
+	# copy over default keyboard file:
+	cp -v "$rootdir/gamepad-cfgs/ps3_blu_controller/keyboard.xml" "$home/.xbmc/userdata/keymaps/keyboard.xml"
+
+	# First grab MAC Address:
+	PS3_MAC_OLD=$(grep "PLAYSTATION(R)3" "$rootdir/gamepad-cfgs/ps3_blu_controller/keyboard.xml | cut -c 49-65")
+	PS3_MAC_NEW=$(grep "PLAYSTATION(R)3" "/proc/bus/input/devices" | cut -c38-54)
+	# Swap MAC address for controller 1
+	sed -i "s|$PS3_MAC_OLD|$PS3_MAC_NEW|g" "$home/.xbmc/userdata/keymaps/keyboard.xml"
+
+	#fix permissions since we are running as sudo
 	h_correct_perms
-
 
 }
 
@@ -123,8 +148,5 @@ function gp_x360()
 	update-rc.d xboxdrv defaults
 
 	#fix permissions since we are running as sudo
-	h_correct_perms
-
-	# correct permissions
 	h_correct_perms
 }
