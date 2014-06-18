@@ -90,7 +90,6 @@ function gp_ps3_blu_main()
 		# call pairing function to set current bluetooth MAC to Player 1
 		ps3_pair_blu
 		# grab player 1 controller MAC Address of USB/bluetooth pairing process
-		PS3_MAC_P1_USB=$(sixpair | grep "Current" | cut -c 27-43)
 		PS3_MAC_P1_BLU=$(grep "PLAYSTATION(R)3" "/proc/bus/input/devices" | cut -c38-54)
 		# TESING ONLY!!!
 		echo $PS3_MAC_P1_USB
@@ -136,11 +135,17 @@ function ps3_pair_blu()
 	# Set and pair up player controller
 	#####################################
 
-	dialog --msgbox "Please plug in these items now:\n\n1)The USB cable\n2)PS3 controller\n3)Bluetooth dongle\n\n\
-Additional controllers can be added in the settings menu"  12 40
+	dialog --msgbox "Please plug in these items now:\n\n1)The USB cable\n2)PS3 controller\n \
+3)Bluetooth dongle\n\n\Additional controllers can be added in the settings menu"  12 40
 
 	clear
 	# Grab player 1 controller MAC Address of wired device
+	echo "Setting up Playstation 3 Sixaxis (blutooth) [Player 1]" | tee "$rootdir/logs/debug.log"
+
+	# echo USB MAC value to log for debugging purposes
+ 	PS3_MAC_P1_USB=$(sixpair | grep "Current" | cut -c 27-43)
+
+	# Pair controller with logging
 	sixpair | tee "$rootdir/logs/debug.log"
 	# start sixad service
 	echo "restarting serives" | tee "$rootdir/logs/debug.log"
