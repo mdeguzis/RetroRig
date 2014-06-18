@@ -139,27 +139,15 @@ function ps3_pair_blu()
 	dialog --msgbox "Please plug these items now:\n\n1)The USB cable\n2)PS3 controller\n3)Bluetooth dongle\n\n\
 Additional controllers can be added in the settings menu"  12 40
 
-	# Grab player 1 controller MAC Address of wired device
-	sixpair > "$rootdir/logs/debug.log" 2>&1
-	ps3_p1=$(sixpair | grep "Current" | cut -c 27-43)
-
-	# start sixad service
-	sixad --start > "$rootdir/logs/debug.log" 2>&1 &
-	# clear screen to clear [1] FG process start
 	clear
+	# Grab player 1 controller MAC Address of wired device
+	sixpair
+	# start sixad service
+	sixad --start
 
 	# Inform player 1 controller user to disconnect USB cord
 	dialog --msgbox "Please unplug the the USB cable and press the PS Center button now\n\nThe \
 controller will rumble and the appropriate LED should light. If it does not, please hold in the PS button to turn it off, then back on." 10 60
-
-	# As a last step, inform user to hold down PS Button until it turns off for next controller
-	# This msg  will be commented out for this section as we only have 1 controller
-
-	#dialog --msgbox "Please hold down the PS Button on the Player 1 controller until \
-	#		 it turns off. This will take about 5-10 seconds." 8 40
-
-	# As a last step, inform user to hold down PS Button until it turns off for next controller
-	# This msg  will be commented out for this section as we only have 1 controller
 
 	#dialog --msgbox "Please hold down the PS Button on the Player 1 controller until \
 	#		 it turns off. This will take about 5-10 seconds." 8 40
