@@ -144,10 +144,9 @@ function gp_ps3_blu_main()
 
 	# First grab MAC Addresses:
 	# In the config file, the MAC is set to 00:00:00:00:00:00
-	# Still, it should be proper practice to ascertain the current MAC (old), rather than set it directly.
 
 	# set MAC values
-	PS3_MAC_OLD=$(grep "PLAYSTATION(R)3" "$rootdir/gamepad-cfgs/ps3_blu_controller/keyboard.xml | cut -c 49-65")
+	PS3_MAC_OLD="00:00:00:00:00:00"
 
 	# Replace MAC Address for ***CONTROLLER 1 ONLY!*** This will be used to control XBMC		
 	sed -i "s|$PS3_MAC_OLD|$PS3_MAC_P1_BLU|g" "$home/.xbmc/userdata/keymaps/keyboard.xml"
@@ -181,6 +180,8 @@ function ps3_pair_blu()
 	echo "" | tee "$rootdir/logs/debug.log"
 	# start service, but fork to background so when user exits script it is still running to avoid reboot
 	service sixad restart | tee "$rootdir/logs/debug.log" &
+	sleep 2s
+	clear
 
 	# Inform player 1 controller user to disconnect USB cord
 	dialog --msgbox "Please disconnect the USB cable and press the PS Button now. The appropriate \
