@@ -140,11 +140,13 @@ function ps3_pair_blu()
 Additional controllers can be added in the settings menu"  12 40
 
 	# Grab player 1 controller MAC Address of wired device
-	sixpair &> "$rootdir/logs/debug.log"
+	sixpair > "$rootdir/logs/debug.log" 2>&1
 	ps3_p1=$(sixpair | grep "Current" | cut -c 27-43)
 
 	# start sixad service
-	sixad --start &> "$rootdir/logs/debug.log" 
+	sixad --start > "$rootdir/logs/debug.log" 2>&1 &
+	# clear screen to clear [1] FG process start
+	clear
 
 	# Inform player 1 controller user to disconnect USB cord
 	dialog --msgbox "Please unplug the the USB cable and press the PS Center button now\n\nThe \
