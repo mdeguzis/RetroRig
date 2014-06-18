@@ -92,18 +92,47 @@ function gp_ps3_blu_main()
 		# grab player 1 controller MAC Address of USB/bluetooth pairing process
 		PS3_MAC_P1_BLU=$(grep "PLAYSTATION(R)3" "/proc/bus/input/devices" | cut -c38-54)
 		# TESING ONLY!!!
-		echo $PS3_MAC_P1_USB
-		echo $PS3_MAC_P1_BLU
-		sleep 5s
+		 echo "The USB MAC Address is: $PS3_MAC_P1_USB"
+		 echo "The Bluetooth MAC Address is: $PS3_MAC_P1_BLU"
+		dialog --msgbox "Pairing of Player 1 Controller complete" 5 55 
+		 sleep 5s
 		;;
 
 		2)
+		# call pairing function to set current bluetooth MAC to Player 1
+		ps3_pair_blu
+		dialog --msgbox "Pairing of Player 1 Controller complete" 5 55 
+		# call pairing function to set current bluetooth MAC to Player 2
+		ps3_pair_blu
+		dialog --msgbox "Pairing of Player 2 Controller complete" 5 55 
 		;;
 
 		3)
+		# call pairing function to set current bluetooth MAC to Player 1
+		ps3_pair_blu
+		dialog --msgbox "Pairing of Player 1 Controller complete" 5 55 
+		# call pairing function to set current bluetooth MAC to Player 2
+		ps3_pair_blu
+		dialog --msgbox "Pairing of Player 2 Controller complete" 5 55
+		# call pairing function to set current bluetooth MAC to Player 3
+		ps3_pair_blu
+		dialog --msgbox "Pairing of Player 3 Controller complete" 5 55  
 		;;
 
 		4)
+		# call pairing function to set current bluetooth MAC to Player 1
+		ps3_pair_blu
+		dialog --msgbox "Pairing of Player 1 Controller complete" 5 55 
+		# call pairing function to set current bluetooth MAC to Player 2
+		ps3_pair_blu
+		dialog --msgbox "Pairing of Player 2 Controller complete" 5 55
+		# call pairing function to set current bluetooth MAC to Player 3
+		ps3_pair_blu
+		dialog --msgbox "Pairing of Player 3 Controller complete" 5 55
+		# call pairing function to set current bluetooth MAC to Player 4
+		ps3_pair_blu
+		dialog --msgbox "Pairing of Player 4 Controller complete" 5 55    
+
 		;;
 
 		esac
@@ -135,8 +164,8 @@ function ps3_pair_blu()
 	# Set and pair up player controller
 	#####################################
 
-	dialog --msgbox "Please plug in these items now:\n\n1)The USB cable\n2)PS3 controller\n \
-3)Bluetooth dongle\n\n\Additional controllers can be added in the settings menu"  12 40
+	dialog --msgbox "Please plug in these items now:\n\n1)The USB cable\n2)PS3 controller\n\
+3)Bluetooth dongle\n\nAdditional controllers can be added in the settings menu"  12 40
 
 	clear
 	# Grab player 1 controller MAC Address of wired device
@@ -153,16 +182,17 @@ function ps3_pair_blu()
 	service sixad restart | tee "$rootdir/logs/debug.log"
 
 	# Inform player 1 controller user to disconnect USB cord
-	dialog --msgbox "The appropriate LED should not be lit. If it is not, please hold in the PS button to turn it off, then back on." 10 60
+	dialog --msgbox "Please disconnect the USB cable and press the PS Button now. The appropriate \
+LED should not be lit. If it is not, please hold in the PS button to turn it off, then back on." 10 60
 
 	#dialog --msgbox "Please hold down the PS Button on the Player 1 controller until \
 	#		 it turns off. This will take about 5-10 seconds." 8 40
 
 
-	###########################################################
+	##############################################################
 	# THIS DEBUG SECTION BELOW IS NOT WOKRING, needs fixed :(
-	# The above does work I believe.
-	###########################################################
+	# The above pairing does work, but it would be nice to check
+	##############################################################
 
 
 	# check that controller is off
