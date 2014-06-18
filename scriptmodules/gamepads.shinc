@@ -94,44 +94,44 @@ function gp_ps3_blu_main()
 		# TESING ONLY!!!
 		 echo "The USB MAC Address is: $PS3_MAC_P1_USB"
 		 echo "The Bluetooth MAC Address is: $PS3_MAC_P1_BLU"
-		dialog --msgbox "Pairing of Player 1 Controller complete" 5 55 
+		dialog --msgbox "Pairing of Player 1 Controller complete" 5 43 
 		 sleep 5s
 		;;
 
 		2)
 		# call pairing function to set current bluetooth MAC to Player 1
 		ps3_pair_blu
-		dialog --msgbox "Pairing of Player 1 Controller complete" 5 55 
+		dialog --msgbox "Pairing of Player 1 Controller complete" 5 43 
 		# call pairing function to set current bluetooth MAC to Player 2
 		ps3_pair_blu
-		dialog --msgbox "Pairing of Player 2 Controller complete" 5 55 
+		dialog --msgbox "Pairing of Player 2 Controller complete" 5 43 
 		;;
 
 		3)
 		# call pairing function to set current bluetooth MAC to Player 1
 		ps3_pair_blu
-		dialog --msgbox "Pairing of Player 1 Controller complete" 5 55 
+		dialog --msgbox "Pairing of Player 1 Controller complete" 5 43 
 		# call pairing function to set current bluetooth MAC to Player 2
 		ps3_pair_blu
-		dialog --msgbox "Pairing of Player 2 Controller complete" 5 55
+		dialog --msgbox "Pairing of Player 2 Controller complete" 5 43
 		# call pairing function to set current bluetooth MAC to Player 3
 		ps3_pair_blu
-		dialog --msgbox "Pairing of Player 3 Controller complete" 5 55  
+		dialog --msgbox "Pairing of Player 3 Controller complete" 5 43  
 		;;
 
 		4)
 		# call pairing function to set current bluetooth MAC to Player 1
 		ps3_pair_blu
-		dialog --msgbox "Pairing of Player 1 Controller complete" 5 55 
+		dialog --msgbox "Pairing of Player 1 Controller complete" 5 43 
 		# call pairing function to set current bluetooth MAC to Player 2
 		ps3_pair_blu
-		dialog --msgbox "Pairing of Player 2 Controller complete" 5 55
+		dialog --msgbox "Pairing of Player 2 Controller complete" 5 43
 		# call pairing function to set current bluetooth MAC to Player 3
 		ps3_pair_blu
-		dialog --msgbox "Pairing of Player 3 Controller complete" 5 55
+		dialog --msgbox "Pairing of Player 3 Controller complete" 5 43
 		# call pairing function to set current bluetooth MAC to Player 4
 		ps3_pair_blu
-		dialog --msgbox "Pairing of Player 4 Controller complete" 5 55    
+		dialog --msgbox "Pairing of Player 4 Controller complete" 5 43    
 
 		;;
 
@@ -179,7 +179,8 @@ function ps3_pair_blu()
 	# start sixad service
 	echo "restarting serives" | tee "$rootdir/logs/debug.log"
 	echo "" | tee "$rootdir/logs/debug.log"
-	service sixad restart | tee "$rootdir/logs/debug.log"
+	# start service, but fork to background so when user exits script it is still running to avoid reboot
+	service sixad restart | tee "$rootdir/logs/debug.log" &
 
 	# Inform player 1 controller user to disconnect USB cord
 	dialog --msgbox "Please disconnect the USB cable and press the PS Button now. The appropriate \
