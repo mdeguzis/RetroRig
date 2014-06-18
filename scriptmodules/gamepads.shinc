@@ -136,16 +136,16 @@ function ps3_pair_blu()
 	# Set and pair up player controller
 	#####################################
 
-	dialog --msgbox "Please plug these items now:\n\n1)The USB cable\n2)PS3 controller\n3)Bluetooth dongle\n\n\
+	dialog --msgbox "Please plug in these items now:\n\n1)The USB cable\n2)PS3 controller\n3)Bluetooth dongle\n\n\
 Additional controllers can be added in the settings menu"  12 40
 
 	clear
 	# Grab player 1 controller MAC Address of wired device
-	sixpair
+	sixpair | tee "$rootdir/logs/debug.log"
 	# start sixad service
-	echo "restarting serives"
-	echo ""
-	service sixad restart
+	echo "restarting serives" | tee "$rootdir/logs/debug.log"
+	echo "" | tee "$rootdir/logs/debug.log"
+	service sixad restart | tee "$rootdir/logs/debug.log"
 
 	# Inform player 1 controller user to disconnect USB cord
 	dialog --msgbox "The appropriate LED should not be lit. If it is not, please hold in the PS button to turn it off, then back on." 10 60
