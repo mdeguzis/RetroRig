@@ -7,25 +7,6 @@
 # You can also reach me on twitter: @N3RD42
 #
 
-h_ps3_blu_check()
-{
-
-	if [ -z 'grep "PLAYSTATION(R)3" "/proc/bus/input/devices"' ]; then
-		# not set, echo below fore TESTING ONLY!!!
-		# set ps3_blu_complete to 0 for false
-		dialog --infobox "Your controller is still turned on!" 3 39
-		ps3_blu_complete="0"	
-		sleep 2s
-	else
-		# Let user know pairing is complete
-		dialog --infobox "Pairing on controller via bluetooth complete" 3 48
-		sleep 2s
-		# set ps3_blu_complete to 1 for true
-		ps3_blu_complete="1"	
-		sleep 2s
-	fi
-}
-
 h_autosave_configs()
 {
 
