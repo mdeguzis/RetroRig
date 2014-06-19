@@ -2,7 +2,7 @@
 
 clear
 echo "Recconecting PS3 Controller for XBMC.."
-sleep 3s
+sleep 2s
 
 count=0
 
@@ -18,5 +18,5 @@ done
 sleep 3s
 # fork to background
 echo starting xbmc
-sleep 2s
+sleep 1s
 xbmc

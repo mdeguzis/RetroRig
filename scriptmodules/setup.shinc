@@ -164,6 +164,17 @@ options=(1 "Xbox 360 Controller (standard)"
 	done
 }
 
+function rrs_add_standard_repos()
+{
+
+	#add repository for official team XBMC "stable"
+	add-apt-repository -y ppa:team-xbmc/ppa
+
+	# add respository for qtsixa
+	apt-add-repository -y ppa:falk-t-j/qtsixa
+
+}
+
 function rrs_emulators()
 {
 	__postMSGs=""
@@ -212,8 +223,8 @@ function rrs_software() {
 	# add multi-arch support
 	dpkg --add-architecture i386
 
-	#add repository for official team XBMC "stable"
-	add-apt-repository -y ppa:team-xbmc/ppa
+	# add add repos
+	rrs_add_standard_repos
 
 	# add extra repostories to the em_add_repos function!
 	em_add_repos
@@ -224,7 +235,7 @@ function rrs_software() {
 	#install software from repositories
 	apt-get install -y xboxdrv curl python-software-properties \
 	pkg-config software-properties-common dconf-tools jstest-gtk \
-	qjoypad xbmc build-essential
+	qjoypad xbmc build-essential sixad
 
 	# Remove apport, as bug apport-gtk does nothing but interrupt
 	# XBMC and emulators
