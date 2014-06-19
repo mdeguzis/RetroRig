@@ -524,6 +524,39 @@ function h_correct_perms()
 
 	# replace "test" username in config files here to ensure games
 	# and emulators function and start properly
+	
+	# mupen64plus files
+	chgrp -R "$user" "$home/.config/mupen64plus"
+     	chown -R "$user" "$home/.config/mupen64plus"
+	# config files
+	chgrp -R "$user" "$home/.config/jstest-gtk"
+     	chown -R "$user" "$home/.config/jstest-gtk"
+	# mame files
+	chgrp -R "$user" "$home/.mame"
+     	chown -R "$user" "$home/.mame"
+	# mess files
+	chgrp -R "$user" "$home/.mess"
+     	chown -R "$user" "$home/.mess"
+	# medanfen files
+	chgrp -R "$user" "$home/.mednafen"
+     	chown -R "$user" "$home/.mednafen"
+	# qjoypad files
+	chgrp -R "$user" "$home/.qjoypad3"
+     	chown -R "$user" "$home/.qjoypad3"
+	# qtsixa files
+	chgrp -R "$user" "$home/.qtsixa"
+     	chown -R "$user" "$home/.qtsixa"
+	# stella files
+	chgrp -R "$user" "$home/.stella"
+     	chown -R "$user" "$home/.stella"
+	# xbmc files
+	chgrp -R "$user" "$home/.xbmc"
+     	chown -R "$user" "$home/.xbmc"
+	# qtsixa gui files
+	chgrp -R "$user" "$home/.sixemugui"
+     	chown -R "$user" "$home/.sixemugui"
+
+
 }
 
 function h_emu_user_fixes()

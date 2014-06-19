@@ -171,10 +171,10 @@ function gp_ps3_blu_main()
 	rm -f /etc/xdg/autostart/xbmc.desktop 
 	# Replace it with the custom script for reboots
 	cp -v "$rootdir/init-scripts/ps3_blu_controller/ps3_autodetect_xbmc.sh" "/usr/share/applications/"
-	cp -v "$roodir/init-scripts/ps3_blu_controller/xbmc.desktop" "/etc/xdg/autostart"
+	cp -v "$roodir/init-scripts/ps3_blu_controller/XBMC_PS3_CUSTOM.desktop" "/etc/xdg/autostart"
 	
 	chmod +x "/usr/share/applications/ps3_autodetect_xbmc.sh" 
-	chmod +x "/etc/xdg/autostart/xbmc.desktop" 
+	chmod +x "/etc/xdg/autostart/XBMC_PS3_CUSTOM.desktop" 
 	
 }
 
@@ -297,6 +297,9 @@ function gp_x360()
 	# copy keyboard.xml file for XBMC. Button id numbers are totally diffferent, due to the use of 
 	# the use-dpad-as-button, and use-trigger-as-button options used.
 	cp -v "$rootdir/gamepad-cfgs/x360_controller/keyboard.xml" "$home/.xbmc/userdata/keymaps"
+
+	# create autostart for XBMC
+	cp -v "/usr/share/applications/xbmc.desktop" "/etc/xdg/autostart/" >> "$rootdir/logs/debug.log"
 
 	#update init scripts
 	update-rc.d xboxdrv defaults

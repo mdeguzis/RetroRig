@@ -258,14 +258,9 @@ See debug.log for more details. Continuing on to emulator installs..." 18 60
 }
 
 
-function rrs_autostart()
+function rrs_done()
 {
 	clear
-	# create autostart for XBMC (universal)
-	cp -v "/usr/share/applications/xbmc.desktop" "/etc/xdg/autostart/" >> "$rootdir/logs/debug.log"
-
-	# later this section will configure LightDM (login manager for Ubuntu) to log into
-	# the XBMC session and skip Unity altogether. Provide an option to do so, yes/no...
 
 	# inform user install is done (this is the last step of main, option 1)
         dialog --backtitle "LibreGeek.org - RetroRig Setup. Installation folder: $rootdir for user $user" --msgbox "Finished main install tasks.\n\nYou now have to copy roms to the roms folders. \nThis can be done via SSH, Samba, or via your graphic folder manager (please see settings menu for more)\n\nAll current config folders used were appended with .old for restoration purposes.\n\nPlease reboot to complete the installation." 17 50
