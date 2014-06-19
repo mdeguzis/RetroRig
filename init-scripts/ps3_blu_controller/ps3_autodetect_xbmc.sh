@@ -18,5 +18,5 @@ done
 sleep 3s
 # fork to background
 echo starting xbmc
-sleep 5s
+sleep 2s
 xbmc
