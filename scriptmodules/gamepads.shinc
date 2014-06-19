@@ -170,7 +170,11 @@ function gp_ps3_blu_main()
 	# First remove the existing /etc/xdg/autstart entry/entries
 	rm -f /etc/xdg/autostart/xbmc.desktop 
 	# Replace it with the custom script for reboots
-	cp -v "$rootdir/init-scripts/ps3_blu_controller/ps3_autodetect_xbmc.sh" "/etc/xdg/autostart"
+	cp -v "$rootdir/init-scripts/ps3_blu_controller/ps3_autodetect_xbmc.sh" "/etc/share/applications/"
+	cp -v "$roodir/init-scripts/ps3_blu_controller/xbmc.desktop" "/usr/xdg/autostart"
+	
+	chmod +x "/etc/share/applications/ps3_autodetect_xbmc.sh" 
+	chmod +x "/etc/xdg/autostart/xbmc.desktop" 
 	
 }
 
