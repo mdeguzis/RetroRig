@@ -16,11 +16,12 @@
 #
 #button id 1 = Select
 #button id 2 = Left thumbstick click
-#button id 3 = Start
-#button id 4 = dpad up
-#button id 5 = dpad right
-#button id 6 = dpad down
-#button id 7 = dpad left
+#button id 3 = Right thumbstick click
+#button id 4 = Start
+#button id 5 = dpad up
+#button id 6 = dpad right
+#button id 7 = dpad down
+#button id 8 = dpad left
 #button id 9 = L2
 #button id 10 = R2
 #button id 11 = L1
@@ -44,12 +45,12 @@
 -->
 <keymap>
   <global>
-    <joystick name="PLAYSTATION(R)3 Controller (00:00:00:00:00:00)">
-<button id="4">Up</button> 
-<button id="6">Down</button> 
-<button id="7">Left</button>
-<button id="5">Right</button>
-<button id="1">Select</button>
+    <joystick name="PLAYSTATION(R)3 Controller (04:76:6E:90:8E:9F)">
+<button id="5">Up</button>
+<button id="6">Right</button> 
+<button id="7">Down</button> 
+<button id="8">Left</button>
+<button id="15">Select</button>
 <button id="14">Back</button>
 <button id="16">ContextMenu</button>
 <button id="13">FullScreen</button>
@@ -69,12 +70,12 @@
     </joystick>
   </global>
 <Home>
- <joystick name="PLAYSTATION(R)3 Controller (00:00:00:00:00:00)">
-    <button id="8">XBMC.ActivateWindow(shutdownmenu)</button>
+ <joystick name="PLAYSTATION(R)3 Controller (04:76:6E:90:8E:9F)">
+    <button id="13">XBMC.ActivateWindow(shutdownmenu)</button>
  </joystick>
 </Home>
   <FullscreenVideo>
-    <joystick name="PLAYSTATION(R)3 Controller (00:00:00:00:00:00)">
+    <joystick name="PLAYSTATION(R)3 Controller (04:76:6E:90:8E:9F)">
  
       <button id="5">Pause</button>
       <button id="6">Stop</button>
@@ -93,54 +94,54 @@
     </joystick>
   </FullscreenVideo>
  <FullscreenInfo>
-   <joystick name="PLAYSTATION(R)3 Controller (00:00:00:00:00:00)">
+   <joystick name="PLAYSTATION(R)3 Controller (04:76:6E:90:8E:9F)">
       <button id="1">Close</button> 
       <button id="14">Close</button> 
     </joystick>
   </FullscreenInfo>
  <PlayerControls>
-   <joystick name="PLAYSTATION(R)3 Controller (00:00:00:00:00:00)">
+   <joystick name="PLAYSTATION(R)3 Controller (04:76:6E:90:8E:9F)">
      <button id="3">Close</button>
      <button id="1">Close</button> 
      <button id="14">Close</button>
    </joystick>
  </PlayerControls>
  <MusicOSD>
-   <joystick name="PLAYSTATION(R)3 Controller (00:00:00:00:00:00)">
+   <joystick name="PLAYSTATION(R)3 Controller (04:76:6E:90:8E:9F)">
      <button id="1">Close</button>  
      <button id="14">Close</button>
    </joystick>
  </MusicOSD>
  <VisualisationSettings>
-  <joystick name="PLAYSTATION(R)3 Controller (00:00:00:00:00:00)">
+  <joystick name="PLAYSTATION(R)3 Controller (04:76:6E:90:8E:9F)">
   <altname>Controller (Xbox 360 Wireless Receiver for Windows)</altname>
    <button id="1">Close</button>  
    <button id="3">Close</button> 
   </joystick>
  </VisualisationSettings>
  <VisualisationPresetList>
-  <joystick name="PLAYSTATION(R)3 Controller (00:00:00:00:00:00)">
+  <joystick name="PLAYSTATION(R)3 Controller (04:76:6E:90:8E:9F)">
   <altname>Controller (Xbox 360 Wireless Receiver for Windows)</altname>
    <button id="1">Close</button>  
    <button id="3">Close</button>
   </joystick>
  </VisualisationPresetList>
  <SlideShow>
-  <joystick name="PLAYSTATION(R)3 Controller (00:00:00:00:00:00)">
+  <joystick name="PLAYSTATION(R)3 Controller (04:76:6E:90:8E:9F)">
   <altname>Controller (Xbox 360 Wireless Receiver for Windows)</altname>
    <button id="1">Pause</button> 
    <button id="3">Stop</button> 
   </joystick>
  </SlideShow>
  <SelectDialog>
-  <joystick name="PLAYSTATION(R)3 Controller (00:00:00:00:00:00)">
+  <joystick name="PLAYSTATION(R)3 Controller (04:76:6E:90:8E:9F)">
   <altname>Controller (Xbox 360 Wireless Receiver for Windows)</altname>
    <button id="1">Close</button> 
    <button id="3">Close</button> 
   </joystick>
  </SelectDialog>
  <VideoOSD>
-  <joystick name="PLAYSTATION(R)3 Controller (00:00:00:00:00:00)">
+  <joystick name="PLAYSTATION(R)3 Controller (04:76:6E:90:8E:9F)">
   <altname>Controller (Xbox 360 Wireless Receiver for Windows)</altname>
    <button id="3">Close</button> 
    <button id="1">Close</button>  
@@ -148,7 +149,7 @@
   </joystick>
  </VideoOSD>
  <OSDVideoSettings>
-  <joystick name="PLAYSTATION(R)3 Controller (00:00:00:00:00:00)">
+  <joystick name="PLAYSTATION(R)3 Controller (04:76:6E:90:8E:9F)">
   <altname>Controller (Xbox 360 Wireless Receiver for Windows)</altname>
    <button id="1">Close</button>  
    <button id="14">Close</button>
@@ -156,140 +157,140 @@
   </joystick>
  </OSDVideoSettings>
  <OSDAudioSettings>
-  <joystick name="PLAYSTATION(R)3 Controller (00:00:00:00:00:00)"> 
+  <joystick name="PLAYSTATION(R)3 Controller (04:76:6E:90:8E:9F)"> 
   <altname>Controller (Xbox 360 Wireless Receiver for Windows)</altname>
    <button id="1">Close</button>  
    <button id="14">Close</button>
   </joystick>
  </OSDAudioSettings>
  <VideoBookmarks>
-  <joystick name="PLAYSTATION(R)3 Controller (00:00:00:00:00:00)"> 
+  <joystick name="PLAYSTATION(R)3 Controller (04:76:6E:90:8E:9F)"> 
   <altname>Controller (Xbox 360 Wireless Receiver for Windows)</altname>
    <button id="1">Close</button>  
    <button id="14">Close</button>
   </joystick>
  </VideoBookmarks>
  <ContextMenu>
-   <joystick name="PLAYSTATION(R)3 Controller (00:00:00:00:00:00)">
+   <joystick name="PLAYSTATION(R)3 Controller (04:76:6E:90:8E:9F)">
      <button id="1">Close</button> 
      <button id="14">Close</button>
      <button id="3">Close</button> 
    </joystick>
  </ContextMenu>
  <AddonInformation>
-   <joystick name="PLAYSTATION(R)3 Controller (00:00:00:00:00:00)">
+   <joystick name="PLAYSTATION(R)3 Controller (04:76:6E:90:8E:9F)">
      <button id="1">Close</button> 
      <button id="14">Close</button>
    </joystick>
  </AddonInformation>
  <AddonSettings>
-   <joystick name="PLAYSTATION(R)3 Controller (00:00:00:00:00:00)">
+   <joystick name="PLAYSTATION(R)3 Controller (04:76:6E:90:8E:9F)">
      <button id="1">Close</button> 
      <button id="14">Close</button>
    </joystick>
  </AddonSettings>
  <TextViewer>
-   <joystick name="PLAYSTATION(R)3 Controller (00:00:00:00:00:00)">
+   <joystick name="PLAYSTATION(R)3 Controller (04:76:6E:90:8E:9F)">
      <button id="1">Close</button> 
      <button id="14">Close</button>
   </joystick>
  </TextViewer>
  <MyPicturesSettings>
-   <joystick name="PLAYSTATION(R)3 Controller (00:00:00:00:00:00)">
+   <joystick name="PLAYSTATION(R)3 Controller (04:76:6E:90:8E:9F)">
 
      <button id="3">PreviousMenu</button> 
      <button id="14">PreviousMenu</button>
    </joystick>
  </MyPicturesSettings>
  <MyProgramsSettings>
-   <joystick name="PLAYSTATION(R)3 Controller (00:00:00:00:00:00)">
+   <joystick name="PLAYSTATION(R)3 Controller (04:76:6E:90:8E:9F)">
     <button id="1">PreviousMenu</button> 
     <button id="14">PreviousMenu</button>
    </joystick>
  </MyProgramsSettings>
  <MyWeatherSettings>
-   <joystick name="PLAYSTATION(R)3 Controller (00:00:00:00:00:00)">
+   <joystick name="PLAYSTATION(R)3 Controller (04:76:6E:90:8E:9F)">
      <button id="1">PreviousMenu</button> 
      <button id="14">PreviousMenu</button>
    </joystick>
  </MyWeatherSettings>
  <MyMusicSettings>
-   <joystick name="PLAYSTATION(R)3 Controller (00:00:00:00:00:00)">
+   <joystick name="PLAYSTATION(R)3 Controller (04:76:6E:90:8E:9F)">
      <button id="1">PreviousMenu</button> 
      <button id="14">PreviousMenu</button>
    </joystick>
  </MyMusicSettings>
  <SystemSettings>
-   <joystick name="PLAYSTATION(R)3 Controller (00:00:00:00:00:00)">
+   <joystick name="PLAYSTATION(R)3 Controller (04:76:6E:90:8E:9F)">
      <button id="1">PreviousMenu</button> 
      <button id="14">PreviousMenu</button>
    </joystick>
  </SystemSettings>
  <MyVideosSettings>
-   <joystick name="PLAYSTATION(R)3 Controller (00:00:00:00:00:00)">
+   <joystick name="PLAYSTATION(R)3 Controller (04:76:6E:90:8E:9F)">
 
      <button id="1">PreviousMenu</button> 
      <button id="14">PreviousMenu</button>
    </joystick>
  </MyVideosSettings>
  <NetworkSettings>
-   <joystick name="PLAYSTATION(R)3 Controller (00:00:00:00:00:00)">
+   <joystick name="PLAYSTATION(R)3 Controller (04:76:6E:90:8E:9F)">
      <button id="1">PreviousMenu</button> 
      <button id="14">PreviousMenu</button>
    </joystick>
  </NetworkSettings>
  <AppearanceSettings>
-   <joystick name="PLAYSTATION(R)3 Controller (00:00:00:00:00:00)">
+   <joystick name="PLAYSTATION(R)3 Controller (04:76:6E:90:8E:9F)">
      <button id="1">PreviousMenu</button> 
      <button id="14">PreviousMenu</button>
    </joystick>
  </AppearanceSettings>
  <Profiles>
-   <joystick name="PLAYSTATION(R)3 Controller (00:00:00:00:00:00)">
+   <joystick name="PLAYSTATION(R)3 Controller (04:76:6E:90:8E:9F)">
 
      <button id="1">PreviousMenu</button> 
      <button id="14">PreviousMenu</button>
    </joystick>
  </Profiles>
  <systeminfo>
-   <joystick name="PLAYSTATION(R)3 Controller (00:00:00:00:00:00)">
+   <joystick name="PLAYSTATION(R)3 Controller (04:76:6E:90:8E:9F)">
      <button id="1">PreviousMenu</button> 
      <button id="14">PreviousMenu</button>
    </joystick>
  </systeminfo>
  <shutdownmenu>
-   <joystick name="PLAYSTATION(R)3 Controller (00:00:00:00:00:00)">
-     <button id="8">Close</button> 
+   <joystick name="PLAYSTATION(R)3 Controller (04:76:6E:90:8E:9F)">
+     <button id="14">Close</button> 
      <button id="14">PreviousMenu</button>
    </joystick>
  </shutdownmenu>
  <submenu>
-   <joystick name="PLAYSTATION(R)3 Controller (00:00:00:00:00:00)">
+   <joystick name="PLAYSTATION(R)3 Controller (04:76:6E:90:8E:9F)">
 
      <button id="1">PreviousMenu</button> 
      <button id="14">PreviousMenu</button>
    </joystick>
  </submenu>
  <MusicInformation>
-   <joystick name="PLAYSTATION(R)3 Controller (00:00:00:00:00:00)">
+   <joystick name="PLAYSTATION(R)3 Controller (04:76:6E:90:8E:9F)">
      <button id="1">Close</button> 
      <button id="14">Close</button>
    </joystick>
  </MusicInformation>
  <MovieInformation>
-   <joystick name="PLAYSTATION(R)3 Controller (00:00:00:00:00:00)">
+   <joystick name="PLAYSTATION(R)3 Controller (04:76:6E:90:8E:9F)">
      <button id="1">Close</button> 
      <button id="14">Close</button>
    </joystick>
  </MovieInformation>
  <LockSettings>
-   <joystick name="PLAYSTATION(R)3 Controller (00:00:00:00:00:00)">
+   <joystick name="PLAYSTATION(R)3 Controller (04:76:6E:90:8E:9F)">
      <button id="1">Close</button> 
      <button id="14">Close</button>
    </joystick>
  </LockSettings>
  <ProfileSettings>
-   <joystick name="PLAYSTATION(R)3 Controller (00:00:00:00:00:00)">
+   <joystick name="PLAYSTATION(R)3 Controller (04:76:6E:90:8E:9F)">
      <button id="1">Close</button> 
      <button id="14">Close</button>
    </joystick>

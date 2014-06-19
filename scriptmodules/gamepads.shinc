@@ -154,11 +154,31 @@ function gp_ps3_blu_main()
 	# start the service at boot time
 	sixad --boot-yes
 
+	########################
+	# Notice
+	########################
+
+	# We have to now replace the /etc/xdg/autostart entry normally used by xboxdrv, and replace it with a script
+	# I made to check for controller connection on startup.
+	# See:  6.1.2 PS3 Sixaxis Controller (TODO): http://wiki.xbmc.org/?title=EventServer#Event_Clients
+
+	# "Pairing with the PS3 controller is not yet handled automatically, but it can be done using the program 'sixaxis.c' 
+	# available from [1]. Or if you want to do it the gui way [2] Once paired, disable any existing HID servers 
+	# that might currently be running and run 'ps3d.py' as root. The program requires root privileges because it listens
+	# on Bluetooth L2CAP PSMs 17 and 19. (This is not nessecary using the gui tool)"
+
+	# First remove the existing /etc/xdg/autstart entry/entries
+	rm -f /etc/xdg/autostart/xbmc.desktop 
+	# Replace it with the custom script for reboots
+	cp -v "$rootdir/init-scripts/ps3_blu_controller/ps3_autodetect_xbmc.sh" "/etc/xdg/autostart"
+	
 }
 
 
 function ps3_pair_blu()
 {
+
+
 	#####################################
 	# Set and pair up player controller
 	#####################################
