@@ -14,10 +14,9 @@ do
 	sleep 3s
 done
 
-# kill and restart xbmc if it is started
-pkill xbmc
 # give the controller about 3 seconds to start
 sleep 3s
-/usr/bin/xbmc
-#exit script
-exit
+# fork to background
+echo starting xbmc
+sleep 5s
+xbmc

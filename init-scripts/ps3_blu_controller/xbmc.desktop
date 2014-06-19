@@ -5,9 +5,8 @@ GenericName=Media Center
 Comment=Manage and view your media
 Exec=/usr/share/applications/ps3_autodetect_xbmc.sh
 Icon=xbmc
-Terminal=false
+Terminal=true
 Type=Application
 Categories=AudioVideo;Video;Player;TV;
 
 Actions=Fullscreen;Standalone;
-
