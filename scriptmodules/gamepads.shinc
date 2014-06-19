@@ -58,6 +58,9 @@ function gp_ps3_blu()
 function gp_ps3_blu_main()
 {
 
+	# First remove the existing /etc/xdg/autstart entry/entries
+	rm -f /etc/xdg/autostart/xbmc.desktop 
+
 	#set qjoypad's profile to match Xbox 360 Wireless (4-player)
 	cp -v "$rootdir/gamepad-cfgs/ps3_blu_controller/ps3_sixaxis_blu.lyt" "$home/.qjoypad3"
 	#copy qjoypad autostart item for x360_controller gamepad config
@@ -167,8 +170,6 @@ function gp_ps3_blu_main()
 	# that might currently be running and run 'ps3d.py' as root. The program requires root privileges because it listens
 	# on Bluetooth L2CAP PSMs 17 and 19. (This is not nessecary using the gui tool)"
 
-	# First remove the existing /etc/xdg/autstart entry/entries
-	rm -f /etc/xdg/autostart/xbmc.desktop 
 	# Replace it with the custom script for reboots
 	cp -v "$rootdir/init-scripts/ps3_blu_controller/ps3_autodetect_xbmc.sh" "/usr/share/applications/"
 	cp -v "$rootdir/init-scripts/ps3_blu_controller/xbmc.desktop" "/etc/xdg/autostart"
@@ -236,6 +237,9 @@ LED should not be lit. If it is not, please hold in the PS button to turn it off
 
 function gp_x360()
 {
+
+	# First remove the existing /etc/xdg/autstart entry/entries
+	rm -f /etc/xdg/autostart/xbmc.desktop 
 
 	############################################
 	# configure emulator configs for 360 gamepad
