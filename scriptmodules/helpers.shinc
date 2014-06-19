@@ -528,9 +528,12 @@ function h_correct_perms()
 	# mupen64plus files
 	chgrp -R "$user" "$home/.config/mupen64plus"
      	chown -R "$user" "$home/.config/mupen64plus"
-	# config files
+	# jstest-gtk files
 	chgrp -R "$user" "$home/.config/jstest-gtk"
      	chown -R "$user" "$home/.config/jstest-gtk"
+	# ppsspp files
+	chgrp -R "$user" "$home/.config/ppsspp"
+     	chown -R "$user" "$home/.config/ppsspp"
 	# mame files
 	chgrp -R "$user" "$home/.mame"
      	chown -R "$user" "$home/.mame"
