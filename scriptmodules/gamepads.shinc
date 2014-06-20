@@ -209,15 +209,10 @@ function ps3_pair_blu()
 	dialog --msgbox "Please disconnect the USB cable and press the PS Button now. The appropriate \
 LED should not be lit. If it is not, please hold in the PS button to turn it off, then back on." 10 60
 
-	#dialog --msgbox "Please hold down the PS Button on the Player 1 controller until \
-	#		 it turns off. This will take about 5-10 seconds." 8 40
-
-
 	##############################################################
 	# THIS DEBUG SECTION BELOW IS NOT WOKRING, needs fixed :(
 	# The above pairing does work, but it would be nice to check
 	##############################################################
-
 
 	# check that controller is off
 	# set blu check to "0" as starting $var value
@@ -231,6 +226,48 @@ LED should not be lit. If it is not, please hold in the PS button to turn it off
 		dialog --msgbox "Pairing complete!" 5 15
 	fi
 }
+
+function gp_ps3_usb()
+{
+	#mame
+	# default path: /home/$USER/.mame
+	# Main config
+	cp -v "$scriptdir/emu-cfgs/ps3_usb_controller/MAME/default.cfg" "$home/.mame/cfg"
+	cp -v "$scriptdir/emu-cfgs/ps3_usb_controller/MAME/mame.ini" "$home/.mame"
+ 
+	# offline artwork scrapper configs
+	cp -v "$scriptdir/emu-cfgs/ps3_usb_controller/MAME/parserConfig.xml" "$rootdir/Artwork/MAME"
+	cp -v "$scriptdir/emu-cfgs/ps3_usb_controller/MAME/MAME.txt" "$rootdir/Artwork/MAME"
+	cp -v "$scriptdir/emu-cfgs/ps3_usb_controller/MAME/MAME synopsis RCB 201202.zip" "$rootdir/Artwork/MAME"
+
+	# mess
+	# default path: /home/$USER/.mednafen/mednafen.cfg
+	# Main config
+	cp -v "$scriptdir/emu-cfgs/ps3_usb_controller/MESS/mess.ini" "$home/.mess"
+	cp -v "$scriptdir/emu-cfgs/ps3_usb_controller/MESS/default.cfg" "$home/.mess/cfg"
+	cp -v "$scriptdir/emu-cfgs/ps3_usb_controller/MESS/neocdz.cfg" "$home/.mess/cfg"
+
+	# mednafen
+	# default path: /home/$USER/.mednafen/mednafen.cfg
+	# Main config
+	cp -v "$scriptdir/emu-cfgs/ps3_usb_controller/mednafen/mednafen-09x.cfg" "$home/.mednafen"
+
+	# mupen64plus
+	# default path: /home/$USER/.config/mupen64plus
+	# Main config
+	cp -v "$scriptdir/emu-cfgs/ps3_usb_controller/mupen64plus/mupen64plus.cfg" "$home/.config/mupen64plus/"
+
+	#Stella
+	#default path: /home/$USER/.config/mupen64plus
+	#Main config
+	cp -v "$scriptdir/emu-cfgs/ps3_usb_controller/Stella/stellarc" "$home/.stella/"
+
+	# PPSSPP
+	cp -v "scriptdir/emu-cfgs/ps3_usb_controller/PPSSPP/ppsspp.ini" "$home/.config/ppsspp/PSP/SYSTEM"
+	cp -v "scriptdir/emu-cfgs/ps3_usb_controller/PPSSPP/controls.ini" "$home/.config/ppsspp/PSP/SYSTEM"
+
+	# The PS3 pairing process is not needed here if using usb!
+	# gp_ps3_blu_main
 
 function gp_x360()
 {

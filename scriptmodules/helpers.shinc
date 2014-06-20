@@ -570,12 +570,18 @@ function h_emu_user_fixes()
 	# Let's change the config files to reflect the current username
 
 	# mame
-	sed -i "s|/home/mikeyd/|/home/$USER/|g" $home/.mame/mame.ini | tee >> "$rootdir/logs/debug.log"
+	sed -i "s|/home/test/RetroRig|$rootdir|g" $home/.mame/mame.ini | tee >> "$rootdir/logs/debug.log"
+	# MESS
+	sed -i "s|/home/test/RetroRig|$rootdir|g" $home/.mess/mess.ini | tee >> "$rootdir/logs/debug.log"
 	# XBMC
-	sed -i "s|/home/mikeyd/|/home/$USER/|g" $home/.xbmc/userdata/addon_data/script.games.rom.collection.browser/config.xml | tee >> "$rootdir/logs/debug.log"
+	sed -i "s|/home/test/|/home/$user/|g" "$home/.xbmc/userdata/addon_data/script.games.rom.collection.browser/config.xml" | tee >> "$rootdir/logs/debug.log"
 	# PPSSPP	
-	sed -i 's|test|$user|g' "scriptdir/emu-cfgs/x360_controller/PPSSPP/ppsspp.ini"
+	sed -i 's|test|$user|g' "$scriptdir/emu-cfgs/x360_controller/PPSSPP/ppsspp.ini"
 	echo "The user applied to configuration files was: $user" | tee >> "$rootdir/logs/debug.log"
+
+	# MESS
+	sed -i "s|/home/test/RetroRig|$rootdir|g" $home/.mess/mess.ini | tee >> "$rootdir/logs/debug.log"
+
 
 }
 
