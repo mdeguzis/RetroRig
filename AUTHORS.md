@@ -1,9 +1,12 @@
-###########################
+#######################################################################
 #RetroRig Authors List
-###########################
+#######################################################################
 
 Michael DeGuzis, aka "ProfessorKaos" - <ProfessorKaos64@linux.com>
-   - Main code, maintainer, project planning, tester
+   - Creator, main code, maintainer, project planning, tester
  
 Jens-Christian, aka "JC" - <none@domain.com>
    - Contributor, tester
+
+Other
+   - Thank you IMMENSELY for all other testing, ideas, and support!
