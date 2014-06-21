@@ -559,6 +559,11 @@ function h_correct_perms()
 	chgrp -R "$user" "$home/.sixemugui"
      	chown -R "$user" "$home/.sixemugui"
 
+	# BETA ONLY
+	# Sometimes the custom skin reverts its files when using the PS3
+	# help script. Change owership to root, with octal 755 (no -w-) for testing:
+	sudo chmod -Rv 755 "$home/.xbmc/addons/skin.maximinimalism"
+	sudo chown root:root "$home/.xbmc/addons/skin.maximinimalism"
 
 }
 

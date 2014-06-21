@@ -272,6 +272,8 @@ function gp_ps3_usb()
 	# The PS3 pairing process is not needed here if using usb!
 	# gp_ps3_blu_main
 
+}
+
 function gp_x360()
 {
 
