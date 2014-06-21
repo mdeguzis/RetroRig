@@ -151,6 +151,9 @@ function gp_ps3_blu_main()
 	# Replace MAC Address for ***CONTROLLER 1 ONLY!*** This will be used to control XBMC		
 	sed -i "s|$PS3_MAC_OLD|$PS3_MAC_P1_BLU|g" "$home/.xbmc/userdata/keymaps/keyboard.xml"
 
+	# Stella does list the MAC address for the PS3 control in the stellarc file. Replace for now until further notice
+	sed -i "s|$PS3_MAC_OLD|$PS3_MAC_P1_BLU|g" "$home/.stella/stellarc"
+
 	# start the service at boot time
 	sixad --boot-yes
 

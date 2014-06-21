@@ -7,19 +7,20 @@ Joystick 1 {
 }
 
 Joystick 2 {
-	Button 16: key 9
+	Button 1: key 71
+	Button 2: key 74
 	Button 17: key 9
 }
 
 Joystick 3 {
-	Button 15: key 9
-	Button 16: key 9
+	Button 1: key 71
+	Button 2: key 74
 	Button 17: key 9
 }
 
 Joystick 4 {
-	Button 15: key 9
-	Button 16: key 9
+	Button 1: key 71
+	Button 2: key 74
 	Button 17: key 9
 }
 
