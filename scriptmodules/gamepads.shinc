@@ -210,7 +210,7 @@ function ps3_pair_blu()
 
 	# Inform player 1 controller user to disconnect USB cord
 	dialog --msgbox "Please disconnect the USB cable and press the PS Button now. The appropriate \
-LED should not be lit. If it is not, please hold in the PS button to turn it off, then back on." 10 60
+LED should be lit. If it is not, please hold in the PS button to turn it off, then back on." 10 60
 
 	##############################################################
 	# THIS DEBUG SECTION BELOW IS NOT WOKRING, needs fixed :(
