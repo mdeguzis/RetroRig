@@ -300,8 +300,17 @@ while true; do
 		exit
 		;;
 
+	255)
+		# Next two lines for debugging only	
+	   	# dialog --infobox "Esc hit..." 3 14
+	   	# sleep 1s
+		;;
+
 		esac
 	else
+		# Next two lines for debugging only	
+		# dialog --infobox "cancel hit" 3 14
+		# sleep 1s
 		break
     fi
 	done
