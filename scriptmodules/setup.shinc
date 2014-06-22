@@ -235,8 +235,8 @@ function rrs_software() {
 	h_update_system
 
 	# install software from repositories
-	# BETA NOTE: XBMC is now going to be pre-compiled, leaving out the binary
-	# from tthe PPA
+	# BETA NOTE: XBMC is now going to be pre-compiled, then rolled back
+	# into a new deb pkg later on (well..soon)
 	
 	#######################################################################
 	# once manual testing of the XBMC compile is done, it will occur here!
@@ -245,7 +245,7 @@ function rrs_software() {
 	# install binaries
 	apt-get install -y xboxdrv curl python-software-properties \
 	pkg-config software-properties-common dconf-tools jstest-gtk \
-	qjoypad build-essential sixad
+	qjoypad xbmc build-essential sixad
 
 	# Remove apport, as bug apport-gtk does nothing but interrupt
 	# XBMC and emulators
