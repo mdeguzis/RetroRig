@@ -231,13 +231,21 @@ function rrs_software() {
 	# add extra repostories to the em_add_repos function!
 	em_add_repos
 
-	#update repository listings
+	# update repository listings
 	h_update_system
 
-	#install software from repositories
+	# install software from repositories
+	# BETA NOTE: XBMC is now going to be pre-compiled, leaving out the binary
+	# from tthe PPA
+	
+	#######################################################################
+	# once manual testing of the XBMC compile is done, it will occur here!
+	#######################################################################
+
+	# install binaries
 	apt-get install -y xboxdrv curl python-software-properties \
 	pkg-config software-properties-common dconf-tools jstest-gtk \
-	qjoypad xbmc build-essential sixad
+	qjoypad build-essential sixad
 
 	# Remove apport, as bug apport-gtk does nothing but interrupt
 	# XBMC and emulators
