@@ -520,7 +520,7 @@ options=(1 "Neo-Geo CDZ"
 		1)
 		# call file loader  	
 		h_file_loader
-		# copy Neo-Geo BIOS file over
+		# copy Neo-Geo BIOS file over to MESS (root emulator)
 		if [ -n "$folder" ]; then
 			cp -v "$folder" "$rootdir/BIOS/MESS"
 		fi
@@ -529,7 +529,7 @@ options=(1 "Neo-Geo CDZ"
 		2)
 		#call file loader
 		h_file_loader
-		# copy Commodore 64 BIOS file over
+		# copy Commodore 64 BIOS file over to MESS (root emulator)
 		if [ -n "$folder" ]; then
 			cp -v "$folder" "$rootdir/BIOS/MESS"
 		fi
@@ -592,9 +592,10 @@ function h_correct_perms()
 
 	# BETA ONLY
 	# Sometimes the custom skin reverts its files when using the PS3
+	# This may take some time to debug, root cause maybe in an XBMC crash log
 	# help script. Change owership to root, with octal 755 (no -w-) for testing:
 	sudo chmod -Rv 755 "$home/.xbmc/addons/skin.maximinimalism"
-	sudo chown root:root "$home/.xbmc/addons/skin.maximinimalism"
+	sudo chown -Rv root:root "$home/.xbmc/addons/skin.maximinimalism"
 
 }
 

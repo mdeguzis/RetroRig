@@ -15,7 +15,6 @@ function rrs_prepareFolders()
 	#emulator base directory
 	pathlist+=("$rootdir/emulators")
 
-
 	#setup skelton folders for XBMC Rom Collection Browser
 	#ROMs
 	pathlist+=("$rootdir/ROMs/Atari 2600")
@@ -80,7 +79,7 @@ function rrs_prepareFolders()
 	pathlist+=("$HOME/.mednafen")
 
 	#BIOS folder(s)
-	pathlist+=("$rootdir/MESS/BIOS")
+	pathlist+=("$rootdir/BIOS/MESS")
 
 	#Configs
 	pathlist+=("$rootdir/Configs")
@@ -289,6 +288,7 @@ function rrs_xbmc_patched()
 	# create autostart for XBMC
 	# Custom script for reboots/hotplugging
 	cp -v "$rootdir/XBMC-cfgs/extra/gp_autodetect_xbmc.sh" "/usr/share/applications/"
+	cp -v "$rootdir/XBMC-cfgs/extra/xbmc.desktop" "/usr/share/applications/"
 	cp -v "$rootdir/XBMC-cfgs/extra/startXBMC.sh" "/usr/share/applications/"
 	cp -v "$rootdir/XBMC-cfgs/extra/xbmc.desktop" "$home/.confg/autostart"
 	cp -v "$rootdir/XBMC-cfgs/extra/rescan" "/etc/init.d"
@@ -307,7 +307,7 @@ function rrs_xbmc_patched()
 	# remove old xbmc-bin, install our patched version
 	apt-get remove -y xbmc-bin
 	dpkg -i "$rootdir/XBMC-cfgs/extra/xbmc-bin_Gotham_V13.1_patched_for_RetroRig.deb"
-	apt-get install -y xbmc
+	apt-get install -y xbmc wmctrl
 }
 
 function rrs_done()
@@ -424,6 +424,7 @@ echo -e "\e[0"$PATHCOLOR"ABSPATH for user USERNAME\e[0m"
 function rrs_prereq()
 {
     if [[ -z $(type -P git) || -z $(type -P dialog) || -z $(type -P figlet) ]]; then
+	echo ""
         echo "Did not find needed packages 'git' and/or 'dialog/figlet'. Attempting to install these now."
 	sleep 3s
         apt-get update

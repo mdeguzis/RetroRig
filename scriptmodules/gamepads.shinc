@@ -174,9 +174,11 @@ function gp_ps3_blu_main()
 
 	# update init scripts
 	update-rc.d rescan defaults
+
+	# replace specific user paths that emulators and files may use
+	h_emu_user_fixes
 	
 }
-
 
 function ps3_pair_blu()
 {
@@ -271,6 +273,9 @@ function gp_ps3_usb()
 	chmod +x "$home/.confg/autostart/xbmc.desktop"
 	chmod +x "/etc/init.d/rescan"  
 
+	# replace specific user paths that emulators and files may use
+	h_emu_user_fixes
+
 	# patch XBMC
 	rrs_xbmc_patched
 
@@ -344,6 +349,9 @@ function gp_x360()
 
 	#update init scripts for xboxdrv
 	update-rc.d xboxdrv defaults
+
+	# replace specific user paths that emulators and files may use
+	h_emu_user_fixes
 
 	#fix permissions since we are running as sudo
 	h_correct_perms
