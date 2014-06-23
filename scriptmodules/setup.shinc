@@ -71,7 +71,7 @@ function rrs_prepareFolders()
 	pathlist+=("$HOME/.qjoypad3")
 	pathlist+=("$HOME/.config/mupen64plus")
 	
-pathlist+=("$HOME/.config/ppsspp/PSP/SYSTEM")
+	pathlist+=("$HOME/.config/ppsspp/PSP/SYSTEM")
 	pathlist+=("$HOME/.mame/cfg")
 	pathlist+=("$HOME/.mess")
 	pathlist+=("$HOME/.mess/cfg")
@@ -171,7 +171,7 @@ function rrs_add_standard_repos()
 	#add repository for official team XBMC "stable"
 	add-apt-repository -y ppa:team-xbmc/ppa
 
-	# add respository for qtsixa
+	# add respository for qtsixa (PS3 pairing)
 	apt-add-repository -y ppa:falk-t-j/qtsixa
 
 }
@@ -278,6 +278,28 @@ See debug.log for more details. Continuing on to emulator installs..." 18 60
 	#END
 }
 
+
+funtion rrs_ps3_xbmc_patched()
+{
+
+	# copy over helper scripts
+	"$roodir/init-scripts/ps3_blu_controller/ps3_autodetect_xbmc.sh" "/usr/share/applications"
+	"$roodir/XBMC-cfgs/extra/startXBMC.sh" "/usr/share/applications"
+	"$roodir/init-scripts/ps3_blu_controller/rescan" "/etc/init.d"
+	# Correct permissions
+	chmod 755 /usr/share/applications/startXBMC.sh 
+	chmod 755 /usr/share/applications/ps3_autodetect_xbmc.sh 
+	chmod 755 /etc/init.d/rescan
+	# update init scripts
+	update-rc.d rescan defaults
+	# create autostart entry, remove prior if it exists
+	rm -f "$HOME/.config/autostart/xbmc.desktop"
+	cp -v "$roodir/init-scripts/ps3_blu_controller/xbmc.desktop" "$HOME/.config/autostart"
+	# remove old xbmc-bin, install our patched version
+	apt-get remove -y xbmc-bin
+	dpkg -i "$rootdir/XBMC-cfgs/extra/xbmc-bin_Gotham_V13.1_patched_for_RetroRig.deb"
+	apt-get install -y xbmc
+}
 
 function rrs_done()
 {

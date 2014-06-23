@@ -9,45 +9,52 @@
 
 function gp_ps3_blu()
 {
+
+	# clean any old configs
+	h_clean_gampead
+
 	#mame
 	# default path: /home/$USER/.mame
 	# Main config
-	cp -v "$scriptdir/emu-cfgs/ps3_usb_controller/MAME/default.cfg" "$home/.mame/cfg"
-	cp -v "$scriptdir/emu-cfgs/ps3_usb_controller/MAME/mame.ini" "$home/.mame"
+	cp -v "$scriptdir/emu-cfgs/ps3_blu_controller/MAME/default.cfg" "$home/.mame/cfg"
+	cp -v "$scriptdir/emu-cfgs/ps3_blu_controller/MAME/mame.ini" "$home/.mame"
  
 	# offline artwork scrapper configs
-	cp -v "$scriptdir/emu-cfgs/ps3_usb_controller/MAME/parserConfig.xml" "$rootdir/Artwork/MAME"
-	cp -v "$scriptdir/emu-cfgs/ps3_usb_controller/MAME/MAME.txt" "$rootdir/Artwork/MAME"
-	cp -v "$scriptdir/emu-cfgs/ps3_usb_controller/MAME/MAME synopsis RCB 201202.zip" "$rootdir/Artwork/MAME"
+	cp -v "$scriptdir/emu-cfgs/ps3_blu_controller/MAME/parserConfig.xml" "$rootdir/Artwork/MAME"
+	cp -v "$scriptdir/emu-cfgs/ps3_blu_controller/MAME/MAME.txt" "$rootdir/Artwork/MAME"
+	cp -v "$scriptdir/emu-cfgs/ps3_blu_controller/MAME/MAME synopsis RCB 201202.zip" "$rootdir/Artwork/MAME"
 
 	# mess
 	# default path: /home/$USER/.mednafen/mednafen.cfg
 	# Main config
-	cp -v "$scriptdir/emu-cfgs/ps3_usb_controller/MESS/mess.ini" "$home/.mess"
-	cp -v "$scriptdir/emu-cfgs/ps3_usb_controller/MESS/default.cfg" "$home/.mess/cfg"
-	cp -v "$scriptdir/emu-cfgs/ps3_usb_controller/MESS/neocdz.cfg" "$home/.mess/cfg"
+	cp -v "$scriptdir/emu-cfgs/ps3_blu_controller/MESS/mess.ini" "$home/.mess"
+	cp -v "$scriptdir/emu-cfgs/ps3_blu_controller/MESS/default.cfg" "$home/.mess/cfg"
+	cp -v "$scriptdir/emu-cfgs/ps3_blu_controller/MESS/neocdz.cfg" "$home/.mess/cfg"
 
 	# mednafen
 	# default path: /home/$USER/.mednafen/mednafen.cfg
 	# Main config
-	cp -v "$scriptdir/emu-cfgs/ps3_usb_controller/mednafen/mednafen-09x.cfg" "$home/.mednafen"
+	cp -v "$scriptdir/emu-cfgs/ps3_blu_controller/mednafen/mednafen-09x.cfg" "$home/.mednafen"
 
 	# mupen64plus
 	# default path: /home/$USER/.config/mupen64plus
 	# Main config
-	cp -v "$scriptdir/emu-cfgs/ps3_usb_controller/mupen64plus/mupen64plus.cfg" "$home/.config/mupen64plus/"
+	cp -v "$scriptdir/emu-cfgs/ps3_blu_controller/mupen64plus/mupen64plus.cfg" "$home/.config/mupen64plus/"
 
 	#Stella
 	#default path: /home/$USER/.config/mupen64plus
 	#Main config
-	cp -v "$scriptdir/emu-cfgs/ps3_usb_controller/Stella/stellarc" "$home/.stella/"
+	cp -v "$scriptdir/emu-cfgs/ps3_blu_controller/Stella/stellarc" "$home/.stella/"
 
 	# PPSSPP
-	cp -v "scriptdir/emu-cfgs/ps3_usb_controller/PPSSPP/ppsspp.ini" "$home/.config/ppsspp/PSP/SYSTEM"
-	cp -v "scriptdir/emu-cfgs/ps3_usb_controller/PPSSPP/controls.ini" "$home/.config/ppsspp/PSP/SYSTEM"
+	cp -v "scriptdir/emu-cfgs/ps3_blu_controller/PPSSPP/ppsspp.ini" "$home/.config/ppsspp/PSP/SYSTEM"
+	cp -v "scriptdir/emu-cfgs/ps3_blu_controller/PPSSPP/controls.ini" "$home/.config/ppsspp/PSP/SYSTEM"
 
 	# The PS3 pairing process shoudl be handled interactively in a sepearte function:
 	gp_ps3_blu_main
+
+	# call RetroRig's custom deb install for ps3 hotplugging:
+	rrs_ps3_xbmc_patched
 
 	#fix permissions since we are running as sudo
 	h_correct_perms
@@ -232,6 +239,12 @@ LED should be lit. If it is not, please hold in the PS button to turn it off, th
 
 function gp_ps3_usb()
 {
+
+	##############################################################
+	# This seciton is still pending review and testing and is not
+	# used at the moment
+	##############################################################
+
 	#mame
 	# default path: /home/$USER/.mame
 	# Main config
@@ -277,9 +290,8 @@ function gp_ps3_usb()
 function gp_x360()
 {
 
-	############################################
-	# configure emulator configs for 360 gamepad
-	############################################
+	# clean any old configs
+	h_clean_gampead
 
 	#mame
 	# default path: /home/$USER/.mame
