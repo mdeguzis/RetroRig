@@ -160,18 +160,6 @@ function gp_ps3_blu_main()
 	# start the service at boot time
 	sixad --boot-yes
 
-	# create autostart for XBMC
-	# Custom script for reboots/hotplugging
-	cp -v "$rootdir/XBMC-cfgs/extra/gp_autodetect_xbmc.sh" "/usr/share/applications/"
-	cp -v "$rootdir/XBMC-cfgs/extra/startXBMC.sh" "/usr/share/applications/"
-	cp -v "$rootdir/XBMC-cfgs/extra/xbmc.desktop" "$home/.config/autostart"
-	cp -v "$rootdir/XBMC-cfgs/extra/rescan" "/etc/init.d"
-	# fix their permissions
-	chmod +x "/usr/share/applications/gp_autodetect_xbmc.sh" 
-	chmod +x "/usr/share/applications/startXBMC.sh" 
-	chmod +x "$home/.config/autostart/xbmc.desktop"
-	chmod +x "/etc/init.d/rescan"  
-
 	# replace specific user paths that emulators and files may use
 	h_emu_user_fixes
 	

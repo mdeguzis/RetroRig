@@ -32,11 +32,15 @@ h_clean_gampead()
 	# The purpose of this function is to clean any specific configs that may 
 	# have altered files you would need for changing your gamepad type
 
-	# system objects
+	# system objects that may interfere with switching gamepads
+	# The rescan service should be able to coexist with xboxdrv
+	
+	# qjoypad 
 	rm -f /etc/xdg/autostart/qjoypad.desktop
+	# Xbox controller 
 	service xboxdrv stop
 	rm -f /etc/init.d/xboxdrv
-	rm -f /etc/init.d/rescan
+	rm -f /etc/default/xboxdrv
 
 	# clean init scripts (rescan service shouldn't need cleaned right now)
 	# If it is required later, it will fall here.
@@ -44,14 +48,6 @@ h_clean_gampead()
 
 	# XBMC
 	rm -f "$home/.xbmc/userdata/keymaps/keyboard.xml"
-
-	# Application scripts
-	rm -f "/usr/share/applications/gp_autodetect_xbmc.sh"
-	rm -f "/usr/share/applications/startXBMC.sh"
-
-	# autostart entries
-	rm -f "$home/.config/autostart/xbmc.desktop"
-
 }
 
 
@@ -62,6 +58,7 @@ h_autosave_configs()
 	# Directory checks will likely be put in soon.
 	# Old files, aka originals when ran, will be appended with ".old"
 
+	clear
 	# home dotfiles:
 	mv "$home/.mame" "$home/.mame.old" 2>  "/dev/null"
 	mv "$home/.mess" "$home/.mess.old" 2>  "/dev/null"
