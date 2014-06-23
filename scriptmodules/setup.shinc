@@ -249,7 +249,7 @@ function rrs_software() {
 	# call RetroRig's custom deb install for ps3 hotplugging. 
 	# Thankfully our package still works with the Xbox 360 implementation,
 	# so it is now part of the standard install set
-	rrs_ps3_xbmc_patched
+	rrs_xbmc_patched
 
 	# Remove apport, as bug apport-gtk does nothing but interrupt
 	# XBMC and emulators
