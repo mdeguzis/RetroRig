@@ -172,12 +172,6 @@ function gp_ps3_blu_main()
 	chmod +x "$home/.config/autostart/xbmc.desktop"
 	chmod +x "/etc/init.d/rescan"  
 
-	# patch XBMC <- this will probably be removed, standard install for now
-	# rrs_xbmc_patched
-
-	# update init scripts
-	update-rc.d rescan defaults
-
 	# replace specific user paths that emulators and files may use
 	h_emu_user_fixes
 	
