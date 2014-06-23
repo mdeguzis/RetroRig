@@ -153,7 +153,7 @@ options=(1 "Xbox 360 Controller (standard)"
 		;;
 
 		2)
-		gp_ps3_blu_main
+		gp_ps3_blu
 		;;
 
 		2)

@@ -26,7 +26,7 @@ h_ps3_blu_check()
 	fi
 }
 
-h_clean_gampead()
+h_clean_gamepad()
 {
 	clear
 	# The purpose of this function is to clean any specific configs that may 

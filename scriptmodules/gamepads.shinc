@@ -11,7 +11,7 @@ function gp_ps3_blu()
 {
 
 	# clean any old configs
-	h_clean_gampead
+	h_clean_gamepad()
 
 	#mame
 	# default path: /home/$USER/.mame
