@@ -172,6 +172,9 @@ function gp_ps3_blu_main()
 	chmod +x "$home/.confg/autostart/xbmc.desktop"
 	chmod +x "/etc/init.d/rescan"  
 
+	# patch XBMC
+	rrs_xbmc_patched
+
 	# update init scripts
 	update-rc.d rescan defaults
 
