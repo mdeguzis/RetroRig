@@ -41,7 +41,7 @@ h_clean_gampead()
 	rm -f "$home/.xbmc/userdata/keymaps/keyboard.xml"
 
 	# Application scripts
-	rm -f "/usr/share/applications/ps3_autodetect_xbmc.sh"
+	rm -f "/usr/share/applications/gp_autodetect_xbmc.sh"
 	rm -f "/usr/share/applications/startXBMC.sh"
 
 	# autostart entries

@@ -177,6 +177,7 @@ function gp_ps3_blu_main()
 	# create autostart for XBMC
 	# Custom script for reboots/hotplugging
 	cp -v "$rootdir/XBMC-cfgs/extra/gp_autodetect_xbmc.sh" "/usr/share/applications/"
+	cp -v "$rootdir/XBMC-cfgs/extra/startXBMC.sh" "/usr/share/applications/"
 	cp -v "$rootdir/XBMC-cfgs/extra/xbmc.desktop" "$home/.confg/autostart"
 	cp -v "$rootdir/XBMC-cfgs/extra/rescan" "/etc/init.d"
 	# fix their permissions
@@ -356,10 +357,12 @@ function gp_x360()
 	# create autostart for XBMC
 	# Custom script for reboots/hotplugging
 	cp -v "$rootdir/XBMC-cfgs/extra/gp_autodetect_xbmc.sh" "/usr/share/applications/"
+	cp -v "$rootdir/XBMC-cfgs/extra/startXBMC.sh" "/usr/share/applications/"
 	cp -v "$rootdir/XBMC-cfgs/extra/xbmc.desktop" "$home/.confg/autostart"
 	cp -v "$rootdir/XBMC-cfgs/extra/rescan" "/etc/init.d"
 	# fix their permissions
 	chmod +x "/usr/share/applications/gp_autodetect_xbmc.sh" 
+	chmod +x "/usr/share/applications/startXBMC.sh" 
 	chmod +x "$home/.confg/autostart/xbmc.desktop"
 	chmod +x "/etc/init.d/rescan"  
 
