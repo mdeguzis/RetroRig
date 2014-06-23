@@ -263,9 +263,8 @@ function rrs_software() {
 	rrs_debug
 
 	# Inform user about post-install tasks
-	# ...none for now...
-
 	# Output postMSGs to screen
+
 	__postMSGs="$__postMSGs If you wish to start XBMC as a session ONLY, and not Unity whatsover, enable the 'XBMC Session' option in the settings menu! Please be advised that using RetroRig with the xbmc session enabled may result in odd behavior with some emulators. I am doing my best to help/correct this."
 	# inject a space to seperate messages?
 	__postMSGs="$__postMSGs "
@@ -284,19 +283,24 @@ See debug.log for more details. Continuing on to emulator installs..." 18 60
 }
 
 
-function rrs_ps3_xbmc_patched()
+function rrs_xbmc_patched()
 {
 
-	# copy over helper scripts
-	cp -v "$rootdir/init-scripts/ps3_blu_controller/ps3_autodetect_xbmc.sh" "/usr/share/applications"
-	cp -v "$rootdir/XBMC-cfgs/extra/startXBMC.sh" "/usr/share/applications"
-	cp -v "$rootdir/init-scripts/ps3_blu_controller/rescan" "/etc/init.d"
-	# Correct permissions
-	chmod 755 /usr/share/applications/startXBMC.sh 
-	chmod 755 /usr/share/applications/ps3_autodetect_xbmc.sh 
-	chmod 755 /etc/init.d/rescan
+	# create autostart for XBMC
+	# Custom script for reboots/hotplugging
+	cp -v "$rootdir/XBMC-cfgs/extra/gp_autodetect_xbmc.sh" "/usr/share/applications/"
+	cp -v "$rootdir/XBMC-cfgs/extra/startXBMC.sh" "/usr/share/applications/"
+	cp -v "$rootdir/XBMC-cfgs/extra/xbmc.desktop" "$home/.confg/autostart"
+	cp -v "$rootdir/XBMC-cfgs/extra/rescan" "/etc/init.d"
+	# fix their permissions
+	chmod +x "/usr/share/applications/gp_autodetect_xbmc.sh" 
+	chmod +x "/usr/share/applications/startXBMC.sh" 
+	chmod +x "$home/.confg/autostart/xbmc.desktop"
+	chmod +x "/etc/init.d/rescan"  
+
 	# update init scripts
 	update-rc.d rescan defaults
+
 	# create autostart entry, remove prior if it exists
 	rm -f "$HOME/.config/autostart/xbmc.desktop"
 	cp -v "$rootdir/XBMC-cfgs/extra/xbmc.desktop" "$HOME/.config/autostart"

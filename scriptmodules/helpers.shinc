@@ -38,6 +38,10 @@ h_clean_gampead()
 	rm -f /etc/init.d/xboxdrv
 	rm -f /etc/init.d/rescan
 
+	# clean init scripts (rescan service shouldn't need cleaned right now)
+	# If it is required later, it will fall here.
+	update-rc.d -f xboxdrv remove
+
 	# XBMC
 	rm -f "$home/.xbmc/userdata/keymaps/keyboard.xml"
 
