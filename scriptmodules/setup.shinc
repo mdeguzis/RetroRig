@@ -288,9 +288,9 @@ function rrs_ps3_xbmc_patched()
 {
 
 	# copy over helper scripts
-	"$roodir/init-scripts/ps3_blu_controller/ps3_autodetect_xbmc.sh" "/usr/share/applications"
-	"$roodir/XBMC-cfgs/extra/startXBMC.sh" "/usr/share/applications"
-	"$roodir/init-scripts/ps3_blu_controller/rescan" "/etc/init.d"
+	cp -v "$rootdir/init-scripts/ps3_blu_controller/ps3_autodetect_xbmc.sh" "/usr/share/applications"
+	cp -v "$rootdir/XBMC-cfgs/extra/startXBMC.sh" "/usr/share/applications"
+	cp -v "$rootdir/init-scripts/ps3_blu_controller/rescan" "/etc/init.d"
 	# Correct permissions
 	chmod 755 /usr/share/applications/startXBMC.sh 
 	chmod 755 /usr/share/applications/ps3_autodetect_xbmc.sh 
