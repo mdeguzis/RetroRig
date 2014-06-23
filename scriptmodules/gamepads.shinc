@@ -1,0 +1,343 @@
+#!/bin/bash
+#
+# RetroRig menu modules
+# This is a small script to copy over configuration files for emulators
+# append a "-x" on the end above for debugging if need be
+# Please report any errors via a pull request
+# You can also reach me on twitter: @N3RD42
+#
+
+function gp_ps3_blu()
+{
+
+	# clean any old configs
+	h_clean_gampead
+
+	#mame
+	# default path: /home/$USER/.mame
+	# Main config
+	cp -v "$scriptdir/emu-cfgs/ps3_blu_controller/MAME/default.cfg" "$home/.mame/cfg"
+	cp -v "$scriptdir/emu-cfgs/ps3_blu_controller/MAME/mame.ini" "$home/.mame"
+ 
+	# offline artwork scrapper configs
+	cp -v "$scriptdir/emu-cfgs/ps3_blu_controller/MAME/parserConfig.xml" "$rootdir/Artwork/MAME"
+	cp -v "$scriptdir/emu-cfgs/ps3_blu_controller/MAME/MAME.txt" "$rootdir/Artwork/MAME"
+	cp -v "$scriptdir/emu-cfgs/ps3_blu_controller/MAME/MAME synopsis RCB 201202.zip" "$rootdir/Artwork/MAME"
+
+	# mess
+	# default path: /home/$USER/.mednafen/mednafen.cfg
+	# Main config
+	cp -v "$scriptdir/emu-cfgs/ps3_blu_controller/MESS/mess.ini" "$home/.mess"
+	cp -v "$scriptdir/emu-cfgs/ps3_blu_controller/MESS/default.cfg" "$home/.mess/cfg"
+	cp -v "$scriptdir/emu-cfgs/ps3_blu_controller/MESS/neocdz.cfg" "$home/.mess/cfg"
+
+	# mednafen
+	# default path: /home/$USER/.mednafen/mednafen.cfg
+	# Main config
+	cp -v "$scriptdir/emu-cfgs/ps3_blu_controller/mednafen/mednafen-09x.cfg" "$home/.mednafen"
+
+	# mupen64plus
+	# default path: /home/$USER/.config/mupen64plus
+	# Main config
+	cp -v "$scriptdir/emu-cfgs/ps3_blu_controller/mupen64plus/mupen64plus.cfg" "$home/.config/mupen64plus/"
+
+	#Stella
+	#default path: /home/$USER/.config/mupen64plus
+	#Main config
+	cp -v "$scriptdir/emu-cfgs/ps3_blu_controller/Stella/stellarc" "$home/.stella/"
+
+	# PPSSPP
+	cp -v "$scriptdir/emu-cfgs/ps3_blu_controller/PPSSPP/ppsspp.ini" "$home/.config/ppsspp/PSP/SYSTEM"
+	cp -v "$scriptdir/emu-cfgs/ps3_blu_controller/PPSSPP/controls.ini" "$home/.config/ppsspp/PSP/SYSTEM"
+
+	# The PS3 pairing process shoudl be handled interactively in a sepearte function:
+	gp_ps3_blu_main
+
+	#fix permissions since we are running as sudo
+	h_correct_perms
+
+}
+
+
+function gp_ps3_blu_main()
+{
+
+	#set qjoypad's profile to match Xbox 360 Wireless (4-player)
+	cp -v "$rootdir/gamepad-cfgs/ps3_blu_controller/ps3_sixaxis_blu.lyt" "$home/.qjoypad3"
+	#copy qjoypad autostart item for x360_controller gamepad config
+	cp -v "$rootdir/gamepad-cfgs/ps3_blu_controller/qjoypad.desktop" "/etc/xdg/autostart/"
+	
+	#blacklist xpad
+	cp -v "$rootdir/init-scripts/ps3_blu_controller/blacklist.conf" "/etc/modprobe.d/"
+
+
+	# copy keyboard.xml file for XBMC. Button id numbers are totally diffferent, due to the use of 
+	# the use-dpad-as-button, and use-trigger-as-button options used.
+
+	# Present small menu asking for number of controllers
+	cmd=(dialog --backtitle "LibreGeek.org RetroRig Installer" \
+		    --menu "Please select the number of PS3 controllers" 16 47 16)
+	options=(1 "1"
+	 	 2 "2"
+	 	 3 "3"
+	 	 4 "4")
+
+	#make menu choice
+	selection=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
+	#functions
+
+	for choice in $selection
+	do
+		case $choice in
+
+		1)
+		# call pairing function to set current bluetooth MAC to Player 1
+		ps3_pair_blu
+		# grab player 1 controller MAC Address of USB/bluetooth pairing process
+		PS3_MAC_P1_BLU=$(grep "PLAYSTATION(R)3" "/proc/bus/input/devices" | cut -c38-54)
+		# TESING ONLY!!!
+		echo "The USB MAC Address is: $PS3_MAC_P1_USB"
+		echo "The Bluetooth MAC Address is: $PS3_MAC_P1_BLU"
+		dialog --msgbox "Pairing of Player 1 Controller complete" 5 43 
+		sleep 5s
+		;;
+
+		2)
+		# call pairing function to set current bluetooth MAC to Player 1
+		ps3_pair_blu
+		dialog --msgbox "Pairing of Player 1 Controller complete" 5 43 
+		# call pairing function to set current bluetooth MAC to Player 2
+		ps3_pair_blu
+		dialog --msgbox "Pairing of Player 2 Controller complete" 5 43 
+		;;
+
+		3)
+		# call pairing function to set current bluetooth MAC to Player 1
+		ps3_pair_blu
+		dialog --msgbox "Pairing of Player 1 Controller complete" 5 43 
+		# call pairing function to set current bluetooth MAC to Player 2
+		ps3_pair_blu
+		dialog --msgbox "Pairing of Player 2 Controller complete" 5 43
+		# call pairing function to set current bluetooth MAC to Player 3
+		ps3_pair_blu
+		dialog --msgbox "Pairing of Player 3 Controller complete" 5 43  
+		;;
+
+		4)
+		# call pairing function to set current bluetooth MAC to Player 1
+		ps3_pair_blu
+		dialog --msgbox "Pairing of Player 1 Controller complete" 5 43 
+		# call pairing function to set current bluetooth MAC to Player 2
+		ps3_pair_blu
+		dialog --msgbox "Pairing of Player 2 Controller complete" 5 43
+		# call pairing function to set current bluetooth MAC to Player 3
+		ps3_pair_blu
+		dialog --msgbox "Pairing of Player 3 Controller complete" 5 43
+		# call pairing function to set current bluetooth MAC to Player 4
+		ps3_pair_blu
+		dialog --msgbox "Pairing of Player 4 Controller complete" 5 43    
+		;;
+
+		esac
+	done
+
+	clear
+	# copy over default keyboard file:
+	cp -v "$rootdir/gamepad-cfgs/ps3_blu_controller/keyboard.xml" "$home/.xbmc/userdata/keymaps/keyboard.xml"
+
+	# First grab MAC Addresses:
+	# In the config file, the MAC is set to 00:00:00:00:00:00
+
+	# set MAC values
+	PS3_MAC_OLD="00:00:00:00:00:00"
+
+	# Replace MAC Address for ***CONTROLLER 1 ONLY!*** This will be used to control XBMC		
+	sed -i "s|$PS3_MAC_OLD|$PS3_MAC_P1_BLU|g" "$home/.xbmc/userdata/keymaps/keyboard.xml"
+
+	# Stella does list the MAC address for the PS3 control in the stellarc file. Replace for now until further notice
+	sed -i "s|$PS3_MAC_OLD|$PS3_MAC_P1_BLU|g" "$home/.stella/stellarc"
+
+	# start the service at boot time
+	sixad --boot-yes
+
+	# replace specific user paths that emulators and files may use
+	h_emu_user_fixes
+	
+}
+
+function ps3_pair_blu()
+{
+
+
+	#####################################
+	# Set and pair up player controller
+	#####################################
+
+	dialog --msgbox "Please plug in these items now:\n\n1)The USB cable\n2)PS3 controller\n\
+3)Bluetooth dongle\n\nAdditional controllers can be added in the settings menu"  12 40
+
+	clear
+	# Grab player 1 controller MAC Address of wired device
+	echo "Setting up Playstation 3 Sixaxis (blutooth) [Player 1]" | tee "$rootdir/logs/debug.log"
+
+	# echo USB MAC value to log for debugging purposes
+ 	PS3_MAC_P1_USB=$(sixpair | grep "Current" | cut -c 27-43)
+
+	# Pair controller with logging
+	sixpair | tee "$rootdir/logs/debug.log"
+	# start sixad service
+	echo "restarting serives" | tee "$rootdir/logs/debug.log"
+	echo "" | tee "$rootdir/logs/debug.log"
+	# start service, but fork to background so when user exits script it is still running to avoid reboot
+	service sixad restart | tee "$rootdir/logs/debug.log" &
+	sleep 2s
+	clear
+
+	# Inform player 1 controller user to disconnect USB cord
+	dialog --msgbox "Please disconnect the USB cable and press the PS Button now. The appropriate \
+LED should be lit. If it is not, please hold in the PS button to turn it off, then back on." 10 60
+
+}
+
+function gp_ps3_usb()
+{
+
+	##############################################################
+	# This seciton is still pending review and testing and is not
+	# used at the moment
+	##############################################################
+
+	#mame
+	# default path: /home/$USER/.mame
+	# Main config
+	cp -v "$scriptdir/emu-cfgs/ps3_usb_controller/MAME/default.cfg" "$home/.mame/cfg"
+	cp -v "$scriptdir/emu-cfgs/ps3_usb_controller/MAME/mame.ini" "$home/.mame"
+ 
+	# offline artwork scrapper configs
+	cp -v "$scriptdir/emu-cfgs/ps3_usb_controller/MAME/parserConfig.xml" "$rootdir/Artwork/MAME"
+	cp -v "$scriptdir/emu-cfgs/ps3_usb_controller/MAME/MAME.txt" "$rootdir/Artwork/MAME"
+	cp -v "$scriptdir/emu-cfgs/ps3_usb_controller/MAME/MAME synopsis RCB 201202.zip" "$rootdir/Artwork/MAME"
+
+	# mess
+	# default path: /home/$USER/.mednafen/mednafen.cfg
+	# Main config
+	cp -v "$scriptdir/emu-cfgs/ps3_usb_controller/MESS/mess.ini" "$home/.mess"
+	cp -v "$scriptdir/emu-cfgs/ps3_usb_controller/MESS/default.cfg" "$home/.mess/cfg"
+	cp -v "$scriptdir/emu-cfgs/ps3_usb_controller/MESS/neocdz.cfg" "$home/.mess/cfg"
+
+	# mednafen
+	# default path: /home/$USER/.mednafen/mednafen.cfg
+	# Main config
+	cp -v "$scriptdir/emu-cfgs/ps3_usb_controller/mednafen/mednafen-09x.cfg" "$home/.mednafen"
+
+	# mupen64plus
+	# default path: /home/$USER/.config/mupen64plus
+	# Main config
+	cp -v "$scriptdir/emu-cfgs/ps3_usb_controller/mupen64plus/mupen64plus.cfg" "$home/.config/mupen64plus/"
+
+	#Stella
+	#default path: /home/$USER/.config/mupen64plus
+	#Main config
+	cp -v "$scriptdir/emu-cfgs/ps3_usb_controller/Stella/stellarc" "$home/.stella/"
+
+	# PPSSPP
+	cp -v "scriptdir/emu-cfgs/ps3_usb_controller/PPSSPP/ppsspp.ini" "$home/.config/ppsspp/PSP/SYSTEM"
+	cp -v "scriptdir/emu-cfgs/ps3_usb_controller/PPSSPP/controls.ini" "$home/.config/ppsspp/PSP/SYSTEM"
+
+	# The PS3 pairing process is not needed here if using usb!
+	# gp_ps3_blu_main
+
+	# create autostart for XBMC
+	# Custom script for reboots/hotplugging
+	cp -v "$rootdir/XBMC-cfgs/extra/gp_autodetect_xbmc.sh" "/usr/share/applications/"
+	cp -v "$rootdir/XBMC-cfgs/extra/startXBMC.sh" "/usr/share/applications/"
+	cp -v "$rootdir/XBMC-cfgs/extra/xbmc.desktop" "$home/.config/autostart"
+	cp -v "$rootdir/XBMC-cfgs/extra/rescan" "/etc/init.d"
+	# fix their permissions
+	chmod +x "/usr/share/applications/gp_autodetect_xbmc.sh" 
+	chmod +x "$home/.config/autostart/xbmc.desktop"
+	chmod +x "/etc/init.d/rescan"  
+
+	# replace specific user paths that emulators and files may use
+	h_emu_user_fixes
+
+	# patch XBMC <- this will probably be removed, standard install for now
+	# rrs_xbmc_patched
+
+}
+
+function gp_x360()
+{
+
+	# clean any old configs
+	h_clean_gampead
+
+	#mame
+	# default path: /home/$USER/.mame
+	# Main config
+	cp -v "$scriptdir/emu-cfgs/x360_controller/MAME/default.cfg" "$home/.mame/cfg"
+	cp -v "$scriptdir/emu-cfgs/x360_controller/MAME/mame.ini" "$home/.mame"
+ 
+	# offline artwork scrapper configs
+	cp -v "$scriptdir/emu-cfgs/x360_controller/MAME/parserConfig.xml" "$rootdir/Artwork/MAME"
+	cp -v "$scriptdir/emu-cfgs/x360_controller/MAME/MAME.txt" "$rootdir/Artwork/MAME"
+	cp -v "$scriptdir/emu-cfgs/x360_controller/MAME/MAME synopsis RCB 201202.zip" "$rootdir/Artwork/MAME"
+
+	# mess
+	# default path: /home/$USER/.mednafen/mednafen.cfg
+	# Main config
+	cp -v "$scriptdir/emu-cfgs/x360_controller/MESS/mess.ini" "$home/.mess"
+	cp -v "$scriptdir/emu-cfgs/x360_controller/MESS/default.cfg" "$home/.mess/cfg"
+	cp -v "$scriptdir/emu-cfgs/x360_controller/MESS/neocdz.cfg" "$home/.mess/cfg"
+
+	# mednafen
+	# default path: /home/$USER/.mednafen/mednafen.cfg
+	# Main config
+	cp -v "$scriptdir/emu-cfgs/x360_controller/mednafen/mednafen-09x.cfg" "$home/.mednafen"
+
+	# mupen64plus
+	# default path: /home/$USER/.config/mupen64plus
+	# Main config
+	cp -v "$scriptdir/emu-cfgs/x360_controller/mupen64plus/mupen64plus.cfg" "$home/.config/mupen64plus/"
+
+	#Stella
+	#default path: /home/$USER/.config/mupen64plus
+	#Main config
+	cp -v "$scriptdir/emu-cfgs/x360_controller/Stella/stellarc" "$home/.stella/"
+
+	# PPSSPP
+	cp -v "$scriptdir/emu-cfgs/x360_controller/PPSSPP/ppsspp.ini" "$home/.config/ppsspp/PSP/SYSTEM"
+	cp -v "$scriptdir/emu-cfgs/x360_controller/PPSSPP/controls.ini" "$home/.config/ppsspp/PSP/SYSTEM"
+
+	############################################
+	# configure xboxdrv for 360 gamepad
+	############################################
+
+	#set qjoypad's profile to match Xbox 360 Wireless (4-player)
+	cp -v "$rootdir/gamepad-cfgs/x360_controller/x360_controller.lyt" "$home/.qjoypad3"
+	#copy qjoypad autostart item for x360_controller gamepad config
+	cp -v "$rootdir/gamepad-cfgs/x360_controller/qjoypad.desktop" "/etc/xdg/autostart/"
+	
+	#blacklist xpad
+	cp -v "$rootdir/init-scripts/x360_controller/blacklist.conf" "/etc/modprobe.d/"
+
+	#inject init script and default config
+	cp -v "$rootdir/init-scripts/x360_controller/xboxdrv" "/etc/init.d/"
+	cp -v "$rootdir/init-scripts/x360_controller/default/xboxdrv" "/etc/default/xboxdrv"
+
+	# copy keyboard.xml file for XBMC. Button id numbers are totally diffferent, due to the use of 
+	# the use-dpad-as-button, and use-trigger-as-button options used.
+	cp -v "$rootdir/gamepad-cfgs/x360_controller/keyboard.xml" "$home/.xbmc/userdata/keymaps"
+
+	# patch XBMC <- this will probably be removed, standard install for now
+	# rrs_xbmc_patched
+
+	#update init scripts for xboxdrv
+	update-rc.d xboxdrv defaults
+
+	# replace specific user paths that emulators and files may use
+	h_emu_user_fixes
+
+	#fix permissions since we are running as sudo
+	h_correct_perms
+}
