@@ -299,7 +299,7 @@ function rrs_ps3_xbmc_patched()
 	update-rc.d rescan defaults
 	# create autostart entry, remove prior if it exists
 	rm -f "$HOME/.config/autostart/xbmc.desktop"
-	cp -v "$roodir/init-scripts/ps3_blu_controller/xbmc.desktop" "$HOME/.config/autostart"
+	cp -v "$rootdir/XBMC-cfgs/extra/xbmc.desktop" "$HOME/.config/autostart"
 	# remove old xbmc-bin, install our patched version
 	apt-get remove -y xbmc-bin
 	dpkg -i "$rootdir/XBMC-cfgs/extra/xbmc-bin_Gotham_V13.1_patched_for_RetroRig.deb"
