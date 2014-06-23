@@ -47,8 +47,8 @@ function gp_ps3_blu()
 	cp -v "$scriptdir/emu-cfgs/ps3_blu_controller/Stella/stellarc" "$home/.stella/"
 
 	# PPSSPP
-	cp -v "scriptdir/emu-cfgs/ps3_blu_controller/PPSSPP/ppsspp.ini" "$home/.config/ppsspp/PSP/SYSTEM"
-	cp -v "scriptdir/emu-cfgs/ps3_blu_controller/PPSSPP/controls.ini" "$home/.config/ppsspp/PSP/SYSTEM"
+	cp -v "$scriptdir/emu-cfgs/ps3_blu_controller/PPSSPP/ppsspp.ini" "$home/.config/ppsspp/PSP/SYSTEM"
+	cp -v "$scriptdir/emu-cfgs/ps3_blu_controller/PPSSPP/controls.ini" "$home/.config/ppsspp/PSP/SYSTEM"
 
 	# The PS3 pairing process shoudl be handled interactively in a sepearte function:
 	gp_ps3_blu_main
@@ -96,10 +96,10 @@ function gp_ps3_blu_main()
 		# grab player 1 controller MAC Address of USB/bluetooth pairing process
 		PS3_MAC_P1_BLU=$(grep "PLAYSTATION(R)3" "/proc/bus/input/devices" | cut -c38-54)
 		# TESING ONLY!!!
-		 echo "The USB MAC Address is: $PS3_MAC_P1_USB"
-		 echo "The Bluetooth MAC Address is: $PS3_MAC_P1_BLU"
+		echo "The USB MAC Address is: $PS3_MAC_P1_USB"
+		echo "The Bluetooth MAC Address is: $PS3_MAC_P1_BLU"
 		dialog --msgbox "Pairing of Player 1 Controller complete" 5 43 
-		 sleep 5s
+		sleep 5s
 		;;
 
 		2)
@@ -223,22 +223,6 @@ function ps3_pair_blu()
 	dialog --msgbox "Please disconnect the USB cable and press the PS Button now. The appropriate \
 LED should be lit. If it is not, please hold in the PS button to turn it off, then back on." 10 60
 
-	##############################################################
-	# THIS DEBUG SECTION BELOW IS NOT WOKRING, needs fixed :(
-	# The above pairing does work, but it would be nice to check
-	##############################################################
-
-	# check that controller is off
-	# set blu check to "0" as starting $var value
-	ps3_blu_complete="0"
-	# loop until controller is unplugged. When value becomes 1, this will get skipped
-	while [[ $ps3_blu_compete == "0" ]]; do
-		h_ps3_blu_check
-	done
-
-	if [[ $ps3_blu_compete == "1" ]]; then
-		dialog --msgbox "Pairing complete!" 5 15
-	fi
 }
 
 function gp_ps3_usb()

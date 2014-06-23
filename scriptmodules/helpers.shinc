@@ -36,6 +36,7 @@ h_clean_gampead()
 	rm -f /etc/xdg/autostart/qjoypad.desktop
 	service xboxdrv stop
 	rm -f /etc/init.d/xboxdrv
+	rm -f /etc/init.d/rescan
 
 	# XBMC
 	rm -f "$home/.xbmc/userdata/keymaps/keyboard.xml"
