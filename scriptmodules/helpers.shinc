@@ -68,10 +68,12 @@ h_autosave_configs()
 	mv "$home/.config/mupen64plus" "$home/.config/mupen64plus.old" 2>  "/dev/null"
 	mv "$home/.config/ppsspp" "$home/.config/ppsspp.old" 2>  "/dev/null"
 	mv "$home/.ssh" "$home/.ssh.old" 2>  "/dev/null"
+	mv "$home/.qtsixa" "$home/.qtsixa.old" 2>  "/dev/null"
 
 	# system configs:
-	mv "/etc/xdg/autostart/xbmc" "/etc/xdg/autostart/xbmc.old" 2>  "/dev/null"
+	mv "$home/.config/autostart/xbmc/desktop" "$home/.config/autostart/xbmc.desktop.old" 2>  "/dev/null"
 	mv "/etc/init.d/xboxdrv" "/etc/init.d/xboxdrv.old" 2>  "/dev/null"
+	mv "/etc/init.d/rescan" "/etc/init.d/rescan.old" 2>  "/dev/null"
 	mv "/etc/modprobe.d/blacklist.conf" "/etc/modprobe.d/blacklist.conf.old" 2>  "/dev/null"
 	mv "/usr/share/xsessions/xbmc.desktop" "/usr/share/xsessions/xbmc.desktop.old" 2>  "/dev/null"
 	mv "/usr/bin/xbmc-session" "/usr/bin/xbmc-session.old" 2>  "/dev/null"

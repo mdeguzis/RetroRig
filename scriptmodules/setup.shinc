@@ -284,7 +284,7 @@ See debug.log for more details. Continuing on to emulator installs..." 18 60
 }
 
 
-funtion rrs_ps3_xbmc_patched()
+function rrs_ps3_xbmc_patched()
 {
 
 	# copy over helper scripts
