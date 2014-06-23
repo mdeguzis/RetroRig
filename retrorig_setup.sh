@@ -222,10 +222,9 @@ while true; do
 	     3 "Pull latest files from git" 
 	     4 "Update emulator binaries" 
 	     5 "Upgrade System (use with caution!)" 
-	     6 "Start RetroRig" 
-	     7 "Reboot PC"
-	     8 "Uninstall RetroRig"  
-	     9 "Exit")
+	     6 "Reboot PC"
+	     7 "Uninstall RetroRig"  
+	     8 "Exit")
 
 	#make menu choice
 	# Expanding arrays involves [@] and {}
@@ -278,15 +277,11 @@ while true; do
 		chgrp -R "$user" "$scriptdir/logs/upgrade_$now.log.gz"
 		;;
 
-	    6)
-		h_start_xbmc
-		;;
-
-	    7) 
+	    6) 
 		rrs_reboot
 		;;
 
-	    8)
+	    7)
 		now=$(date +'%d%m%Y_%H%M%S')
 		{
 		cfg_uninstall
@@ -295,12 +290,12 @@ while true; do
 		chgrp -R "$user "$scriptdir/logs/uninstall_$now.log.gz"
 		;;
 
-	    9) 
+	    8) 
 		clear
 		exit
 		;;
 
-	255)
+	    255)
 		# Next two lines for debugging only	
 	   	# dialog --infobox "Esc hit..." 3 14
 	   	# sleep 1s
