@@ -31,5 +31,6 @@
 - All the members of /r/LinuxActionShow 
 
 ***
-##### Other
+### Other
+***
    - Thank you IMMENSELY for all other testing, ideas, and support!
