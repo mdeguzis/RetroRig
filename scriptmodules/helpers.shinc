@@ -586,6 +586,21 @@ function h_correct_perms()
 	# qtsixa gui files
 	chgrp -R "$user" "$home/.sixemugui"
      	chown -R "$user" "$home/.sixemugui"
+	# XBMC extra filesfiles
+	chgrp -R "$user" "/usr/share/applications/gp_autodetect_xbmc.sh"
+     	chown -R "$user" "/usr/share/applications/gp_autodetect_xbmc.sh"
+
+	chgrp -R "$user" "$home/Pictures/retro-icon.png"
+	chown -R "$user" "$home/Pictures/retro-icon.png"
+	
+	chgrp -R "$user" "/usr/share/applications/startXBMC.sh"
+	chown -R "$user" "/usr/share/applications/startXBMC.sh"
+
+	chgrp -R "$user" "$home/.config/autostart/RetroRig.desktop"
+	chown -R "$user" "$home/.config/autostart/RetroRig.desktop"
+
+	chgrp -R "$user" "$home/.config/autostart/startXBMC.sh.desktop"
+	chown -R "$user" "$home/.config/autostart/startXBMC.sh.desktop"
 
 	# BETA ONLY
 	# Sometimes the custom skin reverts its files when using the PS3

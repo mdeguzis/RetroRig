@@ -289,8 +289,9 @@ function rrs_xbmc_patched()
 	# Custom script for reboots/hotplugging
 	cp -v "$rootdir/XBMC-cfgs/extra/gp_autodetect_xbmc.sh" "/usr/share/applications/"
 	cp -v "$rootdir/XBMC-cfgs/extra/xbmc.desktop" "/usr/share/applications/"
+	cp -v "$rootdir/XBMC-cfgs/extra/retro-icon.png" "$home/Pictures"
 	cp -v "$rootdir/XBMC-cfgs/extra/startXBMC.sh" "/usr/share/applications/"
-	cp -v "$rootdir/XBMC-cfgs/extra/xbmc.desktop" "$home/.config/autostart"
+	cp -v "$rootdir/XBMC-cfgs/extra/RetroRig.desktop" "$home/.config/autostart"
 	cp -v "$rootdir/XBMC-cfgs/extra/rescan" "/etc/init.d"
 	# fix their permissions
 	chmod +x "/usr/share/applications/gp_autodetect_xbmc.sh" 
@@ -302,6 +303,9 @@ function rrs_xbmc_patched()
 
 	# update init scripts
 	update-rc.d rescan defaults
+
+	# start service
+	service rescan start
 
 	# create autostart entry, remove prior if it exists
 	rm -f "$HOME/.config/autostart/xbmc.desktop"

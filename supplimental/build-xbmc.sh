@@ -122,9 +122,15 @@ make
 
 echo ""
 echo "##########################################"
-echo "Copying over modified cpp file"
+echo "Patching"
 echo "##########################################"
-sudo cp -v $HOME/RetroRig/XBMC-cfgs/extra/SDLJoystick.cpp $HOME/xbmc/xbmc/input/SDLJoystick.cpp
+
+# The below manual patch is now deprecated in favor of a proper patch file from JC
+# sudo cp -v $HOME/RetroRig/XBMC-cfgs/extra/SDLJoystick.cpp $HOME/xbmc/xbmc/input/SDLJoystick.cpp
+
+# Patching SDLJoystick.cpp
+git checkout xbmc/input/SDLJoystick.cpp
+patch "$HOME/xbmc/xbmc/input/SDLJoystick.cpp" < "$HOME/RetroRig/XBMC-cfgs/extra/xbmc_input_SDLJoystick.cpp_-13.1-Gotham-_SIGUSR1_interrupt.patch"
 make
 
 # strip out the bin executable
@@ -141,7 +147,6 @@ cd /tmp/RetroRig
 sudo dpkg-deb -b . xbmc-bin_Gotham_V13.1_patched_for_RetroRig.deb
 
 # copy new deb to home dir
-# Lines 1, 3, and 4 will get worked into script
 
 echo ""
 echo "##########################################"
@@ -159,7 +164,7 @@ sudo apt-get install -y xbmc
 ##############################
 
 #get wmctrl
-sudo apt-get install wmctrl
+sudo apt-get install -y wmctrl
 
 # Copy down these scripts during install 
 # The pastes below are only for historical purposes, these are contained in RetroRig under:
@@ -177,9 +182,9 @@ echo "##########################################"
 echo "copying post install files"
 echo "##########################################"
 
-sudo cp -v "$HOME/RetroRig/init-scripts/ps3_blu_controller/ps3_autodetect_xbmc.sh" "/usr/share/applications"
+sudo cp -v "$HOME/RetroRig/XBMC-cfgs/extra/gp_autodetect_xbmc.sh" "/usr/share/applications"
 sudo cp -v "$HOME/RetroRig/XBMC-cfgs/extra/startXBMC.sh" "/usr/share/applications"
-sudo cp -v "$HOME/RetroRig/init-scripts/ps3_blu_controller/rescan" "/etc/init.d"
+sudo cp -v "$HOME/RetroRig/XBMC-cfgs/extra/rescan" "/etc/init.d"
 
 echo ""
 echo "##########################################"
@@ -187,7 +192,7 @@ echo "Fixing permisisons"
 echo "##########################################"
 
 sudo chmod 755 /usr/share/applications/startXBMC.sh 
-sudo chmod 755 /usr/share/applications/ps3_autodetect_xbmc.sh 
+sudo chmod 755 /usr/share/applications/gp_autodetect_xbmc.sh 
 sudo chmod 755 /etc/init.d/rescan
 
 echo ""
@@ -207,7 +212,7 @@ ehco "Creating autostart entries"
 echo "##########################################"
 
 # Delete existing xbmc starter and create new one without terminal
-# After testing, "startXBMC.sh" will move to /etc/xdg/autostart
-gnome-session-properties
+# "startXBMC.sh" move to /etc/xdg/autostart
+cp -v $HOME/RetroRig/XBMC-cfgs/extra/RetroRig.desktop $HOME/.config/autostart
 
 
