@@ -1,6 +1,6 @@
 [Desktop Entry]
 Version=1.0
-Name=XBMC PS3 (Custom)
+Name=XBMC RetroRig (Custom)
 GenericName=Media Center
 Comment=Manage and view your media
 Exec=/usr/share/applications/startXBMC.sh
