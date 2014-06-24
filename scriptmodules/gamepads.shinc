@@ -30,6 +30,7 @@ function gp_ps3_blu()
 	cp -v "$scriptdir/emu-cfgs/ps3_blu_controller/MESS/mess.ini" "$home/.mess"
 	cp -v "$scriptdir/emu-cfgs/ps3_blu_controller/MESS/default.cfg" "$home/.mess/cfg"
 	cp -v "$scriptdir/emu-cfgs/ps3_blu_controller/MESS/neocdz.cfg" "$home/.mess/cfg"
+	cp -v "$scriptdir/emu-cfgs/ps3_blu_controller/MESS/default.cfg" "$home/.mess/cfg"
 
 	# mednafen
 	# default path: /home/$USER/.mednafen/mednafen.cfg
