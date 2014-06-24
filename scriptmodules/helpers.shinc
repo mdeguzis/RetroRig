@@ -602,7 +602,6 @@ function h_correct_perms()
 	chgrp -R "$user" "$home/.config/autostart/startXBMC.sh.desktop"
 	chown -R "$user" "$home/.config/autostart/startXBMC.sh.desktop"
 
-	# BETA ONLY
 	# Sometimes the custom skin reverts its files when using the PS3
 	# This may take some time to debug, root cause maybe in an XBMC crash log
 	# help script. Change owership to root, with octal 755 (no -w-) for testing:

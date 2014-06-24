@@ -1,11 +1,11 @@
 #! /bin/bash
 ### BEGIN INIT INFO
-# Provides:          xbox-controller
+# Provides:          ps3-controller-usb
 # Required-Start:    $remote_fs $syslog
 # Required-Stop:     $remote_fs $syslog
 # Default-Start:     2 3 4 5
 # Default-Stop:      0 1 6
-# Short-Description: Start XBOX Controller Service
+# Short-Description: Start PS3-USB Controller Service
 # Description:       Start the xboxdrv daemon with several options
 #                    support up to 4 Controllers
 ### END INIT INFO
@@ -13,7 +13,7 @@
 # Author: MasteRehm
 
 PATH=/sbin:/usr/sbin:/bin:/usr/bin
-DESC="XBOX Controller Service"
+DESC="PS3 Controller Service"
 NAME=xboxdrv
 DAEMON=/usr/bin/$NAME
 DAEMON_ARGS="-D -d --deadzone 4000 --dbus disabled --detach"
