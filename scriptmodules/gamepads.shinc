@@ -256,7 +256,7 @@ function gp_ps3_usb()
 
 }
 
-function gp_x360()
+function gp_x360_wireless()
 {
 
 	# clean any old configs
@@ -300,7 +300,7 @@ function gp_x360()
 	cp -v "$scriptdir/emu-cfgs/x360_controller/PPSSPP/controls.ini" "$home/.config/ppsspp/PSP/SYSTEM"
 
 	############################################
-	# configure xboxdrv for 360 gamepad
+	# configure xboxdrv for 360 gamepad (wireless)
 	############################################
 
 	#set qjoypad's profile to match Xbox 360 Wireless (4-player)
@@ -318,6 +318,82 @@ function gp_x360()
 	# copy keyboard.xml file for XBMC. Button id numbers are totally diffferent, due to the use of 
 	# the use-dpad-as-button, and use-trigger-as-button options used.
 	cp -v "$rootdir/gamepad-cfgs/x360_controller/keyboard.xml" "$home/.xbmc/userdata/keymaps"
+
+	# patch XBMC <- this will probably be removed, standard install for now
+	# rrs_xbmc_patched
+
+	#update init scripts for xboxdrv
+	update-rc.d xboxdrv defaults
+
+	# replace specific user paths that emulators and files may use
+	h_emu_user_fixes
+
+	#fix permissions since we are running as sudo
+	h_correct_perms
+}
+
+function gp_x360_usb()
+{
+
+	# clean any old configs
+	h_clean_gampead
+
+	#mame
+	# default path: /home/$USER/.mame
+	# Main config
+	cp -v "$scriptdir/emu-cfgs/x360_usb_controller/MAME/default.cfg" "$home/.mame/cfg"
+	cp -v "$scriptdir/emu-cfgs/x360_usb_controller/MAME/mame.ini" "$home/.mame"
+ 
+	# offline artwork scrapper configs
+	cp -v "$scriptdir/emu-cfgs/x360_usb_controller/MAME/parserConfig.xml" "$rootdir/Artwork/MAME"
+	cp -v "$scriptdir/emu-cfgs/x360_usb_controller/MAME/MAME.txt" "$rootdir/Artwork/MAME"
+	cp -v "$scriptdir/emu-cfgs/x360_usb_controller/MAME/MAME synopsis RCB 201202.zip" "$rootdir/Artwork/MAME"
+
+	# mess
+	# default path: /home/$USER/.mednafen/mednafen.cfg
+	# Main config
+	cp -v "$scriptdir/emu-cfgs/x360_usb_controller/MESS/mess.ini" "$home/.mess"
+	cp -v "$scriptdir/emu-cfgs/x360_usb_controller/MESS/default.cfg" "$home/.mess/cfg"
+	cp -v "$scriptdir/emu-cfgs/x360_usb_controller/MESS/neocdz.cfg" "$home/.mess/cfg"
+
+	# mednafen
+	# default path: /home/$USER/.mednafen/mednafen.cfg
+	# Main config
+	cp -v "$scriptdir/emu-cfgs/x360_usb_controller/mednafen/mednafen-09x.cfg" "$home/.mednafen"
+
+	# mupen64plus
+	# default path: /home/$USER/.config/mupen64plus
+	# Main config
+	cp -v "$scriptdir/emu-cfgs/x360_usb_controller/mupen64plus/mupen64plus.cfg" "$home/.config/mupen64plus/"
+
+	#Stella
+	#default path: /home/$USER/.config/mupen64plus
+	#Main config
+	cp -v "$scriptdir/emu-cfgs/x360_usb_controller/Stella/stellarc" "$home/.stella/"
+
+	# PPSSPP
+	cp -v "$scriptdir/emu-cfgs/x360_usb_controller/PPSSPP/ppsspp.ini" "$home/.config/ppsspp/PSP/SYSTEM"
+	cp -v "$scriptdir/emu-cfgs/x360_usb_controller/PPSSPP/controls.ini" "$home/.config/ppsspp/PSP/SYSTEM"
+
+	############################################
+	# configure xboxdrv for 360 gamepad (wireless)
+	############################################
+
+	#set qjoypad's profile to match Xbox 360 Wireless (4-player)
+	cp -v "$rootdir/gamepad-cfgs/x360_usb_controller/x360_usb_controller.lyt" "$home/.qjoypad3"
+	#copy qjoypad autostart item for x360_usb_controller gamepad config
+	cp -v "$rootdir/gamepad-cfgs/x360_usb_controller/qjoypad.desktop" "/etc/xdg/autostart/"
+	
+	#blacklist xpad
+	cp -v "$rootdir/init-scripts/x360_usb_controller/blacklist.conf" "/etc/modprobe.d/"
+
+	#inject init script and default config
+	cp -v "$rootdir/init-scripts/x360_usb_controller/xboxdrv" "/etc/init.d/"
+	cp -v "$rootdir/init-scripts/x360_usb_controller/default/xboxdrv" "/etc/default/xboxdrv"
+
+	# copy keyboard.xml file for XBMC. Button id numbers are totally diffferent, due to the use of 
+	# the use-dpad-as-button, and use-trigger-as-button options used.
+	cp -v "$rootdir/gamepad-cfgs/x360_usb_controller/keyboard.xml" "$home/.xbmc/userdata/keymaps"
 
 	# patch XBMC <- this will probably be removed, standard install for now
 	# rrs_xbmc_patched
