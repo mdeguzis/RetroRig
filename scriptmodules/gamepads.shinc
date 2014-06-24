@@ -325,6 +325,9 @@ function gp_x360_wireless()
 	#update init scripts for xboxdrv
 	update-rc.d xboxdrv defaults
 
+	# start service now
+	service xboxdrv restart
+
 	# replace specific user paths that emulators and files may use
 	h_emu_user_fixes
 
@@ -400,6 +403,9 @@ function gp_x360_usb()
 
 	#update init scripts for xboxdrv
 	update-rc.d xboxdrv defaults
+
+	# start service now
+	service xboxdrv restart
 
 	# replace specific user paths that emulators and files may use
 	h_emu_user_fixes
