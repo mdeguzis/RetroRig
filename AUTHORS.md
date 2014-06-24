@@ -1,6 +1,6 @@
-###############################
-#RetroRig Authors List
-###############################
+***
+### RetroRig Authors List
+***
 
 **Michael DeGuzis**, 
    - aka "ProfessorKaos64", "pk"
