@@ -137,7 +137,7 @@ function rrs_gamepad (){
 cmd=(dialog --backtitle "LibreGeek.org RetroRig Installer" --menu "| Gamepad Select | \
 			 Request any new Gamepads via github!" 16 62 16)
 options=(1 "Xbox 360 Controller (wireless)"
-	 2 "Xbox 360 Controller (wireless)"
+	 2 "Xbox 360 Controller (wired)"
 	 3 "Sony PS3 Sixaxis (Bluetooth)"
 	 4 "Exit gamepad selection")
 
