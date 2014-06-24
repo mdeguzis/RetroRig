@@ -112,14 +112,4 @@ emulator binaries, and also a way to pull the latest files from github.
 This project is not yet complete! Project notes and guide will be hosted at 
 www.libregeek.org at some point in the near future.
 
-## A big thanks goes out to
-
-<b>Software binaries:</b>  
-The authors of XBMC, Rom Collection Browser, and the various emulators in use here.  
-
-<b>Help and Configuration </b>  
-The great folks of #linuxactionshow (Geekshed IRC)  
-All the members of #bash (freenode.net IRC)  
-All the members of /r/LinuxActionShow  
-
 # EOF #
