@@ -1,10 +1,10 @@
 [Desktop Entry]
 Version=1.0
-Name=XBMC RetroRig (Custom)
-GenericName=Media Center
-Comment=Manage and view your media
+Name=RetroRig
+GenericName=RetroRig Project
+Comment=RetroRig Project Desktop launcher
 Exec=/usr/share/applications/startXBMC.sh
-Icon=xbmc
+Icon=$HOME/Pictures/retro-icon.png
 Terminal=true
 Type=Application
 Categories=AudioVideo;Video;Player;TV;
