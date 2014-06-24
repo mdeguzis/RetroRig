@@ -294,8 +294,10 @@ function rrs_xbmc_patched()
 	cp -v "$rootdir/XBMC-cfgs/extra/rescan" "/etc/init.d"
 	# fix their permissions
 	chmod +x "/usr/share/applications/gp_autodetect_xbmc.sh" 
-	chmod +x "/usr/share/applications/startXBMC.sh" 
 	chmod +x "$home/.config/autostart/xbmc.desktop"
+	chmod +x "/usr/share/applications/xbmc.desktop"
+	chmod +x "/usr/share/applications/startXBMC.sh" 
+
 	chmod +x "/etc/init.d/rescan"  
 
 	# update init scripts
