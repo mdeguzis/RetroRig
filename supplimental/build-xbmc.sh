@@ -155,9 +155,17 @@ echo "##########################################"
 
 cp xbmc-bin_Gotham_V13.1_patched_for_RetroRig.deb ~/
 cd
-sudo apt-get remove -y xbmc-bin
+# don't remove xbmc here, since it will be done via retro rig
+# the below line is for debugging only!
+
+#sudo apt-get remove -y xbmc-bin
+
 sudo dpkg -i xbmc-bin_Gotham_V13.1_patched_for_RetroRig.deb
-sudo apt-get install -y xbmc
+
+# don't isntall xbmc here, since it will be done via retro rig
+# the below line is for debugging only!
+
+#sudo apt-get install -y xbmc
 
 ##############################
 # miscelleaneous stuff
