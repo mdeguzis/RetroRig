@@ -603,8 +603,8 @@ function h_correct_perms()
 	# This may take some time to debug, root cause maybe in an XBMC crash log
 	# help script. Change owership to root, with octal 755 (no -w-) for testing:
 
-	#sudo chmod -Rv 755 "$home/.xbmc/addons/skin.maximinimalism"
-	#sudo chown -Rv root:root "$home/.xbmc/addons/skin.maximinimalism"
+	sudo chmod -Rv 755 "$home/.xbmc/addons/skin.maximinimalism"
+	sudo chown -Rv root:root "$home/.xbmc/addons/skin.maximinimalism"
 
 }
 
