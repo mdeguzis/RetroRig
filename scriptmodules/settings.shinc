@@ -147,8 +147,7 @@ options=(1 "Current Resolution"
 	 5 "1600x900  (900p)  (16:9)"
 	 6 "1920x1080 (1080p) (16:9)"
 	 7 "Custom"
-	 8 "Exit resolution selection"
-	)
+	 8 "Exit resolution selection")
 	
 # Expanding arrays involves [@] and {}
 choices=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
