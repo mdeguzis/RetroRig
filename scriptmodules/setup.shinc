@@ -12,6 +12,10 @@ function rrs_prepareFolders()
 	echo "Creating folders for ROMs, Artwork, Saves, and dotfiles"
 
 	pathlist=()
+
+	# create autostart folder for manual desktop entries
+	pathlist+=("$home/.config/autostart")
+
 	#emulator base directory
 	pathlist+=("$rootdir/emulators")
 
@@ -299,11 +303,11 @@ function rrs_xbmc_patched()
 	cp -v "$rootdir/XBMC-cfgs/extra/RetroRig.desktop" "$home/.config/autostart"
 	cp -v "$rootdir/XBMC-cfgs/extra/rescan" "/etc/init.d"
 	# fix their permissions
-	chmod +x "/usr/share/applications/gp_autodetect_xbmc.sh" 
-	chmod +x "$home/.config/autostart/RetroRig.desktop"
-	chmod +x "/usr/share/applications/RetroRig.desktop"
-	chmod +x "/usr/share/applications/startXBMC.sh" 
-	chmod +x "/etc/init.d/rescan"  
+	chmod 755 "/usr/share/applications/gp_autodetect_xbmc.sh" 
+	chmod 755 "$home/.config/autostart/RetroRig.desktop"
+	chmod 755 "/usr/share/applications/RetroRig.desktop"
+	chmod 755 "/usr/share/applications/startXBMC.sh" 
+	chmod 755 "/etc/init.d/rescan"  
 
 	# Can't use $HOME in the desktop file, so need to replace $user string
 	sed -i "s|test|$user|g" "$home/Pictures/retro-icon.png"
@@ -316,7 +320,7 @@ function rrs_xbmc_patched()
 
 	# create autostart entry, remove prior if it exists
 	rm -f "$HOME/.config/autostart/RetroRig.desktop"
-	cp -v "$rootdir/XBMC-cfgs/extra/RetroRig.desktop" "$HOME/.config/autostart"
+	cp -v "$rootdir/XBMC-cfgs/extra/RetroRig.desktop" "$home/.config/autostart"
 	# remove old xbmc-bin, install our patched version
 	apt-get remove -y xbmc-bin
 	dpkg -i "$rootdir/XBMC-cfgs/extra/xbmc-bin_Gotham_V13.1_patched_for_RetroRig.deb"
