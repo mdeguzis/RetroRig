@@ -249,7 +249,6 @@ while true; do
 		chown -R "$user" "$scriptdir/logs/install_$now.log.gz"
 		chgrp -R "$user" "$scriptdir/logs/install_$now.log.gz"
 		;;
-		;;
 
 	    2) 
 		set_menu
