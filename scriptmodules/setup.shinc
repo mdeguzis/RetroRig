@@ -1,4 +1,4 @@
-#!/bin/bash -x
+#!/bin/bash
 #
 # RetroRig setup modules
 # This is a small script to copy over configuration files for emulators

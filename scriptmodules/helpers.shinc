@@ -599,8 +599,8 @@ function h_correct_perms()
 	chgrp -R "$user" "$home/.config/autostart/RetroRig.desktop"
 	chown -R "$user" "$home/.config/autostart/RetroRig.desktop"
 
-	chgrp -R "$user" "$home/.config/autostart/startXBMC.sh.desktop"
-	chown -R "$user" "$home/.config/autostart/startXBMC.sh.desktop"
+	chgrp -R "$user" "$home/.config/autostart/startXBMC.sh"
+	chown -R "$user" "$home/.config/autostart/startXBMC.sh"
 
 	# Sometimes the custom skin reverts its files when using the PS3
 	# This may take some time to debug, root cause maybe in an XBMC crash log
