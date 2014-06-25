@@ -5,7 +5,7 @@ GenericName=RetroRig Project
 Comment=RetroRig Project Desktop launcher
 Exec=/usr/share/applications/startXBMC.sh
 Icon=/home/test/Pictures/retro-icon.png
-Terminal=true
+Terminal=false
 Type=Application
 Categories=AudioVideo;Video;Player;TV;
 
