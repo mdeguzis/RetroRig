@@ -326,7 +326,9 @@ function gp_x360_wireless()
 	update-rc.d xboxdrv defaults
 
 	# start service now
-	service xboxdrv restart
+	# For some odd reason, the restart action hangs (but does not with sixad)
+	service xboxdrv stop
+	service xboxdrv start
 
 	# replace specific user paths that emulators and files may use
 	h_emu_user_fixes
@@ -401,11 +403,13 @@ function gp_x360_usb()
 	# patch XBMC <- this will probably be removed, standard install for now
 	# rrs_xbmc_patched
 
-	#update init scripts for xboxdrv
+	# update init scripts for xboxdrv
 	update-rc.d xboxdrv defaults
 
 	# start service now
-	service xboxdrv restart
+	# For some odd reason, the restart action hangs (but does not with sixad)
+	service xboxdrv stop
+	service xboxdrv start
 
 	# replace specific user paths that emulators and files may use
 	h_emu_user_fixes
