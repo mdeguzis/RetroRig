@@ -233,6 +233,8 @@ while true; do
 	case $choices in
 
 	    1) 
+		now=$(date +'%d%m%Y_%H%M%S')
+		{
 		h_autosave_configs
 		rrs_software
 		rrs_emulators
@@ -243,6 +245,9 @@ while true; do
 		h_emu_user_fixes
 		set_resolution
 		rrs_done
+		} 2>&1 | tee >(gzip --stdout > $scriptdir/logs/install_$now.log.gz)              	
+		chown -R "$user" "$scriptdir/logs/install_$now.log.gz"
+		chgrp -R "$user" "$scriptdir/logs/install_$now.log.gz"
 		;;
 
 	    2) 
@@ -256,7 +261,7 @@ while true; do
 	    4)
 		now=$(date +'%d%m%Y_%H%M%S')
 		{
-		h_update_binaries
+		h_update_system
 		} 2>&1 | tee >(gzip --stdout > $scriptdir/logs/update_$now.log.gz)              	
 		chown -R "$user" "$scriptdir/logs/update_$now.log.gz"
 		chgrp -R "$user" "$scriptdir/logs/update_$now.log.gz"
