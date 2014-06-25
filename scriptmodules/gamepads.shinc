@@ -327,7 +327,7 @@ function gp_x360_wireless()
 
 	# start service now
 	# For some odd reason, the restart action hangs (but does not with sixad)
-	service xboxdrv stop
+	# h_clean_gampead above already stops the service, so merely starting it should suffice
 	service xboxdrv start
 
 	# replace specific user paths that emulators and files may use
@@ -408,7 +408,7 @@ function gp_x360_usb()
 
 	# start service now
 	# For some odd reason, the restart action hangs (but does not with sixad)
-	service xboxdrv stop
+	# h_clean_gampead above already stops the service, so merely starting it should suffice
 	service xboxdrv start
 
 	# replace specific user paths that emulators and files may use
