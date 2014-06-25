@@ -554,50 +554,50 @@ function h_correct_perms()
 	# and emulators function and start properly
 	
 	# mupen64plus files
-	chgrp -R "$user" "$home/.config/mupen64plus"
-     	chown -R "$user" "$home/.config/mupen64plus"
+	chgrp "$user" "$home/.config/mupen64plus"
+     	chown "$user" "$home/.config/mupen64plus"
 	# jstest-gtk files
-	chgrp -R "$user" "$home/.config/jstest-gtk"
-     	chown -R "$user" "$home/.config/jstest-gtk"
+	chgrp "$user" "$home/.config/jstest-gtk"
+     	chown "$user" "$home/.config/jstest-gtk"
 	# ppsspp files
-	chgrp -R "$user" "$home/.config/ppsspp"
-     	chown -R "$user" "$home/.config/ppsspp"
+	chgrp "$user" "$home/.config/ppsspp"
+     	chown "$user" "$home/.config/ppsspp"
 	# mame files
-	chgrp -R "$user" "$home/.mame"
-     	chown -R "$user" "$home/.mame"
+	chgrp "$user" "$home/.mame"
+     	chown "$user" "$home/.mame"
 	# mess files
-	chgrp -R "$user" "$home/.mess"
-     	chown -R "$user" "$home/.mess"
+	chgrp "$user" "$home/.mess"
+     	chown "$user" "$home/.mess"
 	# medanfen files
-	chgrp -R "$user" "$home/.mednafen"
-     	chown -R "$user" "$home/.mednafen"
+	chgrp "$user" "$home/.mednafen"
+     	chown "$user" "$home/.mednafen"
 	# qjoypad files
-	chgrp -R "$user" "$home/.qjoypad3"
-     	chown -R "$user" "$home/.qjoypad3"
+	chgrp "$user" "$home/.qjoypad3"
+     	chown "$user" "$home/.qjoypad3"
 	# qtsixa files
-	chgrp -R "$user" "$home/.qtsixa"
-     	chown -R "$user" "$home/.qtsixa"
+	chgrp "$user" "$home/.qtsixa"
+     	chown "$user" "$home/.qtsixa"
 	# stella files
-	chgrp -R "$user" "$home/.stella"
-     	chown -R "$user" "$home/.stella"
+	chgrp "$user" "$home/.stella"
+     	chown "$user" "$home/.stella"
 	# xbmc files
-	chgrp -R "$user" "$home/.xbmc"
-     	chown -R "$user" "$home/.xbmc"
+	chgrp "$user" "$home/.xbmc"
+     	chown "$user" "$home/.xbmc"
 	# qtsixa gui files
-	chgrp -R "$user" "$home/.sixemugui"
-     	chown -R "$user" "$home/.sixemugui"
+	chgrp "$user" "$home/.sixemugui"
+     	chown "$user" "$home/.sixemugui"
 	# XBMC extra filesfiles
-	chgrp -R "$user" "/usr/share/applications/gp_autodetect_xbmc.sh"
-     	chown -R "$user" "/usr/share/applications/gp_autodetect_xbmc.sh"
+	chgrp "$user" "/usr/share/applications/gp_autodetect_xbmc.sh"
+     	chown "$user" "/usr/share/applications/gp_autodetect_xbmc.sh"
 
-	chgrp -R "$user" "$home/Pictures/retro-icon.png"
-	chown -R "$user" "$home/Pictures/retro-icon.png"
+	chgrp "$user" "$home/Pictures/retro-icon.png"
+	chown "$user" "$home/Pictures/retro-icon.png"
 	
-	chgrp -R "$user" "/usr/share/applications/startXBMC.sh"
-	chown -R "$user" "/usr/share/applications/startXBMC.sh"
+	chgrp "$user" "/usr/share/applications/startXBMC.sh"
+	chown "$user" "/usr/share/applications/startXBMC.sh"
 
-	chgrp -R "$user" "$home/.config/autostart/RetroRig.desktop"
-	chown -R "$user" "$home/.config/autostart/RetroRig.desktop"
+	chgrp "$user" "$home/.config/autostart/RetroRig.desktop"
+	chown "$user" "$home/.config/autostart/RetroRig.desktop"
 
 	# Sometimes the custom skin reverts its files when using the PS3
 	# This may take some time to debug, root cause maybe in an XBMC crash log
