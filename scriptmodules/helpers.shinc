@@ -547,57 +547,62 @@ options=(1 "Neo-Geo CDZ"
 function h_correct_perms()
 {
 	# correct permissions since we use sudo
-	chgrp -R "$user" "$rootdir"
-    	chown -R "$user" "$rootdir"
+	chgrp -Rv "$user" "$rootdir"
+    	chown -Rv "$user" "$rootdir"
 
 	# replace "test" username in config files here to ensure games
 	# and emulators function and start properly
 	
 	# mupen64plus files
-	chgrp "$user" "$home/.config/mupen64plus"
-     	chown "$user" "$home/.config/mupen64plus"
+	chgrp -Rv "$user" "$home/.config/mupen64plus"
+     	chown -Rv "$user" "$home/.config/mupen64plus"
 	# jstest-gtk files
-	chgrp "$user" "$home/.config/jstest-gtk"
-     	chown "$user" "$home/.config/jstest-gtk"
+	chgrp -Rv "$user" "$home/.config/jstest-gtk"
+     	chown -Rv "$user" "$home/.config/jstest-gtk"
 	# ppsspp files
-	chgrp "$user" "$home/.config/ppsspp"
-     	chown "$user" "$home/.config/ppsspp"
+	chgrp -Rv "$user" "$home/.config/ppsspp"
+     	chown -Rv "$user" "$home/.config/ppsspp"
 	# mame files
-	chgrp "$user" "$home/.mame"
-     	chown "$user" "$home/.mame"
+	chgrp -Rv "$user" "$home/.mame"
+     	chown -Rv "$user" "$home/.mame"
 	# mess files
-	chgrp "$user" "$home/.mess"
-     	chown "$user" "$home/.mess"
+	chgrp -Rv "$user" "$home/.mess"
+     	chown -Rv "$user" "$home/.mess"
 	# medanfen files
-	chgrp "$user" "$home/.mednafen"
-     	chown "$user" "$home/.mednafen"
+	chgrp -Rv "$user" "$home/.mednafen"
+     	chown -Rv "$user" "$home/.mednafen"
 	# qjoypad files
-	chgrp "$user" "$home/.qjoypad3"
-     	chown "$user" "$home/.qjoypad3"
+	chgrp -Rv "$user" "$home/.qjoypad3"
+     	chown -Rv "$user" "$home/.qjoypad3"
 	# qtsixa files
-	chgrp "$user" "$home/.qtsixa"
-     	chown "$user" "$home/.qtsixa"
+	chgrp -Rv "$user" "$home/.qtsixa"
+     	chown -Rv "$user" "$home/.qtsixa"
 	# stella files
-	chgrp "$user" "$home/.stella"
-     	chown "$user" "$home/.stella"
+	chgrp -Rv "$user" "$home/.stella"
+     	chown -Rv "$user" "$home/.stella"
 	# xbmc files
-	chgrp "$user" "$home/.xbmc"
-     	chown "$user" "$home/.xbmc"
+	chgrp -Rv "$user" "$home/.xbmc"
+     	chown -Rv "$user" "$home/.xbmc"
 	# qtsixa gui files
-	chgrp "$user" "$home/.sixemugui"
-     	chown "$user" "$home/.sixemugui"
+	chgrp -Rv "$user" "$home/.sixemugui"
+     	chown -Rv "$user" "$home/.sixemugui"
 	# XBMC extra filesfiles
-	chgrp "$user" "/usr/share/applications/gp_autodetect_xbmc.sh"
-     	chown "$user" "/usr/share/applications/gp_autodetect_xbmc.sh"
+	chgrp -Rv "$user" "/usr/share/applications/gp_autodetect_xbmc.sh"
+     	chown -Rv "$user" "/usr/share/applications/gp_autodetect_xbmc.sh"
 
-	chgrp "$user" "$home/Pictures/retro-icon.png"
-	chown "$user" "$home/Pictures/retro-icon.png"
+	chgrp -Rv "$user" "$home/Pictures/retro-icon.png"
+	chown -Rv "$user" "$home/Pictures/retro-icon.png"
 	
-	chgrp "$user" "/usr/share/applications/startXBMC.sh"
-	chown "$user" "/usr/share/applications/startXBMC.sh"
+	chgrp -Rv "$user" "/usr/share/applications/startXBMC.sh"
+	chown -Rv "$user" "/usr/share/applications/startXBMC.sh"
 
-	chgrp "$user" "$home/.config/autostart/RetroRig.desktop"
-	chown "$user" "$home/.config/autostart/RetroRig.desktop"
+	chgrp -Rv "$user" "$home/.config/autostart/RetroRig.desktop"
+	chown -Rv "$user" "$home/.config/autostart/RetroRig.desktop"
+
+	chgrp -Rv "$user" "$home/.config/autostart/qjoypad.desktop"
+	chown -Rv "$user" "$home/.config/autostart/qjoypad.desktop"
+
+	
 
 	# Sometimes the custom skin reverts its files when using the PS3
 	# This may take some time to debug, root cause maybe in an XBMC crash log

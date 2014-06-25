@@ -66,7 +66,7 @@ function gp_ps3_blu_main()
 	#set qjoypad's profile to match Xbox 360 Wireless (4-player)
 	cp -v "$rootdir/gamepad-cfgs/ps3_blu_controller/ps3_sixaxis_blu.lyt" "$home/.qjoypad3"
 	#copy qjoypad autostart item for x360_controller gamepad config
-	cp -v "$rootdir/gamepad-cfgs/ps3_blu_controller/qjoypad.desktop" "/etc/xdg/autostart/"
+	cp -v "$rootdir/gamepad-cfgs/ps3_blu_controller/qjoypad.desktop" "$home/.config/autostart"
 	
 	#blacklist xpad
 	cp -v "$rootdir/init-scripts/ps3_blu_controller/blacklist.conf" "/etc/modprobe.d/"
@@ -306,7 +306,7 @@ function gp_x360_wireless()
 	#set qjoypad's profile to match Xbox 360 Wireless (4-player)
 	cp -v "$rootdir/gamepad-cfgs/x360_controller/x360_controller.lyt" "$home/.qjoypad3"
 	#copy qjoypad autostart item for x360_controller gamepad config
-	cp -v "$rootdir/gamepad-cfgs/x360_controller/qjoypad.desktop" "/etc/xdg/autostart/"
+	cp -v "$rootdir/gamepad-cfgs/x360_controller/qjoypad.desktop" "$home/.config/autostart"
 	
 	#blacklist xpad
 	cp -v "$rootdir/init-scripts/x360_controller/blacklist.conf" "/etc/modprobe.d/"
@@ -387,7 +387,7 @@ function gp_x360_usb()
 	#set qjoypad's profile to match Xbox 360 Wireless (4-player)
 	cp -v "$rootdir/gamepad-cfgs/x360_usb_controller/x360_usb_controller.lyt" "$home/.qjoypad3"
 	#copy qjoypad autostart item for x360_usb_controller gamepad config
-	cp -v "$rootdir/gamepad-cfgs/x360_usb_controller/qjoypad.desktop" "/etc/xdg/autostart/"
+	cp -v "$rootdir/gamepad-cfgs/x360_usb_controller/qjoypad.desktop" "$home/.config/autostart"
 	
 	#blacklist xpad
 	cp -v "$rootdir/init-scripts/x360_usb_controller/blacklist.conf" "/etc/modprobe.d/"
