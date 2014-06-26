@@ -340,7 +340,6 @@ function gp_x360_wireless()
 	dialog --msgbox "Please reboot to enable the controller."  5 43
 }
 
-
 function gp_x360_usb()
 {
 
