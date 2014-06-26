@@ -8,8 +8,6 @@
 # You can also reach me on twitter: @N3RD42
 #
 
-# TESTING IRC BOT WITH THIS MESSAGE! TEST #2
-
 clear
 #set up errmsgs and postmsgs
 __ERRMSGS=""
