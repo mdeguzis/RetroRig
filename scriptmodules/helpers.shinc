@@ -550,6 +550,11 @@ function h_correct_perms()
 	chgrp -Rv "$user" "$rootdir"
     	chown -Rv "$user" "$rootdir"
 
+	# correct the desktop so we can add our own launcher
+	chmod +x "$home/Desktop/*.desktop"
+	chown -Rv $user "$home/Desktop/*.desktop"
+	chgrp -Rv $user "$home/Desktop/*.desktop"
+
 	# replace "test" username in config files here to ensure games
 	# and emulators function and start properly
 	

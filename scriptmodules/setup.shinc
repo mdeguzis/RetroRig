@@ -113,6 +113,9 @@ export DISPLAY=:0.0
 gsettings set org.gnome.desktop.screensaver lock-enabled false
 gsettings set org.gnome.desktop.screensaver ubuntu-lock-on-suspend false
 gsettings set org.gnome.desktop.session idle-delay 3600
+
+gsettings set com.canonical.Unity.Launcher favorites "$(gsettings get com.canonical.Unity.Launcher favorites | sed "s/, *'RetroRig.desktop' *//g" | sed "s/'RetroRig.desktop' *, *//g" | sed -e "s/]$/, 'RetroRig.desktop']/")"
+
 }
 
 function rrs_xbmc ()
@@ -298,6 +301,7 @@ function rrs_xbmc_patched()
 	# Custom script for reboots/hotplugging
 	cp -v "$rootdir/XBMC-cfgs/extra/gp_autodetect_xbmc.sh" "/usr/share/applications/"
 	cp -v "$rootdir/XBMC-cfgs/extra/RetroRig.desktop" "/usr/share/applications/"
+	cp -v "$rootdir/XBMC-cfgs/extra/RetroRig.desktop" "$home/Desktop"
 	cp -v "$rootdir/XBMC-cfgs/extra/retro-icon.png" "$home/Pictures"
 	cp -v "$rootdir/XBMC-cfgs/extra/startXBMC.sh" "/usr/share/applications/"
 	cp -v "$rootdir/XBMC-cfgs/extra/RetroRig.desktop" "$home/.config/autostart"
@@ -367,7 +371,7 @@ function rrs_debug()
 
 	# Source built / pre-built
 	h_filechecker "$rootdir/emulators/PPSSPP/ppsspp-0.9.8-SDL-pk64"
-	h_filechecker "/ust/bir/PPSSPPSDL"
+	h_filechecker "/ust/bin/PPSSPPSDL"
 
 	#APT pkg checks
 	echo -e "\nCheck for needed pkgs installed via apt: " >> "$rootdir/logs/debug.log"

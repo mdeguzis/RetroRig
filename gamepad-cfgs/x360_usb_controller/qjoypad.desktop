@@ -2,7 +2,7 @@
 Version=1.0
 Name=qjoypad autostart
 Comment=Bolt on for added gamepad functions 
-Exec=qjoypad "x360_usb_controller.lyt"
+Exec=qjoypad "x360_usb_controller"
 Icon=
 Terminal=false
 Type=Application

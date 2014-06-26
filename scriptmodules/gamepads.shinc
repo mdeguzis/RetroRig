@@ -337,6 +337,7 @@ function gp_x360_wireless()
 	h_correct_perms
 }
 
+
 function gp_x360_usb()
 {
 
@@ -413,6 +414,10 @@ function gp_x360_usb()
 
 	# replace specific user paths that emulators and files may use
 	h_emu_user_fixes
+
+	# Let the user know about LED's
+	dialog --msgbox "Using wired controllers, the pairing is in sequence. If you \
+received the wrong LED, unplug and plug the USB cable back in until you get the correct LED number"  10 40
 
 	#fix permissions since we are running as sudo
 	h_correct_perms
