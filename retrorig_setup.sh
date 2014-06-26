@@ -285,7 +285,7 @@ while true; do
 		{
 		cfg_uninstall
 		} 2>&1 | tee >(gzip --stdout > "$scriptdir/logs/uninstall_$now.log.gz")               	
-		chown -R "$user "$scriptdir/logs/uninstall_$now.log.gz"
+		chown -R "$user" "$scriptdir/logs/uninstall_$now.log.gz"
 		chgrp -R "$user "$scriptdir/logs/uninstall_$now.log.gz"
 		;;
 
