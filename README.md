@@ -6,13 +6,17 @@ RetroRig Project for Ubuntu 14.04 LTS
 RetroRig is shell script to setup a Linux x86_64 system  with several emulators, and XBMC as graphical
 front end.The inspiration for doing this lies almost completely with the RetroPie Project. I wanted to provide
 something similar, but with XBMC, x86_64, and my favorite interface, "Rom Collection Browser."
-This project is intended to be run on Ubuntu (currently 14.04 LTS) with an wireless Xbox 360 Controller.
-At some point in the future, I want to try and branch this to other distributions if possible, as well
-as accomodate other controllers. Please see the release-roadmap file for ideas and future plans.
+This project is intended to be run on Ubuntu (currently 14.04 LTS) a gamepad / controller.
+At some point in the future, I want to try and branch this to other distributions if possible. 
+Please see the release-roadmap file for ideas and future plans.
 
 I invite you to challenge the configs and scripts to help improve my ultimate goal to provide
 an easy way to get up and running with RetroGaming on x86_64 Linux systems. Pull requests or
-Issues are very much welcome!
+Issues are very much welcome! Please see the AUTHORS file in the root directory for all the awesome people
+that contribute to this project.
+
+You can follow RetroRig's development by staring the github.com page, or by joining the IRC channel `#retrorig-dev`
+located under the irc.freenode.net network. The main op is me "ProfessorKaos64".
 
 **Please be advised:**      
 RetroRig requires sudo access to inject the xboxdrv 
@@ -26,31 +30,30 @@ Thank you for your patience.
 [![ScreenShot](http://i.imgur.com/bkSJfPJ.jpg)](http://youtu.be/W2diF4EJBU4)
 ## Warning
 
-RetroRig is meant to be a standalone setup for XBMC on Ubuntu.
+RetroRig is meant to be a standalone setup for XBMC on Ubuntu. Soon, RetorRig will use it's own dotfile.
 It is mainly targeted at folks wishing to repurpose an old physical PC. VirtualBox support exists, 
 (to an extent), but can behave erratcially with emulator speed/framerates and is not advised. I do
 hope to corrrect some of that in due time, but right now, it is more of an "extra" or a "test bed."
 
-It will overwrite some folders for supported 
-emulators and a few system files. Please see the 
-wiki entries under "Installation," and "Advanced Configuration."
+It will overwrite some folders for supported emulators and a few system files. Please see the 
+wiki entries under "Installation," and "Advanced Configuration," or checkout the source code.
 
 ## Some current features include
 
 For all other features and future plans, please see the [wiki](https://github.com/ProfessorKaos64/RetroRig/wiki/Features)
 
+* Custom XBMC home screen and button layout
 * Auto-install software, emulator configs, and required components
 * Many supported consoles (more added frequently)
 * Gamepad select menu
-* Resolution presets/custom selection for emulators that support it
 * Preset Controller mappings for supported gamepads
+* Resolution presets/custom selection for emulators that support it
 * Save state, load state, exit emulators with gamepad
 * A cobbled together "first run" state of RCB with a blank games database and pre-set configs
 * Functions to update git repo, emulator binaries, upgrade system and more
 * Automatically start XBMC, then directly into RCB itself (option to boot to XBMC session in settings menu)
 * ROM pre-loader
 * BIOS pre-loader
-* A super lame logo on startup!
 * Modular design for expandability
 * Unity configuration set during config-setup to lengthen screen timeout + remove screen lock
 * Uninstall option
@@ -69,7 +72,6 @@ forum documentation. Yes, I could have used many other distributions, but Ubuntu
 and is a hot target for many folks. Arch Linux, or Debian Testing were other considerations. Of course,
 there are many pro's and con's to using Ubuntu, all of which are understandable. You can't appease
 everyone!
-
 
 ## Wiki
 
@@ -96,9 +98,10 @@ To clone this repo via the CLI:
 `git clone https://github.com/ProfessorKaos64/RetroRig`
 
 To intstall:
-
-    cd RetroRig  
-    sudo ./retrorig_setup.sh
+````
+cd RetroRig  
+sudo ./retrorig_setup.sh
+````
 
 You can also download a zip file or by other means on the github page.
 
