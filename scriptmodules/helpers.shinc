@@ -607,9 +607,7 @@ function h_correct_perms()
 	chgrp -Rv "$user" "$home/.config/autostart/qjoypad.desktop"
 	chown -Rv "$user" "$home/.config/autostart/qjoypad.desktop"
 
-	
-
-	# Sometimes the custom skin reverts its files when using the PS3
+	# Sometimes the custom skin reverts its files we modify
 	# This may take some time to debug, root cause maybe in an XBMC crash log
 	# help script. Change owership to root, with octal 755 (no -w-) for testing:
 	# This only needs done, and should be done for the 2 files we modify:
