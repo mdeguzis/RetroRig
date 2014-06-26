@@ -612,10 +612,10 @@ function h_correct_perms()
 	# Sometimes the custom skin reverts its files when using the PS3
 	# This may take some time to debug, root cause maybe in an XBMC crash log
 	# help script. Change owership to root, with octal 755 (no -w-) for testing:
+	# This only needs done, and should be done for the 2 files we modify:
 
-	sudo chmod -Rv 755 "$home/.xbmc/addons/skin.maximinimalism"
-	sudo chown -Rv root:root "$home/.xbmc/addons/skin.maximinimalism"
-
+	chown -v root:root "$home/.xbmc/addons/skin.maximinimalism/1080i/Home.xml"
+	chown -v root:root "$home/.xbmc/addons/skin.maximinimalism/extras/backgrounds/background001.jpg"
 }
 
 function h_emu_user_fixes()
