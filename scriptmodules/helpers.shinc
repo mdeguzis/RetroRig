@@ -551,9 +551,9 @@ function h_correct_perms()
     	chown -Rv "$user" "$rootdir"
 
 	# correct the desktop so we can add our own launcher
-	chmod +x "$home/Desktop/*.desktop"
-	chown -Rv $user "$home/Desktop/*.desktop"
-	chgrp -Rv $user "$home/Desktop/*.desktop"
+	chmod -Rv 755 "$home/Desktop"
+	chown -Rv "$user" "$home/Desktop"
+	chgrp -Rv "$user" "$home/Desktop"
 
 	# replace "test" username in config files here to ensure games
 	# and emulators function and start properly
@@ -614,6 +614,8 @@ function h_correct_perms()
 
 	chown -v root:root "$home/.xbmc/addons/skin.maximinimalism/1080i/Home.xml"
 	chown -v root:root "$home/.xbmc/addons/skin.maximinimalism/extras/backgrounds/background001.jpg"
+	chmod 744 "$home/.xbmc/addons/skin.maximinimalism/extras/backgrounds/background001.jpg"
+	chmod 744 "$home/.xbmc/addons/skin.maximinimalism/extras/backgrounds/background001.jpg"
 }
 
 function h_emu_user_fixes()
