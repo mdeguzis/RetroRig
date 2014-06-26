@@ -239,11 +239,11 @@ while true; do
 		rrs_prepareFolders
 		rrs_software
 		rrs_emulators
-		rrs_unity
 		rrs_xbmc
 		rrs_gamepad
 		h_emu_user_fixes
 		set_resolution
+		rrs_unity
 		rrs_done
 		} 2>&1 | tee >(gzip --stdout > $scriptdir/logs/install_$now.log.gz)              	
 		chown -R "$user" "$scriptdir/logs/install_$now.log.gz"
