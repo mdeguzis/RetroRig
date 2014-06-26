@@ -84,9 +84,6 @@ h_autosave_configs()
 	# correct permissions after tar archive is created
 	h_correct_perms
 
-	# inform user <- should the user be bothered each time?
-	#dialog --msgbox "All existing configs appended with .old" 5 43
-
 }
 
 

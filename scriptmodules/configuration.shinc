@@ -143,8 +143,6 @@ dialog --title "Confirm yes/no" \
 	# edits the single configuration file.
 
 	sed -i "s|$session_org|$session_new|g" "/usr/share/lightdm/lightdm.conf.d/50-ubuntu.conf"
-	# correct permissions
-	h_correct_perms
 	;;
 
 	255)
@@ -195,6 +193,9 @@ rm -rf "$rootdir"
 #update Ubuntu repository listings
 apt-get update
 sleep 2s
+
+# correct permissions
+h_correct_perms
 
 # call reboot
 rrs_reboot
