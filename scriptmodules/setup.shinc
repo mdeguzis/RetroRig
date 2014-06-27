@@ -307,7 +307,14 @@ function rrs_xbmc_patched()
 	cp -v "$rootdir/XBMC-cfgs/extra/retro-icon.png" "$home/Pictures"
 	cp -v "$rootdir/XBMC-cfgs/extra/startXBMC.sh" "/usr/share/applications/"
 	cp -v "$rootdir/XBMC-cfgs/extra/RetroRig.desktop" "$home/.config/autostart"
-	cp -v "$rootdir/XBMC-cfgs/extra/rescan" "/etc/init.d"
+
+        #get SHA1 tag from patched XBMC version
+        sha1=`file /usr/lib/xbmc/xbmc.bin | cut -f 19 -d ' '| cut -f 2 -d '='|cut -f 1 -d ','`
+        #insert SHA1 tag to rescan by replacing the place holder
+        cat "$rootdir/XBMC-cfgs/extra/rescan" | sed s/placeholderSHA1/$SHA1/ > /tmp/rescan
+        # move to /etc/init.d
+	mv "/tmp/rescan" "/etc/init.d/rescan"
+
 	# fix their permissions
 	chmod 755 "/usr/share/applications/gp_autodetect_xbmc.sh" 
 	chmod 755 "$home/.config/autostart/RetroRig.desktop"
