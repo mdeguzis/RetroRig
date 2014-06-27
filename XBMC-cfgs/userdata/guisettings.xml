@@ -61,7 +61,7 @@
     <epg>
         <daystodisplay default="true">3</daystodisplay>
         <defaultguideview default="true">3</defaultguideview>
-        <epgupdate default="false">120</epgupdate>
+        <epgupdate default="true">120</epgupdate>
         <hidenoinfoavailable default="true">true</hidenoinfoavailable>
         <ignoredbforclient default="true">false</ignoredbforclient>
         <preventupdateswhileplayingtv default="true">false</preventupdateswhileplayingtv>
@@ -76,11 +76,11 @@
         <showparentdiritems default="true">true</showparentdiritems>
     </filelists>
     <general>
-        <addonautoupdate default="false">false</addonautoupdate>
-        <addonforeignfilter default="false">false</addonforeignfilter>
-        <addonnotifications default="false">false</addonnotifications>
+        <addonautoupdate>false</addonautoupdate>
+        <addonforeignfilter default="true">false</addonforeignfilter>
+        <addonnotifications>false</addonnotifications>
         <settinglevel>1</settinglevel>
-        <systemtotaluptime>1</systemtotaluptime>
+        <systemtotaluptime>5</systemtotaluptime>
     </general>
     <input>
         <enablejoystick>true</enablejoystick>
@@ -390,7 +390,18 @@
         <setting type="bool" name="skin.confluence.rcb_disableRomcollections">false</setting>
         <setting type="bool" name="skin.confluence.rcb_overwriteImportOptions">false</setting>
         <setting type="bool" name="skin.confluence.AutoScroll">false</setting>
-        <setting type="bool" name="skin.confluence.FirstTimeRun">true</setting> 
+        <setting type="bool" name="skin.confluence.FirstTimeRun">true</setting>
+        <setting type="bool" name="skin.maximinimalism.DebugGrid">false</setting>
+        <setting type="bool" name="skin.maximinimalism.DebugInfo">false</setting>
+        <setting type="bool" name="skin.maximinimalism.useGlobalFanartBackground">false</setting>
+        <setting type="bool" name="skin.maximinimalism.hideVideo">false</setting>
+        <setting type="bool" name="skin.maximinimalism.stopVideoOnMenu">false</setting>
+        <setting type="bool" name="skin.maximinimalism.exitFirst">false</setting>
+        <setting type="bool" name="skin.maximinimalism.rcb_disableRomcollections">false</setting>
+        <setting type="bool" name="skin.maximinimalism.rcb_overwriteImportOptions">false</setting>
+        <setting type="string" name="skin.maximinimalism.globalBackground"></setting>
+        <setting type="string" name="skin.maximinimalism.videoFanartLocation"></setting>
+        <setting type="string" name="skin.maximinimalism.musicFanartLocation"></setting>
     </skinsettings>
     <resolutions />
     <defaultvideosettings>
