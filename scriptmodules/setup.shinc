@@ -327,8 +327,16 @@ function rrs_xbmc_patched()
 	cp -v "$rootdir/XBMC-cfgs/extra/RetroRig.desktop" "$home/.config/autostart"
 	# remove old xbmc-bin, install our patched version
 	apt-get remove -y xbmc-bin
-	dpkg -i "$rootdir/XBMC-cfgs/extra/xbmc-bin_Gotham_V13.1_patched_for_RetroRig.deb"
+
+	# copy down the patched deb from libregeek (saves on space, dl speed is adaquate for now)
+	wget -P /tmp "www.libregeek.org/RetroRig/xbmc-bin_Gotham_V13.1_patched_for_RetroRig.deb"
+
+	# install deb from /tmp
+	dpkg -i "/tmp/xbmc-bin_Gotham_V13.1_patched_for_RetroRig.deb"
 	apt-get install -y xbmc wmctrl
+
+	# cleaup deb
+	rm -f "/tmp/xbmc-bin_Gotham_V13.1_patched_for_RetroRig.deb"
 }
 
 function rrs_done()

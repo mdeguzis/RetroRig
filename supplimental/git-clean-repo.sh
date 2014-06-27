@@ -105,7 +105,12 @@ git gc --aggressive --prune=now
 #Now we need to push the changes back to the remote
 #repository, so that nobody else will suffer the pain of a 180MB download.
 
-git push origin master --force
+# added by me, pk 
+# manually commit for safety
+
+echo "Please now add, commit, and push these changes or discard them"
+sleep 5s
+clear
 
 #################################
 #End prune/removal code
