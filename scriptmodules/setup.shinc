@@ -140,6 +140,8 @@ function rrs_xbmc ()
 
 function rrs_gamepad (){
 
+# some residual chown/chmod text shows up at times, clear
+clear
 
 cmd=(dialog --backtitle "LibreGeek.org RetroRig Installer" --menu "| Gamepad Select | \
 			 Request any new Gamepads via github!" 16 62 16)
