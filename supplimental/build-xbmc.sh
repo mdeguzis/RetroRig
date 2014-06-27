@@ -113,24 +113,22 @@ cd xbmc
 git checkout 13.1-Gotham
 git pull
 ./bootstrap
-./configure
+./configure --disable-debug --prefix=/usr
 echo "Making current pkg"
 make
 
-# copy the patch to from the RetroRig root DIR: 'XBMC-cfgs/extra/SDLJoystick.cpp' to '~/xbmc/xbmc/input/SDLJoystick.cpp' 
-# Interactive mode to confirm action is valid
-
 echo ""
 echo "##########################################"
-echo "Patching"
+echo "Applying patches to xbmc"
 echo "##########################################"
-
-# The below manual patch is now deprecated in favor of a proper patch file from JC
-# sudo cp -v $HOME/RetroRig/XBMC-cfgs/extra/SDLJoystick.cpp $HOME/xbmc/xbmc/input/SDLJoystick.cpp
-
-# Patching SDLJoystick.cpp
+ 
+#restore baselined versions
 git checkout xbmc/input/SDLJoystick.cpp
-patch "$HOME/xbmc/xbmc/input/SDLJoystick.cpp" < "$HOME/RetroRig/XBMC-cfgs/extra/xbmc_input_SDLJoystick.cpp_-13.1-Gotham-_SIGUSR1_interrupt.patch"
+git checkout xbmc/Application.cpp  
+git checkout xbmc/AppParamParser.cpp
+#patch
+patch xbmc/Application.cpp < $HOME/RetroRig/XBMC-cfgs/extra/xbmc_Application.cpp_-13.1-Gotham-interrupt_handler_for_SIGUSR1.patch
+patch xbmc/AppParamParser.cpp < $HOME/RetroRig/XBMC-cfgs/extra/xbmc_AppParamParser.cpp_-13.1-Gotham-version_disply_shows_RetroRig_patch.patch
 make
 
 # strip out the bin executable
