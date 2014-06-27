@@ -76,7 +76,7 @@
         <showparentdiritems default="true">true</showparentdiritems>
     </filelists>
     <general>
-        <addonautoupdate default="true">true</addonautoupdate>
+        <addonautoupdate default="false">true</addonautoupdate>
         <addonforeignfilter default="true">false</addonforeignfilter>
         <addonnotifications default="true">true</addonnotifications>
         <settinglevel>1</settinglevel>
