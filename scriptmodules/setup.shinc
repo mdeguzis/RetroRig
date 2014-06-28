@@ -258,7 +258,7 @@ function rrs_software() {
 	# install binaries
 	apt-get install -y xboxdrv curl python-software-properties \
 	pkg-config software-properties-common dconf-tools jstest-gtk \
-	qjoypad xbmc build-essential sixad libusb-dev libusb-0.1-4
+	qjoypad build-essential sixad libusb-dev libusb-0.1-4
 
 	# call RetroRig's custom deb install for ps3 hotplugging. 
 	# Thankfully our package still works with the Xbox 360 implementation,
@@ -295,7 +295,6 @@ See debug.log for more details. Continuing on to emulator installs..." 18 60
 	#END
 }
 
-
 function rrs_xbmc_patched()
 {
 
@@ -307,13 +306,6 @@ function rrs_xbmc_patched()
 	cp -v "$rootdir/XBMC-cfgs/extra/retro-icon.png" "$home/Pictures"
 	cp -v "$rootdir/XBMC-cfgs/extra/startXBMC.sh" "/usr/share/applications/"
 	cp -v "$rootdir/XBMC-cfgs/extra/RetroRig.desktop" "$home/.config/autostart"
-
-        #get SHA1 tag from patched XBMC version
-        sha1=`file /usr/lib/xbmc/xbmc.bin | cut -f 19 -d ' '| cut -f 2 -d '='|cut -f 1 -d ','`
-        #insert SHA1 tag to rescan by replacing the place holder
-        cat "$rootdir/XBMC-cfgs/extra/rescan" | sed s/placeholderSHA1/$sha1/ > /tmp/rescan
-        # move to /etc/init.d
-	mv "/tmp/rescan" "/etc/init.d/rescan"
 
 	# fix their permissions
 	chmod 755 "/usr/share/applications/gp_autodetect_xbmc.sh" 
@@ -335,17 +327,25 @@ function rrs_xbmc_patched()
 	rm -f "$HOME/.config/autostart/RetroRig.desktop"
 	cp -v "$rootdir/XBMC-cfgs/extra/RetroRig.desktop" "$home/.config/autostart"
 	# remove old xbmc-bin, install our patched version
-	apt-get remove -y xbmc-bin
+	apt-get remove -y xbmc xbmc-bin
 
 	# copy down the patched deb from libregeek (saves on space, dl speed is adaquate for now)
 	wget -P /tmp "www.libregeek.org/RetroRig/xbmc-bin_Gotham_V13.1_patched_for_RetroRig.deb"
 
 	# install deb from /tmp
 	dpkg -i "/tmp/xbmc-bin_Gotham_V13.1_patched_for_RetroRig.deb"
-	apt-get install -y xbmc wmctrl
+        apt-get install -y xbmc
+        apt-get install -y wmctrl
 
 	# cleaup deb
 	rm -f "/tmp/xbmc-bin_Gotham_V13.1_patched_for_RetroRig.deb"
+
+        #get SHA1 tag from patched XBMC version
+        sha1=`file /usr/lib/xbmc/xbmc.bin | cut -f 19 -d ' '| cut -f 2 -d '='|cut -f 1 -d ','`
+        #insert SHA1 tag to rescan by replacing the place holder
+        cat "$rootdir/XBMC-cfgs/extra/rescan" | sed s/placeholderSHA1/$sha1/ > /tmp/rescan
+        # move to /etc/init.d
+	mv "/tmp/rescan" "/etc/init.d/rescan"
 }
 
 function rrs_done()
