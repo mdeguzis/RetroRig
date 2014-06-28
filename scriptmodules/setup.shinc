@@ -312,20 +312,15 @@ function rrs_xbmc_patched()
 	chmod 755 "$home/.config/autostart/RetroRig.desktop"
 	chmod 755 "/usr/share/applications/RetroRig.desktop"
 	chmod 755 "/usr/share/applications/startXBMC.sh" 
-	chmod 755 "/etc/init.d/rescan"  
+	
 
 	# Can't use $HOME in the desktop file, so need to replace $user string
 	sed -i "s|test|$user|g" "$home/Pictures/retro-icon.png"
 
-	# update init scripts
-	update-rc.d rescan defaults
-
-	# start service
-	service rescan start
-
 	# create autostart entry, remove prior if it exists
 	rm -f "$HOME/.config/autostart/RetroRig.desktop"
 	cp -v "$rootdir/XBMC-cfgs/extra/RetroRig.desktop" "$home/.config/autostart"
+
 	# remove old xbmc-bin, install our patched version
 	apt-get remove -y xbmc-bin
 
@@ -346,6 +341,14 @@ function rrs_xbmc_patched()
         cat "$rootdir/XBMC-cfgs/extra/rescan" | sed s/placeholderSHA1/$sha1/ > /tmp/rescan
         # move to /etc/init.d
 	mv "/tmp/rescan" "/etc/init.d/rescan"
+
+        chmod 755 "/etc/init.d/rescan"  
+
+        # update init scripts
+	update-rc.d rescan defaults
+
+	# start service
+	service rescan start
 }
 
 function rrs_done()
