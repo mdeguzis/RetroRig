@@ -15,6 +15,17 @@
 
 PATH=/bin:/usr/bin:/sbin:/usr/sbin
 DAEMON=/usr/share/applications/gp_autodetect_xbmc.sh
+SHA1=placeholderSHA1
+
+
+########################################################
+#
+# Function rescanIsRunning ()
+#
+# This function returns true (=0)
+# if the backend gp_autodetect_xbmc.sh is running.
+#
+########################################################
 
 rescanIsRunning () {
   VAR=`ps ax| grep gp_autodetect_xbmc.sh|grep /bin/bash`
@@ -26,6 +37,31 @@ rescanIsRunning () {
   fi
 }
 
+########################################################
+#
+# Function checkSHA1ofXBMC ()
+#
+# This function returns true (=0)
+# if xbmc.bin matches the SHA1 string,
+# that was inserted during RetroRig installation.
+#
+########################################################
+
+checkSHA1ofXBMC () {
+
+  VAR=`file /usr/lib/xbmc/xbmc.bin | cut -f 19 -d ' '| cut -f 2 -d '='|cut -f 1 -d ','| grep $SHA1`
+  # skip version test
+  # VAR=notEmpty
+
+  if [ -n "$VAR" ]; then
+    #"VAR is not empty"
+    return 0
+  else
+    return 1
+  fi
+}
+
+
 . /lib/lsb/init-functions
 
 case "$1" in
@@ -34,9 +70,17 @@ case "$1" in
       log_warning_msg "rescan is already running"
     else
     {
-      log_daemon_msg "Starting gp_autodetect_xbmc.sh"
-      $DAEMON &>>/var/log/rescan &
-     log_end_msg 0
+      if checkSHA1ofXBMC; then
+      {
+        log_daemon_msg "Starting gp_autodetect_xbmc.sh"
+        $DAEMON &>>/var/log/rescan &
+        log_end_msg 0
+      }
+      else
+      {
+        log_daemon_msg "Wrong version of XBMC. Daemon has not been started."
+      }
+      fi
     }
     fi
     ;;

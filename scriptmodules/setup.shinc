@@ -295,7 +295,6 @@ See debug.log for more details. Continuing on to emulator installs..." 18 60
 	#END
 }
 
-
 function rrs_xbmc_patched()
 {
 
@@ -307,26 +306,21 @@ function rrs_xbmc_patched()
 	cp -v "$rootdir/XBMC-cfgs/extra/retro-icon.png" "$home/Pictures"
 	cp -v "$rootdir/XBMC-cfgs/extra/startXBMC.sh" "/usr/share/applications/"
 	cp -v "$rootdir/XBMC-cfgs/extra/RetroRig.desktop" "$home/.config/autostart"
-	cp -v "$rootdir/XBMC-cfgs/extra/rescan" "/etc/init.d"
+
 	# fix their permissions
 	chmod 755 "/usr/share/applications/gp_autodetect_xbmc.sh" 
 	chmod 755 "$home/.config/autostart/RetroRig.desktop"
 	chmod 755 "/usr/share/applications/RetroRig.desktop"
 	chmod 755 "/usr/share/applications/startXBMC.sh" 
-	chmod 755 "/etc/init.d/rescan"  
+	
 
 	# Can't use $HOME in the desktop file, so need to replace $user string
 	sed -i "s|test|$user|g" "$home/Pictures/retro-icon.png"
 
-	# update init scripts
-	update-rc.d rescan defaults
-
-	# start service
-	service rescan start
-
 	# create autostart entry, remove prior if it exists
 	rm -f "$HOME/.config/autostart/RetroRig.desktop"
 	cp -v "$rootdir/XBMC-cfgs/extra/RetroRig.desktop" "$home/.config/autostart"
+
 	# remove old xbmc-bin, install our patched version
 	apt-get remove -y xbmc-bin
 
@@ -335,10 +329,26 @@ function rrs_xbmc_patched()
 
 	# install deb from /tmp
 	dpkg -i "/tmp/xbmc-bin_Gotham_V13.1_patched_for_RetroRig.deb"
-	apt-get install -y xbmc wmctrl
+        apt-get install -y xbmc
+        apt-get install -y wmctrl
 
 	# cleaup deb
 	rm -f "/tmp/xbmc-bin_Gotham_V13.1_patched_for_RetroRig.deb"
+
+        #get SHA1 tag from patched XBMC version
+        sha1=`file /usr/lib/xbmc/xbmc.bin | cut -f 19 -d ' '| cut -f 2 -d '='|cut -f 1 -d ','`
+        #insert SHA1 tag to rescan by replacing the place holder
+        cat "$rootdir/XBMC-cfgs/extra/rescan" | sed s/placeholderSHA1/$sha1/ > /tmp/rescan
+        # move to /etc/init.d
+	mv "/tmp/rescan" "/etc/init.d/rescan"
+
+        chmod 755 "/etc/init.d/rescan"  
+
+        # update init scripts
+	update-rc.d rescan defaults
+
+	# start service
+	service rescan start
 }
 
 function rrs_done()

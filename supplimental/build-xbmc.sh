@@ -10,7 +10,7 @@
 # './build-xbmc | tee log.txt'
 #
 # ==========================================================================
-# Author:  Jens-Christiansen, aka "beaumanvienna"
+# Author:  Jens-Christian, aka "beaumanvienna"
 # Contribitions: Michael DeGuzis, aka "ProfessorKaos64"
 # Date:    20140622
 # Version: Beta
@@ -160,7 +160,7 @@ cd
 
 sudo dpkg -i xbmc-bin_Gotham_V13.1_patched_for_RetroRig.deb
 
-# don't isntall xbmc here, since it will be done via retro rig
+# don't install xbmc here, since it will be done via retro rig
 # the below line is for debugging only!
 
 #sudo apt-get install -y xbmc
