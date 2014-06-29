@@ -6,9 +6,9 @@ RetroRig Project for Ubuntu 14.04 LTS
 RetroRig is shell script to setup a Linux x86_64 system  with several emulators, and XBMC as graphical
 front end.The inspiration for doing this lies almost completely with the RetroPie Project. I wanted to provide
 something similar, but with XBMC, x86_64, and my favorite interface, "Rom Collection Browser."
-This project is intended to be run on Ubuntu (currently 14.04 LTS) a gamepad / controller.
+This project is intended to be run on Ubuntu (currently 14.04 LTS), and a gamepad / controller.
 At some point in the future, I want to try and branch this to other distributions if possible. 
-Please see the release-roadmap file for ideas and future plans.
+Please see the features page on the wiki for ideas and future plans.
 
 I invite you to challenge the configs and scripts to help improve my ultimate goal to provide
 an easy way to get up and running with RetroGaming on x86_64 Linux systems. Pull requests or
@@ -16,7 +16,7 @@ Issues are very much welcome! Please see the AUTHORS file in the root directory 
 that contribute to this project.
 
 You can follow RetroRig's development by staring the github.com page, or by joining the IRC channel `#retrorig-dev`
-located under the irc.freenode.net network. The main op is me "ProfessorKaos64".
+located under the irc.freenode.net network. The main op is me "ProfessorKaos64". You can also follow me on twitter with the username @N3RD42
 
 **Please be advised:**      
 RetroRig requires sudo access to inject the xboxdrv 
@@ -30,7 +30,7 @@ Thank you for your patience.
 [![ScreenShot](http://i.imgur.com/bkSJfPJ.jpg)](http://youtu.be/W2diF4EJBU4)
 ## Warning
 
-RetroRig is meant to be a standalone setup for XBMC on Ubuntu. Soon, RetorRig will use it's own dotfile.
+RetroRig is meant to be a standalone setup for XBMC on Ubuntu. Soon, RetorRig will use it's own dotfile so you can continue to use your own XBMC implementation. RetroRig now makes use of a custom-patch XBMC binary file as well, so that hotplugging for support controllers is poossible.
 It is mainly targeted at folks wishing to repurpose an old physical PC. VirtualBox support exists, 
 (to an extent), but can behave erratcially with emulator speed/framerates and is not advised. I do
 hope to corrrect some of that in due time, but right now, it is more of an "extra" or a "test bed."
@@ -43,6 +43,7 @@ wiki entries under "Installation," and "Advanced Configuration," or checkout the
 For all other features and future plans, please see the [wiki](https://github.com/ProfessorKaos64/RetroRig/wiki/Features)
 
 * Custom XBMC home screen and button layout
+* Hotplugging support for supported game controllers
 * Auto-install software, emulator configs, and required components
 * Many supported consoles (more added frequently)
 * Gamepad select menu
