@@ -319,13 +319,18 @@ function rrs_xbmc_patched()
 	chmod 755 "/usr/share/applications/RetroRig.desktop"
 	chmod 755 "/usr/share/applications/startXBMC.sh" 
 	
+	# Can't use $HOME in the desktop file, so need to replace $user string
+	sed -i "s|/home/test/Pictures|$xdg_pictures_dir|g" "/usr/share/applications/RetroRig.desktop"
 
 	# Can't use $HOME in the desktop file, so need to replace $user string
-	sed -i "s|'/home/test/Pictures'|$xdg_pictures_dir|g" "$xdg_desktop_dir/RetroRig.desktop"
+	sed -i "s|/home/test/Pictures|$xdg_pictures_dir|g" "$xdg_desktop_dir/RetroRig.desktop"
 
 	# create autostart entry, remove prior if it exists
 	rm -f "$HOME/.config/autostart/RetroRig.desktop"
 	cp -v "$rootdir/XBMC-cfgs/extra/RetroRig.desktop" "$home/.config/autostart"
+
+	# Can't use $HOME in the desktop file, so need to replace $user string
+	sed -i "s|/home/test/Pictures|$xdg_pictures_dir|g" "$home/.config/autostart/RetroRig.desktop"
 
 	# remove old xbmc-bin, install our patched version
 	apt-get remove -y xbmc-bin
