@@ -44,7 +44,7 @@ function cfg_confirm()
 function cfg_uninstall() 
 {
 
-	#Confirm with user
+	#Confirm with user that they want to uninstall
 	dialog --title "Confirm yes/no" \
 	--backtitle "LibreGeek.org RetroRig Installer" \
 	--yesno "Are you SURE you want to Remove RetroRig?"  6 0
