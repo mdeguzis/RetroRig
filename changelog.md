@@ -20,7 +20,8 @@ Version 0.8.0
 * Many bug fixes
 * Larger binary files hosted at libregeek.org
 * Control/Gamepad assignement fixes (refinement over time)
-
+* XBMC skin fixes
+* Addtions to supplimental folder for building new xbmc-bin binaries
 
 Version 0.7.0
 -------------
