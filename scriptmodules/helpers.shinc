@@ -550,30 +550,13 @@ function h_correct_perms()
 	# correct the desktop permissions so we can add our own launcher
 	# This will allow permissions change for all languages. Thanks JC!
 
-	setDesktopDir=`cat ~/.config/user-dirs.dirs | grep XDG_DESKTOP_DIR| sed s/XDG_DESKTOP_DIR/xdg_desktop_dir/|sed s/HOME/home/`
- 	checkValid=`echo $setDesktopDir|grep xdg_desktop_dir=\"|grep home/`
- 
-	if [ -n "checkValid" ]; then
-		echo "checkValid is not empty"
-		eval "$setDesktopDir"
-	echo $xdg_desktop_dir
 
-	testEmpty=`ls $xdg_desktop_dir|grep .desktop`
-	if [ -n "testEmpty" ]; then
-		echo "desktop files found"
 
-		# correct the desktop so we can add our own launcher
-		chmod -Rv 755 $xdg_desktop_dir
-		chown -Rv $user $xdg_desktop_dir
-		chgrp -Rv $user $xdg_desktop_dir
-		echo "desktop permissions changed"
+	# correct the desktop so we can add our own launcher
+	chmod -Rv 755 $xdg_desktop_dir
+	chown -Rv $user $xdg_desktop_dir
+	chgrp -Rv $user $xdg_desktop_dir
 
-	fi
-	else
-
-		echo "locale desktop settings not found"
-
-	fi
 
 	# replace "test" username in config files here to ensure games
 	# and emulators function and start properly
@@ -615,8 +598,8 @@ function h_correct_perms()
 	chgrp -Rv "$user" "/usr/share/applications/gp_autodetect_xbmc.sh"
      	chown -Rv "$user" "/usr/share/applications/gp_autodetect_xbmc.sh"
 
-	chgrp -Rv "$user" "$home/Pictures/retro-icon.png"
-	chown -Rv "$user" "$home/Pictures/retro-icon.png"
+	chgrp -Rv "$user" "$xdg_pictures_dir/retro-icon.png"
+	chown -Rv "$user" "$xdg_pictures_dir/retro-icon.png"
 	
 	chgrp -Rv "$user" "/usr/share/applications/startXBMC.sh"
 	chown -Rv "$user" "/usr/share/applications/startXBMC.sh"
