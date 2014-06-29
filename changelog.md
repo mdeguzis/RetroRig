@@ -6,7 +6,7 @@ Version 0.8.0
 * Uninstall option fixes
 * New and improved logging options (xbmc logging while in RetroRig)
 * Establish beta branch
-* Cusomt/Patched version of XBMC with hotplugging gamepad support for XBMC (Thanks JC!!!)
+* Custom/Patched version of XBMC with hotplugging gamepad support for XBMC (Thanks JC!!!)
 * PS3 Controller support (bluetooth)
 * Xbox 360 Controller support (USB)
 * Additional emulator support:    
