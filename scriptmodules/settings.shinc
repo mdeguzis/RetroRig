@@ -143,7 +143,7 @@ cmd=(dialog --backtitle "RetroRig Settings" --menu "Choose your resolution" 16 0
 options=(1 "Current Resolution"
 	 2 "1280x720  (720p)  (5:4)"
 	 3 "1280x1024 (SXGA)  (5:4)"
-	 4 "1366x768  (720p)  (16:9)"
+	 4 "1360x768  (720p)  (16:9)"
 	 5 "1600x900  (900p)  (16:9)"
 	 6 "1920x1080 (1080p) (16:9)"
 	 7 "Custom"
@@ -282,31 +282,31 @@ if [ "$choices" != "" ]; then
 	4) 
 		#setting chosen: "1366x768  (720p)  (16:9)"
 		#set mupen64plus value
-		m_new_X="1366"
+		m_new_X="1360"
 		m_new_Y="768"
 		#set mednafen (GBC) value
-		gb_new_X="1366"
+		gb_new_X="1360"
 		gb_new_Y="768"
 		#set mednafen (GBA) value
-		gba_new_X="1366"
+		gba_new_X="1360"
 		gba_new_Y="768"
 		#set mednafen (NES) value
-		nes_new_X="1366"
+		nes_new_X="1360"
 		nes_new_Y="768"
 		#set mednafen (SNES) value
-		snes_new_X="1366"
+		snes_new_X="1360"
 		snes_new_Y="768"
 		#set mednafen (Sega Master System) value
-		sms_new_X="1366"
+		sms_new_X="1360"
 		sms_new_Y="768"
 		#set mednafen (Sega Game Gear) value
-		gg_new_X="1366"
+		gg_new_X="1360"
 		gg_new_Y="768"
 		#set mednafen (Turbographx 16) value
-		pce_new_X="1366"
+		pce_new_X="1360"
 		pce_new_Y="768"
 		#set stella (Atari 2600)
-		st_new="1366x768"
+		st_new="1360x768"
 		# set the resolution with helper
 		h_res_switcher
 		#return to menu

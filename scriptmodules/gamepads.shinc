@@ -168,7 +168,6 @@ function gp_ps3_blu_main()
 function ps3_pair_blu()
 {
 
-
 	#####################################
 	# Set and pair up player controller
 	#####################################
