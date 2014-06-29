@@ -26,8 +26,8 @@ available for review.
 
 Thank you for your patience.
 
-## Demo Video (Version 0.7.9, new one soon)
-[![ScreenShot](http://i.imgur.com/bkSJfPJ.jpg)](http://youtu.be/W2diF4EJBU4)
+## Demo Video (Version 0.8.0)
+[![ScreenShot](http://i.imgur.com/bkSJfPJ.jpg)](http://youtu.be/cJxhrWZDrA4)
 ## Warning
 
 RetroRig is meant to be a standalone setup for XBMC on Ubuntu. Soon, RetorRig will use it's own dotfile so you can continue to use your own XBMC implementation. RetroRig now makes use of a custom-patch XBMC binary file as well, so that hotplugging for support controllers is poossible.
