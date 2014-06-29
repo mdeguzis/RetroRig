@@ -3,7 +3,6 @@
 Joystick 1 {
 	Button 1: key 71
 	Button 2: key 74
-	Button 16: key 9
 	Button 17: key 9
 }
 
