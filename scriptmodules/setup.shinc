@@ -472,10 +472,11 @@ function rrs_prereq()
 {
     if [[ -z $(type -P git) || -z $(type -P dialog) || -z $(type -P figlet) ]]; then
 	echo ""
+	echo "######################################"
 	echo "Pre-req checks"	
 	echo "######################################"
-        echo "Did not find needed packages 'git' and/or 'dialog/figlet'. Attempting to install these now."
-	echo "######################################"
+        echo "Did not find needed packages 'git' and/or 'dialog/figlet'."
+	echo "Attempting to install these now."
 	echo ""
 	sleep 3s
         apt-get update
