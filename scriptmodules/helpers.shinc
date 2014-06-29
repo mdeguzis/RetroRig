@@ -7,6 +7,50 @@
 # You can also reach me on twitter: @N3RD42
 #
 
+h_ps3_blu_check()
+{
+
+	if [ -z 'grep "PLAYSTATION(R)3" "/proc/bus/input/devices"' ]; then
+		# not set, echo below fore TESTING ONLY!!!
+		# set ps3_blu_complete to 0 for false
+		dialog --infobox "Your controller is still turned on!" 3 39
+		ps3_blu_complete="0"	
+		sleep 2s
+	else
+		# Let user know pairing is complete
+		dialog --infobox "Pairing on controller via bluetooth complete" 3 48
+		sleep 2s
+		# set ps3_blu_complete to 1 for true
+		ps3_blu_complete="1"	
+		sleep 2s
+	fi
+}
+
+h_clean_gamepad()
+{
+	clear
+	# The purpose of this function is to clean any specific configs that may 
+	# have altered files you would need for changing your gamepad type
+
+	# system objects that may interfere with switching gamepads
+	# The rescan service should be able to coexist with xboxdrv
+	
+	# qjoypad 
+	rm -f /etc/xdg/autostart/qjoypad.desktop
+	# Xbox controller 
+	service xboxdrv stop
+	rm -f /etc/init.d/xboxdrv
+	rm -f /etc/default/xboxdrv
+
+	# clean init scripts (rescan service shouldn't need cleaned right now)
+	# If it is required later, it will fall here.
+	update-rc.d -f xboxdrv remove
+
+	# XBMC
+	rm -f "$home/.xbmc/userdata/keymaps/keyboard.xml"
+}
+
+
 h_autosave_configs()
 {
 
@@ -14,6 +58,7 @@ h_autosave_configs()
 	# Directory checks will likely be put in soon.
 	# Old files, aka originals when ran, will be appended with ".old"
 
+	clear
 	# home dotfiles:
 	mv "$home/.mame" "$home/.mame.old" 2>  "/dev/null"
 	mv "$home/.mess" "$home/.mess.old" 2>  "/dev/null"
@@ -25,10 +70,12 @@ h_autosave_configs()
 	mv "$home/.config/mupen64plus" "$home/.config/mupen64plus.old" 2>  "/dev/null"
 	mv "$home/.config/ppsspp" "$home/.config/ppsspp.old" 2>  "/dev/null"
 	mv "$home/.ssh" "$home/.ssh.old" 2>  "/dev/null"
+	mv "$home/.qtsixa" "$home/.qtsixa.old" 2>  "/dev/null"
 
 	# system configs:
-	mv "/etc/xdg/autostart/xbmc" "/etc/xdg/autostart/xbmc.old" 2>  "/dev/null"
+	mv "$home/.config/autostart/xbmc/desktop" "$home/.config/autostart/xbmc.desktop.old" 2>  "/dev/null"
 	mv "/etc/init.d/xboxdrv" "/etc/init.d/xboxdrv.old" 2>  "/dev/null"
+	mv "/etc/init.d/rescan" "/etc/init.d/rescan.old" 2>  "/dev/null"
 	mv "/etc/modprobe.d/blacklist.conf" "/etc/modprobe.d/blacklist.conf.old" 2>  "/dev/null"
 	mv "/usr/share/xsessions/xbmc.desktop" "/usr/share/xsessions/xbmc.desktop.old" 2>  "/dev/null"
 	mv "/usr/bin/xbmc-session" "/usr/bin/xbmc-session.old" 2>  "/dev/null"
@@ -36,9 +83,6 @@ h_autosave_configs()
 
 	# correct permissions after tar archive is created
 	h_correct_perms
-
-	# inform user <- should the user be bothered each time?
-	#dialog --msgbox "All existing configs appended with .old" 5 43
 
 }
 
@@ -470,7 +514,7 @@ options=(1 "Neo-Geo CDZ"
 		1)
 		# call file loader  	
 		h_file_loader
-		# copy Neo-Geo BIOS file over
+		# copy Neo-Geo BIOS file over to MESS (root emulator)
 		if [ -n "$folder" ]; then
 			cp -v "$folder" "$rootdir/BIOS/MESS"
 		fi
@@ -479,7 +523,7 @@ options=(1 "Neo-Geo CDZ"
 		2)
 		#call file loader
 		h_file_loader
-		# copy Commodore 64 BIOS file over
+		# copy Commodore 64 BIOS file over to MESS (root emulator)
 		if [ -n "$folder" ]; then
 			cp -v "$folder" "$rootdir/BIOS/MESS"
 		fi
@@ -500,11 +544,81 @@ options=(1 "Neo-Geo CDZ"
 function h_correct_perms()
 {
 	# correct permissions since we use sudo
-	chgrp -R "$user" "$rootdir"
-    	chown -R "$user" "$rootdir"
+	chgrp -Rv "$user" "$rootdir"
+    	chown -Rv "$user" "$rootdir"
+
+	# correct the desktop permissions so we can add our own launcher
+	# This will allow permissions change for all languages. Thanks JC!
+
+
+
+	# correct the desktop so we can add our own launcher
+	chmod -Rv 755 $xdg_desktop_dir
+	chown -Rv $user $xdg_desktop_dir
+	chgrp -Rv $user $xdg_desktop_dir
+
 
 	# replace "test" username in config files here to ensure games
 	# and emulators function and start properly
+	
+	# mupen64plus files
+	chgrp -Rv "$user" "$home/.config/mupen64plus"
+     	chown -Rv "$user" "$home/.config/mupen64plus"
+	# jstest-gtk files
+	chgrp -Rv "$user" "$home/.config/jstest-gtk"
+     	chown -Rv "$user" "$home/.config/jstest-gtk"
+	# ppsspp files
+	chgrp -Rv "$user" "$home/.config/ppsspp"
+     	chown -Rv "$user" "$home/.config/ppsspp"
+	# mame files
+	chgrp -Rv "$user" "$home/.mame"
+     	chown -Rv "$user" "$home/.mame"
+	# mess files
+	chgrp -Rv "$user" "$home/.mess"
+     	chown -Rv "$user" "$home/.mess"
+	# medanfen files
+	chgrp -Rv "$user" "$home/.mednafen"
+     	chown -Rv "$user" "$home/.mednafen"
+	# qjoypad files
+	chgrp -Rv "$user" "$home/.qjoypad3"
+     	chown -Rv "$user" "$home/.qjoypad3"
+	# qtsixa files
+	chgrp -Rv "$user" "$home/.qtsixa"
+     	chown -Rv "$user" "$home/.qtsixa"
+	# stella files
+	chgrp -Rv "$user" "$home/.stella"
+     	chown -Rv "$user" "$home/.stella"
+	# xbmc files
+	chgrp -Rv "$user" "$home/.xbmc"
+     	chown -Rv "$user" "$home/.xbmc"
+	# qtsixa gui files
+	chgrp -Rv "$user" "$home/.sixemugui"
+     	chown -Rv "$user" "$home/.sixemugui"
+	# XBMC extra filesfiles
+	chgrp -Rv "$user" "/usr/share/applications/gp_autodetect_xbmc.sh"
+     	chown -Rv "$user" "/usr/share/applications/gp_autodetect_xbmc.sh"
+
+	chgrp -Rv "$user" "$xdg_pictures_dir/retro-icon.png"
+	chown -Rv "$user" "$xdg_pictures_dir/retro-icon.png"
+	
+	chgrp -Rv "$user" "/usr/share/applications/startXBMC.sh"
+	chown -Rv "$user" "/usr/share/applications/startXBMC.sh"
+
+	chgrp -Rv "$user" "$home/.config/autostart/RetroRig.desktop"
+	chown -Rv "$user" "$home/.config/autostart/RetroRig.desktop"
+
+	chgrp -Rv "$user" "$home/.config/autostart/qjoypad.desktop"
+	chown -Rv "$user" "$home/.config/autostart/qjoypad.desktop"
+
+	# Sometimes the custom skin reverts its files we modify
+	# This may take some time to debug, root cause maybe in an XBMC crash log
+	# help script. Change owership to root, with octal 755 (no -w-) for testing:
+	# This only needs done, and should be done for the 2 files we modify:
+
+	chown -v root:root "$home/.xbmc/addons/skin.maximinimalism/1080i/Home.xml"
+	chown -v root:root "$home/.xbmc/addons/skin.maximinimalism/extras/backgrounds/background001.jpg"
+	chmod 744 "$home/.xbmc/addons/skin.maximinimalism/extras/backgrounds/background001.jpg"
+	chmod 744 "$home/.xbmc/addons/skin.maximinimalism/extras/backgrounds/background001.jpg"
 }
 
 function h_emu_user_fixes()
@@ -515,12 +629,17 @@ function h_emu_user_fixes()
 	# Let's change the config files to reflect the current username
 
 	# mame
-	sed -i "s|/home/mikeyd/|/home/$USER/|g" $home/.mame/mame.ini | tee >> "$rootdir/logs/debug.log"
+	sed -i "s|/home/test/RetroRig|$rootdir|g" $home/.mame/mame.ini | tee >> "$rootdir/logs/debug.log"
+	# MESS
+	sed -i "s|/home/test/RetroRig|$rootdir|g" $home/.mess/mess.ini | tee >> "$rootdir/logs/debug.log"
 	# XBMC
-	sed -i "s|/home/mikeyd/|/home/$USER/|g" $home/.xbmc/userdata/addon_data/script.games.rom.collection.browser/config.xml | tee >> "$rootdir/logs/debug.log"
+	sed -i "s|/home/test/|/home/$user/|g" "$home/.xbmc/userdata/addon_data/script.games.rom.collection.browser/config.xml" | tee >> "$rootdir/logs/debug.log"
 	# PPSSPP	
-	sed -i 's|test|$user|g' "scriptdir/emu-cfgs/x360_controller/PPSSPP/ppsspp.ini"
+	sed -i 's|test|$user|g' "$scriptdir/emu-cfgs/x360_controller/PPSSPP/ppsspp.ini"
 	echo "The user applied to configuration files was: $user" | tee >> "$rootdir/logs/debug.log"
+	# MESS
+	sed -i "s|/home/test/RetroRig|$rootdir|g" $home/.mess/mess.ini | tee >> "$rootdir/logs/debug.log"
+
 
 }
 
@@ -579,17 +698,6 @@ clear
 apt-get update
 apt-get upgrade
 sleep 3s
-clear
-
-}
-
-function h_start_xbmc() 
-{
-
-dialog --infobox "starting RetroRig" 3 21
-sleep 1s
-su - $user -c '/usr/bin/xbmc'
-#clear
 clear
 
 }

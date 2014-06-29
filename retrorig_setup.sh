@@ -104,6 +104,52 @@ function loadConfig()
     fi
 }
 
+########################################################################
+#
+#  setDesktopEnvironment()
+#  
+#  Arguments:    Desktop folder identifier used in Unity/Gnome/Cinnamon
+#                in ~/.config/user-dirs.dirs. 
+#  
+#  Description:  The command to set a folder variable is already 
+#                contained in ~/.config/user-dirs.dirs. For example:
+#
+#                XDG_DOWNLOAD_DIR="$HOME/Downloads"
+#
+#                This script filters the related line and
+#                sets the corresponding variable with lower 
+#                case letters:
+#
+#                xdg_download_dir=/home/username/Downloads
+#
+########################################################################
+
+function setDesktopEnvironment()
+{
+
+  arg_upper_case=$1
+  arg_lower_case=`echo $1|tr '[:upper:]' '[:lower:]'`
+  XDG_DIR="XDG_"$arg_upper_case"_DIR"
+  xdg_dir="xdg_"$arg_lower_case"_dir"
+
+  setDir=`cat ~/.config/user-dirs.dirs | grep $XDG_DIR| sed s/$XDG_DIR/$xdg_dir/|sed s/HOME/home/`
+  target=`echo $setDir| cut -f 2 -d "="| sed s,'$home',$home,`
+
+  checkValid=`echo $setDir|grep $xdg_dir=\"|grep home/`
+ 
+  if [ -n "$checkValid" ]; then
+    echo "setting $"$xdg_dir "to" $target
+    eval "$setDir"
+
+  else
+
+    echo "local desktop setting" $XDG_DIR "not found"
+ 
+  fi
+}
+
+
+
 script_invoke_path="$0"
 script_name=$(basename "$0")
 getScriptAbsoluteDir "$script_invoke_path"
@@ -176,6 +222,33 @@ esscrapimgw=275 # width in pixel for EmulationStation games scraper
 
 home=$(eval echo ~$user)
 
+#################################################################
+#
+# *** Setting up local desktop folder structure ***
+#
+# Example for German Desktop:
+#
+# setup $xdg_desktop_dir to "/home/username/Schreibtisch"
+# setup $xdg_download_dir to "/home/username/Downloads"
+# setup $xdg_templates_dir to "/home/username/Vorlagen"
+# setup $xdg_publicshare_dir to "/home/username/Öffentlich"
+# setup $xdg_documents_dir to "/home/username/Dokumente"
+# setup $xdg_music_dir to "/home/username/Musik"
+# setup $xdg_pictures_dir to "/home/username/Bilder"
+# setup $xdg_videos_dir to "/home/username/Videos"
+#
+setDesktopEnvironment DESKTOP
+setDesktopEnvironment DOWNLOAD
+setDesktopEnvironment TEMPLATES
+setDesktopEnvironment PUBLICSHARE
+setDesktopEnvironment DOCUMENTS
+setDesktopEnvironment MUSIC
+setDesktopEnvironment PICTURES
+setDesktopEnvironment VIDEOS
+
+#################################################################
+
+
 # make sure that RetroRig root directory exists
 if [[ ! -d $rootdir ]]; then
     mkdir -p "$rootdir"
@@ -222,10 +295,9 @@ while true; do
 	     3 "Pull latest files from git" 
 	     4 "Update emulator binaries" 
 	     5 "Upgrade System (use with caution!)" 
-	     6 "Start RetroRig" 
-	     7 "Reboot PC"
-	     8 "Uninstall RetroRig"  
-	     9 "Exit")
+	     6 "Reboot PC"
+	     7 "Uninstall RetroRig"  
+	     8 "Exit")
 
 	#make menu choice
 	# Expanding arrays involves [@] and {}
@@ -237,17 +309,16 @@ while true; do
 		now=$(date +'%d%m%Y_%H%M%S')
 		{
 		h_autosave_configs
-
+		rrs_prepareFolders
 		rrs_software
 		rrs_emulators
-		rrs_prepareFolders
-		rrs_unity
 		rrs_xbmc
 		rrs_gamepad
 		h_emu_user_fixes
 		set_resolution
-		rrs_autostart
-		} 2>&1 | tee >(gzip --stdout > $scriptdir/logs/install_$now.log.gz)	               	
+		rrs_unity
+		rrs_done
+		} 2>&1 | tee >(gzip --stdout > $scriptdir/logs/install_$now.log.gz)              	
 		chown -R "$user" "$scriptdir/logs/install_$now.log.gz"
 		chgrp -R "$user" "$scriptdir/logs/install_$now.log.gz"
 		;;
@@ -263,7 +334,7 @@ while true; do
 	    4)
 		now=$(date +'%d%m%Y_%H%M%S')
 		{
-		h_update_binaries
+		h_update_system
 		} 2>&1 | tee >(gzip --stdout > $scriptdir/logs/update_$now.log.gz)              	
 		chown -R "$user" "$scriptdir/logs/update_$now.log.gz"
 		chgrp -R "$user" "$scriptdir/logs/update_$now.log.gz"
@@ -278,31 +349,37 @@ while true; do
 		chgrp -R "$user" "$scriptdir/logs/upgrade_$now.log.gz"
 		;;
 
-	    6)
-		h_start_xbmc
-		;;
-
-	    7) 
+	    6) 
 		rrs_reboot
 		;;
 
-	    8)
+	    7)
 		now=$(date +'%d%m%Y_%H%M%S')
 		{
 		cfg_uninstall
 		} 2>&1 | tee >(gzip --stdout > "$scriptdir/logs/uninstall_$now.log.gz")               	
-		chown -R "$user "$scriptdir/logs/uninstall_$now.log.gz"
-		chgrp -R "$user "$scriptdir/logs/uninstall_$now.log.gz"
+		chown -R "$user" "$scriptdir/logs/uninstall_$now.log.gz"
+		chgrp -R "$user" "$scriptdir/logs/uninstall_$now.log.gz"
 		;;
 
-	    9) 
+	    8) 
 		clear
 		exit
 		;;
 
+	    255)
+		# Next two lines for debugging only	
+	   	# dialog --infobox "Esc hit..." 3 14
+	   	# sleep 1s
+		;;
+
 		esac
 	else
+		# Next two lines for debugging only	
+		# dialog --infobox "cancel hit" 3 14
+		# sleep 1s
 		break
     fi
 	done
 clear
+

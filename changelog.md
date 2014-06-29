@@ -1,6 +1,28 @@
 RetroRig changelog
 ============================
 
+Version 0.8.0
+
+* Uninstall option fixes
+* New and improved logging options (xbmc logging while in RetroRig)
+* Establish beta branch
+* Cusomt/Patched version of XBMC with hotplugging gamepad support for XBMC (Thanks JC!!!)
+* PS3 Controller support (bluetooth)
+* Xbox 360 Controller support (USB)
+* Additional emulator support:    
+  GBC
+  GBA
+  TurboGraphx 16
+  Neo-Geo CDZ
+  Sega Game Gear
+  PSP
+  Sega Genesis
+* Many bug fixes
+* Larger binary files hosted at libregeek.org
+* Control/Gamepad assignement fixes (refinement over time)
+* XBMC skin fixes
+* Addtions to supplimental folder for building new xbmc-bin binaries
+
 Version 0.7.0
 -------------
 

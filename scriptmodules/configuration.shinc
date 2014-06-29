@@ -73,6 +73,7 @@ dialog --title "Confirm yes/no" \
 
 	# repositories
 	add-apt-repository -ry ppa:team-xbmc/ppa
+	add-apt-repository -ry ppa:falk-t-j/qtsixa
 	rm -f /etc/apt/sources.list.d/playdeb.list
 	;;
 
@@ -100,12 +101,12 @@ dialog --title "Confirm yes/no" \
 	case $response in
 
 	0) 
-	#keep folders
+	# keep folders
 	sleep 2s
 	;;
 
    	1) 
-	#remove dotfiles
+	# remove dotfiles
 	rm -rf "$HOME/.qjoypad3" 
 	rm -rf "$HOME/.config/mupen64plus" 
 	rm -rf "$HOME/.mame" 
@@ -114,16 +115,22 @@ dialog --title "Confirm yes/no" \
 	rm -rf "$HOME/.mednafen" 
 	rm -rf "$HOME/.mess" 
 
-	#system objects
+	# system objects
 	rm -f /etc/xdg/autostart/qjoypad.desktop
 	service xboxdrv stop
+
+	# Application scripts
+	rm -f "/usr/share/applications/ps3_autodetect_xbmc.sh"
+	rm -f "/usr/share/applications/startXBMC.sh"
+
 	# remove init services	
 	update-rc.d -f xboxdrv remove
 	rm -f /etc/init.d/xboxdrv
+	rm -f /etc/init.d/rescan
 	rm -f /etc/default/xboxdrv
 	sed -i 's|blacklist xpad||g' "/etc/modprobe.d/blacklist.conf"
-	# XBMC session (if applicable)
 
+	# XBMC session (if applicable)
 	# change default xsession
 	session_org="user-session=XBMC"
 	session_new="user-session=ubuntu"
@@ -136,8 +143,6 @@ dialog --title "Confirm yes/no" \
 	# edits the single configuration file.
 
 	sed -i "s|$session_org|$session_new|g" "/usr/share/lightdm/lightdm.conf.d/50-ubuntu.conf"
-	# correct permissions
-	h_correct_perms
 	;;
 
 	255)
@@ -188,6 +193,12 @@ rm -rf "$rootdir"
 #update Ubuntu repository listings
 apt-get update
 sleep 2s
+
+# correct permissions
+h_correct_perms
+
+# call reboot
+rrs_reboot
 
 }
 

@@ -105,7 +105,8 @@ git gc --aggressive --prune=now
 #Now we need to push the changes back to the remote
 #repository, so that nobody else will suffer the pain of a 180MB download.
 
-git push origin master --force
+git push origin --force --all
+git push origin --force --tags
 
 #################################
 #End prune/removal code

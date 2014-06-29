@@ -1,0 +1,149 @@
+Test Protocol
+=============
+ 
+14/06/29 13:15AM UTC-2
+ 
+Starting Point: Plain Ubuntu Install
+ 
+Test xdg folder structure
+
+Still testing on the local copy of "xbmc-bin_Gotham_V13.1_patched_for_RetroRig.deb",
+since the upload yesterday didn't work. 
+ 
+sudo apt-get update
+sudo apt-get install dialog git figlet
+
+git clone https://github.com/beaumanvienna/RetroRig
+cd RetroRig/
+git checkout beta
+git remote add upstream https://github.com/ProfessorKaos64/RetroRig
+git fetch upstream
+git config --global user.email "jc.lache@gmail.com"
+git config --global user.name "beaumanvienna"
+git merge upstream/beta
+    yo@yo:~/RetroRig$ git merge upstream/beta
+    Already up-to-date.
+gedit scriptmodules/setup.shinc
+git diff scriptmodules/setup.shinc
+    yo@yo:~/RetroRig$ git diff scriptmodules/setup.shinc
+    diff --git a/scriptmodules/setup.shinc b/scriptmodules/setup.shinc
+    index 4b933ab..53709cb 100644
+    --- a/scriptmodules/setup.shinc
+    +++ b/scriptmodules/setup.shinc
+    @@ -336,7 +336,7 @@ function rrs_xbmc_patched()
+            apt-get remove -y xbmc-bin
+ 
+            # copy down the patched deb from libregeek (saves on space, dl speed is 
+    -       wget -P /tmp "www.libregeek.org/RetroRig/xbmc-bin_Gotham_V13.1_patched_f
+    +       #wget -P /tmp "www.libregeek.org/RetroRig/xbmc-bin_Gotham_V13.1_patched_
+ 
+            # install deb from /tmp
+            dpkg -i "/tmp/xbmc-bin_Gotham_V13.1_patched_for_RetroRig.deb"
+
+  #only wget is uncommented, everything else is in the original state from beauman's forked repro
+
+cp /home/yo/xbmc-bin_Gotham_V13.1_patched_for_RetroRig.deb /tmp/
+sudo ./retrorig_setup.sh
+xbmc -v
+    yo@yo:~/RetroRig$ xbmc -v
+    XBMC Media Center 13.1 Git:20140604-84725b0
+    Copyright (C) 2005-2013 Team XBMC - http://xbmc.org
+    Patched for RetroRig (patch level 1)
+    # still working
+service rescan status
+sudo service rescan stop
+sudo service rescan start
+    yo@yo:~/RetroRig$ service rescan status 
+    rescan is running
+    yo@yo:~/RetroRig$ sudo service rescan stop
+     * Stopping rescan                                                       [ OK ] 
+    yo@yo:~/RetroRig$ sudo service rescan start
+     * Starting gp_autodetect_xbmc.sh                                        [ OK ] 
+    yo@yo:~/RetroRig$ 
+    # still working
+
+# test xdg folders
+
+ls ~/Schreibtisch/
+    yo@yo:~/RetroRig$ ls ~/Schreibtisch/
+    RetroRig.desktop
+cat ~/Schreibtisch/RetroRig.desktop
+    yo@yo:~/RetroRig$ cat ~/Schreibtisch/RetroRig.desktop 
+    [Desktop Entry]
+    Version=1.0
+    Name=RetroRig
+    GenericName=RetroRig Project
+    Comment=RetroRig Project Desktop launcher
+    Exec=/usr/share/applications/startXBMC.sh
+    Icon=/home/yo/Bilder/retro-icon.png
+    Terminal=false
+    Type=Application
+    Categories=AudioVideo;Video;Player;TV;
+
+    Actions=Fullscreen;Standalone;
+
+    # xdg folders ok
+
+cat ~/.config/autostart/RetroRig.desktop
+    yo@yo:~/RetroRig$ cat ~/.config/autostart/RetroRig.desktop 
+    [Desktop Entry]
+    Version=1.0
+    Name=RetroRig
+    GenericName=RetroRig Project
+    Comment=RetroRig Project Desktop launcher
+    Exec=/usr/share/applications/startXBMC.sh
+    Icon=/home/yo/Bilder/retro-icon.png
+    Terminal=false
+    Type=Application
+    Categories=AudioVideo;Video;Player;TV;
+
+    Actions=Fullscreen;Standalone;
+    # xdg folders ok
+
+ls ~/Bilder/retro-icon.png
+    yo@yo:~/RetroRig$ ls ~/Bilder/retro-icon.png 
+    /home/yo/Bilder/retro-icon.png
+    # icon ok
+
+cat /usr/share/applications/RetroRig.desktop
+    yo@yo:~/RetroRig$ cat /usr/share/applications/RetroRig.desktop 
+    [Desktop Entry]
+    Version=1.0
+    Name=RetroRig
+    GenericName=RetroRig Project
+    Comment=RetroRig Project Desktop launcher
+    Exec=/usr/share/applications/startXBMC.sh
+    Icon=/home/yo/Bilder/retro-icon.png
+    Terminal=false
+    Type=Application
+    Categories=AudioVideo;Video;Player;TV;
+
+#the icon shows up on the desktop and starts RetroRig upon double click
+# everything normal in XBMC, hotplugging OK
+#nothing in the launcher
+xbmc
+    yo@yo:~/RetroRig$ xbmc
+    This xbmc version is patched for RetroRig.
+gnome-session-properties 
+    # looks good, the RetroRig starter now has the RetroRig icon
+sudo reboot
+#new icon in the launcher with RetroRig icon, starts xbmc
+
+
+#########################
+# 
+# *** RECAP ***
+#
+# Pretty good version. During the test runs today (about 5 or 6 times from scratch)
+# XBMC had one time problems with exiting.
+#
+# The changes from yesterday and Friday worked every time. It's really just the 
+# spoiled deb package which caused the installation of the wrong XBMC version
+# on the Professors install.
+#
+# The XDG folder are working. This was tested with German desktop folder structure.
+#
+#########################
+
+
+

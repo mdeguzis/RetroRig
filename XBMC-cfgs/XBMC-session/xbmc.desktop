@@ -2,6 +2,6 @@
 Encoding=UTF-8
 Name=XBMC
 Comment=
-Exec=/usr/bin/xbmc-session
+Exec=/usr/share/applications/startXBMC.sh
 Icon=
 Type=Application
