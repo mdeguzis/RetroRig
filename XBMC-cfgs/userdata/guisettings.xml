@@ -80,7 +80,7 @@
         <addonforeignfilter default="true">false</addonforeignfilter>
         <addonnotifications>false</addonnotifications>
         <settinglevel>1</settinglevel>
-        <systemtotaluptime>5</systemtotaluptime>
+        <systemtotaluptime>14</systemtotaluptime>
     </general>
     <input>
         <enablejoystick>true</enablejoystick>
