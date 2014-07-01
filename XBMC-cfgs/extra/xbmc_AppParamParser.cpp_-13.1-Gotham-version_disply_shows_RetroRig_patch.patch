@@ -1,2 +1,10 @@
-86a87
->   printf("Patched for RetroRig (patch level 1)\n");
+--- xbmc/AppParamParser.cpp	2014-07-01 21:13:03.447707535 +0200
++++ AppParamParser.cpp	2014-07-01 21:12:15.695708053 +0200
+@@ -84,6 +84,7 @@
+ {
+   printf("XBMC Media Center %s\n", g_infoManager.GetVersion().c_str());
+   printf("Copyright (C) 2005-2013 Team XBMC - http://xbmc.org\n");
++  printf("Patched for RetroRig (patch level 2)\n");
+   exit(0);
+ }
+ 

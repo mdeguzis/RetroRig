@@ -264,7 +264,7 @@ function rrs_software() {
 	# install binaries
 	apt-get install -y xboxdrv curl python-software-properties \
 	pkg-config software-properties-common dconf-tools jstest-gtk \
-	qjoypad xbmc build-essential sixad libusb-dev libusb-0.1-4
+	qjoypad build-essential sixad libusb-dev libusb-0.1-4
 
 	# call RetroRig's custom deb install for ps3 hotplugging. 
 	# Thankfully our package still works with the Xbox 360 implementation,
@@ -333,18 +333,27 @@ function rrs_xbmc_patched()
 	sed -i "s|/home/test/Pictures|$xdg_pictures_dir|g" "$home/.config/autostart/RetroRig.desktop"
 
 	# remove old xbmc-bin, install our patched version
-	apt-get remove -y xbmc-bin
+	apt-get remove -y xbmc xbmc-bin
 
-	# copy down the patched deb from libregeek (saves on space, dl speed is adaquate for now)
-	wget -P /tmp "www.libregeek.org/RetroRig/xbmc-bin_Gotham_V13.1_patched_for_RetroRig.deb"
-
+	# copy down the patched debs from libregeek (saves on space, dl speed is adaquate for now)
+	wget -P /tmp "www.libregeek.org/RetroRig/xbmc-bin_Gotham_V13.1_patched_for_RetroRig_patchlevel_2.deb"
+	wget -P /tmp "www.libregeek.org/RetroRig/xbmc_Gotham_V13.1_patched_for_RetroRig_patchlevel_2.deb"
+	# install dependencies manually
+	apt-get install -y libva-intel-vaapi-driver \
+                           i965-va-driver:amd64 \
+                           libavahi-compat-libdnssd-dev \
+		           libavahi-compat-libdnssd1:amd64 \
+                           libjs-jquery \
+                           python-bluez \
+                           python-simplejson \
+                           python-support
 	# install deb from /tmp
-	dpkg -i "/tmp/xbmc-bin_Gotham_V13.1_patched_for_RetroRig.deb"
-        apt-get install -y xbmc
-        apt-get install -y wmctrl
+	dpkg -i "/tmp/xbmc-bin_Gotham_V13.1_patched_for_RetroRig_patchlevel_2.deb"
+        dpkg -i "/tmp/xbmc_Gotham_V13.1_patched_for_RetroRig_patchlevel_2.deb"
 
-	# cleaup deb
-	rm -f "/tmp/xbmc-bin_Gotham_V13.1_patched_for_RetroRig.deb"
+	# cleanup deb
+	rm -f "/tmp/xbmc-bin_Gotham_V13.1_patched_for_RetroRig_patchlevel_2.deb"
+	rm -f "/tmp/xbmc_Gotham_V13.1_patched_for_RetroRig_patchlevel_2.deb"
 
         #get SHA1 tag from patched XBMC version
         sha1=`file /usr/lib/xbmc/xbmc.bin | cut -f 19 -d ' '| cut -f 2 -d '='|cut -f 1 -d ','`
