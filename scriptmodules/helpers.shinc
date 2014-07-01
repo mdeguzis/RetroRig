@@ -637,9 +637,6 @@ function h_emu_user_fixes()
 	# PPSSPP	
 	sed -i 's|test|$user|g' "$scriptdir/emu-cfgs/x360_controller/PPSSPP/ppsspp.ini"
 	echo "The user applied to configuration files was: $user" | tee >> "$rootdir/logs/debug.log"
-	# MESS
-	sed -i "s|/home/test/RetroRig|$rootdir|g" $home/.mess/mess.ini | tee >> "$rootdir/logs/debug.log"
-
 
 }
 
