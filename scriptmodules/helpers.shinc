@@ -700,7 +700,9 @@ rm -rf "$rootdir/emulators/PPSSPP/*"
 em_install_ppsspp
 
 
+
 # Update other binaries that were installed via PPA's and Official Ubuntu repos
+
 apt-get update
 sleep 3s
 clear
