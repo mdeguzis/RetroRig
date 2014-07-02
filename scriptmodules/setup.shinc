@@ -214,10 +214,7 @@ function rrs_emulators()
 	# Run Debug checks
 	rrs_debug
 
-	__postMSGs="$__postMSGs This MESS configuration requires BIOS files be placed 
-under '$rootdir/ROMs/BIOS/MESS'. You may also use the BIOS Loader under the settings menu.
-Many MAME games under MAME4ALL have self contained BIOS files. For those that do not, you will need
-to place them in the '$rootdir/ROMs/MAME folder'."
+	__postMSGs="$__postMSGs This current configuration requires BIOS files be placed under '$rootdir/BIOS/' folder for the respective system you are using or under the '$rootdir/ROMs/' folder for the same system. You may also use the BIOS Loader under the settings menu. Many MAME games under MAME4ALL have self contained BIOS files, so I added 2 locations, either the ROM folder or in the BIOS folders."
 
 	# inject a space to seperate messages?
 	__postMSGs="$__postMSGs "
@@ -486,10 +483,11 @@ function rrs_prereq()
 {
     if [[ -z $(type -P git) || -z $(type -P dialog) || -z $(type -P figlet) ]]; then
 	echo ""
+	echo "######################################"
 	echo "Pre-req checks"	
 	echo "######################################"
-        echo "Did not find needed packages 'git' and/or 'dialog/figlet'. Attempting to install these now."
-	echo "######################################"
+        echo "Did not find needed packages 'git' and/or 'dialog/figlet'."
+	echo "Attempting to install these now."
 	echo ""
 	sleep 3s
         apt-get update
