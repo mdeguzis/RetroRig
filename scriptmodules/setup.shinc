@@ -336,14 +336,34 @@ function rrs_xbmc_patched()
 	wget -P /tmp "www.libregeek.org/RetroRig/xbmc-bin_Gotham_V13.1_patched_for_RetroRig_patchlevel_2.deb"
 	wget -P /tmp "www.libregeek.org/RetroRig/xbmc_Gotham_V13.1_patched_for_RetroRig_patchlevel_2.deb"
 	# install dependencies manually
-	apt-get install -y libva-intel-vaapi-driver \
+	apt-get install -y mesa-utils \
+                           libva-intel-vaapi-driver \
                            i965-va-driver:amd64 \
                            libavahi-compat-libdnssd-dev \
 		           libavahi-compat-libdnssd1:amd64 \
                            libjs-jquery \
                            python-bluez \
                            python-simplejson \
-                           python-support
+                           python-support \
+                           ttf-dejavu-core \
+                           libnfs1 \
+                           libbluray1 \
+                           libshairport1 \
+                           libshairplay0 \
+                           libaacs0 \
+                           liblockdev1 \
+                           libcec2 \
+                           libvdpau1 \
+                           libmicrohttpd10 \
+                           libao-common \
+                           libao4 \
+                           mysql-common \
+                           libmysqlclient18 \
+                           libtinyxml2.6.2 \
+                           libva-x11-1 \
+                           libva-glx1 \
+                           libcrystalhd3
+
 	# install deb from /tmp
 	dpkg -i "/tmp/xbmc-bin_Gotham_V13.1_patched_for_RetroRig_patchlevel_2.deb"
         dpkg -i "/tmp/xbmc_Gotham_V13.1_patched_for_RetroRig_patchlevel_2.deb"
