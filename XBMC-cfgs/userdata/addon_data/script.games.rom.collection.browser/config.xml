@@ -322,6 +322,7 @@
       <emulatorCmd>/usr/games/mednafen</emulatorCmd>
       <emulatorParams>"%ROM%"</emulatorParams>
       <romPath>/home/test/RetroRig/ROMs/SNES/*.smc</romPath>
+      <romPath>/home/test/RetroRig/ROMs/SNES/*.zip</romPath>
       <saveStatePath />
       <saveStateParams />
       <mediaPath type="boxfront">/home/test/RetroRig/Artwork/SNES/boxfront/%GAME%.*</mediaPath>
