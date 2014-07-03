@@ -60,26 +60,27 @@ h_autosave_configs()
 
 	clear
 	# home dotfiles:
-	mv "$home/.mame" "$home/.mame.old" 2>  "/dev/null"
-	mv "$home/.mess" "$home/.mess.old" 2>  "/dev/null"
-	mv "$home/.stella" "$home/.stella.old" 2>  "/dev/null"
-	mv "$home/.mednafen" "$home/.mednafen.old" 2>  "/dev/null"
-	mv "$home/.xbmc" "$home/.xbmc.old" 2>  "/dev/null"
-	mv "$home/.qjoypad3" "$home/.qjoypad3.old" 2>  "/dev/null"
+	cp -v "$home/.mame" "$home/.mame.old" 2> "/dev/null"
+	cp -v "$home/.mess" "$home/.mess.old" 2> "/dev/null"
+	cp -v "$home/.stella" "$home/.stella.old" 2>  "/dev/null"
+	cp -v "$home/.mednafen" "$home/.mednafen.old" 2> "/dev/null"
+	cp -v "$home/.xbmc" "$home/.xbmc.old" 2>  "/dev/null"
+	cp -v "$home/.qjoypad3" "$home/.qjoypad3.old" 2>  "/dev/null"
 	# .config dotfiles
-	mv "$home/.config/mupen64plus" "$home/.config/mupen64plus.old" 2>  "/dev/null"
-	mv "$home/.config/ppsspp" "$home/.config/ppsspp.old" 2>  "/dev/null"
-	mv "$home/.ssh" "$home/.ssh.old" 2>  "/dev/null"
-	mv "$home/.qtsixa" "$home/.qtsixa.old" 2>  "/dev/null"
+	cp -v "$home/.config/mupen64plus" "$home/.config/mupen64plus.old" 2> "/dev/null"
+	cp -v "$home/.config/ppsspp/PSP/SYSTEM/ppsspp.ini" "$home/.config/ppsspp/PSP/SYSTEM/ppsspp.ini.old" 2> "/dev/null"
+	cp -v "$home/.config/ppsspp/PSP/SYSTEM/controls.ini" "$home/.config/ppsspp/PSP/SYSTEM/controls.ini.old" 2> "/dev/null"
+	cp -v "$home/.ssh" "$home/.ssh.old" 2>  "/dev/null"
+	cp -v "$home/.qtsixa" "$home/.qtsixa.old" 2>  "/dev/null"
 
 	# system configs:
-	mv "$home/.config/autostart/xbmc/desktop" "$home/.config/autostart/xbmc.desktop.old" 2>  "/dev/null"
-	mv "/etc/init.d/xboxdrv" "/etc/init.d/xboxdrv.old" 2>  "/dev/null"
-	mv "/etc/init.d/rescan" "/etc/init.d/rescan.old" 2>  "/dev/null"
-	mv "/etc/modprobe.d/blacklist.conf" "/etc/modprobe.d/blacklist.conf.old" 2>  "/dev/null"
-	mv "/usr/share/xsessions/xbmc.desktop" "/usr/share/xsessions/xbmc.desktop.old" 2>  "/dev/null"
-	mv "/usr/bin/xbmc-session" "/usr/bin/xbmc-session.old" 2>  "/dev/null"
-	mv "/usr/share/lightdm/lightdm.conf.d/50-ubuntu.conf" "/usr/share/lightdm/lightdm.conf.d/50-ubuntu.conf.old" 2>  "/dev/null"
+	cp -v "$home/.config/autostart/xbmc/desktop" "$home/.config/autostart/xbmc.desktop.old" 2> "/dev/null"
+	cp -v "/etc/init.d/xboxdrv" "/etc/init.d/xboxdrv.old" 2> "/dev/null"
+	cp -v "/etc/init.d/rescan" "/etc/init.d/rescan.old" 2> "/dev/null"
+	cp -v "/etc/modprobe.d/blacklist.conf" "/etc/modprobe.d/blacklist.conf.old" 2> "/dev/null"
+	cp -v "/usr/share/xsessions/xbmc.desktop" "/usr/share/xsessions/xbmc.desktop.old" 2> "/dev/null"
+	cp -v "/usr/bin/xbmc-session" "/usr/bin/xbmc-session.old" 2> "/dev/null"
+	cp -v "/usr/share/lightdm/lightdm.conf.d/50-ubuntu.conf" "/usr/share/lightdm/lightdm.conf.d/50-ubuntu.conf.old" 2> "/dev/null"
 
 	# correct permissions after tar archive is created
 	h_correct_perms
@@ -449,8 +450,8 @@ function h_res_switcher()
 	sed -i "s|$sms_org_Y|sms.yres $sms_new_Y|g" "$home/.mednafen/mednafen-09x.cfg"
 
 	#Mednafen (Sega Gane Gear)
-	sms_org_X=$(grep -Ee "\bsms.xres\b " "$home/.mednafen/mednafen-09x.cfg")
-	sms_org_Y=$(grep -Ee "\bsms.yres\b " "$home/.mednafen/mednafen-09x.cfg")
+	gg_org_X=$(grep -Ee "\bgg.xres\b " "$home/.mednafen/mednafen-09x.cfg")
+	gg_org_Y=$(grep -Ee "\bgg.yres\b " "$home/.mednafen/mednafen-09x.cfg")
 	#make the changes, prefix new_X in case NULL was entered previously
 	sed -i "s|$sms_org_X|sms.xres $sms_new_X|g" "$home/.mednafen/mednafen-09x.cfg"
 	sed -i "s|$sms_org_Y|sms.yres $sms_new_Y|g" "$home/.mednafen/mednafen-09x.cfg"
