@@ -88,6 +88,7 @@ function rrs_prepareFolders()
 
 	#BIOS folder(s)
 	pathlist+=("$rootdir/BIOS/MESS")
+	pathlist+=("$rootdir/BIOS/MAME")
 
 	#Configs
 	pathlist+=("$rootdir/Configs")
