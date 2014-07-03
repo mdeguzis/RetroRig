@@ -449,12 +449,12 @@ function h_res_switcher()
 	sed -i "s|$sms_org_X|sms.xres $sms_new_X|g" "$home/.mednafen/mednafen-09x.cfg"
 	sed -i "s|$sms_org_Y|sms.yres $sms_new_Y|g" "$home/.mednafen/mednafen-09x.cfg"
 
-	#Mednafen (Sega Gane Gear)
+	#Mednafen (Sega Game Gear)
 	gg_org_X=$(grep -Ee "\bgg.xres\b " "$home/.mednafen/mednafen-09x.cfg")
 	gg_org_Y=$(grep -Ee "\bgg.yres\b " "$home/.mednafen/mednafen-09x.cfg")
 	#make the changes, prefix new_X in case NULL was entered previously
-	sed -i "s|$sms_org_X|sms.xres $sms_new_X|g" "$home/.mednafen/mednafen-09x.cfg"
-	sed -i "s|$sms_org_Y|sms.yres $sms_new_Y|g" "$home/.mednafen/mednafen-09x.cfg"
+	sed -i "s|$gg_org_X|gg.xres $gg_new_X|g" "$home/.mednafen/mednafen-09x.cfg"
+	sed -i "s|$gg_org_Y|gg.yres $gg_new_Y|g" "$home/.mednafen/mednafen-09x.cfg"
 
 
 	#Mednafen (Turbographx 16)
