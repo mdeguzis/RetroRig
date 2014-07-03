@@ -1,30 +1,50 @@
-20a21
-> #include "signal.h"
-378a380,398
-> #ifdef TARGET_LINUX
-> #ifdef HAS_SDL_JOYSTICK
-> void ReScan(int i)
-> {
->   CLog::Log(LOGDEBUG, "rescanning for new game controller");
-> 
->   // switch off
->   g_Joystick.SetEnabled( false );
->   
->   // switch back on
->   if (CSettings::Get().GetBool("input.enablejoystick") &&
->                     CPeripheralImon::GetCountOfImonsConflictWithDInput() == 0)
->   {
->     g_Joystick.SetEnabled( true );
->   }
-> }
-> #endif
-> #endif
-> 
-1530a1551,1557
->   
-> #ifdef TARGET_LINUX
->   //register interrupt handler for SIGUSR1 to have XBMC re-initialze the gamepads
->   printf("This xbmc version is patched for RetroRig.\n");
->   signal(SIGUSR1, ReScan);  
-> #endif
-> 
+--- xbmc/Application.cpp	2014-07-01 21:13:13.867707421 +0200
++++ Application.cpp	2014-07-01 21:12:31.699707879 +0200
+@@ -18,6 +18,7 @@
+  *
+  */
+ 
++#include "signal.h"
+ #include "network/Network.h"
+ #include "threads/SystemClock.h"
+ #include "system.h"
+@@ -378,6 +379,25 @@
+ 
+ #define MAX_FFWD_SPEED 5
+ 
++#ifdef TARGET_LINUX
++#ifdef HAS_SDL_JOYSTICK
++void ReScan(int i)
++{
++  CLog::Log(LOGDEBUG, "rescanning for new game controller");
++
++  // switch off
++  g_Joystick.SetEnabled( false );
++  
++  // switch back on
++  if (CSettings::Get().GetBool("input.enablejoystick") &&
++                    CPeripheralImon::GetCountOfImonsConflictWithDInput() == 0)
++  {
++    g_Joystick.SetEnabled( true );
++  }
++}
++#endif
++#endif
++
+ //extern IDirectSoundRenderer* m_pAudioDecoder;
+ CApplication::CApplication(void)
+   : m_pPlayer(new CApplicationPlayer)
+@@ -1549,6 +1569,13 @@
+ #ifdef HAS_SDL_JOYSTICK
+   g_Joystick.SetEnabled(CSettings::Get().GetBool("input.enablejoystick") &&
+                     CPeripheralImon::GetCountOfImonsConflictWithDInput() == 0 );
++  
++#ifdef TARGET_LINUX
++  //register interrupt handler for SIGUSR1 to have XBMC re-initialze the gamepads
++  printf("This xbmc version is patched for RetroRig.\n");
++  signal(SIGUSR1, ReScan);  
++#endif
++
+ #endif
+ 
+   return true;

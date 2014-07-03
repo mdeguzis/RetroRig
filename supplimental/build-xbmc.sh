@@ -83,12 +83,24 @@ echo "Extracting old deb package"
 echo "##########################################"
 
 # copy over deb files for build
-mkdir /tmp/RetroRig
-cd /tmp/RetroRig
+# unpack for xbmc-bin
+mkdir /tmp/RetroRig-bin
+cd /tmp/RetroRig-bin
 sudo cp -v /var/cache/apt/archives/xbmc-bin_*.deb xbmc-bin_original.deb
 
 sudo dpkg-deb -x xbmc-bin_original.deb .
 sudo dpkg-deb -e xbmc-bin_original.deb
+
+# unpack for xbmc
+mkdir /tmp/RetroRig
+cd /tmp/RetroRig
+sudo cp -v /var/cache/apt/archives/xbmc_2*.deb xbmc-original.deb
+
+sudo dpkg-deb -x xbmc-original.deb .
+sudo dpkg-deb -e xbmc-original.deb
+
+sudo rm -rf /tmp/RetroRig/usr/share/xbmc/
+sudo cp -r /usr/share/xbmc/ /tmp/RetroRig/usr/share/
 
 #now compile xbmc
 cd
@@ -130,6 +142,7 @@ git checkout xbmc/AppParamParser.cpp
 patch xbmc/Application.cpp < $HOME/RetroRig/XBMC-cfgs/extra/xbmc_Application.cpp_-13.1-Gotham-interrupt_handler_for_SIGUSR1.patch
 patch xbmc/AppParamParser.cpp < $HOME/RetroRig/XBMC-cfgs/extra/xbmc_AppParamParser.cpp_-13.1-Gotham-version_disply_shows_RetroRig_patch.patch
 make
+make install
 
 # strip out the bin executable
 strip xbmc.bin
@@ -141,8 +154,14 @@ echo "##########################################"
 # replace old xbmc bin file with new one, repack, tidy up
 # Notes for dpkg: http://ubuntuforums.org/showthread.php?t=1687348
 sudo cp ./xbmc.bin /tmp/RetroRig/usr/lib/xbmc/xbmc.bin
+
+# create xbmc-bin
+cd /tmp/RetroRig-bin
+sudo dpkg-deb -b . xbmc-bin_Gotham_V13.1_patched_for_RetroRig_patchlevel_2.deb
+
+# create xbmc
 cd /tmp/RetroRig
-sudo dpkg-deb -b . xbmc-bin_Gotham_V13.1_patched_for_RetroRig.deb
+sudo dpkg-deb -b . xbmc_Gotham_V13.1_patched_for_RetroRig_patchlevel_2.deb
 
 # copy new deb to home dir
 
