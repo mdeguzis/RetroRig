@@ -637,9 +637,6 @@ function h_emu_user_fixes()
 	# PPSSPP	
 	sed -i 's|test|$user|g' "$scriptdir/emu-cfgs/x360_controller/PPSSPP/ppsspp.ini"
 	echo "The user applied to configuration files was: $user" | tee >> "$rootdir/logs/debug.log"
-	# MESS
-	sed -i "s|/home/test/RetroRig|$rootdir|g" $home/.mess/mess.ini | tee >> "$rootdir/logs/debug.log"
-
 
 }
 
@@ -685,6 +682,24 @@ dialog --backtitle "LibreGeek.org - RetroRig Setup." --msgbox "Fetched the lates
 
 function h_update_system() 
 {
+
+# Remove custom emulator binaries and install the latest
+
+###########################
+# PPSSPP
+###########################
+
+# RetroRig pulls this from libregeek.org to control versioning, rather than blindly
+# install the latest from 'http://ppsspp.angelxwind.net/'
+rm -f "/usr/bin/PPSSPPSDL"
+rm -rf "$rootdir/emulators/PPSSPP/*"
+# install latest PPSSPP
+em_install_ppsspp
+
+
+
+# Update other binaries that were installed via PPA's and Official Ubuntu repos
+
 apt-get update
 sleep 3s
 clear

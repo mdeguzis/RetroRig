@@ -56,20 +56,23 @@ function em_install_ppsspp()
 	# (this means I removed the CMAKE files left over). Once a tar.gz file, 
 	# this resulted in a 21.8 MB "mobile" pkg :)
 
+	# install pre-requisites
+	apt-get install -y libsdl1.2-dev
+
 	# pull down emulator from libregeek (to avoid increasing the git repo)
-	wget -P /tmp "www.libregeek.org/RetroRig/ppsspp-0.9.8-SDL-pk64.tar.gz"
+	wget -P /tmp "www.libregeek.org/RetroRig/karenbuildbot-net.angelxwind.ppsspp-linux-amd64-generic.tar.gz"
 
 	# Since ppsspp-0.9.8-SDL-pk64 is already in $rootdir/emulators, we just
 	# need to untar it:
-	tar -xzvf "/tmp/ppsspp-0.9.8-SDL-pk64.tar.gz" -C "$rootdir/emulators/PPSSPP"
+	tar -xzvf "/tmp/karenbuildbot-net.angelxwind.ppsspp-linux-amd64-generic.tar.gz" -C "$rootdir/emulators/PPSSPP"
 
 	# remove tmp file
-	rm -f /tmp/ppsspp-0.9.8-SDL-pk64.tar.gz
+	rm -f "/tmp/karenbuildbot-net.angelxwind.ppsspp-linux-amd64-generic.tar.gz"
 
 	# Symlink  binary to common location to avoid path errors based on where
 	# user installs RetroRig. Remove link if it exists first.
 	rm -f "/usr/bin/PPSSPPSDL"
-	ln -s "$rootdir/emulators/PPSSPP/ppsspp-0.9.8-SDL-pk64/PPSSPPSDL" "/usr/bin"
+	ln -s "$rootdir/emulators/PPSSPP/PPSSPPSDL" "/usr/bin/PPSSPPSDL"
 	chmod +x "/usr/bin/PPSSPPSDL"
 	
 	# XBMC will run the compiled executable file directly from this path

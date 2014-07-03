@@ -44,11 +44,10 @@ function cfg_confirm()
 function cfg_uninstall() 
 {
 
-#Confirm with user
-
-dialog --title "Confirm yes/no" \
+	#Confirm with user that they want to uninstall
+	dialog --title "Confirm yes/no" \
 	--backtitle "LibreGeek.org RetroRig Installer" \
-	--yesno "Do you REALLY want to uninstall RetroRig?" 5 52
+	--yesno "Are you SURE you want to Remove RetroRig?"  6 0
 	 
 	# Get exit status
 	# 0 means user hit [yes] button.
@@ -57,40 +56,39 @@ dialog --title "Confirm yes/no" \
 	response=$?
 	case $response in
 
-	0) 
-	# remove installed binaries
-	# do not remove software-properties-common, necessary pkg!
-	clear
-	apt-get autoremove -y xboxdrv curl python-software-properties \
-	pkg-config mednafen mame mupen64plus dconf-tools qjoypad xbmc \
-	stella build-essential
+		0) 
+		# remove installed binaries
+		# do not remove software-properties-common, necessary pkg!
+		clear
+		apt-get autoremove -y xboxdrv curl python-software-properties \
+		pkg-config mednafen mame mupen64plus dconf-tools qjoypad xbmc \
+		stella sixad
 
-	# add apport, apport-gtk back
-	apt-get install -y apport apport-gtk
-	dpkg --remove-architecture i386
+		# add apport, apport-gtk back
+		apt-get install -y apport apport-gtk
+		dpkg --remove-architecture i386
 
-	apt-get -y autoremove
+		apt-get -y autoremove
 
-	# repositories
-	add-apt-repository -ry ppa:team-xbmc/ppa
-	add-apt-repository -ry ppa:falk-t-j/qtsixa
-	rm -f /etc/apt/sources.list.d/playdeb.list
-	;;
+		# repositories
+		add-apt-repository -ry ppa:team-xbmc/ppa
+		add-apt-repository -ry ppa:falk-t-j/qtsixa
+		rm -f /etc/apt/sources.list.d/playdeb.list
+		;;
 
-   	1)
-	return
-	;; 
+	   	1)
+		return
+		;; 
 
-	255)
-	return
-	;;
+		255)
+		return
+		;;
 
 	esac
 
 #ask to keep folders
 #prompt user if they wish to keep folders from install
-dialog --title "Confirm yes/no" \
-	--backtitle "LibreGeek.org RetroRig Installer" \
+dialog --title "Confirm yes/no" --backtitle "LibreGeek.org RetroRig Installer" \
 	--yesno "Do you wish to keep configuration folders?" 6 30	
 	 
 	# Get exit status
@@ -119,11 +117,14 @@ dialog --title "Confirm yes/no" \
 	rm -f /etc/xdg/autostart/qjoypad.desktop
 	service xboxdrv stop
 
-	# Application scripts
-	rm -f "/usr/share/applications/ps3_autodetect_xbmc.sh"
+	# Application entries
+	rm -f "/usr/share/applications/gp_autodetect_xbmc.sh"
 	rm -f "/usr/share/applications/startXBMC.sh"
+	rm -f "/usr/share/applications/RetriRig.desktop"
 
-	# remove init services	
+	# remove init services
+	service xboxdrv stop
+	service rescan stop	
 	update-rc.d -f xboxdrv remove
 	rm -f /etc/init.d/xboxdrv
 	rm -f /etc/init.d/rescan
@@ -134,6 +135,12 @@ dialog --title "Confirm yes/no" \
 	# change default xsession
 	session_org="user-session=XBMC"
 	session_new="user-session=ubuntu"
+
+	# auto start entries
+	rm -f "$home/.config/autostart/RetroRig.desktop"
+
+	# shortcuts
+	rm -f "$xdg_desktop_dir/RetroRig.desktop"
 
 	# change the session
 	# NOTE! As of Ubuntu Trusy 14.04, lightdm-set-defaults is no longer available. This is because 
@@ -155,9 +162,8 @@ dialog --title "Confirm yes/no" \
 #ask to keep folders
 #prompt user if they wish to keep ROMs they loaded
 
-	dialog --title "Confirm yes/no" \
-	--backtitle "LibreGeek.org RetroRig Installer" \
-	--yesno "Do you wish to keep your ROMs/emulators?" 6 30
+dialog --title "Confirm yes/no" --backtitle "LibreGeek.org RetroRig Installer" \
+	--yesno "Do you wish to keep ROM folders?" 6 30
 	 
 	# Get exit status
 	# 0 means user hit [yes] button.
