@@ -104,7 +104,8 @@ h_restore_configs()
 	mv "$home/.qjoypad3.old" "$home/.qjoypad3" 2>  "/dev/null"
 	# .config dotfiles
 	mv "$home/.config/mupen64plus/mupen64plus.old" "$home/.config/mupen64plus.cfg" 2>  "/dev/null"
-	mv "$home/.config/ppsspp.old" "$home/.config/ppsspp.old" 2>  "/dev/null"
+	mv "$home/.config/PSP/SYSTEM/ppsspp.ini.old" "$home/.config/PSP/SYSTEM/ppsspp.ini" 2>  "/dev/null"
+	mv "$home/.config/PSP/SYSTEM/control.ini.old" "$home/.config/PSP/SYSTEM/control.ini" 2>  "/dev/null"
 	mv "$home/.ssh.old" "$home/.ssh" 2>  "/dev/null"
 
 	# system configs:
@@ -455,7 +456,6 @@ function h_res_switcher()
 	#make the changes, prefix new_X in case NULL was entered previously
 	sed -i "s|$gg_org_X|gg.xres $gg_new_X|g" "$home/.mednafen/mednafen-09x.cfg"
 	sed -i "s|$gg_org_Y|gg.yres $gg_new_Y|g" "$home/.mednafen/mednafen-09x.cfg"
-
 
 	#Mednafen (Turbographx 16)
 	pce_org_X=$(grep -Ee "\bpce.xres\b " "$home/.mednafen/mednafen-09x.cfg")
