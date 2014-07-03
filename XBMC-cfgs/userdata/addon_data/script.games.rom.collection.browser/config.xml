@@ -386,6 +386,7 @@
       <emulatorCmd>/usr/games/mednafen</emulatorCmd>
       <emulatorParams>"%ROM%"</emulatorParams>
       <romPath>/home/test/RetroRig/ROMs/NES/*.nes</romPath>
+      <romPath>/home/test/RetroRig/ROMs/NES/*.zip</romPath>
       <saveStatePath />
       <saveStateParams />
       <mediaPath type="boxfront">/home/test/RetroRig/Artwork/NES/boxfront/%GAME%.*</mediaPath>
