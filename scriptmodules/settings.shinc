@@ -23,7 +23,8 @@ while true; do
 	     8 "Enable XBMC session (beta feature)"
 	     9 "Backup existing configs"
 	     10 "Restore first run configs"
- 	     11 "Back to main menu")
+	     11 "Update XBMC binary/configs"
+ 	     12 "Back to main menu")
 
 	#make menu choice
 	choices=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
@@ -74,6 +75,10 @@ while true; do
 		;;
 
 		11)
+		h_update_XBMC_cfgs
+		;;
+
+		12)
 		return
 		;;
 

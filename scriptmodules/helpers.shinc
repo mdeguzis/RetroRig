@@ -7,6 +7,19 @@
 # You can also reach me on twitter: @N3RD42
 #
 
+h_update_XBMC_cfgs()
+{
+	clear
+	# make sure xbmc is not running
+	pkill xbmc
+	# pull the latest files
+	h_update_git
+	# update XBMC configs, including our custom version. This is a good idea
+	# since if we make changes to anything at all, this should take care of it
+	rrs_xbmc_patched
+
+}
+
 h_ps3_blu_check()
 {
 

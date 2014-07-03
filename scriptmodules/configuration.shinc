@@ -41,7 +41,7 @@ function cfg_confirm()
 	esac
 }
 
-function cfg_uninstall() 
+function cfg_uninstall()
 {
 
 	#Confirm with user that they want to uninstall
