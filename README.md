@@ -94,7 +94,7 @@ You will need git,figlet and dialog to run the installer:
 
 RetroRig will try to install them for you (for instance, if you download the zip archive), but if you
 experience any issues starting the script,enusre they exist with the CLI commands 'which dialog' 
-and 'which git" to ensure they report back.
+and 'which git" to ensure they report back. Please also ensure your graphics card or onboard graphics chipset supports OpenGL.
 
 To clone this repo via the CLI:
 
