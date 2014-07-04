@@ -294,11 +294,12 @@ Installer" --menu "| Main Menu (v. 0.8.0b) | \
     options=(1 "Install RetroRig" 
 	     2 "Retro Rig Settings" 
 	     3 "Pull latest files from git" 
-	     4 "Update emulator binaries" 
-	     5 "Upgrade System (use with caution!)" 
-	     6 "Reboot PC"
-	     7 "Uninstall RetroRig"  
-	     8 "Exit")
+	     4 "Update emulator binaries"
+	     5 "Update XBMC" 
+	     6 "Upgrade System (use with caution!)" 
+	     7 "Reboot PC"
+	     8 "Uninstall RetroRig"  
+	     9 "Exit")
 
 	#make menu choice
 	# Expanding arrays involves [@] and {}
@@ -341,7 +342,12 @@ Installer" --menu "| Main Menu (v. 0.8.0b) | \
 		chgrp -R "$user" "$scriptdir/logs/update_$now.log.gz"
 		;;
 
+
 	    5)
+		rrs_xbmc_patched
+		;;
+
+	    6)
 		now=$(date +'%d%m%Y_%H%M%S')
 		{
 		h_upgrade_system
@@ -350,15 +356,15 @@ Installer" --menu "| Main Menu (v. 0.8.0b) | \
 		chgrp -R "$user" "$scriptdir/logs/upgrade_$now.log.gz"
 		;;
 
-	    6) 
+	    7) 
 		rrs_reboot
 		;;
 
-	    7)
+	    8)
 		cfg_uninstall
 		;;
 
-	    8) 
+	    9) 
 		clear
 		exit
 		;;

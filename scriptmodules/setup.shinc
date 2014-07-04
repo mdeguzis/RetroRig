@@ -287,10 +287,6 @@ function rrs_software() {
 	# Inform user about post-install tasks
 	# Output postMSGs to screen
 
-	__postMSGs="$__postMSGs If you wish to start XBMC as a session ONLY, and not Unity whatsover, enable the 'XBMC Session' option in the settings menu! Please be advised that using RetroRig with the xbmc session enabled may result in odd behavior with some emulators. I am doing my best to help/correct this."
-	# inject a space to seperate messages?
-	__postMSGs="$__postMSGs "
-
 	# inject a space to seperate messages?
 	__postMSGs="$__postMSGs For VirtualBox users, please see the wiki under 'Installation' for notes on running RetroRig under a virtual machine! At the minimum, you will need to add a filter for your controller "
 	
