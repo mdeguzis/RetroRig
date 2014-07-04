@@ -330,6 +330,7 @@ function rrs_xbmc_patched()
                            libbluray1 \
                            libshairport1 \
                            libshairplay0 \
+			   libsdl1.2debian \
                            libaacs0 \
                            liblockdev1 \
                            libcec2 \
