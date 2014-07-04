@@ -175,7 +175,7 @@ function rrs_add_standard_repos()
 
 	# add repository for official team XBMC "stable"
 	# We use our own custom pkgs now...
-	# add-apt-repository -y ppa:team-xbmc/ppa
+	add-apt-repository -y ppa:team-xbmc/ppa
 
 	# add respository for qtsixa (PS3 pairing)
 	apt-add-repository -y ppa:falk-t-j/qtsixa
@@ -329,6 +329,7 @@ function rrs_xbmc_patched()
                            libbluray1 \
                            libshairport1 \
                            libshairplay0 \
+
                            libaacs0 \
                            liblockdev1 \
                            libcec2 \
