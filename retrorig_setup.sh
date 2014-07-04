@@ -289,7 +289,7 @@ sleep 5s
 
 while true; do
     cmd=(dialog --backtitle "LibreGeek.org RetroRig 
-Installer" --menu "| Main Menu (v. 0.8.0b) | \
+Installer" --menu "| Main Menu (v. 0.8.1b) | \
  			 BIOS files are NOT provided!" 17 62 16)
     options=(1 "Install RetroRig" 
 	     2 "Retro Rig Settings" 
@@ -315,7 +315,7 @@ Installer" --menu "| Main Menu (v. 0.8.0b) | \
 		rrs_prepareFolders
 		rrs_software
 		rrs_emulators
-		rrs_xbmc
+		rrs_xbmc_cfgs
 		rrs_gamepad
 		h_emu_user_fixes
 		set_resolution

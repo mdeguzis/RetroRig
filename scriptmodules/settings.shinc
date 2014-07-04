@@ -75,7 +75,7 @@ while true; do
 		;;
 
 		11)
-		h_update_XBMC
+		rrs_xbmc_cfgs
 		;;
 
 		12)

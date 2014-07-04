@@ -123,25 +123,6 @@ gsettings set com.canonical.Unity.Launcher favorites "$(gsettings get com.canoni
 
 }
 
-function rrs_xbmc()
-{
-
-	#xbmc does not (at least for Ubuntu's repo pkg) load the
-	#dot files without loading XBMC at least once
-	#copy in default folder base from first run:	
-	cp -Rv "$HOME/RetroRig/XBMC-cfgs/addons" "$HOME/.xbmc"
-	cp -Rv "$HOME/RetroRig/XBMC-cfgs/userdata" "$HOME/.xbmc"
-
-	# set the system user to an absolute value.
-	# RCB and some config files don't like using $HOME, rather /home/test/
-	# Let's change the config files to reflect the current username
-	sed -i "s|/home/test/|/home/$user/|g" "$home/.xbmc/userdata/addon_data/script.games.rom.collection.browser/config.xml"
-	echo "The user applied to configuration files was: $user"
-
-	# correct permissions
-	h_correct_perms
-
-}
 
 function rrs_gamepad (){
 
@@ -388,6 +369,26 @@ function rrs_xbmc_patched()
 
 	# start service
 	service rescan start
+}
+
+function rrs_xbmc_cfgs()
+{
+
+	#xbmc does not (at least for Ubuntu's repo pkg) load the
+	#dot files without loading XBMC at least once
+	#copy in default folder base from first run:	
+	cp -Rv "$HOME/RetroRig/XBMC-cfgs/addons" "$HOME/.xbmc"
+	cp -Rv "$HOME/RetroRig/XBMC-cfgs/userdata" "$HOME/.xbmc"
+
+	# set the system user to an absolute value.
+	# RCB and some config files don't like using $HOME, rather /home/test/
+	# Let's change the config files to reflect the current username
+	sed -i "s|/home/test/|/home/$user/|g" "$home/.xbmc/userdata/addon_data/script.games.rom.collection.browser/config.xml"
+	echo "The user applied to configuration files was: $user"
+
+	# correct permissions
+	h_correct_perms
+
 }
 
 function rrs_done()
