@@ -326,6 +326,7 @@ function rrs_xbmc_patched()
                            python-support \
                            ttf-dejavu-core \
                            libnfs1 \
+			   libpcrecpp0 \
                            libbluray1 \
                            libshairport1 \
                            libshairplay0 \
