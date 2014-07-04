@@ -124,7 +124,8 @@ gsettings set com.canonical.Unity.Launcher favorites "$(gsettings get com.canoni
 }
 
 
-function rrs_gamepad (){
+function rrs_gamepad ()
+{
 
 # some residual chown/chmod text shows up at times, clear
 clear
@@ -172,8 +173,9 @@ options=(1 "Xbox 360 Controller (wireless)"
 function rrs_add_standard_repos()
 {
 
-	#add repository for official team XBMC "stable"
-	add-apt-repository -y ppa:team-xbmc/ppa
+	# add repository for official team XBMC "stable"
+	# We use our own custom pkgs now...
+	# add-apt-repository -y ppa:team-xbmc/ppa
 
 	# add respository for qtsixa (PS3 pairing)
 	apt-add-repository -y ppa:falk-t-j/qtsixa
@@ -217,7 +219,8 @@ function rrs_emulators()
 
 }
 
-function rrs_software() {
+function rrs_software() 
+{
 
 	# clear post install messages
 	__postMSGs=""
@@ -238,13 +241,6 @@ function rrs_software() {
 	h_update_system
 
 	# install software from repositories
-	# BETA NOTE: XBMC is now going to be pre-compiled, then rolled back
-	# into a new deb pkg later on (well..soon)
-	
-	#######################################################################
-	# once manual testing of the XBMC compile is done, it will occur here!
-	#######################################################################
-
 	# install binaries
 	apt-get install -y xboxdrv curl python-software-properties \
 	pkg-config software-properties-common dconf-tools jstest-gtk \
@@ -284,7 +280,7 @@ See debug.log for more details. Continuing on to emulator installs..." 18 60
 function rrs_xbmc_patched()
 {
 
-	# create autostart for XBMC
+	# create autostart for XBMC and place our modified files
 	# Custom script for reboots/hotplugging
 	cp -v "$rootdir/XBMC-cfgs/extra/gp_autodetect_xbmc.sh" "/usr/share/applications/"
 	cp -v "$rootdir/XBMC-cfgs/extra/RetroRig.desktop" "/usr/share/applications/"
@@ -320,7 +316,6 @@ function rrs_xbmc_patched()
 	wget -P /tmp "www.libregeek.org/RetroRig/xbmc_Gotham_V13.1_patched_for_RetroRig_patchlevel_2.deb"
 	# install dependencies manually
 	apt-get install -y mesa-utils \
-		           libpcrepp0 \
                            libva-intel-vaapi-driver \
                            i965-va-driver:amd64 \
                            libavahi-compat-libdnssd-dev \
@@ -374,18 +369,33 @@ function rrs_xbmc_patched()
 
 function rrs_xbmc_cfgs()
 {
-	local file="$home/.xbmc/userdata/addon_data/script.games.rom.collection.browser/"
+	clear
+	
+	# set local vars for this function
+	local gamedb_org="$home/.xbmc/userdata/addon_data/script.games.rom.collection.browser/"
+	local gamedb_tmp="/tmp/MyGames.db"
 
 	# back the current MyGames.db file if it exists	
-	if [ -n "$file" ]; then
-		cp -R "$file" "/tmp"
+	if [[ -n "$gamedb_org" ]]; then
+		cp -v "$gamedb_org" "/tmp"
 	fi
 
-	#xbmc does not (at least for Ubuntu's repo pkg) load the
-	#dot files without loading XBMC at least once
+	# xbmc does not (at least for Ubuntu's repo pkg) load the
+	# dot files without loading XBMC at least once, so let's copy ours in first
+
 	#copy in default folder base from first run:	
 	cp -Rv "$HOME/RetroRig/XBMC-cfgs/addons" "$HOME/.xbmc"
 	cp -Rv "$HOME/RetroRig/XBMC-cfgs/userdata" "$HOME/.xbmc"
+
+	# Restore MyGames.db if it exists
+	if [[ -n "$gamedb_tmp" ]]; then
+		# copy file over
+		cp -v "$gamedb_tmp" "$home/.xbmc/userdata/addon_data/script.games.rom.collection.browser/"
+		# remove /tmp file
+		# rm -f "$gamedb_tmp"
+	fi
+
+
 
 	# set the system user to an absolute value.
 	# RCB and some config files don't like using $HOME, rather /home/test/
@@ -395,7 +405,6 @@ function rrs_xbmc_cfgs()
 
 	# correct permissions
 	h_correct_perms
-
 }
 
 function rrs_done()
