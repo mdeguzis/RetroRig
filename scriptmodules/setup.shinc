@@ -596,3 +596,25 @@ function rrs_reboot()
 	esac
 }
 
+rrs_kernel_3_14()
+{
+
+	# This is a BETA test area to get the 3.14 kernel into 14.04 LTS
+	# so we can have PS3 USB Controller support back, which is broken
+	# in 3.13.0-29-generic. 
+	# Please see: https://bugs.launchpad.net/ubuntu/+source/linux/+bug/1326725
+	
+	wget -P /tmp "http://kernel.ubuntu.com/~kernel-ppa/mainline/v3.14-trusty/linux-headers-3.14.0-031400_3.14.0-031400.201403310035_all.deb"
+	wget -P /tmp "http://kernel.ubuntu.com/~kernel-ppa/mainline/v3.14-trusty/linux-headers-3.14.0-031400-generic_3.14.0-031400.201403310035_amd64.deb"
+	wget -P /tmp "http://kernel.ubuntu.com/~kernel-ppa/mainline/v3.14-trusty/linux-image-3.14.0-031400-generic_3.14.0-031400.201403310035_amd64.deb"
+
+	cd /tmp
+	dpkg -i linux-headers-3.14*.deb linux-image-3.14*.deb
+
+	# inform user
+	dialog --msgbox "upgrading the kernel to 3.14 is complete, please reboot" 5 60
+
+	# prompt to reboot
+	rrs_reboot
+}
+

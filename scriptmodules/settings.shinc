@@ -24,7 +24,8 @@ while true; do
 	     9 "Backup existing configs"
 	     10 "Restore first run configs"
 	     11 "Update XBMC configs"
- 	     12 "Back to main menu")
+	     12 "Upgrade kernel (PS3 USB testing)"
+ 	     13 "Back to main menu")
 
 	#make menu choice
 	choices=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
@@ -76,6 +77,10 @@ while true; do
 
 		11)
 		rrs_xbmc_cfgs
+		;;
+
+		12)
+		rrs_kernel_3_14
 		;;
 
 		12)
