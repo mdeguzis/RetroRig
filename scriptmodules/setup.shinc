@@ -599,6 +599,32 @@ function rrs_reboot()
 rrs_kernel_3_14()
 {
 
+	#confirm kernel upgrade is the intended action
+	dialog --title "Confirm yes/no" \
+	--backtitle "LibreGeek.org RetroRig Installer" \
+	--yesno "Are you sure you want to Upgrade Ubuntu's Kernel to 3.14?\n\nThis carries risks of instability. Canonical does not recommend updating your Linux kernel to other versions other than the ones provided on official channels. This is not a totally safe procedure and you might have problems afterwards, even system failures or applications not working properly. On the other hand, you might get better performance from your system.\n\nHowever, in upgrading to the 3.14 kernel, you regain PS3 Controller USB support, broken in '3.13.0-29-generic' of Ubuntu 14.04 LTS. See: http://bit.ly/1qwnL08"  17 64
+
+	# Get exit status
+	# 0 means user hit [yes] button.
+	# 1 means user hit [no] button.
+	# 255 means user hit [Esc] key.
+	response=$?
+	case $response in
+		0)
+		clear
+		# continue below
+		;;
+
+		1)
+		return 
+		;;
+
+		255)
+		return
+		;;
+	esac
+
+
 	# This is a BETA test area to get the 3.14 kernel into 14.04 LTS
 	# so we can have PS3 USB Controller support back, which is broken
 	# in 3.13.0-29-generic. 

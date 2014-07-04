@@ -24,7 +24,7 @@ while true; do
 	     9 "Backup existing configs"
 	     10 "Restore first run configs"
 	     11 "Update XBMC configs"
-	     12 "Upgrade kernel (PS3 USB testing)"
+	     12 "Upgrade Ubuntu kernel (PS3 USB Support)"
  	     13 "Back to main menu")
 
 	#make menu choice
@@ -83,7 +83,7 @@ while true; do
 		rrs_kernel_3_14
 		;;
 
-		12)
+		13)
 		return
 		;;
 
