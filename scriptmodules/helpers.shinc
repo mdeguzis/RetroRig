@@ -7,19 +7,6 @@
 # You can also reach me on twitter: @N3RD42
 #
 
-h_update_XBMC_cfgs()
-{
-	clear
-	# make sure xbmc is not running
-	pkill xbmc
-	# pull the latest files
-	h_update_git
-	# update XBMC configs, including our custom version. This is a good idea
-	# since if we make changes to anything at all, this should take care of it
-	rrs_xbmc_patched
-
-}
-
 h_ps3_blu_check()
 {
 
@@ -708,12 +695,14 @@ function h_update_system()
 rm -f "/usr/bin/PPSSPPSDL"
 rm -rf "$rootdir/emulators/PPSSPP/*"
 # install latest PPSSPP
-em_install_ppsspp
+rrs_emulators
 
-
+###########################
+# XBMC
+###########################
+h_update_XBMC
 
 # Update other binaries that were installed via PPA's and Official Ubuntu repos
-
 apt-get update
 sleep 3s
 clear
@@ -728,5 +717,31 @@ apt-get update
 apt-get upgrade
 sleep 3s
 clear
+
+}
+
+h_update_XBMC()
+{
+	clear
+	# make sure xbmc is not running
+	pkill xbmc
+	# pull the latest files
+	h_update_git
+
+	# backup MyGames.db
+	cp "$home/.xbmc/userdata/addon_data/script.games.rom.collection.browser/MyGames.db" "/tmp"
+
+	# update XBMC configs, including our custom version. This is a good idea
+	# since if we make changes to anything at all, this should take care of it
+	rrs_xbmc_patched
+
+	# restore MyGames.db
+	cp "/tmp/MyGames.db" "$home/.xbmc/userdata/addon_data/script.games.rom.collection.browser/MyGames.db" 
+
+	# cleanup /tmp
+	rm -f "/tmp/MyGames.db"
+
+	# correct permissions
+	h_correct_perms
 
 }

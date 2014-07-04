@@ -288,8 +288,9 @@ sleep 5s
 
 
 while true; do
-    cmd=(dialog --backtitle "LibreGeek.org RetroRig Installer" --menu "| Main Menu | \
- 			 Any required BIOS files are NOT provided!" 17 62 16)
+    cmd=(dialog --backtitle "LibreGeek.org RetroRig 
+Installer" --menu "| Main Menu (v. 0.8.0) | \
+ 			 BIOS files are NOT provided!" 17 62 16)
     options=(1 "Install RetroRig" 
 	     2 "Retro Rig Settings" 
 	     3 "Pull latest files from git" 

@@ -123,7 +123,7 @@ gsettings set com.canonical.Unity.Launcher favorites "$(gsettings get com.canoni
 
 }
 
-function rrs_xbmc ()
+function rrs_xbmc()
 {
 
 	#xbmc does not (at least for Ubuntu's repo pkg) load the
@@ -151,9 +151,10 @@ clear
 cmd=(dialog --backtitle "LibreGeek.org RetroRig Installer" --menu "| Gamepad Select | \
 			 Request any new Gamepads via github!" 16 62 16)
 options=(1 "Xbox 360 Controller (wireless)"
-	 2 "Xbox 360 Controller (wired)"
+	 2 "Xbox 360 Controller (USB)"
 	 3 "Sony PS3 Sixaxis (Bluetooth)"
-	 4 "Exit gamepad selection")
+	 4 "Sony PS3 Sixaxis (USB)"
+	 5 "Exit gamepad selection")
 
 	#make menu choice
 	selection=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
@@ -176,6 +177,10 @@ options=(1 "Xbox 360 Controller (wireless)"
 		;;
 
 		4)
+		gp_ps3_usb
+		;;
+
+		5)
 		return
 		;;
 
