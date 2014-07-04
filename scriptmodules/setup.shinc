@@ -178,7 +178,7 @@ function rrs_add_standard_repos()
 	add-apt-repository -y ppa:team-xbmc/ppa
 
 	# add respository for qtsixa (PS3 pairing)
-	apt-add-repository -y ppa:falk-t-j/qtsixa
+	add-apt-repository -y ppa:falk-t-j/qtsixa
 
 }
 
