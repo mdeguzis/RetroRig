@@ -320,6 +320,7 @@ function rrs_xbmc_patched()
 	wget -P /tmp "www.libregeek.org/RetroRig/xbmc_Gotham_V13.1_patched_for_RetroRig_patchlevel_2.deb"
 	# install dependencies manually
 	apt-get install -y mesa-utils \
+		           libpcrepp0 \
                            libva-intel-vaapi-driver \
                            i965-va-driver:amd64 \
                            libavahi-compat-libdnssd-dev \
@@ -373,6 +374,12 @@ function rrs_xbmc_patched()
 
 function rrs_xbmc_cfgs()
 {
+	local file="$home/.xbmc/userdata/addon_data/script.games.rom.collection.browser/"
+
+	# back the current MyGames.db file if it exists	
+	if [ -n "$file" ]; then
+		cp -R "$file" "/tmp"
+	fi
 
 	#xbmc does not (at least for Ubuntu's repo pkg) load the
 	#dot files without loading XBMC at least once
