@@ -296,10 +296,11 @@ Installer" --menu "| Main Menu (v. 0.8.0b) | \
 	     3 "Pull latest files from git" 
 	     4 "Update emulator binaries"
 	     5 "Update XBMC" 
-	     6 "Upgrade System (use with caution!)" 
-	     7 "Reboot PC"
-	     8 "Uninstall RetroRig"  
-	     9 "Exit")
+	     6 "Update System"
+	     7 "Upgrade System (Use with caution)"  
+	     8 "Reboot PC"
+	     9 "Uninstall RetroRig"  
+	     10 "Exit")
 
 	#make menu choice
 	# Expanding arrays involves [@] and {}
@@ -334,37 +335,29 @@ Installer" --menu "| Main Menu (v. 0.8.0b) | \
 		;;
 
 	    4)
-		now=$(date +'%d%m%Y_%H%M%S')
-		{
-		h_update_system
-		} 2>&1 | tee >(gzip --stdout > $scriptdir/logs/update_$now.log.gz)              	
-		chown -R "$user" "$scriptdir/logs/update_$now.log.gz"
-		chgrp -R "$user" "$scriptdir/logs/update_$now.log.gz"
+		rrs_emulators
 		;;
-
-
 	    5)
 		rrs_xbmc_patched
 		;;
 
 	    6)
-		now=$(date +'%d%m%Y_%H%M%S')
-		{
-		h_upgrade_system
-		} 2>&1 | tee >(gzip --stdout > "$scriptdir/logs/upgrade_$now.log.gz")	               	
-		chown -R "$user" "$scriptdir/logs/upgrade_$now.log.gz"
-		chgrp -R "$user" "$scriptdir/logs/upgrade_$now.log.gz"
+		h_update_system
 		;;
 
-	    7) 
+	    7)
+		h_upgrade_system
+		;;
+
+	    8) 
 		rrs_reboot
 		;;
 
-	    8)
+	    9)
 		cfg_uninstall
 		;;
 
-	    9) 
+	    10) 
 		clear
 		exit
 		;;

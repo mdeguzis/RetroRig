@@ -126,7 +126,6 @@ h_restore_configs()
 
 
 function h_plugin_switcher()
-
 {
 
 cmd=(dialog --backtitle "LibreGeek.org RetroRig Installer" --menu "Plugin Configuration Menu" 16 0 16)
@@ -684,25 +683,8 @@ dialog --backtitle "LibreGeek.org - RetroRig Setup." --msgbox "Fetched the lates
 function h_update_system() 
 {
 
-# Remove custom emulator binaries and install the latest
 
-###########################
-# PPSSPP
-###########################
-
-# RetroRig pulls this from libregeek.org to control versioning, rather than blindly
-# install the latest from 'http://ppsspp.angelxwind.net/'
-rm -f "/usr/bin/PPSSPPSDL"
-rm -rf "$rootdir/emulators/PPSSPP/*"
-# install latest PPSSPP
-rrs_emulators
-
-###########################
-# XBMC
-###########################
-h_update_XBMC
-
-# Update other binaries that were installed via PPA's and Official Ubuntu repos
+# Update binaries that were installed via PPA's and Official Ubuntu repos
 apt-get update
 sleep 3s
 clear
