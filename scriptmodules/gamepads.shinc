@@ -210,7 +210,7 @@ function gp_ps3_usb()
 	cp -v "$rootdir/init-scripts/ps3_usb_controller/default/xboxdrv" "/etc/default/xboxdrv"
 
 	# set qjoypad
-	cp -v "$rootdir/gamepad-cfgs/ps3_usb_controller/ps3_sixaxis_blu.lyt" "$home/.qjoypad3"
+	cp -v "$rootdir/gamepad-cfgs/ps3_usb_controller/ps3_sixaxis_usb.lyt" "$home/.qjoypad3"
 	# copy qjoypad autostart item for x360_controller gamepad config
 	cp -v "$rootdir/gamepad-cfgs/ps3_usb_controller/qjoypad.desktop" "$home/.config/autostart"
 	
