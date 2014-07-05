@@ -2,7 +2,7 @@
 Version=1.0
 Name=qjoypad autostart
 Comment=Bolt on for added gamepad functions 
-Exec=qjoypad "ps3_sixaxis_blu"
+Exec=qjoypad "ps3_sixaxis_usb"
 Icon=
 Terminal=false
 Type=Application
