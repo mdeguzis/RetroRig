@@ -316,8 +316,11 @@ the service may fail to start correctly.\n\nPlease see /etc/default/xboxdrv for 
 	#update init scripts for xboxdrv
 	update-rc.d xboxdrv defaults
 
-	# start service now
-	service xboxdrv start &
+	# restart the service in a new shell to avoid the gzip operation hanging
+	# disabled for now since the gzip operation hangs waiting for xboxdrv
+	# to complete, when it's still sitting in the background
+	
+	# service xboxdrv start
 
 	# replace specific user paths that emulators and files may use
 	h_emu_user_fixes
@@ -393,14 +396,14 @@ function gp_x360_wireless()
 	# the use-dpad-as-button, and use-trigger-as-button options used.
 	cp -v "$rootdir/gamepad-cfgs/x360_controller/keyboard.xml" "$home/.xbmc/userdata/keymaps"
 
-	# patch XBMC <- this will probably be removed, standard install for now
-	# rrs_xbmc_patched
-
 	#update init scripts for xboxdrv
 	update-rc.d xboxdrv defaults
 
-	# start service now
-	service xboxdrv start &
+	# restart the service in a new shell to avoid the gzip operation hanging
+	# disabled for now since the gzip operation hangs waiting for xboxdrv
+	# to complete, when it's still sitting in the background
+	
+	# service xboxdrv start
 
 	# replace specific user paths that emulators and files may use
 	h_emu_user_fixes
@@ -475,14 +478,14 @@ function gp_x360_usb()
 	# the use-dpad-as-button, and use-trigger-as-button options used.
 	cp -v "$rootdir/gamepad-cfgs/x360_usb_controller/keyboard.xml" "$home/.xbmc/userdata/keymaps"
 
-	# patch XBMC <- this will probably be removed, standard install for now
-	# rrs_xbmc_patched
-
 	# update init scripts for xboxdrv
 	update-rc.d xboxdrv defaults
 
-	# start service now
-	service xboxdrv start &
+	# restart the service in a new shell to avoid the gzip operation hanging
+	# disabled for now since the gzip operation hangs waiting for xboxdrv
+	# to complete, when it's still sitting in the background
+	
+	# service xboxdrv start
 
 	# replace specific user paths that emulators and files may use
 	h_emu_user_fixes
