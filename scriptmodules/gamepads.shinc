@@ -316,11 +316,9 @@ the service may fail to start correctly.\n\nPlease see /etc/default/xboxdrv for 
 	#update init scripts for xboxdrv
 	update-rc.d xboxdrv defaults
 
-	# restart the service in a new shell to avoid the gzip operation hanging
-	# disabled for now since the gzip operation hangs waiting for xboxdrv
-	# to complete, when it's still sitting in the background
-	
-	# service xboxdrv start
+	# start the xboxdrv service
+	# disable for now, hangs script completion running in background
+	# service xboxdrv start &
 
 	# replace specific user paths that emulators and files may use
 	h_emu_user_fixes
@@ -399,11 +397,9 @@ function gp_x360_wireless()
 	#update init scripts for xboxdrv
 	update-rc.d xboxdrv defaults
 
-	# restart the service in a new shell to avoid the gzip operation hanging
-	# disabled for now since the gzip operation hangs waiting for xboxdrv
-	# to complete, when it's still sitting in the background
-	
-	# service xboxdrv start
+	# start the xboxdrv service
+	# disable for now, hangs script completion running in background
+	# service xboxdrv start &
 
 	# replace specific user paths that emulators and files may use
 	h_emu_user_fixes
@@ -481,11 +477,9 @@ function gp_x360_usb()
 	# update init scripts for xboxdrv
 	update-rc.d xboxdrv defaults
 
-	# restart the service in a new shell to avoid the gzip operation hanging
-	# disabled for now since the gzip operation hangs waiting for xboxdrv
-	# to complete, when it's still sitting in the background
-	
-	# service xboxdrv start
+	# start the xboxdrv service
+	# disable for now, hangs script completion running in background
+	# service xboxdrv start &
 
 	# replace specific user paths that emulators and files may use
 	h_emu_user_fixes

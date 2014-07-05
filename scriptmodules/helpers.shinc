@@ -678,7 +678,7 @@ function h_update_system()
 
 
 # Update binaries that were installed via PPA's and Official Ubuntu repos
-apt-get update
+apt-get update -y
 sleep 3s
 clear
 
@@ -688,8 +688,8 @@ function h_upgrade_system()
 {
 
 clear
-apt-get update
-apt-get upgrade
+apt-get update -y
+apt-get upgrade -y
 sleep 3s
 clear
 
