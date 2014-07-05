@@ -612,16 +612,6 @@ function h_correct_perms()
 
 	chmod 755 /etc/init.d/xboxdrv
 	chmod 755 /etc/default/xboxdrv
-
-	# Sometimes the custom skin reverts its files we modify
-	# This may take some time to debug, root cause maybe in an XBMC crash log
-	# help script. Change owership to root, with octal 755 (no -w-) for testing:
-	# This only needs done, and should be done for the 2 files we modify:
-
-	chown -v root:root "$home/.xbmc/addons/skin.maximinimalism/1080i/Home.xml"
-	chown -v root:root "$home/.xbmc/addons/skin.maximinimalism/extras/backgrounds/background001.jpg"
-	chmod 744 "$home/.xbmc/addons/skin.maximinimalism/extras/backgrounds/background001.jpg"
-	chmod 744 "$home/.xbmc/addons/skin.maximinimalism/extras/backgrounds/background001.jpg"
 }
 
 function h_emu_user_fixes()
