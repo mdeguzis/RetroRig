@@ -205,6 +205,9 @@ function gp_ps3_usb()
 	# This seciton is still pending review and testing !!!
 	##############################################################
 
+	# clean any old configs
+	h_clean_gamepad
+
 	#inject init script and default config for xboxdrv
 	cp -v "$rootdir/init-scripts/ps3_usb_controller/xboxdrv" "/etc/init.d/"
 	cp -v "$rootdir/init-scripts/ps3_usb_controller/default/xboxdrv" "/etc/default/xboxdrv"
