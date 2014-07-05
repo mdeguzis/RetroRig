@@ -71,7 +71,7 @@
   </global>
 <Home>
  <joystick name="Xbox Gamepad (userspace driver)">
-    <button id="13">XBMC.ActivateWindow(shutdownmenu)</button>
+    <button id="8">XBMC.ActivateWindow(shutdownmenu)</button>
  </joystick>
 </Home>
   <FullscreenVideo>
