@@ -603,6 +603,15 @@ rrs_kernel_3_14()
 {
 
 	#confirm kernel upgrade is the intended action
+	# suppressing for now, testing
+
+
+<<-
+
+**************************************
+* COMMENTED OUT FOR NOW, TESTING 
+**************************************
+
 	dialog --title "Confirm yes/no" \
 	--backtitle "LibreGeek.org RetroRig Installer" \
 	--yesno "Are you sure you want to Upgrade Ubuntu's Kernel to 3.14?\n\nThis carries risks of instability. By choosing yes, you accept those risks. Canonical does not recommend updating your Linux kernel to other versions other than the ones provided on official channels. This is not a totally safe procedure and you might have problems afterwards, even system failures or applications not working properly. On the other hand, you might get better performance from your system.\n\nHowever, in upgrading to the 3.14 kernel, you regain PS3 Controller USB support, broken in '3.13.0-29-generic' of Ubuntu 14.04 LTS. See: http://bit.ly/1qwnL08"  18 64
@@ -632,6 +641,8 @@ rrs_kernel_3_14()
 	# so we can have PS3 USB Controller support back, which is broken
 	# in 3.13.0-29-generic. 
 	# Please see: https://bugs.launchpad.net/ubuntu/+source/linux/+bug/1326725
+
+-
 	
 	wget -P /tmp "http://kernel.ubuntu.com/~kernel-ppa/mainline/v3.14-trusty/linux-headers-3.14.0-031400_3.14.0-031400.201403310035_all.deb"
 	wget -P /tmp "http://kernel.ubuntu.com/~kernel-ppa/mainline/v3.14-trusty/linux-headers-3.14.0-031400-generic_3.14.0-031400.201403310035_amd64.deb"

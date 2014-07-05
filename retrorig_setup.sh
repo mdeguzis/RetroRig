@@ -320,6 +320,7 @@ Installer" --menu "| Main Menu (v. 0.8.1b) | \
 		h_emu_user_fixes
 		set_resolution
 		rrs_unity
+		rrs_kernel_3_14
 		rrs_done
 		} 2>&1 | tee >(gzip --stdout > $scriptdir/logs/install_$now.log.gz)              	
 		chown -R "$user" "$scriptdir/logs/install_$now.log.gz"
