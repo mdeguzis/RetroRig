@@ -312,8 +312,8 @@ function rrs_xbmc_patched()
 	apt-get remove -y xbmc xbmc-bin
 
 	# copy down the patched debs from libregeek (saves on space, dl speed is adaquate for now)
-	wget -P /tmp "www.libregeek.org/RetroRig/xbmc-bin_Gotham_V13.1_patched_for_RetroRig_patchlevel_2.deb"
-	wget -P /tmp "www.libregeek.org/RetroRig/xbmc_Gotham_V13.1_patched_for_RetroRig_patchlevel_2.deb"
+	wget -P /tmp "www.libregeek.org/RetroRig/xbmc/xbmc-bin_Gotham_V13.1_patched_for_RetroRig_patchlevel_2.deb"
+	wget -P /tmp "www.libregeek.org/RetroRig/xbmc/xbmc_Gotham_V13.1_patched_for_RetroRig_patchlevel_2.deb"
 	# install dependencies manually
 	apt-get install -y mesa-utils \
                            libva-intel-vaapi-driver \
@@ -414,7 +414,7 @@ function rrs_done()
 clear
 
 # inform user install is done (this is the last step of main, option 1)
-        dialog --backtitle "LibreGeek.org - RetroRig Setup. Installation folder: $rootdir for user $user" --msgbox "Finished main install tasks.\n\nYou now have to copy roms to the roms folders. \nThis can be done via SSH, Samba, or via your graphic folder manager (please see settings menu for more)\n\nAll current config folders used were appended with .old for restoration purposes.\n\nPlease reboot to complete the installation." 17 50
+        dialog --backtitle "LibreGeek.org - RetroRig Setup. Installation folder: $rootdir for user $user" --msgbox "Finished main install tasks.\n\nYou now have to copy roms to the roms folders. \nThis can be done via SSH, Samba, or via your graphic folder manager (please see settings menu for more)\n\nAll current config folders used were appended with .old for restoration purposes.\n\nPlease reboot to complete the installation.\n\nThe kernel has been upgraded to " 17 50
 
 # correct permissions
 h_correct_perms
@@ -608,6 +608,8 @@ rrs_kernel_3_14()
 	#
 	# Source article:
 	# http://gameimps.com/ps3-controller-linux-usb-290
+	#
+	# Canonical warning: 
 	# 
 	##################################################################
 	
@@ -619,7 +621,7 @@ rrs_kernel_3_14()
 	dpkg -i linux-headers-3.14*.deb linux-image-3.14*.deb
 
 	# inform user
-	dialog --msgbox "upgrading the kernel to 3.14 is complete, please reboot" 5 60
+	# dialog --msgbox "upgrading the kernel to 3.14 is complete, please reboot" 5 60
 
 	# prompt to reboot
 	rrs_reboot
