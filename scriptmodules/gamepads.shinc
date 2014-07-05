@@ -60,12 +60,12 @@ function gp_ps3_blu()
 function gp_ps3_blu_main()
 {
 
-	#set qjoypad's profile to match Xbox 360 Wireless (4-player)
+	# set qjoypad's profile to match PS3
 	cp -v "$rootdir/gamepad-cfgs/ps3_blu_controller/ps3_sixaxis_blu.lyt" "$home/.qjoypad3"
-	#copy qjoypad autostart item for x360_controller gamepad config
+	# copy qjoypad autostart item for x360_controller gamepad config
 	cp -v "$rootdir/gamepad-cfgs/ps3_blu_controller/qjoypad.desktop" "$home/.config/autostart"
 	
-	#blacklist xpad
+	# blacklist xpad
 	cp -v "$rootdir/init-scripts/ps3_blu_controller/blacklist.conf" "/etc/modprobe.d/"
 
 
@@ -202,9 +202,23 @@ function gp_ps3_usb()
 {
 
 	##############################################################
-	# This seciton is still pending review and testing and is not
-	# used at the moment
+	# This seciton is still pending review and testing !!!
 	##############################################################
+
+	#inject init script and default config for xboxdrv
+	cp -v "$rootdir/init-scripts/ps3_usb_controller/xboxdrv" "/etc/init.d/"
+	cp -v "$rootdir/init-scripts/ps3_usb_controller/default/xboxdrv" "/etc/default/xboxdrv"
+
+	# set qjoypad
+	cp -v "$rootdir/gamepad-cfgs/ps3_usb_controller/ps3_sixaxis_blu.lyt" "$home/.qjoypad3"
+	# copy qjoypad autostart item for x360_controller gamepad config
+	cp -v "$rootdir/gamepad-cfgs/ps3_usb_controller/qjoypad.desktop" "$home/.config/autostart"
+	
+	#blacklist xpad
+	cp -v "$rootdir/init-scripts/ps3_usb_controller/blacklist.conf" "/etc/modprobe.d/"
+
+	# copy over default keyboard file:
+	cp -v "$rootdir/gamepad-cfgs/ps3_usb_controller/keyboard.xml" "$home/.xbmc/userdata/keymaps/keyboard.xml"
 
 	#mame
 	# default path: /home/$USER/.mame
@@ -243,14 +257,23 @@ function gp_ps3_usb()
 	cp -v "scriptdir/emu-cfgs/ps3_usb_controller/PPSSPP/ppsspp.ini" "$home/.config/ppsspp/PSP/SYSTEM"
 	cp -v "scriptdir/emu-cfgs/ps3_usb_controller/PPSSPP/controls.ini" "$home/.config/ppsspp/PSP/SYSTEM"
 
-	# The PS3 pairing process is not needed here if using usb!
-	# gp_ps3_blu_main
+	#update init scripts for xboxdrv
+	update-rc.d xboxdrv defaults
+
+	# start service now
+	# For some odd reason, the restart action hangs (but does not with sixad)
+	# This will be disabled for now...
+
+	# service xboxdrv start
 
 	# replace specific user paths that emulators and files may use
 	h_emu_user_fixes
 
-	# correct permissions
+	# correct permissions since we run as sudo
 	h_correct_perms
+
+	# Let the user know about LED's
+	dialog --msgbox "Please reboot to enable the controller."  5 43
 
 }
 
