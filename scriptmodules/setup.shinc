@@ -1,4 +1,4 @@
-#!/bin/bash -x
+#!/bin/bash
 #
 # RetroRig setup modules
 # This is a small script to copy over configuration files for emulators
@@ -622,8 +622,5 @@ rrs_kernel_3_14()
 
 	# inform user
 	# dialog --msgbox "upgrading the kernel to 3.14 is complete, please reboot" 5 60
-
-	# prompt to reboot
-	rrs_reboot
 }
 
