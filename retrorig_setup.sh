@@ -322,6 +322,7 @@ Installer" --menu "| Main Menu (v. 0.8.1b) | \
 		rrs_unity
 		rrs_kernel_3_14
 		rrs_done
+		rrs_reboot
 		} 2>&1 | tee "$scriptdir/logs/install_$now.log.txt"              	
 		chown -R "$user" "$scriptdir/logs/install_$now.log.txt"
 		chgrp -R "$user" "$scriptdir/logs/install_$now.log.txt"

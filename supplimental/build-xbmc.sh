@@ -45,13 +45,20 @@ echo "##########################################"
 echo "Removing old build files and directories"
 echo "##########################################"
 
+# create previous build directory for saving old build files
+mkdir -p ~/RetroRig-beforeBuild
+
 # remove xbmc,build dirs, and old files
 rm -f build_log.txt
 sudo apt-get remove -y xbmc xbmc-bin
+# backup old build dirs (ya know, for safety!)
+mv -v ~/xbmc ~/RetroRig-beforeBuild
+mv -v ~/RetroRig ~/RetroRig-beforeBuild
+# Continue to remove old directories
 rm -rfv ~/RetroRig
+rm -rfv ~/xbmc
 sudo rm -rfv /tmp/RetroRig
 sudo rm -rfv /tmp/RetroRig-bin/
-rm -rfv ~/xbmc
 rm -rfv ~/xbmc-bin_Gotham_V13.1_patched_for_RetroRig_patchlevel_*.deb
 rm -rfv ~/xbmc_Gotham_V13.1_patched_for_RetroRig_patchlevel_*.deb 
 
