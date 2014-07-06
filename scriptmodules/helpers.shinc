@@ -543,75 +543,79 @@ options=(1 "Neo-Geo CDZ"
 
 function h_correct_perms()
 {
+
+	# inform user of permissions corrections
+	clear
+	echo "Correcting permissions on folders due to use of sudo."
+	echo "Please wait..."
+
 	# correct permissions since we use sudo
-	chgrp -Rv "$user" "$rootdir"
-    	chown -Rv "$user" "$rootdir"
+	chgrp -Rv "$user" "$rootdir" > /dev/null 2>&1
+    	chown -Rv "$user" "$rootdir" > /dev/null 2>&1
 
 	# correct the desktop permissions so we can add our own launcher
 	# This will allow permissions change for all languages. Thanks JC!
 
-
-
 	# correct the desktop so we can add our own launcher
-	chmod -Rv 755 $xdg_desktop_dir
-	chown -Rv $user $xdg_desktop_dir
-	chgrp -Rv $user $xdg_desktop_dir
+	chmod -Rv 755 $xdg_desktop_dir > /dev/null 2>&1
+	chown -Rv $user $xdg_desktop_dir > /dev/null 2>&1
+	chgrp -Rv $user $xdg_desktop_dir > /dev/null 2>&1
 
 
 	# replace "test" username in config files here to ensure games
 	# and emulators function and start properly
 	
 	# mupen64plus files
-	chgrp -Rv "$user" "$home/.config/mupen64plus"
-     	chown -Rv "$user" "$home/.config/mupen64plus"
+	chgrp -Rv "$user" "$home/.config/mupen64plus" > /dev/null 2>&1
+     	chown -Rv "$user" "$home/.config/mupen64plus" > /dev/null 2>&1
 	# jstest-gtk files
-	chgrp -Rv "$user" "$home/.config/jstest-gtk"
-     	chown -Rv "$user" "$home/.config/jstest-gtk"
+	chgrp -Rv "$user" "$home/.config/jstest-gtk" > /dev/null 2>&1
+     	chown -Rv "$user" "$home/.config/jstest-gtk" > /dev/null 2>&1
 	# ppsspp files
-	chgrp -Rv "$user" "$home/.config/ppsspp"
-     	chown -Rv "$user" "$home/.config/ppsspp"
+	chgrp -Rv "$user" "$home/.config/ppsspp" > /dev/null 2>&1
+     	chown -Rv "$user" "$home/.config/ppsspp" > /dev/null 2>&1
 	# mame files
-	chgrp -Rv "$user" "$home/.mame"
-     	chown -Rv "$user" "$home/.mame"
+	chgrp -Rv "$user" "$home/.mame" > /dev/null 2>&1
+     	chown -Rv "$user" "$home/.mame" > /dev/null 2>&1
 	# mess files
-	chgrp -Rv "$user" "$home/.mess"
-     	chown -Rv "$user" "$home/.mess"
+	chgrp -Rv "$user" "$home/.mess" > /dev/null 2>&1
+     	chown -Rv "$user" "$home/.mess" > /dev/null 2>&1
 	# medanfen files
-	chgrp -Rv "$user" "$home/.mednafen"
-     	chown -Rv "$user" "$home/.mednafen"
+	chgrp -Rv "$user" "$home/.mednafen" > /dev/null 2>&1
+     	chown -Rv "$user" "$home/.mednafen" > /dev/null 2>&1
 	# qjoypad files
-	chgrp -Rv "$user" "$home/.qjoypad3"
-     	chown -Rv "$user" "$home/.qjoypad3"
+	chgrp -Rv "$user" "$home/.qjoypad3" > /dev/null 2>&1
+     	chown -Rv "$user" "$home/.qjoypad3" > /dev/null 2>&1
 	# qtsixa files
-	chgrp -Rv "$user" "$home/.qtsixa"
-     	chown -Rv "$user" "$home/.qtsixa"
+	chgrp -Rv "$user" "$home/.qtsixa" > /dev/null 2>&1
+     	chown -Rv "$user" "$home/.qtsixa" > /dev/null 2>&1
 	# stella files
-	chgrp -Rv "$user" "$home/.stella"
-     	chown -Rv "$user" "$home/.stella"
+	chgrp -Rv "$user" "$home/.stella" > /dev/null 2>&1
+     	chown -Rv "$user" "$home/.stella" > /dev/null 2>&1
 	# xbmc files
-	chgrp -Rv "$user" "$home/.xbmc"
-     	chown -Rv "$user" "$home/.xbmc"
+	chgrp -Rv "$user" "$home/.xbmc" > /dev/null 2>&1
+     	chown -Rv "$user" "$home/.xbmc" > /dev/null 2>&1
 	# qtsixa gui files
-	chgrp -Rv "$user" "$home/.sixemugui"
-     	chown -Rv "$user" "$home/.sixemugui"
+	chgrp -Rv "$user" "$home/.sixemugui" > /dev/null 2>&1
+     	chown -Rv "$user" "$home/.sixemugui" > /dev/null 2>&1
 	# XBMC extra filesfiles
-	chgrp -Rv "$user" "/usr/share/applications/gp_autodetect_xbmc.sh"
-     	chown -Rv "$user" "/usr/share/applications/gp_autodetect_xbmc.sh"
+	chgrp -Rv "$user" "/usr/share/applications/gp_autodetect_xbmc.sh" > /dev/null 2>&1
+     	chown -Rv "$user" "/usr/share/applications/gp_autodetect_xbmc.sh" > /dev/null 2>&1
 
-	chgrp -Rv "$user" "$xdg_pictures_dir/retro-icon.png"
-	chown -Rv "$user" "$xdg_pictures_dir/retro-icon.png"
+	chgrp -Rv "$user" "$xdg_pictures_dir/retro-icon.png" > /dev/null 2>&1
+	chown -Rv "$user" "$xdg_pictures_dir/retro-icon.png" > /dev/null 2>&1
 	
-	chgrp -Rv "$user" "/usr/share/applications/startXBMC.sh"
-	chown -Rv "$user" "/usr/share/applications/startXBMC.sh"
+	chgrp -Rv "$user" "/usr/share/applications/startXBMC.sh" > /dev/null 2>&1
+	chown -Rv "$user" "/usr/share/applications/startXBMC.sh" > /dev/null 2>&1
 
-	chgrp -Rv "$user" "$home/.config/autostart/RetroRig.desktop"
+	chgrp -Rv "$user" "$home/.config/autostart/RetroRig.desktop" > /dev/null 2>&1
 	chown -Rv "$user" "$home/.config/autostart/RetroRig.desktop"
 
-	chgrp -Rv "$user" "$home/.config/autostart/qjoypad.desktop"
-	chown -Rv "$user" "$home/.config/autostart/qjoypad.desktop"
+	chgrp -Rv "$user" "$home/.config/autostart/qjoypad.desktop" > /dev/null 2>&1
+	chown -Rv "$user" "$home/.config/autostart/qjoypad.desktop" > /dev/null 2>&1
 
-	chmod 755 /etc/init.d/xboxdrv
-	chmod 755 /etc/default/xboxdrv
+	chmod 755 /etc/init.d/xboxdrv > /dev/null 2>&1
+	chmod 755 /etc/default/xboxdrv > /dev/null 2>&1
 }
 
 function h_emu_user_fixes()
