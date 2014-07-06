@@ -322,9 +322,9 @@ Installer" --menu "| Main Menu (v. 0.8.1b) | \
 		rrs_unity
 		rrs_kernel_3_14
 		rrs_done
-		} 2>&1 | tee >(gzip --stdout > $scriptdir/logs/install_$now.log.gz)              	
-		chown -R "$user" "$scriptdir/logs/install_$now.log.gz"
-		chgrp -R "$user" "$scriptdir/logs/install_$now.log.gz"
+		} 2>&1 | tee "$scriptdir/logs/install_$now.log.txt"              	
+		chown -R "$user" "$scriptdir/logs/install_$now.log.txt"
+		chgrp -R "$user" "$scriptdir/logs/install_$now.log.txt"
 		;;
 
 	    2) 
