@@ -58,6 +58,10 @@ h_autosave_configs()
 	# Directory checks will likely be put in soon.
 	# Old files, aka originals when ran, will be appended with ".old"
 
+	# backup $home/.xbmc as a good precaution, even though we don't use this
+	# dotfile anymore
+	cp -v "$home/.xbmc" "$home/.xbmc.old" 2> "/dev/null"
+
 	clear
 	# home dotfiles:
 	cp -v "$home/.mame" "$home/.mame.old" 2> "/dev/null"
