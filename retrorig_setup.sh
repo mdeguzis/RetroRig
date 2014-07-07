@@ -298,7 +298,7 @@ printf "%*s\n" $(((${#title2}+$COLUMNS)/2)) "$title2"
 sleep 5s
 
 # set the directory '$home/.retrorig' as a variable for easy reading
-xbmc_home="$home/.retrorig"
+xbmc_home="$home/.retrorig/.xbmc"
 
 #################################################################
 
