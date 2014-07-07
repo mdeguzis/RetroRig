@@ -38,6 +38,7 @@
       <emulatorParams>"%ROM%"</emulatorParams>
       <romPath>/home/test/RetroRig/ROMs/Sega Master System/*.sms</romPath>
       <romPath>/home/test/RetroRig/ROMs/Sega Master System/*.zip</romPath>
+      <romPath>/home/test/RetroRig/ROMs/Sega Master System/*.bin</romPath>
       <saveStatePath />
       <saveStateParams />
       <mediaPath type="boxfront">/home/test/RetroRig/Artwork/Sega Master System/boxfront/%GAME%.*</mediaPath>
