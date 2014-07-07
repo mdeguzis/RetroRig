@@ -300,6 +300,10 @@ sleep 5s
 # set the directory '$home/.retrorig' as a variable for easy reading
 xbmc_home="$home/.retrorig/.xbmc"
 
+# set config_home for all the dotfiles that need copied down for emulators
+# and other utilities
+config_home="$home/.retrorig"
+
 #################################################################
 
 while true; do

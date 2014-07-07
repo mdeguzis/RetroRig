@@ -175,47 +175,47 @@ if [ "$choices" != "" ]; then
 		#echo curent resolution
 		#mupen64plus
 		echo "mupen64plus:" > "$scriptdir/logs/res.txt"
-		grep -Ee "\bScreenWidth = \b" "$home/.config/mupen64plus/mupen64plus.cfg" >> "$scriptdir/logs/res.txt"
-		grep -Ee "\bScreenHeight = \b" "$home/.config/mupen64plus/mupen64plus.cfg" >> "$scriptdir/logs/res.txt"
+		grep -Ee "\bScreenWidth = \b" "$config_home/.config/mupen64plus/mupen64plus.cfg" >> "$scriptdir/logs/res.txt"
+		grep -Ee "\bScreenHeight = \b" "$config_home/.config/mupen64plus/mupen64plus.cfg" >> "$scriptdir/logs/res.txt"
 		echo "" >> "$scriptdir/logs/res.txt"
 		#mednafen GBC
 		echo "Mednafen (GBC)" >> "$scriptdir/logs/res.txt"
-		grep -Ee "\bgb.xres\b" "$home/.mednafen/mednafen-09x.cfg" >> "$scriptdir/logs/res.txt"
-		grep -Ee "\bgb.yres\b" "$home/.mednafen/mednafen-09x.cfg" >> "$scriptdir/logs/res.txt"
+		grep -Ee "\bgb.xres\b" "$config_home/.mednafen/mednafen-09x.cfg" >> "$scriptdir/logs/res.txt"
+		grep -Ee "\bgb.yres\b" "$config_home/.mednafen/mednafen-09x.cfg" >> "$scriptdir/logs/res.txt"
 		echo "" >> "$scriptdir/logs/res.txt"
 		#mednafen GBA
 		echo "Mednafen (GBA)" >> "$scriptdir/logs/res.txt"
-		grep -Ee "\bgba.xres\b" "$home/.mednafen/mednafen-09x.cfg" >> "$scriptdir/logs/res.txt"
-		grep -Ee "\bgba.yres\b" "$home/.mednafen/mednafen-09x.cfg" >> "$scriptdir/logs/res.txt"
+		grep -Ee "\bgba.xres\b" "$config_home/.mednafen/mednafen-09x.cfg" >> "$scriptdir/logs/res.txt"
+		grep -Ee "\bgba.yres\b" "$config_home/.mednafen/mednafen-09x.cfg" >> "$scriptdir/logs/res.txt"
 		echo "" >> "$scriptdir/logs/res.txt"
 		#mednafen NES
 		echo "Mednafen (NES)" >> "$scriptdir/logs/res.txt"
-		grep -Ee "\bnes.xres\b" "$home/.mednafen/mednafen-09x.cfg" >> "$scriptdir/logs/res.txt"
-		grep -Ee "\bnes.yres\b" "$home/.mednafen/mednafen-09x.cfg" >> "$scriptdir/logs/res.txt"
+		grep -Ee "\bnes.xres\b" "$config_home/.mednafen/mednafen-09x.cfg" >> "$scriptdir/logs/res.txt"
+		grep -Ee "\bnes.yres\b" "$config_home/.mednafen/mednafen-09x.cfg" >> "$scriptdir/logs/res.txt"
 		echo "" >> "$scriptdir/logs/res.txt"
 		#mednafen Sega Sega Master System
 		echo "Mednafen (Sega Master System)" >> "$scriptdir/logs/res.txt"
-		grep -Ee "\bsms.xres\b" "$home/.mednafen/mednafen-09x.cfg" >> "$scriptdir/logs/res.txt"
-		grep -Ee "\bsms.yres\b" "$home/.mednafen/mednafen-09x.cfg" >> "$scriptdir/logs/res.txt"
+		grep -Ee "\bsms.xres\b" "$config_home/.mednafen/mednafen-09x.cfg" >> "$scriptdir/logs/res.txt"
+		grep -Ee "\bsms.yres\b" "$config_home/.mednafen/mednafen-09x.cfg" >> "$scriptdir/logs/res.txt"
 		echo "" >> "$scriptdir/logs/res.txt"
 		#mednafen Sega Game Gear
 		echo "Mednafen (Sega Game Gear)" >> "$scriptdir/logs/res.txt"
-		grep -Ee "\bgg.xres\b" "$home/.mednafen/mednafen-09x.cfg" >> "$scriptdir/logs/res.txt"
-		grep -Ee "\bgg.yres\b" "$home/.mednafen/mednafen-09x.cfg" >> "$scriptdir/logs/res.txt"
+		grep -Ee "\bgg.xres\b" "$config_home/.mednafen/mednafen-09x.cfg" >> "$scriptdir/logs/res.txt"
+		grep -Ee "\bgg.yres\b" "$config_home/.mednafen/mednafen-09x.cfg" >> "$scriptdir/logs/res.txt"
 		echo "" >> "$scriptdir/logs/res.txt"
 		#mednafen SNES
 		echo "Mednafen (SNES)" >> "$scriptdir/logs/res.txt"
-		grep -Ee "\bsnes.xres\b" "$home/.mednafen/mednafen-09x.cfg" >> "$scriptdir/logs/res.txt"
-		grep -Ee "\bsnes.yres\b" "$home/.mednafen/mednafen-09x.cfg" >> "$scriptdir/logs/res.txt"
+		grep -Ee "\bsnes.xres\b" "$config_home/.mednafen/mednafen-09x.cfg" >> "$scriptdir/logs/res.txt"
+		grep -Ee "\bsnes.yres\b" "$config_home/.mednafen/mednafen-09x.cfg" >> "$scriptdir/logs/res.txt"
 		echo "" >> "$scriptdir/logs/res.txt"
 		#mednafen Turbographx 16
 		echo "Mednafen (Turbographx 16)" >> "$scriptdir/logs/res.txt"
-		grep -Ee "\bpce.xres\b" "$home/.mednafen/mednafen-09x.cfg" >> "$scriptdir/logs/res.txt"
-		grep -Ee "\bpce.yres\b" "$home/.mednafen/mednafen-09x.cfg" >> "$scriptdir/logs/res.txt"
+		grep -Ee "\bpce.xres\b" "$config_home/.mednafen/mednafen-09x.cfg" >> "$scriptdir/logs/res.txt"
+		grep -Ee "\bpce.yres\b" "$config_home/.mednafen/mednafen-09x.cfg" >> "$scriptdir/logs/res.txt"
 		echo "" >> "$scriptdir/logs/res.txt"
 		#Stella
 		echo "Stella" >> "$scriptdir/logs/res.txt"
-		grep -Ee "\bfullres = \b" "$home/.stella/stellarc" >> "$scriptdir/logs/res.txt"
+		grep -Ee "\bfullres = \b" "$config_home/.stella/stellarc" >> "$scriptdir/logs/res.txt"
 		echo "" >> "$scriptdir/logs/res.txt"
 		#report current resolution
 		dialog --textbox "$scriptdir/logs/res.txt" 33 0
@@ -482,8 +482,8 @@ options=(1 "Change Video Plugin"
 		#Maybe I can find a way to swap the dir on the fly later on
 		folder=$(dialog --stdout --title "Please choose a file (spacebar to select)" --fselect $fstart/ 10 68)
 		#change plugin
-		m_plug_orig=$(grep -i "VideoPlugin = " "$home/.config/mupen64plus/mupen64plus.cfg")
-		sed -i "s|$m_plug_orig|VideoPlugin = $folder|g" "$home/.config/mupen64plus/mupen64plus.cfg"
+		m_plug_orig=$(grep -i "VideoPlugin = " "$config_home/.config/mupen64plus/mupen64plus.cfg")
+		sed -i "s|$m_plug_orig|VideoPlugin = $folder|g" "$config_home/.config/mupen64plus/mupen64plus.cfg"
 		;;
 
 		2)

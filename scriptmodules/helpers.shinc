@@ -64,18 +64,7 @@ h_autosave_configs()
 
 	clear
 	# home dotfiles:
-	cp -v "$home/.mame" "$home/.mame.old" 2> "/dev/null"
-	cp -v "$home/.mess" "$home/.mess.old" 2> "/dev/null"
-	cp -v "$home/.stella" "$home/.stella.old" 2>  "/dev/null"
-	cp -v "$home/.mednafen" "$home/.mednafen.old" 2> "/dev/null"
-	cp -v "$xbmc_home" "$xbmc_home.old" 2>  "/dev/null"
-	cp -v "$home/.qjoypad3" "$home/.qjoypad3.old" 2>  "/dev/null"
-	# .config dotfiles
-	cp -v "$home/.config/mupen64plus" "$home/.config/mupen64plus.old" 2> "/dev/null"
-	cp -v "$home/.config/ppsspp/PSP/SYSTEM/ppsspp.ini" "$home/.config/ppsspp/PSP/SYSTEM/ppsspp.ini.old" 2> "/dev/null"
-	cp -v "$home/.config/ppsspp/PSP/SYSTEM/controls.ini" "$home/.config/ppsspp/PSP/SYSTEM/controls.ini.old" 2> "/dev/null"
-	cp -v "$home/.ssh" "$home/.ssh.old" 2>  "/dev/null"
-	cp -v "$home/.qtsixa" "$home/.qtsixa.old" 2>  "/dev/null"
+	# This section is not needed anymore since we not use out own dotfile
 
 	# system configs:
 	cp -v "$home/.config/autostart/xbmc/desktop" "$home/.config/autostart/xbmc.desktop.old" 2> "/dev/null"
@@ -100,17 +89,7 @@ h_restore_configs()
 	# new files, aka new when installed, will be renamed without".old"
 
 	# home dotfiles:
-	mv "$home/.mame.old" "$home/.mame" 2>  "/dev/null"
-	mv "$home/.mess.old" "$home/.mess" 2>  "/dev/null"
-	mv "$home/.stella.old" "$home/.stella" 2>  "/dev/null"
-	mv "$home/.mednafen.old" "$home/.mednafen" 2>  "/dev/null"
-	mv "$xbmc_home.old" "$xbmc_home" 2>  "/dev/null"
-	mv "$home/.qjoypad3.old" "$home/.qjoypad3" 2>  "/dev/null"
-	# .config dotfiles
-	mv "$home/.config/mupen64plus/mupen64plus.old" "$home/.config/mupen64plus.cfg" 2>  "/dev/null"
-	mv "$home/.config/PSP/SYSTEM/ppsspp.ini.old" "$home/.config/PSP/SYSTEM/ppsspp.ini" 2>  "/dev/null"
-	mv "$home/.config/PSP/SYSTEM/control.ini.old" "$home/.config/PSP/SYSTEM/control.ini" 2>  "/dev/null"
-	mv "$home/.ssh.old" "$home/.ssh" 2>  "/dev/null"
+	# This section is not needed anymore since we not use out own dotfile
 
 	# system configs:
 	mv "/etc/xdg/autostart/xbmc.old" "/etc/xdg/autostart/xbmc" 2>  "/dev/null"
@@ -150,11 +129,11 @@ options=(1 "Current configuration"
 		#echo curent plugin settings
 		#mupen64plus
 		echo "Mupen64plus:" > res.txt
-		grep -i "VideoPlugin = " "$home/.config/mupen64plus/mupen64plus.cfg" >> "$scriptdir/logs/res.txt"
+		grep -i "VideoPlugin = " "$config_home/.config/mupen64plus/mupen64plus.cfg" >> "$scriptdir/logs/res.txt"
 		echo "" >> "$scriptdir/logs/res.txt"
 		#Stella
 		echo "Stella:" >> "$scriptdir/logs/res.txt"
-		grep -i "tia_filter" "$home/.stella/stellarc" >> "$scriptdir/logs/res.txt"
+		grep -i "tia_filter" "$config_home/.stella/stellarc" >> "$scriptdir/logs/res.txt"
 		echo "" >> res.txt
 		#report current resolution
 		dialog --textbox res.txt 33 0
@@ -380,18 +359,18 @@ function h_res_switcher()
 	########################		
 	#Stella
 	########################
-	st_org=$(grep -Ee "\bfullres = \b" "$home/.stella/stellarc")
+	st_org=$(grep -Ee "\bfullres = \b" "$config_home/.stella/stellarc")
 	#make the changes, prefix new_X in case NULL was entered previously
-	sed -i "s|$st_org|fullres = $st_new|g" "$home/.stella/stellarc"
+	sed -i "s|$st_org|fullres = $st_new|g" "$config_home/.stella/stellarc"
 
 	########################		
 	#mupen64plus
 	########################
-	m_org_X=$(grep -Ee "\bScreenWidth = \b" "$home/.config/mupen64plus/mupen64plus.cfg")
-	m_org_Y=$(grep -Ee "\bScreenHeight = \b" "$home/.config/mupen64plus/mupen64plus.cfg")
+	m_org_X=$(grep -Ee "\bScreenWidth = \b" "$config_home/.config/mupen64plus/mupen64plus.cfg")
+	m_org_Y=$(grep -Ee "\bScreenHeight = \b" "$config_home/.config/mupen64plus/mupen64plus.cfg")
 	#make the changes, prefix new_X in case NULL was entered previousey
-	sed -i "s|$m_org_X|ScreenWidth = $m_new_X|g" "$home/.config/mupen64plus/mupen64plus.cfg"
-	sed -i "s|$m_org_Y|ScreenHeight = $m_new_Y|g" "$home/.config/mupen64plus/mupen64plus.cfg"
+	sed -i "s|$m_org_X|ScreenWidth = $m_new_X|g" "$config_home/.config/mupen64plus/mupen64plus.cfg"
+	sed -i "s|$m_org_Y|ScreenHeight = $m_new_Y|g" "$config_home/.config/mupen64plus/mupen64plus.cfg"
 
 	########################		
 	#mednafen 
@@ -419,53 +398,53 @@ function h_res_switcher()
 	#the screen (EMU_CODE.aspect. See the wiki for more
 
 	#Mednafen (GBC)
-	gb_org_X=$(grep -Ee "\bgb.xres\b " "$home/.mednafen/mednafen-09x.cfg")
-	gb_org_Y=$(grep -Ee "\bgb.yres\b " "$home/.mednafen/mednafen-09x.cfg")
+	gb_org_X=$(grep -Ee "\bgb.xres\b " "$config_home/.mednafen/mednafen-09x.cfg")
+	gb_org_Y=$(grep -Ee "\bgb.yres\b " "$config_home/.mednafen/mednafen-09x.cfg")
 	#make the changes, prefix new_X in case NULL was entered previously
-	sed -i "s|$gb_org_X|gb.xres $gb_new_X|g" "$home/.mednafen/mednafen-09x.cfg"
-	sed -i "s|$gb_org_Y|gb.yres $gb_new_Y|g" "$home/.mednafen/mednafen-09x.cfg"
+	sed -i "s|$gb_org_X|gb.xres $gb_new_X|g" "$config_home/.mednafen/mednafen-09x.cfg"
+	sed -i "s|$gb_org_Y|gb.yres $gb_new_Y|g" "$config_home/.mednafen/mednafen-09x.cfg"
 
 	#Mednafen (NES)
-	nes_org_X=$(grep -Ee "\bnes.xres\b " "$home/.mednafen/mednafen-09x.cfg")
-	nes_org_Y=$(grep -Ee "\bnes.yres\b " "$home/.mednafen/mednafen-09x.cfg")
+	nes_org_X=$(grep -Ee "\bnes.xres\b " "$config_home/.mednafen/mednafen-09x.cfg")
+	nes_org_Y=$(grep -Ee "\bnes.yres\b " "$config_home/.mednafen/mednafen-09x.cfg")
 	#make the changes, prefix new_X in case NULL was entered previously
-	sed -i "s|$nes_org_X|nes.xres $nes_new_X|g" "$home/.mednafen/mednafen-09x.cfg"
-	sed -i "s|$nes_org_Y|nes.yres $nes_new_Y|g" "$home/.mednafen/mednafen-09x.cfg"
+	sed -i "s|$nes_org_X|nes.xres $nes_new_X|g" "$config_home/.mednafen/mednafen-09x.cfg"
+	sed -i "s|$nes_org_Y|nes.yres $nes_new_Y|g" "$config_home/.mednafen/mednafen-09x.cfg"
 
 	#Mednafen (GameBoy Advance)
-	gba_org_X=$(grep -Ee "\bgba.xres\b " "$home/.mednafen/mednafen-09x.cfg")
-	gba_org_Y=$(grep -Ee "\bgba.yres\b " "$home/.mednafen/mednafen-09x.cfg")
+	gba_org_X=$(grep -Ee "\bgba.xres\b " "$config_home/.mednafen/mednafen-09x.cfg")
+	gba_org_Y=$(grep -Ee "\bgba.yres\b " "$config_home/.mednafen/mednafen-09x.cfg")
 	#make the changes, prefix new_X in case NULL was entered previously
-	sed -i "s|$gba_org_X|gba.xres $gba_new_X|g" "$home/.mednafen/mednafen-09x.cfg"
-	sed -i "s|$gba_org_Y|gba.yres $gba_new_Y|g" "$home/.mednafen/mednafen-09x.cfg"
+	sed -i "s|$gba_org_X|gba.xres $gba_new_X|g" "$config_home/.mednafen/mednafen-09x.cfg"
+	sed -i "s|$gba_org_Y|gba.yres $gba_new_Y|g" "$config_home/.mednafen/mednafen-09x.cfg"
 
 	#Mednafen (SNES)
-	snes_org_X=$(grep -Ee "\bsnes.xres\b " "$home/.mednafen/mednafen-09x.cfg")
-	snes_org_Y=$(grep -Ee "\bsnes.yres\b " "$home/.mednafen/mednafen-09x.cfg")
+	snes_org_X=$(grep -Ee "\bsnes.xres\b " "$config_home/.mednafen/mednafen-09x.cfg")
+	snes_org_Y=$(grep -Ee "\bsnes.yres\b " "$config_home/.mednafen/mednafen-09x.cfg")
 	#make the changes, prefix new_X in case NULL was entered previously
-	sed -i "s|$snes_org_X|snes.xres $snes_new_X|g" "$home/.mednafen/mednafen-09x.cfg"
-	sed -i "s|$snes_org_Y|snes.yres $snes_new_Y|g" "$home/.mednafen/mednafen-09x.cfg"
+	sed -i "s|$snes_org_X|snes.xres $snes_new_X|g" "$config_home/.mednafen/mednafen-09x.cfg"
+	sed -i "s|$snes_org_Y|snes.yres $snes_new_Y|g" "$config_home/.mednafen/mednafen-09x.cfg"
 
 	#Mednafen (Sega Master System, aka Sega Sega Master)
-	sms_org_X=$(grep -Ee "\bsms.xres\b " "$home/.mednafen/mednafen-09x.cfg")
-	sms_org_Y=$(grep -Ee "\bsms.yres\b " "$home/.mednafen/mednafen-09x.cfg")
+	sms_org_X=$(grep -Ee "\bsms.xres\b " "$config_home/.mednafen/mednafen-09x.cfg")
+	sms_org_Y=$(grep -Ee "\bsms.yres\b " "$config_home/.mednafen/mednafen-09x.cfg")
 	#make the changes, prefix new_X in case NULL was entered previously
-	sed -i "s|$sms_org_X|sms.xres $sms_new_X|g" "$home/.mednafen/mednafen-09x.cfg"
-	sed -i "s|$sms_org_Y|sms.yres $sms_new_Y|g" "$home/.mednafen/mednafen-09x.cfg"
+	sed -i "s|$sms_org_X|sms.xres $sms_new_X|g" "$config_home/.mednafen/mednafen-09x.cfg"
+	sed -i "s|$sms_org_Y|sms.yres $sms_new_Y|g" "$config_home/.mednafen/mednafen-09x.cfg"
 
 	#Mednafen (Sega Game Gear)
-	gg_org_X=$(grep -Ee "\bgg.xres\b " "$home/.mednafen/mednafen-09x.cfg")
-	gg_org_Y=$(grep -Ee "\bgg.yres\b " "$home/.mednafen/mednafen-09x.cfg")
+	gg_org_X=$(grep -Ee "\bgg.xres\b " "$config_home/.mednafen/mednafen-09x.cfg")
+	gg_org_Y=$(grep -Ee "\bgg.yres\b " "$config_home/.mednafen/mednafen-09x.cfg")
 	#make the changes, prefix new_X in case NULL was entered previously
-	sed -i "s|$gg_org_X|gg.xres $gg_new_X|g" "$home/.mednafen/mednafen-09x.cfg"
-	sed -i "s|$gg_org_Y|gg.yres $gg_new_Y|g" "$home/.mednafen/mednafen-09x.cfg"
+	sed -i "s|$gg_org_X|gg.xres $gg_new_X|g" "$config_home/.mednafen/mednafen-09x.cfg"
+	sed -i "s|$gg_org_Y|gg.yres $gg_new_Y|g" "$config_home/.mednafen/mednafen-09x.cfg"
 
 	#Mednafen (Turbographx 16)
-	pce_org_X=$(grep -Ee "\bpce.xres\b " "$home/.mednafen/mednafen-09x.cfg")
-	pce_org_Y=$(grep -Ee "\bpce.yres\b " "$home/.mednafen/mednafen-09x.cfg")
+	pce_org_X=$(grep -Ee "\bpce.xres\b " "$config_home/.mednafen/mednafen-09x.cfg")
+	pce_org_Y=$(grep -Ee "\bpce.yres\b " "$config_home/.mednafen/mednafen-09x.cfg")
 	#make the changes, prefix new_X in case NULL was entered previously
-	sed -i "s|$pce_org_X|pce.xres $pce_new_X|g" "$home/.mednafen/mednafen-09x.cfg"
-	sed -i "s|$pce_org_Y|pce.yres $pce_new_Y|g" "$home/.mednafen/mednafen-09x.cfg"
+	sed -i "s|$pce_org_X|pce.xres $pce_new_X|g" "$config_home/.mednafen/mednafen-09x.cfg"
+	sed -i "s|$pce_org_Y|pce.yres $pce_new_Y|g" "$config_home/.mednafen/mednafen-09x.cfg"
 
 	# correct permissions
 	h_correct_perms
@@ -570,38 +549,38 @@ function h_correct_perms()
 	# and emulators function and start properly
 	
 	# mupen64plus files
-	chgrp -Rv "$user" "$home/.config/mupen64plus" > /dev/null 2>&1
-     	chown -Rv "$user" "$home/.config/mupen64plus" > /dev/null 2>&1
+	chgrp -Rv "$user" "$config_home/.config/mupen64plus" > /dev/null 2>&1
+     	chown -Rv "$user" "$config_home/.config/mupen64plus" > /dev/null 2>&1
 	# jstest-gtk files
-	chgrp -Rv "$user" "$home/.config/jstest-gtk" > /dev/null 2>&1
-     	chown -Rv "$user" "$home/.config/jstest-gtk" > /dev/null 2>&1
+	chgrp -Rv "$user" "$config_home/.config/jstest-gtk" > /dev/null 2>&1
+     	chown -Rv "$user" "$config_home/.config/jstest-gtk" > /dev/null 2>&1
 	# ppsspp files
-	chgrp -Rv "$user" "$home/.config/ppsspp" > /dev/null 2>&1
-     	chown -Rv "$user" "$home/.config/ppsspp" > /dev/null 2>&1
+	chgrp -Rv "$user" "$config_home/.config/ppsspp" > /dev/null 2>&1
+     	chown -Rv "$user" "$config_home/.config/ppsspp" > /dev/null 2>&1
 	# mame files
-	chgrp -Rv "$user" "$home/.mame" > /dev/null 2>&1
-     	chown -Rv "$user" "$home/.mame" > /dev/null 2>&1
+	chgrp -Rv "$user" "$config_home/.mame" > /dev/null 2>&1
+     	chown -Rv "$user" "$config_home/.mame" > /dev/null 2>&1
 	# mess files
-	chgrp -Rv "$user" "$home/.mess" > /dev/null 2>&1
-     	chown -Rv "$user" "$home/.mess" > /dev/null 2>&1
+	chgrp -Rv "$user" "$config_home/.mess" > /dev/null 2>&1
+     	chown -Rv "$user" "$config_home/.mess" > /dev/null 2>&1
 	# medanfen files
-	chgrp -Rv "$user" "$home/.mednafen" > /dev/null 2>&1
-     	chown -Rv "$user" "$home/.mednafen" > /dev/null 2>&1
+	chgrp -Rv "$user" "$config_home/.mednafen" > /dev/null 2>&1
+     	chown -Rv "$user" "$config_home/.mednafen" > /dev/null 2>&1
 	# qjoypad files
-	chgrp -Rv "$user" "$home/.qjoypad3" > /dev/null 2>&1
-     	chown -Rv "$user" "$home/.qjoypad3" > /dev/null 2>&1
+	chgrp -Rv "$user" "$config_home/.qjoypad3" > /dev/null 2>&1
+     	chown -Rv "$user" "$config_home/.qjoypad3" > /dev/null 2>&1
 	# qtsixa files
-	chgrp -Rv "$user" "$home/.qtsixa" > /dev/null 2>&1
-     	chown -Rv "$user" "$home/.qtsixa" > /dev/null 2>&1
+	chgrp -Rv "$user" "$config_home/.qtsixa" > /dev/null 2>&1
+     	chown -Rv "$user" "$config_home/.qtsixa" > /dev/null 2>&1
 	# stella files
-	chgrp -Rv "$user" "$home/.stella" > /dev/null 2>&1
-     	chown -Rv "$user" "$home/.stella" > /dev/null 2>&1
+	chgrp -Rv "$user" "$config_home/.stella" > /dev/null 2>&1
+     	chown -Rv "$user" "$config_home/.stella" > /dev/null 2>&1
 	# xbmc files
 	chgrp -Rv "$user" "$xbmc_home" > /dev/null 2>&1
      	chown -Rv "$user" "$xbmc_home" > /dev/null 2>&1
 	# qtsixa gui files
-	chgrp -Rv "$user" "$home/.sixemugui" > /dev/null 2>&1
-     	chown -Rv "$user" "$home/.sixemugui" > /dev/null 2>&1
+	chgrp -Rv "$user" "$config_home/.sixemugui" > /dev/null 2>&1
+     	chown -Rv "$user" "$config_home/.sixemugui" > /dev/null 2>&1
 	# XBMC extra filesfiles
 	chgrp -Rv "$user" "/usr/share/applications/gp_autodetect_xbmc.sh" > /dev/null 2>&1
      	chown -Rv "$user" "/usr/share/applications/gp_autodetect_xbmc.sh" > /dev/null 2>&1
@@ -634,13 +613,13 @@ function h_emu_user_fixes()
 {
 
 	# set the system user to an absolute value for files that require it
-	# RCB and some config files don't like using $HOME, rather /home/test/
+	# RCB and some config files don't like using $config_home, rather /home/test/
 	# Let's change the config files to reflect the current username
 
 	# mame
-	sed -i "s|/home/test/RetroRig|$rootdir|g" $home/.mame/mame.ini | tee >> "$rootdir/logs/debug.log"
+	sed -i "s|/home/test/RetroRig|$rootdir|g" $config_home/.mame/mame.ini | tee >> "$rootdir/logs/debug.log"
 	# MESS
-	sed -i "s|/home/test/RetroRig|$rootdir|g" $home/.mess/mess.ini | tee >> "$rootdir/logs/debug.log"
+	sed -i "s|/home/test/RetroRig|$rootdir|g" $config_home/.mess/mess.ini | tee >> "$rootdir/logs/debug.log"
 	# XBMC
 	sed -i "s|/home/test/|/home/$user/|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml" | tee >> "$rootdir/logs/debug.log"
 	# PPSSPP	

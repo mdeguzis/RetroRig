@@ -16,8 +16,8 @@ function gp_ps3_blu()
 	#mame
 	# default path: /home/$USER/.mame
 	# Main config
-	cp -v "$scriptdir/emu-cfgs/ps3_blu_controller/MAME/default.cfg" "$home/.mame/cfg"
-	cp -v "$scriptdir/emu-cfgs/ps3_blu_controller/MAME/mame.ini" "$home/.mame"
+	cp -v "$scriptdir/emu-cfgs/ps3_blu_controller/MAME/default.cfg" "$config_home/.mame/cfg"
+	cp -v "$scriptdir/emu-cfgs/ps3_blu_controller/MAME/mame.ini" "$config_home/.mame"
  
 	# offline artwork scrapper configs
 	cp -v "$scriptdir/emu-cfgs/ps3_blu_controller/MAME/parserConfig.xml" "$rootdir/Artwork/MAME"
@@ -27,29 +27,29 @@ function gp_ps3_blu()
 	# mess
 	# default path: /home/$USER/.mednafen/mednafen.cfg
 	# Main config
-	cp -v "$scriptdir/emu-cfgs/ps3_blu_controller/MESS/mess.ini" "$home/.mess"
-	cp -v "$scriptdir/emu-cfgs/ps3_blu_controller/MESS/default.cfg" "$home/.mess/cfg"
-	cp -v "$scriptdir/emu-cfgs/ps3_blu_controller/MESS/neocdz.cfg" "$home/.mess/cfg"
-	cp -v "$scriptdir/emu-cfgs/ps3_blu_controller/MESS/default.cfg" "$home/.mess/cfg"
+	cp -v "$scriptdir/emu-cfgs/ps3_blu_controller/MESS/mess.ini" "$config_home/.mess"
+	cp -v "$scriptdir/emu-cfgs/ps3_blu_controller/MESS/default.cfg" "$config_home/.mess/cfg"
+	cp -v "$scriptdir/emu-cfgs/ps3_blu_controller/MESS/neocdz.cfg" "$config_home/.mess/cfg"
+	cp -v "$scriptdir/emu-cfgs/ps3_blu_controller/MESS/default.cfg" "$config_home/.mess/cfg"
 
 	# mednafen
 	# default path: /home/$USER/.mednafen/mednafen.cfg
 	# Main config
-	cp -v "$scriptdir/emu-cfgs/ps3_blu_controller/mednafen/mednafen-09x.cfg" "$home/.mednafen"
+	cp -v "$scriptdir/emu-cfgs/ps3_blu_controller/mednafen/mednafen-09x.cfg" "$config_home/.mednafen"
 
 	# mupen64plus
 	# default path: /home/$USER/.config/mupen64plus
 	# Main config
-	cp -v "$scriptdir/emu-cfgs/ps3_blu_controller/mupen64plus/mupen64plus.cfg" "$home/.config/mupen64plus/"
+	cp -v "$scriptdir/emu-cfgs/ps3_blu_controller/mupen64plus/mupen64plus.cfg" "$config_home/.config/mupen64plus/"
 
 	#Stella
 	#default path: /home/$USER/.config/mupen64plus
 	#Main config
-	cp -v "$scriptdir/emu-cfgs/ps3_blu_controller/Stella/stellarc" "$home/.stella/"
+	cp -v "$scriptdir/emu-cfgs/ps3_blu_controller/Stella/stellarc" "$config_home/.stella/"
 
 	# PPSSPP
-	cp -v "$scriptdir/emu-cfgs/ps3_blu_controller/PPSSPP/ppsspp.ini" "$home/.config/ppsspp/PSP/SYSTEM"
-	cp -v "$scriptdir/emu-cfgs/ps3_blu_controller/PPSSPP/controls.ini" "$home/.config/ppsspp/PSP/SYSTEM"
+	cp -v "$scriptdir/emu-cfgs/ps3_blu_controller/PPSSPP/ppsspp.ini" "$config_home/.config/ppsspp/PSP/SYSTEM"
+	cp -v "$scriptdir/emu-cfgs/ps3_blu_controller/PPSSPP/controls.ini" "$config_home/.config/ppsspp/PSP/SYSTEM"
 
 	# The PS3 pairing process shoudl be handled interactively in a sepearte function:
 	gp_ps3_blu_main
@@ -61,7 +61,7 @@ function gp_ps3_blu_main()
 {
 
 	# set qjoypad's profile to match PS3
-	cp -v "$rootdir/gamepad-cfgs/ps3_blu_controller/ps3_sixaxis_blu.lyt" "$home/.qjoypad3"
+	cp -v "$rootdir/gamepad-cfgs/ps3_blu_controller/ps3_sixaxis_blu.lyt" "$config_home/.qjoypad3"
 	# copy qjoypad autostart item for x360_controller gamepad config
 	cp -v "$rootdir/gamepad-cfgs/ps3_blu_controller/qjoypad.desktop" "$home/.config/autostart"
 	
@@ -153,7 +153,7 @@ function gp_ps3_blu_main()
 	sed -i "s|$PS3_MAC_OLD|$PS3_MAC_P1_BLU|g" "$xbmc_home/userdata/keymaps/keyboard.xml"
 
 	# Stella does list the MAC address for the PS3 control in the stellarc file. Replace for now until further notice
-	sed -i "s|$PS3_MAC_OLD|$PS3_MAC_P1_BLU|g" "$home/.stella/stellarc"
+	sed -i "s|$PS3_MAC_OLD|$PS3_MAC_P1_BLU|g" "$config_home/.stella/stellarc"
 
 	# start the service at boot time
 	sixad --boot-yes
@@ -213,7 +213,7 @@ function gp_ps3_usb()
 	cp -v "$rootdir/init-scripts/ps3_usb_controller/default/xboxdrv" "/etc/default/xboxdrv"
 
 	# set qjoypad
-	cp -v "$rootdir/gamepad-cfgs/ps3_usb_controller/ps3_sixaxis_usb.lyt" "$home/.qjoypad3"
+	cp -v "$rootdir/gamepad-cfgs/ps3_usb_controller/ps3_sixaxis_usb.lyt" "$config_home/.qjoypad3"
 	# copy qjoypad autostart item for x360_controller gamepad config
 	cp -v "$rootdir/gamepad-cfgs/ps3_usb_controller/qjoypad.desktop" "$home/.config/autostart"
 	
@@ -279,8 +279,8 @@ the service may fail to start correctly.\n\nPlease see /etc/default/xboxdrv for 
 	#mame
 	# default path: /home/$USER/.mame
 	# Main config
-	cp -v "$scriptdir/emu-cfgs/ps3_usb_controller/MAME/default.cfg" "$home/.mame/cfg"
-	cp -v "$scriptdir/emu-cfgs/ps3_usb_controller/MAME/mame.ini" "$home/.mame"
+	cp -v "$scriptdir/emu-cfgs/ps3_usb_controller/MAME/default.cfg" "$config_home/.mame/cfg"
+	cp -v "$scriptdir/emu-cfgs/ps3_usb_controller/MAME/mame.ini" "$config_home/.mame"
  
 	# offline artwork scrapper configs
 	cp -v "$scriptdir/emu-cfgs/ps3_usb_controller/MAME/parserConfig.xml" "$rootdir/Artwork/MAME"
@@ -290,28 +290,28 @@ the service may fail to start correctly.\n\nPlease see /etc/default/xboxdrv for 
 	# mess
 	# default path: /home/$USER/.mednafen/mednafen.cfg
 	# Main config
-	cp -v "$scriptdir/emu-cfgs/ps3_usb_controller/MESS/mess.ini" "$home/.mess"
-	cp -v "$scriptdir/emu-cfgs/ps3_usb_controller/MESS/default.cfg" "$home/.mess/cfg"
-	cp -v "$scriptdir/emu-cfgs/ps3_usb_controller/MESS/neocdz.cfg" "$home/.mess/cfg"
+	cp -v "$scriptdir/emu-cfgs/ps3_usb_controller/MESS/mess.ini" "$config_home/.mess"
+	cp -v "$scriptdir/emu-cfgs/ps3_usb_controller/MESS/default.cfg" "$config_home/.mess/cfg"
+	cp -v "$scriptdir/emu-cfgs/ps3_usb_controller/MESS/neocdz.cfg" "$config_home/.mess/cfg"
 
 	# mednafen
 	# default path: /home/$USER/.mednafen/mednafen.cfg
 	# Main config
-	cp -v "$scriptdir/emu-cfgs/ps3_usb_controller/mednafen/mednafen-09x.cfg" "$home/.mednafen"
+	cp -v "$scriptdir/emu-cfgs/ps3_usb_controller/mednafen/mednafen-09x.cfg" "$config_home/.mednafen"
 
 	# mupen64plus
 	# default path: /home/$USER/.config/mupen64plus
 	# Main config
-	cp -v "$scriptdir/emu-cfgs/ps3_usb_controller/mupen64plus/mupen64plus.cfg" "$home/.config/mupen64plus/"
+	cp -v "$scriptdir/emu-cfgs/ps3_usb_controller/mupen64plus/mupen64plus.cfg" "$config_home/.config/mupen64plus/"
 
 	#Stella
 	#default path: /home/$USER/.config/mupen64plus
 	#Main config
-	cp -v "$scriptdir/emu-cfgs/ps3_usb_controller/Stella/stellarc" "$home/.stella/"
+	cp -v "$scriptdir/emu-cfgs/ps3_usb_controller/Stella/stellarc" "$config_home/.stella/"
 
 	# PPSSPP
-	cp -v "$scriptdir/emu-cfgs/ps3_usb_controller/PPSSPP/ppsspp.ini" "$home/.config/ppsspp/PSP/SYSTEM"
-	cp -v "$scriptdir/emu-cfgs/ps3_usb_controller/PPSSPP/controls.ini" "$home/.config/ppsspp/PSP/SYSTEM"
+	cp -v "$scriptdir/emu-cfgs/ps3_usb_controller/PPSSPP/ppsspp.ini" "$config_home/.config/ppsspp/PSP/SYSTEM"
+	cp -v "$scriptdir/emu-cfgs/ps3_usb_controller/PPSSPP/controls.ini" "$config_home/.config/ppsspp/PSP/SYSTEM"
 
 	#update init scripts for xboxdrv
 	update-rc.d xboxdrv defaults
@@ -340,8 +340,8 @@ function gp_x360_wireless()
 	#mame
 	# default path: /home/$USER/.mame
 	# Main config
-	cp -v "$scriptdir/emu-cfgs/x360_controller/MAME/default.cfg" "$home/.mame/cfg"
-	cp -v "$scriptdir/emu-cfgs/x360_controller/MAME/mame.ini" "$home/.mame"
+	cp -v "$scriptdir/emu-cfgs/x360_controller/MAME/default.cfg" "$config_home/.mame/cfg"
+	cp -v "$scriptdir/emu-cfgs/x360_controller/MAME/mame.ini" "$config_home/.mame"
  
 	# offline artwork scrapper configs
 	cp -v "$scriptdir/emu-cfgs/x360_controller/MAME/parserConfig.xml" "$rootdir/Artwork/MAME"
@@ -351,35 +351,35 @@ function gp_x360_wireless()
 	# mess
 	# default path: /home/$USER/.mednafen/mednafen.cfg
 	# Main config
-	cp -v "$scriptdir/emu-cfgs/x360_controller/MESS/mess.ini" "$home/.mess"
-	cp -v "$scriptdir/emu-cfgs/x360_controller/MESS/default.cfg" "$home/.mess/cfg"
-	cp -v "$scriptdir/emu-cfgs/x360_controller/MESS/neocdz.cfg" "$home/.mess/cfg"
+	cp -v "$scriptdir/emu-cfgs/x360_controller/MESS/mess.ini" "$config_home/.mess"
+	cp -v "$scriptdir/emu-cfgs/x360_controller/MESS/default.cfg" "$config_home/.mess/cfg"
+	cp -v "$scriptdir/emu-cfgs/x360_controller/MESS/neocdz.cfg" "$config_home/.mess/cfg"
 
 	# mednafen
 	# default path: /home/$USER/.mednafen/mednafen.cfg
 	# Main config
-	cp -v "$scriptdir/emu-cfgs/x360_controller/mednafen/mednafen-09x.cfg" "$home/.mednafen"
+	cp -v "$scriptdir/emu-cfgs/x360_controller/mednafen/mednafen-09x.cfg" "$config_home/.mednafen"
 
 	# mupen64plus
 	# default path: /home/$USER/.config/mupen64plus
 	# Main config
-	cp -v "$scriptdir/emu-cfgs/x360_controller/mupen64plus/mupen64plus.cfg" "$home/.config/mupen64plus/"
+	cp -v "$scriptdir/emu-cfgs/x360_controller/mupen64plus/mupen64plus.cfg" "$config_home/.config/mupen64plus/"
 
 	#Stella
 	#default path: /home/$USER/.config/mupen64plus
 	#Main config
-	cp -v "$scriptdir/emu-cfgs/x360_controller/Stella/stellarc" "$home/.stella/"
+	cp -v "$scriptdir/emu-cfgs/x360_controller/Stella/stellarc" "$config_home/.stella/"
 
 	# PPSSPP
-	cp -v "$scriptdir/emu-cfgs/x360_controller/PPSSPP/ppsspp.ini" "$home/.config/ppsspp/PSP/SYSTEM"
-	cp -v "$scriptdir/emu-cfgs/x360_controller/PPSSPP/controls.ini" "$home/.config/ppsspp/PSP/SYSTEM"
+	cp -v "$scriptdir/emu-cfgs/x360_controller/PPSSPP/ppsspp.ini" "$config_home/.config/ppsspp/PSP/SYSTEM"
+	cp -v "$scriptdir/emu-cfgs/x360_controller/PPSSPP/controls.ini" "$config_home/.config/ppsspp/PSP/SYSTEM"
 
 	############################################
 	# configure xboxdrv for 360 gamepad (wireless)
 	############################################
 
 	#set qjoypad's profile to match Xbox 360 Wireless (4-player)
-	cp -v "$rootdir/gamepad-cfgs/x360_controller/x360_controller.lyt" "$home/.qjoypad3"
+	cp -v "$rootdir/gamepad-cfgs/x360_controller/x360_controller.lyt" "$config_home/.qjoypad3"
 	#copy qjoypad autostart item for x360_controller gamepad config
 	cp -v "$rootdir/gamepad-cfgs/x360_controller/qjoypad.desktop" "$home/.config/autostart"
 	
@@ -420,8 +420,8 @@ function gp_x360_usb()
 	#mame
 	# default path: /home/$USER/.mame
 	# Main config
-	cp -v "$scriptdir/emu-cfgs/x360_usb_controller/MAME/default.cfg" "$home/.mame/cfg"
-	cp -v "$scriptdir/emu-cfgs/x360_usb_controller/MAME/mame.ini" "$home/.mame"
+	cp -v "$scriptdir/emu-cfgs/x360_usb_controller/MAME/default.cfg" "$config_home/.mame/cfg"
+	cp -v "$scriptdir/emu-cfgs/x360_usb_controller/MAME/mame.ini" "$config_home/.mame"
  
 	# offline artwork scrapper configs
 	cp -v "$scriptdir/emu-cfgs/x360_usb_controller/MAME/parserConfig.xml" "$rootdir/Artwork/MAME"
@@ -431,35 +431,35 @@ function gp_x360_usb()
 	# mess
 	# default path: /home/$USER/.mednafen/mednafen.cfg
 	# Main config
-	cp -v "$scriptdir/emu-cfgs/x360_usb_controller/MESS/mess.ini" "$home/.mess"
-	cp -v "$scriptdir/emu-cfgs/x360_usb_controller/MESS/default.cfg" "$home/.mess/cfg"
-	cp -v "$scriptdir/emu-cfgs/x360_usb_controller/MESS/neocdz.cfg" "$home/.mess/cfg"
+	cp -v "$scriptdir/emu-cfgs/x360_usb_controller/MESS/mess.ini" "$config_home/.mess"
+	cp -v "$scriptdir/emu-cfgs/x360_usb_controller/MESS/default.cfg" "$config_home/.mess/cfg"
+	cp -v "$scriptdir/emu-cfgs/x360_usb_controller/MESS/neocdz.cfg" "$config_home/.mess/cfg"
 
 	# mednafen
 	# default path: /home/$USER/.mednafen/mednafen.cfg
 	# Main config
-	cp -v "$scriptdir/emu-cfgs/x360_usb_controller/mednafen/mednafen-09x.cfg" "$home/.mednafen"
+	cp -v "$scriptdir/emu-cfgs/x360_usb_controller/mednafen/mednafen-09x.cfg" "$config_home/.mednafen"
 
 	# mupen64plus
 	# default path: /home/$USER/.config/mupen64plus
 	# Main config
-	cp -v "$scriptdir/emu-cfgs/x360_usb_controller/mupen64plus/mupen64plus.cfg" "$home/.config/mupen64plus/"
+	cp -v "$scriptdir/emu-cfgs/x360_usb_controller/mupen64plus/mupen64plus.cfg" "$config_home/.config/mupen64plus/"
 
 	#Stella
 	#default path: /home/$USER/.config/mupen64plus
 	#Main config
-	cp -v "$scriptdir/emu-cfgs/x360_usb_controller/Stella/stellarc" "$home/.stella/"
+	cp -v "$scriptdir/emu-cfgs/x360_usb_controller/Stella/stellarc" "$config_home/.stella/"
 
 	# PPSSPP
-	cp -v "$scriptdir/emu-cfgs/x360_usb_controller/PPSSPP/ppsspp.ini" "$home/.config/ppsspp/PSP/SYSTEM"
-	cp -v "$scriptdir/emu-cfgs/x360_usb_controller/PPSSPP/controls.ini" "$home/.config/ppsspp/PSP/SYSTEM"
+	cp -v "$scriptdir/emu-cfgs/x360_usb_controller/PPSSPP/ppsspp.ini" "$config_home/.config/ppsspp/PSP/SYSTEM"
+	cp -v "$scriptdir/emu-cfgs/x360_usb_controller/PPSSPP/controls.ini" "$config_home/.config/ppsspp/PSP/SYSTEM"
 
 	############################################
 	# configure xboxdrv for 360 gamepad (wireless)
 	############################################
 
 	#set qjoypad's profile to match Xbox 360 Wireless (4-player)
-	cp -v "$rootdir/gamepad-cfgs/x360_usb_controller/x360_usb_controller.lyt" "$home/.qjoypad3"
+	cp -v "$rootdir/gamepad-cfgs/x360_usb_controller/x360_usb_controller.lyt" "$config_home/.qjoypad3"
 	#copy qjoypad autostart item for x360_usb_controller gamepad config
 	cp -v "$rootdir/gamepad-cfgs/x360_usb_controller/qjoypad.desktop" "$home/.config/autostart"
 	
