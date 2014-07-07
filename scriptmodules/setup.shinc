@@ -379,7 +379,7 @@ function rrs_xbmc_cfgs()
 	clear
 	
 	# set local vars for this function
-	local gamedb_org="$home/.xbmc/userdata/addon_data/script.games.rom.collection.browser/"
+	local gamedb_org="$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/"
 	local gamedb_tmp="/tmp/MyGames.db"
 
 	# back the current MyGames.db file if it exists	
@@ -391,8 +391,8 @@ function rrs_xbmc_cfgs()
 	# dot files without loading XBMC at least once, so let's copy ours in first
 
 	#copy in default folder base from first run:	
-	cp -Rv "$HOME/RetroRig/XBMC-cfgs/addons" "$xbmc_home"
-	cp -Rv "$HOME/RetroRig/XBMC-cfgs/userdata" "$xbmc_home"
+	cp -Rv "$home/RetroRig/XBMC-cfgs/addons" "$xbmc_home"
+	cp -Rv "$home/RetroRig/XBMC-cfgs/userdata" "$xbmc_home"
 
 	# Restore MyGames.db if it exists
 	if [[ -n "$gamedb_tmp" ]]; then
