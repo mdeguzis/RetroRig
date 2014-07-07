@@ -109,7 +109,7 @@ dialog --title "Confirm yes/no" --backtitle "LibreGeek.org RetroRig Installer" \
 	rm -rf "$HOME/.config/mupen64plus" 
 	rm -rf "$HOME/.mame" 
 	rm -rf "$HOME/.stella" 
-	rm -rf "$HOME/.xbmc"
+	rm -rf "$xbmc_home"
 	rm -rf "$HOME/.mednafen" 
 	rm -rf "$HOME/.mess" 
 

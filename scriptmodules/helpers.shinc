@@ -47,7 +47,7 @@ h_clean_gamepad()
 	update-rc.d -f xboxdrv remove
 
 	# XBMC
-	rm -f "$home/.xbmc/userdata/keymaps/keyboard.xml"
+	rm -f "$xbmc_home/userdata/keymaps/keyboard.xml"
 }
 
 
@@ -64,7 +64,7 @@ h_autosave_configs()
 	cp -v "$home/.mess" "$home/.mess.old" 2> "/dev/null"
 	cp -v "$home/.stella" "$home/.stella.old" 2>  "/dev/null"
 	cp -v "$home/.mednafen" "$home/.mednafen.old" 2> "/dev/null"
-	cp -v "$home/.xbmc" "$home/.xbmc.old" 2>  "/dev/null"
+	cp -v "$xbmc_home" "$xbmc_home.old" 2>  "/dev/null"
 	cp -v "$home/.qjoypad3" "$home/.qjoypad3.old" 2>  "/dev/null"
 	# .config dotfiles
 	cp -v "$home/.config/mupen64plus" "$home/.config/mupen64plus.old" 2> "/dev/null"
@@ -100,7 +100,7 @@ h_restore_configs()
 	mv "$home/.mess.old" "$home/.mess" 2>  "/dev/null"
 	mv "$home/.stella.old" "$home/.stella" 2>  "/dev/null"
 	mv "$home/.mednafen.old" "$home/.mednafen" 2>  "/dev/null"
-	mv "$home/.xbmc.old" "$home/.xbmc" 2>  "/dev/null"
+	mv "$xbmc_home.old" "$xbmc_home" 2>  "/dev/null"
 	mv "$home/.qjoypad3.old" "$home/.qjoypad3" 2>  "/dev/null"
 	# .config dotfiles
 	mv "$home/.config/mupen64plus/mupen64plus.old" "$home/.config/mupen64plus.cfg" 2>  "/dev/null"
@@ -593,8 +593,8 @@ function h_correct_perms()
 	chgrp -Rv "$user" "$home/.stella" > /dev/null 2>&1
      	chown -Rv "$user" "$home/.stella" > /dev/null 2>&1
 	# xbmc files
-	chgrp -Rv "$user" "$home/.xbmc" > /dev/null 2>&1
-     	chown -Rv "$user" "$home/.xbmc" > /dev/null 2>&1
+	chgrp -Rv "$user" "$xbmc_home" > /dev/null 2>&1
+     	chown -Rv "$user" "$xbmc_home" > /dev/null 2>&1
 	# qtsixa gui files
 	chgrp -Rv "$user" "$home/.sixemugui" > /dev/null 2>&1
      	chown -Rv "$user" "$home/.sixemugui" > /dev/null 2>&1
@@ -602,18 +602,26 @@ function h_correct_perms()
 	chgrp -Rv "$user" "/usr/share/applications/gp_autodetect_xbmc.sh" > /dev/null 2>&1
      	chown -Rv "$user" "/usr/share/applications/gp_autodetect_xbmc.sh" > /dev/null 2>&1
 
+	# Pictures directory
 	chgrp -Rv "$user" "$xdg_pictures_dir/retro-icon.png" > /dev/null 2>&1
 	chown -Rv "$user" "$xdg_pictures_dir/retro-icon.png" > /dev/null 2>&1
 	
+	# start script
 	chgrp -Rv "$user" "/usr/share/applications/startXBMC.sh" > /dev/null 2>&1
 	chown -Rv "$user" "/usr/share/applications/startXBMC.sh" > /dev/null 2>&1
 
+	# desktop file
 	chgrp -Rv "$user" "$home/.config/autostart/RetroRig.desktop" > /dev/null 2>&1
 	chown -Rv "$user" "$home/.config/autostart/RetroRig.desktop"
 
+	# qjoypad desktop file
 	chgrp -Rv "$user" "$home/.config/autostart/qjoypad.desktop" > /dev/null 2>&1
 	chown -Rv "$user" "$home/.config/autostart/qjoypad.desktop" > /dev/null 2>&1
 
+	# correct our own start file for retrorig
+	chmod ugo+x /usr/bin/xbmc-retrorig
+
+	# xboxdrv init script
 	chmod 755 /etc/init.d/xboxdrv > /dev/null 2>&1
 	chmod 755 /etc/default/xboxdrv > /dev/null 2>&1
 }
@@ -630,7 +638,7 @@ function h_emu_user_fixes()
 	# MESS
 	sed -i "s|/home/test/RetroRig|$rootdir|g" $home/.mess/mess.ini | tee >> "$rootdir/logs/debug.log"
 	# XBMC
-	sed -i "s|/home/test/|/home/$user/|g" "$home/.xbmc/userdata/addon_data/script.games.rom.collection.browser/config.xml" | tee >> "$rootdir/logs/debug.log"
+	sed -i "s|/home/test/|/home/$user/|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml" | tee >> "$rootdir/logs/debug.log"
 	# PPSSPP	
 	sed -i 's|test|$user|g' "$scriptdir/emu-cfgs/x360_controller/PPSSPP/ppsspp.ini"
 	echo "The user applied to configuration files was: $user" | tee >> "$rootdir/logs/debug.log"

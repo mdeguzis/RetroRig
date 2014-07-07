@@ -237,6 +237,8 @@ home=$(eval echo ~$user)
 # setup $xdg_pictures_dir to "/home/username/Bilder"
 # setup $xdg_videos_dir to "/home/username/Videos"
 #
+#################################################################
+
 setDesktopEnvironment DESKTOP
 setDesktopEnvironment DOWNLOAD
 setDesktopEnvironment TEMPLATES
@@ -246,6 +248,15 @@ setDesktopEnvironment MUSIC
 setDesktopEnvironment PICTURES
 setDesktopEnvironment VIDEOS
 
+#################################################################
+
+
+#################################################################
+# Pre-configuration
+# 
+# as show the banner. Pre-reqs are checked and ammened if 
+# possible.
+#
 #################################################################
 
 
@@ -286,6 +297,10 @@ title2="www.libregeek.org"
 printf "%*s\n" $(((${#title2}+$COLUMNS)/2)) "$title2"
 sleep 5s
 
+# set the directory '$home/.retrorig' as a variable for easy reading
+xbmc_home="$home/.retrorig"
+
+#################################################################
 
 while true; do
     cmd=(dialog --backtitle "LibreGeek.org RetroRig 

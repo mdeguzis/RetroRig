@@ -75,16 +75,17 @@ function rrs_prepareFolders()
 	pathlist+=("$rootdir/Saves/Genesis")
 
 	#create dotfiles
-	pathlist+=("$HOME/.qjoypad3")
-	pathlist+=("$HOME/.config/mupen64plus")
+	pathlist+=("$home/.retrorig")
+	pathlist+=("$home/.qjoypad3")
+	pathlist+=("$home/.config/mupen64plus")
 	
-	pathlist+=("$HOME/.config/ppsspp/PSP/SYSTEM")
-	pathlist+=("$HOME/.mame/cfg")
-	pathlist+=("$HOME/.mess")
-	pathlist+=("$HOME/.mess/cfg")
-	pathlist+=("$HOME/.stella")
-	pathlist+=("$HOME/.xbmc/userdata/keymaps")
-	pathlist+=("$HOME/.mednafen")
+	pathlist+=("$home/.config/ppsspp/PSP/SYSTEM")
+	pathlist+=("$home/.mame/cfg")
+	pathlist+=("$home/.mess")
+	pathlist+=("$home/.mess/cfg")
+	pathlist+=("$home/.stella")
+	pathlist+=("$xbmc_home/userdata/keymaps")
+	pathlist+=("$home/.mednafen")
 
 	#BIOS folder(s)
 	pathlist+=("$rootdir/BIOS/MESS")
@@ -353,12 +354,16 @@ function rrs_xbmc_patched()
 	rm -f "/tmp/xbmc-bin_Gotham_V13.1_patched_for_RetroRig_patchlevel_2.deb"
 	rm -f "/tmp/xbmc_Gotham_V13.1_patched_for_RetroRig_patchlevel_2.deb"
 
-        #get SHA1 tag from patched XBMC version
+        # get SHA1 tag from patched XBMC version
         sha1=`file /usr/lib/xbmc/xbmc.bin | cut -f 19 -d ' '| cut -f 2 -d '='|cut -f 1 -d ','`
-        #insert SHA1 tag to rescan by replacing the place holder
+        # insert SHA1 tag to rescan by replacing the place holder
         cat "$rootdir/XBMC-cfgs/extra/rescan" | sed s/placeholderSHA1/$sha1/ > /tmp/rescan
         # move to /etc/init.d
 	mv "/tmp/rescan" "/etc/init.d/rescan"
+
+	# Create our on start file so we have use our own dotfile, rather than make the user
+	# use their existing .xbmc dotfile
+	cp -v "XBMC-cfgs/extra/xbmc-retrorig" "/usr/bin"
 
         chmod 755 "/etc/init.d/rescan"  
 
@@ -386,13 +391,13 @@ function rrs_xbmc_cfgs()
 	# dot files without loading XBMC at least once, so let's copy ours in first
 
 	#copy in default folder base from first run:	
-	cp -Rv "$HOME/RetroRig/XBMC-cfgs/addons" "$HOME/.xbmc"
-	cp -Rv "$HOME/RetroRig/XBMC-cfgs/userdata" "$HOME/.xbmc"
+	cp -Rv "$HOME/RetroRig/XBMC-cfgs/addons" "$xbmc_home"
+	cp -Rv "$HOME/RetroRig/XBMC-cfgs/userdata" "$xbmc_home"
 
 	# Restore MyGames.db if it exists
 	if [[ -n "$gamedb_tmp" ]]; then
 		# copy file over
-		cp -v "$gamedb_tmp" "$home/.xbmc/userdata/addon_data/script.games.rom.collection.browser/"
+		cp -v "$gamedb_tmp" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/"
 		# remove /tmp file
 		# rm -f "$gamedb_tmp"
 	fi
@@ -402,7 +407,7 @@ function rrs_xbmc_cfgs()
 	# set the system user to an absolute value.
 	# RCB and some config files don't like using $HOME, rather /home/test/
 	# Let's change the config files to reflect the current username
-	sed -i "s|/home/test/|/home/$user/|g" "$home/.xbmc/userdata/addon_data/script.games.rom.collection.browser/config.xml"
+	sed -i "s|/home/test/|/home/$user/|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
 	echo "The user applied to configuration files was: $user"
 
 	# correct permissions
@@ -427,14 +432,14 @@ function rrs_debug()
 
 	# Check for existance of essential files
 	echo "Essential files: XBMC:" > "$rootdir/logs/debug.log"
-	echo "Path(s): '$HOME/.xbmc/userdata'" >> "$rootdir/logs/debug.log"
-	h_filechecker "$HOME/.xbmc/userdata" "$rootdir/logs/debug.log"
+	echo "Path(s): '$xbmc_home/userdata'" >> "$rootdir/logs/debug.log"
+	h_filechecker "$xbmc_home/userdata" "$rootdir/logs/debug.log"
 	# RCB
 	echo "Essential files: ROM Collection Browser:" >> "$rootdir/logs/debug.log"
-	echo "Path: '$HOME/.xbmc/addons/script.games.rom.collection.browser'" >> "$rootdir/logs/debug.log"
-	h_filechecker "$HOME/.xbmc/addons/script.games.rom.collection.browser"	
-	echo "Path: '$HOME/.xbmc/userdata/addon_data/script.games.rom.collection.browser'" >> "$rootdir/logs/debug.log"
-	h_filechecker "$HOME/.xbmc/userdata/addon_data/script.games.rom.collection.browser" "$rootdir/logs/debug.log"
+	echo "Path: '$xbmc_home/addons/script.games.rom.collection.browser'" >> "$rootdir/logs/debug.log"
+	h_filechecker "$xbmc_home/addons/script.games.rom.collection.browser"	
+	echo "Path: '$xbmc_home/userdata/addon_data/script.games.rom.collection.browser'" >> "$rootdir/logs/debug.log"
+	h_filechecker "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser" "$rootdir/logs/debug.log"
 	# init file checks	
 	echo "Available init files:" >> "$rootdir/logs/debug.log"
 	echo "Has xboxdrv been loaded?" >> "$rootdir/logs/debug.log"

@@ -141,7 +141,7 @@ function gp_ps3_blu_main()
 
 	clear
 	# copy over default keyboard file:
-	cp -v "$rootdir/gamepad-cfgs/ps3_blu_controller/keyboard.xml" "$home/.xbmc/userdata/keymaps/keyboard.xml"
+	cp -v "$rootdir/gamepad-cfgs/ps3_blu_controller/keyboard.xml" "$xbmc_home/userdata/keymaps/keyboard.xml"
 
 	# First grab MAC Addresses:
 	# In the config file, the MAC is set to 00:00:00:00:00:00
@@ -150,7 +150,7 @@ function gp_ps3_blu_main()
 	PS3_MAC_OLD="00:00:00:00:00:00"
 
 	# Replace MAC Address for ***CONTROLLER 1 ONLY!*** This will be used to control XBMC		
-	sed -i "s|$PS3_MAC_OLD|$PS3_MAC_P1_BLU|g" "$home/.xbmc/userdata/keymaps/keyboard.xml"
+	sed -i "s|$PS3_MAC_OLD|$PS3_MAC_P1_BLU|g" "$xbmc_home/userdata/keymaps/keyboard.xml"
 
 	# Stella does list the MAC address for the PS3 control in the stellarc file. Replace for now until further notice
 	sed -i "s|$PS3_MAC_OLD|$PS3_MAC_P1_BLU|g" "$home/.stella/stellarc"
@@ -221,7 +221,7 @@ function gp_ps3_usb()
 	cp -v "$rootdir/init-scripts/ps3_usb_controller/blacklist.conf" "/etc/modprobe.d/"
 
 	# copy over default keyboard file:
-	cp -v "$rootdir/gamepad-cfgs/ps3_usb_controller/keyboard.xml" "$home/.xbmc/userdata/keymaps/keyboard.xml"
+	cp -v "$rootdir/gamepad-cfgs/ps3_usb_controller/keyboard.xml" "$xbmc_home/userdata/keymaps/keyboard.xml"
 
 
 	##############################################################
@@ -392,7 +392,7 @@ function gp_x360_wireless()
 
 	# copy keyboard.xml file for XBMC. Button id numbers are totally diffferent, due to the use of 
 	# the use-dpad-as-button, and use-trigger-as-button options used.
-	cp -v "$rootdir/gamepad-cfgs/x360_controller/keyboard.xml" "$home/.xbmc/userdata/keymaps"
+	cp -v "$rootdir/gamepad-cfgs/x360_controller/keyboard.xml" "$xbmc_home/userdata/keymaps"
 
 	#update init scripts for xboxdrv
 	update-rc.d xboxdrv defaults
@@ -472,7 +472,7 @@ function gp_x360_usb()
 
 	# copy keyboard.xml file for XBMC. Button id numbers are totally diffferent, due to the use of 
 	# the use-dpad-as-button, and use-trigger-as-button options used.
-	cp -v "$rootdir/gamepad-cfgs/x360_usb_controller/keyboard.xml" "$home/.xbmc/userdata/keymaps"
+	cp -v "$rootdir/gamepad-cfgs/x360_usb_controller/keyboard.xml" "$xbmc_home/userdata/keymaps"
 
 	# update init scripts for xboxdrv
 	update-rc.d xboxdrv defaults
