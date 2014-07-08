@@ -67,7 +67,6 @@ h_autosave_configs()
 	# This section is not needed anymore since we not use out own dotfile
 
 	# system configs:
-	cp -v "$home/.config/autostart/xbmc/desktop" "$home/.config/autostart/xbmc.desktop.old" 2> "/dev/null"
 	cp -v "/etc/init.d/xboxdrv" "/etc/init.d/xboxdrv.old" 2> "/dev/null"
 	cp -v "/etc/init.d/rescan" "/etc/init.d/rescan.old" 2> "/dev/null"
 	cp -v "/etc/modprobe.d/blacklist.conf" "/etc/modprobe.d/blacklist.conf.old" 2> "/dev/null"

@@ -17,7 +17,7 @@ xbmc-retrorig  &
 status=Running
 while [ "$status" == "Running" ]
 do
-  status=`pgrep xbmc > /dev/null && echo Running`
+  status=`pgrep xbmc-retrorig > /dev/null && echo Running`
   sleep 1
 done
 
