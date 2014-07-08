@@ -288,7 +288,7 @@ function rrs_xbmc_patched()
 	cp -v "$rootdir/XBMC-cfgs/extra/RetroRig.desktop" "$xdg_desktop_dir"
 	cp -v "$rootdir/XBMC-cfgs/extra/retro-icon.png" "$xdg_pictures_dir"
 	cp -v "$rootdir/XBMC-cfgs/extra/startXBMC.sh" "/usr/share/applications/"
-	cp -v "$rootdir/XBMC-cfgs/extra/RetroRig.desktop" "$config_home/.config/autostart"
+	cp -v "$rootdir/XBMC-cfgs/extra/RetroRig.desktop" "$home/.config/autostart"
 
 	# fix their permissions
 	chmod 755 "/usr/share/applications/gp_autodetect_xbmc.sh" 
@@ -307,7 +307,7 @@ function rrs_xbmc_patched()
 	cp -v "$rootdir/XBMC-cfgs/extra/RetroRig.desktop" "$home/.config/autostart"
 
 	# Can't use $config_home in the desktop file, so need to replace $user string
-	sed -i "s|/home/test/Pictures|$xdg_pictures_dir|g" "$config_home/.config/autostart"
+	sed -i "s|/home/test/Pictures|$xdg_pictures_dir|g" "$home/.config/autostart"
 
 	# remove old xbmc-bin, install our patched version
 	apt-get remove -y xbmc xbmc-bin
