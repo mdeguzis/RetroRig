@@ -11,10 +11,11 @@ function rrs_prepareFolders()
 {
 	echo "Creating folders for ROMs, Artwork, Saves, and dotfiles"
 
+	
 	pathlist=()
 
 	# create autostart folder for manual desktop entries
-	pathlist+=("$home/.config/autostart")
+	pathlist+=("$home/.config/autostart/")
 
 	#emulator base directory
 	pathlist+=("$rootdir/emulators")
@@ -76,7 +77,8 @@ function rrs_prepareFolders()
 
 	#create dotfiles
 	pathlist+=("$config_home/.retrorig")
-	pathlist+=("$config_home/.qjoypad3")
+	# qjoypad must stay in $home, since it launches before* RetroRig
+	pathlist+=("$home/.qjoypad3")
 	pathlist+=("$config_home/.config/mupen64plus")
 	
 	pathlist+=("$config_home/.config/ppsspp/PSP/SYSTEM")

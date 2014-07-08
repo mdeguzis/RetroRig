@@ -36,7 +36,7 @@ h_clean_gamepad()
 	# The rescan service should be able to coexist with xboxdrv
 	
 	# qjoypad 
-	rm -f /etc/xdg/autostart/qjoypad.desktop
+	rm -f "$home.comfig/autostart/qjoypad.desktop"
 	# Xbox controller 
 	service xboxdrv stop
 	rm -f /etc/init.d/xboxdrv
@@ -567,8 +567,8 @@ function h_correct_perms()
 	chgrp -Rv "$user" "$config_home/.mednafen" > /dev/null 2>&1
      	chown -Rv "$user" "$config_home/.mednafen" > /dev/null 2>&1
 	# qjoypad files
-	chgrp -Rv "$user" "$config_home/.qjoypad3" > /dev/null 2>&1
-     	chown -Rv "$user" "$config_home/.qjoypad3" > /dev/null 2>&1
+	chgrp -Rv "$user" "$home/.qjoypad3" > /dev/null 2>&1
+     	chown -Rv "$user" "$home/.qjoypad3" > /dev/null 2>&1
 	# qtsixa files
 	chgrp -Rv "$user" "$config_home/.qtsixa" > /dev/null 2>&1
      	chown -Rv "$user" "$config_home/.qtsixa" > /dev/null 2>&1
@@ -595,7 +595,7 @@ function h_correct_perms()
 
 	# desktop file
 	chgrp -Rv "$user" "$home/.config/autostart/RetroRig.desktop" > /dev/null 2>&1
-	chown -Rv "$user" "$home/.config/autostart/RetroRig.desktop"
+	chown -Rv "$user" "$home/.config/autostart/RetroRig.desktop" > /dev/null 2>&1
 
 	# qjoypad desktop file
 	chgrp -Rv "$user" "$home/.config/autostart/qjoypad.desktop" > /dev/null 2>&1
