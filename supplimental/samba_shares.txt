@@ -1,0 +1,13 @@
+
+[RetroRig_ROMs]
+    comment = server media x drive
+    path = /home/test/RetroRig/ROMs
+    read only = no
+    writeable = yes
+    browseable = yes
+    valid users = test  
+    create mask = 0644
+    directory mask = 0755
+    inherit acls = yes
+    ; if you set this, all files get written as this user
+    #force user = one

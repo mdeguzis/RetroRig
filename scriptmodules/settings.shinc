@@ -18,14 +18,15 @@ while true; do
 	     3 "Change plugins/filters/scaling"
 	     4 "Change Gamepad Type"
 	     5 "Enable SSH support"
-	     6 "BIOS loader"
-	     7 "BIOS checker"
-	     8 "Enable XBMC session (beta feature)"
-	     9 "Backup existing configs"
-	     10 "Restore first run configs"
-	     11 "Update XBMC configs"
-	     12 "Upgrade Ubuntu kernel (PS3 USB Support)"
- 	     13 "Back to main menu")
+	     6 "Enable ROMs samba share"
+	     7 "BIOS loader"
+	     8 "BIOS checker"
+	     9 "Enable XBMC session (beta feature)"
+	     10 "Backup existing configs"
+	     11 "Restore first run configs"
+	     12 "Update XBMC configs"
+	     13 "Upgrade Ubuntu kernel (PS3 USB Support)"
+ 	     14 "Back to main menu")
 
 	#make menu choice
 	choices=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
@@ -55,35 +56,39 @@ while true; do
 		;;
 
 		6)
-		h_bios_loader
+		set_enable_samba
 		;;
 
 		7)
-		h_bios_checker
+		h_bios_loader
 		;;
 
 		8)
+		h_bios_checker
+		;;
+
+		9)
 		dialog --msgbox "This option will skip the Unity desktop, and load XBMC directly. You can still go back to the Ubuntu desktop by exiting XBMC, and choosing 'Ubuntu Desktop' Uninstalling RetroRig will revert this option, or you can merely change '/usr/share/lightdm.conf.d/50-ubuntu.conf's 'user-session' back to 'ubuntu' Please be advised that using RetroRig with the xbmc session enabled may result in odd behavior with some emulators. I am doing my best to help/correct this." 14 60
 		set_xbmc_session
 		;;
 
-		9)
+		10)
 		h_autosave_configs
 		;;
 
-		10)
+		11)
 		h_restore_configs
 		;;
 
-		11)
+		12)
 		rrs_xbmc_cfgs
 		;;
 
-		12)
+		14)
 		rrs_kernel_3_14
 		;;
 
-		13)
+		14)
 		return
 		;;
 
@@ -92,6 +97,31 @@ while true; do
 		break
 	fi
 done
+}
+
+function set_enable_samba()
+{
+	clear
+	
+	# install samba services
+	echo "Installing samba services"
+	sleep 2s
+	apt-get install -y samba
+	
+	# append samba share parameters
+	echo "Configuring samba services"
+	sleep 2s
+	cat "$rootdir/supplimental/samba_shares.txt" >> "/etc/samba/smb.conf"
+
+	# replace parameters of share
+	sed -i "s|/home/test/RetroRig|$rootdir|g" "/etc/samba/smb.conf"
+
+	# restart services
+	service samba restart
+
+	# inform user of quick tips and notes
+	dialog --msgbox "The share 'RetroRig_ROMs' has now been added your acessible samba shares. You can access this a number of ways:\n\n1. 'smbclient //test-pc/retrorig_roms -U $user' on the CLI of a terminal window such as bash \n\n2. 'smb://test-pc/retrorig_roms/' from the file manager address bar (Nautilus) \n\n3. Through an alternative GUI client" 15 60
+
 }
 
 function set_enable_ssh()
