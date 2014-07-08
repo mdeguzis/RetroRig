@@ -135,7 +135,7 @@
                         <label>31000</label>
                         <label2></label2>
                         <thumb>-</thumb>
-                        <onclick>RunAddon(script.games.rom.collection.browser)</onclick>
+                        <onclick>RunScript(script.games.rom.collection.browser)</onclick>
                     </item>
 					
                     <item>
