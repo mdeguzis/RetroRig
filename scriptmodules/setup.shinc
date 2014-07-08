@@ -14,7 +14,7 @@ function rrs_prepareFolders()
 	pathlist=()
 
 	# create autostart folder for manual desktop entries
-	pathlist+=("$config_home/.config/autostart")
+	pathlist+=("$home/.config/autostart")
 
 	#emulator base directory
 	pathlist+=("$rootdir/emulators")
@@ -292,7 +292,7 @@ function rrs_xbmc_patched()
 
 	# fix their permissions
 	chmod 755 "/usr/share/applications/gp_autodetect_xbmc.sh" 
-	chmod 755 "$config_home/.config/autostart/RetroRig.desktop"
+	chmod 755 "$home/.config/autostart/RetroRig.desktop"
 	chmod 755 "/usr/share/applications/RetroRig.desktop"
 	chmod 755 "/usr/share/applications/startXBMC.sh" 
 	
@@ -303,11 +303,11 @@ function rrs_xbmc_patched()
 	sed -i "s|/home/test/Pictures|$xdg_pictures_dir|g" "$xdg_desktop_dir/RetroRig.desktop"
 
 	# create autostart entry, remove prior if it exists
-	rm -f "$config_home/.config/autostart/RetroRig.desktop"
-	cp -v "$rootdir/XBMC-cfgs/extra/RetroRig.desktop" "$config_home/.config/autostart"
+	rm -f "$home.config/autostart/RetroRig.desktop"
+	cp -v "$rootdir/XBMC-cfgs/extra/RetroRig.desktop" "$home/.config/autostart"
 
 	# Can't use $config_home in the desktop file, so need to replace $user string
-	sed -i "s|/home/test/Pictures|$xdg_pictures_dir|g" "$config_home/.config/autostart/RetroRig.desktop"
+	sed -i "s|/home/test/Pictures|$xdg_pictures_dir|g" "$config_home/.config/autostart"
 
 	# remove old xbmc-bin, install our patched version
 	apt-get remove -y xbmc xbmc-bin
@@ -532,7 +532,7 @@ function rrs_prereq()
 	echo "######################################"
 	echo "Pre-req checks"	
 	echo "######################################"
-        echo "Did not find needed packages 'git' and/or 'dialog/figlet'."
+        echo "Did not find 1 or more of the needed packages: git, dialog, or figlet"
 	echo "Attempting to install these now."
 	echo ""
 	sleep 3s
