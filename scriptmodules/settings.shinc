@@ -12,7 +12,7 @@ function set_menu()
 	
 
 while true; do
-    cmd=(dialog --backtitle "LibreGeek.org RetroRig Installer" --menu "Settings Menu" 20 0 16)
+    cmd=(dialog --backtitle "LibreGeek.org RetroRig Installer" --menu "Settings Menu" 20 0 14)
     options=(1 "Change resolution"  
 	     2 "Load ROMs"
 	     3 "Change plugins/filters/scaling"
@@ -84,7 +84,7 @@ while true; do
 		rrs_xbmc_cfgs
 		;;
 
-		14)
+		13)
 		rrs_kernel_3_14
 		;;
 
