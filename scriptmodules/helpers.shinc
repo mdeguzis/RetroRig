@@ -60,19 +60,19 @@ h_autosave_configs()
 
 	# backup $home/.xbmc as a good precaution, even though we don't use this
 	# dotfile anymore
-	cp -v "$home/.xbmc" "$home/.xbmc.old" 2> "/dev/null"
+	cp "$home/.xbmc" "$home/.xbmc.old" > /dev/null 2>&1
 
 	clear
 	# home dotfiles:
 	# This section is not needed anymore since we not use out own dotfile
 
 	# system configs:
-	cp -v "/etc/init.d/xboxdrv" "/etc/init.d/xboxdrv.old" 2> "/dev/null"
-	cp -v "/etc/init.d/rescan" "/etc/init.d/rescan.old" 2> "/dev/null"
-	cp -v "/etc/modprobe.d/blacklist.conf" "/etc/modprobe.d/blacklist.conf.old" 2> "/dev/null"
-	cp -v "/usr/share/xsessions/xbmc.desktop" "/usr/share/xsessions/xbmc.desktop.old" 2> "/dev/null"
-	cp -v "/usr/bin/xbmc-session" "/usr/bin/xbmc-session.old" 2> "/dev/null"
-	cp -v "/usr/share/lightdm/lightdm.conf.d/50-ubuntu.conf" "/usr/share/lightdm/lightdm.conf.d/50-ubuntu.conf.old" 2> "/dev/null"
+	cp "/etc/init.d/xboxdrv" "/etc/init.d/xboxdrv.old" > /dev/null 2>&1
+	cp "/etc/init.d/rescan" "/etc/init.d/rescan.old" > /dev/null 2>&1
+	cp "/etc/modprobe.d/blacklist.conf" "/etc/modprobe.d/blacklist.conf.old" > /dev/null 2>&1
+	cp "/usr/share/xsessions/xbmc.desktop" "/usr/share/xsessions/xbmc.desktop.old" > /dev/null 2>&1
+	cp "/usr/bin/xbmc-session" "/usr/bin/xbmc-session.old" > /dev/null 2>&1
+	cp "/usr/share/lightdm/lightdm.conf.d/50-ubuntu.conf" "/usr/share/lightdm/lightdm.conf.d/50-ubuntu.conf.old" > /dev/null 2>&1
 
 	# correct permissions after tar archive is created
 	h_correct_perms
@@ -91,12 +91,12 @@ h_restore_configs()
 	# This section is not needed anymore since we not use out own dotfile
 
 	# system configs:
-	mv "/etc/xdg/autostart/xbmc.old" "/etc/xdg/autostart/xbmc" 2>  "/dev/null"
-	mv "/etc/init.d/xboxdrv.old" "/etc/init.d/xboxdrv" 2>  "/dev/null"
-	mv "/etc/modprobe.d/blacklist.conf.old" "/etc/modprobe.d/blacklist.conf" 2>  "/dev/null"
-	mv "/usr/share/xsessions/xbmc.desktop.old" "/usr/share/xsessions/xbmc.desktop" 2>  "/dev/null"
-	mv "/usr/bin/xbmc-session.old" "/usr/bin/xbmc-session" 2>  "/dev/null"
-	mv "/usr/share/lightdm/lightdm.conf.d/50-ubuntu.conf.old" "/usr/share/lightdm/lightdm.conf.d/50-ubuntu.conf" 2>  "/dev/null"
+	mv "/etc/xdg/autostart/xbmc.old" "/etc/xdg/autostart/xbmc" > /dev/null 2>&1
+	mv "/etc/init.d/xboxdrv.old" "/etc/init.d/xboxdrv" > /dev/null 2>&1
+	mv "/etc/modprobe.d/blacklist.conf.old" "/etc/modprobe.d/blacklist.conf" > /dev/null 2>&1
+	mv "/usr/share/xsessions/xbmc.desktop.old" "/usr/share/xsessions/xbmc.desktop" > /dev/null 2>&1
+	mv "/usr/bin/xbmc-session.old" "/usr/bin/xbmc-session" > /dev/null 2>&1
+	mv "/usr/share/lightdm/lightdm.conf.d/50-ubuntu.conf.old" "/usr/share/lightdm/lightdm.conf.d/50-ubuntu.conf" > /dev/null 2>&1
 
 	# correct permissions after tar archive is created
 	h_correct_perms
