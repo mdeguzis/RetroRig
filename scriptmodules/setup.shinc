@@ -76,7 +76,7 @@ function rrs_prepareFolders()
 	pathlist+=("$rootdir/Saves/Genesis")
 
 	#create dotfiles
-	pathlist+=("$config_home/.retrorig")
+	pathlist+=("$home/.retrorig")
 	# qjoypad must stay in $home, since it launches before* RetroRig
 	pathlist+=("$home/.qjoypad3")
 	pathlist+=("$config_home/.config/mupen64plus")
