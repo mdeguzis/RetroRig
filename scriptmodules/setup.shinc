@@ -101,7 +101,7 @@ function rrs_prepareFolders()
 	for entry in "${pathlist[@]}"
 	do
 	    if [[ ! -d "$entry" ]]; then
-                mkdir -pv "$entry"
+                mkdir -p "$entry" 
                 chown "$user" "$entry"
                 chgrp "$user" "$entry"
         fi

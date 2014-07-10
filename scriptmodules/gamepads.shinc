@@ -233,7 +233,7 @@ function gp_ps3_usb()
 	cont_num_org=$(grep "CONTROLLER_NUM=" "/etc/default/xboxdrv")
 
 	# inform user that you must have controller connected or restart
-	dialog --msgbox "The xboxdrv usernland module detects the number of USB PS3 controllers connected \
+	dialog --msgbox "The xboxdrv userland module detects the number of USB PS3 controllers connected \
 when it starts. Therefore, we must specify how many you have connected or want to use. Connect your controller(s) \
 now, or reboot to have these changes take effect. If you tell xboxdrv I have 3 controllers, when you only have one, \
 the service may fail to start correctly.\n\nPlease see /etc/default/xboxdrv for more." 14 60
