@@ -129,7 +129,7 @@ echo "##########################################"
 # This XBMC version is used in project OpenElec.
 git clone https://github.com/beaumanvienna/xbmc
 cd xbmc
-git checkout gotham
+git checkout gotham-retrorig
 git pull
 ./bootstrap
 ./configure --disable-debug --prefix=/usr

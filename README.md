@@ -111,8 +111,8 @@ You can also download a zip file or by other means on the github page.
 
 ## Updating
 
-The config-setup.sh script also currently contains mechanisms to upgrade Ubuntu, update the
-emulator binaries, and also a way to pull the latest files from github.
+The retrorig_setup.sh script also currently contains mechanisms to upgrade Ubuntu, update the
+emulator binaries, update our patched XBMC version, and also a way to pull the latest files from github. 
 
 ## Please Note
 
