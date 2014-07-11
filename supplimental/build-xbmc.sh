@@ -62,25 +62,16 @@ sudo rm -rfv /tmp/RetroRig-bin/
 rm -rfv ~/xbmc-bin_Gotham_V13.1_patched_for_RetroRig_patchlevel_*.deb
 rm -rfv ~/xbmc_Gotham_V13.1_patched_for_RetroRig_patchlevel_*.deb 
 
+echo ""
+echo "##########################################"
+echo "Add pre-requisite packages"
+echo "##########################################"
+
+
 sudo add-apt-repository -y ppa:team-xbmc/ppa
 sudo apt-get update
 sudo apt-get install -y dialog git figlet
 
-# Run option 1. "RetroRig installation"
-# For this build script, we only need to clone the RetroRig directory
-
-echo ""
-echo "##########################################"
-echo "Gathering RetroRig files from beta brach"
-echo "##########################################"
-
-# switch to home directory to clone RetroRig, which we will use later on below
-cd
-git clone https://github.com/ProfessorKaos64/RetroRig
-# Only use the beta branch to build new pkgs please
-cd RetroRig
-git checkout beta
-git pull
 
 echo ""
 echo "##########################################"
@@ -146,8 +137,8 @@ git checkout xbmc/input/SDLJoystick.cpp
 git checkout xbmc/Application.cpp  
 git checkout xbmc/AppParamParser.cpp
 #patch using files in $HOME/RetroRig (see line 70)
-patch xbmc/Application.cpp < ../RetroRig/XBMC-cfgs/extra/xbmc_Application.cpp_-13.1-Gotham-interrupt_handler_for_SIGUSR1.patch
-patch xbmc/AppParamParser.cpp < ../RetroRig/XBMC-cfgs/extra/xbmc_AppParamParser.cpp_-13.1-Gotham-version_disply_shows_RetroRig_patch.patch
+#patch xbmc/Application.cpp < ../RetroRig/XBMC-cfgs/extra/xbmc_Application.cpp_-13.1-Gotham-interrupt_handler_for_SIGUSR1.patch
+#patch xbmc/AppParamParser.cpp < ../RetroRig/XBMC-cfgs/extra/xbmc_AppParamParser.cpp_-13.1-Gotham-version_disply_shows_RetroRig_patch.patch
 make
 
 # strip out the bin executable
@@ -166,10 +157,10 @@ sudo cp ./xbmc.bin /tmp/RetroRig-bin/usr/lib/xbmc/
 
 # create xbmc-bin
 cd /tmp/RetroRig-bin
-sudo dpkg-deb -b . xbmc-bin_Gotham_V13.1_patched_for_RetroRig_patchlevel_2.deb
+sudo dpkg-deb -b . xbmc-bin_Gotham_V13.1_patched_for_RetroRig_patchlevel_3.deb
 # copy new deb to '/tmp/XBMC_build' dir
 mkdir -p /tmp/XBMC_build
-cp xbmc-bin_Gotham_V13.1_patched_for_RetroRig_patchlevel_2.deb /tmp/XBMC_build
+cp xbmc-bin_Gotham_V13.1_patched_for_RetroRig_patchlevel_3.deb /tmp/XBMC_build
 
 # create xbmc
 cd /tmp/RetroRig
@@ -177,9 +168,9 @@ cd /tmp/RetroRig
 sudo rm -rf /tmp/RetroRig/usr/share/xbmc/
 sudo cp -r /usr/share/xbmc/ /tmp/RetroRig/usr/share/
 # create package
-sudo dpkg-deb -b . xbmc_Gotham_V13.1_patched_for_RetroRig_patchlevel_2.deb
+sudo dpkg-deb -b . xbmc_Gotham_V13.1_patched_for_RetroRig_patchlevel_3.deb
 # copy new deb to home dir
-cp xbmc_Gotham_V13.1_patched_for_RetroRig_patchlevel_2.deb /tmp/XBMC_build
+cp xbmc_Gotham_V13.1_patched_for_RetroRig_patchlevel_3.deb /tmp/XBMC_build
 
 
 
