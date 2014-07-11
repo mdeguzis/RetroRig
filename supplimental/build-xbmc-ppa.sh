@@ -1,34 +1,11 @@
-
-# ==========================================================================
-# Build Script for custom XBMC deb package with PS3 Hotplugging
-# ==========================================================================
+#========================================================================
+# Build Script for custom XBMC RetroRig PPA
+#======================================================================== 
 #
-# If sucessful, this will be tested against the Xbox 360 controller as well.
-# If it can co-exist (the new build), will be used as normal. If it cannot,
-# It will be only installed as part of the PS3 gamepad selection
-# It may be useful to tee the output to a log file: 
-# './build-xbmc | tee log.txt'
-#
-# ==========================================================================
-# Author:  Jens-Christian, aka "beaumanvienna"
-# Contribitions: Michael DeGuzis, aka "ProfessorKaos64"
-# Date:    20140622
-# Version: Beta
-# ==========================================================================
-
-# Starting point is a plain ubuntu install.
-# Get and install RetroRig (done via normal install script, posted for science)
-
-###############################################################
-# sudo apt-get update
-# sudo apt-get install dialog git figlet
-# sudo rm /var/cache/apt/archives/*
-# cd
-# git clone https://github.com/ProfessorKaos64/RetroRig
-# cd RetroRig 
-# git checkout beta
-# sudo ./retrorig_setup.sh
-###############################################################
+# Author:  Michael DeGuzis and Jens-Christian, 
+# Date:    20140710
+# Version: Beta 0.1.1
+# #========================================================================
 
 # Instead, add the xbmc PPA manually and do it here so we don't 
 # Necessarily need to install a lot of extra stuff to do a new package.
@@ -40,19 +17,21 @@ echo "##########################################"
 echo ""
 sleep 2s
 
-echo ""
+clear
 echo "##########################################"
 echo "Removing old build files and directories"
 echo "##########################################"
+sleep 2s
 cd
 rm -rf XBMC_BUILD/xbmc
 sudo apt-get autoremove xbmc
 
 # Fetch build pkgs
-echo ""
+clear
 echo "##########################################"
 echo "Fetching necessary packages for build"
 echo "##########################################"
+sleep 2s
 
 sudo add-apt-repository -y ppa:team-xbmc/ppa
 sudo apt-get update
@@ -83,19 +62,19 @@ echo ""
 echo "##########################################"
 echo "Fetching latest stable XBMC Gotham release"
 echo "##########################################"
+sleep 2s
 
-# clone the xbmc source based on fernetMenta/xbmc and checkout the stable 13.1 Gotham release
-# This XBMC version is used in project OpenElec.
-
+# this repro is derived from fernetMenta/xbmc w/o any commits so far
 git clone https://github.com/beaumanvienna/xbmc
 cd xbmc
-git checkout gotham-retrorig
+git checkout gotham
 git pull
 
 echo ""
 echo "##########################################"
 echo "Creating original archive..."
 echo "##########################################"
+sleep 2s
 
 # The Ubuntu package guide notes:
 # The first stage in packaging is to get the released tar from upstream
@@ -108,31 +87,35 @@ echo "##########################################"
 cd ..
 # rename origin directory
 mv "xbmc/" "xbmc-retrorig/"
-# Create archive
-tar -zcvf "xbmc-retrorig.tar.gz" "xbmc-retrorig/"
+
 # jump back to build directory
 cd xbmc-retrorig
-clear
+
+# This branch as all of JC's current patches
+git checkout gotham-retrorig
+git pull
 
 echo ""
 echo "##########################################"
 echo "Bootstrapping..."
 echo "##########################################"
 ./bootstrap
+sleep 2s
 
 echo ""
 echo "##########################################"
 echo "Configuring..."
 echo "##########################################"
-./configure --disable-debug --prefix=/usr
+./configure --prefix=/usr
+sleep 2s
 
 
 echo ""
 echo "##########################################"
 echo "Making package..."
 echo "##########################################"
-sleep 3s
-clear
+sleep 2s
+
 # Tip: by adding -j<number> to the make command, you describe how many
 # concurrent jobs will be used. So for dualcore the command is: 
 make -j2
@@ -141,18 +124,29 @@ echo ""
 echo "##########################################"
 echo "Installing from source..."
 echo "##########################################"
+sleep 2s
 
 # strip out the bin executable
+# Note from pk: is this really needed?
+
 strip xbmc.bin
-#install
-clear
-echo "Installing built source files"
-sleep 3s
+
 sudo make install
+
 
 echo ""
 echo "##########################################"
+echo "Starting Debian pkg with dh-make"
+echo "##########################################"
+
+cd ..
+# push build dir aside to build pkg
+mv "xbmc-retrorig/" "/tmp"
+bzr dh-make xbmc-retrorig 0.9.1 xbmc-retrorig.tar.gz 
+
 echo ""
+echo "##########################################"
+echo "Editing Debian files, one by one"
 echo "##########################################"
 
 
