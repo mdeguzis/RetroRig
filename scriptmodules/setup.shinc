@@ -386,6 +386,7 @@ function rrs_xbmc_patched()
 	# copy down the patched debs from libregeek (saves on space, dl speed is adaquate for now)
 	wget -P /tmp "www.libregeek.org/RetroRig/xbmc/xbmc-bin_Gotham_V13.1_patched_for_RetroRig_patchlevel_3.deb"
 	wget -P /tmp "www.libregeek.org/RetroRig/xbmc/xbmc_Gotham_V13.1_patched_for_RetroRig_patchlevel_3.deb"
+
 	# install dependencies manually
 	apt-get install -y mesa-utils \
                            libva-intel-vaapi-driver \

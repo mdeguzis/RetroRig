@@ -106,17 +106,35 @@ function set_enable_samba()
 	clear
 	
 	# install samba services
+	echo "####################################################"
 	echo "Installing samba services"
+	echo "####################################################"
+	echo ""
 	sleep 2s
 	apt-get install -y samba
 	
 	# append samba share parameters
+	echo "####################################################"
 	echo "Configuring samba services"
+	echo "####################################################"
+	echo ""
 	sleep 2s
 	cat "$rootdir/supplimental/samba_shares.txt" >> "/etc/samba/smb.conf"
 
 	# replace parameters of share
 	sed -i "s|/home/test/RetroRig|$rootdir|g" "/etc/samba/smb.conf"
+
+	# set samba password
+	echo "####################################################"
+	echo "Setting samba password for user: $user"
+	echo "####################################################"
+	echo ""
+	smbpasswd -a $user
+
+	echo "####################################################"
+	echo "Restarting samba services "
+	echo "####################################################"
+	echo ""
 
 	# restart services
 	service samba restart
@@ -130,7 +148,16 @@ function set_enable_ssh()
 {
 	clear
 	#install openssh-server  
+	echo "####################################################"
+	echo "Installing ssh services"
+	echo "####################################################"
+	echo ""
 	apt-get install -y openssh-server
+	
+	echo "####################################################"
+	echo "Configuring samba services"
+	echo "####################################################"
+	echo ""
 	#prompt user to change default port
 	dialog --title "Set desired SSH port (typically 22)" --inputbox "Enter Port" 10 0 2> /tmp/set_ssh
 	#cat input
@@ -152,6 +179,11 @@ function set_xbmc_session()
 	
 	# confirm with user first
 	cfg_confirm
+
+	echo "####################################################"
+	echo "Configuring xbmc session"
+	echo "####################################################"
+	echo ""
 
 	clear
 	# copy config files
