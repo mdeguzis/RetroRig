@@ -1,0 +1,10 @@
+thing to change for other ps1 gamepads besides controls:
+
+;Path to directory for firmware.
+filesys.path_firmware /home/test/RetroRig/BIOS/Mednafen
+
+;Enable specified special video scaler.
+psx.special scale2x
+
+;Enable specified OpenGL pixel shader.
+psx.pixshader ipsharper
