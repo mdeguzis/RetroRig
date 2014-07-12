@@ -537,8 +537,6 @@ function h_correct_perms()
 
 	# correct the desktop permissions so we can add our own launcher
 	# This will allow permissions change for all languages. Thanks JC!
-
-	# correct the desktop so we can add our own launcher
 	chmod -Rv 755 $xdg_desktop_dir > /dev/null 2>&1
 	chown -Rv $user $xdg_desktop_dir > /dev/null 2>&1
 	chgrp -Rv $user $xdg_desktop_dir > /dev/null 2>&1
@@ -547,58 +545,38 @@ function h_correct_perms()
 	# replace "test" username in config files here to ensure games
 	# and emulators function and start properly
 	
-	# mupen64plus files
-	chgrp -Rv "$user" "$config_home/.config/mupen64plus" > /dev/null 2>&1
-     	chown -Rv "$user" "$config_home/.config/mupen64plus" > /dev/null 2>&1
-	# jstest-gtk files
-	chgrp -Rv "$user" "$config_home/.config/jstest-gtk" > /dev/null 2>&1
-     	chown -Rv "$user" "$config_home/.config/jstest-gtk" > /dev/null 2>&1
-	# ppsspp files
-	chgrp -Rv "$user" "$config_home/.config/ppsspp" > /dev/null 2>&1
-     	chown -Rv "$user" "$config_home/.config/ppsspp" > /dev/null 2>&1
-	# mame files
-	chgrp -Rv "$user" "$config_home/.mame" > /dev/null 2>&1
-     	chown -Rv "$user" "$config_home/.mame" > /dev/null 2>&1
-	# mess files
-	chgrp -Rv "$user" "$config_home/.mess" > /dev/null 2>&1
-     	chown -Rv "$user" "$config_home/.mess" > /dev/null 2>&1
-	# medanfen files
-	chgrp -Rv "$user" "$config_home/.mednafen" > /dev/null 2>&1
-     	chown -Rv "$user" "$config_home/.mednafen" > /dev/null 2>&1
-	# qjoypad files
-	chgrp -Rv "$user" "$home/.qjoypad3" > /dev/null 2>&1
-     	chown -Rv "$user" "$home/.qjoypad3" > /dev/null 2>&1
-	# qtsixa files
-	chgrp -Rv "$user" "$config_home/.qtsixa" > /dev/null 2>&1
-     	chown -Rv "$user" "$config_home/.qtsixa" > /dev/null 2>&1
-	# stella files
-	chgrp -Rv "$user" "$config_home/.stella" > /dev/null 2>&1
-     	chown -Rv "$user" "$config_home/.stella" > /dev/null 2>&1
-	# xbmc files
+	# .retrorig dot file (our custom path)
+	chgrp -Rv "$user" "$config_home" > /dev/null 2>&1
+     	chown -Rv "$user" "$config_home" > /dev/null 2>&1
+
+	# xbmc dotfile (our custom path)
 	chgrp -Rv "$user" "$xbmc_home" > /dev/null 2>&1
      	chown -Rv "$user" "$xbmc_home" > /dev/null 2>&1
-	# qtsixa gui files
-	chgrp -Rv "$user" "$config_home/.sixemugui" > /dev/null 2>&1
-     	chown -Rv "$user" "$config_home/.sixemugui" > /dev/null 2>&1
-	# XBMC extra filesfiles
+
+	# qjoypad files from user home directory
+	chgrp -Rv "$user" "$home/.qjoypad3" > /dev/null 2>&1
+     	chown -Rv "$user" "$home/.qjoypad3" > /dev/null 2>&1
+	
+
+	# XBMC gamepad auto-detect helper
 	chgrp -Rv "$user" "/usr/share/applications/gp_autodetect_xbmc.sh" > /dev/null 2>&1
      	chown -Rv "$user" "/usr/share/applications/gp_autodetect_xbmc.sh" > /dev/null 2>&1
+
+	# start script for RetroRig application
+	chgrp -Rv "$user" "/usr/share/applications/startXBMC.sh" > /dev/null 2>&1
+	chown -Rv "$user" "/usr/share/applications/startXBMC.sh" > /dev/null 2>&1
+
+	# RetroRig autostart file
+	chgrp -Rv "$user" "$home/.config/autostart/RetroRig.desktop" > /dev/null 2>&1
+	chown -Rv "$user" "$home/.config/autostart/RetroRig.desktop" > /dev/null 2>&1
+
+	# qjoypad autostart file
+	chgrp -Rv "$user" "$home/.config/autostart/qjoypad.desktop" > /dev/null 2>&1
+	chown -Rv "$user" "$home/.config/autostart/qjoypad.desktop" > /dev/null 2>&1
 
 	# Pictures directory
 	chgrp -Rv "$user" "$xdg_pictures_dir/retro-icon.png" > /dev/null 2>&1
 	chown -Rv "$user" "$xdg_pictures_dir/retro-icon.png" > /dev/null 2>&1
-	
-	# start script
-	chgrp -Rv "$user" "/usr/share/applications/startXBMC.sh" > /dev/null 2>&1
-	chown -Rv "$user" "/usr/share/applications/startXBMC.sh" > /dev/null 2>&1
-
-	# desktop file
-	chgrp -Rv "$user" "$home/.config/autostart/RetroRig.desktop" > /dev/null 2>&1
-	chown -Rv "$user" "$home/.config/autostart/RetroRig.desktop" > /dev/null 2>&1
-
-	# qjoypad desktop file
-	chgrp -Rv "$user" "$home/.config/autostart/qjoypad.desktop" > /dev/null 2>&1
-	chown -Rv "$user" "$home/.config/autostart/qjoypad.desktop" > /dev/null 2>&1
 
 	# correct our own start file for retrorig
 	chmod ugo+x /usr/bin/xbmc-retrorig
