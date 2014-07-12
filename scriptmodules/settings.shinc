@@ -126,14 +126,17 @@ function set_enable_samba()
 	sed -i "s|/home/test/RetroRig|$rootdir|g" "/etc/samba/smb.conf"
 
 	# set samba password
-	echo ""
-	echo "####################################################"
-	echo "Setting samba password for user: $user"
-	echo "####################################################"
-	echo ""
-	smbpasswd -a $user
-	sleep 3s
+	# should this be left at guest access or set the user?
 
+	#echo ""
+	#echo "####################################################"
+	#echo "Setting samba password for user: $user"
+	#echo "####################################################"
+	#echo ""
+	#smbpasswd -a $user
+	#sleep 3s
+	
+	echo ""
 	echo "####################################################"
 	echo "Restarting samba services "
 	echo "####################################################"

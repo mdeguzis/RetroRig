@@ -5,9 +5,8 @@
     read only = no
     writeable = yes
     browseable = yes
-    valid users = test  
-    create mask = 0644
-    directory mask = 0755
+    guest account = nobody
+    guest ok = yes
     inherit acls = yes
     ; if you set this, all files get written as this user
     #force user = one
