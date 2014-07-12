@@ -86,6 +86,8 @@ wget "http://www.libregeek.org/RetroRig/old_pkgs/xbmc-bin_original.deb"
 # unpack xbmc-bin
 sudo dpkg-deb -x xbmc-bin_original.deb .
 sudo dpkg-deb -e xbmc-bin_original.deb
+# clean packed debs
+rm -f *.deb
 
 # download original xbmc file for build
 mkdir /tmp/RetroRig
@@ -95,6 +97,8 @@ wget "http://www.libregeek.org/RetroRig/old_pkgs/xbmc_original.deb"
 # unpack xbmc
 sudo dpkg-deb -x xbmc_original.deb .
 sudo dpkg-deb -e xbmc_original.deb
+# clean packed debs
+rm -f *.deb
 
 sudo rm -rf /tmp/RetroRig/usr/share/xbmc/
 sudo cp -r /usr/share/xbmc/ /tmp/RetroRig/usr/share/
