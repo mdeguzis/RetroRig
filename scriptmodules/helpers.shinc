@@ -214,7 +214,8 @@ options=(1 "Atari 2600"
 	 10 "TurboGraphx 16"
 	 11 "Neo-Geo CDZ"
 	 12 "PSP"
-	 13 "Exit ROM Loader")
+	 13 "PSX/PS1"
+	 14 "Exit ROM Loader")
 
 	#make menu choice
 	choices=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
@@ -332,6 +333,15 @@ options=(1 "Atari 2600"
 		;;
 
 		13)  
+		#call file loader  	
+		h_file_loader
+		#copy PSX/PS1 ROMs
+		if [ -n "$folder" ]; then
+			cp -Rv "$folder"/* "$rootdir/ROMs/PS1/"
+		fi
+		;;
+
+		14)  
 		return
 		;;
 
@@ -444,6 +454,13 @@ function h_res_switcher()
 	#make the changes, prefix new_X in case NULL was entered previously
 	sed -i "s|$pce_org_X|pce.xres $pce_new_X|g" "$config_home/.mednafen/mednafen-09x.cfg"
 	sed -i "s|$pce_org_Y|pce.yres $pce_new_Y|g" "$config_home/.mednafen/mednafen-09x.cfg"
+
+	#Mednafen (PSX)
+	psx_org_X=$(grep -Ee "\bpsx.xres\b " "$config_home/.mednafen/mednafen-09x.cfg")
+	psx_org_Y=$(grep -Ee "\bpsx.yres\b " "$config_home/.mednafen/mednafen-09x.cfg")
+	#make the changes, prefix new_X in case NULL was entered previously
+	sed -i "s|$psx_org_X|psx.xres $psx_new_X|g" "$config_home/.mednafen/mednafen-09x.cfg"
+	sed -i "s|$psx_org_Y|psx.yres $psx_new_Y|g" "$config_home/.mednafen/mednafen-09x.cfg"
 
 	# correct permissions
 	h_correct_perms

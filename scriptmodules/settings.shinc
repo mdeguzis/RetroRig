@@ -282,6 +282,11 @@ if [ "$choices" != "" ]; then
 		grep -Ee "\bpce.xres\b" "$config_home/.mednafen/mednafen-09x.cfg" >> "$scriptdir/logs/res.txt"
 		grep -Ee "\bpce.yres\b" "$config_home/.mednafen/mednafen-09x.cfg" >> "$scriptdir/logs/res.txt"
 		echo "" >> "$scriptdir/logs/res.txt"
+		#mednafen PSX
+		echo "Mednafen (PSX)" >> "$scriptdir/logs/res.txt"
+		grep -Ee "\bpsx.xres\b" "$config_home/.mednafen/mednafen-09x.cfg" >> "$scriptdir/logs/res.txt"
+		grep -Ee "\bpsx.yres\b" "$config_home/.mednafen/mednafen-09x.cfg" >> "$scriptdir/logs/res.txt"
+		echo "" >> "$scriptdir/logs/res.txt"
 		#Stella
 		echo "Stella" >> "$scriptdir/logs/res.txt"
 		grep -Ee "\bfullres = \b" "$config_home/.stella/stellarc" >> "$scriptdir/logs/res.txt"
@@ -318,6 +323,9 @@ if [ "$choices" != "" ]; then
 		#set mednafen (Turbographx 16) value
 		pce_new_X="1280"
 		pce_new_Y="720"
+		#set mednafen (PSX) value
+		psx_new_X="1280"
+		psx_new_Y="720"
 		#set stella (Atari 2600)
 		st_new="1280x720"
 		# set the resolution with helper
@@ -351,6 +359,9 @@ if [ "$choices" != "" ]; then
 		#set mednafen (Turbographx 16) value
 		pce_new_X="1280"
 		pce_new_Y="1024"
+		#set mednafen (PSX) value
+		psx_new_X="1280"
+		psx_new_Y="1024"
 		#set stella (Atari 2600)
 		st_new="1280x1024"
 		# set the resolution with helper
@@ -384,6 +395,9 @@ if [ "$choices" != "" ]; then
 		#set mednafen (Turbographx 16) value
 		pce_new_X="1360"
 		pce_new_Y="768"
+		#set mednafen (PSX) value
+		psx_new_X="1360"
+		psx_new_Y="768"
 		#set stella (Atari 2600)
 		st_new="1360x768"
 		# set the resolution with helper
@@ -417,6 +431,9 @@ if [ "$choices" != "" ]; then
 		#set mednafen (Turbographx 16) value
 		pce_new_X="1600"
 		pce_new_Y="900"
+		#set mednafen (PSX) value
+		psx_new_X="1600"
+		psx_new_Y="900"
 		#set stella (Atari 2600)
 		st_new="1600x900"
 		# set the resolution with helper
@@ -450,6 +467,9 @@ if [ "$choices" != "" ]; then
 		#set mednafen (Turbographx 16) value
 		pce_new_X="1920"
 		pce_new_Y="1080"
+		#set mednafen (PSX) value
+		psx_new_X="1920"
+		psx_new_Y="1080"
 		#set stella (Atari 2600)
 		st_new="1920x1080"
 		# set the resolution with helper
@@ -488,6 +508,9 @@ if [ "$choices" != "" ]; then
 		#mednafen (Turbographx 16)
 		pce_new_X=$(cat '/tmp/new_X')
 		pce_new_Y=$(cat '/tmp/new_Y')
+		#mednafen (PSX)
+		psx_new_X=$(cat '/tmp/new_X')
+		psx_new_Y=$(cat '/tmp/new_Y')
 		#set stella (Atari 2600)
 		st1=$(cat '/tmp/new_X')
 		stdelim=$('x')

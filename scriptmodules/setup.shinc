@@ -34,6 +34,7 @@ function rrs_prepareFolders()
 	pathlist+=("$rootdir/ROMs/TurboGraphx 16")
 	pathlist+=("$rootdir/ROMs/Neo-Geo/CDZ")
 	pathlist+=("$rootdir/ROMs/PSP")
+	pathlist+=("$rootdir/ROMs/PS1")
 	pathlist+=("$rootdir/ROMs/Genesis")
 
 	#Artwork 
@@ -48,6 +49,7 @@ function rrs_prepareFolders()
 	pathlist+=("$rootdir/Artwork/TurboGraphx 16")
 	pathlist+=("$rootdir/Artwork/Neo-Geo/CDZ")
 	pathlist+=("$rootdir/Artwork/PSP")
+	pathlist+=("$rootdir/Artwork/PS1")
 	pathlist+=("$rootdir/Artwork/Genesis")
 
 	#Artwork - MAME offline scraper
@@ -73,6 +75,7 @@ function rrs_prepareFolders()
 	pathlist+=("$rootdir/Saves/TurboGraphx 16")
 	pathlist+=("$rootdir/Saves/Neo-Geo/CDZ")
 	pathlist+=("$rootdir/Saves/PSP")
+	pathlist+=("$rootdir/Saves/PS1")
 	pathlist+=("$rootdir/Saves/Genesis")
 
 	#create dotfiles
@@ -92,6 +95,9 @@ function rrs_prepareFolders()
 	#BIOS folder(s)
 	pathlist+=("$rootdir/BIOS/MESS")
 	pathlist+=("$rootdir/BIOS/MAME")
+	# Note: PS1 BIOS path is set in mednafen under:
+	# filesys.path_firmware
+	pathlist+=("$rootdir/BIOS/Mednafen")
 
 	#Configs
 	pathlist+=("$rootdir/Configs")
