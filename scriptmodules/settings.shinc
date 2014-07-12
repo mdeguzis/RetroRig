@@ -114,6 +114,7 @@ function set_enable_samba()
 	apt-get install -y samba
 	
 	# append samba share parameters
+	echo ""
 	echo "####################################################"
 	echo "Configuring samba services"
 	echo "####################################################"
@@ -125,17 +126,18 @@ function set_enable_samba()
 	sed -i "s|/home/test/RetroRig|$rootdir|g" "/etc/samba/smb.conf"
 
 	# set samba password
+	echo ""
 	echo "####################################################"
 	echo "Setting samba password for user: $user"
 	echo "####################################################"
 	echo ""
 	smbpasswd -a $user
+	sleep 3s
 
 	echo "####################################################"
 	echo "Restarting samba services "
 	echo "####################################################"
 	echo ""
-
 	# restart services
 	service samba restart
 
