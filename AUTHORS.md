@@ -22,8 +22,7 @@
 ##### Software binaries:
  - [XBMC](http://xbmc.org/)
  - [Rom Collection Browser](https://code.google.com/p/romcollectionbrowser/)
- - Make of the [maximinimalism](https://github.com/chrisbevan/skin.maximinimalism) XBMC skin
- - The various emulators in use here.
+ - The various emulators in use her (too many to list!)
 
 ##### Help and Configuration
 - The great folks of #linuxactionshow (Geekshed IRC)
