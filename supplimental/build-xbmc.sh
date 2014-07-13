@@ -157,12 +157,25 @@ cd /tmp/RetroRig
 # replace /tmp/RetroRig/user/share/xbmc with /usr/share/xbmc installed by 'sudo make install'
 sudo rm -rf /tmp/RetroRig/usr/share/xbmc/
 sudo cp -r /usr/share/xbmc/ /tmp/RetroRig/usr/share/
+
+####################################################################
 # disbale version check
+# Note from pk: this is not necessary in "production"  versions, 
+# due to this service being cleanly disabled with the addon pre-set 
+# with .retrorig/.xbmc These changes below will stay commented 
+# "For Science!"
+####################################################################
+
 #echo "removing service 'xbmc.versioncheck'"
-sudo rm -v /tmp/RetroRig/usr/share/xbmc/addons/service.xbmc.versioncheck/service.py
-sudo echo '#!/usr/bin/python' > /tmp/service.py
-sudo echo '# service removed' >> /tmp/service.py
-sudo mv /tmp/service.py /tmp/RetroRig/usr/share/xbmc/addons/service.xbmc.versioncheck/service.py
+#sudo rm -v 
+#/tmp/RetroRig/usr/share/xbmc/addons/service.xbmc.versioncheck/service.py
+#sudo echo '#!/usr/bin/python' > /tmp/service.py
+#sudo echo '# service removed' >> /tmp/service.py
+#sudo mv /tmp/service.py 
+
+#####################################################################
+
+/tmp/RetroRig/usr/share/xbmc/addons/service.xbmc.versioncheck/service.py
 # create package
 sudo dpkg-deb -b . xbmc_Gotham_V13.1_patched_for_RetroRig_patchlevel_4.deb
 # copy new deb to home dir
