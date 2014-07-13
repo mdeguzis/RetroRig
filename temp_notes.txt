@@ -8,3 +8,4 @@ psx.special scale2x
 
 ;Enable specified OpenGL pixel shader.
 psx.pixshader ipsharper
+
