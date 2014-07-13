@@ -13,7 +13,7 @@
    - Contributor, tester
    - Notable Contributions: 
       - PS3 Controller support fixes/patches
-      - RetroRig's patched XBMC package
+      - RetroRig's patched XBMC package (a ton of changes)
       - Idea machine
 
 ***
@@ -29,7 +29,10 @@
 - The great folks of #linuxactionshow (Geekshed IRC)
 - All the members of #bash (freenode.net IRC)
 - All the members of /r/LinuxActionShow 
-
+- The great work from FernetMenta's [xbmc branch](https://github.com/FernetMenta/xbmc)
+- [wsnipex](http://forum.xbmc.org/member.php?action=profile&uid=96724) from the XBMC forums
+- The creator of the [Maximinimalism](https://github.com/chrisbevan/skin.maximinimalism) XBMC theme
+- If I missed you, please let me know so I can give you credit!
 ***
 ### Other
 ***
