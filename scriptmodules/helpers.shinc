@@ -35,13 +35,6 @@ h_clean_gamepad()
 	# system objects that may interfere with switching gamepads
 	# The rescan service should be able to coexist with xboxdrv
 	
-	# controller configs
-	rm -f "$config_home/.config"
-	rm -f "$config_home/.stella"
-	rm -f "$config_home/.mednafen"
-	rm -f "$config_home/.mess"
-	rm -f "$config_home/.mame"
-
 	# qjoypad 
 	rm -f "$home/.config/autostart/qjoypad.desktop"
 	# Xbox controller 
@@ -570,9 +563,10 @@ function h_correct_perms()
 	# and emulators function and start properly
 	
 	# .retrorig dot files (our custom path)
+
+	# mednafen
 	chgrp -R "$user" "$config_home/.mednafen" > /dev/null 2>&1
      	chown -R "$user" "$config_home/.mednafen" > /dev/null 2>&1
-	chmod -R 664 "$config_home/.mednafen/mednafen-09x.cfg" > /dev/null 2>&1
 
 	chgrp -R "$user" "$config_home/.mednafen" > /dev/null 2>&1
      	chown -R "$user" "$config_home/.mednafen" > /dev/null 2>&1

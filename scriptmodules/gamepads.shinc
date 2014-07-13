@@ -51,7 +51,7 @@ function gp_ps3_blu()
 	cp -v "$scriptdir/emu-cfgs/ps3_blu_controller/PPSSPP/ppsspp.ini" "$config_home/.config/ppsspp/PSP/SYSTEM"
 	cp -v "$scriptdir/emu-cfgs/ps3_blu_controller/PPSSPP/controls.ini" "$config_home/.config/ppsspp/PSP/SYSTEM"
 
-	# The PS3 pairing process shoudl be handled interactively in a sepearte function:
+	# The PS3 pairing process shoudl be handled interactively in a seperate function:
 	gp_ps3_blu_main
 
 }
