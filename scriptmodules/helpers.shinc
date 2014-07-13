@@ -569,10 +569,10 @@ function h_correct_perms()
 	# replace "test" username in config files here to ensure games
 	# and emulators function and start properly
 	
-	# .retrorig dot file (our custom path)
-	chgrp -R "$user" "$config_home" > /dev/null 2>&1
-     	chown -R "$user" "$config_home" > /dev/null 2>&1
-	chmod -R 664 "$config_home" > /dev/null 2>&1
+	# .retrorig dot files (our custom path)
+	chgrp -R "$user" "$config_home/.mednafen" > /dev/null 2>&1
+     	chown -R "$user" "$config_home/.mednafen" > /dev/null 2>&1
+	chmod -R 664 "$config_home/.mednafen/mednafen-09x.cfg" > /dev/null 2>&1
 
 	# xbmc dotfile (our custom path)
 	chgrp -R "$user" "$xbmc_home" > /dev/null 2>&1

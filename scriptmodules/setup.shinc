@@ -431,8 +431,8 @@ function rrs_xbmc_patched()
         dpkg -i "/tmp/xbmc_Gotham_V13.1_patched_for_RetroRig_patchlevel_4.deb"
 
 	# cleanup deb
-	rm -f "/tmp/xbmc-bin_Gotham_V13.1_patched_for_RetroRig_patchlevel_*.deb"
-	rm -f "/tmp/xbmc_Gotham_V13.1_patched_for_RetroRig_patchlevel_*.deb"
+	sudo rm -f "/tmp/xbmc-bin_Gotham_V13.1_patched_for_RetroRig_patchlevel_*.deb"
+	sudo rm -f "/tmp/xbmc_Gotham_V13.1_patched_for_RetroRig_patchlevel_*.deb"
 
         # get SHA1 tag from patched XBMC version
         sha1=`file /usr/lib/xbmc/xbmc.bin | cut -f 19 -d ' '| cut -f 2 -d '='|cut -f 1 -d ','`
