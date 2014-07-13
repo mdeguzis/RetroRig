@@ -1,6 +1,20 @@
 RetroRig changelog
 ============================
 
+Version 0.9.1
+
+* Add PSX/PS1 Support
+* PS3 USB Controller support
+* samba share for remote ROMs folder access
+* Add quick settings option to update XBMC and it's relevant configs, rather than make user do a full install.
+* Change .xbmc dot file to use .retrorig so folks can still use regular ol' XBMC without issue
+* New XBMC version based on fernetMenta/xbmc
+* Dual-head support with new XBMC version
+* Establish testing checklist
+* Correct XBMC stalling on start/exit  
+* Correct play button not working
+* Backup/restore old configuration folders
+
 Version 0.8.0
 
 * Uninstall option fixes
