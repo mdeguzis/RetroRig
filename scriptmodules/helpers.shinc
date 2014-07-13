@@ -574,6 +574,9 @@ function h_correct_perms()
      	chown -R "$user" "$config_home/.mednafen" > /dev/null 2>&1
 	chmod -R 664 "$config_home/.mednafen/mednafen-09x.cfg" > /dev/null 2>&1
 
+	chgrp -R "$user" "$config_home/.mednafen" > /dev/null 2>&1
+     	chown -R "$user" "$config_home/.mednafen" > /dev/null 2>&1
+
 	# xbmc dotfile (our custom path)
 	chgrp -R "$user" "$xbmc_home" > /dev/null 2>&1
      	chown -R "$user" "$xbmc_home" > /dev/null 2>&1
