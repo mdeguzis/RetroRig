@@ -35,8 +35,15 @@ h_clean_gamepad()
 	# system objects that may interfere with switching gamepads
 	# The rescan service should be able to coexist with xboxdrv
 	
+	# controller configs
+	rm -f "config_home/.config"
+	rm -f "config_home/.stella"
+	rm -f "config_home/.mednafen"
+	rm -f "config_home/.mess"
+	rm -f "config_home/.mame"
+
 	# qjoypad 
-	rm -f "$home.comfig/autostart/qjoypad.desktop"
+	rm -f "$home/.config/autostart/qjoypad.desktop"
 	# Xbox controller 
 	service xboxdrv stop
 	rm -f /etc/init.d/xboxdrv
@@ -578,14 +585,17 @@ function h_correct_perms()
 	# XBMC gamepad auto-detect helper
 	chgrp -Rv "$user" "/usr/share/applications/gp_autodetect_xbmc.sh" > /dev/null 2>&1
      	chown -Rv "$user" "/usr/share/applications/gp_autodetect_xbmc.sh" > /dev/null 2>&1
+	chmod ugo+x "/usr/share/applications/gp_autodetect_xbmc.sh" > /dev/null 2>&1
 
 	# start script for RetroRig application
 	chgrp -Rv "$user" "/usr/share/applications/startXBMC.sh" > /dev/null 2>&1
 	chown -Rv "$user" "/usr/share/applications/startXBMC.sh" > /dev/null 2>&1
+	chmod ugo+x "/usr/share/applications/startXBMC.sh" > /dev/null 2>&1
 
 	# RetroRig autostart file
 	chgrp -Rv "$user" "$home/.config/autostart/RetroRig.desktop" > /dev/null 2>&1
 	chown -Rv "$user" "$home/.config/autostart/RetroRig.desktop" > /dev/null 2>&1
+	chmod ugo+x "$home/.config/autostart/RetroRig.desktop" > /dev/null 2>&1
 
 	# qjoypad autostart file
 	chgrp -Rv "$user" "$home/.config/autostart/qjoypad.desktop" > /dev/null 2>&1
