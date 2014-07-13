@@ -359,6 +359,7 @@ function rrs_debug()
 function rrs_xbmc_patched()
 {
 
+	clear
 	# create autostart for XBMC and place our modified files
 	# Custom script for reboots/hotplugging
 	cp -v "$rootdir/XBMC-cfgs/extra/gp_autodetect_xbmc.sh" "/usr/share/applications/"
@@ -379,7 +380,7 @@ function rrs_xbmc_patched()
 	cp -v "$rootdir/XBMC-cfgs/extra/RetroRig.desktop" "$home/.config/autostart"
 
 	# Can't use $config_home in the desktop file, so need to replace $user string
-	sed -i "s|/home/test/Pictures|$xdg_pictures_dir|g" "$home/.config/autostart"
+	sed -i "s|/home/test/Pictures|$xdg_pictures_dir|g" "$home/.config/autostart/"
 
 	# fix their permissions
 	chmod 755 "/usr/share/applications/gp_autodetect_xbmc.sh" 
