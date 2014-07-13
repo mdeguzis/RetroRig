@@ -36,11 +36,11 @@ h_clean_gamepad()
 	# The rescan service should be able to coexist with xboxdrv
 	
 	# controller configs
-	rm -f "config_home/.config"
-	rm -f "config_home/.stella"
-	rm -f "config_home/.mednafen"
-	rm -f "config_home/.mess"
-	rm -f "config_home/.mame"
+	rm -f "$config_home/.config"
+	rm -f "$config_home/.stella"
+	rm -f "$config_home/.mednafen"
+	rm -f "$config_home/.mess"
+	rm -f "$config_home/.mame"
 
 	# qjoypad 
 	rm -f "$home/.config/autostart/qjoypad.desktop"
