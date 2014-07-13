@@ -1,4 +1,4 @@
-
+#!/bin/bash
 # ==========================================================================
 # Build script for custom XBMC Debian Package with PS3 Hotplugging
 # ==========================================================================
@@ -87,7 +87,7 @@ wget "http://www.libregeek.org/RetroRig/old_pkgs/xbmc-bin_original.deb"
 sudo dpkg-deb -x xbmc-bin_original.deb .
 sudo dpkg-deb -e xbmc-bin_original.deb
 # clean packed debs
-rm -f *.deb
+sudo rm -f *.deb
 
 # download original xbmc file for build
 mkdir /tmp/RetroRig
@@ -98,7 +98,7 @@ wget "http://www.libregeek.org/RetroRig/old_pkgs/xbmc_original.deb"
 sudo dpkg-deb -x xbmc_original.deb .
 sudo dpkg-deb -e xbmc_original.deb
 # clean packed debs
-rm -f *.deb
+sudo rm -f *.deb
 
 #now compile xbmc
 cd
@@ -164,6 +164,5 @@ sudo mv /tmp/service.py /tmp/RetroRig/usr/share/xbmc/addons/service.xbmc.version
 sudo dpkg-deb -b . xbmc_Gotham_V13.1_patched_for_RetroRig_patchlevel_4.deb
 # copy new deb to home dir
 cp xbmc_Gotham_V13.1_patched_for_RetroRig_patchlevel_4.deb /tmp/XBMC_build
-
 
 
