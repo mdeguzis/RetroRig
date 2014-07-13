@@ -12,7 +12,7 @@ function set_menu()
 	
 
 while true; do
-    cmd=(dialog --backtitle "LibreGeek.org RetroRig Installer" --menu "Settings Menu" 20 0 12)
+    cmd=(dialog --backtitle "LibreGeek.org RetroRig Installer" --menu "Settings Menu" 18 0 12)
     options=(1 "Change resolution"  
 	     2 "Load ROMs"
 	     3 "Change plugins/filters/scaling"
