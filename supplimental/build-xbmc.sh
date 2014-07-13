@@ -1,6 +1,6 @@
 
 # ==========================================================================
-# Build Script for custom XBMC deb package with PS3 Hotplugging
+# Build script for custom XBMC Debian Package with PS3 Hotplugging
 # ==========================================================================
 #
 # If sucessful, this will be tested against the Xbox 360 controller as well.
@@ -12,7 +12,7 @@
 # ==========================================================================
 # Author:  Jens-Christian, aka "beaumanvienna"
 # Contribitions: Michael DeGuzis, aka "ProfessorKaos64"
-# Date:    20140622
+# Date:    20140713
 # Version: Beta
 # ==========================================================================
 
@@ -100,9 +100,6 @@ sudo dpkg-deb -e xbmc_original.deb
 # clean packed debs
 rm -f *.deb
 
-sudo rm -rf /tmp/RetroRig/usr/share/xbmc/
-sudo cp -r /usr/share/xbmc/ /tmp/RetroRig/usr/share/
-
 #now compile xbmc
 cd
 
@@ -117,33 +114,19 @@ sudo apt-get install -y automake autopoint bison build-essential ccache cmake cu
 
 echo ""
 echo "##########################################"
-echo "Fetching latest stable XBMC Gotham release"
+echo "Fetching beaumanviennas XBMC repository  #"
 echo "##########################################"
 
 # clone the xbmc source based on fernetMenta/xbmc and checkout the stable 13.1 Gotham release
 # This XBMC version is used in project OpenElec.
 git clone https://github.com/beaumanvienna/xbmc
 cd xbmc
-git checkout gotham-retrorig
+git checkout gotham-retrorig-pl4
 git pull
 ./bootstrap
 ./configure --disable-debug --prefix=/usr
 echo "Making current pkg"
-make
-
-echo ""
-echo "##########################################"
-echo "Applying patches to xbmc"
-echo "##########################################"
- 
-#restore baselined versions
-git checkout xbmc/input/SDLJoystick.cpp
-git checkout xbmc/Application.cpp  
-git checkout xbmc/AppParamParser.cpp
-#patch using files in $HOME/RetroRig (see line 70)
-#patch xbmc/Application.cpp < ../RetroRig/XBMC-cfgs/extra/xbmc_Application.cpp_-13.1-Gotham-interrupt_handler_for_SIGUSR1.patch
-#patch xbmc/AppParamParser.cpp < ../RetroRig/XBMC-cfgs/extra/xbmc_AppParamParser.cpp_-13.1-Gotham-version_disply_shows_RetroRig_patch.patch
-make
+make -j8
 
 # strip out the bin executable
 strip xbmc.bin
@@ -161,20 +144,26 @@ sudo cp ./xbmc.bin /tmp/RetroRig-bin/usr/lib/xbmc/
 
 # create xbmc-bin
 cd /tmp/RetroRig-bin
-sudo dpkg-deb -b . xbmc-bin_Gotham_V13.1_patched_for_RetroRig_patchlevel_3.deb
+sudo dpkg-deb -b . xbmc-bin_Gotham_V13.1_patched_for_RetroRig_patchlevel_4.deb
 # copy new deb to '/tmp/XBMC_build' dir
 mkdir -p /tmp/XBMC_build
-cp xbmc-bin_Gotham_V13.1_patched_for_RetroRig_patchlevel_3.deb /tmp/XBMC_build
+cp xbmc-bin_Gotham_V13.1_patched_for_RetroRig_patchlevel_4.deb /tmp/XBMC_build
 
 # create xbmc
 cd /tmp/RetroRig
 # replace /tmp/RetroRig/user/share/xbmc with /usr/share/xbmc installed by 'sudo make install'
 sudo rm -rf /tmp/RetroRig/usr/share/xbmc/
 sudo cp -r /usr/share/xbmc/ /tmp/RetroRig/usr/share/
+# disbale version check
+#echo "removing service 'xbmc.versioncheck'"
+sudo rm -v /tmp/RetroRig/usr/share/xbmc/addons/service.xbmc.versioncheck/service.py
+sudo echo '#!/usr/bin/python' > /tmp/service.py
+sudo echo '# service removed' >> /tmp/service.py
+sudo mv /tmp/service.py /tmp/RetroRig/usr/share/xbmc/addons/service.xbmc.versioncheck/service.py
 # create package
-sudo dpkg-deb -b . xbmc_Gotham_V13.1_patched_for_RetroRig_patchlevel_3.deb
+sudo dpkg-deb -b . xbmc_Gotham_V13.1_patched_for_RetroRig_patchlevel_4.deb
 # copy new deb to home dir
-cp xbmc_Gotham_V13.1_patched_for_RetroRig_patchlevel_3.deb /tmp/XBMC_build
+cp xbmc_Gotham_V13.1_patched_for_RetroRig_patchlevel_4.deb /tmp/XBMC_build
 
 
 

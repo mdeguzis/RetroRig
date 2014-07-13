@@ -1,0 +1,609 @@
+diff --git a/xbmc/AppParamParser.cpp b/xbmc/AppParamParser.cpp
+index 5b1bab2..59210f5 100644
+--- a/xbmc/AppParamParser.cpp
++++ b/xbmc/AppParamParser.cpp
+@@ -84,6 +84,7 @@ void CAppParamParser::DisplayVersion()
+ {
+   printf("XBMC Media Center %s\n", g_infoManager.GetVersion().c_str());
+   printf("Copyright (C) 2005-2013 Team XBMC - http://xbmc.org\n");
++  printf("Patched for RetroRig (patch level 2)\n");
+   exit(0);
+ }
+ 
+diff --git a/xbmc/Application.cpp b/xbmc/Application.cpp
+index 2f5cb7c..1450105 100644
+--- a/xbmc/Application.cpp
++++ b/xbmc/Application.cpp
+@@ -18,6 +18,7 @@
+  *
+  */
+ 
++#include "signal.h"
+ #include "network/Network.h"
+ #include "threads/SystemClock.h"
+ #include "system.h"
+@@ -378,6 +379,25 @@ using namespace XbmcThreads;
+ 
+ #define MAX_FFWD_SPEED 5
+ 
++#ifdef TARGET_LINUX
++#ifdef HAS_SDL_JOYSTICK
++void ReScan(int i)
++{
++  CLog::Log(LOGDEBUG, "rescanning for new game controller");
++
++  // switch off
++  g_Joystick.SetEnabled( false );
++  
++  // switch back on
++  if (CSettings::Get().GetBool("input.enablejoystick") &&
++                    CPeripheralImon::GetCountOfImonsConflictWithDInput() == 0)
++  {
++    g_Joystick.SetEnabled( true );
++  }
++}
++#endif
++#endif
++
+ //extern IDirectSoundRenderer* m_pAudioDecoder;
+ CApplication::CApplication(void)
+   : m_pPlayer(new CApplicationPlayer)
+@@ -1549,6 +1569,13 @@ bool CApplication::Initialize()
+ #ifdef HAS_SDL_JOYSTICK
+   g_Joystick.SetEnabled(CSettings::Get().GetBool("input.enablejoystick") &&
+                     CPeripheralImon::GetCountOfImonsConflictWithDInput() == 0 );
++  
++#ifdef TARGET_LINUX
++  //register interrupt handler for SIGUSR1 to have XBMC re-initialze the gamepads
++  printf("This xbmc version is patched for RetroRig.\n");
++  signal(SIGUSR1, ReScan);  
++#endif
++
+ #endif
+ 
+   return true;
+@@ -2061,6 +2088,8 @@ void CApplication::LoadSkin(const SkinPtr& skin)
+ 
+ void CApplication::UnloadSkin(bool forReload /* = false */)
+ {
++  printf("debug jc: CApplication::UnloadSkin\n");
++  CLog::Log(LOGWARNING, "debug jc: CApplication::UnloadSkin");
+   m_skinReloading = forReload;
+ 
+   CLog::Log(LOGINFO, "Unloading old skin %s...", forReload ? "for reload " : "");
+@@ -2081,6 +2110,9 @@ void CApplication::UnloadSkin(bool forReload /* = false */)
+   g_colorManager.Clear();
+ 
+   g_infoManager.Clear();
++  
++  printf("debug jc: CApplication::UnloadSkin terminated\n");
++  CLog::Log(LOGWARNING, "debug jc: CApplication::UnloadSkin terminated");
+ 
+ //  The g_SkinInfo boost shared_ptr ought to be reset here
+ // but there are too many places it's used without checking for NULL
+@@ -3533,6 +3565,7 @@ bool CApplication::Cleanup()
+ 
+ void CApplication::Stop(int exitCode)
+ {
++  printf("debug jc: CApplication::Stop()\n");
+   try
+   {
+     CVariant vExitCode(exitCode);
+@@ -3619,24 +3652,44 @@ void CApplication::Stop(int exitCode)
+     CCrystalHD::RemoveInstance();
+ #endif
+ 
++    
++    
+     g_mediaManager.Stop();
++    
++    printf("debug jc: after g_mediaManager.Stop();\n");
++    CLog::Log(LOGNOTICE, "debug jc: after g_mediaManager.Stop();");
+ 
+     // Stop services before unloading Python
+     CAddonMgr::Get().StopServices(false);
++    
++    printf("debug jc: after CAddonMgr::Get().StopServices(false);\n");
++    CLog::Log(LOGNOTICE, "debug jc: after CAddonMgr::Get().StopServices(false);");
+ 
+     // stop all remaining scripts; must be done after skin has been unloaded,
+     // not before some windows still need it when deinitializing during skin
+     // unloading
+     CScriptInvocationManager::Get().Uninitialize();
++    
++    printf("debug jc: CScriptInvocationManager::Get().Uninitialize();\n");
++    CLog::Log(LOGNOTICE, "debug jc: CScriptInvocationManager::Get().Uninitialize();");
+ 
+     g_Windowing.DestroyRenderSystem();
++    printf("debug jc: after DestroyRenderSystem\n");
++    CLog::Log(LOGNOTICE, "debug jc: after DestroyRenderSystem");
+     g_Windowing.DestroyWindow();
++    printf("debug jc: after DestroyWindow\n");
++    CLog::Log(LOGNOTICE, "debug jc: after DestroyWindow");
+     g_Windowing.DestroyWindowSystem();
++    
++    printf("debug jc: after destroyWindowSystem\n");
++    CLog::Log(LOGNOTICE, "debug jc: after destroy");
+ 
+     // shutdown the AudioEngine
+     CAEFactory::Shutdown();
++    printf("debug jc: after CAEFactory::Shutdown();\n");
+     CAEFactory::UnLoadEngine();
+-
++    printf("debug jc: after CAEFactory::UnLoadEngine();\n");
++    
+     // unregister ffmpeg lock manager call back
+     av_lockmgr_register(NULL);
+ 
+@@ -3649,8 +3702,10 @@ void CApplication::Stop(int exitCode)
+ 
+   // we may not get to finish the run cycle but exit immediately after a call to g_application.Stop()
+   // so we may never get to Destroy() in CXBApplicationEx::Run(), we call it here.
++  printf("debug jc: calling Destroy()\n");
+   Destroy();
+-
++  printf("debug jc: CApplication::Stop() terminated\n");
++  
+   //
+   Sleep(200);
+ }
+diff --git a/xbmc/addons/AddonManager.cpp b/xbmc/addons/AddonManager.cpp
+index 48bcac7..ec9edee7 100644
+--- a/xbmc/addons/AddonManager.cpp
++++ b/xbmc/addons/AddonManager.cpp
+@@ -887,6 +887,9 @@ bool CAddonMgr::StartServices(const bool beforelogin)
+ 
+ void CAddonMgr::StopServices(const bool onlylogin)
+ {
++  printf("debug jc: CAddonMgr::StopServices\n");
++  CLog::Log(LOGNOTICE, "debug jc: CAddonMgr::StopServices");
++  
+   CLog::Log(LOGDEBUG, "ADDON: Stopping service addons.");
+ 
+   VECADDONS services;
+@@ -895,14 +898,20 @@ void CAddonMgr::StopServices(const bool onlylogin)
+ 
+   for (IVECADDONS it = services.begin(); it != services.end(); ++it)
+   {
++    printf("debug jc: loop\n");
++    CLog::Log(LOGNOTICE, "debug jc: loop");
+     boost::shared_ptr<CService> service = boost::dynamic_pointer_cast<CService>(*it);
+     if (service)
+     {
+       if ( (onlylogin && service->GetStartOption() == CService::LOGIN)
+         || (!onlylogin) )
++	printf("debug jc: stopping service\n");
++        CLog::Log(LOGNOTICE, "debug jc: stopping service");
+         service->Stop();
+     }
+   }
++  printf("debug jc: CAddonMgr::StopServices terminated\n");
++  CLog::Log(LOGNOTICE, "debug jc: CAddonMgr::StopServices terminated");
+ }
+ 
+ int cp_to_clog(cp_log_severity_t lvl)
+diff --git a/xbmc/addons/Service.cpp b/xbmc/addons/Service.cpp
+index 7cf0fe7..7811027 100644
+--- a/xbmc/addons/Service.cpp
++++ b/xbmc/addons/Service.cpp
+@@ -72,13 +72,21 @@ bool CService::Start()
+ 
+ bool CService::Stop()
+ {
++  printf("debug jc: CService::Stop()\n");
++  CLog::Log(LOGNOTICE, "debug jc: CService::Stop()");
++  
+   bool ret = true;
+ 
+   switch (m_type)
+   {
+ #ifdef HAS_PYTHON
+   case PYTHON:
++    printf("debug jc: case PYTHON\n");
++    CLog::Log(LOGNOTICE, "debug jc: case PYTHON");
++    printf("debug jc: script path is %s\n",LibPath().c_str());
+     ret = CScriptInvocationManager::Get().Stop(LibPath());
++    printf("debug jc: after CScriptInvocationManager::Get().Stop(LibPath()\n");
++    CLog::Log(LOGNOTICE, "debug jc: CScriptInvocationManager::Get().Stop(LibPath()");
+     break;
+ #endif
+ 
+diff --git a/xbmc/guilib/TextureManager.cpp b/xbmc/guilib/TextureManager.cpp
+index f8dad80..1d0b286 100644
+--- a/xbmc/guilib/TextureManager.cpp
++++ b/xbmc/guilib/TextureManager.cpp
+@@ -223,7 +223,11 @@ CGUITextureManager::CGUITextureManager(void)
+ 
+ CGUITextureManager::~CGUITextureManager(void)
+ {
++  printf("debug jc: ~CGUITextureManager\n");
++  CLog::Log(LOGWARNING, "debug jc: ~CGUITextureManager");
+   Cleanup();
++  printf("debug jc: ~CGUITextureManager terminated\n");
++  CLog::Log(LOGWARNING, "debug jc: ~CGUITextureManager terminated");
+ }
+ 
+ /************************************************************************/
+@@ -502,12 +506,16 @@ void CGUITextureManager::ReleaseHwTexture(unsigned int texture)
+ 
+ void CGUITextureManager::Cleanup()
+ {
++  printf("debug jc: CGUITextureManager::Cleanup\n");
++  CLog::Log(LOGWARNING, "debug jc: CGUITextureManager::Cleanup");
+   CSingleLock lock(g_graphicsContext);
+ 
+   ivecTextures i;
+   i = m_vecTextures.begin();
+   while (i != m_vecTextures.end())
+   {
++    printf("debug jc: cleaning up...\n");
++    CLog::Log(LOGWARNING, "cleaning up...");
+     CTextureMap* pMap = *i;
+     CLog::Log(LOGWARNING, "%s: Having to cleanup texture %s", __FUNCTION__, pMap->GetName().c_str());
+     delete pMap;
+@@ -516,6 +524,8 @@ void CGUITextureManager::Cleanup()
+   for (int i = 0; i < 2; i++)
+     m_TexBundle[i].Cleanup();
+   FreeUnusedTextures();
++  printf("debug jc: CGUITextureManager::Cleanup terminated\n");
++  CLog::Log(LOGWARNING, "debug jc: CGUITextureManager::Cleanup terminated");
+ }
+ 
+ void CGUITextureManager::Dump() const
+diff --git a/xbmc/interfaces/generic/LanguageInvokerThread.cpp b/xbmc/interfaces/generic/LanguageInvokerThread.cpp
+index 7b0d903..8046479 100644
+--- a/xbmc/interfaces/generic/LanguageInvokerThread.cpp
++++ b/xbmc/interfaces/generic/LanguageInvokerThread.cpp
+@@ -20,6 +20,7 @@
+ 
+ #include "LanguageInvokerThread.h"
+ #include "ScriptInvocationManager.h"
++#include "utils/log.h"
+ 
+ CLanguageInvokerThread::CLanguageInvokerThread(ILanguageInvoker *invoker, CScriptInvocationManager *invocationManager)
+   : ILanguageInvoker(NULL),
+@@ -30,8 +31,10 @@ CLanguageInvokerThread::CLanguageInvokerThread(ILanguageInvoker *invoker, CScrip
+ 
+ CLanguageInvokerThread::~CLanguageInvokerThread()
+ {
+-  Stop(true);
++  printf("debug jc: CLanguageInvokerThread::~CLanguageInvokerThread()\n");
++  //Stop(true);
+   delete m_invoker;
++  printf("debug jc: CLanguageInvokerThread::~CLanguageInvokerThread() terminated\n");
+ }
+ 
+ InvokerState CLanguageInvokerThread::GetState()
+@@ -56,21 +59,38 @@ bool CLanguageInvokerThread::execute(const std::string &script, const std::vecto
+ 
+ bool CLanguageInvokerThread::stop(bool wait)
+ {
++  
++  bool myVar;
++  
++  printf("debug jc: CLanguageInvokerThread::stop\n");
++  CLog::Log(LOGNOTICE, "debug jc: CLanguageInvokerThread::stop");
++  
+   if (m_invoker == NULL)
++  {
++    printf("debug jc: (m_invoker == NULL) terminating\n");
+     return false;
++  }
+ 
+   if (!CThread::IsRunning())
++  {
++    printf("debug jc: (!CThread::IsRunning()) terminating\n");
+     return false;
++  }
+ 
+   bool result = true;
+   if (m_invoker->GetState() < InvokerStateDone)
+   {
++    printf("debug jc: before result = m_invoker->Stop(wait);\n");
+     // stop the language-specific invoker
+     result = m_invoker->Stop(wait);
+     // stop the thread
+-    CThread::StopThread(wait);
++    printf("debug jc: before CThread::StopThread(wait);\n");
++    printf("debug jc: skipping CThread::StopThread(wait);\n");
++    //CThread::StopThread(wait);
+   }
+ 
++  printf("debug jc: CLanguageInvokerThread::stop terminating\n");
++  CLog::Log(LOGNOTICE, "debug jc: CLanguageInvokerThread::stop terminating");
+   return result;
+ }
+ 
+diff --git a/xbmc/interfaces/generic/ScriptInvocationManager.cpp b/xbmc/interfaces/generic/ScriptInvocationManager.cpp
+index b3c98f0..20908a4 100644
+--- a/xbmc/interfaces/generic/ScriptInvocationManager.cpp
++++ b/xbmc/interfaces/generic/ScriptInvocationManager.cpp
+@@ -38,11 +38,13 @@ CScriptInvocationManager::CScriptInvocationManager()
+ 
+ CScriptInvocationManager::~CScriptInvocationManager()
+ {
++  printf("CScriptInvocationManager::~CScriptInvocationManager()\n");
+   Uninitialize();
++  printf("CScriptInvocationManager::~CScriptInvocationManager()terminated\n");
+ }
+ 
+ CScriptInvocationManager& CScriptInvocationManager::Get()
+-{
++{ 
+   static CScriptInvocationManager s_instance;
+   return s_instance;
+ }
+@@ -81,6 +83,7 @@ void CScriptInvocationManager::Process()
+ 
+ void CScriptInvocationManager::Uninitialize()
+ {
++  /*
+   CSingleLock lock(m_critSection);
+ 
+   // execute Process() once more to handle the remaining scripts
+@@ -105,14 +108,15 @@ void CScriptInvocationManager::Uninitialize()
+     if (!it->done)
+       it->thread->Stop(true);
+   }
+-  tempList.clear();
+-
++  
++  //tempList.clear();
++  //printf("after tempList.clear();\n");
+   lock.Enter();
+   // uninitialize all invocation handlers and then remove them
+   for (LanguageInvocationHandlerMap::iterator it = m_invocationHandlers.begin(); it != m_invocationHandlers.end(); ++it)
+     it->second->Uninitialize();
+ 
+-  m_invocationHandlers.clear();
++  m_invocationHandlers.clear();*/
+ }
+ 
+ void CScriptInvocationManager::RegisterLanguageInvocationHandler(ILanguageInvocationHandler *invocationHandler, const std::string &extension)
+@@ -227,28 +231,60 @@ int CScriptInvocationManager::Execute(const std::string &script, const ADDON::Ad
+ 
+ bool CScriptInvocationManager::Stop(int scriptId, bool wait /* = false */)
+ {
++  bool myVar;
++  
++  printf("debug jc: CScriptInvocationManager::Stop (overlay I)\n");
++  CLog::Log(LOGNOTICE, "debug jc: CScriptInvocationManager::Stop (overlay I)");
++  
+   if (scriptId < 0)
++  {
++    printf("debug jc: (scriptId < 0) terminating\n");
+     return false;
+-
++  }
+   CSingleLock lock(m_critSection);
+   CLanguageInvokerThreadPtr invokerThread = getInvokerThread(scriptId).thread;
+   if (invokerThread == NULL)
++  {
++    printf("debug jc: (invokerThread == NULL) terminating\n");
+     return false;
+-
+-  return invokerThread->Stop(wait);
++  }
++  printf("debug jc: before 'invokerThread->Stop(wait);'\n");
++  CLog::Log(LOGNOTICE, "debug jc: before 'invokerThread->Stop(wait);'");
++  myVar = invokerThread->Stop(wait);
++  
++  printf("debug jc: CScriptInvocationManager::Stop (overlay I) terminated\n");
++  CLog::Log(LOGNOTICE, "debug jc: CScriptInvocationManager::Stop (overlay I) terminated");
++  
++  return myVar;
+ }
+ 
+ bool CScriptInvocationManager::Stop(const std::string &scriptPath, bool wait /* = false */)
+ {
++  bool myVar = true;
++  
++  printf("debug jc: CScriptInvocationManager::Stop (overlay II)\n");
++  CLog::Log(LOGNOTICE, "debug jc: CScriptInvocationManager::Stop (overlay II)");
++  
+   if (scriptPath.empty())
++  {
++    printf("debug jc: (scriptPath.empty()) terminating\n");
+     return false;
++  }
+ 
+   CSingleLock lock(m_critSection);
+   std::map<std::string, int>::const_iterator script = m_scriptPaths.find(scriptPath);
+   if (script == m_scriptPaths.end())
++  {
++    printf("debug jc: (script == m_scriptPaths.end()) terminating\n");
+     return false;
+-
+-  return Stop(script->second, wait);
++  }
++  printf("debug jc: skipping overlay I\n");
++  //myVar = Stop(script->second, wait);
++  
++  printf("debug jc: CScriptInvocationManager::Stop (overlay II) terminated\n");
++  CLog::Log(LOGNOTICE, "debug jc: CScriptInvocationManager::Stop (overlay II) terminated");
++  
++  return myVar;
+ }
+ 
+ bool CScriptInvocationManager::IsRunning(int scriptId) const
+diff --git a/xbmc/interfaces/generic/ScriptInvocationManager.h b/xbmc/interfaces/generic/ScriptInvocationManager.h
+index 4668bb3..264dc0b 100644
+--- a/xbmc/interfaces/generic/ScriptInvocationManager.h
++++ b/xbmc/interfaces/generic/ScriptInvocationManager.h
+@@ -25,6 +25,7 @@
+ 
+ #include "addons/IAddon.h"
+ #include "threads/CriticalSection.h"
++#include "utils/log.h"
+ 
+ class ILanguageInvocationHandler;
+ class ILanguageInvoker;
+diff --git a/xbmc/interfaces/python/PythonInvoker.cpp b/xbmc/interfaces/python/PythonInvoker.cpp
+index b4a75b1..1767e3e 100644
+--- a/xbmc/interfaces/python/PythonInvoker.cpp
++++ b/xbmc/interfaces/python/PythonInvoker.cpp
+@@ -104,6 +104,7 @@ CPythonInvoker::CPythonInvoker(ILanguageInvocationHandler *invocationHandler)
+ 
+ CPythonInvoker::~CPythonInvoker()
+ {
++  printf("debug jc: CPythonInvoker::~CPythonInvoker()\n");
+   // nothing to do for the default invoker used for registration with the
+   // CScriptInvocationManager
+   if (GetId() < 0)
+@@ -112,7 +113,7 @@ CPythonInvoker::~CPythonInvoker()
+   if (GetState() < InvokerStateDone)
+     CLog::Log(LOGDEBUG, "CPythonInvoker(%d): waiting for python thread \"%s\" to stop",
+       GetId(), (m_source != NULL ? m_source : "unknown script"));
+-  Stop(true);
++  //Stop(true);
+   g_pythonParser.PulseGlobalEvent();
+ 
+   delete [] m_source;
+@@ -123,6 +124,7 @@ CPythonInvoker::~CPythonInvoker()
+     delete [] m_argv;
+   }
+   g_pythonParser.FinalizeScript();
++  printf("debug jc: CPythonInvoker::~CPythonInvoker() terminated\n");
+ }
+ 
+ bool CPythonInvoker::Execute(const std::string &script, const std::vector<std::string> &arguments /* = std::vector<std::string>() */)
+@@ -398,6 +400,13 @@ bool CPythonInvoker::execute(const std::string &script, const std::vector<std::s
+ 
+ bool CPythonInvoker::stop(bool abort)
+ {
++  printf("debug jc: CPythonInvoker::stop(bool abort) ** skipping eveything: terminating right now\n");
++  CLog::Log(LOGNOTICE, "debug jc: CPythonInvoker::stop(bool abort) ** skipping eveything: terminating right now");
++  
++  return true;
++  
++  
++  
+   CSingleLock lock(m_critical);
+   m_stop = true;
+ 
+diff --git a/xbmc/main/main.cpp b/xbmc/main/main.cpp
+index ec86426..63a96e8 100644
+--- a/xbmc/main/main.cpp
++++ b/xbmc/main/main.cpp
+@@ -40,13 +40,14 @@
+ #include "input/linux/LIRC.h"
+ #endif
+ #include "XbmcContext.h"
+-
++bool shuttingDown = false;
+ int main(int argc, char* argv[])
+ {
+   // set up some xbmc specific relationships
+   XBMC::Context context;
+ 
+   bool renderGUI = true;
++  bool exitCode;
+   //this can't be set from CAdvancedSettings::Initialize() because it will overwrite
+   //the loglevel set with the --debug flag
+ #ifdef _DEBUG
+@@ -73,5 +74,9 @@ int main(int argc, char* argv[])
+   CAppParamParser appParamParser;
+   appParamParser.Parse((const char **)argv, argc);
+ #endif
+-  return XBMC_Run(renderGUI);
++  printf("debug jc: XBMC_Run(renderGUI);\n");
++  exitCode=XBMC_Run(renderGUI);
++  shuttingDown = true;
++  printf("debug jc: XBMC_Run(renderGUI) teminated\n");
++  return exitCode;
+ }
+diff --git a/xbmc/threads/Thread.cpp b/xbmc/threads/Thread.cpp
+index 3907549..b0b1d6e 100644
+--- a/xbmc/threads/Thread.cpp
++++ b/xbmc/threads/Thread.cpp
+@@ -35,6 +35,8 @@ XbmcCommons::ILogger* CThread::logger = NULL;
+ 
+ #include "threads/platform/ThreadImpl.cpp"
+ 
++extern bool shuttingDown;
++
+ //////////////////////////////////////////////////////////////////////
+ // Construction/Destruction
+ //////////////////////////////////////////////////////////////////////
+@@ -44,6 +46,14 @@ XbmcCommons::ILogger* CThread::logger = NULL;
+ CThread::CThread(const char* ThreadName)
+ : m_StopEvent(true,true), m_TermEvent(true), m_StartEvent(true)
+ {
++  if (ThreadName)
++  {
++    printf("debug jc: CThread::CThread(const char* ThreadName) (Overlay I) for new thread '%s'\n",ThreadName);
++  }
++  else
++  {
++     printf("debug jc: CThread::CThread(const char* ThreadName) (Overlay I) with no name\n");
++  }
+   m_bStop = false;
+ 
+   m_bAutoDelete = false;
+@@ -55,12 +65,23 @@ CThread::CThread(const char* ThreadName)
+   m_pRunnable=NULL;
+ 
+   if (ThreadName)
++  {
+     m_ThreadName = ThreadName;
++  }
++  printf("debug jc: CThread::CThread(const char* ThreadName) (Overlay I) terminated\n");
+ }
+ 
+ CThread::CThread(IRunnable* pRunnable, const char* ThreadName)
+ : m_StopEvent(true,true), m_TermEvent(true), m_StartEvent(true)
+ {
++  if (ThreadName)
++  {
++    printf("debug jc: CThread::CThread(const char* ThreadName) (Overlay II) for new thread '%s'\n",ThreadName);
++  }
++  else
++  {
++     printf("debug jc: CThread::CThread(const char* ThreadName) (Overlay II) with no name\n");
++  }
+   m_bStop = false;
+ 
+   m_bAutoDelete = false;
+@@ -72,18 +93,33 @@ CThread::CThread(IRunnable* pRunnable, const char* ThreadName)
+   m_pRunnable=pRunnable;
+ 
+   if (ThreadName)
++  {
+     m_ThreadName = ThreadName;
++  }
++  printf("debug jc: CThread::CThread(const char* ThreadName) (Overlay II)\n");
+ }
+ 
+ CThread::~CThread()
+ {
+-  StopThread();
++  printf("debug jc: CThread::~CThread() for '%s'\n",m_ThreadName.c_str());
++  if (!shuttingDown) 
++  {
++    printf("debug jc: CThread::~CThread is executing StopThread() to stop '%s';\n", m_ThreadName.c_str());
++    StopThread();
++  }
++  else
++  {
++    printf("debug jc: skipping StopThread() to prevent deadlock!\n");
++  }
++  printf("debug jc: CThread::~CThread() terminated\n");
+ }
+ 
+ void CThread::Create(bool bAutoDelete, unsigned stacksize)
+ {
++  printf("debug jc: CThread::Create() for '%s'\n",m_ThreadName.c_str());
+   if (m_ThreadId != 0)
+   {
++    printf("debug jc: fatal error creating thread- old thread id not null\n");
+     LOG(LOGERROR, "%s - fatal error creating thread- old thread id not null", __FUNCTION__);
+     exit(1);
+   }
+@@ -97,6 +133,7 @@ void CThread::Create(bool bAutoDelete, unsigned stacksize)
+   m_StartEvent.Reset();
+ 
+   SpawnThread(stacksize);
++  printf("debug jc: CThread::Create() terminated\n");
+ }
+ 
+ bool CThread::IsRunning() const
