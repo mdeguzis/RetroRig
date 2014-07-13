@@ -620,16 +620,24 @@ function h_emu_user_fixes()
 	# RCB and some config files don't like using $config_home, rather /home/test/
 	# Let's change the config files to reflect the current username
 
+	
 	# mame
 	sed -i "s|/home/test/RetroRig|$rootdir|g" $config_home/.mame/mame.ini | tee >> "$rootdir/logs/debug.log"
+	
 	# MESS
 	sed -i "s|/home/test/RetroRig|$rootdir|g" $config_home/.mess/mess.ini | tee >> "$rootdir/logs/debug.log"
+	
 	# XBMC
 	sed -i "s|/home/test/|/home/$user/|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml" | tee >> "$rootdir/logs/debug.log"
+	
 	# PPSSPP	
 	sed -i 's|test|$user|g' "$scriptdir/emu-cfgs/x360_controller/PPSSPP/ppsspp.ini"
-	echo "The user applied to configuration files was: $user" | tee >> "$rootdir/logs/debug.log"
 
+	# Mednafen firmware location
+	sed -i 's|/home/test/RetroRig|$rootdir|g' "$config_home/.mednafen/mednafen-09x.cfg"
+
+	# echo change
+	echo "The user applied to configuration files was: $user" | tee >> "$rootdir/logs/debug.log"
 }
 
 function h_filechecker()
