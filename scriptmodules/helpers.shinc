@@ -37,6 +37,7 @@ h_clean_gamepad()
 	
 	# qjoypad 
 	rm -f "$home/.config/autostart/qjoypad.desktop"
+
 	# Xbox controller 
 	service xboxdrv stop
 	rm -f /etc/init.d/xboxdrv
@@ -564,12 +565,9 @@ function h_correct_perms()
 	
 	# .retrorig dot files (our custom path)
 
-	# mednafen
-	chgrp -R "$user" "$config_home/.mednafen" > /dev/null 2>&1
-     	chown -R "$user" "$config_home/.mednafen" > /dev/null 2>&1
-
-	chgrp -R "$user" "$config_home/.mednafen" > /dev/null 2>&1
-     	chown -R "$user" "$config_home/.mednafen" > /dev/null 2>&1
+	# .retrorig
+	chgrp -R "$user" "$config_home" > /dev/null 2>&1
+     	chown -R "$user" "$config_home" > /dev/null 2>&1
 
 	# xbmc dotfile (our custom path)
 	chgrp -R "$user" "$xbmc_home" > /dev/null 2>&1
@@ -578,7 +576,6 @@ function h_correct_perms()
 	# qjoypad files from user home directory
 	chgrp -R "$user" "$home/.qjoypad3" > /dev/null 2>&1
      	chown -R "$user" "$home/.qjoypad3" > /dev/null 2>&1
-	
 
 	# XBMC gamepad auto-detect helper
 	chgrp -R "$user" "/usr/share/applications/gp_autodetect_xbmc.sh" > /dev/null 2>&1
