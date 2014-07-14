@@ -15,8 +15,13 @@ an easy way to get up and running with RetroGaming on x86_64 Linux systems. Pull
 Issues are very much welcome! Please see the AUTHORS file in the root directory for all the awesome people
 that contribute to this project.
 
-You can follow RetroRig's development by staring the github.com page, or with joining the IRC channel `#retrorig-dev`
+<<<<<<< HEAD
+You can follow RetroRig's development by staring the github.com page, or by joining the IRC channel `#retrorig-dev`
 located under the irc.freenode.net network. The main op is me "ProfessorKaos64". You can also follow me on twitter with the username "@N3RD42". There is also a [forum](http://libregeek.org/forum/index.php) for any and all discussion.
+=======
+You can follow RetroRig's development by staring the github.com page, or with joining the IRC channel `#retrorig-dev`
+located under the irc.freenode.net network. The main op is me "ProfessorKaos64". You can also follow me on twitter with the username @N3RD42. There is also a [forum](http://libregeek.org/forum/index.php) for any and all discussion.
+>>>>>>> origin
 
 **Please be advised:**      
 RetroRig requires sudo access to inject the xboxdrv 
@@ -32,8 +37,12 @@ Thank you for your patience.
 [Click here for the version 0.8.0 update video](http://youtu.be/cJxhrWZDrA4)
 ## Warning
 
+<<<<<<< HEAD
 RetroRig is meant to be a standalone setup for XBMC on Ubuntu. Soon, RetorRig will use it's own dotfile so you can continue to use your own XBMC implementation. RetroRig now makes use of a custom-patched XBMC binary as well to allow hotplugging for support controllers is possible. It is mainly targeted at folks wishing to repurpose an old physical PC. VirtualBox support exists, (to an extent), but can behave erratcially with emulator speed/framerates and is not advised. I do hope to corrrect some of that in due time, but right now, it is more of an "extra" or a "test bed."
 
+=======
+RetroRig is meant to be a standalone setup for XBMC on Ubuntu. Soon, RetorRig will use it's own dotfile so you can continue to use your own XBMC implementation. RetroRig now makes use of a custom-patched XBMC binary as well to allow hotplugging for support controllers is poossible.
+>>>>>>> origin
 It is mainly targeted at folks wishing to repurpose an old physical PC. VirtualBox support exists, 
 (to an extent), but can behave erratcially with emulator speed/framerates and is not advised. I do
 hope to corrrect some of that in due time, but right now, it is more of an "extra" or a "test bed."
@@ -111,8 +120,13 @@ You can also download a zip file or by other means on the github page.
 
 ## Updating
 
+<<<<<<< HEAD
 The retrorig_setup.sh script also currently contains mechanisms to upgrade Ubuntu, update the
 emulator binaries, update our patched XBMC version, and also a way to pull the latest files from github. 
+=======
+The setup script also currently contains mechanisms to upgrade Ubuntu, update the
+emulator binaries, and also a way to pull the latest files from github.
+>>>>>>> origin
 
 ## Please Note
 
