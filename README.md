@@ -45,11 +45,16 @@ wiki entries under "Installation," and "Advanced Configuration," or checkout the
 
 For all other features and future plans, please see the [wiki](https://github.com/ProfessorKaos64/RetroRig/wiki/Development-and-Features)
 
+* No need to install an entire seperate distro on your Mint/Debian machine
+* Cusom XBMC binary package
 * Custom XBMC home screen and button layout
+* Seperate dot file (.retrorig, not .xbmc) so you can have your cake and eat it too!
 * Hotplugging support for supported game controllers
+* Dual monitor support for XBMC
 * Auto-install software, emulator configs, and required components
 * Many supported consoles (more added frequently)
 * Gamepad select menu
+* SSH and samba share support
 * Preset Controller mappings for supported gamepads
 * Resolution presets/custom selection for emulators that support it
 * Save state, load state, exit emulators with gamepad
@@ -60,7 +65,6 @@ For all other features and future plans, please see the [wiki](https://github.co
 * BIOS pre-loader
 * Modular design for expandability
 * Unity configuration set during config-setup to lengthen screen timeout + remove screen lock
-* Uninstall option
 
 ## Why XBMC and Ubuntu?
 
