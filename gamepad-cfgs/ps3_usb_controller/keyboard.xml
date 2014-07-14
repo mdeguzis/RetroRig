@@ -1,0 +1,295 @@
+<!--
+# This file is for use with a PS3 Sixaxis (USB) Controller under RetroRig
+# Button id numbers are totally diffferent, due to the use of
+# the use-dpad-as-button, and use-trigger-as-button options used.
+# To use please replace the joystickname with the one you find 
+# in your xbmclogfile
+#
+# Be careful:
+# I generally encourage people to use the analog stick
+# The DPad gets remapped from its default (up, down, etc) to various
+# actions (delete, queue, etc.)
+# The AnalogStick should be used for browsing.
+#
+# The Buttons of the controller are mapped as the following list shows:
+# add +1, since id's start at 0!
+#
+#button id 1 = dpad up
+#button id 2 = dpad down
+#button id 3 = dpad left
+#button id 4 = dpad right
+#button id 5 = ×
+#button id 6 = ○
+#button id 7 = □
+#button id 8 = △
+#button id 9 = L1
+#button id 10 = R1
+#button id 11 = L2
+#button id 12 = R2
+#button id 13 = select 
+#button id 14 = start
+#button id 15 = PS Button
+#button id 16 = left joy down
+#button id 17 = right joy down
+#
+#axis limit="1" id="2"   Up on left stick
+#axis limit="+1" id="2"   Down on left stick
+#axis limit="1" id="1"   Left on left stick
+#axis limit="+1" id="1"   Right on left stick
+#
+#axis limit="1" id="4"   Up on right stick
+#axis limit="+1" id="4"   Down on right stick
+#axis limit="1" id="3"   Left on right stick
+#axis limit="+1" id="3"   Right on right stick
+#
+-->
+<keymap>
+  <global>
+    <joystick name="Xbox Gamepad (userspace driver)">
+<button id="1">Up</button>
+<button id="4">Right</button> 
+<button id="2">Down</button> 
+<button id="3">Left</button>
+<button id="5">Select</button>
+<button id="6">Back</button>
+<button id="7">ContextMenu</button>
+<button id="8">FullScreen</button>
+<button id="9">ScrollUp</button>
+<button id="10">ScrollDown</button>
+
+<hat id="1" position="up">Up</hat>
+<hat id="1" position="down">Down</hat>
+<hat id="1" position="right">Right</hat>
+<hat id="1" position="left">Left</hat>
+  
+<axis limit="-1" id="4">VolumeUp</axis>
+<axis limit="+1" id="4">VolumeDown</axis>
+<axis limit="-1" id="3">AnalogSeekBack</axis>
+<axis limit="+1" id="3">AnalogSeekForward</axis> 
+
+    </joystick>
+  </global>
+<Home>
+ <joystick name="Xbox Gamepad (userspace driver)">
+    <button id="8">XBMC.ActivateWindow(shutdownmenu)</button>
+ </joystick>
+</Home>
+  <FullscreenVideo>
+    <joystick name="Xbox Gamepad (userspace driver)">
+ 
+      <button id="5">Pause</button>
+      <button id="6">Stop</button>
+      <button id="7">FullScreen</button>
+      <button id="8">SkipNext</button>
+      <button id="9">CodecInfo</button>
+      <button id="10">ShowTime</button>
+      <button id="13">Info</button>
+      <button id="14">OSD</button>
+      <button id="12">AnalogFastForward</button>
+      <button id="11">AnalogRewind</button>
+      <button id="1">BigStepForward</button>
+      <button id="2">BigStepBack</button>
+      <button id="3">StepBack</button>
+      <button id="4">StepForward</button>
+    </joystick>
+  </FullscreenVideo>
+ <FullscreenInfo>
+   <joystick name="Xbox Gamepad (userspace driver)">
+      <button id="13">Close</button> 
+      <button id="6">Close</button> 
+    </joystick>
+  </FullscreenInfo>
+ <PlayerControls>
+   <joystick name="Xbox Gamepad (userspace driver)">
+     <button id="3">Close</button>
+     <button id="1">Close</button> 
+     <button id="14">Close</button>
+   </joystick>
+ </PlayerControls>
+ <MusicOSD>
+   <joystick name="Xbox Gamepad (userspace driver)">
+      <button id="13">Close</button> 
+      <button id="6">Close</button> 
+   </joystick>
+ </MusicOSD>
+ <VisualisationSettings>
+  <joystick name="Xbox Gamepad (userspace driver)">
+  <altname>Controller (Xbox 360 Wireless Receiver for Windows)</altname>
+      <button id="13">Close</button> 
+      <button id="6">Close</button> 
+  </joystick>
+ </VisualisationSettings>
+ <VisualisationPresetList>
+  <joystick name="Xbox Gamepad (userspace driver)">
+  <altname>Controller (Xbox 360 Wireless Receiver for Windows)</altname>
+      <button id="13">Close</button> 
+      <button id="6">Close</button> 
+  </joystick>
+ </VisualisationPresetList>
+ <SlideShow>
+  <joystick name="Xbox Gamepad (userspace driver)">
+  <altname>Controller (Xbox 360 Wireless Receiver for Windows)</altname>
+      <button id="13">Close</button> 
+      <button id="6">Close</button> 
+  </joystick>
+ </SlideShow>
+ <SelectDialog>
+  <joystick name="Xbox Gamepad (userspace driver)">
+  <altname>Controller (Xbox 360 Wireless Receiver for Windows)</altname>
+      <button id="13">Close</button> 
+      <button id="6">Close</button> 
+  </joystick>
+ </SelectDialog>
+ <VideoOSD>
+  <joystick name="Xbox Gamepad (userspace driver)">
+  <altname>Controller (Xbox 360 Wireless Receiver for Windows)</altname>
+      <button id="13">Close</button> 
+      <button id="6">Close</button> 
+  </joystick>
+ </VideoOSD>
+ <OSDVideoSettings>
+  <joystick name="Xbox Gamepad (userspace driver)">
+  <altname>Controller (Xbox 360 Wireless Receiver for Windows)</altname>
+      <button id="13">Close</button> 
+      <button id="6">Close</button> 
+  </joystick>
+ </OSDVideoSettings>
+ <OSDAudioSettings>
+  <joystick name="Xbox Gamepad (userspace driver)"> 
+  <altname>Controller (Xbox 360 Wireless Receiver for Windows)</altname>
+      <button id="13">Close</button> 
+      <button id="6">Close</button> 
+  </joystick>
+ </OSDAudioSettings>
+ <VideoBookmarks>
+  <joystick name="Xbox Gamepad (userspace driver)"> 
+  <altname>Controller (Xbox 360 Wireless Receiver for Windows)</altname>
+      <button id="13">Close</button> 
+      <button id="6">Close</button> 
+  </joystick>
+ </VideoBookmarks>
+ <ContextMenu>
+   <joystick name="Xbox Gamepad (userspace driver)">
+      <button id="13">Close</button> 
+      <button id="6">Close</button> 
+   </joystick>
+ </ContextMenu>
+ <AddonInformation>
+   <joystick name="Xbox Gamepad (userspace driver)">
+      <button id="13">Close</button> 
+      <button id="6">Close</button> 
+   </joystick>
+ </AddonInformation>
+ <AddonSettings>
+   <joystick name="Xbox Gamepad (userspace driver)">
+      <button id="13">Close</button> 
+      <button id="6">Close</button> 
+   </joystick>
+ </AddonSettings>
+ <TextViewer>
+   <joystick name="Xbox Gamepad (userspace driver)">
+      <button id="13">Close</button> 
+      <button id="6">Close</button> 
+  </joystick>
+ </TextViewer>
+ <MyPicturesSettings>
+   <joystick name="Xbox Gamepad (userspace driver)">
+
+     <button id="3">PreviousMenu</button> 
+     <button id="14">PreviousMenu</button>
+   </joystick>
+ </MyPicturesSettings>
+ <MyProgramsSettings>
+   <joystick name="Xbox Gamepad (userspace driver)">
+    <button id="1">PreviousMenu</button> 
+    <button id="14">PreviousMenu</button>
+   </joystick>
+ </MyProgramsSettings>
+ <MyWeatherSettings>
+   <joystick name="Xbox Gamepad (userspace driver)">
+     <button id="1">PreviousMenu</button> 
+     <button id="14">PreviousMenu</button>
+   </joystick>
+ </MyWeatherSettings>
+ <MyMusicSettings>
+   <joystick name="Xbox Gamepad (userspace driver)">
+     <button id="1">PreviousMenu</button> 
+     <button id="14">PreviousMenu</button>
+   </joystick>
+ </MyMusicSettings>
+ <SystemSettings>
+   <joystick name="Xbox Gamepad (userspace driver)">
+     <button id="1">PreviousMenu</button> 
+     <button id="14">PreviousMenu</button>
+   </joystick>
+ </SystemSettings>
+ <MyVideosSettings>
+   <joystick name="Xbox Gamepad (userspace driver)">
+
+     <button id="1">PreviousMenu</button> 
+     <button id="14">PreviousMenu</button>
+   </joystick>
+ </MyVideosSettings>
+ <NetworkSettings>
+   <joystick name="Xbox Gamepad (userspace driver)">
+     <button id="1">PreviousMenu</button> 
+     <button id="14">PreviousMenu</button>
+   </joystick>
+ </NetworkSettings>
+ <AppearanceSettings>
+   <joystick name="Xbox Gamepad (userspace driver)">
+     <button id="1">PreviousMenu</button> 
+     <button id="14">PreviousMenu</button>
+   </joystick>
+ </AppearanceSettings>
+ <Profiles>
+   <joystick name="Xbox Gamepad (userspace driver)">
+
+     <button id="1">PreviousMenu</button> 
+     <button id="14">PreviousMenu</button>
+   </joystick>
+ </Profiles>
+ <systeminfo>
+   <joystick name="Xbox Gamepad (userspace driver)">
+     <button id="1">PreviousMenu</button> 
+     <button id="14">PreviousMenu</button>
+   </joystick>
+ </systeminfo>
+ <shutdownmenu>
+   <joystick name="Xbox Gamepad (userspace driver)">
+     <button id="14">Close</button> 
+     <button id="14">PreviousMenu</button>
+   </joystick>
+ </shutdownmenu>
+ <submenu>
+   <joystick name="Xbox Gamepad (userspace driver)">
+
+     <button id="1">PreviousMenu</button> 
+     <button id="14">PreviousMenu</button>
+   </joystick>
+ </submenu>
+ <MusicInformation>
+   <joystick name="Xbox Gamepad (userspace driver)">
+     <button id="1">Close</button> 
+     <button id="14">Close</button>
+   </joystick>
+ </MusicInformation>
+ <MovieInformation>
+   <joystick name="Xbox Gamepad (userspace driver)">
+     <button id="1">Close</button> 
+     <button id="14">Close</button>
+   </joystick>
+ </MovieInformation>
+ <LockSettings>
+   <joystick name="Xbox Gamepad (userspace driver)">
+     <button id="1">Close</button> 
+     <button id="14">Close</button>
+   </joystick>
+ </LockSettings>
+ <ProfileSettings>
+   <joystick name="Xbox Gamepad (userspace driver)">
+     <button id="1">Close</button> 
+     <button id="14">Close</button>
+   </joystick>
+ </ProfileSettings>
+</keymap>

@@ -16,8 +16,8 @@ function gp_ps3_blu()
 	#mame
 	# default path: /home/$USER/.mame
 	# Main config
-	cp -v "$scriptdir/emu-cfgs/ps3_blu_controller/MAME/default.cfg" "$home/.mame/cfg"
-	cp -v "$scriptdir/emu-cfgs/ps3_blu_controller/MAME/mame.ini" "$home/.mame"
+	cp -v "$scriptdir/emu-cfgs/ps3_blu_controller/MAME/default.cfg" "$config_home/.mame/cfg"
+	cp -v "$scriptdir/emu-cfgs/ps3_blu_controller/MAME/mame.ini" "$config_home/.mame"
  
 	# offline artwork scrapper configs
 	cp -v "$scriptdir/emu-cfgs/ps3_blu_controller/MAME/parserConfig.xml" "$rootdir/Artwork/MAME"
@@ -27,31 +27,31 @@ function gp_ps3_blu()
 	# mess
 	# default path: /home/$USER/.mednafen/mednafen.cfg
 	# Main config
-	cp -v "$scriptdir/emu-cfgs/ps3_blu_controller/MESS/mess.ini" "$home/.mess"
-	cp -v "$scriptdir/emu-cfgs/ps3_blu_controller/MESS/default.cfg" "$home/.mess/cfg"
-	cp -v "$scriptdir/emu-cfgs/ps3_blu_controller/MESS/neocdz.cfg" "$home/.mess/cfg"
-	cp -v "$scriptdir/emu-cfgs/ps3_blu_controller/MESS/default.cfg" "$home/.mess/cfg"
+	cp -v "$scriptdir/emu-cfgs/ps3_blu_controller/MESS/mess.ini" "$config_home/.mess"
+	cp -v "$scriptdir/emu-cfgs/ps3_blu_controller/MESS/default.cfg" "$config_home/.mess/cfg"
+	cp -v "$scriptdir/emu-cfgs/ps3_blu_controller/MESS/neocdz.cfg" "$config_home/.mess/cfg"
+	cp -v "$scriptdir/emu-cfgs/ps3_blu_controller/MESS/default.cfg" "$config_home/.mess/cfg"
 
 	# mednafen
 	# default path: /home/$USER/.mednafen/mednafen.cfg
 	# Main config
-	cp -v "$scriptdir/emu-cfgs/ps3_blu_controller/mednafen/mednafen-09x.cfg" "$home/.mednafen"
+	cp -v "$scriptdir/emu-cfgs/ps3_blu_controller/mednafen/mednafen-09x.cfg" "$config_home/.mednafen"
 
 	# mupen64plus
 	# default path: /home/$USER/.config/mupen64plus
 	# Main config
-	cp -v "$scriptdir/emu-cfgs/ps3_blu_controller/mupen64plus/mupen64plus.cfg" "$home/.config/mupen64plus/"
+	cp -v "$scriptdir/emu-cfgs/ps3_blu_controller/mupen64plus/mupen64plus.cfg" "$config_home/.config/mupen64plus/"
 
 	#Stella
 	#default path: /home/$USER/.config/mupen64plus
 	#Main config
-	cp -v "$scriptdir/emu-cfgs/ps3_blu_controller/Stella/stellarc" "$home/.stella/"
+	cp -v "$scriptdir/emu-cfgs/ps3_blu_controller/Stella/stellarc" "$config_home/.stella/"
 
 	# PPSSPP
-	cp -v "$scriptdir/emu-cfgs/ps3_blu_controller/PPSSPP/ppsspp.ini" "$home/.config/ppsspp/PSP/SYSTEM"
-	cp -v "$scriptdir/emu-cfgs/ps3_blu_controller/PPSSPP/controls.ini" "$home/.config/ppsspp/PSP/SYSTEM"
+	cp -v "$scriptdir/emu-cfgs/ps3_blu_controller/PPSSPP/ppsspp.ini" "$config_home/.config/ppsspp/PSP/SYSTEM"
+	cp -v "$scriptdir/emu-cfgs/ps3_blu_controller/PPSSPP/controls.ini" "$config_home/.config/ppsspp/PSP/SYSTEM"
 
-	# The PS3 pairing process shoudl be handled interactively in a sepearte function:
+	# The PS3 pairing process shoudl be handled interactively in a seperate function:
 	gp_ps3_blu_main
 
 }
@@ -60,12 +60,12 @@ function gp_ps3_blu()
 function gp_ps3_blu_main()
 {
 
-	#set qjoypad's profile to match Xbox 360 Wireless (4-player)
+	# set qjoypad's profile to match PS3
 	cp -v "$rootdir/gamepad-cfgs/ps3_blu_controller/ps3_sixaxis_blu.lyt" "$home/.qjoypad3"
-	#copy qjoypad autostart item for x360_controller gamepad config
-	cp -v "$rootdir/gamepad-cfgs/ps3_blu_controller/qjoypad.desktop" "$home/.config/autostart"
+	# copy qjoypad autostart item for x360_controller gamepad config
+	cp -v "$rootdir/gamepad-cfgs/ps3_blu_controller/qjoypad.desktop" "$home/.config/autostart/"
 	
-	#blacklist xpad
+	# blacklist xpad
 	cp -v "$rootdir/init-scripts/ps3_blu_controller/blacklist.conf" "/etc/modprobe.d/"
 
 
@@ -141,7 +141,7 @@ function gp_ps3_blu_main()
 
 	clear
 	# copy over default keyboard file:
-	cp -v "$rootdir/gamepad-cfgs/ps3_blu_controller/keyboard.xml" "$home/.xbmc/userdata/keymaps/keyboard.xml"
+	cp -v "$rootdir/gamepad-cfgs/ps3_blu_controller/keyboard.xml" "$xbmc_home/userdata/keymaps/keyboard.xml"
 
 	# First grab MAC Addresses:
 	# In the config file, the MAC is set to 00:00:00:00:00:00
@@ -150,10 +150,10 @@ function gp_ps3_blu_main()
 	PS3_MAC_OLD="00:00:00:00:00:00"
 
 	# Replace MAC Address for ***CONTROLLER 1 ONLY!*** This will be used to control XBMC		
-	sed -i "s|$PS3_MAC_OLD|$PS3_MAC_P1_BLU|g" "$home/.xbmc/userdata/keymaps/keyboard.xml"
+	sed -i "s|$PS3_MAC_OLD|$PS3_MAC_P1_BLU|g" "$xbmc_home/userdata/keymaps/keyboard.xml"
 
 	# Stella does list the MAC address for the PS3 control in the stellarc file. Replace for now until further notice
-	sed -i "s|$PS3_MAC_OLD|$PS3_MAC_P1_BLU|g" "$home/.stella/stellarc"
+	sed -i "s|$PS3_MAC_OLD|$PS3_MAC_P1_BLU|g" "$config_home/.stella/stellarc"
 
 	# start the service at boot time
 	sixad --boot-yes
@@ -194,7 +194,8 @@ function ps3_pair_blu()
 
 	# Inform player 1 controller user to disconnect USB cord
 	dialog --msgbox "Please disconnect the USB cable and press the PS Button now. The appropriate \
-LED should be lit. If it is not, please hold in the PS button to turn it off, then back on." 10 60
+LED should be lit. If it is not, please hold in the PS button to turn it off, then back on.\n\nPlease reboot to \
+fully enable the controller(s)" 10 60
 
 }
 
@@ -202,15 +203,86 @@ function gp_ps3_usb()
 {
 
 	##############################################################
-	# This seciton is still pending review and testing and is not
-	# used at the moment
+	# This seciton is still pending review and testing !!!
+	##############################################################
+
+	# clean any old configs
+	h_clean_gamepad
+
+	#inject init script and default config for xboxdrv
+	cp -v "$rootdir/init-scripts/ps3_usb_controller/xboxdrv" "/etc/init.d/"
+	cp -v "$rootdir/init-scripts/ps3_usb_controller/default/xboxdrv" "/etc/default/xboxdrv"
+
+	# set qjoypad
+	# this has to still be $home, as the application launches before RetroRig/XBMC
+	cp -v "$rootdir/gamepad-cfgs/ps3_usb_controller/ps3_sixaxis_usb.lyt" "$home/.qjoypad3"
+	# copy qjoypad autostart item for x360_controller gamepad config
+	cp -v "$rootdir/gamepad-cfgs/ps3_usb_controller/qjoypad.desktop" "$home/.config/autostart/"
+	
+	#blacklist xpad
+	cp -v "$rootdir/init-scripts/ps3_usb_controller/blacklist.conf" "/etc/modprobe.d/"
+
+	# copy over default keyboard file:
+	cp -v "$rootdir/gamepad-cfgs/ps3_usb_controller/keyboard.xml" "$xbmc_home/userdata/keymaps/keyboard.xml"
+
+
+	##############################################################
+	# Set number of controllers for /etc/default/xboxdrv
+	##############################################################
+
+	# grab the current number of controlls from file
+	cont_num_org=$(grep "CONTROLLER_NUM=" "/etc/default/xboxdrv")
+
+	# inform user that you must have controller connected or restart
+	dialog --msgbox "The xboxdrv userland module detects the number of USB PS3 controllers connected \
+when it starts. Therefore, we must specify how many you have connected or want to use. Connect your controller(s) \
+now, or reboot to have these changes take effect. If you tell xboxdrv I have 3 controllers, when you only have one, \
+the service may fail to start correctly.\n\nPlease see /etc/default/xboxdrv for more." 14 60
+
+	# Present small menu asking for number of controllers
+	cmd=(dialog --backtitle "LibreGeek.org RetroRig Installer" \
+		    --menu "Please select the number of USB PS3 controllers" 16 47 16)
+	options=(1 "1"
+	 	 2 "2"
+	 	 3 "3"
+	 	 4 "4")
+
+	#make menu choice
+	selection=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
+	#functions
+
+	for choice in $selection
+	do
+		case $choice in
+
+		1)
+		sed -i "s|$cont_num_org|CONTROLLER_NUM=1|g" "/etc/default/xboxdrv"
+		;;
+
+		2)
+		sed -i "s|$cont_num_org|CONTROLLER_NUM=2|g" "/etc/default/xboxdrv"
+		;;
+
+		3)
+		sed -i "s|$cont_num_org|CONTROLLER_NUM=3|g" "/etc/default/xboxdrv"
+		;;
+
+		4)
+		sed -i "s|$cont_num_org|CONTROLLER_NUM=4|g" "/etc/default/xboxdrv"
+		;;
+
+		esac
+	done
+
+	##############################################################
+	# Set emulator configurations
 	##############################################################
 
 	#mame
 	# default path: /home/$USER/.mame
 	# Main config
-	cp -v "$scriptdir/emu-cfgs/ps3_usb_controller/MAME/default.cfg" "$home/.mame/cfg"
-	cp -v "$scriptdir/emu-cfgs/ps3_usb_controller/MAME/mame.ini" "$home/.mame"
+	cp -v "$scriptdir/emu-cfgs/ps3_usb_controller/MAME/default.cfg" "$config_home/.mame/cfg"
+	cp -v "$scriptdir/emu-cfgs/ps3_usb_controller/MAME/mame.ini" "$config_home/.mame"
  
 	# offline artwork scrapper configs
 	cp -v "$scriptdir/emu-cfgs/ps3_usb_controller/MAME/parserConfig.xml" "$rootdir/Artwork/MAME"
@@ -220,37 +292,44 @@ function gp_ps3_usb()
 	# mess
 	# default path: /home/$USER/.mednafen/mednafen.cfg
 	# Main config
-	cp -v "$scriptdir/emu-cfgs/ps3_usb_controller/MESS/mess.ini" "$home/.mess"
-	cp -v "$scriptdir/emu-cfgs/ps3_usb_controller/MESS/default.cfg" "$home/.mess/cfg"
-	cp -v "$scriptdir/emu-cfgs/ps3_usb_controller/MESS/neocdz.cfg" "$home/.mess/cfg"
+	cp -v "$scriptdir/emu-cfgs/ps3_usb_controller/MESS/mess.ini" "$config_home/.mess"
+	cp -v "$scriptdir/emu-cfgs/ps3_usb_controller/MESS/default.cfg" "$config_home/.mess/cfg"
+	cp -v "$scriptdir/emu-cfgs/ps3_usb_controller/MESS/neocdz.cfg" "$config_home/.mess/cfg"
 
 	# mednafen
 	# default path: /home/$USER/.mednafen/mednafen.cfg
 	# Main config
-	cp -v "$scriptdir/emu-cfgs/ps3_usb_controller/mednafen/mednafen-09x.cfg" "$home/.mednafen"
+	cp -v "$scriptdir/emu-cfgs/ps3_usb_controller/mednafen/mednafen-09x.cfg" "$config_home/.mednafen"
 
 	# mupen64plus
 	# default path: /home/$USER/.config/mupen64plus
 	# Main config
-	cp -v "$scriptdir/emu-cfgs/ps3_usb_controller/mupen64plus/mupen64plus.cfg" "$home/.config/mupen64plus/"
+	cp -v "$scriptdir/emu-cfgs/ps3_usb_controller/mupen64plus/mupen64plus.cfg" "$config_home/.config/mupen64plus/"
 
 	#Stella
 	#default path: /home/$USER/.config/mupen64plus
 	#Main config
-	cp -v "$scriptdir/emu-cfgs/ps3_usb_controller/Stella/stellarc" "$home/.stella/"
+	cp -v "$scriptdir/emu-cfgs/ps3_usb_controller/Stella/stellarc" "$config_home/.stella/"
 
 	# PPSSPP
-	cp -v "scriptdir/emu-cfgs/ps3_usb_controller/PPSSPP/ppsspp.ini" "$home/.config/ppsspp/PSP/SYSTEM"
-	cp -v "scriptdir/emu-cfgs/ps3_usb_controller/PPSSPP/controls.ini" "$home/.config/ppsspp/PSP/SYSTEM"
+	cp -v "$scriptdir/emu-cfgs/ps3_usb_controller/PPSSPP/ppsspp.ini" "$config_home/.config/ppsspp/PSP/SYSTEM"
+	cp -v "$scriptdir/emu-cfgs/ps3_usb_controller/PPSSPP/controls.ini" "$config_home/.config/ppsspp/PSP/SYSTEM"
 
-	# The PS3 pairing process is not needed here if using usb!
-	# gp_ps3_blu_main
+	#update init scripts for xboxdrv
+	update-rc.d xboxdrv defaults
+
+	# start the xboxdrv service
+	# disable for now, hangs script completion running in background
+	# service xboxdrv start &
 
 	# replace specific user paths that emulators and files may use
 	h_emu_user_fixes
 
-	# correct permissions
+	# correct permissions since we run as sudo
 	h_correct_perms
+
+	# Let the user know about reboot
+	dialog --msgbox "Please reboot to fully enable the controller(s)."  5 52
 
 }
 
@@ -263,8 +342,8 @@ function gp_x360_wireless()
 	#mame
 	# default path: /home/$USER/.mame
 	# Main config
-	cp -v "$scriptdir/emu-cfgs/x360_controller/MAME/default.cfg" "$home/.mame/cfg"
-	cp -v "$scriptdir/emu-cfgs/x360_controller/MAME/mame.ini" "$home/.mame"
+	cp -v "$scriptdir/emu-cfgs/x360_controller/MAME/default.cfg" "$config_home/.mame/cfg"
+	cp -v "$scriptdir/emu-cfgs/x360_controller/MAME/mame.ini" "$config_home/.mame"
  
 	# offline artwork scrapper configs
 	cp -v "$scriptdir/emu-cfgs/x360_controller/MAME/parserConfig.xml" "$rootdir/Artwork/MAME"
@@ -274,28 +353,28 @@ function gp_x360_wireless()
 	# mess
 	# default path: /home/$USER/.mednafen/mednafen.cfg
 	# Main config
-	cp -v "$scriptdir/emu-cfgs/x360_controller/MESS/mess.ini" "$home/.mess"
-	cp -v "$scriptdir/emu-cfgs/x360_controller/MESS/default.cfg" "$home/.mess/cfg"
-	cp -v "$scriptdir/emu-cfgs/x360_controller/MESS/neocdz.cfg" "$home/.mess/cfg"
+	cp -v "$scriptdir/emu-cfgs/x360_controller/MESS/mess.ini" "$config_home/.mess"
+	cp -v "$scriptdir/emu-cfgs/x360_controller/MESS/default.cfg" "$config_home/.mess/cfg"
+	cp -v "$scriptdir/emu-cfgs/x360_controller/MESS/neocdz.cfg" "$config_home/.mess/cfg"
 
 	# mednafen
 	# default path: /home/$USER/.mednafen/mednafen.cfg
 	# Main config
-	cp -v "$scriptdir/emu-cfgs/x360_controller/mednafen/mednafen-09x.cfg" "$home/.mednafen"
+	cp -v "$scriptdir/emu-cfgs/x360_controller/mednafen/mednafen-09x.cfg" "$config_home/.mednafen"
 
 	# mupen64plus
 	# default path: /home/$USER/.config/mupen64plus
 	# Main config
-	cp -v "$scriptdir/emu-cfgs/x360_controller/mupen64plus/mupen64plus.cfg" "$home/.config/mupen64plus/"
+	cp -v "$scriptdir/emu-cfgs/x360_controller/mupen64plus/mupen64plus.cfg" "$config_home/.config/mupen64plus/"
 
 	#Stella
 	#default path: /home/$USER/.config/mupen64plus
 	#Main config
-	cp -v "$scriptdir/emu-cfgs/x360_controller/Stella/stellarc" "$home/.stella/"
+	cp -v "$scriptdir/emu-cfgs/x360_controller/Stella/stellarc" "$config_home/.stella/"
 
 	# PPSSPP
-	cp -v "$scriptdir/emu-cfgs/x360_controller/PPSSPP/ppsspp.ini" "$home/.config/ppsspp/PSP/SYSTEM"
-	cp -v "$scriptdir/emu-cfgs/x360_controller/PPSSPP/controls.ini" "$home/.config/ppsspp/PSP/SYSTEM"
+	cp -v "$scriptdir/emu-cfgs/x360_controller/PPSSPP/ppsspp.ini" "$config_home/.config/ppsspp/PSP/SYSTEM"
+	cp -v "$scriptdir/emu-cfgs/x360_controller/PPSSPP/controls.ini" "$config_home/.config/ppsspp/PSP/SYSTEM"
 
 	############################################
 	# configure xboxdrv for 360 gamepad (wireless)
@@ -304,7 +383,7 @@ function gp_x360_wireless()
 	#set qjoypad's profile to match Xbox 360 Wireless (4-player)
 	cp -v "$rootdir/gamepad-cfgs/x360_controller/x360_controller.lyt" "$home/.qjoypad3"
 	#copy qjoypad autostart item for x360_controller gamepad config
-	cp -v "$rootdir/gamepad-cfgs/x360_controller/qjoypad.desktop" "$home/.config/autostart"
+	cp -v "$rootdir/gamepad-cfgs/x360_controller/qjoypad.desktop" "$home/.config/autostart/"
 	
 	#blacklist xpad
 	cp -v "$rootdir/init-scripts/x360_controller/blacklist.conf" "/etc/modprobe.d/"
@@ -315,19 +394,14 @@ function gp_x360_wireless()
 
 	# copy keyboard.xml file for XBMC. Button id numbers are totally diffferent, due to the use of 
 	# the use-dpad-as-button, and use-trigger-as-button options used.
-	cp -v "$rootdir/gamepad-cfgs/x360_controller/keyboard.xml" "$home/.xbmc/userdata/keymaps"
-
-	# patch XBMC <- this will probably be removed, standard install for now
-	# rrs_xbmc_patched
+	cp -v "$rootdir/gamepad-cfgs/x360_controller/keyboard.xml" "$xbmc_home/userdata/keymaps"
 
 	#update init scripts for xboxdrv
 	update-rc.d xboxdrv defaults
 
-	# start service now
-	# For some odd reason, the restart action hangs (but does not with sixad)
-	# This will be disabled for now...
-
-	# service xboxdrv start
+	# start the xboxdrv service
+	# disable for now, hangs script completion running in background
+	# service xboxdrv start &
 
 	# replace specific user paths that emulators and files may use
 	h_emu_user_fixes
@@ -335,8 +409,8 @@ function gp_x360_wireless()
 	# correct permissions since we run as sudo
 	h_correct_perms
 
-	# Let the user know about LED's
-	dialog --msgbox "Please reboot to enable the controller."  5 43
+	# Let the user know about reboot
+	dialog --msgbox "Please reboot to fully enable the controller(s)."  5 52
 }
 
 function gp_x360_usb()
@@ -348,8 +422,8 @@ function gp_x360_usb()
 	#mame
 	# default path: /home/$USER/.mame
 	# Main config
-	cp -v "$scriptdir/emu-cfgs/x360_usb_controller/MAME/default.cfg" "$home/.mame/cfg"
-	cp -v "$scriptdir/emu-cfgs/x360_usb_controller/MAME/mame.ini" "$home/.mame"
+	cp -v "$scriptdir/emu-cfgs/x360_usb_controller/MAME/default.cfg" "$config_home/.mame/cfg"
+	cp -v "$scriptdir/emu-cfgs/x360_usb_controller/MAME/mame.ini" "$config_home/.mame"
  
 	# offline artwork scrapper configs
 	cp -v "$scriptdir/emu-cfgs/x360_usb_controller/MAME/parserConfig.xml" "$rootdir/Artwork/MAME"
@@ -359,28 +433,28 @@ function gp_x360_usb()
 	# mess
 	# default path: /home/$USER/.mednafen/mednafen.cfg
 	# Main config
-	cp -v "$scriptdir/emu-cfgs/x360_usb_controller/MESS/mess.ini" "$home/.mess"
-	cp -v "$scriptdir/emu-cfgs/x360_usb_controller/MESS/default.cfg" "$home/.mess/cfg"
-	cp -v "$scriptdir/emu-cfgs/x360_usb_controller/MESS/neocdz.cfg" "$home/.mess/cfg"
+	cp -v "$scriptdir/emu-cfgs/x360_usb_controller/MESS/mess.ini" "$config_home/.mess"
+	cp -v "$scriptdir/emu-cfgs/x360_usb_controller/MESS/default.cfg" "$config_home/.mess/cfg"
+	cp -v "$scriptdir/emu-cfgs/x360_usb_controller/MESS/neocdz.cfg" "$config_home/.mess/cfg"
 
 	# mednafen
 	# default path: /home/$USER/.mednafen/mednafen.cfg
 	# Main config
-	cp -v "$scriptdir/emu-cfgs/x360_usb_controller/mednafen/mednafen-09x.cfg" "$home/.mednafen"
+	cp -v "$scriptdir/emu-cfgs/x360_usb_controller/mednafen/mednafen-09x.cfg" "$config_home/.mednafen"
 
 	# mupen64plus
 	# default path: /home/$USER/.config/mupen64plus
 	# Main config
-	cp -v "$scriptdir/emu-cfgs/x360_usb_controller/mupen64plus/mupen64plus.cfg" "$home/.config/mupen64plus/"
+	cp -v "$scriptdir/emu-cfgs/x360_usb_controller/mupen64plus/mupen64plus.cfg" "$config_home/.config/mupen64plus/"
 
 	#Stella
 	#default path: /home/$USER/.config/mupen64plus
 	#Main config
-	cp -v "$scriptdir/emu-cfgs/x360_usb_controller/Stella/stellarc" "$home/.stella/"
+	cp -v "$scriptdir/emu-cfgs/x360_usb_controller/Stella/stellarc" "$config_home/.stella/"
 
 	# PPSSPP
-	cp -v "$scriptdir/emu-cfgs/x360_usb_controller/PPSSPP/ppsspp.ini" "$home/.config/ppsspp/PSP/SYSTEM"
-	cp -v "$scriptdir/emu-cfgs/x360_usb_controller/PPSSPP/controls.ini" "$home/.config/ppsspp/PSP/SYSTEM"
+	cp -v "$scriptdir/emu-cfgs/x360_usb_controller/PPSSPP/ppsspp.ini" "$config_home/.config/ppsspp/PSP/SYSTEM"
+	cp -v "$scriptdir/emu-cfgs/x360_usb_controller/PPSSPP/controls.ini" "$config_home/.config/ppsspp/PSP/SYSTEM"
 
 	############################################
 	# configure xboxdrv for 360 gamepad (wireless)
@@ -389,7 +463,7 @@ function gp_x360_usb()
 	#set qjoypad's profile to match Xbox 360 Wireless (4-player)
 	cp -v "$rootdir/gamepad-cfgs/x360_usb_controller/x360_usb_controller.lyt" "$home/.qjoypad3"
 	#copy qjoypad autostart item for x360_usb_controller gamepad config
-	cp -v "$rootdir/gamepad-cfgs/x360_usb_controller/qjoypad.desktop" "$home/.config/autostart"
+	cp -v "$rootdir/gamepad-cfgs/x360_usb_controller/qjoypad.desktop" "$home/.config/autostart/"
 	
 	#blacklist xpad
 	cp -v "$rootdir/init-scripts/x360_usb_controller/blacklist.conf" "/etc/modprobe.d/"
@@ -400,19 +474,14 @@ function gp_x360_usb()
 
 	# copy keyboard.xml file for XBMC. Button id numbers are totally diffferent, due to the use of 
 	# the use-dpad-as-button, and use-trigger-as-button options used.
-	cp -v "$rootdir/gamepad-cfgs/x360_usb_controller/keyboard.xml" "$home/.xbmc/userdata/keymaps"
-
-	# patch XBMC <- this will probably be removed, standard install for now
-	# rrs_xbmc_patched
+	cp -v "$rootdir/gamepad-cfgs/x360_usb_controller/keyboard.xml" "$xbmc_home/userdata/keymaps"
 
 	# update init scripts for xboxdrv
 	update-rc.d xboxdrv defaults
 
-	# start service now
-	# For some odd reason, the restart action hangs (but does not with sixad)
-	# This will be disabled for now...
-
-	# service xboxdrv start
+	# start the xboxdrv service
+	# disable for now, hangs script completion running in background
+	# service xboxdrv start &
 
 	# replace specific user paths that emulators and files may use
 	h_emu_user_fixes
@@ -422,6 +491,6 @@ function gp_x360_usb()
 
 	# Let the user know about LED's
 	dialog --msgbox "Using wired controllers, the pairing is in sequence. If you \
-received the wrong LED, unplug and plug the USB cable back in until you get the correct LED number. Please reboot to enable the controller"  10 40
+received the wrong LED, unplug and plug the USB cable back in until you get the correct LED number. Please reboot to fully enable the controller"  10 40
 
 }

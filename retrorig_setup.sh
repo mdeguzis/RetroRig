@@ -237,6 +237,8 @@ home=$(eval echo ~$user)
 # setup $xdg_pictures_dir to "/home/username/Bilder"
 # setup $xdg_videos_dir to "/home/username/Videos"
 #
+#################################################################
+
 setDesktopEnvironment DESKTOP
 setDesktopEnvironment DOWNLOAD
 setDesktopEnvironment TEMPLATES
@@ -246,6 +248,15 @@ setDesktopEnvironment MUSIC
 setDesktopEnvironment PICTURES
 setDesktopEnvironment VIDEOS
 
+#################################################################
+
+
+#################################################################
+# Pre-configuration
+# 
+# as show the banner. Pre-reqs are checked and ammened if 
+# possible.
+#
 #################################################################
 
 
@@ -272,7 +283,7 @@ fi
 # check for pre-requisites, output to log folder
 rrs_prereq
 
-# Show lame logo (take this out?)
+# Show lame logo
 # subtitle 1
 clear
 COLUMNS=$(tput cols) 
@@ -284,20 +295,31 @@ echo ""
 COLUMNS=$(tput cols) 
 title2="www.libregeek.org" 
 printf "%*s\n" $(((${#title2}+$COLUMNS)/2)) "$title2"
-sleep 5s
+sleep 3s
 
+# set the directory '$home/.retrorig' as a variable for easy reading
+xbmc_home="$home/.retrorig/.xbmc"
+
+# set config_home for all the dotfiles that need copied down for emulators
+# and other utilities
+config_home="$home/.retrorig"
+
+#################################################################
 
 while true; do
-    cmd=(dialog --backtitle "LibreGeek.org RetroRig Installer" --menu "| Main Menu | \
- 			 Any required BIOS files are NOT provided!" 17 62 16)
+    cmd=(dialog --backtitle "LibreGeek.org RetroRig 
+Installer" --menu "| Main Menu (v.0.9.1) | \
+ 			 BIOS files are NOT provided!" 17 62 16)
     options=(1 "Install RetroRig" 
 	     2 "Retro Rig Settings" 
 	     3 "Pull latest files from git" 
-	     4 "Update emulator binaries" 
-	     5 "Upgrade System (use with caution!)" 
-	     6 "Reboot PC"
-	     7 "Uninstall RetroRig"  
-	     8 "Exit")
+	     4 "Update emulator binaries"
+	     5 "Update XBMC" 
+	     6 "Update System"
+	     7 "Upgrade System (Use with caution)"  
+	     8 "Reboot PC"
+	     9 "Uninstall RetroRig"  
+	     10 "Exit")
 
 	#make menu choice
 	# Expanding arrays involves [@] and {}
@@ -312,15 +334,17 @@ while true; do
 		rrs_prepareFolders
 		rrs_software
 		rrs_emulators
-		rrs_xbmc
+		rrs_xbmc_cfgs
 		rrs_gamepad
 		h_emu_user_fixes
 		set_resolution
 		rrs_unity
+		rrs_kernel_3_14
 		rrs_done
-		} 2>&1 | tee >(gzip --stdout > $scriptdir/logs/install_$now.log.gz)              	
-		chown -R "$user" "$scriptdir/logs/install_$now.log.gz"
-		chgrp -R "$user" "$scriptdir/logs/install_$now.log.gz"
+		} 2>&1 | tee "$scriptdir/logs/install_$now.log.txt"              	
+		chown -R "$user" "$scriptdir/logs/install_$now.log.txt"
+		chgrp -R "$user" "$scriptdir/logs/install_$now.log.txt"
+		rrs_reboot
 		;;
 
 	    2) 
@@ -332,32 +356,29 @@ while true; do
 		;;
 
 	    4)
-		now=$(date +'%d%m%Y_%H%M%S')
-		{
-		h_update_system
-		} 2>&1 | tee >(gzip --stdout > $scriptdir/logs/update_$now.log.gz)              	
-		chown -R "$user" "$scriptdir/logs/update_$now.log.gz"
-		chgrp -R "$user" "$scriptdir/logs/update_$now.log.gz"
+		rrs_emulators
 		;;
-
 	    5)
-		now=$(date +'%d%m%Y_%H%M%S')
-		{
-		h_upgrade_system
-		} 2>&1 | tee >(gzip --stdout > "$scriptdir/logs/upgrade_$now.log.gz")	               	
-		chown -R "$user" "$scriptdir/logs/upgrade_$now.log.gz"
-		chgrp -R "$user" "$scriptdir/logs/upgrade_$now.log.gz"
+		rrs_xbmc_patched
 		;;
 
-	    6) 
-		rrs_reboot
+	    6)
+		h_update_system
 		;;
 
 	    7)
-		cfg_uninstall
+		h_upgrade_system
 		;;
 
 	    8) 
+		rrs_reboot
+		;;
+
+	    9)
+		cfg_uninstall
+		;;
+
+	    10) 
 		clear
 		exit
 		;;

@@ -41,7 +41,7 @@ function cfg_confirm()
 	esac
 }
 
-function cfg_uninstall() 
+function cfg_uninstall()
 {
 
 	#Confirm with user that they want to uninstall
@@ -91,38 +91,39 @@ function cfg_uninstall()
 dialog --title "Confirm yes/no" --backtitle "LibreGeek.org RetroRig Installer" \
 	--yesno "Do you wish to keep configuration folders?" 6 30	
 	 
-	# Get exit status
-	# 0 means user hit [yes] button.
-	# 1 means user hit [no] button.
-	# 255 means user hit [Esc] key.
-	response=$?
-	case $response in
+# Get exit status
+# 0 means user hit [yes] button.
+# 1 means user hit [no] button.
+# 255 means user hit [Esc] key.
+response=$?
+case $response in
 
 	0) 
+	# User hit [Yes]
 	# keep folders
 	sleep 2s
 	;;
 
    	1) 
+	# User hit [No]
 	# remove dotfiles
-	rm -rf "$HOME/.qjoypad3" 
-	rm -rf "$HOME/.config/mupen64plus" 
-	rm -rf "$HOME/.mame" 
-	rm -rf "$HOME/.stella" 
-	rm -rf "$HOME/.xbmc"
-	rm -rf "$HOME/.mednafen" 
-	rm -rf "$HOME/.mess" 
+	rm -rf "$config_home/.qjoypad3" 
+	rm -rf "$config_home/.config/mupen64plus" 
+	rm -rf "$config_home/.mame" 
+	rm -rf "$config_home/.stella" 
+	rm -rf "$config_home/.mednafen" 
+	rm -rf "$config_home/.mess" 
+	rm -rf "$xbmc_home"
 
-	# system objects
-	rm -f /etc/xdg/autostart/qjoypad.desktop
-	service xboxdrv stop
+	# user home objects
+	rm -f "$home/.config/autostart/qjoypad.desktop"
 
 	# Application entries
 	rm -f "/usr/share/applications/gp_autodetect_xbmc.sh"
 	rm -f "/usr/share/applications/startXBMC.sh"
 	rm -f "/usr/share/applications/RetriRig.desktop"
 
-	# remove init services
+	# remove system services
 	service xboxdrv stop
 	service rescan stop	
 	update-rc.d -f xboxdrv remove
@@ -153,31 +154,33 @@ dialog --title "Confirm yes/no" --backtitle "LibreGeek.org RetroRig Installer" \
 	;;
 
 	255)
-	#Keep folders and continue on"
+	# User hit [Cancel/Esc]
+	# Keep folders and continue on"
 	sleep 2s
 	;;
 
 	esac	
 
-#ask to keep folders
-#prompt user if they wish to keep ROMs they loaded
+	#ask to keep folders
+	#prompt user if they wish to keep ROMs they loaded
 
 dialog --title "Confirm yes/no" --backtitle "LibreGeek.org RetroRig Installer" \
 	--yesno "Do you wish to keep ROM folders?" 6 30
 	 
-	# Get exit status
-	# 0 means user hit [yes] button.
-	# 1 means user hit [no] button.
-	# 255 means user hit [Esc] key.
-	response=$?
-	case $response in
+# Get exit status
+# 0 means user hit [yes] button.
+# 1 means user hit [no] button.
+# 255 means user hit [Esc] key.
+response=$?
+case $response in
 
 	0) 
 	#Keep ROMs
 	sleep 2s
 	;;
 
-   	1) 
+   	1)
+	rm -rf "$rootdir/BIOS" 
 	rm -rf "$rootdir/ROMs"
 	rm -rf "$rootdir/Tools"
 	rm -rf "$rootdir/Artwork"
@@ -193,8 +196,8 @@ dialog --title "Confirm yes/no" --backtitle "LibreGeek.org RetroRig Installer" \
 
 	esac	
 
-#remove $rootdir , i.e. "RetroRig" wherever it was created
-rm -rf "$rootdir"
+# RENAME (not remove) wherever it was created, so uses can still refer to it
+mv "$rootdir" "$rootdir.old"
 
 #update Ubuntu repository listings
 apt-get update

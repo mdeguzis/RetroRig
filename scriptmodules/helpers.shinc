@@ -36,7 +36,8 @@ h_clean_gamepad()
 	# The rescan service should be able to coexist with xboxdrv
 	
 	# qjoypad 
-	rm -f /etc/xdg/autostart/qjoypad.desktop
+	rm -f "$home/.config/autostart/qjoypad.desktop"
+
 	# Xbox controller 
 	service xboxdrv stop
 	rm -f /etc/init.d/xboxdrv
@@ -47,7 +48,7 @@ h_clean_gamepad()
 	update-rc.d -f xboxdrv remove
 
 	# XBMC
-	rm -f "$home/.xbmc/userdata/keymaps/keyboard.xml"
+	rm -f "$xbmc_home/userdata/keymaps/keyboard.xml"
 }
 
 
@@ -58,28 +59,21 @@ h_autosave_configs()
 	# Directory checks will likely be put in soon.
 	# Old files, aka originals when ran, will be appended with ".old"
 
+	# backup $home/.xbmc as a good precaution, even though we don't use this
+	# dotfile anymore
+	cp "$home/.xbmc" "$home/.xbmc.old" > /dev/null 2>&1
+
 	clear
 	# home dotfiles:
-	mv "$home/.mame" "$home/.mame.old" 2>  "/dev/null"
-	mv "$home/.mess" "$home/.mess.old" 2>  "/dev/null"
-	mv "$home/.stella" "$home/.stella.old" 2>  "/dev/null"
-	mv "$home/.mednafen" "$home/.mednafen.old" 2>  "/dev/null"
-	mv "$home/.xbmc" "$home/.xbmc.old" 2>  "/dev/null"
-	mv "$home/.qjoypad3" "$home/.qjoypad3.old" 2>  "/dev/null"
-	# .config dotfiles
-	mv "$home/.config/mupen64plus" "$home/.config/mupen64plus.old" 2>  "/dev/null"
-	mv "$home/.config/ppsspp" "$home/.config/ppsspp.old" 2>  "/dev/null"
-	mv "$home/.ssh" "$home/.ssh.old" 2>  "/dev/null"
-	mv "$home/.qtsixa" "$home/.qtsixa.old" 2>  "/dev/null"
+	# This section is not needed anymore since we not use out own dotfile
 
 	# system configs:
-	mv "$home/.config/autostart/xbmc/desktop" "$home/.config/autostart/xbmc.desktop.old" 2>  "/dev/null"
-	mv "/etc/init.d/xboxdrv" "/etc/init.d/xboxdrv.old" 2>  "/dev/null"
-	mv "/etc/init.d/rescan" "/etc/init.d/rescan.old" 2>  "/dev/null"
-	mv "/etc/modprobe.d/blacklist.conf" "/etc/modprobe.d/blacklist.conf.old" 2>  "/dev/null"
-	mv "/usr/share/xsessions/xbmc.desktop" "/usr/share/xsessions/xbmc.desktop.old" 2>  "/dev/null"
-	mv "/usr/bin/xbmc-session" "/usr/bin/xbmc-session.old" 2>  "/dev/null"
-	mv "/usr/share/lightdm/lightdm.conf.d/50-ubuntu.conf" "/usr/share/lightdm/lightdm.conf.d/50-ubuntu.conf.old" 2>  "/dev/null"
+	cp "/etc/init.d/xboxdrv" "/etc/init.d/xboxdrv.old" > /dev/null 2>&1
+	cp "/etc/init.d/rescan" "/etc/init.d/rescan.old" > /dev/null 2>&1
+	cp "/etc/modprobe.d/blacklist.conf" "/etc/modprobe.d/blacklist.conf.old" > /dev/null 2>&1
+	cp "/usr/share/xsessions/xbmc.desktop" "/usr/share/xsessions/xbmc.desktop.old" > /dev/null 2>&1
+	cp "/usr/bin/xbmc-session" "/usr/bin/xbmc-session.old" > /dev/null 2>&1
+	cp "/usr/share/lightdm/lightdm.conf.d/50-ubuntu.conf" "/usr/share/lightdm/lightdm.conf.d/50-ubuntu.conf.old" > /dev/null 2>&1
 
 	# correct permissions after tar archive is created
 	h_correct_perms
@@ -95,24 +89,15 @@ h_restore_configs()
 	# new files, aka new when installed, will be renamed without".old"
 
 	# home dotfiles:
-	mv "$home/.mame.old" "$home/.mame" 2>  "/dev/null"
-	mv "$home/.mess.old" "$home/.mess" 2>  "/dev/null"
-	mv "$home/.stella.old" "$home/.stella" 2>  "/dev/null"
-	mv "$home/.mednafen.old" "$home/.mednafen" 2>  "/dev/null"
-	mv "$home/.xbmc.old" "$home/.xbmc" 2>  "/dev/null"
-	mv "$home/.qjoypad3.old" "$home/.qjoypad3" 2>  "/dev/null"
-	# .config dotfiles
-	mv "$home/.config/mupen64plus/mupen64plus.old" "$home/.config/mupen64plus.cfg" 2>  "/dev/null"
-	mv "$home/.config/ppsspp.old" "$home/.config/ppsspp.old" 2>  "/dev/null"
-	mv "$home/.ssh.old" "$home/.ssh" 2>  "/dev/null"
+	# This section is not needed anymore since we not use out own dotfile
 
 	# system configs:
-	mv "/etc/xdg/autostart/xbmc.old" "/etc/xdg/autostart/xbmc" 2>  "/dev/null"
-	mv "/etc/init.d/xboxdrv.old" "/etc/init.d/xboxdrv" 2>  "/dev/null"
-	mv "/etc/modprobe.d/blacklist.conf.old" "/etc/modprobe.d/blacklist.conf" 2>  "/dev/null"
-	mv "/usr/share/xsessions/xbmc.desktop.old" "/usr/share/xsessions/xbmc.desktop" 2>  "/dev/null"
-	mv "/usr/bin/xbmc-session.old" "/usr/bin/xbmc-session" 2>  "/dev/null"
-	mv "/usr/share/lightdm/lightdm.conf.d/50-ubuntu.conf.old" "/usr/share/lightdm/lightdm.conf.d/50-ubuntu.conf" 2>  "/dev/null"
+	mv "/etc/xdg/autostart/xbmc.old" "/etc/xdg/autostart/xbmc" > /dev/null 2>&1
+	mv "/etc/init.d/xboxdrv.old" "/etc/init.d/xboxdrv" > /dev/null 2>&1
+	mv "/etc/modprobe.d/blacklist.conf.old" "/etc/modprobe.d/blacklist.conf" > /dev/null 2>&1
+	mv "/usr/share/xsessions/xbmc.desktop.old" "/usr/share/xsessions/xbmc.desktop" > /dev/null 2>&1
+	mv "/usr/bin/xbmc-session.old" "/usr/bin/xbmc-session" > /dev/null 2>&1
+	mv "/usr/share/lightdm/lightdm.conf.d/50-ubuntu.conf.old" "/usr/share/lightdm/lightdm.conf.d/50-ubuntu.conf" > /dev/null 2>&1
 
 	# correct permissions after tar archive is created
 	h_correct_perms
@@ -124,7 +109,6 @@ h_restore_configs()
 
 
 function h_plugin_switcher()
-
 {
 
 cmd=(dialog --backtitle "LibreGeek.org RetroRig Installer" --menu "Plugin Configuration Menu" 16 0 16)
@@ -145,11 +129,11 @@ options=(1 "Current configuration"
 		#echo curent plugin settings
 		#mupen64plus
 		echo "Mupen64plus:" > res.txt
-		grep -i "VideoPlugin = " "$home/.config/mupen64plus/mupen64plus.cfg" >> "$scriptdir/logs/res.txt"
+		grep -i "VideoPlugin = " "$config_home/.config/mupen64plus/mupen64plus.cfg" >> "$scriptdir/logs/res.txt"
 		echo "" >> "$scriptdir/logs/res.txt"
 		#Stella
 		echo "Stella:" >> "$scriptdir/logs/res.txt"
-		grep -i "tia_filter" "$home/.stella/stellarc" >> "$scriptdir/logs/res.txt"
+		grep -i "tia_filter" "$config_home/.stella/stellarc" >> "$scriptdir/logs/res.txt"
 		echo "" >> res.txt
 		#report current resolution
 		dialog --textbox res.txt 33 0
@@ -231,7 +215,8 @@ options=(1 "Atari 2600"
 	 10 "TurboGraphx 16"
 	 11 "Neo-Geo CDZ"
 	 12 "PSP"
-	 13 "Exit ROM Loader")
+	 13 "PSX/PS1"
+	 14 "Exit ROM Loader")
 
 	#make menu choice
 	choices=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
@@ -349,6 +334,15 @@ options=(1 "Atari 2600"
 		;;
 
 		13)  
+		#call file loader  	
+		h_file_loader
+		#copy PSX/PS1 ROMs
+		if [ -n "$folder" ]; then
+			cp -Rv "$folder"/* "$rootdir/ROMs/PS1/"
+		fi
+		;;
+
+		14)  
 		return
 		;;
 
@@ -375,18 +369,18 @@ function h_res_switcher()
 	########################		
 	#Stella
 	########################
-	st_org=$(grep -Ee "\bfullres = \b" "$home/.stella/stellarc")
+	st_org=$(grep -Ee "\bfullres = \b" "$config_home/.stella/stellarc")
 	#make the changes, prefix new_X in case NULL was entered previously
-	sed -i "s|$st_org|fullres = $st_new|g" "$home/.stella/stellarc"
+	sed -i "s|$st_org|fullres = $st_new|g" "$config_home/.stella/stellarc"
 
 	########################		
 	#mupen64plus
 	########################
-	m_org_X=$(grep -Ee "\bScreenWidth = \b" "$home/.config/mupen64plus/mupen64plus.cfg")
-	m_org_Y=$(grep -Ee "\bScreenHeight = \b" "$home/.config/mupen64plus/mupen64plus.cfg")
+	m_org_X=$(grep -Ee "\bScreenWidth = \b" "$config_home/.config/mupen64plus/mupen64plus.cfg")
+	m_org_Y=$(grep -Ee "\bScreenHeight = \b" "$config_home/.config/mupen64plus/mupen64plus.cfg")
 	#make the changes, prefix new_X in case NULL was entered previousey
-	sed -i "s|$m_org_X|ScreenWidth = $m_new_X|g" "$home/.config/mupen64plus/mupen64plus.cfg"
-	sed -i "s|$m_org_Y|ScreenHeight = $m_new_Y|g" "$home/.config/mupen64plus/mupen64plus.cfg"
+	sed -i "s|$m_org_X|ScreenWidth = $m_new_X|g" "$config_home/.config/mupen64plus/mupen64plus.cfg"
+	sed -i "s|$m_org_Y|ScreenHeight = $m_new_Y|g" "$config_home/.config/mupen64plus/mupen64plus.cfg"
 
 	########################		
 	#mednafen 
@@ -414,54 +408,60 @@ function h_res_switcher()
 	#the screen (EMU_CODE.aspect. See the wiki for more
 
 	#Mednafen (GBC)
-	gb_org_X=$(grep -Ee "\bgb.xres\b " "$home/.mednafen/mednafen-09x.cfg")
-	gb_org_Y=$(grep -Ee "\bgb.yres\b " "$home/.mednafen/mednafen-09x.cfg")
+	gb_org_X=$(grep -Ee "\bgb.xres\b " "$config_home/.mednafen/mednafen-09x.cfg")
+	gb_org_Y=$(grep -Ee "\bgb.yres\b " "$config_home/.mednafen/mednafen-09x.cfg")
 	#make the changes, prefix new_X in case NULL was entered previously
-	sed -i "s|$gb_org_X|gb.xres $gb_new_X|g" "$home/.mednafen/mednafen-09x.cfg"
-	sed -i "s|$gb_org_Y|gb.yres $gb_new_Y|g" "$home/.mednafen/mednafen-09x.cfg"
+	sed -i "s|$gb_org_X|gb.xres $gb_new_X|g" "$config_home/.mednafen/mednafen-09x.cfg"
+	sed -i "s|$gb_org_Y|gb.yres $gb_new_Y|g" "$config_home/.mednafen/mednafen-09x.cfg"
 
 	#Mednafen (NES)
-	nes_org_X=$(grep -Ee "\bnes.xres\b " "$home/.mednafen/mednafen-09x.cfg")
-	nes_org_Y=$(grep -Ee "\bnes.yres\b " "$home/.mednafen/mednafen-09x.cfg")
+	nes_org_X=$(grep -Ee "\bnes.xres\b " "$config_home/.mednafen/mednafen-09x.cfg")
+	nes_org_Y=$(grep -Ee "\bnes.yres\b " "$config_home/.mednafen/mednafen-09x.cfg")
 	#make the changes, prefix new_X in case NULL was entered previously
-	sed -i "s|$nes_org_X|nes.xres $nes_new_X|g" "$home/.mednafen/mednafen-09x.cfg"
-	sed -i "s|$nes_org_Y|nes.yres $nes_new_Y|g" "$home/.mednafen/mednafen-09x.cfg"
+	sed -i "s|$nes_org_X|nes.xres $nes_new_X|g" "$config_home/.mednafen/mednafen-09x.cfg"
+	sed -i "s|$nes_org_Y|nes.yres $nes_new_Y|g" "$config_home/.mednafen/mednafen-09x.cfg"
 
 	#Mednafen (GameBoy Advance)
-	gba_org_X=$(grep -Ee "\bgba.xres\b " "$home/.mednafen/mednafen-09x.cfg")
-	gba_org_Y=$(grep -Ee "\bgba.yres\b " "$home/.mednafen/mednafen-09x.cfg")
+	gba_org_X=$(grep -Ee "\bgba.xres\b " "$config_home/.mednafen/mednafen-09x.cfg")
+	gba_org_Y=$(grep -Ee "\bgba.yres\b " "$config_home/.mednafen/mednafen-09x.cfg")
 	#make the changes, prefix new_X in case NULL was entered previously
-	sed -i "s|$gba_org_X|gba.xres $gba_new_X|g" "$home/.mednafen/mednafen-09x.cfg"
-	sed -i "s|$gba_org_Y|gba.yres $gba_new_Y|g" "$home/.mednafen/mednafen-09x.cfg"
+	sed -i "s|$gba_org_X|gba.xres $gba_new_X|g" "$config_home/.mednafen/mednafen-09x.cfg"
+	sed -i "s|$gba_org_Y|gba.yres $gba_new_Y|g" "$config_home/.mednafen/mednafen-09x.cfg"
 
 	#Mednafen (SNES)
-	snes_org_X=$(grep -Ee "\bsnes.xres\b " "$home/.mednafen/mednafen-09x.cfg")
-	snes_org_Y=$(grep -Ee "\bsnes.yres\b " "$home/.mednafen/mednafen-09x.cfg")
+	snes_org_X=$(grep -Ee "\bsnes.xres\b " "$config_home/.mednafen/mednafen-09x.cfg")
+	snes_org_Y=$(grep -Ee "\bsnes.yres\b " "$config_home/.mednafen/mednafen-09x.cfg")
 	#make the changes, prefix new_X in case NULL was entered previously
-	sed -i "s|$snes_org_X|snes.xres $snes_new_X|g" "$home/.mednafen/mednafen-09x.cfg"
-	sed -i "s|$snes_org_Y|snes.yres $snes_new_Y|g" "$home/.mednafen/mednafen-09x.cfg"
+	sed -i "s|$snes_org_X|snes.xres $snes_new_X|g" "$config_home/.mednafen/mednafen-09x.cfg"
+	sed -i "s|$snes_org_Y|snes.yres $snes_new_Y|g" "$config_home/.mednafen/mednafen-09x.cfg"
 
 	#Mednafen (Sega Master System, aka Sega Sega Master)
-	sms_org_X=$(grep -Ee "\bsms.xres\b " "$home/.mednafen/mednafen-09x.cfg")
-	sms_org_Y=$(grep -Ee "\bsms.yres\b " "$home/.mednafen/mednafen-09x.cfg")
+	sms_org_X=$(grep -Ee "\bsms.xres\b " "$config_home/.mednafen/mednafen-09x.cfg")
+	sms_org_Y=$(grep -Ee "\bsms.yres\b " "$config_home/.mednafen/mednafen-09x.cfg")
 	#make the changes, prefix new_X in case NULL was entered previously
-	sed -i "s|$sms_org_X|sms.xres $sms_new_X|g" "$home/.mednafen/mednafen-09x.cfg"
-	sed -i "s|$sms_org_Y|sms.yres $sms_new_Y|g" "$home/.mednafen/mednafen-09x.cfg"
+	sed -i "s|$sms_org_X|sms.xres $sms_new_X|g" "$config_home/.mednafen/mednafen-09x.cfg"
+	sed -i "s|$sms_org_Y|sms.yres $sms_new_Y|g" "$config_home/.mednafen/mednafen-09x.cfg"
 
-	#Mednafen (Sega Gane Gear)
-	sms_org_X=$(grep -Ee "\bsms.xres\b " "$home/.mednafen/mednafen-09x.cfg")
-	sms_org_Y=$(grep -Ee "\bsms.yres\b " "$home/.mednafen/mednafen-09x.cfg")
+	#Mednafen (Sega Game Gear)
+	gg_org_X=$(grep -Ee "\bgg.xres\b " "$config_home/.mednafen/mednafen-09x.cfg")
+	gg_org_Y=$(grep -Ee "\bgg.yres\b " "$config_home/.mednafen/mednafen-09x.cfg")
 	#make the changes, prefix new_X in case NULL was entered previously
-	sed -i "s|$sms_org_X|sms.xres $sms_new_X|g" "$home/.mednafen/mednafen-09x.cfg"
-	sed -i "s|$sms_org_Y|sms.yres $sms_new_Y|g" "$home/.mednafen/mednafen-09x.cfg"
-
+	sed -i "s|$gg_org_X|gg.xres $gg_new_X|g" "$config_home/.mednafen/mednafen-09x.cfg"
+	sed -i "s|$gg_org_Y|gg.yres $gg_new_Y|g" "$config_home/.mednafen/mednafen-09x.cfg"
 
 	#Mednafen (Turbographx 16)
-	pce_org_X=$(grep -Ee "\bpce.xres\b " "$home/.mednafen/mednafen-09x.cfg")
-	pce_org_Y=$(grep -Ee "\bpce.yres\b " "$home/.mednafen/mednafen-09x.cfg")
+	pce_org_X=$(grep -Ee "\bpce.xres\b " "$config_home/.mednafen/mednafen-09x.cfg")
+	pce_org_Y=$(grep -Ee "\bpce.yres\b " "$config_home/.mednafen/mednafen-09x.cfg")
 	#make the changes, prefix new_X in case NULL was entered previously
-	sed -i "s|$pce_org_X|pce.xres $pce_new_X|g" "$home/.mednafen/mednafen-09x.cfg"
-	sed -i "s|$pce_org_Y|pce.yres $pce_new_Y|g" "$home/.mednafen/mednafen-09x.cfg"
+	sed -i "s|$pce_org_X|pce.xres $pce_new_X|g" "$config_home/.mednafen/mednafen-09x.cfg"
+	sed -i "s|$pce_org_Y|pce.yres $pce_new_Y|g" "$config_home/.mednafen/mednafen-09x.cfg"
+
+	#Mednafen (PSX)
+	psx_org_X=$(grep -Ee "\bpsx.xres\b " "$config_home/.mednafen/mednafen-09x.cfg")
+	psx_org_Y=$(grep -Ee "\bpsx.yres\b " "$config_home/.mednafen/mednafen-09x.cfg")
+	#make the changes, prefix new_X in case NULL was entered previously
+	sed -i "s|$psx_org_X|psx.xres $psx_new_X|g" "$config_home/.mednafen/mednafen-09x.cfg"
+	sed -i "s|$psx_org_Y|psx.yres $psx_new_Y|g" "$config_home/.mednafen/mednafen-09x.cfg"
 
 	# correct permissions
 	h_correct_perms
@@ -543,101 +543,93 @@ options=(1 "Neo-Geo CDZ"
 
 function h_correct_perms()
 {
+
+	# inform user of permissions corrections
+	clear
+	echo "Correcting permissions on folders due to use of sudo."
+	echo "Please wait..."
+
 	# correct permissions since we use sudo
-	chgrp -Rv "$user" "$rootdir"
-    	chown -Rv "$user" "$rootdir"
+	chgrp -Rv "$user" "$rootdir" > /dev/null 2>&1
+    	chown -Rv "$user" "$rootdir" > /dev/null 2>&1
 
 	# correct the desktop permissions so we can add our own launcher
 	# This will allow permissions change for all languages. Thanks JC!
-
-
-
-	# correct the desktop so we can add our own launcher
-	chmod -Rv 755 $xdg_desktop_dir
-	chown -Rv $user $xdg_desktop_dir
-	chgrp -Rv $user $xdg_desktop_dir
-
+	chmod -Rv 755 $xdg_desktop_dir > /dev/null 2>&1
+	chown -Rv $user $xdg_desktop_dir > /dev/null 2>&1
+	chgrp -Rv $user $xdg_desktop_dir > /dev/null 2>&1
 
 	# replace "test" username in config files here to ensure games
 	# and emulators function and start properly
 	
-	# mupen64plus files
-	chgrp -Rv "$user" "$home/.config/mupen64plus"
-     	chown -Rv "$user" "$home/.config/mupen64plus"
-	# jstest-gtk files
-	chgrp -Rv "$user" "$home/.config/jstest-gtk"
-     	chown -Rv "$user" "$home/.config/jstest-gtk"
-	# ppsspp files
-	chgrp -Rv "$user" "$home/.config/ppsspp"
-     	chown -Rv "$user" "$home/.config/ppsspp"
-	# mame files
-	chgrp -Rv "$user" "$home/.mame"
-     	chown -Rv "$user" "$home/.mame"
-	# mess files
-	chgrp -Rv "$user" "$home/.mess"
-     	chown -Rv "$user" "$home/.mess"
-	# medanfen files
-	chgrp -Rv "$user" "$home/.mednafen"
-     	chown -Rv "$user" "$home/.mednafen"
-	# qjoypad files
-	chgrp -Rv "$user" "$home/.qjoypad3"
-     	chown -Rv "$user" "$home/.qjoypad3"
-	# qtsixa files
-	chgrp -Rv "$user" "$home/.qtsixa"
-     	chown -Rv "$user" "$home/.qtsixa"
-	# stella files
-	chgrp -Rv "$user" "$home/.stella"
-     	chown -Rv "$user" "$home/.stella"
-	# xbmc files
-	chgrp -Rv "$user" "$home/.xbmc"
-     	chown -Rv "$user" "$home/.xbmc"
-	# qtsixa gui files
-	chgrp -Rv "$user" "$home/.sixemugui"
-     	chown -Rv "$user" "$home/.sixemugui"
-	# XBMC extra filesfiles
-	chgrp -Rv "$user" "/usr/share/applications/gp_autodetect_xbmc.sh"
-     	chown -Rv "$user" "/usr/share/applications/gp_autodetect_xbmc.sh"
+	# .retrorig
+	chgrp -R "$user" "$config_home" > /dev/null 2>&1
+     	chown -R "$user" "$config_home" > /dev/null 2>&1
 
-	chgrp -Rv "$user" "$xdg_pictures_dir/retro-icon.png"
-	chown -Rv "$user" "$xdg_pictures_dir/retro-icon.png"
-	
-	chgrp -Rv "$user" "/usr/share/applications/startXBMC.sh"
-	chown -Rv "$user" "/usr/share/applications/startXBMC.sh"
+	# xbmc dotfile (our custom path)
+	chgrp -R "$user" "$xbmc_home" > /dev/null 2>&1
+     	chown -R "$user" "$xbmc_home" > /dev/null 2>&1
 
-	chgrp -Rv "$user" "$home/.config/autostart/RetroRig.desktop"
-	chown -Rv "$user" "$home/.config/autostart/RetroRig.desktop"
+	# qjoypad files from user home directory
+	chgrp -R "$user" "$home/.qjoypad3" > /dev/null 2>&1
+     	chown -R "$user" "$home/.qjoypad3" > /dev/null 2>&1
 
-	chgrp -Rv "$user" "$home/.config/autostart/qjoypad.desktop"
-	chown -Rv "$user" "$home/.config/autostart/qjoypad.desktop"
+	# XBMC gamepad auto-detect helper
+	chgrp -R "$user" "/usr/share/applications/gp_autodetect_xbmc.sh" > /dev/null 2>&1
+     	chown -R "$user" "/usr/share/applications/gp_autodetect_xbmc.sh" > /dev/null 2>&1
+	chmod ugo+x "/usr/share/applications/gp_autodetect_xbmc.sh" > /dev/null 2>&1
 
-	# Sometimes the custom skin reverts its files we modify
-	# This may take some time to debug, root cause maybe in an XBMC crash log
-	# help script. Change owership to root, with octal 755 (no -w-) for testing:
-	# This only needs done, and should be done for the 2 files we modify:
+	# start script for RetroRig application
+	chgrp -R "$user" "/usr/share/applications/startXBMC.sh" > /dev/null 2>&1
+	chown -R "$user" "/usr/share/applications/startXBMC.sh" > /dev/null 2>&1
+	chmod ugo+x "/usr/share/applications/startXBMC.sh" > /dev/null 2>&1
 
-	chown -v root:root "$home/.xbmc/addons/skin.maximinimalism/1080i/Home.xml"
-	chown -v root:root "$home/.xbmc/addons/skin.maximinimalism/extras/backgrounds/background001.jpg"
-	chmod 744 "$home/.xbmc/addons/skin.maximinimalism/extras/backgrounds/background001.jpg"
-	chmod 744 "$home/.xbmc/addons/skin.maximinimalism/extras/backgrounds/background001.jpg"
+	# RetroRig autostart file
+	chgrp -R "$user" "$home/.config/autostart/RetroRig.desktop" > /dev/null 2>&1
+	chown -R "$user" "$home/.config/autostart/RetroRig.desktop" > /dev/null 2>&1
+	chmod ugo+x "$home/.config/autostart/RetroRig.desktop" > /dev/null 2>&1
+
+	# qjoypad autostart file
+	chgrp -R "$user" "$home/.config/autostart/qjoypad.desktop" > /dev/null 2>&1
+	chown -R "$user" "$home/.config/autostart/qjoypad.desktop" > /dev/null 2>&1
+
+	# Pictures directory
+	chgrp -R "$user" "$xdg_pictures_dir/retro-icon.png" > /dev/null 2>&1
+	chown -R "$user" "$xdg_pictures_dir/retro-icon.png" > /dev/null 2>&1
+
+	# correct our own start file for retrorig
+	chmod ugo+x /usr/bin/xbmc-retrorig
+
+	# xboxdrv init script
+	chmod 755 /etc/init.d/xboxdrv > /dev/null 2>&1
+	chmod 755 /etc/default/xboxdrv > /dev/null 2>&1
 }
 
 function h_emu_user_fixes()
 {
 
 	# set the system user to an absolute value for files that require it
-	# RCB and some config files don't like using $HOME, rather /home/test/
+	# RCB and some config files don't like using $config_home, rather /home/test/
 	# Let's change the config files to reflect the current username
 
+	
 	# mame
-	sed -i "s|/home/test/RetroRig|$rootdir|g" $home/.mame/mame.ini | tee >> "$rootdir/logs/debug.log"
+	sed -i "s|/home/test/RetroRig|$rootdir|g" $config_home/.mame/mame.ini | tee >> "$rootdir/logs/debug.log"
+	
 	# MESS
-	sed -i "s|/home/test/RetroRig|$rootdir|g" $home/.mess/mess.ini | tee >> "$rootdir/logs/debug.log"
+	sed -i "s|/home/test/RetroRig|$rootdir|g" $config_home/.mess/mess.ini | tee >> "$rootdir/logs/debug.log"
+	
 	# XBMC
-	sed -i "s|/home/test/|/home/$user/|g" "$home/.xbmc/userdata/addon_data/script.games.rom.collection.browser/config.xml" | tee >> "$rootdir/logs/debug.log"
+	sed -i "s|/home/test/|/home/$user/|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml" | tee >> "$rootdir/logs/debug.log"
+	
 	# PPSSPP	
 	sed -i 's|test|$user|g' "$scriptdir/emu-cfgs/x360_controller/PPSSPP/ppsspp.ini"
-	echo "The user applied to configuration files was: $user" | tee >> "$rootdir/logs/debug.log"
 
+	# Mednafen firmware location
+	sed -i "s|/home/test/RetroRig|$rootdir|g" "$config_home/.mednafen/mednafen-09x.cfg"
+
+	# echo change
+	echo "The user applied to configuration files was: $user" | tee >> "$rootdir/logs/debug.log"
 }
 
 function h_filechecker()
@@ -663,7 +655,7 @@ function h_pkgcheck()
 function h_update_git() 
 {
 
-echo "Fetching latest version of the RetroPie Setup Script."
+echo "Fetching latest version of the RetroRig Setup Script."
 pushd "$scriptdir"
 
 if [[ ! -d ".git" ]]; then
@@ -683,24 +675,9 @@ dialog --backtitle "LibreGeek.org - RetroRig Setup." --msgbox "Fetched the lates
 function h_update_system() 
 {
 
-# Remove custom emulator binaries and install the latest
 
-###########################
-# PPSSPP
-###########################
-
-# RetroRig pulls this from libregeek.org to control versioning, rather than blindly
-# install the latest from 'http://ppsspp.angelxwind.net/'
-rm -f "/usr/bin/PPSSPPSDL"
-rm -rf "$rootdir/emulators/PPSSPP/*"
-# install latest PPSSPP
-em_install_ppsspp
-
-
-
-# Update other binaries that were installed via PPA's and Official Ubuntu repos
-
-apt-get update
+# Update binaries that were installed via PPA's and Official Ubuntu repos
+apt-get update -y
 sleep 3s
 clear
 
@@ -710,8 +687,8 @@ function h_upgrade_system()
 {
 
 clear
-apt-get update
-apt-get upgrade
+apt-get update -y
+apt-get upgrade -y
 sleep 3s
 clear
 

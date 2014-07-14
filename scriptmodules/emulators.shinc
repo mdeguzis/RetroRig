@@ -60,7 +60,7 @@ function em_install_ppsspp()
 	apt-get install -y libsdl1.2-dev
 
 	# pull down emulator from libregeek (to avoid increasing the git repo)
-	wget -P /tmp "www.libregeek.org/RetroRig/karenbuildbot-net.angelxwind.ppsspp-linux-amd64-generic.tar.gz"
+	wget -P /tmp "www.libregeek.org/RetroRig/emulators/karenbuildbot-net.angelxwind.ppsspp-linux-amd64-generic.tar.gz"
 
 	# Since ppsspp-0.9.8-SDL-pk64 is already in $rootdir/emulators, we just
 	# need to untar it:

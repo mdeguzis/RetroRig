@@ -12,18 +12,21 @@ function set_menu()
 	
 
 while true; do
-    cmd=(dialog --backtitle "LibreGeek.org RetroRig Installer" --menu "Settings Menu" 20 0 16)
+    cmd=(dialog --backtitle "LibreGeek.org RetroRig" --menu "Settings Menu" 18 0 12)
     options=(1 "Change resolution"  
 	     2 "Load ROMs"
 	     3 "Change plugins/filters/scaling"
 	     4 "Change Gamepad Type"
 	     5 "Enable SSH support"
-	     6 "BIOS loader"
-	     7 "BIOS checker"
-	     8 "Enable XBMC session (beta feature)"
-	     9 "Backup existing configs"
-	     10 "Restore first run configs"
- 	     11 "Back to main menu")
+	     6 "Enable ROMs samba share"
+	     7 "BIOS loader"
+	     8 "BIOS checker"
+	     9 "Enable XBMC session (beta feature)"
+	     10 "Backup existing configs"
+	     11 "Restore first run configs"
+	     12 "Update XBMC configs"
+	     13 "Upgrade Ubuntu kernel (PS3 USB Support)"
+ 	     14 "Back to main menu")
 
 	#make menu choice
 	choices=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
@@ -53,27 +56,41 @@ while true; do
 		;;
 
 		6)
-		h_bios_loader
+		set_enable_samba
 		;;
 
 		7)
-		h_bios_checker
+		h_bios_loader
 		;;
 
 		8)
-		dialog --msgbox "This option will skip the Unity desktop, and load XBMC directly. You can still go back to the Ubuntu desktop by exiting XBMC, and choosing 'Ubuntu Desktop' Uninstalling RetroRig will revert this option, or you can merely change '/usr/share/lightdm.conf.d/50-ubuntu.conf's 'user-session' back to 'ubuntu' Please be advised that using RetroRig with the xbmc session enabled may result in odd behavior with some emulators. I am doing my best to help/correct this." 14 60
-		set_xbmc_session
+		h_bios_checker
 		;;
 
 		9)
-		h_autosave_configs
+		#dialog --msgbox "This option will skip the Unity desktop, and load XBMC directly. You can still go back to the Ubuntu desktop by exiting XBMC, and choosing 'Ubuntu Desktop' Uninstalling RetroRig will revert this option, or you can merely change '/usr/share/lightdm.conf.d/50-ubuntu.conf's 'user-session' back to 'ubuntu' Please be advised that using RetroRig with the xbmc session enabled may result in odd behavior with some emulators. I am doing my best to help/correct this." 14 60
+		dialog --msgbox "Option disabled for further testing" 5 40 
+		sleep 2s 	
+		# set_xbmc_session
 		;;
 
 		10)
-		h_restore_configs
+		h_autosave_configs
 		;;
 
 		11)
+		h_restore_configs
+		;;
+
+		12)
+		rrs_xbmc_cfgs
+		;;
+
+		13)
+		rrs_kernel_3_14
+		;;
+
+		14)
 		return
 		;;
 
@@ -84,11 +101,68 @@ while true; do
 done
 }
 
+function set_enable_samba()
+{
+	clear
+	
+	# install samba services
+	echo "####################################################"
+	echo "Installing samba services"
+	echo "####################################################"
+	echo ""
+	sleep 2s
+	apt-get install -y samba
+	
+	# append samba share parameters
+	echo ""
+	echo "####################################################"
+	echo "Configuring samba services"
+	echo "####################################################"
+	echo ""
+	sleep 2s
+	cat "$rootdir/supplimental/samba_shares.txt" >> "/etc/samba/smb.conf"
+
+	# replace parameters of share
+	sed -i "s|/home/test/RetroRig|$rootdir|g" "/etc/samba/smb.conf"
+
+	# set samba password
+	# should this be left at guest access or set the user?
+
+	#echo ""
+	#echo "####################################################"
+	#echo "Setting samba password for user: $user"
+	#echo "####################################################"
+	#echo ""
+	#smbpasswd -a $user
+	#sleep 3s
+	
+	echo ""
+	echo "####################################################"
+	echo "Restarting samba services "
+	echo "####################################################"
+	echo ""
+	# restart services
+	service samba restart
+
+	# inform user of quick tips and notes
+	dialog --msgbox "The share 'RetroRig_ROMs' has now been added your acessible samba shares. You can access this a number of ways:\n\n1. 'smbclient //test-pc/retrorig_roms -U $user' on the CLI of a terminal window such as bash \n\n2. 'smb://test-pc/retrorig_roms/' from the file manager address bar (Nautilus) \n\n3. Through an alternative GUI client" 15 60
+
+}
+
 function set_enable_ssh()
 {
 	clear
 	#install openssh-server  
+	echo "####################################################"
+	echo "Installing ssh services"
+	echo "####################################################"
+	echo ""
 	apt-get install -y openssh-server
+	
+	echo "####################################################"
+	echo "Configuring samba services"
+	echo "####################################################"
+	echo ""
 	#prompt user to change default port
 	dialog --title "Set desired SSH port (typically 22)" --inputbox "Enter Port" 10 0 2> /tmp/set_ssh
 	#cat input
@@ -110,6 +184,11 @@ function set_xbmc_session()
 	
 	# confirm with user first
 	cfg_confirm
+
+	echo "####################################################"
+	echo "Configuring xbmc session"
+	echo "####################################################"
+	echo ""
 
 	clear
 	# copy config files
@@ -165,47 +244,52 @@ if [ "$choices" != "" ]; then
 		#echo curent resolution
 		#mupen64plus
 		echo "mupen64plus:" > "$scriptdir/logs/res.txt"
-		grep -Ee "\bScreenWidth = \b" "$home/.config/mupen64plus/mupen64plus.cfg" >> "$scriptdir/logs/res.txt"
-		grep -Ee "\bScreenHeight = \b" "$home/.config/mupen64plus/mupen64plus.cfg" >> "$scriptdir/logs/res.txt"
+		grep -Ee "\bScreenWidth = \b" "$config_home/.config/mupen64plus/mupen64plus.cfg" >> "$scriptdir/logs/res.txt"
+		grep -Ee "\bScreenHeight = \b" "$config_home/.config/mupen64plus/mupen64plus.cfg" >> "$scriptdir/logs/res.txt"
 		echo "" >> "$scriptdir/logs/res.txt"
 		#mednafen GBC
 		echo "Mednafen (GBC)" >> "$scriptdir/logs/res.txt"
-		grep -Ee "\bgb.xres\b" "$home/.mednafen/mednafen-09x.cfg" >> "$scriptdir/logs/res.txt"
-		grep -Ee "\bgb.yres\b" "$home/.mednafen/mednafen-09x.cfg" >> "$scriptdir/logs/res.txt"
+		grep -Ee "\bgb.xres\b" "$config_home/.mednafen/mednafen-09x.cfg" >> "$scriptdir/logs/res.txt"
+		grep -Ee "\bgb.yres\b" "$config_home/.mednafen/mednafen-09x.cfg" >> "$scriptdir/logs/res.txt"
 		echo "" >> "$scriptdir/logs/res.txt"
 		#mednafen GBA
 		echo "Mednafen (GBA)" >> "$scriptdir/logs/res.txt"
-		grep -Ee "\bgba.xres\b" "$home/.mednafen/mednafen-09x.cfg" >> "$scriptdir/logs/res.txt"
-		grep -Ee "\bgba.yres\b" "$home/.mednafen/mednafen-09x.cfg" >> "$scriptdir/logs/res.txt"
+		grep -Ee "\bgba.xres\b" "$config_home/.mednafen/mednafen-09x.cfg" >> "$scriptdir/logs/res.txt"
+		grep -Ee "\bgba.yres\b" "$config_home/.mednafen/mednafen-09x.cfg" >> "$scriptdir/logs/res.txt"
 		echo "" >> "$scriptdir/logs/res.txt"
 		#mednafen NES
 		echo "Mednafen (NES)" >> "$scriptdir/logs/res.txt"
-		grep -Ee "\bnes.xres\b" "$home/.mednafen/mednafen-09x.cfg" >> "$scriptdir/logs/res.txt"
-		grep -Ee "\bnes.yres\b" "$home/.mednafen/mednafen-09x.cfg" >> "$scriptdir/logs/res.txt"
+		grep -Ee "\bnes.xres\b" "$config_home/.mednafen/mednafen-09x.cfg" >> "$scriptdir/logs/res.txt"
+		grep -Ee "\bnes.yres\b" "$config_home/.mednafen/mednafen-09x.cfg" >> "$scriptdir/logs/res.txt"
 		echo "" >> "$scriptdir/logs/res.txt"
 		#mednafen Sega Sega Master System
 		echo "Mednafen (Sega Master System)" >> "$scriptdir/logs/res.txt"
-		grep -Ee "\bsms.xres\b" "$home/.mednafen/mednafen-09x.cfg" >> "$scriptdir/logs/res.txt"
-		grep -Ee "\bsms.yres\b" "$home/.mednafen/mednafen-09x.cfg" >> "$scriptdir/logs/res.txt"
+		grep -Ee "\bsms.xres\b" "$config_home/.mednafen/mednafen-09x.cfg" >> "$scriptdir/logs/res.txt"
+		grep -Ee "\bsms.yres\b" "$config_home/.mednafen/mednafen-09x.cfg" >> "$scriptdir/logs/res.txt"
 		echo "" >> "$scriptdir/logs/res.txt"
 		#mednafen Sega Game Gear
 		echo "Mednafen (Sega Game Gear)" >> "$scriptdir/logs/res.txt"
-		grep -Ee "\bgg.xres\b" "$home/.mednafen/mednafen-09x.cfg" >> "$scriptdir/logs/res.txt"
-		grep -Ee "\bgg.yres\b" "$home/.mednafen/mednafen-09x.cfg" >> "$scriptdir/logs/res.txt"
+		grep -Ee "\bgg.xres\b" "$config_home/.mednafen/mednafen-09x.cfg" >> "$scriptdir/logs/res.txt"
+		grep -Ee "\bgg.yres\b" "$config_home/.mednafen/mednafen-09x.cfg" >> "$scriptdir/logs/res.txt"
 		echo "" >> "$scriptdir/logs/res.txt"
 		#mednafen SNES
 		echo "Mednafen (SNES)" >> "$scriptdir/logs/res.txt"
-		grep -Ee "\bsnes.xres\b" "$home/.mednafen/mednafen-09x.cfg" >> "$scriptdir/logs/res.txt"
-		grep -Ee "\bsnes.yres\b" "$home/.mednafen/mednafen-09x.cfg" >> "$scriptdir/logs/res.txt"
+		grep -Ee "\bsnes.xres\b" "$config_home/.mednafen/mednafen-09x.cfg" >> "$scriptdir/logs/res.txt"
+		grep -Ee "\bsnes.yres\b" "$config_home/.mednafen/mednafen-09x.cfg" >> "$scriptdir/logs/res.txt"
 		echo "" >> "$scriptdir/logs/res.txt"
 		#mednafen Turbographx 16
 		echo "Mednafen (Turbographx 16)" >> "$scriptdir/logs/res.txt"
-		grep -Ee "\bpce.xres\b" "$home/.mednafen/mednafen-09x.cfg" >> "$scriptdir/logs/res.txt"
-		grep -Ee "\bpce.yres\b" "$home/.mednafen/mednafen-09x.cfg" >> "$scriptdir/logs/res.txt"
+		grep -Ee "\bpce.xres\b" "$config_home/.mednafen/mednafen-09x.cfg" >> "$scriptdir/logs/res.txt"
+		grep -Ee "\bpce.yres\b" "$config_home/.mednafen/mednafen-09x.cfg" >> "$scriptdir/logs/res.txt"
+		echo "" >> "$scriptdir/logs/res.txt"
+		#mednafen PSX
+		echo "Mednafen (PSX)" >> "$scriptdir/logs/res.txt"
+		grep -Ee "\bpsx.xres\b" "$config_home/.mednafen/mednafen-09x.cfg" >> "$scriptdir/logs/res.txt"
+		grep -Ee "\bpsx.yres\b" "$config_home/.mednafen/mednafen-09x.cfg" >> "$scriptdir/logs/res.txt"
 		echo "" >> "$scriptdir/logs/res.txt"
 		#Stella
 		echo "Stella" >> "$scriptdir/logs/res.txt"
-		grep -Ee "\bfullres = \b" "$home/.stella/stellarc" >> "$scriptdir/logs/res.txt"
+		grep -Ee "\bfullres = \b" "$config_home/.stella/stellarc" >> "$scriptdir/logs/res.txt"
 		echo "" >> "$scriptdir/logs/res.txt"
 		#report current resolution
 		dialog --textbox "$scriptdir/logs/res.txt" 33 0
@@ -239,6 +323,9 @@ if [ "$choices" != "" ]; then
 		#set mednafen (Turbographx 16) value
 		pce_new_X="1280"
 		pce_new_Y="720"
+		#set mednafen (PSX) value
+		psx_new_X="1280"
+		psx_new_Y="720"
 		#set stella (Atari 2600)
 		st_new="1280x720"
 		# set the resolution with helper
@@ -272,6 +359,9 @@ if [ "$choices" != "" ]; then
 		#set mednafen (Turbographx 16) value
 		pce_new_X="1280"
 		pce_new_Y="1024"
+		#set mednafen (PSX) value
+		psx_new_X="1280"
+		psx_new_Y="1024"
 		#set stella (Atari 2600)
 		st_new="1280x1024"
 		# set the resolution with helper
@@ -305,6 +395,9 @@ if [ "$choices" != "" ]; then
 		#set mednafen (Turbographx 16) value
 		pce_new_X="1360"
 		pce_new_Y="768"
+		#set mednafen (PSX) value
+		psx_new_X="1360"
+		psx_new_Y="768"
 		#set stella (Atari 2600)
 		st_new="1360x768"
 		# set the resolution with helper
@@ -338,6 +431,9 @@ if [ "$choices" != "" ]; then
 		#set mednafen (Turbographx 16) value
 		pce_new_X="1600"
 		pce_new_Y="900"
+		#set mednafen (PSX) value
+		psx_new_X="1600"
+		psx_new_Y="900"
 		#set stella (Atari 2600)
 		st_new="1600x900"
 		# set the resolution with helper
@@ -371,6 +467,9 @@ if [ "$choices" != "" ]; then
 		#set mednafen (Turbographx 16) value
 		pce_new_X="1920"
 		pce_new_Y="1080"
+		#set mednafen (PSX) value
+		psx_new_X="1920"
+		psx_new_Y="1080"
 		#set stella (Atari 2600)
 		st_new="1920x1080"
 		# set the resolution with helper
@@ -409,6 +508,9 @@ if [ "$choices" != "" ]; then
 		#mednafen (Turbographx 16)
 		pce_new_X=$(cat '/tmp/new_X')
 		pce_new_Y=$(cat '/tmp/new_Y')
+		#mednafen (PSX)
+		psx_new_X=$(cat '/tmp/new_X')
+		psx_new_Y=$(cat '/tmp/new_Y')
 		#set stella (Atari 2600)
 		st1=$(cat '/tmp/new_X')
 		stdelim=$('x')
@@ -472,8 +574,8 @@ options=(1 "Change Video Plugin"
 		#Maybe I can find a way to swap the dir on the fly later on
 		folder=$(dialog --stdout --title "Please choose a file (spacebar to select)" --fselect $fstart/ 10 68)
 		#change plugin
-		m_plug_orig=$(grep -i "VideoPlugin = " "$home/.config/mupen64plus/mupen64plus.cfg")
-		sed -i "s|$m_plug_orig|VideoPlugin = $folder|g" "$home/.config/mupen64plus/mupen64plus.cfg"
+		m_plug_orig=$(grep -i "VideoPlugin = " "$config_home/.config/mupen64plus/mupen64plus.cfg")
+		sed -i "s|$m_plug_orig|VideoPlugin = $folder|g" "$config_home/.config/mupen64plus/mupen64plus.cfg"
 		;;
 
 		2)
