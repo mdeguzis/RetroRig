@@ -10,7 +10,8 @@
 function rrs_prepareFolders()
 {
 	echo "Creating folders for ROMs, Artwork, Saves, and dotfiles"
-
+	# We pass -p below,so all folders below are created for 
+	# a given path
 	
 	pathlist=()
 
@@ -78,19 +79,21 @@ function rrs_prepareFolders()
 	pathlist+=("$rootdir/Saves/PS1")
 	pathlist+=("$rootdir/Saves/Genesis")
 
-	#create dotfiles
+	# create dotfiles
 	pathlist+=("$home/.retrorig")
-	# qjoypad must stay in $home, since it launches before* RetroRig
 	pathlist+=("$home/.qjoypad3")
+	# qjoypad must stay in $home, since it launches before* RetroRig
+	# XBMC's path is set to our .retrorig directory, on with the rest:
 	pathlist+=("$config_home/.config/mupen64plus")
-	
 	pathlist+=("$config_home/.config/ppsspp/PSP/SYSTEM")
 	pathlist+=("$config_home/.mame/cfg")
 	pathlist+=("$config_home/.mess")
 	pathlist+=("$config_home/.mess/cfg")
 	pathlist+=("$config_home/.stella")
-	pathlist+=("$xbmc_home/userdata/keymaps")
 	pathlist+=("$config_home/.mednafen")
+	
+	# xbmc folders
+	pathlist+=("$xbmc_home/userdata/keymaps")
 
 	#BIOS folder(s)
 	pathlist+=("$rootdir/BIOS/MESS")
@@ -121,13 +124,14 @@ function rrs_prepareFolders()
 function rrs_unity()
 {
 
-#disable screensaver, XBMC will manage this
-#export display to allow gsettings running in terminal window
+# Disable screensaver, XBMC will manage this
+# Export display to allow gsettings running in terminal window
 export DISPLAY=:0.0
 gsettings set org.gnome.desktop.screensaver lock-enabled false
 gsettings set org.gnome.desktop.screensaver ubuntu-lock-on-suspend false
 gsettings set org.gnome.desktop.session idle-delay 3600
 
+# Create Unity launcher icon from existing /usr/share/applications/RetroRig.desktop
 gsettings set com.canonical.Unity.Launcher favorites "$(gsettings get com.canonical.Unity.Launcher favorites | sed "s/, *'RetroRig.desktop' *//g" | sed "s/'RetroRig.desktop' *, *//g" | sed -e "s/]$/, 'RetroRig.desktop']/")"
 
 }
@@ -183,7 +187,7 @@ function rrs_add_standard_repos()
 {
 
 	# add repository for official team XBMC "stable"
-	# We use our own custom pkgs now...
+	# We still need this repository for xbmc.bin dependencies
 	add-apt-repository -y ppa:team-xbmc/ppa
 
 	# add respository for qtsixa (PS3 pairing)
@@ -452,6 +456,11 @@ function rrs_xbmc_patched()
 
 	# start service
 	service rescan start
+
+	# remove team xbmc repository so we don't have to worry about our xbmc
+	# package being overwritten (This can always be removed later if need be):
+	add-apt-repository -ry ppa:team-xbmc/ppa
+
 }
 
 function rrs_xbmc_cfgs()
@@ -470,7 +479,7 @@ function rrs_xbmc_cfgs()
 	# xbmc does not (at least for Ubuntu's repo pkg) load the
 	# dot files without loading XBMC at least once, so let's copy ours in first
 
-	#copy in default folder base from first run:	
+	# Copy in default folder base from first run:	
 	cp -Rv "$scriptdir/XBMC-cfgs/addons" "$xbmc_home"
 	cp -Rv "$scriptdir/XBMC-cfgs/userdata" "$xbmc_home"
 
@@ -481,8 +490,6 @@ function rrs_xbmc_cfgs()
 		# remove /tmp file
 		# rm -f "$gamedb_tmp"
 	fi
-
-
 
 	# set the system user to an absolute value.
 	# RCB and some config files don't like using $config_home, rather /home/test/
@@ -637,10 +644,16 @@ rrs_kernel_3_14()
 	# hid-sony kernel module regression::
 	# https://bugs.launchpad.net/ubuntu/+source/linux/+bug/1326725
 	#
-	# Source article:
-	# http://gameimps.com/ps3-controller-linux-usb-290
+	# PPA Page:
+	# http://kernel.ubuntu.com/~kernel-ppa/mainline/v3.14-trusty/
 	#
-	# Canonical warning: 
+	# WARNING:
+	# Canonical does not recommend updating your Linux kernel to other
+	# versions other than the ones provided on official channels. This 
+	# is not a totally safe procedure and you might have problems 
+	# afterwards, even system failures or applications not working 
+	# properly. On the other hand, you might get better performance 
+	# from your system.
 	# 
 	##################################################################
 	
@@ -653,5 +666,10 @@ rrs_kernel_3_14()
 
 	# inform user
 	# dialog --msgbox "upgrading the kernel to 3.14 is complete, please reboot" 5 60
+
+	# cleanup packages
+	rm -f /tmp/linux-headers-3.14*
+	rm -f /tmp/linux-image-3.14*
+
 }
 

@@ -179,7 +179,8 @@ case $response in
 	sleep 2s
 	;;
 
-   	1) 
+   	1)
+	rm -rf "$rootdir/BIOS" 
 	rm -rf "$rootdir/ROMs"
 	rm -rf "$rootdir/Tools"
 	rm -rf "$rootdir/Artwork"
@@ -195,8 +196,8 @@ case $response in
 
 	esac	
 
-#remove $rootdir , i.e. "RetroRig" wherever it was created
-rm -rf "$rootdir"
+# RENAME (not remove) wherever it was created, so uses can still refer to it
+mv "$rootdir" "$rootdir.old"
 
 #update Ubuntu repository listings
 apt-get update
