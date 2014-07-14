@@ -283,7 +283,7 @@ fi
 # check for pre-requisites, output to log folder
 rrs_prereq
 
-# Show lame logo (take this out?)
+# Show lame logo
 # subtitle 1
 clear
 COLUMNS=$(tput cols) 
