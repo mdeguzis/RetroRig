@@ -559,12 +559,9 @@ function h_correct_perms()
 	chown -Rv $user $xdg_desktop_dir > /dev/null 2>&1
 	chgrp -Rv $user $xdg_desktop_dir > /dev/null 2>&1
 
-
 	# replace "test" username in config files here to ensure games
 	# and emulators function and start properly
 	
-	# .retrorig dot files (our custom path)
-
 	# .retrorig
 	chgrp -R "$user" "$config_home" > /dev/null 2>&1
      	chown -R "$user" "$config_home" > /dev/null 2>&1
