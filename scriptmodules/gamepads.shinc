@@ -194,7 +194,8 @@ function ps3_pair_blu()
 
 	# Inform player 1 controller user to disconnect USB cord
 	dialog --msgbox "Please disconnect the USB cable and press the PS Button now. The appropriate \
-LED should be lit. If it is not, please hold in the PS button to turn it off, then back on." 10 60
+LED should be lit. If it is not, please hold in the PS button to turn it off, then back on.\n\nPlease reboot to \
+fully enable the controller(s)" 10 60
 
 }
 
@@ -327,8 +328,8 @@ the service may fail to start correctly.\n\nPlease see /etc/default/xboxdrv for 
 	# correct permissions since we run as sudo
 	h_correct_perms
 
-	# Let the user know about LED's
-	dialog --msgbox "Please reboot to enable the controller."  5 43
+	# Let the user know about reboot
+	dialog --msgbox "Please reboot to fully enable the controller(s)."  5 52
 
 }
 
@@ -408,8 +409,8 @@ function gp_x360_wireless()
 	# correct permissions since we run as sudo
 	h_correct_perms
 
-	# Let the user know about LED's
-	dialog --msgbox "Please reboot to enable the controller."  5 43
+	# Let the user know about reboot
+	dialog --msgbox "Please reboot to fully enable the controller(s)."  5 52
 }
 
 function gp_x360_usb()
@@ -490,6 +491,6 @@ function gp_x360_usb()
 
 	# Let the user know about LED's
 	dialog --msgbox "Using wired controllers, the pairing is in sequence. If you \
-received the wrong LED, unplug and plug the USB cable back in until you get the correct LED number. Please reboot to enable the controller"  10 40
+received the wrong LED, unplug and plug the USB cable back in until you get the correct LED number. Please reboot to fully enable the controller"  10 40
 
 }
