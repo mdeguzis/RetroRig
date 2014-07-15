@@ -476,25 +476,27 @@ function h_bios_checker()
 
 	# BIOS file checks
 	clear
-	echo "Checking for Bios files (if applicable)..." | tee >> "$rootdir/logs/debug.log"
+	echo "Checking for Bios files (if applicable)..."
 	echo ""
 	sleep 3s
 
 	# MESS -g BIOS files
-	h_filechecker 
-"$rootdir/ROMs/BIOS/MESS" 
+	h_filechecker "$rootdir/ROMs/BIOS/MESS" 
 	# output something to user, so they don't necessarily have to check the debug log
-	echo "BIOS directory contains: "
+	echo "MESS BIOS directory contains: "
 	ls "$rootdir/BIOS/MESS"
 	echo ""
-
 	# If MESS is loaded already, verify BIOS files
 	/usr/games/mess neocdz -verifyroms
 
+	# output something to user, so they don't necessarily have to check the debug log
+	echo "MAME BIOS directory contains: "
+	ls "$rootdir/BIOS/MAME"
+	echo ""
 	# Verify mame rom sets
 	# Let user know this takes a lot of time...
 	echo ""
-	echo "Checking for mame bios files...This will take a long time, please wait..." | tee >> "$rootdir/logs/debug.log"
+	echo "Checking for MAME bios files...This will take a long time, please wait..."
 	echo ""
 	/usr/games/mame -verifyroms
 
@@ -510,7 +512,7 @@ function h_bios_loader()
 
 cmd=(dialog --backtitle "LibreGeek.org RetroRig Installer" --menu "Load BIOS files for which system?" 19 32 24)
 options=(1 "Neo-Geo CDZ"
-	 2 "Commodore 64" 
+	 2 "MAME" 
 	 3 "Exit BIOS Loader")
 
 	#make menu choice
@@ -533,9 +535,9 @@ options=(1 "Neo-Geo CDZ"
 		2)
 		#call file loader
 		h_file_loader
-		# copy Commodore 64 BIOS file over to MESS (root emulator)
+		# copy MAME BIOS file over to MESS (root emulator)
 		if [ -n "$folder" ]; then
-			cp -v "$folder" "$rootdir/BIOS/MESS"
+			cp -v "$folder" "$rootdir/BIOS/MAME"
 		fi
 		;;
 
