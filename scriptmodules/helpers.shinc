@@ -473,13 +473,20 @@ function h_res_switcher()
 
 function h_bios_checker()
 {
-
-	# BIOS file checks
 	clear
+	# BIOS file checks
+	echo "######################################"
+	echo "BIOS/romset Checker Utility"	
+	echo "######################################"
+	echo ""
 	echo "Checking for Bios files (if applicable)..."
 	echo ""
 	sleep 3s
 
+
+	echo "######################################"
+	echo "MESS romset"	
+	echo "######################################"
 	# MESS -g BIOS files
 	h_filechecker "$rootdir/ROMs/BIOS/MESS" 
 	# output something to user, so they don't necessarily have to check the debug log
@@ -489,6 +496,11 @@ function h_bios_checker()
 	# If MESS is loaded already, verify BIOS files
 	/usr/games/mess neocdz -verifyroms
 
+
+	echo "######################################"
+	echo "MAME romset"	
+	echo "######################################"
+
 	# output something to user, so they don't necessarily have to check the debug log
 	echo "MAME BIOS directory contains: "
 	ls "$rootdir/BIOS/MAME"
@@ -496,7 +508,7 @@ function h_bios_checker()
 	# Verify mame rom sets
 	# Let user know this takes a lot of time...
 	echo ""
-	echo "Checking for MAME bios files...This will take a long time, please wait..."
+	echo "This will take a long time, please wait..."
 	echo ""
 	/usr/games/mame -verifyroms
 
