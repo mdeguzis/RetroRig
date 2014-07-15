@@ -491,6 +491,13 @@ function h_bios_checker()
 	# If MESS is loaded already, verify BIOS files
 	/usr/games/mess neocdz -verifyroms
 
+	# Verify mame rom sets
+	# Let user know this takes a lot of time...
+	echo ""
+	echo "Checking for mame bios files...This will take a long time, please wait..." | tee >> "$rootdir/logs/debug.log"
+	echo ""
+	/usr/games/mame -verifyroms
+
 	#hold for review
 	sleep 5s
 
