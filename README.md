@@ -1,4 +1,4 @@
-RetroRig Project for Ubuntu 14.04 LTS
+RetroRig Project for Ubuntu
 ===================================================
 ![alt text](http://i.imgur.com/Irgv0Fx.png "RetroRig")
 ###### [Version 0.9.1]
