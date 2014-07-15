@@ -38,6 +38,9 @@ h_clean_gamepad()
 	# qjoypad 
 	rm -f "$home/.config/autostart/qjoypad.desktop"
 
+	# XBMC keymaps
+	rm -f "$xbmc_home/userdata/keymaps/keyboard.xml"
+
 	# Xbox controller 
 	service xboxdrv stop
 	rm -f /etc/init.d/xboxdrv
