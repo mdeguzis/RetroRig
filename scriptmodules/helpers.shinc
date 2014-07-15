@@ -502,14 +502,12 @@ function h_bios_checker()
 	echo "######################################"
 
 	# output something to user, so they don't necessarily have to check the debug log
+	echo "This will take a long time, please wait..."
 	echo "MAME BIOS directory contains: "
 	ls "$rootdir/BIOS/MAME"
 	echo ""
 	# Verify mame rom sets
 	# Let user know this takes a lot of time...
-	echo ""
-	echo "This will take a long time, please wait..."
-	echo ""
 	/usr/games/mame -verifyroms
 
 	#hold for review
