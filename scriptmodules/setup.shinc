@@ -659,6 +659,10 @@ rrs_kernel_3_14()
 	
 	clear
 	# alternatively: a=$(uname -r); user_kernel=${a//[^0-9]}
+	
+	# Get user's current kernel. We only need the 3.14.0 digits
+	# The rest can be different between kernels and is not needed
+	# To determine if we are on 3.14.x / 3.14.x.000000
 	user_kernel=$(uname -r | awk -F'[^0-9]*' '{print $1$2$3}')
 	echo "user's kernel is: $user_kernel"
 	sleep 2s
