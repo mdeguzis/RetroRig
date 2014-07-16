@@ -657,12 +657,30 @@ rrs_kernel_3_14()
 	# 
 	##################################################################
 	
-	wget -P /tmp "http://kernel.ubuntu.com/~kernel-ppa/mainline/v3.14-trusty/linux-headers-3.14.0-031400_3.14.0-031400.201403310035_all.deb"
-	wget -P /tmp "http://kernel.ubuntu.com/~kernel-ppa/mainline/v3.14-trusty/linux-headers-3.14.0-031400-generic_3.14.0-031400.201403310035_amd64.deb"
-	wget -P /tmp "http://kernel.ubuntu.com/~kernel-ppa/mainline/v3.14-trusty/linux-image-3.14.0-031400-generic_3.14.0-031400.201403310035_amd64.deb"
+	clear
+	# alternatively: a=$(uname -r); user_kernel=${a//[^0-9]}
+	user_kernel=$(uname -r | awk -F'[^0-9]*' '{print $1$2$3}')
+	echo "user's kernel is: $user_kernel"
+	sleep 2s
 
-	cd /tmp
-	dpkg -i linux-headers-3.14*.deb linux-image-3.14*.deb
+	target_kernel="3140"
+	echo "Target kernel is: $target_kernel"
+	sleep 2s
+
+	# Check if 3.14.x exists
+	if [ $user_kernel -lt "$target_kernel" ]; then
+   	    echo "Kernel 3.14.x not found, installing"
+	    sleep 5s
+	    wget -P /tmp "http://kernel.ubuntu.com/~kernel-ppa/mainline/v3.14-trusty/linux-headers-3.14.0-031400_3.14.0-031400.201403310035_all.deb"
+	    wget -P /tmp "http://kernel.ubuntu.com/~kernel-ppa/mainline/v3.14-trusty/linux-headers-3.14.0-031400-generic_3.14.0-031400.201403310035_amd64.deb"
+	    wget -P /tmp "http://kernel.ubuntu.com/~kernel-ppa/mainline/v3.14-trusty/linux-image-3.14.0-031400-generic_3.14.0-031400.201403310035_amd64.deb"
+	    cd /tmp
+	    dpkg -i linux-headers-3.14*.deb linux-image-3.14*.deb
+	elif [ $user_kernel -ge "$target_kernel" ]; then
+   	    # Do nothing
+	    echo "Kernel 3.14.x or greater found, exiting"
+	    sleep 2s
+	fi
 
 	# inform user
 	# dialog --msgbox "upgrading the kernel to 3.14 is complete, please reboot" 5 60
