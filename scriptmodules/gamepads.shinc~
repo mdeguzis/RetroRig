@@ -223,6 +223,9 @@ function gp_ps3_usb()
 	cp -v "$rootdir/init-scripts/ps3_usb_controller/xboxdrv" "/etc/init.d/"
 	cp -v "$rootdir/init-scripts/ps3_usb_controller/default/xboxdrv" "/etc/default/xboxdrv"
 
+	# set qjoypad
+	# this has to still be $home, as the application launches before RetroRig/XBMC
+	cp -v "$rootdir/gamepad-cfgs/ps3_usb_controller/ps3_sixaxis_usb.lyt" "$config_home/.qjoypad3"
 	
 	#blacklist xpad
 	cp -v "$rootdir/init-scripts/ps3_usb_controller/blacklist.conf" "/etc/modprobe.d/"
@@ -383,7 +386,10 @@ function gp_x360_wireless()
 
 	############################################
 	# configure xboxdrv for 360 gamepad (wireless)
-	############################################"
+	############################################
+
+	#set qjoypad's profile to match Xbox 360 Wireless (4-player)
+	cp -v "$rootdir/gamepad-cfgs/x360_controller/x360_controller.lyt" "$config_home/.qjoypad3"
 	
 	#blacklist xpad
 	cp -v "$rootdir/init-scripts/x360_controller/blacklist.conf" "/etc/modprobe.d/"
@@ -459,6 +465,9 @@ function gp_x360_usb()
 	############################################
 	# configure xboxdrv for 360 gamepad (wireless)
 	############################################
+
+	#set qjoypad's profile to match Xbox 360 Wireless (4-player)
+	cp -v "$rootdir/gamepad-cfgs/x360_controller_usb/x360_controller_usb.lyt" "$config_home/.qjoypad3"
 	
 	#blacklist xpad
 	cp -v "$rootdir/init-scripts/x360_controller_usb/blacklist.conf" "/etc/modprobe.d/"
