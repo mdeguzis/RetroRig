@@ -1,4 +1,4 @@
-RetroRig Project for Ubuntu 14.04 LTS
+RetroRig Project for Ubuntu
 ===================================================
 ![alt text](http://i.imgur.com/Irgv0Fx.png "RetroRig")
 ###### [Version 0.9.1]
@@ -45,8 +45,8 @@ wiki entries under "Installation," and "Advanced Configuration," or checkout the
 
 For all other features and future plans, please see the [wiki](https://github.com/ProfessorKaos64/RetroRig/wiki/Development-and-Features)
 
-* No need to install an entire seperate distro on your Mint/Debian machine
-* Cusom XBMC binary package
+* No need to install an entire separate distro on your Mint/Debian machine
+* Custom XBMC binary package
 * Custom XBMC home screen and button layout
 * Seperate dot file (.retrorig, not .xbmc) so you can have your cake and eat it too!
 * Hotplugging support for supported game controllers

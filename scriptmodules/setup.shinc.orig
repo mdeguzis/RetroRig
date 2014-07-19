@@ -673,18 +673,17 @@ rrs_kernel_3_14()
 
 	# Check if 3.14.x exists
 	if [ $user_kernel -lt "$target_kernel" ]; then
+<<<<<<< HEAD
    	    echo "Kernel 3.14.x or greater not found, installing"
+=======
+   	    echo "Kernel 3.14.x not found, installing"
+>>>>>>> origin
 	    sleep 5s
 	    wget -P /tmp "http://kernel.ubuntu.com/~kernel-ppa/mainline/v3.14-trusty/linux-headers-3.14.0-031400_3.14.0-031400.201403310035_all.deb"
 	    wget -P /tmp "http://kernel.ubuntu.com/~kernel-ppa/mainline/v3.14-trusty/linux-headers-3.14.0-031400-generic_3.14.0-031400.201403310035_amd64.deb"
 	    wget -P /tmp "http://kernel.ubuntu.com/~kernel-ppa/mainline/v3.14-trusty/linux-image-3.14.0-031400-generic_3.14.0-031400.201403310035_amd64.deb"
 	    cd /tmp
 	    dpkg -i linux-headers-3.14*.deb linux-image-3.14*.deb
-	elif [ $user_kernel -ge "$target_kernel" ]; then
-   	    # Do nothing
-	    echo "Kernel 3.14.x or greater found, exiting"
-	    sleep 2s
-	fi
 	elif [ $user_kernel -ge "$target_kernel" ]; then
    	    # Do nothing
 	    echo "Kernel 3.14.x or greater found, exiting"

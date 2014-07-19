@@ -21,12 +21,11 @@ while true; do
 	     6 "Enable ROMs samba share"
 	     7 "BIOS loader"
 	     8 "BIOS checker"
-	     9 "Enable XBMC session (beta feature)"
-	     10 "Backup existing configs"
-	     11 "Restore first run configs"
-	     12 "Update XBMC configs"
-	     13 "Upgrade Ubuntu kernel (PS3 USB Support)"
- 	     14 "Back to main menu")
+	     9 "Backup existing configs"
+	     10 "Restore first run configs"
+	     11 "Update XBMC configs"
+	     12 "Upgrade Ubuntu kernel (PS3 USB Support)"
+ 	     13 "Back to main menu")
 
 	#make menu choice
 	choices=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
@@ -68,29 +67,22 @@ while true; do
 		;;
 
 		9)
-		#dialog --msgbox "This option will skip the Unity desktop, and load XBMC directly. You can still go back to the Ubuntu desktop by exiting XBMC, and choosing 'Ubuntu Desktop' Uninstalling RetroRig will revert this option, or you can merely change '/usr/share/lightdm.conf.d/50-ubuntu.conf's 'user-session' back to 'ubuntu' Please be advised that using RetroRig with the xbmc session enabled may result in odd behavior with some emulators. I am doing my best to help/correct this." 14 60
-		dialog --msgbox "Option disabled for further testing" 5 40 
-		sleep 2s 	
-		# set_xbmc_session
-		;;
-
-		10)
 		h_autosave_configs
 		;;
 
-		11)
+		10)
 		h_restore_configs
 		;;
 
-		12)
+		11)
 		rrs_xbmc_cfgs
 		;;
 
-		13)
+		12)
 		rrs_kernel_3_14
 		;;
 
-		14)
+		13)
 		return
 		;;
 
