@@ -395,6 +395,10 @@ function rrs_xbmc_patched()
 	# remove old xbmc-bin, install our patched version
 	apt-get remove -y xbmc xbmc-bin
 
+	# remove old /tmp files if they exist
+	rm -f /tmp/xbmc-bin_Gotham_V13.1_patched_for_RetroRig*
+	rm -f /tmp/xbmc_Gotham_V13.1_patched_for_RetroRig*
+
 	# copy down the patched debs from libregeek (saves on space, dl speed is adaquate for now)
 	wget -P /tmp "www.libregeek.org/RetroRig/xbmc/xbmc-bin_Gotham_V13.1_patched_for_RetroRig_patchlevel_4.deb"
 	wget -P /tmp "www.libregeek.org/RetroRig/xbmc/xbmc_Gotham_V13.1_patched_for_RetroRig_patchlevel_4.deb"
