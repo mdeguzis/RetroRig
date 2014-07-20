@@ -648,7 +648,7 @@ function h_emu_user_fixes()
 	sed -i 's|test|$user|g' "$scriptdir/emu-cfgs/x360_controller/PPSSPP/ppsspp.ini"
 
 	# Mednafen firmware location
-	sed -i "s|/home/test/RetroRig|$rootdir|g" "$config_home/.mednafen/mednafen-09x.cfg"
+	sed -i "s|firmware|$rootdir/BIOS/Mednafen|g" "$config_home/.mednafen/mednafen-09x.cfg"
 
 	# echo change
 	echo "The user applied to configuration files was: $user" | tee >> "$rootdir/logs/debug.log"
