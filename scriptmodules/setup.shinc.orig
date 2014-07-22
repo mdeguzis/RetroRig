@@ -81,6 +81,7 @@ function rrs_prepareFolders()
 
 	# create dotfiles
 	pathlist+=("$home/.retrorig")
+	# our new mednafen SDL2 uses a different path, and is symlinked to match this
 	pathlist+=("$config_home/.qjoypad3")
 
 	# XBMC's path is set to our .retrorig directory, on with the rest:
