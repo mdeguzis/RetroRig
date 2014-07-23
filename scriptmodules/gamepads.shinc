@@ -60,17 +60,52 @@ function gp_ps3_blu()
 function gp_ps3_blu_main()
 {
 
-	# Add PSP qjoypad profile for easy exits during gameplay
-	# This has been updated to only be called on PPSSPP launch, as this emulator uses differen joypad
-	# Button codes. 
-	cp -v "$rootdir/gamepad-cfgs/ps3_blu_controller/psp_sixaxis_blu.lyt" "$config_home/.qjoypad3"
+	###########################################################
+	# Add emulator specifc control remaps here for qjoypad
+	###########################################################
 
 	# set vars for pre/post command for the PPSSPP emulator in RCB
 	# We need this unforuntely, since the SDL/sixad mapping are so screwy, we need ot use 
 	# keyboard.Esc instead of a button press (PS button is an axis in sixad anyway).
+
+	# copy in default default config.xml for RCB (Which is cleaned/removed in h_clean_gamepad)
+	cp -v "$scriptdir/XBMC-cfgs/userdata/addon_data/script.games.rom.collection.browser/config.xml" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/"
+
+	# copy in profiles for emulators
+	cp -v "$rootdir/gamepad-cfgs/ps3_blu_controller/mednafen_ps3_general_blu.lyt" "$config_home/.qjoypad3"
+	cp -v "$rootdir/gamepad-cfgs/ps3_blu_controller/mednafen_ps3_psx_blu.lyt" "$config_home/.qjoypad3"
+	cp -v "$rootdir/gamepad-cfgs/ps3_blu_controller/psp_ps3_blu.lyt" "$config_home/.qjoypad3"
+
+	##################### 
+	# PSP 
+	##################### 
 	old_pre="<preCmd>psp_temp</preCmd>"
 	old_post="<postCmd>psp_temp</postCmd>"
-	new_pre="<preCmd>qjoypad "psp_x360" &amp;</preCmd>"
+	new_pre="<preCmd>qjoypad "psp_ps3_blu" &amp;</preCmd>"
+	new_post="<postCmd>killall qjoypad</postCmd>"
+	# perform actual changes
+	sed -i "s|"$old_pre"|"$new_pre"|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
+	sed -i "s|"$old_post"|"$new_post"|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
+
+	#####################
+	# mednafen (general)
+	##################### 
+
+	old_pre="<preCmd>med_temp</preCmd>"
+	old_post="<postCmd>med_temp</postCmd>"
+	new_pre="<preCmd>qjoypad "mednafen_ps3_general_blu" &amp;</preCmd>"
+	new_post="<postCmd>killall qjoypad</postCmd>"
+	# perform actual changes
+	sed -i "s|"$old_pre"|"$new_pre"|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
+	sed -i "s|"$old_post"|"$new_post"|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
+
+	#####################
+	# mednafen (PSX/PS1)
+	##################### 
+	
+	old_pre="<preCmd>med_psx</preCmd>"
+	old_post="<postCmd>med_psx</postCmd>"
+	new_pre="<preCmd>qjoypad "mednafen_ps3_psx_blu" &amp;</preCmd>"
 	new_post="<postCmd>killall qjoypad</postCmd>"
 	# perform actual changes
 	sed -i "s|"$old_pre"|"$new_pre"|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
@@ -79,8 +114,9 @@ function gp_ps3_blu_main()
 	# blacklist xpad
 	cp -v "$rootdir/init-scripts/ps3_blu_controller/blacklist.conf" "/etc/modprobe.d/"
 
-	# copy keyboard.xml file for XBMC. Button id numbers are totally diffferent, due to the use of 
-	# the use-dpad-as-button, and use-trigger-as-button options used.
+	###########################################################
+	# End qjoypad remappings
+	###########################################################
 
 	# Present small menu asking for number of controllers
 	cmd=(dialog --backtitle "LibreGeek.org RetroRig Installer" \
@@ -212,12 +248,53 @@ fully enable the controller(s)" 10 60
 function gp_ps3_usb()
 {
 
-	##############################################################
-	# This seciton is still pending review and testing !!!
-	##############################################################
-
 	# clean any old configs
 	h_clean_gamepad
+
+	##############################################################
+	# Set emulator configurations
+	##############################################################
+
+	#mame
+	# default path: /home/$USER/.mame
+	# Main config
+	cp -v "$scriptdir/emu-cfgs/ps3_usb_controller/MAME/default.cfg" "$config_home/.mame/cfg"
+	cp -v "$scriptdir/emu-cfgs/ps3_usb_controller/MAME/mame.ini" "$config_home/.mame"
+ 
+	# offline artwork scrapper configs
+	cp -v "$scriptdir/emu-cfgs/ps3_usb_controller/MAME/parserConfig.xml" "$rootdir/Artwork/MAME"
+	cp -v "$scriptdir/emu-cfgs/ps3_usb_controller/MAME/MAME.txt" "$rootdir/Artwork/MAME"
+	cp -v "$scriptdir/emu-cfgs/ps3_usb_controller/MAME/MAME synopsis RCB 201202.zip" "$rootdir/Artwork/MAME"
+
+	# mess
+	# default path: /home/$USER/.mednafen/mednafen.cfg
+	# Main config
+	cp -v "$scriptdir/emu-cfgs/ps3_usb_controller/MESS/mess.ini" "$config_home/.mess"
+	cp -v "$scriptdir/emu-cfgs/ps3_usb_controller/MESS/default.cfg" "$config_home/.mess/cfg"
+	cp -v "$scriptdir/emu-cfgs/ps3_usb_controller/MESS/neocdz.cfg" "$config_home/.mess/cfg"
+
+	# mednafen
+	# default path: /home/$USER/.mednafen/mednafen.cfg
+	# Main config
+	cp -v "$scriptdir/emu-cfgs/ps3_usb_controller/mednafen/mednafen-09x.cfg" "$config_home/.mednafen"
+
+	# mupen64plus
+	# default path: /home/$USER/.config/mupen64plus
+	# Main config
+	cp -v "$scriptdir/emu-cfgs/ps3_usb_controller/mupen64plus/mupen64plus.cfg" "$config_home/.config/mupen64plus/"
+
+	#Stella
+	#default path: /home/$USER/.config/mupen64plus
+	#Main config
+	cp -v "$scriptdir/emu-cfgs/ps3_usb_controller/Stella/stellarc" "$config_home/.stella/"
+
+	# PPSSPP
+	cp -v "$scriptdir/emu-cfgs/ps3_usb_controller/PPSSPP/ppsspp.ini" "$config_home/.config/ppsspp/PSP/SYSTEM"
+	cp -v "$scriptdir/emu-cfgs/ps3_usb_controller/PPSSPP/controls.ini" "$config_home/.config/ppsspp/PSP/SYSTEM"
+
+	##############################################################
+	# Set system objects
+	##############################################################
 
 	#inject init script and default config for xboxdrv
 	cp -v "$rootdir/init-scripts/ps3_usb_controller/xboxdrv" "/etc/init.d/"
@@ -229,7 +306,6 @@ function gp_ps3_usb()
 
 	# copy over default keyboard file:
 	cp -v "$rootdir/gamepad-cfgs/ps3_usb_controller/keyboard.xml" "$xbmc_home/userdata/keymaps/keyboard.xml"
-
 
 	##############################################################
 	# Set number of controllers for /etc/default/xboxdrv
@@ -279,46 +355,60 @@ the service may fail to start correctly.\n\nPlease see /etc/default/xboxdrv for 
 		esac
 	done
 
-	##############################################################
-	# Set emulator configurations
-	##############################################################
+	##########################################################
+	# Add emulator specifc control remaps here for qjoypad
+	##########################################################
 
-	#mame
-	# default path: /home/$USER/.mame
-	# Main config
-	cp -v "$scriptdir/emu-cfgs/ps3_usb_controller/MAME/default.cfg" "$config_home/.mame/cfg"
-	cp -v "$scriptdir/emu-cfgs/ps3_usb_controller/MAME/mame.ini" "$config_home/.mame"
- 
-	# offline artwork scrapper configs
-	cp -v "$scriptdir/emu-cfgs/ps3_usb_controller/MAME/parserConfig.xml" "$rootdir/Artwork/MAME"
-	cp -v "$scriptdir/emu-cfgs/ps3_usb_controller/MAME/MAME.txt" "$rootdir/Artwork/MAME"
-	cp -v "$scriptdir/emu-cfgs/ps3_usb_controller/MAME/MAME synopsis RCB 201202.zip" "$rootdir/Artwork/MAME"
+	# set vars for pre/post command for the PPSSPP emulator in RCB
+	# We need this unforuntely, since the SDL/sixad mapping are so screwy, we need ot use 
+	# keyboard.Esc instead of a button press (PS button is an axis in sixad anyway).
 
-	# mess
-	# default path: /home/$USER/.mednafen/mednafen.cfg
-	# Main config
-	cp -v "$scriptdir/emu-cfgs/ps3_usb_controller/MESS/mess.ini" "$config_home/.mess"
-	cp -v "$scriptdir/emu-cfgs/ps3_usb_controller/MESS/default.cfg" "$config_home/.mess/cfg"
-	cp -v "$scriptdir/emu-cfgs/ps3_usb_controller/MESS/neocdz.cfg" "$config_home/.mess/cfg"
+	# copy in default default config.xml for RCB (Which is cleaned/removed in h_clean_gamepad)
+	cp -v "$scriptdir/XBMC-cfgs/userdata/addon_data/script.games.rom.collection.browser/config.xml" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/"
 
-	# mednafen
-	# default path: /home/$USER/.mednafen/mednafen.cfg
-	# Main config
-	cp -v "$scriptdir/emu-cfgs/ps3_usb_controller/mednafen/mednafen-09x.cfg" "$config_home/.mednafen"
+	# copy in profiles for emulators
+	cp -v "$scriptdir/gamepad-cfgs/ps3_usb_controller/mednafen_ps3_general_usb.lyt" "$config_home/.mednafen/.qjoypad3"
+	cp -v "$scriptdir/gamepad-cfgs/ps3_usb_controller/mednafen_ps3_psx_usb.lyt" "$config_home/.mednafen/.qjoypad3"
+	cp -v "$scriptdir/gamepad-cfgs/ps3_usb_controller/psp_ps3_usb.lyt" "$config_home/.mednafen/.qjoypad3"
 
-	# mupen64plus
-	# default path: /home/$USER/.config/mupen64plus
-	# Main config
-	cp -v "$scriptdir/emu-cfgs/ps3_usb_controller/mupen64plus/mupen64plus.cfg" "$config_home/.config/mupen64plus/"
+	##################### 
+	# PSP 
+	##################### 
+	old_pre="<preCmd>psp_temp</preCmd>"
+	old_post="<postCmd>psp_temp</postCmd>"
+	new_pre="<preCmd>qjoypad "psp_ps3_usb" &amp;</preCmd>"
+	new_post="<postCmd>killall qjoypad</postCmd>"
+	# perform actual changes
+	sed -i "s|"$old_pre"|"$new_pre"|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
+	sed -i "s|"$old_post"|"$new_post"|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
 
-	#Stella
-	#default path: /home/$USER/.config/mupen64plus
-	#Main config
-	cp -v "$scriptdir/emu-cfgs/ps3_usb_controller/Stella/stellarc" "$config_home/.stella/"
+	#####################
+	# mednafen (general)
+	##################### 
 
-	# PPSSPP
-	cp -v "$scriptdir/emu-cfgs/ps3_usb_controller/PPSSPP/ppsspp.ini" "$config_home/.config/ppsspp/PSP/SYSTEM"
-	cp -v "$scriptdir/emu-cfgs/ps3_usb_controller/PPSSPP/controls.ini" "$config_home/.config/ppsspp/PSP/SYSTEM"
+	old_pre="<preCmd>med_temp</preCmd>"
+	old_post="<postCmd>med_temp</postCmd>"
+	new_pre="<preCmd>qjoypad "mednafen_ps3_general_usb" &amp;</preCmd>"
+	new_post="<postCmd>killall qjoypad</postCmd>"
+	# perform actual changes
+	sed -i "s|"$old_pre"|"$new_pre"|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
+	sed -i "s|"$old_post"|"$new_post"|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
+
+	#####################
+	# mednafen (PSX/PS1)
+	##################### 
+	
+	old_pre="<preCmd>med_psx</preCmd>"
+	old_post="<postCmd>med_psx</postCmd>"
+	new_pre="<preCmd>qjoypad "mednafen_ps3_psx_usb" &amp;</preCmd>"
+	new_post="<postCmd>killall qjoypad</postCmd>"
+	# perform actual changes
+	sed -i "s|"$old_pre"|"$new_pre"|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
+	sed -i "s|"$old_post"|"$new_post"|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
+
+	###########################################################
+	# End qjoypad remappings
+	###########################################################
 
 	#update init scripts for xboxdrv
 	update-rc.d xboxdrv defaults
@@ -385,24 +475,28 @@ function gp_x360_wireless()
 	cp -v "$scriptdir/emu-cfgs/x360_controller/PPSSPP/ppsspp.ini" "$config_home/.config/ppsspp/PSP/SYSTEM"
 	cp -v "$scriptdir/emu-cfgs/x360_controller/PPSSPP/controls.ini" "$config_home/.config/ppsspp/PSP/SYSTEM"
 
-	#######################################################
+	##########################################################
 	# Add emulator specifc control remaps here for qjoypad
-	#######################################################
+	##########################################################
 
 	# set vars for pre/post command for the PPSSPP emulator in RCB
 	# We need this unforuntely, since the SDL/sixad mapping are so screwy, we need ot use 
 	# keyboard.Esc instead of a button press (PS button is an axis in sixad anyway).
 
-	cp -v "$scriptdir/gamepad-cfgs/x360_controller/mednafen_x360_general.lyt" "$config_home/.mednafen/.qjoypad3"
-	cp -v "$scriptdir/gamepad-cfgs/x360_controller/mednafen_x360_psx.lyt" "$config_home/.mednafen/.qjoypad3"
-	cp -v "$scriptdir/gamepad-cfgs/x360_controller/psp_x360.lyt" "$config_home/.mednafen/.qjoypad3"
+	# copy in default default config.xml for RCB (Which is cleaned/removed in h_clean_gamepad)
+	cp -v "$scriptdir/XBMC-cfgs/userdata/addon_data/script.games.rom.collection.browser/config.xml" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/"
+
+	# copy in profiles for emulators
+	cp -v "$scriptdir/gamepad-cfgs/x360_controller/mednafen_x360_general_wireless.lyt" "$config_home/.mednafen/.qjoypad3"
+	cp -v "$scriptdir/gamepad-cfgs/x360_controller/mednafen_x360_psx_wireless.lyt" "$config_home/.mednafen/.qjoypad3"
+	cp -v "$scriptdir/gamepad-cfgs/x360_controller/psp_x360_wireless.lyt" "$config_home/.mednafen/.qjoypad3"
 
 	##################### 
 	# PSP 
 	##################### 
 	old_pre="<preCmd>psp_temp</preCmd>"
 	old_post="<postCmd>psp_temp</postCmd>"
-	new_pre="<preCmd>qjoypad "psp_x360" &amp;</preCmd>"
+	new_pre="<preCmd>qjoypad "psp_x360_wireless" &amp;</preCmd>"
 	new_post="<postCmd>killall qjoypad</postCmd>"
 	# perform actual changes
 	sed -i "s|"$old_pre"|"$new_pre"|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
@@ -414,7 +508,7 @@ function gp_x360_wireless()
 
 	old_pre="<preCmd>med_temp</preCmd>"
 	old_post="<postCmd>med_temp</postCmd>"
-	new_pre="<preCmd>qjoypad "mednafen_x360_general" &amp;</preCmd>"
+	new_pre="<preCmd>qjoypad "mednafen_x360_general_wireless" &amp;</preCmd>"
 	new_post="<postCmd>killall qjoypad</postCmd>"
 	# perform actual changes
 	sed -i "s|"$old_pre"|"$new_pre"|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
@@ -426,11 +520,16 @@ function gp_x360_wireless()
 	
 	old_pre="<preCmd>med_psx</preCmd>"
 	old_post="<postCmd>med_psx</postCmd>"
-	new_pre="<preCmd>qjoypad "mednafen_x360_psx" &amp;</preCmd>"
+	new_pre="<preCmd>qjoypad "mednafen_x360_psx_wireless" &amp;</preCmd>"
 	new_post="<postCmd>killall qjoypad</postCmd>"
 	# perform actual changes
 	sed -i "s|"$old_pre"|"$new_pre"|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
 	sed -i "s|"$old_post"|"$new_post"|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
+
+	###########################################################
+	# End qjoypad remappings
+	###########################################################
+
 
 	#######################################################
 	# configure xboxdrv for 360 gamepad (wireless)
@@ -511,14 +610,18 @@ function gp_x360_usb()
 	cp -v "$scriptdir/emu-cfgs/x360_usb_controller/PPSSPP/ppsspp.ini" "$config_home/.config/ppsspp/PSP/SYSTEM"
 	cp -v "$scriptdir/emu-cfgs/x360_usb_controller/PPSSPP/controls.ini" "$config_home/.config/ppsspp/PSP/SYSTEM"
 
-	#######################################################
+	##########################################################
 	# Add emulator specifc control remaps here for qjoypad
-	#######################################################
+	##########################################################
 
 	# set vars for pre/post command for the PPSSPP emulator in RCB
 	# We need this unforuntely, since the SDL/sixad mapping are so screwy, we need ot use 
 	# keyboard.Esc instead of a button press (PS button is an axis in sixad anyway).
 
+	# copy in default default config.xml for RCB (Which is cleaned/removed in h_clean_gamepad)
+	cp -v "$scriptdir/XBMC-cfgs/userdata/addon_data/script.games.rom.collection.browser/config.xml" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/"
+
+	# copy in profiles for emulators
 	cp -v "$scriptdir/gamepad-cfgs/x360_usb_controller/mednafen_x360_general_usb.lyt" "$config_home/.mednafen/.qjoypad3"
 	cp -v "$scriptdir/gamepad-cfgs/x360_usb_controller/mednafen_x360_psx_usb.lyt" "$config_home/.mednafen/.qjoypad3"
 	cp -v "$scriptdir/gamepad-cfgs/x360_usb_controller/psp_x360_usb.lyt" "$config_home/.mednafen/.qjoypad3"
@@ -557,6 +660,11 @@ function gp_x360_usb()
 	# perform actual changes
 	sed -i "s|"$old_pre"|"$new_pre"|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
 	sed -i "s|"$old_post"|"$new_post"|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
+
+	###########################################################
+	# End qjoypad remappings
+	###########################################################
+
 
 	############################################
 	# configure xboxdrv for 360 gamepad (wireless)

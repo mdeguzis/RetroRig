@@ -34,6 +34,10 @@ h_clean_gamepad()
 
 	# system objects that may interfere with switching gamepads
 	# The rescan service should be able to coexist with xboxdrv
+
+	# We need to remove config.xml from RCB when changing gamepads, since we do active 
+	# swaps of qjoypad profiles now 
+	rm -f "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
 	
 	# qjoypad 
 	rm -f "$home/.config/autostart/qjoypad.desktop"
