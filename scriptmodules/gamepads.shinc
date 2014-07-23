@@ -441,39 +441,39 @@ function gp_x360_wireless()
 	#mame
 	# default path: /home/$USER/.mame
 	# Main config
-	cp -v "$scriptdir/emu-cfgs/x360_controller/MAME/default.cfg" "$config_home/.mame/cfg"
-	cp -v "$scriptdir/emu-cfgs/x360_controller/MAME/mame.ini" "$config_home/.mame"
+	cp -v "$scriptdir/emu-cfgs/x360_wireless_controller/MAME/default.cfg" "$config_home/.mame/cfg"
+	cp -v "$scriptdir/emu-cfgs/x360_wireless_controller/MAME/mame.ini" "$config_home/.mame"
  
 	# offline artwork scrapper configs
-	cp -v "$scriptdir/emu-cfgs/x360_controller/MAME/parserConfig.xml" "$rootdir/Artwork/MAME"
-	cp -v "$scriptdir/emu-cfgs/x360_controller/MAME/MAME.txt" "$rootdir/Artwork/MAME"
-	cp -v "$scriptdir/emu-cfgs/x360_controller/MAME/MAME synopsis RCB 201202.zip" "$rootdir/Artwork/MAME"
+	cp -v "$scriptdir/emu-cfgs/x360_wireless_controller/MAME/parserConfig.xml" "$rootdir/Artwork/MAME"
+	cp -v "$scriptdir/emu-cfgs/x360_wireless_controller/MAME/MAME.txt" "$rootdir/Artwork/MAME"
+	cp -v "$scriptdir/emu-cfgs/x360_wireless_controller/MAME/MAME synopsis RCB 201202.zip" "$rootdir/Artwork/MAME"
 
 	# mess
 	# default path: /home/$USER/.mednafen/mednafen.cfg
 	# Main config
-	cp -v "$scriptdir/emu-cfgs/x360_controller/MESS/mess.ini" "$config_home/.mess"
-	cp -v "$scriptdir/emu-cfgs/x360_controller/MESS/default.cfg" "$config_home/.mess/cfg"
-	cp -v "$scriptdir/emu-cfgs/x360_controller/MESS/neocdz.cfg" "$config_home/.mess/cfg"
+	cp -v "$scriptdir/emu-cfgs/x360_wireless_controller/MESS/mess.ini" "$config_home/.mess"
+	cp -v "$scriptdir/emu-cfgs/x360_wireless_controller/MESS/default.cfg" "$config_home/.mess/cfg"
+	cp -v "$scriptdir/emu-cfgs/x360_wireless_controller/MESS/neocdz.cfg" "$config_home/.mess/cfg"
 
 	# mednafen
 	# default path: /home/$USER/.mednafen/mednafen.cfg
 	# Main config
-	cp -v "$scriptdir/emu-cfgs/x360_controller/mednafen/mednafen-09x.cfg" "$config_home/.mednafen"
+	cp -v "$scriptdir/emu-cfgs/x360_wireless_controller/mednafen/mednafen-09x.cfg" "$config_home/.mednafen"
 
 	# mupen64plus
 	# default path: /home/$USER/.config/mupen64plus
 	# Main config
-	cp -v "$scriptdir/emu-cfgs/x360_controller/mupen64plus/mupen64plus.cfg" "$config_home/.config/mupen64plus/"
+	cp -v "$scriptdir/emu-cfgs/x360_wireless_controller/mupen64plus/mupen64plus.cfg" "$config_home/.config/mupen64plus/"
 
 	#Stella
 	#default path: /home/$USER/.config/mupen64plus
 	#Main config
-	cp -v "$scriptdir/emu-cfgs/x360_controller/Stella/stellarc" "$config_home/.stella/"
+	cp -v "$scriptdir/emu-cfgs/x360_wireless_controller/Stella/stellarc" "$config_home/.stella/"
 
 	# PPSSPP
-	cp -v "$scriptdir/emu-cfgs/x360_controller/PPSSPP/ppsspp.ini" "$config_home/.config/ppsspp/PSP/SYSTEM"
-	cp -v "$scriptdir/emu-cfgs/x360_controller/PPSSPP/controls.ini" "$config_home/.config/ppsspp/PSP/SYSTEM"
+	cp -v "$scriptdir/emu-cfgs/x360_wireless_controller/PPSSPP/ppsspp.ini" "$config_home/.config/ppsspp/PSP/SYSTEM"
+	cp -v "$scriptdir/emu-cfgs/x360_wireless_controller/PPSSPP/controls.ini" "$config_home/.config/ppsspp/PSP/SYSTEM"
 
 	##########################################################
 	# Add emulator specifc control remaps here for qjoypad
@@ -487,9 +487,9 @@ function gp_x360_wireless()
 	cp -v "$scriptdir/XBMC-cfgs/userdata/addon_data/script.games.rom.collection.browser/config.xml" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/"
 
 	# copy in profiles for emulators
-	cp -v "$scriptdir/gamepad-cfgs/x360_controller/mednafen_x360_general_wireless.lyt" "$config_home/.mednafen/.qjoypad3"
-	cp -v "$scriptdir/gamepad-cfgs/x360_controller/mednafen_x360_psx_wireless.lyt" "$config_home/.mednafen/.qjoypad3"
-	cp -v "$scriptdir/gamepad-cfgs/x360_controller/psp_x360_wireless.lyt" "$config_home/.mednafen/.qjoypad3"
+	cp -v "$scriptdir/gamepad-cfgs/x360_wireless_controller/mednafen_x360_general_wireless.lyt" "$config_home/.mednafen/.qjoypad3"
+	cp -v "$scriptdir/gamepad-cfgs/x360_wireless_controller/mednafen_x360_psx_wireless.lyt" "$config_home/.mednafen/.qjoypad3"
+	cp -v "$scriptdir/gamepad-cfgs/x360_wireless_controller/psp_x360_wireless.lyt" "$config_home/.mednafen/.qjoypad3"
 
 	##################### 
 	# PSP 
@@ -536,15 +536,15 @@ function gp_x360_wireless()
 	#######################################################
 	
 	#blacklist xpad
-	cp -v "$rootdir/init-scripts/x360_controller/blacklist.conf" "/etc/modprobe.d/"
+	cp -v "$rootdir/init-scripts/x360_wireless_controller/blacklist.conf" "/etc/modprobe.d/"
 
 	#inject init script and default config
-	cp -v "$rootdir/init-scripts/x360_controller/xboxdrv" "/etc/init.d/"
-	cp -v "$rootdir/init-scripts/x360_controller/default/xboxdrv" "/etc/default/xboxdrv"
+	cp -v "$rootdir/init-scripts/x360_wireless_controller/xboxdrv" "/etc/init.d/"
+	cp -v "$rootdir/init-scripts/x360_wireless_controller/default/xboxdrv" "/etc/default/xboxdrv"
 
 	# copy keyboard.xml file for XBMC. Button id numbers are totally diffferent, due to the use of 
 	# the use-dpad-as-button, and use-trigger-as-button options used.
-	cp -v "$rootdir/gamepad-cfgs/x360_controller/keyboard.xml" "$xbmc_home/userdata/keymaps"
+	cp -v "$rootdir/gamepad-cfgs/x360_wireless_controller/keyboard.xml" "$xbmc_home/userdata/keymaps"
 
 	#update init scripts for xboxdrv
 	update-rc.d xboxdrv defaults
