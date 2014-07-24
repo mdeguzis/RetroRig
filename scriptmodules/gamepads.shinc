@@ -79,10 +79,10 @@ function gp_ps3_blu_main()
 	##################### 
 	# PSP 
 	##################### 
-	old_pre="<preCmd>psp_temp</preCmd>"
-	old_post="<postCmd>psp_temp</postCmd>"
-	new_pre="<preCmd>qjoypad "psp_ps3_blu" &amp;</preCmd>"
-	new_post="<postCmd>killall qjoypad</postCmd>"
+	old_pre="psp_temp"
+	old_post="psp_temp"
+	new_pre="qjoypad "psp_ps3_blu" &amp;"
+	new_post="killall qjoypad"
 	# perform actual changes
 	sed -i "s|"$old_pre"|"$new_pre"|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
 	sed -i "s|"$old_post"|"$new_post"|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
@@ -91,10 +91,10 @@ function gp_ps3_blu_main()
 	# mednafen (general)
 	##################### 
 
-	old_pre="<preCmd>med_temp</preCmd>"
-	old_post="<postCmd>med_temp</postCmd>"
-	new_pre="<preCmd>qjoypad "mednafen_ps3_general_blu" &amp;</preCmd>"
-	new_post="<postCmd>killall qjoypad</postCmd>"
+	old_pre="med_temp"
+	old_post="med_temp"
+	new_pre="qjoypad "mednafen_ps3_general_blu" &amp;"
+	new_post="killall qjoypad"
 	# perform actual changes
 	sed -i "s|"$old_pre"|"$new_pre"|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
 	sed -i "s|"$old_post"|"$new_post"|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
@@ -103,10 +103,10 @@ function gp_ps3_blu_main()
 	# mednafen (PSX/PS1)
 	##################### 
 	
-	old_pre="<preCmd>med_psx</preCmd>"
-	old_post="<postCmd>med_psx</postCmd>"
-	new_pre="<preCmd>qjoypad "mednafen_ps3_psx_blu" &amp;</preCmd>"
-	new_post="<postCmd>killall qjoypad</postCmd>"
+	old_pre="med_psx"
+	old_post="med_psx"
+	new_pre="qjoypad "mednafen_ps3_psx_blu" &amp;"
+	new_post="killall qjoypad"
 	# perform actual changes
 	sed -i "s|"$old_pre"|"$new_pre"|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
 	sed -i "s|"$old_post"|"$new_post"|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
@@ -374,10 +374,10 @@ the service may fail to start correctly.\n\nPlease see /etc/default/xboxdrv for 
 	##################### 
 	# PSP 
 	##################### 
-	old_pre="<preCmd>psp_temp</preCmd>"
-	old_post="<postCmd>psp_temp</postCmd>"
-	new_pre="<preCmd>qjoypad "psp_ps3_usb" &amp;</preCmd>"
-	new_post="<postCmd>killall qjoypad</postCmd>"
+	old_pre="psp_temp"
+	old_post="psp_temp"
+	new_pre="qjoypad "psp_ps3_usb" &amp;"
+	new_post="killall qjoypad"
 	# perform actual changes
 	sed -i "s|"$old_pre"|"$new_pre"|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
 	sed -i "s|"$old_post"|"$new_post"|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
@@ -386,10 +386,10 @@ the service may fail to start correctly.\n\nPlease see /etc/default/xboxdrv for 
 	# mednafen (general)
 	##################### 
 
-	old_pre="<preCmd>med_temp</preCmd>"
-	old_post="<postCmd>med_temp</postCmd>"
-	new_pre="<preCmd>qjoypad "mednafen_ps3_general_usb" &amp;</preCmd>"
-	new_post="<postCmd>killall qjoypad</postCmd>"
+	old_pre="med_temp"
+	old_post="med_temp"
+	new_pre="qjoypad "mednafen_ps3_general_usb" &amp;"
+	new_post="killall qjoypad"
 	# perform actual changes
 	sed -i "s|"$old_pre"|"$new_pre"|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
 	sed -i "s|"$old_post"|"$new_post"|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
@@ -398,10 +398,10 @@ the service may fail to start correctly.\n\nPlease see /etc/default/xboxdrv for 
 	# mednafen (PSX/PS1)
 	##################### 
 	
-	old_pre="<preCmd>med_psx</preCmd>"
-	old_post="<postCmd>med_psx</postCmd>"
-	new_pre="<preCmd>qjoypad "mednafen_ps3_psx_usb" &amp;</preCmd>"
-	new_post="<postCmd>killall qjoypad</postCmd>"
+	old_pre="med_psx"
+	old_post="med_psx"
+	new_pre="qjoypad "mednafen_ps3_psx_usb" &amp;"
+	new_post="killall qjoypad"
 	# perform actual changes
 	sed -i "s|"$old_pre"|"$new_pre"|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
 	sed -i "s|"$old_post"|"$new_post"|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
@@ -494,10 +494,10 @@ function gp_x360_wireless()
 	##################### 
 	# PSP 
 	##################### 
-	old_pre="<preCmd>psp_temp</preCmd>"
-	old_post="<postCmd>psp_temp</postCmd>"
-	new_pre="<preCmd>qjoypad "psp_x360_wireless" &amp;</preCmd>"
-	new_post="<postCmd>killall qjoypad</postCmd>"
+	old_pre="psp_temp"
+	old_post="psp_temp"
+	new_pre="qjoypad "psp_x360_wireless" &amp;"
+	new_post="killall qjoypad"
 	# perform actual changes
 	sed -i "s|"$old_pre"|"$new_pre"|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
 	sed -i "s|"$old_post"|"$new_post"|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
@@ -506,10 +506,10 @@ function gp_x360_wireless()
 	# mednafen (general)
 	##################### 
 
-	old_pre="<preCmd>med_temp</preCmd>"
-	old_post="<postCmd>med_temp</postCmd>"
-	new_pre="<preCmd>qjoypad "mednafen_x360_general_wireless" &amp;</preCmd>"
-	new_post="<postCmd>killall qjoypad</postCmd>"
+	old_pre="med_temp"
+	old_post="med_temp"
+	new_pre="qjoypad "mednafen_x360_general_wireless" &amp;"
+	new_post="killall qjoypad"
 	# perform actual changes
 	sed -i "s|"$old_pre"|"$new_pre"|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
 	sed -i "s|"$old_post"|"$new_post"|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
@@ -518,10 +518,10 @@ function gp_x360_wireless()
 	# mednafen (PSX/PS1)
 	##################### 
 	
-	old_pre="<preCmd>med_psx</preCmd>"
-	old_post="<postCmd>med_psx</postCmd>"
-	new_pre="<preCmd>qjoypad "mednafen_x360_psx_wireless" &amp;</preCmd>"
-	new_post="<postCmd>killall qjoypad</postCmd>"
+	old_pre="med_psx"
+	old_post="med_psx"
+	new_pre="qjoypad "mednafen_x360_psx_wireless" &amp;"
+	new_post="killall qjoypad"
 	# perform actual changes
 	sed -i "s|"$old_pre"|"$new_pre"|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
 	sed -i "s|"$old_post"|"$new_post"|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
@@ -629,10 +629,10 @@ function gp_x360_usb()
 	##################### 
 	# PSP 
 	##################### 
-	old_pre="<preCmd>psp_temp</preCmd>"
-	old_post="<postCmd>psp_temp</postCmd>"
-	new_pre="<preCmd>qjoypad "psp_x360_usb" &amp;</preCmd>"
-	new_post="<postCmd>killall qjoypad</postCmd>"
+	old_pre="psp_temp"
+	old_post="psp_temp"
+	new_pre="qjoypad "psp_x360_usb" &amp;"
+	new_post="killall qjoypad"
 	# perform actual changes
 	sed -i "s|"$old_pre"|"$new_pre"|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
 	sed -i "s|"$old_post"|"$new_post"|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
@@ -641,10 +641,10 @@ function gp_x360_usb()
 	# mednafen (general)
 	##################### 
 
-	old_pre="<preCmd>med_temp</preCmd>"
-	old_post="<postCmd>med_temp</postCmd>"
-	new_pre="<preCmd>qjoypad "mednafen_x360_general_usb" &amp;</preCmd>"
-	new_post="<postCmd>killall qjoypad</postCmd>"
+	old_pre="med_temp"
+	old_post="med_temp"
+	new_pre="qjoypad "mednafen_x360_general_usb" &amp;"
+	new_post="killall qjoypad"
 	# perform actual changes
 	sed -i "s|"$old_pre"|"$new_pre"|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
 	sed -i "s|"$old_post"|"$new_post"|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
@@ -653,10 +653,10 @@ function gp_x360_usb()
 	# mednafen (PSX/PS1)
 	##################### 
 	
-	old_pre="<preCmd>med_psx</preCmd>"
-	old_post="<postCmd>med_psx</postCmd>"
-	new_pre="<preCmd>qjoypad "mednafen_x360_psx_usb" &amp;</preCmd>"
-	new_post="<postCmd>killall qjoypad</postCmd>"
+	old_pre="med_psx"
+	old_post="med_psx"
+	new_pre="qjoypad "mednafen_x360_psx_usb" &amp;"
+	new_post="killall qjoypad"
 	# perform actual changes
 	sed -i "s|"$old_pre"|"$new_pre"|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
 	sed -i "s|"$old_post"|"$new_post"|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
