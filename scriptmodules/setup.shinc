@@ -432,7 +432,11 @@ function rrs_xbmc_patched()
                            libtinyxml2.6.2 \
                            libva-x11-1 \
                            libva-glx1 \
-                           libcrystalhd3
+                           libcrystalhd3 \
+                           libmad0 \
+                           libass4 \
+                           libmp3lame0 \
+                           libenca0
 
 	# install deb from /tmp
 	dpkg -i "/tmp/xbmc-bin_gotham-patched-for-retrorig-patchlevel-5-0trusty.deb"
