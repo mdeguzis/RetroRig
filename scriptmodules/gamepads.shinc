@@ -67,6 +67,8 @@ function gp_ps3_blu_main()
 	# set vars for pre/post command for the PPSSPP emulator in RCB
 	# We need this unforuntely, since the SDL/sixad mapping are so screwy, we need ot use 
 	# keyboard.Esc instead of a button press (PS button is an axis in sixad anyway).
+	# It is very important that you preceed '&amp;' with a backslash to escape the '&' character
+	# so it is properly replaced. RCB requires '&amp' over the literal '&'.
 
 	# copy in default default config.xml for RCB (Which is cleaned/removed in h_clean_gamepad)
 	cp -v "$scriptdir/XBMC-cfgs/userdata/addon_data/script.games.rom.collection.browser/config.xml" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/"
@@ -81,7 +83,7 @@ function gp_ps3_blu_main()
 	##################### 
 	old_pre="psp_temp_pre"
 	old_post="psp_temp_post"
-	new_pre="qjoypad psp_ps3_blu &amp;"
+	new_pre="qjoypad psp_ps3_blu \&amp;"
 	new_post="killall qjoypad"
 	# perform actual changes
 	sed -i "s|$old_pre|$new_pre|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
@@ -93,7 +95,7 @@ function gp_ps3_blu_main()
 
 	old_pre="med_temp_pre"
 	old_post="med_temp_post"
-	new_pre="qjoypad mednafen_ps3_general_blu &amp;"
+	new_pre="qjoypad mednafen_ps3_general_blu \&amp;"
 	new_post="killall qjoypad"
 	# perform actual changes
 	sed -i "s|$old_pre|$new_pre|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
@@ -105,7 +107,7 @@ function gp_ps3_blu_main()
 	
 	old_pre="med_psx_pre"
 	old_post="med_psx_post"
-	new_pre="qjoypad mednafen_ps3_psx_blu &amp;"
+	new_pre="qjoypad mednafen_ps3_psx_blu \&amp;"
 	new_post="killall qjoypad"
 	# perform actual changes
 	sed -i "s|$old_pre|$new_pre|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
@@ -362,6 +364,8 @@ the service may fail to start correctly.\n\nPlease see /etc/default/xboxdrv for 
 	# set vars for pre/post command for the PPSSPP emulator in RCB
 	# We need this unforuntely, since the SDL/sixad mapping are so screwy, we need ot use 
 	# keyboard.Esc instead of a button press (PS button is an axis in sixad anyway).
+	# It is very important that you preceed '&amp;' with a backslash to escape the '&' character
+	# so it is properly replaced. RCB requires '&amp' over the literal '&'.
 
 	# copy in default default config.xml for RCB (Which is cleaned/removed in h_clean_gamepad)
 	cp -v "$scriptdir/XBMC-cfgs/userdata/addon_data/script.games.rom.collection.browser/config.xml" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/"
@@ -376,7 +380,7 @@ the service may fail to start correctly.\n\nPlease see /etc/default/xboxdrv for 
 	##################### 
 	old_pre="psp_temp_pre"
 	old_post="psp_temp_post"
-	new_pre="qjoypad psp_ps3_usb &amp;"
+	new_pre="qjoypad psp_ps3_usb \&amp;"
 	new_post="killall qjoypad"
 	# perform actual changes
 	sed -i "s|$old_pre|$new_pre|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
@@ -388,7 +392,7 @@ the service may fail to start correctly.\n\nPlease see /etc/default/xboxdrv for 
 
 	old_pre="med_temp_pre"
 	old_post="med_temp_post"
-	new_pre="qjoypad mednafen_ps3_general_usb &amp;"
+	new_pre="qjoypad mednafen_ps3_general_usb \&amp;"
 	new_post="killall qjoypad"
 	# perform actual changes
 	sed -i "s|$old_pre|$new_pre|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
@@ -400,7 +404,7 @@ the service may fail to start correctly.\n\nPlease see /etc/default/xboxdrv for 
 	
 	old_pre="med_psx_pre"
 	old_post="med_psx_post"
-	new_pre="qjoypad mednafen_ps3_psx_usb &amp;"
+	new_pre="qjoypad mednafen_ps3_psx_usb \&amp;"
 	new_post="killall qjoypad"
 	# perform actual changes
 	sed -i "s|$old_pre|$new_pre|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
@@ -482,6 +486,8 @@ function gp_x360_wireless()
 	# set vars for pre/post command for the PPSSPP emulator in RCB
 	# We need this unforuntely, since the SDL/sixad mapping are so screwy, we need ot use 
 	# keyboard.Esc instead of a button press (PS button is an axis in sixad anyway).
+	# It is very important that you preceed '&amp;' with a backslash to escape the '&' character
+	# so it is properly replaced. RCB requires '&amp' over the literal '&'.
 
 	# copy in default default config.xml for RCB (Which is cleaned/removed in h_clean_gamepad)
 	cp -v "$scriptdir/XBMC-cfgs/userdata/addon_data/script.games.rom.collection.browser/config.xml" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/"
@@ -496,7 +502,7 @@ function gp_x360_wireless()
 	##################### 
 	old_pre="psp_temp_pre"
 	old_post="psp_temp_post"
-	new_pre="qjoypad psp_x360_wireless &amp;"
+	new_pre="qjoypad psp_x360_wireless \&amp;"
 	new_post="killall qjoypad"
 	# perform actual changes
 	sed -i "s|$old_pre|$new_pre|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
@@ -508,7 +514,7 @@ function gp_x360_wireless()
 
 	old_pre="med_temp_pre"
 	old_post="med_temp_post"
-	new_pre="qjoypad mednafen_x360_general_wireless &amp;"
+	new_pre="qjoypad mednafen_x360_general_wireless \&amp;"
 	new_post="killall qjoypad"
 	# perform actual changes
 	sed -i "s|$old_pre|$new_pre|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
@@ -520,7 +526,7 @@ function gp_x360_wireless()
 	
 	old_pre="med_psx_pre"
 	old_post="med_psx_post"
-	new_pre="qjoypad mednafen_x360_psx_wireless &amp;"
+	new_pre="qjoypad mednafen_x360_psx_wireless \&amp;"
 	new_post="killall qjoypad"
 	# perform actual changes
 	sed -i "s|$old_pre|$new_pre|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
@@ -617,6 +623,8 @@ function gp_x360_usb()
 	# set vars for pre/post command for the PPSSPP emulator in RCB
 	# We need this unforuntely, since the SDL/sixad mapping are so screwy, we need ot use 
 	# keyboard.Esc instead of a button press (PS button is an axis in sixad anyway).
+	# It is very important that you preceed '&amp;' with a backslash to escape the '&' character
+	# so it is properly replaced. RCB requires '&amp' over the literal '&'.
 
 	# copy in default default config.xml for RCB (Which is cleaned/removed in h_clean_gamepad)
 	cp -v "$scriptdir/XBMC-cfgs/userdata/addon_data/script.games.rom.collection.browser/config.xml" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/"
@@ -631,7 +639,7 @@ function gp_x360_usb()
 	##################### 
 	old_pre="psp_temp_pre"
 	old_post="psp_temp_post"
-	new_pre="qjoypad psp_x360_usb &amp;"
+	new_pre="qjoypad psp_x360_usb \&amp;"
 	new_post="killall qjoypad"
 	# perform actual changes
 	sed -i "s|$old_pre|$new_pre|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
@@ -643,7 +651,7 @@ function gp_x360_usb()
 
 	old_pre="med_temp_pre"
 	old_post="med_temp_post"
-	new_pre="qjoypad mednafen_x360_general_usb &amp;"
+	new_pre="qjoypad mednafen_x360_general_usb \&amp;"
 	new_post="killall qjoypad"
 	# perform actual changes
 	sed -i "s|$old_pre|$new_pre|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
@@ -655,7 +663,7 @@ function gp_x360_usb()
 	
 	old_pre="med_psx_pre"
 	old_post="med_psx_post"
-	new_pre="qjoypad mednafen_x360_psx_usb &amp;"
+	new_pre="qjoypad mednafen_x360_psx_usb \&amp;"
 	new_post="killall qjoypad"
 	# perform actual changes
 	sed -i "s|$old_pre|$new_pre|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
