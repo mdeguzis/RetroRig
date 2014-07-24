@@ -46,8 +46,8 @@
       <mediaPath type="cartridge">/home/test/RetroRig/Artwork/Sega Master System/cartridge/%GAME%.*</mediaPath>
       <mediaPath type="screenshot">/home/test/RetroRig/Artwork/Sega Master System/screenshot/%GAME%.*</mediaPath>
       <mediaPath type="fanart">/home/test/RetroRig/Artwork/Sega Master System/fanart/%GAME%.*</mediaPath>
-      <preCmd>med_temp</preCmd>
-      <postCmd>med_temp</postCmd>
+      <preCmd>med_temp_pre</preCmd>
+      <postCmd>med_temp_post</postCmd>
       <useEmuSolo>False</useEmuSolo>
       <usePopen>False</usePopen>
       <ignoreOnScan>False</ignoreOnScan>
@@ -78,8 +78,8 @@
       <mediaPath type="cartridge">/home/test/RetroRig/Artwork/GBA/cartridge/%GAME%.*</mediaPath>
       <mediaPath type="screenshot">/home/test/RetroRig/Artwork/GBA/screenshot/%GAME%.*</mediaPath>
       <mediaPath type="fanart">/home/test/RetroRig/Artwork/GBA/fanart/%GAME%.*</mediaPath>
-      <preCmd>med_temp</preCmd>
-      <postCmd>med_temp</postCmd>
+      <preCmd>med_temp_pre</preCmd>
+      <postCmd>med_temp_post</postCmd>
       <useEmuSolo>False</useEmuSolo>
       <usePopen>False</usePopen>
       <ignoreOnScan>False</ignoreOnScan>
@@ -109,8 +109,8 @@
       <mediaPath type="cartridge">/home/test/RetroRig/Artwork/PSP/cartridge/%GAME%.*</mediaPath>
       <mediaPath type="screenshot">/home/test/RetroRig/Artwork/PSP/screenshot/%GAME%.*</mediaPath>
       <mediaPath type="fanart">/home/test/RetroRig/Artwork/PSP/fanart/%GAME%.*</mediaPath>
-      <preCmd>psp_temp</preCmd>
-      <postCmd>psp_temp</postCmd>
+      <preCmd>psp_temp_pre</preCmd>
+      <postCmd>psp_temp_post</postCmd>
       <useEmuSolo>False</useEmuSolo>
       <usePopen>False</usePopen>
       <ignoreOnScan>False</ignoreOnScan>
@@ -141,8 +141,8 @@
       <mediaPath type="cartridge">/home/test/RetroRig/Artwork/PS1/cartridge/%GAME%.*</mediaPath>
       <mediaPath type="screenshot">/home/test/RetroRig/Artwork/PS1/screenshot/%GAME%.*</mediaPath>
       <mediaPath type="fanart">/home/test/RetroRig/Artwork/PS1/fanart/%GAME%.*</mediaPath>
-      <preCmd>med_psx</preCmd>
-      <postCmd>med_psx</postCmd>
+      <preCmd>med_psx_pre</preCmd>
+      <postCmd>med_psx_post</postCmd>
       <useEmuSolo>False</useEmuSolo>
       <usePopen>False</usePopen>
       <ignoreOnScan>False</ignoreOnScan>
@@ -173,8 +173,8 @@
       <mediaPath type="cartridge">/home/test/RetroRig/Artwork/Genesis/cartridge/%GAME%.*</mediaPath>
       <mediaPath type="screenshot">/home/test/RetroRig/Artwork/Genesis/screenshot/%GAME%.*</mediaPath>
       <mediaPath type="fanart">/home/test/RetroRig/Artwork/Genesis/fanart/%GAME%.*</mediaPath>
-      <preCmd>med_temp</preCmd>
-      <postCmd>med_temp</postCmd>
+      <preCmd>med_temp_pre</preCmd>
+      <postCmd>med_temp_post</postCmd>
       <useEmuSolo>False</useEmuSolo>
       <usePopen>False</usePopen>
       <ignoreOnScan>False</ignoreOnScan>
@@ -205,8 +205,8 @@
       <mediaPath type="cartridge">/home/test/RetroRig/Artwork/GBC/cartridge/%GAME%.*</mediaPath>
       <mediaPath type="screenshot">/home/test/RetroRig/Artwork/GBC/screenshot/%GAME%.*</mediaPath>
       <mediaPath type="fanart">/home/test/RetroRig/Artwork/GBC/fanart/%GAME%.*</mediaPath>
-      <preCmd>med_temp</preCmd>
-      <postCmd>med_temp</postCmd>
+      <preCmd>med_temp_pre</preCmd>
+      <postCmd>med_temp_post</postCmd>
       <useEmuSolo>False</useEmuSolo>
       <usePopen>False</usePopen>
       <ignoreOnScan>False</ignoreOnScan>
@@ -237,8 +237,8 @@
       <mediaPath type="cartridge">/home/test/RetroRig/ROMs/TurboGraphx 16/cartridge/%GAME%.*</mediaPath>
       <mediaPath type="screenshot">/home/test/RetroRig/ROMs/TurboGraphx 16/screenshot/%GAME%.*</mediaPath>
       <mediaPath type="fanart">/home/test/RetroRig/ROMs/TurboGraphx 16/fanart/%GAME%.*</mediaPath>
-      <preCmd>med_temp</preCmd>
-      <postCmd>med_temp</postCmd>
+      <preCmd>med_temp_pre</preCmd>
+      <postCmd>med_temp_post</postCmd>
       <useEmuSolo>False</useEmuSolo>
       <usePopen>False</usePopen>
       <ignoreOnScan>False</ignoreOnScan>
@@ -269,8 +269,8 @@
       <mediaPath type="cartridge">/home/test/RetroRig/Artwork/Sega Game Gear/cartridge/%GAME%.*</mediaPath>
       <mediaPath type="screenshot">/home/test/RetroRig/Artwork/Sega Game Gear/screenshot/%GAME%.*</mediaPath>
       <mediaPath type="fanart">/home/test/RetroRig/Artwork/Sega Game Gear/fanart/%GAME%.*</mediaPath>
-      <preCmd>med_temp</preCmd>
-      <postCmd>med_temp</postCmd>
+      <preCmd>med_temp_pre</preCmd>
+      <postCmd>med_temp_post</postCmd>
       <useEmuSolo>False</useEmuSolo>
       <usePopen>False</usePopen>
       <ignoreOnScan>False</ignoreOnScan>
@@ -363,8 +363,8 @@
       <mediaPath type="cartridge">/home/test/RetroRig/Artwork/SNES/cartridge/%GAME%.*</mediaPath>
       <mediaPath type="screenshot">/home/test/RetroRig/Artwork/SNES/screenshot/%GAME%.*</mediaPath>
       <mediaPath type="fanart">/home/test/RetroRig/Artwork/SNES/fanart/%GAME%.*</mediaPath>
-      <preCmd>med_temp</preCmd>
-      <postCmd>med_temp</postCmd>
+      <preCmd>med_temp_pre</preCmd>
+      <postCmd>med_temp_post</postCmd>
       <useEmuSolo>False</useEmuSolo>
       <usePopen>False</usePopen>
       <ignoreOnScan>False</ignoreOnScan>
@@ -428,8 +428,8 @@
       <mediaPath type="cartridge">/home/test/RetroRig/Artwork/NES/cartridge/%GAME%.*</mediaPath>
       <mediaPath type="screenshot">/home/test/RetroRig/Artwork/NES/screenshot/%GAME%.*</mediaPath>
       <mediaPath type="fanart">/home/test/RetroRig/Artwork/NES/fanart/%GAME%.*</mediaPath>
-      <preCmd>med_temp</preCmd>
-      <postCmd>med_temp</postCmd>
+      <preCmd>med_temp_pre</preCmd>
+      <postCmd>med_temp_post</postCmd>
       <useEmuSolo>False</useEmuSolo>
       <usePopen>False</usePopen>
       <ignoreOnScan>False</ignoreOnScan>
