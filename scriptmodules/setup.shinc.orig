@@ -103,8 +103,8 @@ function rrs_prepareFolders()
 	# filesys.path_firmware
 	pathlist+=("$rootdir/BIOS/Mednafen")
 
-	#Configs
-	pathlist+=("$rootdir/Configs")
+	# Configs
+	# pathlist+=("$rootdir/Configs")
 
 	# quotes needed on entry to preven globbing on directory creation!
 	# Expanding arrays involves [@] and {}
