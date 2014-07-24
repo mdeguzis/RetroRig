@@ -400,8 +400,8 @@ function rrs_xbmc_patched()
 	rm -f /tmp/xbmc_Gotham_V13.1_patched_for_RetroRig*
 
 	# copy down the patched debs from libregeek (saves on space, dl speed is adaquate for now)
-	wget -P /tmp "www.libregeek.org/RetroRig/xbmc/xbmc-bin_Gotham_V13.1_patched_for_RetroRig_patchlevel_4.deb"
-	wget -P /tmp "www.libregeek.org/RetroRig/xbmc/xbmc_Gotham_V13.1_patched_for_RetroRig_patchlevel_4.deb"
+	wget -P /tmp "www.libregeek.org/RetroRig/xbmc/xbmc-bin_Gotham_V13.1_patched_for_RetroRig_patchlevel_5.deb"
+	wget -P /tmp "www.libregeek.org/RetroRig/xbmc/xbmc_Gotham_V13.1_patched_for_RetroRig_patchlevel_5.deb"
 
 	# install dependencies manually
 	apt-get install -y mesa-utils \
@@ -435,8 +435,8 @@ function rrs_xbmc_patched()
                            libcrystalhd3
 
 	# install deb from /tmp
-	dpkg -i "/tmp/xbmc-bin_Gotham_V13.1_patched_for_RetroRig_patchlevel_4.deb"
-        dpkg -i "/tmp/xbmc_Gotham_V13.1_patched_for_RetroRig_patchlevel_4.deb"
+	dpkg -i "/tmp/xbmc-bin_Gotham_V13.1_patched_for_RetroRig_patchlevel_5.deb"
+        dpkg -i "/tmp/xbmc_Gotham_V13.1_patched_for_RetroRig_patchlevel_5.deb"
 
 	# cleanup deb
 	sudo rm -f "/tmp/xbmc-bin_Gotham_V13.1_patched_for_RetroRig_patchlevel_*.deb"

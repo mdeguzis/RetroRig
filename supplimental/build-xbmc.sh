@@ -32,11 +32,11 @@
 
 # Instead, add the xbmc PPA manually and do it here so we don't 
 # Necessarily need to install a lot of extra stuff to do a new package.
-export PL=5
+PL=5
 clear
-echo "##########################################"
-echo "Building new custom xbmc-bin deb pkg"
-echo "##########################################"
+echo "#######################################################"
+echo "Building custom XBMC Debian packages (patch level $PL)"
+echo "#######################################################"
 echo ""
 sleep 2s
 
@@ -46,21 +46,19 @@ echo "Removing old build files and directories"
 echo "##########################################"
 
 # create previous build directory for saving old build files
-mkdir -p ~/RetroRig-beforeBuild
+mkdir -p ~/XBMC-beforeBuild
 
-# remove xbmc,build dirs, and old files
-rm -f build_log.txt
+# remove xbmc
 sudo apt-get remove -y xbmc xbmc-bin
-# backup old build dirs (ya know, for safety!)
-mv -v ~/xbmc ~/RetroRig-beforeBuild
-mv -v ~/RetroRig ~/RetroRig-beforeBuild
-# Continue to remove old directories
-rm -rfv ~/RetroRig
-rm -rfv ~/xbmc
+
+# backup old build dir
+mv -v ~/xbmc ~/XBMC-beforeBuild
+
+# remove old files and directories
 sudo rm -rfv /tmp/RetroRig
 sudo rm -rfv /tmp/RetroRig-bin/
-rm -rfv ~/xbmc-bin_Gotham_V13.1_patched_for_RetroRig_patchlevel_*.deb
-rm -rfv ~/xbmc_Gotham_V13.1_patched_for_RetroRig_patchlevel_*.deb 
+rm -rfv "~/xbmc_gotham-patched-for-retrorig-patchlevel-*-0trusty.deb"
+rm -rfv "~/xbmc-bin_gotham-patched-for-retrorig-patchlevel-*-0trusty.deb"
 
 echo ""
 echo "##########################################"
@@ -75,28 +73,28 @@ sudo apt-get install -y dialog git figlet
 
 echo ""
 echo "##########################################"
-echo "Extracting old deb packages"
+echo "Extracting original Debian packages"
 echo "##########################################"
 
-# download original xbmc-bin file for build
+# download original xbmc-bin package as template
 mkdir /tmp/RetroRig-bin
 cd /tmp/RetroRig-bin
 wget "http://www.libregeek.org/RetroRig/old_pkgs/xbmc-bin_original.deb"
 
 # unpack xbmc-bin
-sudo dpkg-deb -x xbmc-bin_original.deb .
-sudo dpkg-deb -e xbmc-bin_original.deb
+dpkg-deb -x xbmc-bin_original.deb .
+dpkg-deb -e xbmc-bin_original.deb
 # clean packed debs
 sudo rm -f *.deb
 
-# download original xbmc file for build
+# download original xbmc file package as template
 mkdir /tmp/RetroRig
 cd /tmp/RetroRig
 wget "http://www.libregeek.org/RetroRig/old_pkgs/xbmc_original.deb"
 
 # unpack xbmc
-sudo dpkg-deb -x xbmc_original.deb .
-sudo dpkg-deb -e xbmc_original.deb
+dpkg-deb -x xbmc_original.deb .
+dpkg-deb -e xbmc_original.deb
 # clean packed debs
 sudo rm -f *.deb
 
@@ -116,7 +114,7 @@ sudo apt-get install -y automake autopoint bison build-essential ccache cmake cu
 
 echo ""
 echo "##########################################"
-echo "Fetching beaumanviennas XBMC repository  #"
+echo "Fetching beaumanviennas XBMC repository"
 echo "##########################################"
 
 # clone the xbmc source based on fernetMenta/xbmc and checkout Gotham 13.1 based patch level 
@@ -142,20 +140,36 @@ echo "Creating custom deb pkg"
 echo "##########################################"
 # replace old xbmc bin file with new one, repack, tidy up
 # Notes for dpkg: http://ubuntuforums.org/showthread.php?t=1687348
-sudo cp ./xbmc.bin /tmp/RetroRig-bin/usr/lib/xbmc/
+cp ./xbmc.bin /tmp/RetroRig-bin/usr/lib/xbmc/
+
+cd /tmp/RetroRig-bin
+
+#remove Debian original files
+rm /tmp/RetroRig-bin/DEBIAN/control
+rm /tmp/RetroRig-bin/DEBIAN/md5sums
+
+#copy/create Debian customized files
+cp ~/RetroRig/supplimental/control.xbmc-bin /tmp/RetroRig-bin/DEBIAN/control
+find /tmp/RetroRig-bin/usr -type f -exec md5sum {} \; > /tmp/RetroRig-bin/DEBIAN/md5sums
 
 # create xbmc-bin
-cd /tmp/RetroRig-bin
-sudo dpkg-deb -b . xbmc-bin_Gotham_V13.1_patched_for_RetroRig_patchlevel_$PL.deb
+dpkg-deb -b . "xbmc-bin_gotham-patched-for-retrorig-patchlevel-$PL-0trusty.deb"
 # copy new deb to '/tmp/XBMC_build' dir
 mkdir -p /tmp/XBMC_build
-cp xbmc-bin_Gotham_V13.1_patched_for_RetroRig_patchlevel_$PL.deb /tmp/XBMC_build
+cp "xbmc-bin_gotham-patched-for-retrorig-patchlevel-$PL-0trusty.deb" /tmp/XBMC_build
 
 # create xbmc
 cd /tmp/RetroRig
+rm /tmp/RetroRig/DEBIAN/control
+rm /tmp/RetroRig/DEBIAN/md5sums
+
+#copy Debian control file
+cp ~/RetroRig/supplimental/control.xbmc /tmp/RetroRig/DEBIAN/control
+find /tmp/RetroRig/usr -type f -exec md5sum {} \; > /tmp/RetroRig/DEBIAN/md5sums
+
 # replace /tmp/RetroRig/user/share/xbmc with /usr/share/xbmc installed by 'sudo make install'
-sudo rm -rf /tmp/RetroRig/usr/share/xbmc/
-sudo cp -r /usr/share/xbmc/ /tmp/RetroRig/usr/share/
+rm -rf /tmp/RetroRig/usr/share/xbmc/
+cp -r /usr/share/xbmc/ /tmp/RetroRig/usr/share/
 
 ####################################################################
 # disbale version check
@@ -175,16 +189,21 @@ sudo cp -r /usr/share/xbmc/ /tmp/RetroRig/usr/share/
 ####################################################################
 
 #echo "removing service 'xbmc.versioncheck'"
-sudo rm -v /tmp/RetroRig/usr/share/xbmc/addons/service.xbmc.versioncheck/service.py
-sudo echo '#!/usr/bin/python' > /tmp/service.py
-sudo echo '# service removed' >> /tmp/service.py
-sudo mv /tmp/service.py 
+rm -v /tmp/RetroRig/usr/share/xbmc/addons/service.xbmc.versioncheck/service.py
+echo '#!/usr/bin/python' > /tmp/service.py
+echo '# service removed' >> /tmp/service.py
+mv /tmp/service.py /tmp/RetroRig/usr/share/xbmc/addons/service.xbmc.versioncheck/service.py
 
 #####################################################################
 
+####################################################################
+# copy splash screen for XBMC/RetroRig 
+####################################################################
+cp -v ~/RetroRig/Artwork/XBMC/Splash.png   /tmp/RetroRig/usr/share/xbmc/media/Splash.png
+
 # create package
-sudo dpkg-deb -b . xbmc_Gotham_V13.1_patched_for_RetroRig_patchlevel_$PL.deb
+dpkg-deb -b . "xbmc_gotham-patched-for-retrorig-patchlevel-$PL-0trusty.deb"
 # copy new deb to home dir
-cp xbmc_Gotham_V13.1_patched_for_RetroRig_patchlevel_$PL.deb /tmp/XBMC_build
+cp "xbmc_gotham-patched-for-retrorig-patchlevel-$PL-0trusty.deb" /tmp/XBMC_build
 
 

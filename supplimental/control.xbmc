@@ -1,0 +1,26 @@
+Package: xbmc
+Version: 2:13.1~gotham-patched-for-retrorig-patchlevel-5-0trusty
+Architecture: all
+Maintainer: RetroRig Development Team <jc.lache@gmail.com>
+Installed-Size: 45617
+Depends: xbmc-bin (>= 2:13.1~gotham-patched-for-retrorig-patchlevel-5-0trusty), curl, mesa-utils, x11-utils, ttf-liberation | fonts-liberation, ttf-dejavu-core, python-bluez | python-lightblue, python-imaging, python-simplejson, libmad0, libass4, libssh-4 | libssh2-1, libnfs1, libbluray1, libshairport1, libshairplay0, libmp3lame0, libvorbisfile3, libaacs0, libflac8, libcec2 (>= 2.1.1), librtmp0, libgnutls26 | libgnutls28, libxslt1.1, python, python-support (>= 0.90.0)
+Recommends: libvdpau1, libva-intel-vaapi-driver, libva1
+Suggests: xbmc-test-helper, xbmc-pvr-mythtv-cmyth, xbmc-pvr-vuplus, xbmc-pvr-vdr-vnsi, xbmc-pvr-njoy, xbmc-pvr-nextpvr, xbmc-pvr-mediaportal-tvserver, xbmc-pvr-tvheadend-hts, xbmc-pvr-dvbviewer, xbmc-pvr-argustv, xbmc-pvr-iptvsimple
+Breaks: xbmc-data (<< 2:11.0~git20111222.22ad8e4), xbmc-skin-confluence (<< 2:11.0~git20111222.22ad8e4), xbmc-standalone (<< 2:11.0~git20111222.22ad8e4)
+Replaces: xbmc-data, xbmc-skin-confluence, xbmc-standalone
+Provides: xbmc-data, xbmc-skin-confluence, xbmc-standalone
+Section: video
+Priority: optional
+Homepage: http://www.libregeek.org/
+Description: XBMC Media Center (binary data package) patched for RetroRig
+ XBMC, recursive acronym for "XBMC Media Center", is an award winning free and
+ open source software media-player and entertainment hub for all your digital
+ media. 
+ .
+ This package is derived from fernetMenta/XBMC, which is deployed in project "OpenELEC".
+ FernetMenta XBMC supports dual monitors.
+ Changes for RetroRig comprise: PS3 controller hotplug support, different application
+ icons for XBMC in native and RetroRig mode, passing display settings to child processes. 
+ .
+ This package contains all the architecture independent data needed to have a
+ working XBMC.
