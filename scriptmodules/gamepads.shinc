@@ -84,8 +84,8 @@ function gp_ps3_blu_main()
 	new_pre="qjoypad "psp_ps3_blu" &amp;"
 	new_post="killall qjoypad"
 	# perform actual changes
-	sed -i "s|"$old_pre"|"$new_pre"|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
-	sed -i "s|"$old_post"|"$new_post"|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
+	sed -i "s|$old_pre|$new_pre|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
+	sed -i "s|$old_post|$new_post|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
 
 	#####################
 	# mednafen (general)
@@ -96,8 +96,8 @@ function gp_ps3_blu_main()
 	new_pre="qjoypad "mednafen_ps3_general_blu" &amp;"
 	new_post="killall qjoypad"
 	# perform actual changes
-	sed -i "s|"$old_pre"|"$new_pre"|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
-	sed -i "s|"$old_post"|"$new_post"|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
+	sed -i "s|$old_pre|$new_pre|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
+	sed -i "s|$old_post|$new_post|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
 
 	#####################
 	# mednafen (PSX/PS1)
@@ -108,8 +108,8 @@ function gp_ps3_blu_main()
 	new_pre="qjoypad "mednafen_ps3_psx_blu" &amp;"
 	new_post="killall qjoypad"
 	# perform actual changes
-	sed -i "s|"$old_pre"|"$new_pre"|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
-	sed -i "s|"$old_post"|"$new_post"|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
+	sed -i "s|$old_pre|$new_pre|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
+	sed -i "s|$old_post|$new_post|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
 
 	# blacklist xpad
 	cp -v "$rootdir/init-scripts/ps3_blu_controller/blacklist.conf" "/etc/modprobe.d/"
@@ -379,8 +379,8 @@ the service may fail to start correctly.\n\nPlease see /etc/default/xboxdrv for 
 	new_pre="qjoypad "psp_ps3_usb" &amp;"
 	new_post="killall qjoypad"
 	# perform actual changes
-	sed -i "s|"$old_pre"|"$new_pre"|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
-	sed -i "s|"$old_post"|"$new_post"|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
+	sed -i "s|$old_pre|$new_pre|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
+	sed -i "s|$old_post|$new_post|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
 
 	#####################
 	# mednafen (general)
@@ -391,8 +391,8 @@ the service may fail to start correctly.\n\nPlease see /etc/default/xboxdrv for 
 	new_pre="qjoypad "mednafen_ps3_general_usb" &amp;"
 	new_post="killall qjoypad"
 	# perform actual changes
-	sed -i "s|"$old_pre"|"$new_pre"|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
-	sed -i "s|"$old_post"|"$new_post"|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
+	sed -i "s|$old_pre|$new_pre|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
+	sed -i "s|$old_post|$new_post|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
 
 	#####################
 	# mednafen (PSX/PS1)
@@ -403,8 +403,8 @@ the service may fail to start correctly.\n\nPlease see /etc/default/xboxdrv for 
 	new_pre="qjoypad "mednafen_ps3_psx_usb" &amp;"
 	new_post="killall qjoypad"
 	# perform actual changes
-	sed -i "s|"$old_pre"|"$new_pre"|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
-	sed -i "s|"$old_post"|"$new_post"|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
+	sed -i "s|$old_pre|$new_pre|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
+	sed -i "s|$old_post|$new_post|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
 
 	###########################################################
 	# End qjoypad remappings
@@ -499,8 +499,8 @@ function gp_x360_wireless()
 	new_pre="qjoypad "psp_x360_wireless" &amp;"
 	new_post="killall qjoypad"
 	# perform actual changes
-	sed -i "s|"$old_pre"|"$new_pre"|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
-	sed -i "s|"$old_post"|"$new_post"|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
+	sed -i "s|$old_pre|$new_pre|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
+	sed -i "s|$old_post|$new_post|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
 
 	#####################
 	# mednafen (general)
@@ -511,8 +511,8 @@ function gp_x360_wireless()
 	new_pre="qjoypad "mednafen_x360_general_wireless" &amp;"
 	new_post="killall qjoypad"
 	# perform actual changes
-	sed -i "s|"$old_pre"|"$new_pre"|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
-	sed -i "s|"$old_post"|"$new_post"|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
+	sed -i "s|$old_pre|$new_pre|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
+	sed -i "s|$old_post|$new_post|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
 
 	#####################
 	# mednafen (PSX/PS1)
@@ -523,8 +523,8 @@ function gp_x360_wireless()
 	new_pre="qjoypad "mednafen_x360_psx_wireless" &amp;"
 	new_post="killall qjoypad"
 	# perform actual changes
-	sed -i "s|"$old_pre"|"$new_pre"|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
-	sed -i "s|"$old_post"|"$new_post"|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
+	sed -i "s|$old_pre|$new_pre|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
+	sed -i "s|$old_post|$new_post|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
 
 	###########################################################
 	# End qjoypad remappings
@@ -634,8 +634,8 @@ function gp_x360_usb()
 	new_pre="qjoypad "psp_x360_usb" &amp;"
 	new_post="killall qjoypad"
 	# perform actual changes
-	sed -i "s|"$old_pre"|"$new_pre"|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
-	sed -i "s|"$old_post"|"$new_post"|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
+	sed -i "s|$old_pre|$new_pre|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
+	sed -i "s|$old_post|$new_post|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
 
 	#####################
 	# mednafen (general)
@@ -646,8 +646,8 @@ function gp_x360_usb()
 	new_pre="qjoypad "mednafen_x360_general_usb" &amp;"
 	new_post="killall qjoypad"
 	# perform actual changes
-	sed -i "s|"$old_pre"|"$new_pre"|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
-	sed -i "s|"$old_post"|"$new_post"|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
+	sed -i "s|$old_pre|$new_pre|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
+	sed -i "s|$old_post|$new_post|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
 
 	#####################
 	# mednafen (PSX/PS1)
@@ -658,8 +658,8 @@ function gp_x360_usb()
 	new_pre="qjoypad "mednafen_x360_psx_usb" &amp;"
 	new_post="killall qjoypad"
 	# perform actual changes
-	sed -i "s|"$old_pre"|"$new_pre"|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
-	sed -i "s|"$old_post"|"$new_post"|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
+	sed -i "s|$old_pre|$new_pre|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
+	sed -i "s|$old_post|$new_post|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
 
 	###########################################################
 	# End qjoypad remappings
