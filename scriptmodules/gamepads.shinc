@@ -367,9 +367,9 @@ the service may fail to start correctly.\n\nPlease see /etc/default/xboxdrv for 
 	cp -v "$scriptdir/XBMC-cfgs/userdata/addon_data/script.games.rom.collection.browser/config.xml" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/"
 
 	# copy in profiles for emulators
-	cp -v "$scriptdir/gamepad-cfgs/ps3_usb_controller/mednafen_ps3_general_usb.lyt" "$config_home/.mednafen/.qjoypad3"
-	cp -v "$scriptdir/gamepad-cfgs/ps3_usb_controller/mednafen_ps3_psx_usb.lyt" "$config_home/.mednafen/.qjoypad3"
-	cp -v "$scriptdir/gamepad-cfgs/ps3_usb_controller/psp_ps3_usb.lyt" "$config_home/.mednafen/.qjoypad3"
+	cp -v "$scriptdir/gamepad-cfgs/ps3_usb_controller/mednafen_ps3_general_usb.lyt" "$config_home/.qjoypad3"
+	cp -v "$scriptdir/gamepad-cfgs/ps3_usb_controller/mednafen_ps3_psx_usb.lyt" "$config_home/.qjoypad3"
+	cp -v "$scriptdir/gamepad-cfgs/ps3_usb_controller/psp_ps3_usb.lyt" "$config_home/.qjoypad3"
 
 	##################### 
 	# PSP 
@@ -487,9 +487,9 @@ function gp_x360_wireless()
 	cp -v "$scriptdir/XBMC-cfgs/userdata/addon_data/script.games.rom.collection.browser/config.xml" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/"
 
 	# copy in profiles for emulators
-	cp -v "$scriptdir/gamepad-cfgs/x360_wireless_controller/mednafen_x360_general_wireless.lyt" "$config_home/.mednafen/.qjoypad3"
-	cp -v "$scriptdir/gamepad-cfgs/x360_wireless_controller/mednafen_x360_psx_wireless.lyt" "$config_home/.mednafen/.qjoypad3"
-	cp -v "$scriptdir/gamepad-cfgs/x360_wireless_controller/psp_x360_wireless.lyt" "$config_home/.mednafen/.qjoypad3"
+	cp -v "$scriptdir/gamepad-cfgs/x360_wireless_controller/mednafen_x360_general_wireless.lyt" "$config_home/.qjoypad3"
+	cp -v "$scriptdir/gamepad-cfgs/x360_wireless_controller/mednafen_x360_psx_wireless.lyt" "$config_home/.qjoypad3"
+	cp -v "$scriptdir/gamepad-cfgs/x360_wireless_controller/psp_x360_wireless.lyt" "$config_home/.qjoypad3"
 
 	##################### 
 	# PSP 
@@ -622,9 +622,9 @@ function gp_x360_usb()
 	cp -v "$scriptdir/XBMC-cfgs/userdata/addon_data/script.games.rom.collection.browser/config.xml" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/"
 
 	# copy in profiles for emulators
-	cp -v "$scriptdir/gamepad-cfgs/x360_usb_controller/mednafen_x360_general_usb.lyt" "$config_home/.mednafen/.qjoypad3"
-	cp -v "$scriptdir/gamepad-cfgs/x360_usb_controller/mednafen_x360_psx_usb.lyt" "$config_home/.mednafen/.qjoypad3"
-	cp -v "$scriptdir/gamepad-cfgs/x360_usb_controller/psp_x360_usb.lyt" "$config_home/.mednafen/.qjoypad3"
+	cp -v "$scriptdir/gamepad-cfgs/x360_usb_controller/mednafen_x360_general_usb.lyt" "$config_home/.qjoypad3"
+	cp -v "$scriptdir/gamepad-cfgs/x360_usb_controller/mednafen_x360_psx_usb.lyt" "$config_home/.qjoypad3"
+	cp -v "$scriptdir/gamepad-cfgs/x360_usb_controller/psp_x360_usb.lyt" "$config_home/.qjoypad3"
 
 	##################### 
 	# PSP 
