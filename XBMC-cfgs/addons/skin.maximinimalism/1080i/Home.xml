@@ -136,29 +136,6 @@
                     </control>
                 </focusedlayout>
                 <content>
-                    <item>
-						<visible>!Skin.HasSetting(hideVideo)</visible>
-                        <label>31000</label>
-                        <label2></label2>
-                        <thumb>-</thumb>
-                        <onclick>activateWindow(videolibrary)</onclick>
-                        <onclick>Skin.SetString(showRecentVideoItems,true)</onclick>
-                    </item>
-                    <item>
-						<visible>!Skin.HasSetting(hideMusic)</visible>
-                        <label>31001</label>
-                        <label2></label2>
-                        <thumb>-</thumb>
-                        <onclick>ActivateWindow(musiclibrary)</onclick>
-                        <onclick>Skin.SetString(showRecentMusicItems,true)</onclick>
-                    </item>
-                    <item>
-						<visible>!Skin.HasSetting(hidePictures)</visible>
-                        <label>31002</label>
-                        <label2></label2>
-                        <thumb>-</thumb>
-                        <onclick>ActivateWindow(pictures)</onclick>
-                    </item>
 					<item>
 						<visible>!Skin.HasSetting(hideGames) + System.HasAddon(script.games.rom.collection.browser)</visible>
                         <label>31156</label>
@@ -166,29 +143,7 @@
                         <thumb>-</thumb>
                         <onclick>RunScript(script.games.rom.collection.browser)</onclick>
                     </item>
-					<item>
-						<visible>!Skin.HasSetting(hidePrograms)</visible>
-                        <label>0</label>
-                        <label2></label2>
-                        <thumb>-</thumb>
-                        <onclick>ActivateWindow(programs,addons,return)</onclick>
-                    </item>
-					<item>
-						<visible>!Skin.HasSetting(hideSearch)</visible>
-                        <label>137</label>
-                        <label2></label2>
-                        <thumb>-</thumb>
-                        <onclick>RunScript(script.globalsearch)</onclick>
-						<onclick>Skin.SetString(showRecentMusicItems,false)</onclick>
-						<onclick>Skin.SetString(showRecentVideoItems,false)</onclick>
-                    </item>
-					<item>
-						<visible>!Skin.HasSetting(hideFavourites)</visible>
-                        <label>1036</label>
-                        <label2></label2>
-                        <thumb>-</thumb>
-                        <onclick>ReplaceWindow(favourites)</onclick>
-                    </item>
+				
                     <item>
                         <label>5</label>
                         <label2></label2>
