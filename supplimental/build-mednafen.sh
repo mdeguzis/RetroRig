@@ -79,7 +79,7 @@ mkdir /tmp/mednafen_build
 
 # download original mednafen as template
 cd /tmp/mednafen
-#wget "http://www.libregeek.org/RetroRig/old_pkgs/mednafen_original.deb"
+wget "http://www.libregeek.org/RetroRig/old_pkgs/mednafen_original.deb"
 cp ~/mednafen_original.deb /tmp/mednafen
 
 # unpack mednafen template
