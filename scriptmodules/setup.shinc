@@ -364,6 +364,9 @@ function rrs_xbmc_patched()
 {
 
 	clear
+	# release the aptitdue hold to install/upgrade RetroRig's XBMC version
+	apt-mark unhold xbmc xbmc-bin
+
 	# create autostart for XBMC and place our modified files
 	# Custom script for reboots/hotplugging
 	cp -v "$rootdir/XBMC-cfgs/extra/gp_autodetect_xbmc.sh" "/usr/share/applications/"
@@ -461,9 +464,9 @@ function rrs_xbmc_patched()
 	# start service
 	service rescan start
 
-	# remove team xbmc repository so we don't have to worry about our xbmc
-	# package being overwritten (This can always be removed later if need be):
-	add-apt-repository -ry ppa:team-xbmc/ppa
+	# Tell aptitude to hold our packages to avoid unwanted upgrades
+	# Please refer to the top of this script, where the hold is released for upgrade purposes
+	apt-mark hold xbmc xbmc-bin 
 
 }
 
