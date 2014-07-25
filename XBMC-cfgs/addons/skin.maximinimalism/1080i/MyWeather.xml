@@ -33,7 +33,7 @@
             <control type="spincontrolex" id="3">
                 <description>Location Select</description>
                 <posx>12</posx>
-                <posy>44</posy>
+                <posy>47</posy>
                 <label>-</label>
                 <label2>-</label2>
                 <font>pageTitle</font>
@@ -46,7 +46,7 @@
             <control type="label">
                 <visible>true</visible>
                 <posx>84</posx>
-                <posy>44</posy>
+                <posy>47</posy>
                 <width>18-col</width>
                 <font>pageTitle</font>
                 <label>$INFO[Window.Property(Location)]</label>
@@ -71,8 +71,8 @@
                 <height>18-row</height>
                 <itemlayout width="5-col-gutter" height="6-col">
                     <control type="label">
-                        <posx>46</posx>
-                        <posy>72</posy>
+                        <posx>36</posx>
+                        <posy>92</posy>
                         <width>5-col-gutter</width>
                         <font>symbolWeather</font>
                         <textcolor>selected</textcolor>
@@ -95,7 +95,6 @@
                         <align>center</align>
                         <font>itemTitle</font>
                         <textcolor>selected</textcolor>
-						<autoscroll delay="3000" time="1000" repeat="3000"></autoscroll>
                         <label>$INFO[ListItem.Property(Outlook)]</label>
                     </control>
                     <control type="textbox">
@@ -111,8 +110,8 @@
                 </itemlayout>
                 <focusedlayout width="6-col" height="6-col">
                     <control type="label">
-                        <posx>46</posx>
-                        <posy>72</posy>
+                        <posx>36</posx>
+                        <posy>92</posy>
                         <width>5-col-gutter</width>
                         <font>symbolWeather</font>
                         <textcolor>selected</textcolor>

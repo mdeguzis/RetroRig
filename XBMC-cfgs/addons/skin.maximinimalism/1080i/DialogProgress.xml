@@ -2,11 +2,9 @@
 <window>
     <defaultcontrol always="true">10</defaultcontrol>
     <coordinates>
-		<system>1</system>
-		<left>0</left>
-		<top>0</top>
-	</coordinates>
-    <controls>	
+        <origin x="0" y="0" />
+    </coordinates>
+    <controls>
         <control type="group">
             <posx>col-19-begin</posx>
             <posy>row-2-begin</posy>
@@ -33,24 +31,23 @@
                 <font>smallStrong</font>
                 <width>468</width>
                 <height>1-row</height>
-                <label>$INFO[Control.GetLabel(1)] $INFO[System.Progressbar,- ,%] ($LOCALIZE[31152])</label>
+                <label>$INFO[Control.GetLabel(1)] $INFO[System.Progressbar,- ,%]</label>
                 <textcolor>black</textcolor>
-				<scroll>true</scroll>
                 <shadowcolor>-</shadowcolor>
                 <!--animations-->
                 <animation type="Windowopen">
                     <effect type="fade" start="0" end="100" delay="400" time="400" tween="sine" />
                 </animation>
             </control>
-            <control type="textbox" id="9">
+            <control type="label">
                 <description>message</description>
                 <posx>24</posx>
-                <posy>22</posy>
+                <posy>30</posy>
                 <font>pageTitle</font>
                 <textcolor>black</textcolor>
                 <width>468</width>
                 <height>1-row</height>
-                <label>-</label>
+                <label>$INFO[control.getlabel(2)] $INFO[control.getlabel(3)] $INFO[control.getlabel(4)]</label>
                 <scroll>true</scroll>
                 <shadowcolor>-</shadowcolor>
                 <!--animations-->
@@ -65,9 +62,15 @@
             <control type="label" id="1">
                 <description>fake heading label</description>
             </control>
-			<control type="button" id="10">
-				<description>Cancel button</description>
-			</control>
+            <control type="label" id="2">
+                <description>dialog line 1</description>
+            </control>
+            <control type="label" id="3">
+                <description>dialog line 2</description>
+            </control>
+            <control type="label" id="4">
+                <description>dialog line 3</description>
+            </control>
         </control>
     </controls>
 </window>

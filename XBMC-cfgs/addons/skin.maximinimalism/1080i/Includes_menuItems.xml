@@ -2,39 +2,38 @@
 <includes>
 <include name="menuItems">
 	<control type="list" id="9000">
-		<posx>-14</posx>
+		<posx>0</posx>
         <posy>180</posy>
         <width>3-col</width>
         <height>12-row</height>
         <orientation>vertical</orientation>
         <onleft>62</onleft>
         <onright>9999</onright>
-		<onback>activateWindow(home)</onback>
         <itemlayout width="4-col" height="43">
             <control type="label">
-                <posx>14</posx>
+                <posx>0</posx>
                 <posy>0</posy>
                 <width>3-col-gutter</width>
                 <font>menuTitle</font>
-                <label>$INFO[ListItem.Label]</label>
+                <info>ListItem.Label</info>
                 <textcolor>unselected</textcolor>
             </control>
         </itemlayout>
         <focusedlayout width="4-col" height="43">
             <control type="label">
                 <visible>Control.HasFocus(9000)</visible>
-                <posx>1</posx>
+                <posx>0</posx>
                 <posy>0</posy>
-                <width>4-col</width>
+                <width>3-col-gutter</width>
                 <font>menuTitle</font>
-                <label>[ $INFO[ListItem.Label] ]</label>
+                <label>$INFO[ListItem.Label]</label>
                 <textcolor>selected</textcolor>
             </control>
             <control type="label">
                 <visible>!Control.HasFocus(9000)</visible>
-                <posx>14</posx>
+                <posx>0</posx>
                 <posy>0</posy>
-                <width>4-col</width>
+                <width>3-col-gutter</width>
                 <font>menuTitle</font>
                 <label>$INFO[ListItem.Label]</label>
                 <textcolor>unselected</textcolor>

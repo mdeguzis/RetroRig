@@ -4,7 +4,6 @@
     <allowoverlay>yes</allowoverlay>
     <controls>
         <control type="image">
-			<visible>!Window.IsVisible(SliderDialog)</visible>
             <posx>0</posx>
             <posy>0</posy>
             <width>fullscreenWidth</width>
@@ -15,7 +14,6 @@
             <include>fadeInOut</include>
         </control>
         <control type="group">
-			<visible>!Window.IsVisible(SliderDialog)</visible>
             <posx>col-7-begin</posx>
             <posy>row-3-begin</posy>
             <!--animations-->
@@ -40,7 +38,7 @@
             </control>
             <control type="label" id="2">
                 <posx>12</posx>
-                <posy>44</posy>
+                <posy>47</posy>
                 <width>12-col</width>
                 <font>pageTitle</font>
                 <textcolor>black</textcolor>

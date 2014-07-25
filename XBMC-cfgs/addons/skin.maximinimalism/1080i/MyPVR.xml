@@ -4,6 +4,7 @@
     <allowoverlay>no</allowoverlay>
     <onload condition="Skin.hassetting(stopVideoOnMenu) + !Player.HasAudio">PlayerControl(stop)</onload>
 	<onunload>Skin.SetString(showRecentVideoItems,true)</onunload>
+	<previouswindow>home</previouswindow>
     <controls>        		
 		<include>globalBackground</include>
         <!--page container group-->
@@ -73,8 +74,8 @@
                 </control>
                 <!--page scrollbar-->
                 <control type="group" id="9400">
-                    <visible>Control.IsVisible(60) + !control.isvisible(10)</visible>
-                    <animation effect="fade" start="100" end="70" time="100" condition="!controlgroup(9400).hasfocus">conditional</animation>
+                    <visible>Control.IsVisible(60)</visible>
+                    <animation effect="fade" start="100" end="0" time="100" condition="!controlgroup(9400).hasfocus">conditional</animation>
                     <control type="scrollbar" id="60">
                         <posx>108r</posx>
                         <posy>276</posy>
@@ -84,7 +85,6 @@
                 </control>
                 <!--Sort / misc labels (footer)-->
                 <control type="group">
-					<visible>false</visible>
                     <posx>col-4-begin</posx>
                     <posy>row-18-begin</posy>
                     <include>mediaListFooter</include>

@@ -41,7 +41,7 @@
             </control>
             <control type="label">
                 <posx>12</posx>
-                <posy>44</posy>
+                <posy>47</posy>
                 <width>8-col</width>
                 <font>pageTitle</font>
                 <label>$LOCALIZE[5]</label>
@@ -76,7 +76,7 @@
                         <label>$INFO[ListItem.label2]</label>
                     </control>
                     <control type="label">
-                        <posx>101</posx>
+                        <posx>84</posx>
                         <posy>5</posy>
                         <width>326</width>
                         <font>itemTitle</font>
@@ -84,7 +84,7 @@
                         <label>$INFO[ListItem.label]</label>
                     </control>
                     <control type="label">
-                        <posx>101</posx>
+                        <posx>84</posx>
                         <posy>38</posy>
                         <width>326</width>
                         <font>smallStrong</font>
@@ -110,16 +110,16 @@
                         <label>$INFO[ListItem.label2]</label>
                     </control>
                     <control type="label">
-                        <posx>85</posx>
+                        <posx>84</posx>
                         <posy>5</posy>
                         <width>326</width>
                         <font>itemTitle</font>
                         <textcolor>selected</textcolor>
-                        <label>[ $INFO[ListItem.label] ]</label>
+                        <label>$INFO[ListItem.label]</label>
                         <scroll>true</scroll>
                     </control>
                     <control type="label">
-                        <posx>101</posx>
+                        <posx>84</posx>
                         <posy>38</posy>
                         <width>326</width>
                         <font>smallStrong</font>

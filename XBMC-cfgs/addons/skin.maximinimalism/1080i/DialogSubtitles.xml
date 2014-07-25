@@ -78,23 +78,34 @@
                         <control type="label">
                             <posx>12</posx>
                             <posy>0</posy>
-                            <width>12-col-gutter</width>
+                            <width>7-col</width>
                             <font>itemTitle</font>
                             <textcolor>selected</textcolor>
                             <selectedcolor>selected</selectedcolor>
                             <shadowcolor>-</shadowcolor>
                             <info>ListItem.Label2</info>
                         </control>
-                        <!--language / rating / sync / CC-->
+                        <!--language-->
                         <control type="label">
-                            <posx>12-col</posx>
+                            <posx>8-col</posx>
                             <posy>0</posy>
                             <width>4-col-gutter</width>
-                            <font>smallStrong</font>
+                            <font>itemTitle</font>
                             <textcolor>selected</textcolor>
                             <selectedcolor>selected</selectedcolor>
                             <shadowcolor>-</shadowcolor>
-                            <label>$INFO[ListItem.Label] - $INFO[ListItem.ActualIcon]*</label>
+                            <info>ListItem.Label</info>
+                        </control>
+                        <!--rating-->
+                        <control type="label">
+                            <posx>12-col</posx>
+                            <posy>0</posy>
+                            <width>1-col</width>
+                            <font>itemTitle</font>
+                            <textcolor>selected</textcolor>
+                            <selectedcolor>selected</selectedcolor>
+                            <shadowcolor>-</shadowcolor>
+                            <label>$INFO[ListItem.ActualIcon]*</label>
                         </control>
                         <!--closed caption-->
                         <control type="label">
@@ -102,7 +113,7 @@
                             <posx>14-col</posx>
                             <posy>0</posy>
                             <width>1-col</width>
-                            <font>smallStrong</font>
+                            <font>itemTitle</font>
                             <textcolor>selected</textcolor>
                             <selectedcolor>selected</selectedcolor>
                             <shadowcolor>-</shadowcolor>
@@ -114,7 +125,7 @@
                             <posx>15-col</posx>
                             <posy>0</posy>
                             <width>1-col</width>
-                            <font>smallStrong</font>
+                            <font>itemTitle</font>
                             <textcolor>selected</textcolor>
                             <selectedcolor>selected</selectedcolor>
                             <shadowcolor>-</shadowcolor>
@@ -136,23 +147,34 @@
                         <control type="label">
                             <posx>12</posx>
                             <posy>0</posy>
-                            <width>12-col-gutter</width>
+                            <width>7-col</width>
                             <font>itemTitle</font>
                             <textcolor>black</textcolor>
                             <selectedcolor>black</selectedcolor>
                             <shadowcolor>-</shadowcolor>
                             <info>ListItem.Label2</info>
                         </control>
-                        <!--language / rating / sync / CC-->
+                        <!--language-->
                         <control type="label">
-                            <posx>12-col</posx>
+                            <posx>8-col</posx>
                             <posy>0</posy>
                             <width>4-col-gutter</width>
-                            <font>smallStrong</font>
+                            <font>itemTitle</font>
                             <textcolor>black</textcolor>
                             <selectedcolor>black</selectedcolor>
                             <shadowcolor>-</shadowcolor>
-                            <label>$INFO[ListItem.Label] - $INFO[ListItem.ActualIcon]*</label>
+                            <info>ListItem.Label</info>
+                        </control>
+                        <!--rating-->
+                        <control type="label">
+                            <posx>12-col</posx>
+                            <posy>0</posy>
+                            <width>1-col</width>
+                            <font>itemTitle</font>
+                            <textcolor>black</textcolor>
+                            <selectedcolor>black</selectedcolor>
+                            <shadowcolor>-</shadowcolor>
+                            <label>$INFO[ListItem.ActualIcon]*</label>
                         </control>
                         <!--closed caption-->
                         <control type="label">
@@ -160,7 +182,7 @@
                             <posx>14-col</posx>
                             <posy>0</posy>
                             <width>1-col</width>
-                            <font>smallStrong</font>
+                            <font>itemTitle</font>
                             <textcolor>black</textcolor>
                             <selectedcolor>black</selectedcolor>
                             <shadowcolor>-</shadowcolor>
@@ -172,7 +194,7 @@
                             <posx>15-col</posx>
                             <posy>0</posy>
                             <width>1-col</width>
-                            <font>smallStrong</font>
+                            <font>itemTitle</font>
                             <textcolor>black</textcolor>
                             <selectedcolor>black</selectedcolor>
                             <shadowcolor>-</shadowcolor>
@@ -183,7 +205,7 @@
                 <!--page scrollbar-->
                 <control type="group" id="8000">
                     <visible>Control.IsVisible(60)</visible>
-                    <animation effect="fade" start="100" end="70" time="100" condition="!controlgroup(8000).hasfocus">conditional</animation>
+                    <animation effect="fade" start="100" end="0" time="100" condition="!controlgroup(8000).hasfocus">conditional</animation>
                     <control type="scrollbar" id="60">
                         <posx>col-20-begin</posx>
                         <posy>120</posy>
@@ -213,7 +235,7 @@
                     <posx>0</posx>
                     <posy>177</posy>
                     <width>4-col-gutter</width>
-                    <height>11-row</height>
+                    <height>4-row</height>
                     <onright>120</onright>
 					<onup>160</onup>
                     <scrolltime>200</scrolltime>

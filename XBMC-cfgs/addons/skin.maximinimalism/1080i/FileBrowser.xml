@@ -59,9 +59,9 @@
                 <colordiffuse>ffffffff</colordiffuse>
                 <aspectratio>stretch</aspectratio>
             </control>
-            <control type="label" id="411">
+            <control type="label">
                 <posx>12</posx>
-                <posy>44</posy>
+                <posy>47</posy>
                 <width>16-col</width>
                 <font>pageTitle</font>
                 <label>31089</label>
