@@ -79,7 +79,7 @@ echo "##########################################"
 # download original xbmc-bin package as template
 mkdir /tmp/RetroRig-bin
 cd /tmp/RetroRig-bin
-wget "http://www.libregeek.org/RetroRig/old_pkgs/xbmc-bin_original.deb"
+wget -P --tries=50 "http://www.libregeek.org/RetroRig/old_pkgs/xbmc-bin_original.deb"
 
 # unpack xbmc-bin
 dpkg-deb -x xbmc-bin_original.deb .
@@ -90,7 +90,7 @@ sudo rm -f *.deb
 # download original xbmc file package as template
 mkdir /tmp/RetroRig
 cd /tmp/RetroRig
-wget "http://www.libregeek.org/RetroRig/old_pkgs/xbmc_original.deb"
+wget -P --tries=50 "http://www.libregeek.org/RetroRig/old_pkgs/xbmc_original.deb"
 
 # unpack xbmc
 dpkg-deb -x xbmc_original.deb .
