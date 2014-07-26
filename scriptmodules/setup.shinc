@@ -399,12 +399,12 @@ function rrs_xbmc_patched()
 	apt-get remove -y xbmc xbmc-bin
 
 	# remove old /tmp files if they exist
-	rm -f /tmp/xbmc-bin_Gotham_V13.1_patched_for_RetroRig*
-	rm -f /tmp/xbmc_Gotham_V13.1_patched_for_RetroRig*
+	rm -f "/tmp/xbmc_gotham-patched-for-retrorig-patchlevel-*-0trusty.deb"
+	rm -f "/tmp/xbmc-bin_gotham-patched-for-retrorig-patchlevel-*-0trusty.deb"
 
 	# copy down the patched debs from libregeek (saves on space, dl speed is adaquate for now)
-	wget -P /tmp "www.libregeek.org/RetroRig/xbmc/xbmc-bin_Gotham_V13.1_patched_for_RetroRig_patchlevel_4.deb"
-	wget -P /tmp "www.libregeek.org/RetroRig/xbmc/xbmc_Gotham_V13.1_patched_for_RetroRig_patchlevel_4.deb"
+	wget --tries=50 -P /tmp "www.libregeek.org/RetroRig/xbmc/xbmc_gotham-patched-for-retrorig-patchlevel-5-0trusty.deb"
+	wget --tries=50 -P /tmp "www.libregeek.org/RetroRig/xbmc/xbmc-bin_gotham-patched-for-retrorig-patchlevel-5-0trusty.deb"
 
 	# install dependencies manually
 	apt-get install -y mesa-utils \
@@ -435,15 +435,19 @@ function rrs_xbmc_patched()
                            libtinyxml2.6.2 \
                            libva-x11-1 \
                            libva-glx1 \
-                           libcrystalhd3
+                           libcrystalhd3 \
+                           libmad0 \
+                           libass4 \
+                           libmp3lame0 \
+                           libenca0
 
 	# install deb from /tmp
-	dpkg -i "/tmp/xbmc-bin_Gotham_V13.1_patched_for_RetroRig_patchlevel_4.deb"
-        dpkg -i "/tmp/xbmc_Gotham_V13.1_patched_for_RetroRig_patchlevel_4.deb"
+	dpkg -i "/tmp/xbmc-bin_gotham-patched-for-retrorig-patchlevel-5-0trusty.deb"
+        dpkg -i "/tmp/xbmc_gotham-patched-for-retrorig-patchlevel-5-0trusty.deb"
 
 	# cleanup deb
-	sudo rm -f "/tmp/xbmc-bin_Gotham_V13.1_patched_for_RetroRig_patchlevel_*.deb"
-	sudo rm -f "/tmp/xbmc_Gotham_V13.1_patched_for_RetroRig_patchlevel_*.deb"
+	rm -f "/tmp/xbmc-bin_gotham-patched-for-retrorig-patchlevel-*-0trusty.deb"
+	rm -f "/tmp/xbmc_gotham-patched-for-retrorig-patchlevel-*-0trusty.deb"
 
         # get SHA1 tag from patched XBMC version
         sha1=`file /usr/lib/xbmc/xbmc.bin | cut -f 19 -d ' '| cut -f 2 -d '='|cut -f 1 -d ','`
@@ -681,9 +685,9 @@ rrs_kernel_check()
 	if [ $user_kernel -lt "$target_kernel" ]; then
    	    echo "Kernel 3.14.x not found, installing"
 	    sleep 5s
-	    wget -P /tmp "http://kernel.ubuntu.com/~kernel-ppa/mainline/v3.14-trusty/linux-headers-3.14.0-031400_3.14.0-031400.201403310035_all.deb"
-	    wget -P /tmp "http://kernel.ubuntu.com/~kernel-ppa/mainline/v3.14-trusty/linux-headers-3.14.0-031400-generic_3.14.0-031400.201403310035_amd64.deb"
-	    wget -P /tmp "http://kernel.ubuntu.com/~kernel-ppa/mainline/v3.14-trusty/linux-image-3.14.0-031400-generic_3.14.0-031400.201403310035_amd64.deb"
+	    wget --tries=50 -P /tmp "http://kernel.ubuntu.com/~kernel-ppa/mainline/v3.14-trusty/linux-headers-3.14.0-031400_3.14.0-031400.201403310035_all.deb"
+	    wget --tries=50 -P /tmp "http://kernel.ubuntu.com/~kernel-ppa/mainline/v3.14-trusty/linux-headers-3.14.0-031400-generic_3.14.0-031400.201403310035_amd64.deb"
+	    wget --tries=50 -P /tmp "http://kernel.ubuntu.com/~kernel-ppa/mainline/v3.14-trusty/linux-image-3.14.0-031400-generic_3.14.0-031400.201403310035_amd64.deb"
 	    cd /tmp
 	    dpkg -i linux-headers-3.14*.deb linux-image-3.14*.deb
 	elif [ $user_kernel -ge "$target_kernel" ]; then
