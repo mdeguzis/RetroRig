@@ -226,10 +226,10 @@ function rrs_emulators()
 
 
 	if [[ ! -z $__postMSGs ]]; then
-	dialog --backtitle "LibreGeek.org - RetroRig Setup. Installation folder: $rootdir for user $user" --msgbox "$__postMSGs" 17 70
+	dialog --backtitle "LibreGeek.org - RetroRig Setup" --msgbox "$__postMSGs" 17 70
 	fi
 
-	dialog --backtitle "LibreGeek.org - RetroRig Setup. Installation folder: $rootdir for user $user" --msgbox "Finished emulator installs.\n\nYou now have to copy roms to the roms folders. You may also use the 'ROM loader' in settings menu" 17 60
+	dialog --backtitle "LibreGeek.org - RetroRig Setup" --msgbox "Finished emulator installs.\n\nYou now have to copy roms to the roms folders. You may also use the 'ROM loader' in settings menu" 17 60
 
 }
 
