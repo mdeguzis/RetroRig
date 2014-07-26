@@ -339,7 +339,7 @@ Installer" --menu "| Main Menu (v.0.9.1) | \
 		h_emu_user_fixes
 		set_resolution
 		rrs_unity
-		rrs_kernel_3_14
+		rrs_kernel_check
 		rrs_done
 		} 2>&1 | tee "$scriptdir/logs/install_$now.log.txt"              	
 		chown -R "$user" "$scriptdir/logs/install_$now.log.txt"

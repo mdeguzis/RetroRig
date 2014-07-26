@@ -79,7 +79,7 @@ while true; do
 		;;
 
 		12)
-		rrs_kernel_3_14
+		rrs_kernel_check
 		;;
 
 		13)
