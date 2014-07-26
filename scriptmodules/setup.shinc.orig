@@ -635,9 +635,8 @@ function rrs_reboot()
 	esac
 }
 
-rrs_kernel_3_14()
+rrs_kernel_check()
 {
-
 
 	##################################################################
 	# related documentation as to why this kernel upgrade is done:
@@ -674,11 +673,7 @@ rrs_kernel_3_14()
 
 	# Check if 3.14.x exists
 	if [ $user_kernel -lt "$target_kernel" ]; then
-<<<<<<< HEAD
-   	    echo "Kernel 3.14.x or greater not found, installing"
-=======
    	    echo "Kernel 3.14.x not found, installing"
->>>>>>> origin
 	    sleep 5s
 	    wget -P /tmp "http://kernel.ubuntu.com/~kernel-ppa/mainline/v3.14-trusty/linux-headers-3.14.0-031400_3.14.0-031400.201403310035_all.deb"
 	    wget -P /tmp "http://kernel.ubuntu.com/~kernel-ppa/mainline/v3.14-trusty/linux-headers-3.14.0-031400-generic_3.14.0-031400.201403310035_amd64.deb"
@@ -691,12 +686,14 @@ rrs_kernel_3_14()
 	    sleep 2s
 	fi
 
-	# inform user
-	# dialog --msgbox "upgrading the kernel to 3.14 is complete, please reboot" 5 60
+	# Hold the kernel packages so the kernel is not upgrade by accident
+	apt-mark hold linux-generic linux-headers-generic linux-image-generic 
+
+	# inform user of what was done
+	dialog --msgbox "Upgrading the kernel to 3.14.0-031400-generic is complete. The packages 'linux-generic linux-headers-generic linux-image-generic' have been held to avoid falling back to regressed kernel. If you wish to change your kernel, please run the following command in the terminal:\n\n'sudo apt-mark unhold linux-generic linux-headers-generic linux-image-generic'" 14 60
 
 	# cleanup packages
 	rm -f /tmp/linux-headers-3.14*
 	rm -f /tmp/linux-image-3.14*
 
 }
-
