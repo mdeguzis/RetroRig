@@ -127,11 +127,10 @@ case $response in
 	rm -f "/usr/share/applications/RetriRig.desktop"
 
 	# remove /etc/sudoers lines we added
-	echo "" >> /etc/sudoers
-	echo "# RetroRig specific allowances" >> /etc/sudoers
-	echo "%sudo   ALL=NOPASSWD: /usr/sbin/service xboxdrv restart" >> /etc/sudoers
-	echo "%sudo   ALL=NOPASSWD: /sbin/rmmod hid_sony" >> /etc/sudoers
-	echo "%sudo   ALL=NOPASSWD: /usr/bin/xboxdrv" >> /etc/sudoers
+	sed -i '/# RetroRig specific allowances/d' "/etc/sudoers"
+	sed -i '/%sudo   ALL=NOPASSWD: \/usr\/sbin\/service xboxdrv restart/d' "/etc/sudoers"
+	sed -i '/%sudo   ALL=NOPASSWD: \/sbin\/rmmod hid_sony/d' "/etc/sudoers"
+	sed -i '/%sudo   ALL=NOPASSWD: \/usr\/bin\/xboxdrv/d' "/etc/sudoers"
 
 	# remove system services
 	service xboxdrv stop
