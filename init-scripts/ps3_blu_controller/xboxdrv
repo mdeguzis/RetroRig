@@ -16,7 +16,7 @@ PATH=/sbin:/usr/sbin:/bin:/usr/bin
 DESC="PS3 Controller Service"
 NAME=xboxdrv
 DAEMON=/usr/bin/$NAME
-DAEMON_ARGS="-D -d --deadzone 4000 --dbus disabled --detach"
+DAEMON_ARGS=""
 PIDFILE=/var/run/$NAME.pid
 SCRIPTNAME=/etc/init.d/$NAME
 
@@ -50,7 +50,8 @@ do_start()
 
 do_stop()
 {
-    start-stop-daemon -K -o -q -x $DAEMON
+    start-stop-daemon -K -o -q -x $DAEMON -- $DAEMON_ARGS $CONTROLLER
+    kill -7 $(ps aux | grep 'xboxdrv' | awk '{print $2}')
     sleep 1
 }
 

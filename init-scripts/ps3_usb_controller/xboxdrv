@@ -50,7 +50,8 @@ do_start()
 
 do_stop()
 {
-    start-stop-daemon -K -o -q -x $DAEMON
+    start-stop-daemon -K -o -q -x $DAEMON -- $DAEMON_ARGS $CONTROLLER
+    kill -7 $(ps aux | grep 'xboxdrv' | awk '{print $2}')
     sleep 1
 }
 
