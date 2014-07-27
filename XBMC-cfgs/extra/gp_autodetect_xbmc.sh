@@ -17,7 +17,7 @@ echo $controllerAvailable_ps3_usb
 controllerAvailable_x360_wireless=`cat /proc/bus/input/devices | grep "Xbox Gamepad (userspace driver)"`
 echo "Available Xbox 360 Controllers (Wireless):"
 echo $controllerAvailable_x360_wireless
-
+l
 controllerAvailable_x360_usb=`cat /proc/bus/input/devices | grep "Xbox Gamepad (userspace driver)"`
 echo "Available Xbox 360 Controllers (Wired):"
 echo $controllerAvailable_x360_usb

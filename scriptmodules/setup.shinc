@@ -375,7 +375,12 @@ function rrs_xbmc_patched()
 	cp -v "$rootdir/XBMC-cfgs/extra/retro-icon.png" "$xdg_pictures_dir"
 	cp -v "$rootdir/XBMC-cfgs/extra/retro-icon.png" "/usr/share/icons/"
 	cp -v "$rootdir/XBMC-cfgs/extra/startXBMC.sh" "/usr/share/applications/"
-	
+
+	# insert restarting xboxdrv specifically into /etc/sudoers
+	echo "" >> /etc/sudoers
+	echo "# RetroRig specific allowances"
+	echo "%sudo   ALL=NOPASSWD: /usr/sbin/service xboxdrv restart"
+
 	# Can't use $config_home in the desktop file, so need to replace $user string
 	sed -i "s|/home/test/Pictures|$xdg_pictures_dir|g" "/usr/share/applications/RetroRig.desktop"
 
