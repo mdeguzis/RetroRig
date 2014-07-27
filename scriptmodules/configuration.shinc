@@ -126,6 +126,13 @@ case $response in
 	rm -f "/usr/share/applications/startXBMC.sh"
 	rm -f "/usr/share/applications/RetriRig.desktop"
 
+	# remove /etc/sudoers lines we added
+	echo "" >> /etc/sudoers
+	echo "# RetroRig specific allowances" >> /etc/sudoers
+	echo "%sudo   ALL=NOPASSWD: /usr/sbin/service xboxdrv restart" >> /etc/sudoers
+	echo "%sudo   ALL=NOPASSWD: /sbin/rmmod hid_sony" >> /etc/sudoers
+	echo "%sudo   ALL=NOPASSWD: /usr/bin/xboxdrv" >> /etc/sudoers
+
 	# remove system services
 	service xboxdrv stop
 	service rescan stop	
