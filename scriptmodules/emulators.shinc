@@ -9,12 +9,13 @@
 
 function em_add_repos()
 {
-	# Add playdeb repo for later additions (very useful) 
-	echo "deb http://archive.getdeb.net/ubuntu trusty-getdeb games" > /tmp/playdeb.list 
-	mv "/tmp/playdeb.list" "/etc/apt/sources.list.d/playdeb.list"
-	wget -q -O- http://archive.getdeb.net/getdeb-archive.key > getdeb.key 
-	apt-key add getdeb.key 
-	rm -f getdeb.key
+	# Add playdeb repo for later additions (disabled until needed!!!)
+	
+	# echo "deb http://archive.getdeb.net/ubuntu trusty-getdeb games" > /tmp/playdeb.list 
+	# mv "/tmp/playdeb.list" "/etc/apt/sources.list.d/playdeb.list"
+	# wget -q -O- http://archive.getdeb.net/getdeb-archive.key > getdeb.key 
+	# apt-key add getdeb.key 
+	# rm -f getdeb.key
 }
 
 function em_install_ppsspp_source()
