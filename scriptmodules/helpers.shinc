@@ -44,6 +44,10 @@ h_clean_gamepad()
 
 	# XBMC keymaps
 	rm -f "$xbmc_home/userdata/keymaps/keyboard.xml"
+	
+	# remove the /usr/share/applications/gp_autodetect_xbmc.sh file, so we can actively
+	# set the gamepad type on changes from user input in the script gamepad select
+	rm -f "/usr/share/applications/gp_autodetect_xbmc.sh"
 
 	# Xbox controller 
 	service xboxdrv stop

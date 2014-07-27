@@ -209,6 +209,9 @@ function gp_ps3_blu_main()
 	# replace specific user paths that emulators and files may use
 	h_emu_user_fixes
 
+	# copy in the gp_autodetect_xbmc.sh template file, and change our gamepad type
+	cp -v "$scriptdir/X" "/usr/share/applications/gp_autodetect_xbmc.sh"
+
 	# correct permissions since we run as sudo
 	h_correct_perms	
 }
