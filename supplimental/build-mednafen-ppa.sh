@@ -29,7 +29,7 @@ echo "##########################################"
 #apt-get build-deps
 sudo apt-get -y build-dep mednafen
 #apt-get install packages
-sudo apt-get install -y build-essential fakeroot devscripts automake autoconf autotools-dev libsdl2-dev
+sudo apt-get install -y build-essential fakeroot devscripts automake autoconf autotools-dev libsdl2-dev libmpcdec-dev
 
 
 echo ""
