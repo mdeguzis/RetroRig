@@ -9,6 +9,9 @@
 
 function em_add_repos()
 {
+	# For some reason, a syntax error occurs on script load without data in in this function
+	echo "No custom repos in use at the moment for emulator installs"
+
 	# Add playdeb repo for later additions (disabled until needed!!!)
 	
 	# echo "deb http://archive.getdeb.net/ubuntu trusty-getdeb games" > /tmp/playdeb.list 
