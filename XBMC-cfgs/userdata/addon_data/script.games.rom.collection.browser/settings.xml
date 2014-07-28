@@ -30,5 +30,5 @@
     <setting id="rcb_suspendAudio" value="true" />
     <setting id="rcb_toggleScreenMode" value="true" />
     <setting id="rcb_useVBInSoloMode" value="false" />
-    <setting id="rcb_view_mode" value="52" />
+    <setting id="rcb_view_mode" value="50" />
 </settings>
