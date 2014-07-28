@@ -575,9 +575,11 @@ function gp_x360_wireless()
 	h_emu_user_fixes
 
 	# copy in the gp_autodetect_xbmc.sh template file, and change the gamepad type
-	new_controller_type="x360_wireless"
-	cp -v "$scriptdir/XBMC-cfgs/extra/gp_autodetect_xbmc.sh" "/usr/share/applications/gp_autodetect_xbmc.sh" 
-	sed -i "s|controller_temp|$new_controller_type|g" "/usr/share/applications/gp_autodetect_xbmc.sh"
+	
+	# new_controller_type="x360_wireless"
+	# Testing ONLY for gp_autodetect_xbmc.sh.testing
+	# cp -v "$scriptdir/XBMC-cfgs/extra/gp_autodetect_xbmc.sh" "/usr/share/applications/gp_autodetect_xbmc.sh" 
+	# sed -i "s|controller_temp|$new_controller_type|g" "/usr/share/applications/gp_autodetect_xbmc.sh"
 
 	# correct permissions since we run as sudo
 	h_correct_perms
