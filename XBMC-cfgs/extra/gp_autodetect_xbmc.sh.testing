@@ -1,0 +1,85 @@
+#!/bin/bash 
+
+# Project RetroRig: https://github.com/ProfessorKaos64/RetroRig
+# This script detects a change on available PS controller. If detected, it notifies XBMC.
+# Authors: Jens-Christiansen, Michael DeGuzis
+# Revision: 2014/06/21, initial version
+# Revision: 2014/07/26, by pk, added checks for all controllers
+
+###################################################
+# set controller type based on RetroRig Script
+###################################################
+
+controllertype="ps3_usb"
+
+###################################################
+
+while [ 0 ]
+do
+
+# tell user controller is not connected if applicable
+#if "lsusb | grep -E 'xbox|Xbox|ps3|PS3|playstation|Playstation|PLAYSTATION|Sony|'";then
+	# do nothing
+#else
+	# let user know controller is disonnected
+#	echo "Controller is disconncected, please reconnect!"
+#fi
+
+# check for PS3 Bluetooth Controller
+if [ "$controllertype" = "ps3_blu" ]; then
+
+          old_ps3_blu=$new_ps3_blu
+          new_ps3_blu=`cat /proc/bus/input/devices | grep "PLAYSTATION(R)"`
+          if [ "$new_ps3_blu" != "$old_ps3_blu" ]; then
+            killall xbmc.bin -SIGUSR1
+          fi
+fi
+
+# check for PS3 USB Controller
+
+if [ "$controllertype" = "ps3_usb" ]; then
+          # check for PS3 USB Controller
+          old_ps3_usb=$new_ps3_usb
+          new_ps3_usb=`lsusb | grep -E "PlayStation 3 Controller"`
+          if [ "$new_ps3_usb" != "$old_ps3_usb" ]; then
+            echo "Restarting xboxdrv services (PS3, USB)"
+	    sudo /usr/sbin/service xboxdrv stop
+            sleep 2s
+            sudo modprobe -r hid_sony
+            sudo /usr/sbin/service xboxdrv restart
+            killall xbmc.bin -SIGUSR1
+          fi
+ fi
+
+# check for xbox 360 wirelesss Controller
+
+if [ "$controllertype" = "xbox360_wireless" ]; then
+          # check for Xbox360 USB Hub (wireless) Controller
+          oldControllerAvailable=$controllerAvailable
+          controllerAvailable=`lsusb | grep Xbox 360 Wireless`
+          if [ "$controllerAvailable" != "$oldControllerAvailable" ]; then
+            echo "Restarting xboxdrv services (x360 wireless)"
+            sudo /usr/sbin/service xboxdrv restart
+            killall xbmc.bin -SIGUSR1
+          fi
+ fi
+
+### XBOX 360 WIRED HOTPLUGGING BELOW IS NOT CURRENTLY FUNCTIONING!!! ###
+
+# check for xbox 360 wired Controller
+if [ "$controllertype" = "x360_wired" ]; then
+
+          # check for Xbox360 USB connected Controller
+          oldControllerAvailableUSB=$controllerAvailableUSB
+          controllerAvailableUSB=`lsusb | grep "Xbox360 Controller"`
+          if [ "$controllerAvailableUSB" != "$oldControllerAvailableUSB" ]; then
+            echo "Restarting xboxdrv services"
+            killall xboxdrv
+            sudo /usr/sbin/service xboxdrv restart
+            killall xbmc.bin -SIGUSR1
+          fi
+fi
+
+  sleep 1
+done
+
