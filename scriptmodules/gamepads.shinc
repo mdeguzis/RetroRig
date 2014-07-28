@@ -430,16 +430,17 @@ RetorRig loads to use the gamepad" 14 60
 	# replace specific user paths that emulators and files may use
 	h_emu_user_fixes
 
-	# copy in the gp_autodetect_xbmc.sh template file, and change the gamepad type
-	new_controller_type="ps3_usb"
-	cp -v "$scriptdir/XBMC-cfgs/extra/gp_autodetect_xbmc.sh" "/usr/share/applications/gp_autodetect_xbmc.sh" 
-	sed -i "s|controller_temp|$new_controller_type|g" "/usr/share/applications/gp_autodetect_xbmc.sh"
+	# copy in the gp_autodetect_xbmc.sh template file, and change the gamepad type 
+	# Testing ONLY for gp_autodetect_xbmc.sh.testing
+	# new_controller_type="ps3_usb"
+	# cp -v "$scriptdir/XBMC-cfgs/extra/gp_autodetect_xbmc.sh" "/usr/share/applications/gp_autodetect_xbmc.sh" 
+	# sed -i "s|controller_temp|$new_controller_type|g" "/usr/share/applications/gp_autodetect_xbmc.sh"
 
 	# correct permissions since we run as sudo
 	h_correct_perms
 
 	# Let the user know about reboot
-	dialog --msgbox "Please reboot to fully enable the controller(s)."  5 52
+	dialog --msgbox "No reboot is needed for PS3 Controllers over Bluetooth"  5 60
 
 }
 
@@ -713,9 +714,10 @@ function gp_x360_usb()
 	# service xboxdrv start &
 
 	# copy in the gp_autodetect_xbmc.sh template file, and change the gamepad type
-	new_controller_type="x360_wired"
-	cp -v "$scriptdir/XBMC-cfgs/extra/gp_autodetect_xbmc.sh" "/usr/share/applications/gp_autodetect_xbmc.sh" 
-	sed -i "s|controller_temp|$new_controller_type|g" "/usr/share/applications/gp_autodetect_xbmc.sh"
+	# Testing ONLY for gp_autodetect_xbmc.sh.testing
+	# new_controller_type="x360_wired"
+	# cp -v "$scriptdir/XBMC-cfgs/extra/gp_autodetect_xbmc.sh" "/usr/share/applications/gp_autodetect_xbmc.sh" 
+	# sed -i "s|controller_temp|$new_controller_type|g" "/usr/share/applications/gp_autodetect_xbmc.sh"
 
 	# replace specific user paths that emulators and files may use
 	h_emu_user_fixes
