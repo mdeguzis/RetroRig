@@ -10,7 +10,6 @@
 function set_menu()
 {
 	
-
 while true; do
     cmd=(dialog --backtitle "LibreGeek.org RetroRig" --menu "Settings Menu" 18 0 12)
     options=(1 "Change resolution"  

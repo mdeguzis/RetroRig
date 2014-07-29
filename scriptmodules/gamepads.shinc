@@ -152,8 +152,6 @@ function gp_ps3_blu_main()
 		# call pairing function to set current bluetooth MAC to Player 1
 		n="1"
 		ps3_pair_blu
-		# Set up control assignments for emulators and XBMC control
-		ps3_set_p1_assignments
 		# TESING ONLY!!!
 		# echo "The USB MAC Address is: $PS3_MAC_P1_USB"
 		# echo "The Bluetooth MAC Address is: $PS3_MAC_P1_BLU"
@@ -165,8 +163,6 @@ function gp_ps3_blu_main()
 		# call pairing function to set current bluetooth MAC to Player 1
 		n="1"
 		ps3_pair_blu
-		# Set up control assignments for emulators and XBMC control
-		ps3_set_p1_assignments
 		dialog --msgbox "Pairing of Player 1 Controller complete" 5 43 
 		# call pairing function to set current bluetooth MAC to Player 2
 		n="2"
@@ -178,8 +174,6 @@ function gp_ps3_blu_main()
 		# call pairing function to set current bluetooth MAC to Player 1
 		n="1"
 		ps3_pair_blu
-		# Set up control assignments for emulators and XBMC control
-		ps3_set_p1_assignments
 		dialog --msgbox "Pairing of Player 1 Controller complete" 5 43 
 		# call pairing function to set current bluetooth MAC to Player 2
 		n="2"
@@ -195,8 +189,6 @@ function gp_ps3_blu_main()
 		# call pairing function to set current bluetooth MAC to Player 1
 		n="1"
 		ps3_pair_blu
-		# Set up control assignments for emulators and XBMC control
-		ps3_set_p1_assignments
 		dialog --msgbox "Pairing of Player 1 Controller complete" 5 43 
 		# call pairing function to set current bluetooth MAC to Player 2
 		n="2"
@@ -235,19 +227,24 @@ function gp_ps3_blu_main()
 	h_correct_perms	
 }
 
-function ps3_set_p1_assignments()
+function ps3_set_ctrl_assignments()
 {
 	
+	# note:
+	# This is ok to run on each pairing (player 1-4) since they all would connect to 
+	# and share the same Bluetooth MAC address. This address is not different for
+	# each individual controller, and there for can be safely called on pairing.
+
 	clear
 	# inform user
-	echo "Assigning Player $n controls to XBMC and applicable emulators"
+	echo "Assigning Player controls to XBMC and applicable emulators based on Bluetooth MAC Address"
 	sleep 2s
 
 	# Set PS3 Blu MAC value 
- 	PS3_MAC_P1_BLU=$(sixpair | grep "Current" | cut -c 27-43)
+ 	PS3_MAC_BLU=$(sixpair | grep "Current" | cut -c 27-43)
 
 	# copy over default keyboard file:
-	cp -v "$rootdir/gamepad-cfgs/ps3_blu_controller/keyboard.xml" "$xbmc_home/userdata/keymaps/keyboard.xml"
+	cp -v "$rootdir/gamepad-cfgs/ps3_blu_controller/keyboard.xml" "$xbmc_home/userdata/keymaps/"
 
 	# First grab MAC Addresses:
 	# In the config file, the MAC is set to 00:00:00:00:00:00
@@ -256,10 +253,10 @@ function ps3_set_p1_assignments()
 	PS3_MAC_OLD="00:00:00:00:00:00"
 
 	# Replace MAC Address for ***CONTROLLER 1 ONLY!*** This will be used to control XBMC		
-	sed -i "s|$PS3_MAC_OLD|$PS3_MAC_P1_BLU|g" "$xbmc_home/userdata/keymaps/keyboard.xml"
+	sed -i "s|$PS3_MAC_OLD|$PS3_MAC_BLU|g" "$xbmc_home/userdata/keymaps/keyboard.xml"
 
 	# Stella does list the MAC address for the PS3 control in the stellarc file. Replace for now until further notice
-	sed -i "s|$PS3_MAC_OLD|$PS3_MAC_P1_BLU|g" "$config_home/.stella/stellarc"
+	sed -i "s|$PS3_MAC_OLD|$PS3_MAC_BLU|g" "$config_home/.stella/stellarc"
 
 }
 
@@ -275,8 +272,11 @@ function ps3_pair_blu()
 
 	clear
 	# Grab player 1 controller MAC Address of wired device
-	echo "Setting up Playstation 3 Sixaxis (blutooth) [Player $n]" | tee "$rootdir/logs/debug.log"
+	echo "Setting up Playstation 3 Sixaxis (bluetooth) [Player $n]" | tee "$rootdir/logs/debug.log"
 	sleep 2s
+
+	# Set up control assignments for emulators and XBMC control
+	ps3_set_ctrl_assignments
 
 	# Pair controller with logging
 	sixpair | tee "$rootdir/logs/debug.log"
