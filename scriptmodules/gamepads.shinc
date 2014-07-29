@@ -120,6 +120,18 @@ function gp_ps3_blu_main()
 	# End qjoypad remappings
 	###########################################################
 
+	###########################################################
+	# Start controller pairing process
+	###########################################################
+
+	# start sixad service for pairing process
+        echo "starting serives" | tee "$rootdir/logs/debug.log"
+        echo "" | tee "$rootdir/logs/debug.log"
+        # start service, but fork to background so when user exits script it is still running $
+        service sixad start | tee "$rootdir/logs/debug.log" &
+        sleep 2s
+        clear
+
 	# Present small menu asking for number of controllers
 	cmd=(dialog --backtitle "LibreGeek.org RetroRig Installer" \
 		    --menu "Please select the number of PS3 controllers" 16 47 16)
@@ -203,14 +215,9 @@ function gp_ps3_blu_main()
 		esac
 	done
 
-	clear
-	# restart sixad service
-        echo "starting serives" | tee "$rootdir/logs/debug.log"
-        echo "" | tee "$rootdir/logs/debug.log"
-        # start service, but fork to background so when user exits script it is still running $
-        service sixad start | tee "$rootdir/logs/debug.log" &
-        sleep 2s
-        clear
+	###########################################################
+	# End controller pairing process
+	###########################################################
 
 	clear
 	# start the service at boot time
