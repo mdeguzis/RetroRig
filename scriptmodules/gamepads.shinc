@@ -153,6 +153,8 @@ function gp_ps3_blu_main()
 		# call pairing function to set current bluetooth MAC to Player 1
 		n="1"
 		ps3_pair_blu
+		# Set up control assignments for emulators and XBMC control
+		ps3_set_p1_assignments
 		dialog --msgbox "Pairing of Player 1 Controller complete" 5 43 
 		# call pairing function to set current bluetooth MAC to Player 2
 		n="2"
@@ -164,6 +166,8 @@ function gp_ps3_blu_main()
 		# call pairing function to set current bluetooth MAC to Player 1
 		n="1"
 		ps3_pair_blu
+		# Set up control assignments for emulators and XBMC control
+		ps3_set_p1_assignments
 		dialog --msgbox "Pairing of Player 1 Controller complete" 5 43 
 		# call pairing function to set current bluetooth MAC to Player 2
 		n="2"
@@ -179,6 +183,8 @@ function gp_ps3_blu_main()
 		# call pairing function to set current bluetooth MAC to Player 1
 		n="1"
 		ps3_pair_blu
+		# Set up control assignments for emulators and XBMC control
+		ps3_set_p1_assignments
 		dialog --msgbox "Pairing of Player 1 Controller complete" 5 43 
 		# call pairing function to set current bluetooth MAC to Player 2
 		n="2"
