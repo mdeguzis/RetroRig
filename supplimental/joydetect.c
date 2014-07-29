@@ -21,7 +21,7 @@ int main(int argc, char **argv)
 	ioctl (jhandle, JSIOCGNAME(128), &jname);
 	close(jhandle);
 
-	printf("Name: %s\nAxes: %i\nButtons: %i\n",jname, jcaps[0],jcaps[1]);
+        printf("Name: %s\n",jname);
 
 	return 0;
 }
