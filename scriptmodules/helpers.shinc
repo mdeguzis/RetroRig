@@ -54,6 +54,9 @@ h_clean_gamepad()
 	rm -f /etc/init.d/xboxdrv
 	rm -f /etc/default/xboxdrv
 
+	# PS3 controller
+	service sixad stop
+
 	# clean init scripts (rescan service shouldn't need cleaned right now)
 	# If it is required later, it will fall here.
 	update-rc.d -f xboxdrv remove

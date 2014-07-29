@@ -138,9 +138,10 @@ function gp_ps3_blu_main()
 
 		1)
 		# call pairing function to set current bluetooth MAC to Player 1
+		n="1"
 		ps3_pair_blu
-		# grab player 1 controller MAC Address of USB/bluetooth pairing process
-		PS3_MAC_P1_BLU=$(grep "PLAYSTATION(R)3" "/proc/bus/input/devices" | cut -c38-54)
+		# Set up control assignments for emulators and XBMC control
+		ps3_set_p1_assignments
 		# TESING ONLY!!!
 		# echo "The USB MAC Address is: $PS3_MAC_P1_USB"
 		# echo "The Bluetooth MAC Address is: $PS3_MAC_P1_BLU"
@@ -150,36 +151,45 @@ function gp_ps3_blu_main()
 
 		2)
 		# call pairing function to set current bluetooth MAC to Player 1
+		n="1"
 		ps3_pair_blu
 		dialog --msgbox "Pairing of Player 1 Controller complete" 5 43 
 		# call pairing function to set current bluetooth MAC to Player 2
+		n="2"
 		ps3_pair_blu
 		dialog --msgbox "Pairing of Player 2 Controller complete" 5 43 
 		;;
 
 		3)
 		# call pairing function to set current bluetooth MAC to Player 1
+		n="1"
 		ps3_pair_blu
 		dialog --msgbox "Pairing of Player 1 Controller complete" 5 43 
 		# call pairing function to set current bluetooth MAC to Player 2
+		n="2"
 		ps3_pair_blu
 		dialog --msgbox "Pairing of Player 2 Controller complete" 5 43
 		# call pairing function to set current bluetooth MAC to Player 3
+		n="3"
 		ps3_pair_blu
 		dialog --msgbox "Pairing of Player 3 Controller complete" 5 43  
 		;;
 
 		4)
 		# call pairing function to set current bluetooth MAC to Player 1
+		n="1"
 		ps3_pair_blu
 		dialog --msgbox "Pairing of Player 1 Controller complete" 5 43 
 		# call pairing function to set current bluetooth MAC to Player 2
+		n="2"
 		ps3_pair_blu
 		dialog --msgbox "Pairing of Player 2 Controller complete" 5 43
 		# call pairing function to set current bluetooth MAC to Player 3
+		n="3"
 		ps3_pair_blu
 		dialog --msgbox "Pairing of Player 3 Controller complete" 5 43
 		# call pairing function to set current bluetooth MAC to Player 4
+		n="4"
 		ps3_pair_blu
 		dialog --msgbox "Pairing of Player 4 Controller complete" 5 43    
 		;;
@@ -188,21 +198,15 @@ function gp_ps3_blu_main()
 	done
 
 	clear
-	# copy over default keyboard file:
-	cp -v "$rootdir/gamepad-cfgs/ps3_blu_controller/keyboard.xml" "$xbmc_home/userdata/keymaps/keyboard.xml"
+	# restart sixad service
+        echo "starting serives" | tee "$rootdir/logs/debug.log"
+        echo "" | tee "$rootdir/logs/debug.log"
+        # start service, but fork to background so when user exits script it is still running $
+        service sixad start | tee "$rootdir/logs/debug.log" &
+        sleep 2s
+        clear
 
-	# First grab MAC Addresses:
-	# In the config file, the MAC is set to 00:00:00:00:00:00
-
-	# set MAC values
-	PS3_MAC_OLD="00:00:00:00:00:00"
-
-	# Replace MAC Address for ***CONTROLLER 1 ONLY!*** This will be used to control XBMC		
-	sed -i "s|$PS3_MAC_OLD|$PS3_MAC_P1_BLU|g" "$xbmc_home/userdata/keymaps/keyboard.xml"
-
-	# Stella does list the MAC address for the PS3 control in the stellarc file. Replace for now until further notice
-	sed -i "s|$PS3_MAC_OLD|$PS3_MAC_P1_BLU|g" "$config_home/.stella/stellarc"
-
+	clear
 	# start the service at boot time
 	sixad --boot-yes
 
@@ -218,6 +222,34 @@ function gp_ps3_blu_main()
 	h_correct_perms	
 }
 
+function ps3_set_p1_assignments()
+{
+	
+	clear
+	# inform user
+	echo "Assigning Player $n controls to XBMC and applicable emulators"
+	sleep 2s
+
+	# Set PS3 Blu MAC value 
+ 	PS3_MAC_P1_BLU=$(sixpair | grep "Current" | cut -c 27-43)
+
+	# copy over default keyboard file:
+	cp -v "$rootdir/gamepad-cfgs/ps3_blu_controller/keyboard.xml" "$xbmc_home/userdata/keymaps/keyboard.xml"
+
+	# First grab MAC Addresses:
+	# In the config file, the MAC is set to 00:00:00:00:00:00
+
+	# set MAC values
+	PS3_MAC_OLD="00:00:00:00:00:00"
+
+	# Replace MAC Address for ***CONTROLLER 1 ONLY!*** This will be used to control XBMC		
+	sed -i "s|$PS3_MAC_OLD|$PS3_MAC_P1_BLU|g" "$xbmc_home/userdata/keymaps/keyboard.xml"
+
+	# Stella does list the MAC address for the PS3 control in the stellarc file. Replace for now until further notice
+	sed -i "s|$PS3_MAC_OLD|$PS3_MAC_P1_BLU|g" "$config_home/.stella/stellarc"
+
+}
+
 function ps3_pair_blu()
 {
 
@@ -225,25 +257,17 @@ function ps3_pair_blu()
 	# Set and pair up player controller
 	#####################################
 
-	dialog --msgbox "Please plug in these items now:\n\n1)The USB cable\n2)PS3 controller\n\
+	dialog --msgbox "Please plug in these items now:\n\n1)The USB cable\n2)PS3 controller $n \n
 3)Bluetooth dongle\n\nAdditional controllers can be added in the settings menu"  12 40
 
 	clear
 	# Grab player 1 controller MAC Address of wired device
-	echo "Setting up Playstation 3 Sixaxis (blutooth) [Player 1]" | tee "$rootdir/logs/debug.log"
-
-	# echo USB MAC value to log for debugging purposes
- 	PS3_MAC_P1_USB=$(sixpair | grep "Current" | cut -c 27-43)
+	echo "Setting up Playstation 3 Sixaxis (blutooth) [Player $n]" | tee "$rootdir/logs/debug.log"
+	sleep 2s
 
 	# Pair controller with logging
 	sixpair | tee "$rootdir/logs/debug.log"
-	# start sixad service
-	echo "restarting serives" | tee "$rootdir/logs/debug.log"
-	echo "" | tee "$rootdir/logs/debug.log"
-	# start service, but fork to background so when user exits script it is still running to avoid reboot
-	service sixad restart | tee "$rootdir/logs/debug.log" &
 	sleep 2s
-	clear
 
 	# Inform player 1 controller user to disconnect USB cord
 	dialog --msgbox "Please disconnect the USB cable and press the PS Button now. The appropriate \
