@@ -242,13 +242,13 @@ function ps3_set_ctrl_assignments()
 
 	clear
 	# inform user
-	echo -e "Assigning controls to XBMC / applicable emulators based\n on controller MAC Address"
+	echo -e "Assigning controls to XBMC / applicable emulators based\non controller MAC Address"
 	sleep 2s
 
 	# Set PS3 Blu MAC value with the "joydetect" C program
 	# Credit for this goes entirely to http://www.reddit.com/user/ElFeesho
  	PS3_MAC_BLU=$($scriptdir/supplimental/joydetect /dev/input/js0 | awk -F'[^:[a-zA-Z0-9]*' '{print $6}')
-	echo -e "Controller ID/MAC Address applied to XBMC/emulators was:\n $PS3_MAC_BLU"
+	echo -e "\nController ID/MAC Address applied to XBMC/emulators was:\n$PS3_MAC_BLU"
 	sleep 2s
 
 	# copy over default keyboard file:
@@ -289,8 +289,8 @@ function ps3_pair_blu()
 
 	# Inform player 1 controller user to disconnect USB cord
 	dialog --msgbox "Please disconnect the USB cable and press the PS Button now. The appropriate \
-LED should be lit. If it is not, please hold in the PS button to turn it off, then back on.\n\nPlease reboot to \
-fully enable the controller(s)" 10 60
+LED for player $n should be lit. If it is not, please hold in the PS button to turn it off, then back on.\n\nThere is no need to reboot to \
+fully enable the controller(s)" 12 60
 
 }
 
