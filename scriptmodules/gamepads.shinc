@@ -242,13 +242,13 @@ function ps3_set_ctrl_assignments()
 
 	clear
 	# inform user
-	echo "Assigning controls to XBMC / applicable emulators based on controller MAC Address"
+	echo -e "Assigning controls to XBMC / applicable emulators based\n on controller MAC Address"
 	sleep 2s
 
 	# Set PS3 Blu MAC value with the "joydetect" C program
 	# Credit for this goes entirely to http://www.reddit.com/user/ElFeesho
  	PS3_MAC_BLU=$($scriptdir/supplimental/joydetect /dev/input/js0 | awk -F'[^:[a-zA-Z0-9]*' '{print $6}')
-	echo "Controller ID/MAC Address applied to XBMC/emulators was: $PS3_MAC_BLU"
+	echo -e "Controller ID/MAC Address applied to XBMC/emulators was:\n $PS3_MAC_BLU"
 	sleep 2s
 
 	# copy over default keyboard file:
