@@ -152,9 +152,8 @@ function gp_ps3_blu_main()
 		# call pairing function to set current bluetooth MAC to Player 1
 		n="1"
 		ps3_pair_blu
-		# TESING ONLY!!!
-		# echo "The USB MAC Address is: $PS3_MAC_P1_USB"
-		# echo "The Bluetooth MAC Address is: $PS3_MAC_P1_BLU"
+		# Set up control assignments for emulators and XBMC control
+		ps3_set_ctrl_assignments
 		dialog --msgbox "Pairing of Player 1 Controller complete" 5 43 
 		sleep 5s
 		;;
@@ -163,6 +162,8 @@ function gp_ps3_blu_main()
 		# call pairing function to set current bluetooth MAC to Player 1
 		n="1"
 		ps3_pair_blu
+		# Set up control assignments for emulators and XBMC control
+		ps3_set_ctrl_assignments
 		dialog --msgbox "Pairing of Player 1 Controller complete" 5 43 
 		# call pairing function to set current bluetooth MAC to Player 2
 		n="2"
@@ -174,6 +175,8 @@ function gp_ps3_blu_main()
 		# call pairing function to set current bluetooth MAC to Player 1
 		n="1"
 		ps3_pair_blu
+		# Set up control assignments for emulators and XBMC control
+		ps3_set_ctrl_assignments
 		dialog --msgbox "Pairing of Player 1 Controller complete" 5 43 
 		# call pairing function to set current bluetooth MAC to Player 2
 		n="2"
@@ -189,6 +192,8 @@ function gp_ps3_blu_main()
 		# call pairing function to set current bluetooth MAC to Player 1
 		n="1"
 		ps3_pair_blu
+		# Set up control assignments for emulators and XBMC control
+		ps3_set_ctrl_assignments
 		dialog --msgbox "Pairing of Player 1 Controller complete" 5 43 
 		# call pairing function to set current bluetooth MAC to Player 2
 		n="2"
@@ -237,11 +242,14 @@ function ps3_set_ctrl_assignments()
 
 	clear
 	# inform user
-	echo "Assigning Player controls to XBMC and applicable emulators based on Bluetooth MAC Address"
+	echo "Assigning controls to XBMC / applicable emulators based on controller MAC Address"
 	sleep 2s
 
-	# Set PS3 Blu MAC value 
- 	PS3_MAC_BLU=$(sixpair | grep "Current" | cut -c 27-43)
+	# Set PS3 Blu MAC value with the "joydetect" C program
+	# Credit for this goes entirely to http://www.reddit.com/user/ElFeesho
+ 	PS3_MAC_BLU=$($scriptdir/supplimental/joydetect /dev/input/js0 | awk -F'[^:[a-zA-Z0-9]*' '{print $6}')
+	echo "Controller ID/MAC Address applied to XBMC/emulators was: $PS3_MAC_BLU"
+	sleep 2s
 
 	# copy over default keyboard file:
 	cp -v "$rootdir/gamepad-cfgs/ps3_blu_controller/keyboard.xml" "$xbmc_home/userdata/keymaps/"
@@ -278,9 +286,6 @@ function ps3_pair_blu()
 	# Pair controller with logging
 	sixpair | tee "$rootdir/logs/debug.log"
 	sleep 2s
-
-	# Set up control assignments for emulators and XBMC control
-	ps3_set_ctrl_assignments
 
 	# Inform player 1 controller user to disconnect USB cord
 	dialog --msgbox "Please disconnect the USB cable and press the PS Button now. The appropriate \
