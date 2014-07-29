@@ -275,12 +275,12 @@ function ps3_pair_blu()
 	echo "Setting up Playstation 3 Sixaxis (bluetooth) [Player $n]" | tee "$rootdir/logs/debug.log"
 	sleep 2s
 
-	# Set up control assignments for emulators and XBMC control
-	ps3_set_ctrl_assignments
-
 	# Pair controller with logging
 	sixpair | tee "$rootdir/logs/debug.log"
 	sleep 2s
+
+	# Set up control assignments for emulators and XBMC control
+	ps3_set_ctrl_assignments
 
 	# Inform player 1 controller user to disconnect USB cord
 	dialog --msgbox "Please disconnect the USB cable and press the PS Button now. The appropriate \
