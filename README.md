@@ -49,7 +49,7 @@ For all other features and future plans, please see the [wiki](https://github.co
 * Custom XBMC binary package
 * Custom XBMC home screen and button layout
 * Seperate dot file (.retrorig, not .xbmc) so you can have your cake and eat it too!
-* Hotplugging support for supported game controllers
+* Hotplugging support for supported game wireless controllers
 * Dual monitor support for XBMC
 * Auto-install software, emulator configs, and required components
 * Many supported consoles (more added frequently)
