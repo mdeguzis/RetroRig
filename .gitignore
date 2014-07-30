@@ -12,7 +12,9 @@ Thumbs.db
 
 ######################################################## 
 # Ignore logs so they are not uploaded during commits  
+# ignore any testing files
 ########################################################
 logs/*
 debug.log
 /.project
+testing-beta/*
