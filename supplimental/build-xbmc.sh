@@ -200,6 +200,7 @@ mv /tmp/service.py /tmp/RetroRig/usr/share/xbmc/addons/service.xbmc.versioncheck
 # copy splash screen for XBMC/RetroRig 
 ####################################################################
 cp -v ~/RetroRig/Artwork/XBMC/Splash.png   /tmp/RetroRig/usr/share/xbmc/media/Splash.png
+cp -v ~/RetroRig/Artwork/XBMC/Splash_retrorig.png   /tmp/RetroRig/usr/share/xbmc/media/Splash_retrorig.png
 
 # create package
 dpkg-deb -b . "xbmc_gotham-patched-for-retrorig-patchlevel-$PL-0trusty.deb"
