@@ -6,12 +6,18 @@
 #
 # ==========================================================================
 # Author:  Jens-Christian, aka "beaumanvienna"
-# Date:    2014/07/28
+# Date:    2014/07/31
 # Version: Patch Level 1
 # ==========================================================================
 
+#define base version
+BASE=0.9.36.2
+
 # define patch level
 PL=1
+
+#define mednafen branch to checkout
+BRANCH=mednafen-0.9.36.2-SDL2-dual-head
 
 clear
 echo "#########################################################"
@@ -51,24 +57,42 @@ cd ~/packaging/mednafen
 
 echo ""
 echo "##########################################"
-echo "Get template files"
+echo "Setup package base files"
 echo "##########################################"
 
-wget --tries=50 "http://archive.ubuntu.com/ubuntu/pool/universe/m/mednafen/mednafen_0.9.33.3-1.dsc" 
-wget --tries=50 "http://archive.ubuntu.com/ubuntu/pool/universe/m/mednafen/mednafen_0.9.33.3.orig.tar.bz2"
-wget --tries=50 "http://archive.ubuntu.com/ubuntu/pool/universe/m/mednafen/mednafen_0.9.33.3-1.debian.tar.xz"
+echo "dsc file"
+cp ~/RetroRig/supplimental/mednafen/mednafen.dsc mednafen_$BASE.$PL.dsc
+sed -i "s|version_placeholder|$BASE.$PL|g" "mednafen_$BASE.$PL.dsc"
 
+echo "original tarball"
+git clone https://github.com/beaumanvienna/mednafen-git 
+file mednafen-git/
+
+if [ $? -eq 0 ]; then  
+    echo "successfully cloned"
+else  
+    echo "git clone failed, aborting"
+    exit
+fi 
+
+mv mednafen-git/ mednafen
+cd mednafen
+git checkout $BRANCH
+rm -rf .git instructions.txt patch-from.0.9.36.2-to-SDL2.txt
+cd ..
+tar cfj mednafen_$BASE.$PL.orig.tar.bz2 mednafen
+
+echo "debian files"
+wget --tries=50 "http://archive.ubuntu.com/ubuntu/pool/universe/m/mednafen/mednafen_0.9.33.3-1.debian.tar.xz"
 
 echo ""
 echo "##########################################"
-echo "Unpacking template files"
+echo "Unpacking debian files"
 echo "##########################################"
 echo ""
 
 #unpack
-echo "mednafen_0.9.33.3.orig.tar.bz2"
-tar xfj mednafen_0.9.33.3.orig.tar.bz2
-echo "mednafen_0.9.33.3-1.debian.tar.xz"
+echo "mednafen_0.9.36.2-1.debian.tar.xz"
 tar xfJ mednafen_0.9.33.3-1.debian.tar.xz
 
 #move debian folder into source folder
@@ -76,22 +100,81 @@ mv debian/ mednafen/
 
 echo ""
 echo "##########################################"
-echo "Building package now"
-echo "Prompt 'Continue' when asked"
+echo "Setting up debian files"
 echo "##########################################"
+echo ""
 
 #change to source folder
 cd mednafen/
 
-#build the package from source
+echo "control"
+cp ~/RetroRig/supplimental/mednafen/control debian/
+
+echo "rules"
+cp ~/RetroRig/supplimental/mednafen/rules debian/
+
+
+echo "changelog"
+cp ~/RetroRig/supplimental/mednafen/changelog debian/
+dch -i
+
+echo "setting up patches"
+rm debian/patches/*
+rm -rf .pc/
+
+
+echo ""
+echo "##########################################"
+echo "Building binary package now"
+echo "Prompt 'Continue' when asked"
+echo "##########################################"
+
+
+
+#build package from source, to check if it compiles
 debuild -us -uc
 
-echo ""
-echo "##########################################"
-echo "Building finished"
-echo "##########################################"
-echo ""
+if [ $? -eq 0 ]; then  
+    echo ""
+    echo "##########################################"
+    echo "Building finished"
+    echo "##########################################"
+    echo ""
+    ls -lah ~/packaging/mednafen
+    sleep 10
+else  
+    echo "debuild failed to generate the binary package, aborting"
+    exit
+fi 
 
-ls -lah ~/packaging/mednafen
+
+#get secret key
+gpgkey=`gpg --list-secret-keys|grep "sec   "|cut -f 2 -d '/'|cut -f 1 -d ' '`
+
+if [[ -n "$gpgkey" ]]; then
+
+  echo ""
+  echo "##########################################"
+  echo "Building source package"
+  echo "##########################################"
+  echo ""
+  echo ""
+  echo ""
+  echo "****** please copy your gpg passphrase into the clipboard now ******"
+  sleep 20
+
+  debuild -S -sa -k$gpgkey
+
+  if [ $? -eq 0 ]; then
+    echo "you can upload the package with dput ppa:beauman/retrorig ~/packaging/mednafen/mednafen_$BASE.$PL""_source.changes"
+    echo "all good"
+  else
+    echo "debuild failed to generate the source package, aborting"
+  fi
+else
+  echo "secret key not found, aborting"
+fi
+
+
 
 
