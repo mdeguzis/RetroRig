@@ -90,7 +90,7 @@ To clone this repo via the CLI:
 
 `git clone https://github.com/ProfessorKaos64/RetroRig`
 
-To intstall:
+To install:
 ````
 cd RetroRig
 git checkout <platform>  
