@@ -1,0 +1,21 @@
+#!/usr/bin/make -f
+
+%:
+	dh $@
+
+override_dh_clean:
+	dh_clean
+
+override_dh_auto_configure:
+	./bootstrap
+	./configure --disable-debug --prefix=/usr	
+#	./configure $(XBMC_CONFIG_OPTIONS)
+
+override_dh_auto_build:
+	dh_auto_build -- -j$(NPROC)
+
+
+
+
+
+
