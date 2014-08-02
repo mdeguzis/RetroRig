@@ -66,21 +66,6 @@ For all other features and future plans, please see the [wiki](https://github.co
 * Modular design for expandability
 * Unity configuration set during config-setup to lengthen screen timeout + remove screen lock
 
-## Why XBMC and Ubuntu?
-
-I mainly made the decision to use Ubuntu+XBMC for a few reasons. First of all is XBMC itself, which can
-extend far beyond retro gaming, adding many benefits if you decided to utilize XBMC further down the
-line, ensuring your computer / partition is not sitting there unused for other tasks. Another reason
-was ROM Collection Browser, which in my opinion, is truly amazing at organizing your ROMs. The artwork
-scrappers, importers, sorting, filtering, launch options, and more make it truly fantastic.
-
-So then, why Ubuntu? Well, 14.04 LTS recently debuted when I decided to start this, which as many know,
-provides years of updates. Additionally, Ubuntu itself is rich with PPAs, software repositories, and
-forum documentation. Yes, I could have used many other distributions, but Ubuntu has a wide scope,
-and is a hot target for many folks. Arch Linux, or Debian Testing were other considerations. Of course,
-there are many pro's and con's to using Ubuntu, all of which are understandable. You can't appease
-everyone!
-
 ## Wiki
 
 First, I must direct you to read the wiki on this github page, as it contains extra iformation outside this wiki. 
