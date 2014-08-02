@@ -1,4 +1,4 @@
-RetroRig Project for x86_64 Linux Operating Systems
+RetroRig Project for x86_64 Linux Systems
 ===================================================
 ![alt text](http://i.imgur.com/Irgv0Fx.png "RetroRig")
 ###### [Version 0.9.1]
