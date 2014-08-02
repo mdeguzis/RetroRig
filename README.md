@@ -97,9 +97,7 @@ git checkout <platform>
 sudo ./retrorig_setup.sh
 ````
 
-Substitute `<platform>` with your Linux distribution. See the branches pulldown menu for all available options. Currently,
-Only Ubuntu 14.04 is supported, but more will be added in due time!
-
+Substitute `<platform>` with your Linux distribution. See the branches pulldown menu for all available options.
 You can also download a zip file or by other means on the github page.
 
 ## Updating
