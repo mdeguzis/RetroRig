@@ -24,6 +24,7 @@ function rrs_prepareFolders()
 	#setup skelton folders for XBMC Rom Collection Browser
 	#ROMs
 	pathlist+=("$rootdir/ROMs/Atari 2600")
+	pathlist+=("$rootdir/ROMs/Atari Lynx")
 	pathlist+=("$rootdir/ROMs/MAME")
 	pathlist+=("$rootdir/ROMs/N64")
 	pathlist+=("$rootdir/ROMs/NES")
@@ -40,6 +41,7 @@ function rrs_prepareFolders()
 
 	#Artwork 
 	pathlist+=("$rootdir/Artwork/Atari 2600")
+	pathlist+=("$rootdir/Artwork/Atari Lynx")
 	pathlist+=("$rootdir/Artwork/N64")
 	pathlist+=("$rootdir/Artwork/NES")
 	pathlist+=("$rootdir/Artwork/SNES")
@@ -65,6 +67,7 @@ function rrs_prepareFolders()
 
 	#Saves (if any)
 	pathlist+=("$rootdir/Saves/Atari 2600")
+	pathlist+=("$rootdir/Saves/Atari Lynx")
 	pathlist+=("$rootdir/Saves/MAME")
 	pathlist+=("$rootdir/Saves/N64")
 	pathlist+=("$rootdir/Saves/NES")
