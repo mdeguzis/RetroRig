@@ -31,7 +31,12 @@
 - The great work from FernetMenta's [xbmc branch](https://github.com/FernetMenta/xbmc)
 - [wsnipex](http://forum.xbmc.org/member.php?action=profile&uid=96724) from the XBMC forums
 - The creator of the [Maximinimalism](https://github.com/chrisbevan/skin.maximinimalism) XBMC theme
-- If I missed you, please let me know so I can give you credit!
+- Reddit user [archdaemon](http://www.reddit.com/user/archdaemon) for syntax help with 
+RCB changes
+- Reddit user [ElFeesho](http://www.reddit.com/user/ElFeesho) for the awesome joydetect C 
+utility code base 
+
+##### If I missed you, please let me know so I can give you credit!
 
 ***
 ### Other

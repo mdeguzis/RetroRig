@@ -24,6 +24,7 @@ function rrs_prepareFolders()
 	#setup skelton folders for XBMC Rom Collection Browser
 	#ROMs
 	pathlist+=("$rootdir/ROMs/Atari 2600")
+	pathlist+=("$rootdir/ROMs/Atari Lynx")
 	pathlist+=("$rootdir/ROMs/MAME")
 	pathlist+=("$rootdir/ROMs/N64")
 	pathlist+=("$rootdir/ROMs/NES")
@@ -40,6 +41,7 @@ function rrs_prepareFolders()
 
 	#Artwork 
 	pathlist+=("$rootdir/Artwork/Atari 2600")
+	pathlist+=("$rootdir/Artwork/Atari Lynx")
 	pathlist+=("$rootdir/Artwork/N64")
 	pathlist+=("$rootdir/Artwork/NES")
 	pathlist+=("$rootdir/Artwork/SNES")
@@ -65,6 +67,7 @@ function rrs_prepareFolders()
 
 	#Saves (if any)
 	pathlist+=("$rootdir/Saves/Atari 2600")
+	pathlist+=("$rootdir/Saves/Atari Lynx")
 	pathlist+=("$rootdir/Saves/MAME")
 	pathlist+=("$rootdir/Saves/N64")
 	pathlist+=("$rootdir/Saves/NES")
@@ -102,8 +105,8 @@ function rrs_prepareFolders()
 	# filesys.path_firmware
 	pathlist+=("$rootdir/BIOS/Mednafen")
 
-	#Configs
-	pathlist+=("$rootdir/Configs")
+	#Configs (not needed at the moment)
+	# pathlist+=("$rootdir/Configs")
 
 	# quotes needed on entry to preven globbing on directory creation!
 	# Expanding arrays involves [@] and {}
@@ -364,6 +367,9 @@ function rrs_xbmc_patched()
 {
 
 	clear
+	# release the aptitdue hold to install/upgrade RetroRig's XBMC version
+	apt-mark unhold xbmc xbmc-bin
+
 	# create autostart for XBMC and place our modified files
 	# Custom script for reboots/hotplugging
 	cp -v "$rootdir/XBMC-cfgs/extra/gp_autodetect_xbmc.sh" "/usr/share/applications/"
@@ -372,7 +378,10 @@ function rrs_xbmc_patched()
 	cp -v "$rootdir/XBMC-cfgs/extra/retro-icon.png" "$xdg_pictures_dir"
 	cp -v "$rootdir/XBMC-cfgs/extra/retro-icon.png" "/usr/share/icons/"
 	cp -v "$rootdir/XBMC-cfgs/extra/startXBMC.sh" "/usr/share/applications/"
-	
+
+	# insert restarting xboxdrv specifically into /etc/sudoers
+	cat "$scriptdir/XBMC-cfgs/extra/sudoers.txt" >> "/etc/sudoers"
+
 	# Can't use $config_home in the desktop file, so need to replace $user string
 	sed -i "s|/home/test/Pictures|$xdg_pictures_dir|g" "/usr/share/applications/RetroRig.desktop"
 
@@ -465,9 +474,9 @@ function rrs_xbmc_patched()
 	# start service
 	service rescan start
 
-	# remove team xbmc repository so we don't have to worry about our xbmc
-	# package being overwritten (This can always be removed later if need be):
-	add-apt-repository -ry ppa:team-xbmc/ppa
+	# Tell aptitude to hold our packages to avoid unwanted upgrades
+	# Please refer to the top of this script, where the hold is released for upgrade purposes
+	apt-mark hold xbmc xbmc-bin 
 
 }
 
@@ -514,7 +523,7 @@ function rrs_done()
 clear
 
 # inform user install is done (this is the last step of main, option 1)
-        dialog --backtitle "LibreGeek.org - RetroRig Setup. Installation folder: $rootdir for user $user" --msgbox "Finished main install tasks.\n\nYou now have to copy roms to the roms folders. \nThis can be done via SSH, Samba, or via your graphic folder manager (please see settings menu for more)\n\nAll current config folders used were appended with .old for restoration purposes.\n\nPlease reboot to complete the installation.\n\nThe kernel has been upgraded to 3.14.0-031400-generic" 18 50
+        dialog --backtitle "LibreGeek.org - RetroRig Setup. Installation folder: $rootdir for user $user" --msgbox "Finished main install tasks.\n\nYou now have to copy roms to the roms folders. \nThis can be done via SSH, Samba, or via your graphic folder manager (please see settings menu for more)\n\nAll current config folders used were appended with .old for restoration purposes.\n\nYou must reboot to complete the installation!\n\n" 18 50
 
 # correct permissions
 h_correct_perms
@@ -642,9 +651,8 @@ function rrs_reboot()
 	esac
 }
 
-rrs_kernel_3_14()
+rrs_kernel_check()
 {
-
 
 	##################################################################
 	# related documentation as to why this kernel upgrade is done:
@@ -694,8 +702,12 @@ rrs_kernel_3_14()
 	    sleep 2s
 	fi
 
-	# inform user
-	# dialog --msgbox "upgrading the kernel to 3.14 is complete, please reboot" 5 60
+	# Hold the kernel packages so the kernel is not upgrade by accident
+	# Commented out for testing some errors with an old mednafen pkg
+	#sudo aptitude hold linux-image-`uname -r` 
+
+	# inform user of what was done
+	dialog --msgbox "Upgrading the kernel to 3.14.0-031400-generic is complete. The packages 'linux-generic linux-headers-generic linux-image-generic' have been held to avoid falling back to a regressed kernel (sony-hid). If you wish to change your kernel, please run the following command in the terminal:\n\n'sudo apt-mark unhold linux-generic linux-headers-generic linux-image-generic'" 14 60
 
 	# cleanup packages
 	rm -f /tmp/linux-headers-3.14*

@@ -1,4 +1,4 @@
-RetroRig Project for Ubuntu
+RetroRig Project
 ===================================================
 ![alt text](http://i.imgur.com/Irgv0Fx.png "RetroRig")
 ###### [Version 0.9.1]
@@ -49,7 +49,7 @@ For all other features and future plans, please see the [wiki](https://github.co
 * Custom XBMC binary package
 * Custom XBMC home screen and button layout
 * Seperate dot file (.retrorig, not .xbmc) so you can have your cake and eat it too!
-* Hotplugging support for supported game controllers
+* Hotplugging support for supported game wireless controllers
 * Dual monitor support for XBMC
 * Auto-install software, emulator configs, and required components
 * Many supported consoles (more added frequently)
@@ -65,21 +65,6 @@ For all other features and future plans, please see the [wiki](https://github.co
 * BIOS pre-loader
 * Modular design for expandability
 * Unity configuration set during config-setup to lengthen screen timeout + remove screen lock
-
-## Why XBMC and Ubuntu?
-
-I mainly made the decision to use Ubuntu+XBMC for a few reasons. First of all is XBMC itself, which can
-extend far beyond retro gaming, adding many benefits if you decided to utilize XBMC further down the
-line, ensuring your computer / partition is not sitting there unused for other tasks. Another reason
-was ROM Collection Browser, which in my opinion, is truly amazing at organizing your ROMs. The artwork
-scrappers, importers, sorting, filtering, launch options, and more make it truly fantastic.
-
-So then, why Ubuntu? Well, 14.04 LTS recently debuted when I decided to start this, which as many know,
-provides years of updates. Additionally, Ubuntu itself is rich with PPAs, software repositories, and
-forum documentation. Yes, I could have used many other distributions, but Ubuntu has a wide scope,
-and is a hot target for many folks. Arch Linux, or Debian Testing were other considerations. Of course,
-there are many pro's and con's to using Ubuntu, all of which are understandable. You can't appease
-everyone!
 
 ## Wiki
 
@@ -105,12 +90,14 @@ To clone this repo via the CLI:
 
 `git clone https://github.com/ProfessorKaos64/RetroRig`
 
-To intstall:
+To install:
 ````
-cd RetroRig  
+cd RetroRig
+git checkout <platform>  
 sudo ./retrorig_setup.sh
 ````
 
+Substitute `<platform>` with your Linux distribution. See the branches pulldown menu for all available options.
 You can also download a zip file or by other means on the github page.
 
 ## Updating

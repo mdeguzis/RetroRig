@@ -308,7 +308,7 @@ config_home="$home/.retrorig"
 
 while true; do
     cmd=(dialog --backtitle "LibreGeek.org RetroRig 
-Installer" --menu "| Main Menu (v.0.9.1) | \
+Installer" --menu "| Main Menu (v.0.9.5b) | \
  			 BIOS files are NOT provided!" 17 62 16)
     options=(1 "Install RetroRig" 
 	     2 "Retro Rig Settings" 
@@ -339,7 +339,7 @@ Installer" --menu "| Main Menu (v.0.9.1) | \
 		h_emu_user_fixes
 		set_resolution
 		rrs_unity
-		rrs_kernel_3_14
+		rrs_kernel_check
 		rrs_done
 		} 2>&1 | tee "$scriptdir/logs/install_$now.log.txt"              	
 		chown -R "$user" "$scriptdir/logs/install_$now.log.txt"

@@ -9,12 +9,16 @@
 
 function em_add_repos()
 {
-	# Add playdeb repo for later additions (very useful) 
-	echo "deb http://archive.getdeb.net/ubuntu trusty-getdeb games" > /tmp/playdeb.list 
-	mv "/tmp/playdeb.list" "/etc/apt/sources.list.d/playdeb.list"
-	wget -q -O- http://archive.getdeb.net/getdeb-archive.key > getdeb.key 
-	apt-key add getdeb.key 
-	rm -f getdeb.key
+	# For some reason, a syntax error occurs on script load without data in in this function
+	echo "No custom repos in use at the moment for emulator installs"
+
+	# Add playdeb repo for later additions (disabled until needed!!!)
+	
+	# echo "deb http://archive.getdeb.net/ubuntu trusty-getdeb games" > /tmp/playdeb.list 
+	# mv "/tmp/playdeb.list" "/etc/apt/sources.list.d/playdeb.list"
+	# wget -q -O- http://archive.getdeb.net/getdeb-archive.key > getdeb.key 
+	# apt-key add getdeb.key 
+	# rm -f getdeb.key
 }
 
 function em_install_ppsspp_source()
@@ -100,11 +104,18 @@ function em_install_mame()
 
 function em_install_mednafen()
 {
+	# release aptitude hold for upgrade/install
+	apt-mark unhold mednafen
+
 	echo "Installing Mednafen emulator"
 	#apt-get install -y mednafen
 	wget --tries=50 -P /tmp "www.libregeek.org/RetroRig/mednafen/mednafen-patched-for-retrorig-patchlevel-1-0trusty.deb"
 	apt-get install -y libsdl2-2.0-0
-        sudo dpkg -i "/tmp/mednafen-patched-for-retrorig-patchlevel-1-0trusty.deb"
+        dpkg -i "/tmp/mednafen-patched-for-retrorig-patchlevel-1-0trusty.deb"
+
+	# hold package after install against upgrades
+	apt-mark hold mednafen
+
 }
 
 function em_install_mess()

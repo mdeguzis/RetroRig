@@ -86,6 +86,9 @@ function cfg_uninstall()
 
 	esac
 
+# release holds on packages
+apt-mark unhold xbmc xbmc-bin mednafen
+
 #ask to keep folders
 #prompt user if they wish to keep folders from install
 dialog --title "Confirm yes/no" --backtitle "LibreGeek.org RetroRig Installer" \
@@ -122,6 +125,12 @@ case $response in
 	rm -f "/usr/share/applications/gp_autodetect_xbmc.sh"
 	rm -f "/usr/share/applications/startXBMC.sh"
 	rm -f "/usr/share/applications/RetriRig.desktop"
+
+	# remove /etc/sudoers lines we added
+	sed -i '/# RetroRig specific allowances/d' "/etc/sudoers"
+	sed -i '/%sudo   ALL=NOPASSWD: \/usr\/sbin\/service xboxdrv restart/d' "/etc/sudoers"
+	sed -i '/%sudo   ALL=NOPASSWD: \/sbin\/rmmod hid_sony/d' "/etc/sudoers"
+	sed -i '/%sudo   ALL=NOPASSWD: \/usr\/bin\/xboxdrv/d' "/etc/sudoers"
 
 	# remove system services
 	service xboxdrv stop
