@@ -64,8 +64,8 @@ cp ~/RetroRig/supplimental/xbmc/xbmc.dsc xbmc_$BASE.$PL.dsc
 sed -i "s|version_placeholder|$BASE.$PL|g" "xbmc_$BASE.$PL.dsc"
 
 echo "original tarball"
-#git clone https://github.com/beaumanvienna/xbmc 
-cp -r ~/xbmc .
+git clone https://github.com/beaumanvienna/xbmc 
+#cp -r ~/xbmc .
 
 file xbmc/
 
@@ -83,8 +83,8 @@ cd ..
 tar cfj xbmc_$BASE.$PL.orig.tar.bz2 xbmc
 
 echo "debian files"
-#wget --tries=50 "https://launchpad.net/~aap/+archive/ubuntu/xbmc-release-fernetmenta/+files/xbmc_13.1-27182~e41281c-ppa1~trusty.debian.tar.bz2"
-cp ~/temp/xbmc_13.1-27182~e41281c-ppa1~trusty.debian.tar.bz2 .
+wget --tries=50 "https://launchpad.net/~aap/+archive/ubuntu/xbmc-release-fernetmenta/+files/xbmc_13.1-27182~e41281c-ppa1~trusty.debian.tar.bz2"
+#cp ~/temp/xbmc_13.1-27182~e41281c-ppa1~trusty.debian.tar.bz2 .
 
 echo ""
 echo "##########################################"
