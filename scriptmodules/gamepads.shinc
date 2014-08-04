@@ -189,7 +189,7 @@ function gp_ps3_blu_main()
 		# call pairing function to set current bluetooth MAC to Player 2
 		n="2"
 		ps3_pair_blu
-		# Set up control assignments for emulators and XBMC control
+		# Set up control assignments for emulators
 		ps3_set_emulator_ids
 		dialog --msgbox "Pairing of Player 2 Controller complete" 5 43 
 		;;
@@ -205,13 +205,13 @@ function gp_ps3_blu_main()
 		# call pairing function to set current bluetooth MAC to Player 2
 		n="2"
 		ps3_pair_blu
-		# Set up control assignments for emulators and XBMC control
+		# Set up control assignments for emulators
 		ps3_set_emulator_ids
 		dialog --msgbox "Pairing of Player 2 Controller complete" 5 43
 		# call pairing function to set current bluetooth MAC to Player 3
 		n="3"
 		ps3_pair_blu
-		# Set up control assignments for emulators and XBMC control
+		# Set up control assignments for emulators
 		ps3_set_emulator_ids
 		dialog --msgbox "Pairing of Player 3 Controller complete" 5 43  
 		;;
@@ -227,19 +227,19 @@ function gp_ps3_blu_main()
 		# call pairing function to set current bluetooth MAC to Player 2
 		n="2"
 		ps3_pair_blu
-		# Set up control assignments for emulators and XBMC control
+		# Set up control assignments for emulators
 		ps3_set_emulator_ids
 		dialog --msgbox "Pairing of Player 2 Controller complete" 5 43
 		# call pairing function to set current bluetooth MAC to Player 3
 		n="3"
 		ps3_pair_blu
-		# Set up control assignments for emulators and XBMC control
+		# Set up control assignments for emulators
 		ps3_set_emulator_ids
 		dialog --msgbox "Pairing of Player 3 Controller complete" 5 43
 		# call pairing function to set current bluetooth MAC to Player 4
 		n="4"
 		ps3_pair_blu
-		# Set up control assignments for emulators and XBMC control
+		# Set up control assignments for emulators
 		ps3_set_emulator_ids
 		dialog --msgbox "Pairing of Player 4 Controller complete" 5 43    
 		;;
@@ -287,7 +287,7 @@ function ps3_set_ctrl_assignments()
 	sleep 2s
 
 	# copy over default keyboard file:
-	cp -v "$rootdir/gamepad-cfgs/ps3_blu_controller/keyboard.xml" "$xbmc_home/userdata/keymaps/"
+	cp "$rootdir/gamepad-cfgs/ps3_blu_controller/keyboard.xml" "$xbmc_home/userdata/keymaps/"
 
 	# First grab MAC Addresses:
 	# In the config file, the MAC is set to 00:00:00:00:00:00
