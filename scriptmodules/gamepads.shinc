@@ -315,7 +315,25 @@ function ps3_set_ctrl_assignments()
 function ps3_set_emulator_ids()
 {
 	# Set PS3 Blu MAC value with the "joydetect" C program for Dolphin controller assignments
- 	GC_MAC_BLU=$($scriptdir/supplimental/joydetect /dev/input/js$n | awk -F'[^:[a-zA-Z0-9]*' '{print $6}')
+ 
+        if [ $n == "1" ]; then
+		GC_MAC_BLU=$($scriptdir/supplimental/joydetect /dev/input/js0 | awk -F'[^:[a-zA-Z0-9]*' '{print $6}')
+
+	elif [ $n == "2" ]; then
+		GC_MAC_BLU=$($scriptdir/supplimental/joydetect /dev/input/js1 | awk -F'[^:[a-zA-Z0-9]*' '{print $6}')
+
+	elif [ $n == "3" ]; then
+		GC_MAC_BLU=$($scriptdir/supplimental/joydetect /dev/input/js2 | awk -F'[^:[a-zA-Z0-9]*' '{print $6}')
+
+	elif [ $n == "4" ]; then
+		GC_MAC_BLU=$($scriptdir/supplimental/joydetect /dev/input/js3 | awk -F'[^:[a-zA-Z0-9]*' '{print $6}')
+
+	else
+		echo "Error settings MAC/ID for emulator"
+
+        fi
+
+
 	echo -e "\nController ID/MAC Address applied to Dolphin emulator Controller $n was:\n$GC_MAC_BLU"
 	# Assign controller
 	sed -i "s|MAC_TEMP_$n|$GC_MAC_BLU|g" "$config_home/.dolphin-emu/Config/GCPadNew.ini"
