@@ -76,7 +76,7 @@ function em_install_ppsspp()
 	apt-get install -y libsdl1.2-dev
 
 	# pull down emulator from libregeek (to avoid increasing the git repo)
-	wget --tries=50 -P /tmp "www.libregeek.org/RetroRig/emulators/karenbuildbot-net.angelxwind.ppsspp-linux-amd64-generic.tar.gz"
+	wget --tries=50 -P /tmp "www.libregeek.org/RetroRig/emulators/Debian/karenbuildbot-net.angelxwind.ppsspp-linux-amd64-generic.tar.gz"
 
 	# Since ppsspp-0.9.8-SDL-pk64 is already in $rootdir/emulators, we just
 	# need to untar it:
@@ -105,7 +105,7 @@ function em_install_stella()
 	# Source: http://stella.sourceforge.net/development.php
 	# SVN trunk: 'svn co https://svn.code.sf.net/p/stella/code/trunk stella'
 
-	wget --tries=50 -P "/usr/bin/" "www.libregeek.org/RetroRig/emulators/Stella/stella"
+	wget --tries=50 -P "/usr/bin/" "www.libregeek.org/RetroRig/emulators/Debian/Stella/stella"
 	chmod +x "/usr/bin/stella"
 
 }
