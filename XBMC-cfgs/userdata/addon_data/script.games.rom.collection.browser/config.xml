@@ -7,8 +7,8 @@
       <emulatorParams>"%ROM%"</emulatorParams>
       <romPath>/home/test/RetroRig/ROMs/MAME/*.zip</romPath>
       <saveStatePath />
-      <saveStateParams />
-      <mediaPath type="boxfront">/home/test/RetroRig/Artwork/MAME/boxfront/%GAME%.*</mediaPath>
+      <saveStateParams />rtwork/MAME/boxfront/%GAME%.*</mediaPath>
+      <mediaPath type="boxfront">/home/test/RetroRig/A
       <mediaPath type="title">/home/test/RetroRig/Artwork/MAME/title/%GAME%.*</mediaPath>
       <mediaPath type="gameplay">/home/test/RetroRig/Artwork/MAME/gameplay/%GAME%.*</mediaPath>
       <mediaPath type="action">/home/test/RetroRig/Artwork/MAME/action/%GAME%.*</mediaPath>
@@ -440,6 +440,37 @@
       <maxFolderDepth>99</maxFolderDepth>
       <doNotExtractZipFiles>False</doNotExtractZipFiles>
       <diskPrefix>_Disk</diskPrefix>
+      <imagePlacingMain>gameinfobig</imagePlacingMain>
+      <imagePlacingInfo>gameinfosmall</imagePlacingInfo>
+      <scraper name="thegamesdb.net" replaceKeyString="" replaceValueString="" />
+      <scraper name="archive.vg" replaceKeyString="" replaceValueString="" />
+      <scraper name="mobygames.com" replaceKeyString="" replaceValueString="" />
+    </RomCollection>
+    <RomCollection id="16" name="GameCube">
+      <useBuiltinEmulator>False</useBuiltinEmulator>
+      <gameclient />
+      <emulatorCmd>/usr/games/dolphin-emu</emulatorCmd>
+      <emulatorParams>-b -e "%ROM%"</emulatorParams>
+      <romPath>/home/test/RetroRig/ROMs/Gamecube/*.iso</romPath>
+      <saveStatePath />
+      <saveStateParams />
+      <mediaPath type="boxfront">/home/test/RetroRig/Artwork/Gamecube/boxfront/%GAME%.*</mediaPath>
+      <mediaPath type="boxback">/home/test/RetroRig/Artwork/Gamecube/boxback/%GAME%.*</mediaPath>
+      <mediaPath type="cartridge">/home/test/RetroRig/Artwork/Gamecube/cartridge/%GAME%.*</mediaPath>
+      <mediaPath type="screenshot">/home/test/RetroRig/Artwork/Gamecube/screenshot/%GAME%.*</mediaPath>
+      <mediaPath type="fanart">/home/test/RetroRig/Artwork/Gamecube/fanart/%GAME%.*</mediaPath>
+      <preCmd>dolphin_pre</preCmd>
+      <postCmd>dolphin_post</postCmd>
+      <useEmuSolo>False</useEmuSolo>
+      <usePopen>False</usePopen>
+      <ignoreOnScan>False</ignoreOnScan>
+      <allowUpdate>True</allowUpdate>
+      <autoplayVideoMain>True</autoplayVideoMain>
+      <autoplayVideoInfo>True</autoplayVideoInfo>
+      <useFoldernameAsGamename>False</useFoldernameAsGamename>
+      <maxFolderDepth>99</maxFolderDepth>
+      <doNotExtractZipFiles>False</doNotExtractZipFiles>
+      <diskPrefix>_Disk.*</diskPrefix>
       <imagePlacingMain>gameinfobig</imagePlacingMain>
       <imagePlacingInfo>gameinfosmall</imagePlacingInfo>
       <scraper name="thegamesdb.net" replaceKeyString="" replaceValueString="" />

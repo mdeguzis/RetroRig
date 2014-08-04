@@ -19,6 +19,18 @@ function em_add_repos()
 	# wget -q -O- http://archive.getdeb.net/getdeb-archive.key > getdeb.key 
 	# apt-key add getdeb.key 
 	# rm -f getdeb.key
+
+	# dolphin emulator PPA
+	add-apt-repository ppa:glennric/dolphin-emu
+
+}
+
+function em_install_dolphin()
+{
+
+	echo "Installing Nintendo Gamecube emulator Dolphin"
+	apt-get install -y dolphin-emu-master
+
 }
 
 function em_install_ppsspp_source()

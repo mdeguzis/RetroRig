@@ -644,7 +644,6 @@ function h_emu_user_fixes()
 	# set the system user to an absolute value for files that require it
 	# RCB and some config files don't like using $config_home, rather /home/test/
 	# Let's change the config files to reflect the current username
-
 	
 	# mame
 	sed -i "s|/home/test/RetroRig|$rootdir|g" $config_home/.mame/mame.ini | tee >> "$rootdir/logs/debug.log"
@@ -660,6 +659,9 @@ function h_emu_user_fixes()
 
 	# Mednafen firmware location
 	sed -i "s|/home/test/RetroRig/|$rootdir|g" "$config_home/.mednafen/mednafen-09x.cfg"
+
+	# Dolphin directories
+	sed -i "s|/home/test/RetroRig/|$rootdir|g" "$config_home/.dolphin-emu/Config/Dolphin.ini"
 
 	# echo change
 	echo "The user applied to configuration files was: $user" | tee >> "$rootdir/logs/debug.log"

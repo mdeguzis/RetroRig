@@ -25,7 +25,7 @@ function gp_ps3_blu()
 	cp -v "$scriptdir/emu-cfgs/ps3_blu_controller/MAME/MAME synopsis RCB 201202.zip" "$rootdir/Artwork/MAME"
 
 	# mess
-	# default path: /home/$USER/.mednafen/mednafen.cfg
+	# default path: /home/$USER/.retrorig/.mess
 	# Main config
 	cp -v "$scriptdir/emu-cfgs/ps3_blu_controller/MESS/mess.ini" "$config_home/.mess"
 	cp -v "$scriptdir/emu-cfgs/ps3_blu_controller/MESS/default.cfg" "$config_home/.mess/cfg"
@@ -33,14 +33,20 @@ function gp_ps3_blu()
 	cp -v "$scriptdir/emu-cfgs/ps3_blu_controller/MESS/default.cfg" "$config_home/.mess/cfg"
 
 	# mednafen
-	# default path: /home/$USER/.mednafen/mednafen.cfg
+	# default path: /home/$USER/.retrorig/.mednafen
 	# Main config
 	cp -v "$scriptdir/emu-cfgs/ps3_blu_controller/mednafen/mednafen-09x.cfg" "$config_home/.mednafen"
 
 	# mupen64plus
-	# default path: /home/$USER/.config/mupen64plus
+	# default path: /home/$USER/.retrorig/.config/mupen64plus
 	# Main config
 	cp -v "$scriptdir/emu-cfgs/ps3_blu_controller/mupen64plus/mupen64plus.cfg" "$config_home/.config/mupen64plus/"
+
+	# Dolphin
+	# default path: /home/$USER/.retrorig/.dolphin-emu
+	# Main config
+	cp -v "$scriptdir/emu-cfgs/ps3_blu_controller/Dolphin/GCPadNew.ini" "$config_home/.dolphin-emu/Config"
+	cp -v "$scriptdir/emu-cfgs/ps3_blu_controller/Dolphin/Dolphin.ini" "$config_home/.dolphin-emu/Config"
 
 	#Stella
 	#default path: /home/$USER/.config/mupen64plus
@@ -77,6 +83,7 @@ function gp_ps3_blu_main()
 	cp -v "$rootdir/gamepad-cfgs/ps3_blu_controller/mednafen_ps3_general_blu.lyt" "$config_home/.qjoypad3"
 	cp -v "$rootdir/gamepad-cfgs/ps3_blu_controller/mednafen_ps3_psx_blu.lyt" "$config_home/.qjoypad3"
 	cp -v "$rootdir/gamepad-cfgs/ps3_blu_controller/psp_ps3_blu.lyt" "$config_home/.qjoypad3"
+	cp -v "$rootdir/gamepad-cfgs/ps3_blu_controller/dolphin_blu.lyt" "$config_home/.qjoypad3"
 
 	##################### 
 	# PSP 
@@ -108,6 +115,18 @@ function gp_ps3_blu_main()
 	old_pre="med_psx_pre"
 	old_post="med_psx_post"
 	new_pre="qjoypad mednafen_ps3_psx_blu \&amp;"
+	new_post="killall qjoypad"
+	# perform actual changes
+	sed -i "s|$old_pre|$new_pre|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
+	sed -i "s|$old_post|$new_post|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
+
+	#####################
+	# dolphin
+	##################### 
+	
+	old_pre="dolphin_pre"
+	old_post="dolphin_post"
+	new_pre="qjoypad dolphin_ps3_blu \&amp;"
 	new_post="killall qjoypad"
 	# perform actual changes
 	sed -i "s|$old_pre|$new_pre|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
@@ -251,6 +270,13 @@ function ps3_set_ctrl_assignments()
 	echo -e "\nController ID/MAC Address applied to XBMC/emulators was:\n$PS3_MAC_BLU"
 	sleep 2s
 
+	# Set PS3 Blu MAC value with the "joydetect" C program for Dolphin controller assignments
+ 	GC_MAC_BLU=$($scriptdir/supplimental/joydetect /dev/input/js0 | awk -F'[^:[a-zA-Z0-9]*' '{print $6}')
+	echo -e "\nController ID/MAC Address applied to Dolphin emulator Controller $n was:\n$GC_MAC_BLU"
+	# Assign controller
+	sed -i "s|MAC_TEMP_$n|$GC_MAC_BLU|g" "$config_home/.dolphin-emu/Config/GCPadNew.ini"
+	sleep 2s
+
 	# copy over default keyboard file:
 	cp -v "$rootdir/gamepad-cfgs/ps3_blu_controller/keyboard.xml" "$xbmc_home/userdata/keymaps/"
 
@@ -305,7 +331,7 @@ function gp_ps3_usb()
 	##############################################################
 
 	#mame
-	# default path: /home/$USER/.mame
+	# default path: /home/$USER/.retrorig/.mame
 	# Main config
 	cp -v "$scriptdir/emu-cfgs/ps3_usb_controller/MAME/default.cfg" "$config_home/.mame/cfg"
 	cp -v "$scriptdir/emu-cfgs/ps3_usb_controller/MAME/mame.ini" "$config_home/.mame"
@@ -316,24 +342,30 @@ function gp_ps3_usb()
 	cp -v "$scriptdir/emu-cfgs/ps3_usb_controller/MAME/MAME synopsis RCB 201202.zip" "$rootdir/Artwork/MAME"
 
 	# mess
-	# default path: /home/$USER/.mednafen/mednafen.cfg
+	# default path: /home/$USER/.retrorig/.mednafen/mednafen.cfg
 	# Main config
 	cp -v "$scriptdir/emu-cfgs/ps3_usb_controller/MESS/mess.ini" "$config_home/.mess"
 	cp -v "$scriptdir/emu-cfgs/ps3_usb_controller/MESS/default.cfg" "$config_home/.mess/cfg"
 	cp -v "$scriptdir/emu-cfgs/ps3_usb_controller/MESS/neocdz.cfg" "$config_home/.mess/cfg"
 
 	# mednafen
-	# default path: /home/$USER/.mednafen/mednafen.cfg
+	# default path: /home/$USER/.retrorig/.mednafen/mednafen.cfg
 	# Main config
 	cp -v "$scriptdir/emu-cfgs/ps3_usb_controller/mednafen/mednafen-09x.cfg" "$config_home/.mednafen"
 
 	# mupen64plus
-	# default path: /home/$USER/.config/mupen64plus
+	# default path: /home/$USER/.retrorig/.config/mupen64plus
 	# Main config
 	cp -v "$scriptdir/emu-cfgs/ps3_usb_controller/mupen64plus/mupen64plus.cfg" "$config_home/.config/mupen64plus/"
 
+	# Dolphin
+	# default path: /home/$USER/.retrorig/.dolphin-emu
+	# Main config
+	cp -v "$scriptdir/emu-cfgs/ps3_usb_controller/Dolphin/GCPadNew.ini" "$config_home/.dolphin-emu/Config"
+	cp -v "$scriptdir/emu-cfgs/ps3_usb_controller/Dolphin/Dolphin.ini" "$config_home/.dolphin-emu/Config"
+
 	#Stella
-	#default path: /home/$USER/.config/mupen64plus
+	#default path: /home/$USER/.retrorig/.config/mupen64plus
 	#Main config
 	cp -v "$scriptdir/emu-cfgs/ps3_usb_controller/Stella/stellarc" "$config_home/.stella/"
 
@@ -422,6 +454,7 @@ RetorRig loads to use the gamepad" 14 60
 	cp -v "$scriptdir/gamepad-cfgs/ps3_usb_controller/mednafen_ps3_general_usb.lyt" "$config_home/.qjoypad3"
 	cp -v "$scriptdir/gamepad-cfgs/ps3_usb_controller/mednafen_ps3_psx_usb.lyt" "$config_home/.qjoypad3"
 	cp -v "$scriptdir/gamepad-cfgs/ps3_usb_controller/psp_ps3_usb.lyt" "$config_home/.qjoypad3"
+	cp -v "$scriptdir/gamepad-cfgs/ps3_usb_controller/dolphin_ps3_usb.lyt" "$config_home/.qjoypad3"
 
 	##################### 
 	# PSP 
@@ -453,6 +486,18 @@ RetorRig loads to use the gamepad" 14 60
 	old_pre="med_psx_pre"
 	old_post="med_psx_post"
 	new_pre="qjoypad mednafen_ps3_psx_usb \&amp;"
+	new_post="killall qjoypad"
+	# perform actual changes
+	sed -i "s|$old_pre|$new_pre|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
+	sed -i "s|$old_post|$new_post|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
+
+	#####################
+	# dolphin
+	##################### 
+	
+	old_pre="dolphin_pre"
+	old_post="dolphin_post"
+	new_pre="qjoypad dolphin_ps3_usb \&amp;"
 	new_post="killall qjoypad"
 	# perform actual changes
 	sed -i "s|$old_pre|$new_pre|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
@@ -524,6 +569,12 @@ function gp_x360_wireless()
 	# Main config
 	cp -v "$scriptdir/emu-cfgs/x360_wireless_controller/mupen64plus/mupen64plus.cfg" "$config_home/.config/mupen64plus/"
 
+	# Dolphin
+	# default path: /home/$USER/.retrorig/.dolphin-emu
+	# Main config
+	cp -v "$scriptdir/emu-cfgs/x360_wireless_controller/Dolphin/GCPadNew.ini" "$config_home/.dolphin-emu/Config"
+	cp -v "$scriptdir/emu-cfgs/x360_wireless_controller/Dolphin/Dolphin.ini" "$config_home/.dolphin-emu/Config"
+
 	#Stella
 	#default path: /home/$USER/.config/mupen64plus
 	#Main config
@@ -550,6 +601,7 @@ function gp_x360_wireless()
 	cp -v "$scriptdir/gamepad-cfgs/x360_wireless_controller/mednafen_x360_general_wireless.lyt" "$config_home/.qjoypad3"
 	cp -v "$scriptdir/gamepad-cfgs/x360_wireless_controller/mednafen_x360_psx_wireless.lyt" "$config_home/.qjoypad3"
 	cp -v "$scriptdir/gamepad-cfgs/x360_wireless_controller/psp_x360_wireless.lyt" "$config_home/.qjoypad3"
+	cp -v "$scriptdir/gamepad-cfgs/x360_wireless_controller/dolphin_x360_wireless.lyt" "$config_home/.qjoypad3"
 
 	##################### 
 	# PSP 
@@ -581,6 +633,18 @@ function gp_x360_wireless()
 	old_pre="med_psx_pre"
 	old_post="med_psx_post"
 	new_pre="qjoypad mednafen_x360_psx_wireless \&amp;"
+	new_post="killall qjoypad"
+	# perform actual changes
+	sed -i "s|$old_pre|$new_pre|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
+	sed -i "s|$old_post|$new_post|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
+
+	#####################
+	# dolphin
+	##################### 
+	
+	old_pre="dolphin_pre"
+	old_post="dolphin_post"
+	new_pre="qjoypad dolphin_x360_wireless \&amp;"
 	new_post="killall qjoypad"
 	# perform actual changes
 	sed -i "s|$old_pre|$new_pre|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
@@ -668,6 +732,12 @@ function gp_x360_usb()
 	# Main config
 	cp -v "$scriptdir/emu-cfgs/x360_usb_controller/mupen64plus/mupen64plus.cfg" "$config_home/.config/mupen64plus/"
 
+	# Dolphin
+	# default path: /home/$USER/.retrorig/.dolphin-emu
+	# Main config
+	cp -v "$scriptdir/emu-cfgs/x360_usb_controller//Dolphin/GCPadNew.ini" "$config_home/.dolphin-emu/Config"
+	cp -v "$scriptdir/emu-cfgs/x360_usb_controller//Dolphin/Dolphin.ini" "$config_home/.dolphin-emu/Config"
+
 	#Stella
 	#default path: /home/$USER/.config/mupen64plus
 	#Main config
@@ -676,6 +746,55 @@ function gp_x360_usb()
 	# PPSSPP
 	cp -v "$scriptdir/emu-cfgs/x360_usb_controller/PPSSPP/ppsspp.ini" "$config_home/.config/ppsspp/PSP/SYSTEM"
 	cp -v "$scriptdir/emu-cfgs/x360_usb_controller/PPSSPP/controls.ini" "$config_home/.config/ppsspp/PSP/SYSTEM"
+
+	##############################################################
+	# Set number of controllers for /etc/default/xboxdrv
+	##############################################################
+
+	# grab the current number of controlls from file
+	cont_num_org=$(grep "CONTROLLER_NUM=" "/etc/default/xboxdrv")
+
+	# inform user that you must have controller connected or restart
+	dialog --msgbox "The xboxdrv userland module detects the number of USB PS3 controllers connected \
+when it starts. Therefore, we must specify how many you have connected or want to use. \
+You must reboot to have these changes take effect. If you tell xboxdrv I have 3 controllers, when you only have one, \
+the service may fail to start correctly.\n\nPlease see /etc/default/xboxdrv for more. Press the PS Button after \
+RetorRig loads to use the gamepad" 14 60
+
+	# Present small menu asking for number of controllers
+	cmd=(dialog --backtitle "LibreGeek.org RetroRig Installer" \
+		    --menu "Please select the number of USB PS3 controllers" 16 47 16)
+	options=(1 "1"
+	 	 2 "2"
+	 	 3 "3"
+	 	 4 "4")
+
+	#make menu choice
+	selection=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
+	#functions
+
+	for choice in $selection
+	do
+		case $choice in
+
+		1)
+		sed -i "s|$cont_num_org|CONTROLLER_NUM=1|g" "/etc/default/xboxdrv"
+		;;
+
+		2)
+		sed -i "s|$cont_num_org|CONTROLLER_NUM=2|g" "/etc/default/xboxdrv"
+		;;
+
+		3)
+		sed -i "s|$cont_num_org|CONTROLLER_NUM=3|g" "/etc/default/xboxdrv"
+		;;
+
+		4)
+		sed -i "s|$cont_num_org|CONTROLLER_NUM=4|g" "/etc/default/xboxdrv"
+		;;
+
+		esac
+	done
 
 	##########################################################
 	# Add emulator specifc control remaps here for qjoypad
@@ -694,6 +813,7 @@ function gp_x360_usb()
 	cp -v "$scriptdir/gamepad-cfgs/x360_usb_controller/mednafen_x360_general_usb.lyt" "$config_home/.qjoypad3"
 	cp -v "$scriptdir/gamepad-cfgs/x360_usb_controller/mednafen_x360_psx_usb.lyt" "$config_home/.qjoypad3"
 	cp -v "$scriptdir/gamepad-cfgs/x360_usb_controller/psp_x360_usb.lyt" "$config_home/.qjoypad3"
+	cp -v "$scriptdir/gamepad-cfgs/x360_usb_controller/dolphin_x360_usb.lyt" "$config_home/.qjoypad3"
 
 	##################### 
 	# PSP 
@@ -725,6 +845,18 @@ function gp_x360_usb()
 	old_pre="med_psx_pre"
 	old_post="med_psx_post"
 	new_pre="qjoypad mednafen_x360_psx_usb \&amp;"
+	new_post="killall qjoypad"
+	# perform actual changes
+	sed -i "s|$old_pre|$new_pre|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
+	sed -i "s|$old_post|$new_post|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
+
+	#####################
+	# dolphin
+	##################### 
+	
+	old_pre="dolphin_pre"
+	old_post="dolphin_post"
+	new_pre="qjoypad dolphin_x360_usb \&amp;"
 	new_post="killall qjoypad"
 	# perform actual changes
 	sed -i "s|$old_pre|$new_pre|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"

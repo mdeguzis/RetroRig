@@ -25,6 +25,7 @@ function rrs_prepareFolders()
 	#ROMs
 	pathlist+=("$rootdir/ROMs/Atari 2600")
 	pathlist+=("$rootdir/ROMs/Atari Lynx")
+	pathlist+=("$rootdir/ROMs/Gamecube")
 	pathlist+=("$rootdir/ROMs/MAME")
 	pathlist+=("$rootdir/ROMs/N64")
 	pathlist+=("$rootdir/ROMs/NES")
@@ -42,6 +43,7 @@ function rrs_prepareFolders()
 	#Artwork 
 	pathlist+=("$rootdir/Artwork/Atari 2600")
 	pathlist+=("$rootdir/Artwork/Atari Lynx")
+	pathlist+=("$rootdir/Artwork/Gamecube")
 	pathlist+=("$rootdir/Artwork/N64")
 	pathlist+=("$rootdir/Artwork/NES")
 	pathlist+=("$rootdir/Artwork/SNES")
@@ -69,6 +71,7 @@ function rrs_prepareFolders()
 	pathlist+=("$rootdir/Saves/Atari 2600")
 	pathlist+=("$rootdir/Saves/Atari Lynx")
 	pathlist+=("$rootdir/Saves/MAME")
+	pathlist+=("$rootdir/Saves/Gamecube")
 	pathlist+=("$rootdir/Saves/N64")
 	pathlist+=("$rootdir/Saves/NES")
 	pathlist+=("$rootdir/Saves/SNES")
@@ -85,6 +88,7 @@ function rrs_prepareFolders()
 	# create dotfiles
 	pathlist+=("$home/.retrorig")
 	pathlist+=("$config_home/.qjoypad3")
+	pathlist+=("$config_home/.dolphin-emu/Config")
 
 	# XBMC's path is set to our .retrorig directory, on with the rest:
 	pathlist+=("$config_home/.config/mupen64plus")
@@ -212,6 +216,7 @@ function rrs_emulators()
 	em_install_stella
 	em_install_mednafen
 	em_install_ppsspp
+	em_install_dolphin
 
 	#fix permissions since we are running as sudo
 	h_correct_perms
