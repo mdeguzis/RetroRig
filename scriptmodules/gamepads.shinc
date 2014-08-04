@@ -306,7 +306,7 @@ function ps3_set_ctrl_assignments()
 function ps3_set_emulator_ids()
 {
 	# Set PS3 Blu MAC value with the "joydetect" C program for Dolphin controller assignments
- 	GC_MAC_BLU=$($scriptdir/supplimental/joydetect /dev/input/js0 | awk -F'[^:[a-zA-Z0-9]*' '{print $6}')
+ 	GC_MAC_BLU=$($scriptdir/supplimental/joydetect /dev/input/js$n | awk -F'[^:[a-zA-Z0-9]*' '{print $6}')
 	echo -e "\nController ID/MAC Address applied to Dolphin emulator Controller $n was:\n$GC_MAC_BLU"
 	# Assign controller
 	sed -i "s|MAC_TEMP_$n|$GC_MAC_BLU|g" "$config_home/.dolphin-emu/Config/GCPadNew.ini"
