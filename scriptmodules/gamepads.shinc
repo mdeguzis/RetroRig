@@ -83,7 +83,7 @@ function gp_ps3_blu_main()
 	cp -v "$rootdir/gamepad-cfgs/ps3_blu_controller/mednafen_ps3_general_blu.lyt" "$config_home/.qjoypad3"
 	cp -v "$rootdir/gamepad-cfgs/ps3_blu_controller/mednafen_ps3_psx_blu.lyt" "$config_home/.qjoypad3"
 	cp -v "$rootdir/gamepad-cfgs/ps3_blu_controller/psp_ps3_blu.lyt" "$config_home/.qjoypad3"
-	cp -v "$rootdir/gamepad-cfgs/ps3_blu_controller/dolphin_blu.lyt" "$config_home/.qjoypad3"
+	cp -v "$rootdir/gamepad-cfgs/ps3_blu_controller/dolphin_ps3_blu.lyt" "$config_home/.qjoypad3"
 
 	##################### 
 	# PSP 
