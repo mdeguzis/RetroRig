@@ -172,6 +172,7 @@ function gp_ps3_blu_main()
 		n="1"
 		ps3_pair_blu
 		# Set up control assignments for emulators and XBMC control
+		clear
 		ps3_set_ctrl_assignments
 		ps3_set_emulator_ids
 		dialog --msgbox "Pairing of Player 1 Controller complete" 5 43 
@@ -183,6 +184,7 @@ function gp_ps3_blu_main()
 		n="1"
 		ps3_pair_blu
 		# Set up control assignments for emulators and XBMC control
+		clear
 		ps3_set_ctrl_assignments
 		ps3_set_emulator_ids
 		dialog --msgbox "Pairing of Player 1 Controller complete" 5 43 
@@ -190,6 +192,7 @@ function gp_ps3_blu_main()
 		n="2"
 		ps3_pair_blu
 		# Set up control assignments for emulators
+		clear
 		ps3_set_emulator_ids
 		dialog --msgbox "Pairing of Player 2 Controller complete" 5 43 
 		;;
@@ -199,6 +202,7 @@ function gp_ps3_blu_main()
 		n="1"
 		ps3_pair_blu
 		# Set up control assignments for emulators and XBMC control
+		clear
 		ps3_set_ctrl_assignments
 		ps3_set_emulator_ids
 		dialog --msgbox "Pairing of Player 1 Controller complete" 5 43 
@@ -206,12 +210,14 @@ function gp_ps3_blu_main()
 		n="2"
 		ps3_pair_blu
 		# Set up control assignments for emulators
+		clear
 		ps3_set_emulator_ids
 		dialog --msgbox "Pairing of Player 2 Controller complete" 5 43
 		# call pairing function to set current bluetooth MAC to Player 3
 		n="3"
 		ps3_pair_blu
 		# Set up control assignments for emulators
+		clear
 		ps3_set_emulator_ids
 		dialog --msgbox "Pairing of Player 3 Controller complete" 5 43  
 		;;
@@ -221,6 +227,7 @@ function gp_ps3_blu_main()
 		n="1"
 		ps3_pair_blu
 		# Set up control assignments for emulators and XBMC control
+		clear
 		ps3_set_ctrl_assignments
 		ps3_set_emulator_ids
 		dialog --msgbox "Pairing of Player 1 Controller complete" 5 43 
@@ -228,18 +235,21 @@ function gp_ps3_blu_main()
 		n="2"
 		ps3_pair_blu
 		# Set up control assignments for emulators
+		clear
 		ps3_set_emulator_ids
 		dialog --msgbox "Pairing of Player 2 Controller complete" 5 43
 		# call pairing function to set current bluetooth MAC to Player 3
 		n="3"
 		ps3_pair_blu
 		# Set up control assignments for emulators
+		clear
 		ps3_set_emulator_ids
 		dialog --msgbox "Pairing of Player 3 Controller complete" 5 43
 		# call pairing function to set current bluetooth MAC to Player 4
 		n="4"
 		ps3_pair_blu
 		# Set up control assignments for emulators
+		clear
 		ps3_set_emulator_ids
 		dialog --msgbox "Pairing of Player 4 Controller complete" 5 43    
 		;;
@@ -275,7 +285,6 @@ function ps3_set_ctrl_assignments()
 	# and share the same Bluetooth MAC address. This address is not different for
 	# each individual controller, and there for can be safely called on pairing.
 
-	clear
 	# inform user
 	echo -e "Assigning controls to XBMC / applicable emulators based\non controller MAC Address"
 	sleep 2s
