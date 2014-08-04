@@ -1,14 +1,14 @@
 <config version="2.0.8">
   <RomCollections>
-    <RomCollection id="11" name="MAME">
+     <RomCollection id="11" name="MAME">
       <useBuiltinEmulator>False</useBuiltinEmulator>
       <gameclient />
       <emulatorCmd>/usr/games/mame</emulatorCmd>
       <emulatorParams>"%ROM%"</emulatorParams>
       <romPath>/home/test/RetroRig/ROMs/MAME/*.zip</romPath>
       <saveStatePath />
-      <saveStateParams />rtwork/MAME/boxfront/%GAME%.*</mediaPath>
-      <mediaPath type="boxfront">/home/test/RetroRig/A
+      <saveStateParams />
+      <mediaPath type="boxfront">/home/test/RetroRig/Artwork/MAME/boxfront/%GAME%.*</mediaPath>
       <mediaPath type="title">/home/test/RetroRig/Artwork/MAME/title/%GAME%.*</mediaPath>
       <mediaPath type="gameplay">/home/test/RetroRig/Artwork/MAME/gameplay/%GAME%.*</mediaPath>
       <mediaPath type="action">/home/test/RetroRig/Artwork/MAME/action/%GAME%.*</mediaPath>
