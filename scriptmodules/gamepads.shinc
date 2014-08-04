@@ -173,6 +173,7 @@ function gp_ps3_blu_main()
 		ps3_pair_blu
 		# Set up control assignments for emulators and XBMC control
 		ps3_set_ctrl_assignments
+		ps3_set_emulator_ids
 		dialog --msgbox "Pairing of Player 1 Controller complete" 5 43 
 		sleep 5s
 		;;
@@ -183,10 +184,13 @@ function gp_ps3_blu_main()
 		ps3_pair_blu
 		# Set up control assignments for emulators and XBMC control
 		ps3_set_ctrl_assignments
+		ps3_set_emulator_ids
 		dialog --msgbox "Pairing of Player 1 Controller complete" 5 43 
 		# call pairing function to set current bluetooth MAC to Player 2
 		n="2"
 		ps3_pair_blu
+		# Set up control assignments for emulators and XBMC control
+		ps3_set_emulator_ids
 		dialog --msgbox "Pairing of Player 2 Controller complete" 5 43 
 		;;
 
@@ -196,14 +200,19 @@ function gp_ps3_blu_main()
 		ps3_pair_blu
 		# Set up control assignments for emulators and XBMC control
 		ps3_set_ctrl_assignments
+		ps3_set_emulator_ids
 		dialog --msgbox "Pairing of Player 1 Controller complete" 5 43 
 		# call pairing function to set current bluetooth MAC to Player 2
 		n="2"
 		ps3_pair_blu
+		# Set up control assignments for emulators and XBMC control
+		ps3_set_emulator_ids
 		dialog --msgbox "Pairing of Player 2 Controller complete" 5 43
 		# call pairing function to set current bluetooth MAC to Player 3
 		n="3"
 		ps3_pair_blu
+		# Set up control assignments for emulators and XBMC control
+		ps3_set_emulator_ids
 		dialog --msgbox "Pairing of Player 3 Controller complete" 5 43  
 		;;
 
@@ -213,18 +222,25 @@ function gp_ps3_blu_main()
 		ps3_pair_blu
 		# Set up control assignments for emulators and XBMC control
 		ps3_set_ctrl_assignments
+		ps3_set_emulator_ids
 		dialog --msgbox "Pairing of Player 1 Controller complete" 5 43 
 		# call pairing function to set current bluetooth MAC to Player 2
 		n="2"
 		ps3_pair_blu
+		# Set up control assignments for emulators and XBMC control
+		ps3_set_emulator_ids
 		dialog --msgbox "Pairing of Player 2 Controller complete" 5 43
 		# call pairing function to set current bluetooth MAC to Player 3
 		n="3"
 		ps3_pair_blu
+		# Set up control assignments for emulators and XBMC control
+		ps3_set_emulator_ids
 		dialog --msgbox "Pairing of Player 3 Controller complete" 5 43
 		# call pairing function to set current bluetooth MAC to Player 4
 		n="4"
 		ps3_pair_blu
+		# Set up control assignments for emulators and XBMC control
+		ps3_set_emulator_ids
 		dialog --msgbox "Pairing of Player 4 Controller complete" 5 43    
 		;;
 
@@ -270,13 +286,6 @@ function ps3_set_ctrl_assignments()
 	echo -e "\nController ID/MAC Address applied to XBMC/emulators was:\n$PS3_MAC_BLU"
 	sleep 2s
 
-	# Set PS3 Blu MAC value with the "joydetect" C program for Dolphin controller assignments
- 	GC_MAC_BLU=$($scriptdir/supplimental/joydetect /dev/input/js0 | awk -F'[^:[a-zA-Z0-9]*' '{print $6}')
-	echo -e "\nController ID/MAC Address applied to Dolphin emulator Controller $n was:\n$GC_MAC_BLU"
-	# Assign controller
-	sed -i "s|MAC_TEMP_$n|$GC_MAC_BLU|g" "$config_home/.dolphin-emu/Config/GCPadNew.ini"
-	sleep 2s
-
 	# copy over default keyboard file:
 	cp -v "$rootdir/gamepad-cfgs/ps3_blu_controller/keyboard.xml" "$xbmc_home/userdata/keymaps/"
 
@@ -292,6 +301,16 @@ function ps3_set_ctrl_assignments()
 	# Stella does list the MAC address for the PS3 control in the stellarc file. Replace for now until further notice
 	sed -i "s|$PS3_MAC_OLD|$PS3_MAC_BLU|g" "$config_home/.stella/stellarc"
 
+}
+
+function ps3_set_emulator_ids()
+{
+	# Set PS3 Blu MAC value with the "joydetect" C program for Dolphin controller assignments
+ 	GC_MAC_BLU=$($scriptdir/supplimental/joydetect /dev/input/js0 | awk -F'[^:[a-zA-Z0-9]*' '{print $6}')
+	echo -e "\nController ID/MAC Address applied to Dolphin emulator Controller $n was:\n$GC_MAC_BLU"
+	# Assign controller
+	sed -i "s|MAC_TEMP_$n|$GC_MAC_BLU|g" "$config_home/.dolphin-emu/Config/GCPadNew.ini"
+	sleep 2s
 }
 
 function ps3_pair_blu()
