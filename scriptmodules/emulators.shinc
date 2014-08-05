@@ -21,7 +21,7 @@ function em_add_repos()
 	# rm -f getdeb.key
 
 	# dolphin emulator PPA
-	add-apt-repository ppa:glennric/dolphin-emu
+	add-apt-repository -y ppa:glennric/dolphin-emu
 
 }
 
