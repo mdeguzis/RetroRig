@@ -1,4 +1,4 @@
-xbmc (13.1.5) trusty; urgency=medium
+xbmc (version_placeholder) trusty; urgency=medium
 
   * This version is based on fernetMenta xbmc. Added:
     - gamepad hotplug support
