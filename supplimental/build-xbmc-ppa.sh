@@ -103,7 +103,7 @@ fi
 cd xbmc
 git checkout $BRANCH
 rm -rf .git 
-cp ~/RetroRig/Artwork/XBMC/Splash_retrorig.png media/
+cp ~/RetroRig/Artwork/XBMC/Splash_retrorig.png ~/RetroRig/Artwork/XBMC/Splash.png media/
 cd ..
 tar cfj xbmc_$BASE.$PL.orig.tar.bz2 xbmc
 
