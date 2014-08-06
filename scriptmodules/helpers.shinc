@@ -668,6 +668,10 @@ function h_emu_user_fixes()
 	sed -i "s|home_temp|$home|g" "$config_home/.dolphin-emu/Config/Dolphin.ini"
 	sed -i "s|config_temp|$config_home|g" "$config_home/.dolphin-emu/Config/Dolphin.ini"
 
+	# Stella
+	sed -i "s|config_temp|$config_home|g" "$config_home/.stella/stellarc"
+	sed -i "s|installdir_temp|$rootdir|g" "$config_home/.stella/stellarc"
+
 	# echo change
 	echo "The user applied to configuration files was: $user" | tee >> "$rootdir/logs/debug.log"
 }
