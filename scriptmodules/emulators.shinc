@@ -19,6 +19,18 @@ function em_add_repos()
 	# wget -q -O- http://archive.getdeb.net/getdeb-archive.key > getdeb.key 
 	# apt-key add getdeb.key 
 	# rm -f getdeb.key
+
+	# dolphin emulator PPA
+	add-apt-repository -y ppa:glennric/dolphin-emu
+
+}
+
+function em_install_dolphin()
+{
+
+	echo "Installing Nintendo Gamecube emulator Dolphin"
+	apt-get install -y dolphin-emu-master
+
 }
 
 function em_install_ppsspp_source()
@@ -64,7 +76,7 @@ function em_install_ppsspp()
 	apt-get install -y libsdl1.2-dev
 
 	# pull down emulator from libregeek (to avoid increasing the git repo)
-	wget --tries=50 -P /tmp "www.libregeek.org/RetroRig/emulators/karenbuildbot-net.angelxwind.ppsspp-linux-amd64-generic.tar.gz"
+	wget --tries=50 -P /tmp "www.libregeek.org/RetroRig/Ubuntu-Trusty/emulators/karenbuildbot-net.angelxwind.ppsspp-linux-amd64-generic.tar.gz"
 
 	# Since ppsspp-0.9.8-SDL-pk64 is already in $rootdir/emulators, we just
 	# need to untar it:
@@ -86,7 +98,16 @@ function em_install_ppsspp()
 function em_install_stella()
 {
 	echo "Installing Atari 2600 emulator Stella"
-	apt-get install -y stella
+	#apt-get install -y stella
+
+	# As of 20140802, Stella, at least in testing, would fail to launch when using OpenGL
+	# Stella was build from the latest SVN trunk, and works successfully
+	# Source: http://stella.sourceforge.net/development.php
+	# SVN trunk: 'svn co https://svn.code.sf.net/p/stella/code/trunk stella'
+
+	wget --tries=50 -P "/usr/bin/" "www.libregeek.org/RetroRig/Ubuntu-Trusty/emulators/Stella/stella"
+	chmod +x "/usr/bin/stella"
+
 }
 
 function em_install_mupen64plus()
@@ -109,7 +130,7 @@ function em_install_mednafen()
 
 	echo "Installing Mednafen emulator"
 	#apt-get install -y mednafen
-	wget --tries=50 -P /tmp "www.libregeek.org/RetroRig/mednafen/mednafen-patched-for-retrorig-patchlevel-1-0trusty.deb"
+	wget --tries=50 -P /tmp "www.libregeek.org/RetroRig/Ubuntu-Trusty/mednafen/mednafen-patched-for-retrorig-patchlevel-1-0trusty.deb"
 	apt-get install -y libsdl2-2.0-0
         dpkg -i "/tmp/mednafen-patched-for-retrorig-patchlevel-1-0trusty.deb"
 

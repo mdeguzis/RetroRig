@@ -644,22 +644,33 @@ function h_emu_user_fixes()
 	# set the system user to an absolute value for files that require it
 	# RCB and some config files don't like using $config_home, rather /home/test/
 	# Let's change the config files to reflect the current username
-
 	
 	# mame
-	sed -i "s|/home/test/RetroRig|$rootdir|g" $config_home/.mame/mame.ini | tee >> "$rootdir/logs/debug.log"
+	sed -i "s|installdir_temp|$rootdir|g" "$config_home/.mame/mame.ini" | tee >> "$rootdir/logs/debug.log"
+	sed -i "s|config_temp|$config_home|g" "$config_home/.mame/mame.ini" | tee >> "$rootdir/logs/debug.log"
 	
 	# MESS
-	sed -i "s|/home/test/RetroRig|$rootdir|g" $config_home/.mess/mess.ini | tee >> "$rootdir/logs/debug.log"
+	sed -i "s|installdir_temp|$rootdir|g" "$config_home/.mess/mess.ini" | tee >> "$rootdir/logs/debug.log"
+	sed -i "s|config_temp|$config_home|g" "$config_home/.mess/mess.ini" | tee >> "$rootdir/logs/debug.log"
 	
 	# XBMC
-	sed -i "s|retrodir|$rootdir|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml" | tee >> "$rootdir/logs/debug.log"
+	sed -i "s|installdir_temp|$rootdir|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml" | tee >> "$rootdir/logs/debug.log"
 	
 	# PPSSPP	
-	sed -i 's|test|$user|g' "$scriptdir/emu-cfgs/x360_controller/PPSSPP/ppsspp.ini"
+	sed -i "s|installdir_temp|$rootdir|g" "$config_home/.config/ppsspp/PSP/SYSTEM/ppsspp.ini"
+	sed -i "s|config_temp|$config_home|g" "$config_home/.config/ppsspp/PSP/SYSTEM/ppsspp.ini"
 
 	# Mednafen firmware location
 	sed -i "s|firmware_temp|$rootdir/BIOS/Mednafen|g" "$config_home/.mednafen/mednafen-09x.cfg"
+
+	# Dolphin directories
+	sed -i "s|installdir_temp|$rootdir|g" "$config_home/.dolphin-emu/Config/Dolphin.ini"
+	sed -i "s|home_temp|$home|g" "$config_home/.dolphin-emu/Config/Dolphin.ini"
+	sed -i "s|config_temp|$config_home|g" "$config_home/.dolphin-emu/Config/Dolphin.ini"
+
+	# Stella
+	sed -i "s|config_temp|$config_home|g" "$config_home/.stella/stellarc"
+	sed -i "s|installdir_temp|$rootdir|g" "$config_home/.stella/stellarc"
 
 	# echo change
 	echo "The user applied to configuration files was: $user" | tee >> "$rootdir/logs/debug.log"

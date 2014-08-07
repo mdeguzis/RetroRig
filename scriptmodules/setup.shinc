@@ -25,6 +25,7 @@ function rrs_prepareFolders()
 	#ROMs
 	pathlist+=("$rootdir/ROMs/Atari 2600")
 	pathlist+=("$rootdir/ROMs/Atari Lynx")
+	pathlist+=("$rootdir/ROMs/Gamecube")
 	pathlist+=("$rootdir/ROMs/MAME")
 	pathlist+=("$rootdir/ROMs/N64")
 	pathlist+=("$rootdir/ROMs/NES")
@@ -42,6 +43,7 @@ function rrs_prepareFolders()
 	#Artwork 
 	pathlist+=("$rootdir/Artwork/Atari 2600")
 	pathlist+=("$rootdir/Artwork/Atari Lynx")
+	pathlist+=("$rootdir/Artwork/Gamecube")
 	pathlist+=("$rootdir/Artwork/N64")
 	pathlist+=("$rootdir/Artwork/NES")
 	pathlist+=("$rootdir/Artwork/SNES")
@@ -69,6 +71,7 @@ function rrs_prepareFolders()
 	pathlist+=("$rootdir/Saves/Atari 2600")
 	pathlist+=("$rootdir/Saves/Atari Lynx")
 	pathlist+=("$rootdir/Saves/MAME")
+	pathlist+=("$rootdir/Saves/Gamecube")
 	pathlist+=("$rootdir/Saves/N64")
 	pathlist+=("$rootdir/Saves/NES")
 	pathlist+=("$rootdir/Saves/SNES")
@@ -85,6 +88,7 @@ function rrs_prepareFolders()
 	# create dotfiles
 	pathlist+=("$home/.retrorig")
 	pathlist+=("$config_home/.qjoypad3")
+	pathlist+=("$config_home/.dolphin-emu/Config")
 
 	# XBMC's path is set to our .retrorig directory, on with the rest:
 	pathlist+=("$config_home/.config/mupen64plus")
@@ -212,6 +216,7 @@ function rrs_emulators()
 	em_install_stella
 	em_install_mednafen
 	em_install_ppsspp
+	em_install_dolphin
 
 	#fix permissions since we are running as sudo
 	h_correct_perms
@@ -260,7 +265,7 @@ function rrs_software()
 	# install binaries
 	apt-get install -y xboxdrv curl python-software-properties \
 	pkg-config software-properties-common dconf-tools jstest-gtk \
-	qjoypad build-essential sixad libusb-dev libusb-0.1-4
+	qjoypad build-essential sixad libusb-dev libusb-0.1-4 libsdl2-dev
 
 	# call RetroRig's custom deb install for ps3 hotplugging. 
 	# Thankfully our package still works with the Xbox 360 implementation,
@@ -409,8 +414,8 @@ function rrs_xbmc_patched()
 	rm -f "/tmp/xbmc-bin_gotham-patched-for-retrorig-patchlevel-*-0trusty.deb"
 
 	# copy down the patched debs from libregeek (saves on space, dl speed is adaquate for now)
-	wget --tries=50 -P /tmp "www.libregeek.org/RetroRig/xbmc/xbmc_gotham-patched-for-retrorig-patchlevel-5-0trusty.deb"
-	wget --tries=50 -P /tmp "www.libregeek.org/RetroRig/xbmc/xbmc-bin_gotham-patched-for-retrorig-patchlevel-5-0trusty.deb"
+	wget --tries=50 -P /tmp "www.libregeek.org/RetroRig/Ubuntu-Trusty/xbmc/xbmc_gotham-patched-for-retrorig-patchlevel-5-0trusty.deb"
+	wget --tries=50 -P /tmp "www.libregeek.org/RetroRig/Ubuntu-Trusty/xbmc/xbmc-bin_gotham-patched-for-retrorig-patchlevel-5-0trusty.deb"
 
 	# install dependencies manually
 	apt-get install -y mesa-utils \
