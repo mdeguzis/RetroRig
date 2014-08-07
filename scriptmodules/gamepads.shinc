@@ -10,6 +10,13 @@
 function gp_ps3_blu()
 {
 
+	####################################################################
+	# Function Description:
+	# 
+	# This function serves to copy the default emulator configurations
+	# for the PS3 Controller over bluetooth
+	####################################################################
+
 	# clean any old configs
 	h_clean_gamepad
 
@@ -56,15 +63,6 @@ function gp_ps3_blu()
 	# PPSSPP
 	cp -v "$scriptdir/emu-cfgs/ps3_blu_controller/PPSSPP/ppsspp.ini" "$config_home/.config/ppsspp/PSP/SYSTEM"
 	cp -v "$scriptdir/emu-cfgs/ps3_blu_controller/PPSSPP/controls.ini" "$config_home/.config/ppsspp/PSP/SYSTEM"
-
-	# The PS3 pairing process shoudl be handled interactively in a seperate function:
-	gp_ps3_blu_main
-
-}
-
-
-function gp_ps3_blu_main()
-{
 
 	###########################################################
 	# Add emulator specifc control remaps here for qjoypad
@@ -139,6 +137,22 @@ function gp_ps3_blu_main()
 	# End qjoypad remappings
 	###########################################################
 
+	# The PS3 pairing process should be handled interactively in a seperate function:
+	gp_ps3_blu_main
+
+}
+
+
+function gp_ps3_blu_main()
+{
+
+	####################################################################
+	# Function Description:
+	# 
+	# This function serves as the "main screen" for PS3 controller 
+	# setups
+	####################################################################
+
 	###########################################################
 	# Start controller pairing process
 	###########################################################
@@ -168,6 +182,7 @@ function gp_ps3_blu_main()
 		case $choice in
 
 		1)
+		
 		# call pairing function to set current bluetooth MAC to Player 1
 		n="1"
 		ps3_pair_blu
@@ -180,6 +195,7 @@ function gp_ps3_blu_main()
 		;;
 
 		2)
+		
 		# call pairing function to set current bluetooth MAC to Player 1
 		n="1"
 		ps3_pair_blu
@@ -188,24 +204,7 @@ function gp_ps3_blu_main()
 		ps3_set_ctrl_assignments
 		ps3_set_emulator_ids
 		dialog --msgbox "Pairing of Player 1 Controller complete" 5 43 
-		# call pairing function to set current bluetooth MAC to Player 2
-		n="2"
-		ps3_pair_blu
-		# Set up control assignments for emulators
-		clear
-		ps3_set_emulator_ids
-		dialog --msgbox "Pairing of Player 2 Controller complete" 5 43 
-		;;
-
-		3)
-		# call pairing function to set current bluetooth MAC to Player 1
-		n="1"
-		ps3_pair_blu
-		# Set up control assignments for emulators and XBMC control
-		clear
-		ps3_set_ctrl_assignments
-		ps3_set_emulator_ids
-		dialog --msgbox "Pairing of Player 1 Controller complete" 5 43 
+		
 		# call pairing function to set current bluetooth MAC to Player 2
 		n="2"
 		ps3_pair_blu
@@ -213,6 +212,27 @@ function gp_ps3_blu_main()
 		clear
 		ps3_set_emulator_ids
 		dialog --msgbox "Pairing of Player 2 Controller complete" 5 43
+		;;
+
+		3)
+
+		# call pairing function to set current bluetooth MAC to Player 1
+		n="1"
+		ps3_pair_blu
+		# Set up control assignments for emulators and XBMC control
+		clear
+		ps3_set_ctrl_assignments
+		ps3_set_emulator_ids
+		dialog --msgbox "Pairing of Player 1 Controller complete" 5 43
+ 
+		# call pairing function to set current bluetooth MAC to Player 2
+		n="2"
+		ps3_pair_blu
+		# Set up control assignments for emulators
+		clear
+		ps3_set_emulator_ids
+		dialog --msgbox "Pairing of Player 2 Controller complete" 5 43
+
 		# call pairing function to set current bluetooth MAC to Player 3
 		n="3"
 		ps3_pair_blu
@@ -223,6 +243,7 @@ function gp_ps3_blu_main()
 		;;
 
 		4)
+
 		# call pairing function to set current bluetooth MAC to Player 1
 		n="1"
 		ps3_pair_blu
@@ -230,7 +251,8 @@ function gp_ps3_blu_main()
 		clear
 		ps3_set_ctrl_assignments
 		ps3_set_emulator_ids
-		dialog --msgbox "Pairing of Player 1 Controller complete" 5 43 
+		dialog --msgbox "Pairing of Player 1 Controller complete" 5 43
+
 		# call pairing function to set current bluetooth MAC to Player 2
 		n="2"
 		ps3_pair_blu
@@ -238,6 +260,7 @@ function gp_ps3_blu_main()
 		clear
 		ps3_set_emulator_ids
 		dialog --msgbox "Pairing of Player 2 Controller complete" 5 43
+
 		# call pairing function to set current bluetooth MAC to Player 3
 		n="3"
 		ps3_pair_blu
@@ -245,6 +268,7 @@ function gp_ps3_blu_main()
 		clear
 		ps3_set_emulator_ids
 		dialog --msgbox "Pairing of Player 3 Controller complete" 5 43
+
 		# call pairing function to set current bluetooth MAC to Player 4
 		n="4"
 		ps3_pair_blu
@@ -268,22 +292,27 @@ function gp_ps3_blu_main()
 	# replace specific user paths that emulators and files may use
 	h_emu_user_fixes
 
-	# copy in the gp_autodetect_xbmc.sh template file, and change the gamepad type
-	new_controller_type="ps3_blu"
-	cp -v "$scriptdir/XBMC-cfgs/extra/gp_autodetect_xbmc.sh" "/usr/share/applications/gp_autodetect_xbmc.sh" 
-	sed -i "s|controller_temp|$new_controller_type|g" "/usr/share/applications/gp_autodetect_xbmc.sh"
+	#####################################################################################
+	# THIS FUNCTION SECTION IS NOT USED AT THE MOMENT, MORE TESTING IS NEEDED!!!
+	#####################################################################################
 
-	# correct permissions since we run as sudo
+	# copy in the gp_autodetect_xbmc.sh template file, and change the gamepad type
+	# new_controller_type="ps3_blu"
+	# cp -v "$scriptdir/XBMC-cfgs/extra/gp_autodetect_xbmc.sh" "/usr/share/applications/gp_autodetect_xbmc.sh" 
+	# sed -i "s|controller_temp|$new_controller_type|g" "/usr/share/applications/gp_autodetect_xbmc.sh"
+
+	# correct permissions since we install using sudo access
 	h_correct_perms	
 }
 
 function ps3_set_ctrl_assignments()
 {
-	
-	# note:
-	# This is ok to run on each pairing (player 1-4) since they all would connect to 
-	# and share the same Bluetooth MAC address. This address is not different for
-	# each individual controller, and there for can be safely called on pairing.
+	####################################################################
+	# Function Description:
+	# 
+	# This function sets the control methods for XBMC navigation
+	# and assignsthe unique MAC address of P1 to use as primary
+	####################################################################
 
 	# inform user
 	echo -e "Assigning controls to XBMC / applicable emulators based\non controller MAC Address"
@@ -307,25 +336,39 @@ function ps3_set_ctrl_assignments()
 	# Replace MAC Address for ***CONTROLLER 1 ONLY!*** This will be used to control XBMC		
 	sed -i "s|$PS3_MAC_OLD|$PS3_MAC_BLU|g" "$xbmc_home/userdata/keymaps/keyboard.xml"
 
-	# Stella does list the MAC address for the PS3 control in the stellarc file. Replace for now until further notice
-	sed -i "s|$PS3_MAC_OLD|$PS3_MAC_BLU|g" "$config_home/.stella/stellarc"
-
 }
 
 function ps3_set_emulator_ids()
 {
-	# Set PS3 Blu MAC value with the "joydetect" C program for Dolphin controller assignments
+	####################################################################
+	# Function Description:
+	# 
+	# Set PS3 Blu MAC value with the "joydetect" C program for Dolphin 
+	# controller assignments The MAC address of the unique controller is 
+	# based off of $n, the current controller number being set by 
+	# gp_ps3_blu_main, and later paired
+	#################################################################### 
  
         if [ $n == "1" ]; then
+		# Dolphin
 		GC_MAC_BLU=$($scriptdir/supplimental/joydetect /dev/input/js0 | awk -F'[^:[a-zA-Z0-9]*' '{print $6}')
+		# Stella (supports only 2 players )
+		Stella_MAC_BLU=$($scriptdir/supplimental/joydetect /dev/input/js0 | awk -F'[^:[a-zA-Z0-9]*' '{print $6}')
+		sed -i "s|p1_stella_MAC_temp|$config_home|g" "$config_home/.stella/stellarc"
 
 	elif [ $n == "2" ]; then
+		# Dolphin
 		GC_MAC_BLU=$($scriptdir/supplimental/joydetect /dev/input/js1 | awk -F'[^:[a-zA-Z0-9]*' '{print $6}')
+		# Stella (supports only 2 players )
+		Stella_MAC_BLU=$($scriptdir/supplimental/joydetect /dev/input/js0 | awk -F'[^:[a-zA-Z0-9]*' '{print $6}')
+		sed -i "s|p2_stella_MAC_temp|$config_home|g" "$config_home/.stella/stellarc"
 
 	elif [ $n == "3" ]; then
+		# Dolphin
 		GC_MAC_BLU=$($scriptdir/supplimental/joydetect /dev/input/js2 | awk -F'[^:[a-zA-Z0-9]*' '{print $6}')
 
 	elif [ $n == "4" ]; then
+		# Dolphin
 		GC_MAC_BLU=$($scriptdir/supplimental/joydetect /dev/input/js3 | awk -F'[^:[a-zA-Z0-9]*' '{print $6}')
 
 	else
@@ -333,19 +376,26 @@ function ps3_set_emulator_ids()
 
         fi
 
+	clear
+	echo -e "Controller ID/MAC Address applied to the Dolphin emulator Controller $n was:\n$GC_MAC_BLU"
+	echo -e "\nController ID/MAC Address applied to the Stella emulator Controller $n was:\n$Stella_MAC_BLU"
 
-	echo -e "\nController ID/MAC Address applied to Dolphin emulator Controller $n was:\n$GC_MAC_BLU"
-	# Assign controller
+	# Assign controller ID
 	sed -i "s|MAC_TEMP_$n|$GC_MAC_BLU|g" "$config_home/.dolphin-emu/Config/GCPadNew.ini"
+
+
+
 	sleep 2s
 }
 
 function ps3_pair_blu()
 {
+	####################################################################
+	# Function Description:
+	# 
+	# Set and pair up player controller interactively
+	####################################################################
 
-	#####################################
-	# Set and pair up player controller
-	#####################################
 
 	dialog --msgbox "Please plug in these items now:\n\n1)The USB cable\n2)PS3 controller $n \n
 3)Bluetooth dongle\n\nAdditional controllers can be added in the settings menu"  12 40
@@ -368,15 +418,17 @@ fully enable the controller(s)" 12 60
 
 function gp_ps3_usb()
 {
+	####################################################################
+	# Function Description:
+	# 
+	# Assign and modify emulator configurations for PS3 Controller over
+	# USB
+	####################################################################
 
 	# clean any old configs
 	h_clean_gamepad
 
-	##############################################################
-	# Set emulator configurations
-	##############################################################
-
-	#mame
+	# MAME
 	# default path: /home/$USER/.retrorig/.mame
 	# Main config
 	cp -v "$scriptdir/emu-cfgs/ps3_usb_controller/MAME/default.cfg" "$config_home/.mame/cfg"
@@ -410,9 +462,9 @@ function gp_ps3_usb()
 	cp -v "$scriptdir/emu-cfgs/ps3_usb_controller/Dolphin/GCPadNew.ini" "$config_home/.dolphin-emu/Config"
 	cp -v "$scriptdir/emu-cfgs/ps3_usb_controller/Dolphin/Dolphin.ini" "$config_home/.dolphin-emu/Config"
 
-	#Stella
-	#default path: /home/$USER/.retrorig/.config/mupen64plus
-	#Main config
+	# Stella
+	# default path: /home/$USER/.retrorig/.config/mupen64plus
+	# Main config
 	cp -v "$scriptdir/emu-cfgs/ps3_usb_controller/Stella/stellarc" "$config_home/.stella/"
 
 	# PPSSPP
@@ -423,12 +475,12 @@ function gp_ps3_usb()
 	# Set system objects
 	##############################################################
 
-	#inject init script and default config for xboxdrv
+	# inject init script and default config for xboxdrv
 	cp -v "$rootdir/init-scripts/ps3_usb_controller/xboxdrv" "/etc/init.d/"
 	cp -v "$rootdir/init-scripts/ps3_usb_controller/default/xboxdrv" "/etc/default/xboxdrv"
 
 	
-	#blacklist xpad
+	# blacklist xpad
 	cp -v "$rootdir/init-scripts/ps3_usb_controller/blacklist.conf" "/etc/modprobe.d/"
 
 	# copy over default keyboard file:
@@ -516,7 +568,6 @@ RetorRig loads to use the gamepad" 14 60
 	#####################
 	# mednafen (general)
 	##################### 
-
 	old_pre="med_temp_pre"
 	old_post="med_temp_post"
 	new_pre="qjoypad mednafen_ps3_general_usb \&amp;"
@@ -528,7 +579,6 @@ RetorRig loads to use the gamepad" 14 60
 	#####################
 	# mednafen (PSX/PS1)
 	##################### 
-	
 	old_pre="med_psx_pre"
 	old_post="med_psx_post"
 	new_pre="qjoypad mednafen_ps3_psx_usb \&amp;"
@@ -540,7 +590,6 @@ RetorRig loads to use the gamepad" 14 60
 	#####################
 	# dolphin
 	##################### 
-	
 	old_pre="dolphin_pre"
 	old_post="dolphin_post"
 	new_pre="qjoypad dolphin_ps3_usb \&amp;"
@@ -560,16 +609,16 @@ RetorRig loads to use the gamepad" 14 60
 	# disable for now, hangs script completion running in background
 	# service xboxdrv start &
 
-	# replace specific user paths that emulators and files may use
-	h_emu_user_fixes
-
 	# copy in the gp_autodetect_xbmc.sh template file, and change the gamepad type 
 	# Testing ONLY for gp_autodetect_xbmc.sh.testing
 	# new_controller_type="ps3_usb"
 	# cp -v "$scriptdir/XBMC-cfgs/extra/gp_autodetect_xbmc.sh" "/usr/share/applications/gp_autodetect_xbmc.sh" 
 	# sed -i "s|controller_temp|$new_controller_type|g" "/usr/share/applications/gp_autodetect_xbmc.sh"
 
-	# correct permissions since we run as sudo
+	# replace specific user paths that emulators and files may use
+	h_emu_user_fixes
+
+	# correct permissions since we install using sudo access
 	h_correct_perms
 
 	# Let the user know about reboot
@@ -579,6 +628,12 @@ RetorRig loads to use the gamepad" 14 60
 
 function gp_x360_wireless()
 {
+	####################################################################
+	# Function Description:
+	# 
+	# Assign and modify emulator configurations for wireless 
+	# X360 Controller
+	####################################################################
 
 	# clean any old configs
 	h_clean_gamepad
@@ -723,17 +778,19 @@ function gp_x360_wireless()
 	# disable for now, hangs script completion running in background
 	# service xboxdrv start &
 
-	# replace specific user paths that emulators and files may use
-	h_emu_user_fixes
-
-	# copy in the gp_autodetect_xbmc.sh template file, and change the gamepad type
+	#####################################################################################
+	# THIS FUNCTION SECTION IS NOT USED AT THE MOMENT, MORE TESTING IS NEEDED!!!
+	#####################################################################################
 	
 	# new_controller_type="x360_wireless"
 	# Testing ONLY for gp_autodetect_xbmc.sh.testing
 	# cp -v "$scriptdir/XBMC-cfgs/extra/gp_autodetect_xbmc.sh" "/usr/share/applications/gp_autodetect_xbmc.sh" 
 	# sed -i "s|controller_temp|$new_controller_type|g" "/usr/share/applications/gp_autodetect_xbmc.sh"
 
-	# correct permissions since we run as sudo
+	# replace specific user paths that emulators and files may use
+	h_emu_user_fixes
+
+	# correct permissions since we install using sudo access
 	h_correct_perms
 
 	# Let the user know about reboot
@@ -742,6 +799,12 @@ function gp_x360_wireless()
 
 function gp_x360_usb()
 {
+	####################################################################
+	# Function Description:
+	# 
+	# Assign and modify emulator configurations for USB / Wired 
+	# X360 Controller
+	####################################################################
 
 	# clean any old configs
 	h_clean_gamepad
@@ -875,7 +938,6 @@ RetorRig loads to use the gamepad" 14 60
 	#####################
 	# mednafen (general)
 	##################### 
-
 	old_pre="med_temp_pre"
 	old_post="med_temp_post"
 	new_pre="qjoypad mednafen_x360_general_usb \&amp;"
@@ -887,7 +949,6 @@ RetorRig loads to use the gamepad" 14 60
 	#####################
 	# mednafen (PSX/PS1)
 	##################### 
-	
 	old_pre="med_psx_pre"
 	old_post="med_psx_post"
 	new_pre="qjoypad mednafen_x360_psx_usb \&amp;"
@@ -899,7 +960,6 @@ RetorRig loads to use the gamepad" 14 60
 	#####################
 	# dolphin
 	##################### 
-	
 	old_pre="dolphin_pre"
 	old_post="dolphin_post"
 	new_pre="qjoypad dolphin_x360_usb \&amp;"
@@ -935,7 +995,10 @@ RetorRig loads to use the gamepad" 14 60
 	# disable for now, hangs script completion running in background
 	# service xboxdrv start &
 
-	# copy in the gp_autodetect_xbmc.sh template file, and change the gamepad type
+	#####################################################################################
+	# THIS FUNCTION SECTION IS NOT USED AT THE MOMENT, MORE TESTING IS NEEDED!!!
+	#####################################################################################
+
 	# Testing ONLY for gp_autodetect_xbmc.sh.testing
 	# new_controller_type="x360_wired"
 	# cp -v "$scriptdir/XBMC-cfgs/extra/gp_autodetect_xbmc.sh" "/usr/share/applications/gp_autodetect_xbmc.sh" 
@@ -944,7 +1007,7 @@ RetorRig loads to use the gamepad" 14 60
 	# replace specific user paths that emulators and files may use
 	h_emu_user_fixes
 
-	# correct permissions since we run as sudo
+	# correct permissions since we install using sudo access
 	h_correct_perms
 
 	# Let the user know about LED's
