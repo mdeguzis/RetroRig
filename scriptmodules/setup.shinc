@@ -200,6 +200,9 @@ function rrs_add_standard_repos()
 	# add respository for qtsixa (PS3 pairing)
 	add-apt-repository -y ppa:falk-t-j/qtsixa
 
+	# add respository for RetroRig backends (xbmc, mednafen,...)
+	add-apt-repository -y ppa:beauman/retrorig
+
 }
 
 function rrs_emulators()
@@ -413,52 +416,65 @@ function rrs_xbmc_patched()
 	rm -f "/tmp/xbmc_gotham-patched-for-retrorig-patchlevel-*-0trusty.deb"
 	rm -f "/tmp/xbmc-bin_gotham-patched-for-retrorig-patchlevel-*-0trusty.deb"
 
-	# copy down the patched debs from libregeek (saves on space, dl speed is adaquate for now)
-	wget --tries=50 -P /tmp "www.libregeek.org/RetroRig/Ubuntu-Trusty/xbmc/xbmc_gotham-patched-for-retrorig-patchlevel-5-0trusty.deb"
-	wget --tries=50 -P /tmp "www.libregeek.org/RetroRig/Ubuntu-Trusty/xbmc/xbmc-bin_gotham-patched-for-retrorig-patchlevel-5-0trusty.deb"
+################################################################################################################################################
+# installation of xbmc from libregeek.org (deprecated)
+#
+#	# copy down the patched debs from libregeek (saves on space, dl speed is adaquate for now)
+#	#wget --tries=50 -P /tmp "www.libregeek.org/RetroRig/Ubuntu-Trusty/xbmc/xbmc_gotham-patched-for-retrorig-patchlevel-5-0trusty.deb"
+#	#wget --tries=50 -P /tmp "www.libregeek.org/RetroRig/Ubuntu-Trusty/xbmc/xbmc-bin_gotham-patched-for-retrorig-patchlevel-5-0trusty.deb"
+#
+#	# install dependencies manually
+	#apt-get install -y mesa-utils \
+        #                   libva-intel-vaapi-driver \
+        #                   i965-va-driver:amd64 \
+        #                   libavahi-compat-libdnssd-dev \
+        #                   libavahi-compat-libdnssd1:amd64 \
+        #                   libjs-jquery \
+        #                   python-bluez \
+        #                   python-simplejson \
+        #                   python-support \
+        #                   ttf-dejavu-core \
+        #                   libnfs1 \
+        #                   libpcrecpp0 \
+        #                   libbluray1 \
+        #                   libshairport1 \
+        #                   libshairplay0 \
+        #                   libsdl1.2debian \
+        #                   libaacs0 \
+        #                   liblockdev1 \
+        #                   libcec2 \
+        #                   libvdpau1 \
+        #                   libmicrohttpd10 \
+        #                   libao-common \
+        #                   libao4 \
+        #                   mysql-common \
+        #                   libmysqlclient18 \
+        #                   libtinyxml2.6.2 \
+        #                   libva-x11-1 \
+        #                   libva-glx1 \
+        #                   libcrystalhd3 \
+        #                   libmad0 \
+        #                   libass4 \
+        #                   libmp3lame0 \
+        #                   libenca0
 
-	# install dependencies manually
-	apt-get install -y mesa-utils \
-                           libva-intel-vaapi-driver \
-                           i965-va-driver:amd64 \
-                           libavahi-compat-libdnssd-dev \
-		           libavahi-compat-libdnssd1:amd64 \
-                           libjs-jquery \
-                           python-bluez \
-                           python-simplejson \
-                           python-support \
-                           ttf-dejavu-core \
-                           libnfs1 \
-			   libpcrecpp0 \
-                           libbluray1 \
-                           libshairport1 \
-                           libshairplay0 \
-			   libsdl1.2debian \
-                           libaacs0 \
-                           liblockdev1 \
-                           libcec2 \
-                           libvdpau1 \
-                           libmicrohttpd10 \
-                           libao-common \
-                           libao4 \
-                           mysql-common \
-                           libmysqlclient18 \
-                           libtinyxml2.6.2 \
-                           libva-x11-1 \
-                           libva-glx1 \
-                           libcrystalhd3 \
-                           libmad0 \
-                           libass4 \
-                           libmp3lame0 \
-                           libenca0
+#	# install deb from /tmp
+#	#dpkg -i "/tmp/xbmc-bin_gotham-patched-for-retrorig-patchlevel-5-0trusty.deb"
+#       #dpkg -i "/tmp/xbmc_gotham-patched-for-retrorig-patchlevel-5-0trusty.deb"
+#
+#	# cleanup deb
+#	#rm -f "/tmp/xbmc-bin_gotham-patched-for-retrorig-patchlevel-*-0trusty.deb"
+#	#rm -f "/tmp/xbmc_gotham-patched-for-retrorig-patchlevel-*-0trusty.deb"
+################################################################################################################################################
 
-	# install deb from /tmp
-	dpkg -i "/tmp/xbmc-bin_gotham-patched-for-retrorig-patchlevel-5-0trusty.deb"
-        dpkg -i "/tmp/xbmc_gotham-patched-for-retrorig-patchlevel-5-0trusty.deb"
+        # release aptitude hold for upgrade/install
+	apt-mark unhold xbmc
 
-	# cleanup deb
-	rm -f "/tmp/xbmc-bin_gotham-patched-for-retrorig-patchlevel-*-0trusty.deb"
-	rm -f "/tmp/xbmc_gotham-patched-for-retrorig-patchlevel-*-0trusty.deb"
+	echo "Installing xbmc"
+	apt-get install -y xbmc
+
+	# hold package after install against upgrades
+	apt-mark hold xbmc
 
         # get SHA1 tag from patched XBMC version
         sha1=`file /usr/lib/xbmc/xbmc.bin | cut -f 19 -d ' '| cut -f 2 -d '='|cut -f 1 -d ','`
