@@ -646,12 +646,12 @@ function h_emu_user_fixes()
 	# Let's change the config files to reflect the current username
 	
 	# mame
-	sed -i "s|installdir_temp|$rootdir|g" $config_home/.mame/mame.ini | tee >> "$rootdir/logs/debug.log"
-	sed -i "s|config_temp|$config_home|g" $config_home/.mame/mame.ini | tee >> "$rootdir/logs/debug.log"
+	sed -i "s|installdir_temp|$rootdir|g" "$config_home/.mame/mame.ini" | tee >> "$rootdir/logs/debug.log"
+	sed -i "s|config_temp|$config_home|g" "$config_home/.mame/mame.ini" | tee >> "$rootdir/logs/debug.log"
 	
 	# MESS
-	sed -i "s|installdir_temp|$rootdir|g" $config_home/.mess/mess.ini | tee >> "$rootdir/logs/debug.log"
-	sed -i "s|config_temp|$config_home|g" $config_home/.mess/mess.ini | tee >> "$rootdir/logs/debug.log"
+	sed -i "s|installdir_temp|$rootdir|g" "$config_home/.mess/mess.ini" | tee >> "$rootdir/logs/debug.log"
+	sed -i "s|config_temp|$config_home|g" "$config_home/.mess/mess.ini" | tee >> "$rootdir/logs/debug.log"
 	
 	# XBMC
 	sed -i "s|installdir_temp|$rootdir|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml" | tee >> "$rootdir/logs/debug.log"
