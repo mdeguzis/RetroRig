@@ -98,15 +98,30 @@ function em_install_ppsspp()
 function em_install_stella()
 {
 	echo "Installing Atari 2600 emulator Stella"
-	#apt-get install -y stella
 
-	# As of 20140802, Stella, at least in testing, would fail to launch when using OpenGL
-	# Stella was build from the latest SVN trunk, and works successfully
-	# Source: http://stella.sourceforge.net/development.php
-	# SVN trunk: 'svn co https://svn.code.sf.net/p/stella/code/trunk stella'
+	# release aptitude hold for upgrade/install
+	apt-mark unhold stella
 
-	wget --tries=50 -P "/usr/bin/" "www.libregeek.org/RetroRig/Ubuntu-Trusty/emulators/Stella/stella"
-	chmod +x "/usr/bin/stella"
+        #remove any previously installed version
+	apt-get remove -y stella
+
+        #install from PPA
+	apt-get install -y stella
+
+	# hold package after install against upgrades
+	apt-mark hold stella
+
+	############################################################################################################
+	# installation of stella from libregeek.org (deprecated)
+	#
+	#	# As of 20140802, Stella, at least in testing, would fail to launch when using OpenGL
+	#	# Stella was build from the latest SVN trunk, and works successfully
+	#	# Source: http://stella.sourceforge.net/development.php
+	#	# SVN trunk: 'svn co https://svn.code.sf.net/p/stella/code/trunk stella'
+	#
+	#	wget --tries=50 -P "/usr/bin/" "www.libregeek.org/RetroRig/Ubuntu-Trusty/emulators/Stella/stella"
+	#	chmod +x "/usr/bin/stella"
+	############################################################################################################
 
 }
 
