@@ -128,6 +128,9 @@ function em_install_mednafen()
 	# release aptitude hold for upgrade/install
 	apt-mark unhold mednafen
 
+        #remove any previously installed version
+	apt-get remove -y mednafen
+
 	echo "Installing Mednafen emulator"
 	apt-get install -y mednafen
 	#wget --tries=50 -P /tmp "www.libregeek.org/RetroRig/Ubuntu-Trusty/mednafen/mednafen-patched-for-retrorig-patchlevel-1-0trusty.deb"

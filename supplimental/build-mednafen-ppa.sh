@@ -14,7 +14,7 @@
 BASE=0.9.36.2
 
 # define patch level
-PL=1
+PL=2
 
 #define mednafen branch to checkout
 BRANCH=mednafen-0.9.36.2-SDL2-dual-head
