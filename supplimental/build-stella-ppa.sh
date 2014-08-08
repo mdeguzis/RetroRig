@@ -41,7 +41,6 @@ if [[ -n "$2" ]]; then
   echo "##########################################"
   echo ""
 
-  # needed for ffmpeg-stella-dev
   sudo apt-get install -y subversion
 
   #apt-get build-deps
