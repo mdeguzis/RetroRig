@@ -1,3 +1,9 @@
+mednafen (0.9.36.2.2) trusty; urgency=medium
+
+  * window flags changed from SDL_WINDOW_FULLSCREEN to SDL_WINDOW_FULLSCREEN_DESKTOP
+
+ -- Jens-Christian Lache <jc.lache@web.de>  Fri, 08 Aug 2014 18:09:48 +0200
+
 mednafen (0.9.36.2.1) trusty; urgency=medium
 
   * patched for SDL2 and added dual-head support

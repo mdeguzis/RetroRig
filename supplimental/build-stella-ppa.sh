@@ -1,25 +1,21 @@
 #========================================================================
-# Build Script for custom XBMC RetroRig PPA
+# Build Script for custom Stella RetroRig PPA
 #======================================================================== 
 #
-# Author:  Michael DeGuzis and Jens-Christian, 
-# Date:    20140805
-# Version: Patch Level 6
+# Author:  Jens-Christian Lache
+# Date:    20140808
+# Version: Patch Level 0 (unpatched)
 # ========================================================================
 
 #define base version
-BASE=13.1
+BASE=2:4.0
 
 # define patch level
-PL=6
-
-#define xbmc branch to checkout
-BRANCH=gotham-retrorig-pl$PL
-
+PL=0
 
 clear
 echo "#########################################################"
-echo "Building custom xbmc Debian package (patch level $PL)"
+echo "Building custom Stella Debian package (patch level $PL)"
 echo "#########################################################"
 echo ""
 if [[ -n "$1" ]]; then
@@ -45,19 +41,17 @@ if [[ -n "$2" ]]; then
   echo "##########################################"
   echo ""
 
-  # needed for ffmpeg-xbmc-dev
-  sudo add-apt-repository -y ppa:wsnipex/xbmc-fernetmenta-master
-  sudo apt-get update
+  sudo apt-get install -y subversion
 
   #apt-get build-deps
-  sudo apt-get -y build-dep xbmc
+  sudo apt-get -y build-dep stella
   #apt-get install packages
-  sudo apt-get install -y build-essential fakeroot devscripts automake autoconf autotools-dev fpc ffmpeg-xbmc-dev
+  sudo apt-get install -y build-essential fakeroot devscripts automake autoconf autotools-dev
 
 else
   echo ""
   echo "skipping installation of build packages, use arbitrary second argument to get those packages"
-  echo "e.g ./build-xbmc-ppa.sh compile update"
+  echo "e.g ./build-stella-ppa.sh compile update"
   echo ""
 fi
 
@@ -66,18 +60,18 @@ echo "##########################################"
 echo "Setup build directory"
 echo "##########################################"
 echo ""
-echo "~/packaging/xbmc"
+echo "~/packaging/stella"
 # start in $HOME
 cd
 
 # remove old build directory
-rm -rf ~/packaging/xbmc
+rm -rf ~/packaging/stella
 
 #create build directory
-mkdir -p ~/packaging/xbmc
+mkdir -p ~/packaging/stella
 
 #change to build directory
-cd ~/packaging/xbmc
+cd ~/packaging/stella
 
 echo ""
 echo "##########################################"
@@ -85,13 +79,13 @@ echo "Setup package base files"
 echo "##########################################"
 
 echo "dsc file"
-cp ~/RetroRig/supplimental/xbmc/xbmc.dsc xbmc_$BASE.$PL.dsc
-sed -i "s|version_placeholder|$BASE.$PL|g" "xbmc_$BASE.$PL.dsc"
+cp ~/RetroRig/supplimental/stella/stella.dsc stella_$BASE.$PL.dsc
+sed -i "s|version_placeholder|$BASE.$PL|g" "stella_$BASE.$PL.dsc"
 
 echo "original tarball"
-git clone https://github.com/beaumanvienna/xbmc 
+svn co https://svn.code.sf.net/p/stella/code/trunk stella 
 
-file xbmc/
+file stella/
 
 if [ $? -eq 0 ]; then  
     echo "successfully cloned"
@@ -100,30 +94,11 @@ else
     exit
 fi 
 
-cd xbmc
-git checkout $BRANCH
-rm -rf .git 
-cp ~/RetroRig/Artwork/XBMC/Splash_retrorig.png ~/RetroRig/Artwork/XBMC/Splash.png media/
+cd stella
+rm -rf .svn
 cd ..
-tar cfj xbmc_$BASE.$PL.orig.tar.bz2 xbmc
+tar cfj stella_$BASE.$PL.orig.tar.bz2 stella
 
-echo "debian files"
-wget --tries=50 "https://launchpad.net/~aap/+archive/ubuntu/xbmc-release-fernetmenta/+files/xbmc_13.1-27182~e41281c-ppa1~trusty.debian.tar.bz2"
-
-echo ""
-echo "##########################################"
-echo "Unpacking debian files"
-echo "##########################################"
-echo ""
-
-#unpack
-echo "unpacking template xbmc_13.1-27182~e41281c-ppa1~trusty.debian.tar.bz2"
-tar xfj xbmc_13.1-27182~e41281c-ppa1~trusty.debian.tar.bz2
-#remove template
-rm xbmc_13.1-27182~e41281c-ppa1~trusty.debian.tar.bz2
-
-#move debian folder into source folder
-mv debian/ xbmc/
 
 echo ""
 echo "##########################################"
@@ -132,34 +107,22 @@ echo "##########################################"
 echo ""
 
 #change to source folder
-cd xbmc/
+cd stella/
 
 echo "compat"
-cp ~/RetroRig/supplimental/xbmc/compat debian/
+cp ~/RetroRig/supplimental/stella/compat debian/
 
 echo "control"
-cp ~/RetroRig/supplimental/xbmc/control debian/
-
-echo "rules"
-cp ~/RetroRig/supplimental/xbmc/rules debian/
-
-echo "setting up patches"
-rm -rf debian/patches/*
-rm -rf .pc/
-rm debian/source/options debian/source/include-binaries
+cp ~/RetroRig/supplimental/stella/control debian/
 
 echo "format"
-cp ~/RetroRig/supplimental/xbmc/format debian/source/
+mkdir debian/source
+cp ~/RetroRig/supplimental/stella/format debian/source/
 
 echo "changelog"
-cp ~/RetroRig/supplimental/xbmc/changelog debian/
+cp ~/RetroRig/supplimental/stella/changelog debian/
 sed -i "s|version_placeholder|$BASE.$PL|g" debian/changelog
 #dch -i
-
-
-cd debian
-rm xbmc-addon-dev.install xbmc-eventclients-common.install xbmc-eventclients-dev.examples xbmc-eventclients-dev.install xbmc-eventclients-j2me.install xbmc-eventclients-j2me.manpages xbmc-eventclients-ps3.install xbmc-eventclients-ps3.manpages xbmc-eventclients-wiiremote.install  xbmc-eventclients-wiiremote.manpages xbmc-eventclients-xbmc-send.install xbmc-eventclients-xbmc-send.manpages xbmc-pvr-dev.install xbmc-screensaver-dev.install xbmc-visualization-dev.install
-cd ..
 
 if [[ -n "$1" ]]; then
   arg0=$1
@@ -185,7 +148,7 @@ case "$arg0" in
         echo "Building finished"
         echo "##########################################"
         echo ""
-        ls -lah ~/packaging/xbmc
+        ls -lah ~/packaging/stella
          exit 0
     else  
         echo "debuild failed to generate the binary package, aborting"
@@ -214,10 +177,10 @@ case "$arg0" in
       if [ $? -eq 0 ]; then
         echo ""
         echo ""
-        ls -lah ~/packaging/xbmc
+        ls -lah ~/packaging/stella
         echo ""
         echo ""
-        echo "you can upload the package with dput ppa:beauman/retrorig ~/packaging/xbmc/xbmc_$BASE.$PL""_source.changes"
+        echo "you can upload the package with dput ppa:beauman/retrorig ~/packaging/stella/stella_$BASE.$PL""_source.changes"
         echo "all good"
         echo ""
         echo ""
@@ -225,7 +188,7 @@ case "$arg0" in
         while true; do
             read -p "Do you wish to upload the source package?    " yn
             case $yn in
-                [Yy]* ) dput ppa:beauman/retrorig ~/packaging/xbmc/xbmc_$BASE.$PL""_source.changes; break;;
+                [Yy]* ) dput ppa:beauman/retrorig ~/packaging/stella/stella_*.$PL""_source.changes; break;;
                 [Nn]* ) break;;
                 * ) echo "Please answer yes or no.";;
             esac

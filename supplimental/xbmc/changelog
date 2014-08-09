@@ -1,0 +1,12 @@
+xbmc (version_placeholder) trusty; urgency=medium
+
+  * This version is based on fernetMenta xbmc. Added:
+    - gamepad hotplug support
+    - different icons and different splashscreens for native and RetroRig xbmc $
+    - Setting SDL_VIDEO_FULLSCREEN_HEAD for emulators
+    - disabled some code for python thread, to prevent xbmc from hanging
+
+ -- Jens-Christian Lache <jc.lache@web.de>  Fri, 01 Aug 2014 23:10:24 +0800
+
+
+
