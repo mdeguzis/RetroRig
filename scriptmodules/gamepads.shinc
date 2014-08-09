@@ -55,9 +55,17 @@ function gp_ps3_blu()
 	cp -v "$scriptdir/emu-cfgs/ps3_blu_controller/Dolphin/GCPadNew.ini" "$config_home/.dolphin-emu/Config"
 	cp -v "$scriptdir/emu-cfgs/ps3_blu_controller/Dolphin/Dolphin.ini" "$config_home/.dolphin-emu/Config"
 
-	#Stella
-	#default path: /home/$USER/.config/mupen64plus
-	#Main config
+	# PCSX2
+	cp -v "$scriptdir/emu-cfgs/ps3_blu_controller/PCSX2/inisOnePAD.ini" "$config_home/.config/pcsx2/inisOnePAD.ini"
+	cp -v "$scriptdir/emu-cfgs/ps3_blu_controller/PCSX2/PCSX2-reg.ini" "$config_home/.config/pcsx2/PCSX2-reg.ini"
+	cp -v "$scriptdir/emu-cfgs/ps3_blu_controller/PCSX2/GSdx.ini" "$config_home/.config/pcsx2/inis/GSdx.ini"
+	cp -v "$scriptdir/emu-cfgs/ps3_blu_controller/PCSX2/OnePAD.ini" "$config_home/.config/pcsx2/inis/OnePAD.ini"
+	cp -v "$scriptdir/emu-cfgs/ps3_blu_controller/PCSX2/PCSX2_vm.ini" "$config_home/.config/pcsx2/inis/PCSX2_vm.ini"
+	cp -v "$scriptdir/emu-cfgs/ps3_blu_controller/PCSX2/spu2-x.ini" "$config_home/.config/pcsx2/inis/spu2-x.ini"
+
+	# Stella
+	# default path: /home/$USER/.config/mupen64plus
+	# Main config
 	cp -v "$scriptdir/emu-cfgs/ps3_blu_controller/Stella/stellarc" "$config_home/.stella/"
 
 	# PPSSPP
@@ -77,11 +85,15 @@ function gp_ps3_blu()
 	# copy in default default config.xml for RCB (Which is cleaned/removed in h_clean_gamepad)
 	cp -v "$scriptdir/XBMC-cfgs/userdata/addon_data/script.games.rom.collection.browser/config.xml" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/"
 
-	# copy in profiles for emulators
+	# copy in profiles for emulators (qjoypad)
 	cp -v "$rootdir/gamepad-cfgs/ps3_blu_controller/mednafen_ps3_general_blu.lyt" "$config_home/.qjoypad3"
 	cp -v "$rootdir/gamepad-cfgs/ps3_blu_controller/mednafen_ps3_psx_blu.lyt" "$config_home/.qjoypad3"
 	cp -v "$rootdir/gamepad-cfgs/ps3_blu_controller/psp_ps3_blu.lyt" "$config_home/.qjoypad3"
 	cp -v "$rootdir/gamepad-cfgs/ps3_blu_controller/dolphin_ps3_blu.lyt" "$config_home/.qjoypad3"
+
+	# copy in profiles for emulaotrs (antimicro)
+	cp -v "$rootdir/init-scripts/ps3_blu_controller/antimicro_settings.ini" "$config_home/.config/antimicro/"
+	cp -v "$rootdir/init-scripts/ps3_blu_controller/am_pcsx2_ps3_blu.joystick.xml" "$config_home/.config/antimicro/"
 
 	##################### 
 	# PSP 
@@ -136,6 +148,26 @@ function gp_ps3_blu()
 	###########################################################
 	# End qjoypad remappings
 	###########################################################
+
+	###########################################################
+	# Add emulator specifc control remaps here for AniMicro
+	# Note: In due time, AntiMicro may replace qjoypad for all
+	# emulator control hotswaps for gamepads
+	###########################################################
+
+	#####################
+	# PCSX2
+	#####################
+
+	old_pre="ps2_pre"
+	old_post="ps2_post"
+	new_pre="antimicro --hidden --profile /home/test/.retrorig/.config/antimicro/am_pcsx2_ps3_blu.joystick.xml &amp;"
+	# The line below is only for good measure
+	new_post="killall pcsx2 antimicro"
+	# perform actual changes
+	sed -i "s|$old_pre|$new_pre|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
+	sed -i "s|$old_post|$new_post|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
+ 
 
 	# The PS3 pairing process should be handled interactively in a seperate function:
 	gp_ps3_blu_main

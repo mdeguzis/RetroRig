@@ -477,6 +477,15 @@ function h_res_switcher()
 	sed -i "s|$psx_org_X|psx.xres $psx_new_X|g" "$config_home/.mednafen/mednafen-09x.cfg"
 	sed -i "s|$psx_org_Y|psx.yres $psx_new_Y|g" "$config_home/.mednafen/mednafen-09x.cfg"
 
+	########################		
+	# pcsx2
+	########################
+	ps2_org_X=$(grep -Ee "\bresx = \b" "$config_home/.config/pcsx2/inis/GSdx.ini")
+	ps2_org_Y=$(grep -Ee "\bresy = \b" "$config_home/.config/pcsx2/inis/GSdx.ini")
+	#make the changes, prefix new_X in case NULL was entered previousey
+	sed -i "s|$ps2_org_X|ScreenWidth = $ps2_new_X|g" "$config_home/.config/pcsx2/inis/GSdx.ini"
+	sed -i "s|$ps2_org_Y|ScreenHeight = $ps2_new_Y|g" "$config_home/.config/pcsx2/inis/GSdx.ini"
+
 	# correct permissions
 	h_correct_perms
 }
@@ -534,7 +543,9 @@ function h_bios_loader()
 cmd=(dialog --backtitle "LibreGeek.org RetroRig Installer" --menu "Load BIOS files for which system?" 19 32 24)
 options=(1 "Neo-Geo CDZ"
 	 2 "MAME" 
-	 3 "Exit BIOS Loader")
+	 3 "PSX/PS1"
+	 4 "PS2"  
+	 5 "Exit BIOS Loader")
 
 	#make menu choice
 	selection=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
@@ -563,6 +574,24 @@ options=(1 "Neo-Geo CDZ"
 		;;
 
 		3)
+		#call file loader
+		h_file_loader
+		# copy PSX BIOS file over to Mednafen (root emulator)
+		if [ -n "$folder" ]; then
+			cp -v "$folder" "$rootdir/BIOS/Mednafen"
+		fi
+		;;
+
+		4)
+		#call file loader
+		h_file_loader
+		# copy PS2 BIOS file over to PCSX2 (root emulator)
+		if [ -n "$folder" ]; then
+			cp -v "$folder" "$rootdir/BIOS/PCSX2"
+		fi
+		;;
+
+		5)
 		return
 		;;
 
@@ -630,6 +659,11 @@ function h_correct_perms()
 	chgrp -R "$user" "$xdg_pictures_dir/retro-icon.png" > /dev/null 2>&1
 	chown -R "$user" "$xdg_pictures_dir/retro-icon.png" > /dev/null 2>&1
 
+	# antimicro
+	chgrp -R "$user" "$xdg_pictures_dir/retro-icon.png" > /dev/null 2>&1
+	chown -R "$user" "$xdg_pictures_dir/retro-icon.png" > /dev/null 2>&1
+	chmod ugo+x "/usr/bin/antimicro"
+
 	# correct our own start file for retrorig
 	chmod ugo+x /usr/bin/xbmc-retrorig
 
@@ -671,6 +705,14 @@ function h_emu_user_fixes()
 	# Stella
 	sed -i "s|config_temp|$config_home|g" "$config_home/.stella/stellarc"
 	sed -i "s|installdir_temp|$rootdir|g" "$config_home/.stella/stellarc"
+
+	# PCSX2
+	sed -i "s|config_temp|$config_home|g" "$config_home/.config/pcsx2/PCSX2-reg.ini"
+	sed -i "s|installdir_temp|$rootdir|g" "$config_home/.config/pcsx2/inis/PCSX2_ui.ini"
+	sed -i "s|config_temp|$config_home|g" "$config_home/.config/pcsx2/inis/PCSX2_ui.ini"
+
+	# antimicro
+	sed -i "s|config_temp|$config_home|g" "$config_home/.config/antimicro/antimicro_settings.ini"		
 
 	# echo change
 	echo "The user applied to configuration files was: $user" | tee >> "$rootdir/logs/debug.log"
