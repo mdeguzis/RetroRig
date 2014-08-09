@@ -467,6 +467,9 @@ function rrs_xbmc_patched()
 #	#rm -f "/tmp/xbmc_gotham-patched-for-retrorig-patchlevel-*-0trusty.deb"
 ################################################################################################################################################
 
+	#xbmc works fine w/o these librarys, but generates error messages in its log file
+        apt-get install -y libcec2 libcrystalhd3
+
         # release aptitude hold for upgrade/install
 	apt-mark unhold xbmc
 
