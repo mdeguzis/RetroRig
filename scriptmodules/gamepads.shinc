@@ -92,8 +92,8 @@ function gp_ps3_blu()
 	cp -v "$rootdir/gamepad-cfgs/ps3_blu_controller/dolphin_ps3_blu.lyt" "$config_home/.qjoypad3"
 
 	# copy in profiles for emulaotrs (antimicro)
-	cp -v "$rootdir/init-scripts/ps3_blu_controller/antimicro_settings.ini" "$config_home/.config/antimicro/"
-	cp -v "$rootdir/init-scripts/ps3_blu_controller/am_pcsx2_ps3_blu.joystick.xml" "$config_home/.config/antimicro/"
+	cp -v "$rootdir/gamepad-cfgs/ps3_blu_controller/antimicro_settings.ini" "$config_home/.config/antimicro/"
+	cp -v "$rootdir/gamepad-cfgs/ps3_blu_controller/am_pcsx2_ps3_blu.joystick.xml" "$config_home/.config/antimicro/"
 
 	##################### 
 	# PSP 
