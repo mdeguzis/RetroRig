@@ -151,6 +151,7 @@ function gp_ps3_blu()
 
 	###########################################################
 	# Add emulator specifc control remaps here for AniMicro
+	###########################################################
 	# Note: In due time, AntiMicro may replace qjoypad for all
 	# emulator control hotswaps for gamepads
 	###########################################################
@@ -161,7 +162,7 @@ function gp_ps3_blu()
 
 	old_pre="ps2_pre"
 	old_post="ps2_post"
-	new_pre="antimicro --hidden --profile /home/test/.retrorig/.config/antimicro/am_pcsx2_ps3_blu.joystick.xml &amp;"
+	new_pre="antimicro --hidden --profile /home/test/.retrorig/.config/antimicro/am_pcsx2_ps3_blu.joystick.xml \&amp;"
 	# The line below is only for good measure
 	new_post="killall pcsx2 antimicro"
 	# perform actual changes
