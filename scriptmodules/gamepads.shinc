@@ -58,10 +58,10 @@ function gp_ps3_blu()
 	# PCSX2
 	cp -v "$scriptdir/emu-cfgs/ps3_blu_controller/PCSX2/inisOnePAD.ini" "$config_home/.config/pcsx2/inisOnePAD.ini"
 	cp -v "$scriptdir/emu-cfgs/ps3_blu_controller/PCSX2/PCSX2-reg.ini" "$config_home/.config/pcsx2/PCSX2-reg.ini"
-	cp -v "$scriptdir/emu-cfgs/ps3_blu_controller/PCSX2/GSdx.ini" "$config_home/.config/pcsx2/inis/GSdx.ini"
-	cp -v "$scriptdir/emu-cfgs/ps3_blu_controller/PCSX2/OnePAD.ini" "$config_home/.config/pcsx2/inis/OnePAD.ini"
-	cp -v "$scriptdir/emu-cfgs/ps3_blu_controller/PCSX2/PCSX2_vm.ini" "$config_home/.config/pcsx2/inis/PCSX2_vm.ini"
-	cp -v "$scriptdir/emu-cfgs/ps3_blu_controller/PCSX2/spu2-x.ini" "$config_home/.config/pcsx2/inis/spu2-x.ini"
+	cp -v "$scriptdir/emu-cfgs/ps3_blu_controller/PCSX2/inis/GSdx.ini" "$config_home/.config/pcsx2/inis/GSdx.ini"
+	cp -v "$scriptdir/emu-cfgs/ps3_blu_controller/PCSX2/inis/OnePAD.ini" "$config_home/.config/pcsx2/inis/OnePAD.ini"
+	cp -v "$scriptdir/emu-cfgs/ps3_blu_controller/PCSX2/inis/PCSX2_vm.ini" "$config_home/.config/pcsx2/inis/PCSX2_vm.ini"
+	cp -v "$scriptdir/emu-cfgs/ps3_blu_controller/PCSX2/inis/spu2-x.ini" "$config_home/.config/pcsx2/inis/spu2-x.ini"
 
 	# Stella
 	# default path: /home/$USER/.config/mupen64plus
@@ -330,7 +330,7 @@ function gp_ps3_blu_main()
 
 	# copy in the gp_autodetect_xbmc.sh template file, and change the gamepad type
 	# new_controller_type="ps3_blu"
-	# cp -v "$scriptdir/XBMC-cfgs/extra/gp_autodetect_xbmc.sh" "/usr/share/applications/gp_autodetect_xbmc.sh" 
+	# cp -v "$scriptdir/XBMC-cfgs/extra/gp_autodetect_xbmc.sh" "/usr/share/applications/" 
 	# sed -i "s|controller_temp|$new_controller_type|g" "/usr/share/applications/gp_autodetect_xbmc.sh"
 
 	# correct permissions since we install using sudo access
@@ -367,6 +367,7 @@ function ps3_set_ctrl_assignments()
 
 	# Replace MAC Address for ***CONTROLLER 1 ONLY!*** This will be used to control XBMC		
 	sed -i "s|$PS3_MAC_OLD|$PS3_MAC_BLU|g" "$xbmc_home/userdata/keymaps/keyboard.xml"
+	sleep 2s
 
 }
 
@@ -644,7 +645,7 @@ RetorRig loads to use the gamepad" 14 60
 	# copy in the gp_autodetect_xbmc.sh template file, and change the gamepad type 
 	# Testing ONLY for gp_autodetect_xbmc.sh.testing
 	# new_controller_type="ps3_usb"
-	# cp -v "$scriptdir/XBMC-cfgs/extra/gp_autodetect_xbmc.sh" "/usr/share/applications/gp_autodetect_xbmc.sh" 
+	# cp -v "$scriptdir/XBMC-cfgs/extra/gp_autodetect_xbmc.sh" "/usr/share/applications/" 
 	# sed -i "s|controller_temp|$new_controller_type|g" "/usr/share/applications/gp_autodetect_xbmc.sh"
 
 	# replace specific user paths that emulators and files may use
@@ -816,7 +817,7 @@ function gp_x360_wireless()
 	
 	# new_controller_type="x360_wireless"
 	# Testing ONLY for gp_autodetect_xbmc.sh.testing
-	# cp -v "$scriptdir/XBMC-cfgs/extra/gp_autodetect_xbmc.sh" "/usr/share/applications/gp_autodetect_xbmc.sh" 
+	# cp -v "$scriptdir/XBMC-cfgs/extra/gp_autodetect_xbmc.sh" "/usr/share/applications/" 
 	# sed -i "s|controller_temp|$new_controller_type|g" "/usr/share/applications/gp_autodetect_xbmc.sh"
 
 	# replace specific user paths that emulators and files may use
@@ -1033,7 +1034,7 @@ RetorRig loads to use the gamepad" 14 60
 
 	# Testing ONLY for gp_autodetect_xbmc.sh.testing
 	# new_controller_type="x360_wired"
-	# cp -v "$scriptdir/XBMC-cfgs/extra/gp_autodetect_xbmc.sh" "/usr/share/applications/gp_autodetect_xbmc.sh" 
+	# cp -v "$scriptdir/XBMC-cfgs/extra/gp_autodetect_xbmc.sh" "/usr/share/applications/" 
 	# sed -i "s|controller_temp|$new_controller_type|g" "/usr/share/applications/gp_autodetect_xbmc.sh"
 
 	# replace specific user paths that emulators and files may use
