@@ -227,6 +227,7 @@ function rrs_emulators()
 	em_install_mednafen
 	em_install_ppsspp
 	em_install_dolphin
+	em_install_pcsx2
 
 	#fix permissions since we are running as sudo
 	h_correct_perms
