@@ -589,6 +589,13 @@ options=(1 "Neo-Geo CDZ"
 		# copy PS2 BIOS file over to PCSX2 (root emulator)
 		if [ -n "$folder" ]; then
 			cp -v "$folder" "$rootdir/BIOS/PCSX2"
+			# copy in template file ..pcsx2/inis/PCSX2_ui.ini
+			rm -f "$config_home/.config/pcsx2/inis/PCSX2_ui.ini"
+			cp -v "$scriptdir/emu-cfgs/ps3_blu_controller/PCSX2/inis/PCSX2_ui.ini" "$config_home/.config/pcsx2/inis/PCSX2_vm.ini"
+			# use sed to replace the defined BIOS file
+			# perform actual changes
+			sed -i "s|bios_file_temp|$folder|g" "$config_home/.config/pcsx2/inis/PCSX2_vm.ini"
+			
 		fi
 		;;
 

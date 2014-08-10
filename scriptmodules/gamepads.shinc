@@ -56,10 +56,13 @@ function gp_ps3_blu()
 	cp -v "$scriptdir/emu-cfgs/ps3_blu_controller/Dolphin/Dolphin.ini" "$config_home/.dolphin-emu/Config"
 
 	# PCSX2
+	# base config folder
 	cp -v "$scriptdir/emu-cfgs/ps3_blu_controller/PCSX2/inisOnePAD.ini" "$config_home/.config/pcsx2/inisOnePAD.ini"
 	cp -v "$scriptdir/emu-cfgs/ps3_blu_controller/PCSX2/PCSX2-reg.ini" "$config_home/.config/pcsx2/PCSX2-reg.ini"
+	# inis
 	cp -v "$scriptdir/emu-cfgs/ps3_blu_controller/PCSX2/inis/GSdx.ini" "$config_home/.config/pcsx2/inis/GSdx.ini"
 	cp -v "$scriptdir/emu-cfgs/ps3_blu_controller/PCSX2/inis/OnePAD.ini" "$config_home/.config/pcsx2/inis/OnePAD.ini"
+	cp -v "$scriptdir/emu-cfgs/ps3_blu_controller/PCSX2/inis/PCSX2_ui.ini" "$config_home/.config/pcsx2/inis/PCSX2_vm.ini"
 	cp -v "$scriptdir/emu-cfgs/ps3_blu_controller/PCSX2/inis/PCSX2_vm.ini" "$config_home/.config/pcsx2/inis/PCSX2_vm.ini"
 	cp -v "$scriptdir/emu-cfgs/ps3_blu_controller/PCSX2/inis/spu2-x.ini" "$config_home/.config/pcsx2/inis/spu2-x.ini"
 
@@ -394,7 +397,7 @@ function ps3_set_emulator_ids()
 		# Dolphin
 		GC_MAC_BLU=$($scriptdir/supplimental/joydetect /dev/input/js1 | awk -F'[^:[a-zA-Z0-9]*' '{print $6}')
 		# Stella (supports only 2 players )
-		Stella_MAC_BLU=$($scriptdir/supplimental/joydetect /dev/input/js0 | awk -F'[^:[a-zA-Z0-9]*' '{print $6}')
+		Stella_MAC_BLU=$($scriptdir/supplimental/joydetect /dev/input/js1 | awk -F'[^:[a-zA-Z0-9]*' '{print $6}')
 		sed -i "s|p2_stella_MAC_temp|$config_home|g" "$config_home/.stella/stellarc"
 
 	elif [ $n == "3" ]; then

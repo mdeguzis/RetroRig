@@ -36,7 +36,7 @@
                         <mode>keyboard</mode>
                     </slot>
                     <slot>
-                        <code>0x43</code>
+                        <code>0x51</code>
                         <mode>keyboard</mode>
                     </slot>
                 </slots>

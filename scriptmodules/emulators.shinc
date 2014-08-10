@@ -35,6 +35,15 @@ function em_install_pcsx2()
 	# Unstable version still needs testing:
 	# apt-get install pcsx2-unstable
 
+	# PCSX2 will default the BIOS path we set to RetroRig/BIOS/PCSX2
+	# If the bios file is not specified in the [filenames] section under Bios=
+	# For that reason, the default directory will be symlinked and the PCX2 BIOS folder
+	# will not be created in setup.shinc 
+	ln -s "$config_home/.config/pcsx2/bios" "$rootdir/BIOS/PCSX2"
+
+
+ln -s /home/test/.retrorig/.config/pcsx2/bios /home/test/RetroRig/BIOS/PCSX2
+
 }
 
 function em_install_dolphin()
