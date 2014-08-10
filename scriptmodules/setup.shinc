@@ -523,11 +523,11 @@ function rrs_xbmc_cfgs()
 	clear
 	
 	# set local vars for this function
-	local gamedb_org="$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/"
+	local gamedb_org="$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/MyGames.db"
 	local gamedb_tmp="/tmp/MyGames.db"
 
 	# back the current MyGames.db file if it exists	
-	if [[ -n "$gamedb_org" ]]; then
+	if [[ -d "$gamedb_org" ]]; then
 		cp -v "$gamedb_org" "/tmp"
 	fi
 
@@ -539,7 +539,7 @@ function rrs_xbmc_cfgs()
 	cp -Rv "$scriptdir/XBMC-cfgs/userdata" "$xbmc_home"
 
 	# Restore MyGames.db if it exists
-	if [[ -n "$gamedb_tmp" ]]; then
+	if [[ -d "$gamedb_tmp" ]]; then
 		# copy file over
 		cp -v "$gamedb_tmp" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/"
 		# remove /tmp file
