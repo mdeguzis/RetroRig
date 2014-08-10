@@ -170,9 +170,7 @@ function gp_ps3_blu()
 	new_post="killall pcsx2 antimicro"
 	# perform actual changes
 	sed -i "s|$old_pre|$new_pre|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
-	sed -i "s|$old_post|$new_post|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
  
-
 	# The PS3 pairing process should be handled interactively in a seperate function:
 	gp_ps3_blu_main
 
@@ -379,7 +377,6 @@ function ps3_set_ctrl_assignments()
 
 	# Replace MAC Address for ***CONTROLLER 1 ONLY!*** This will be used to control XBMC		
 	sed -i "s|$PS3_MAC_OLD|$PS3_MAC_BLU|g" "$xbmc_home/userdata/keymaps/keyboard.xml"
-	sed -i "s|$PS3_MAC_OLD|$PS3_MAC_BLU|g" "$home/.xbmc/userdata/keymaps/keyboard.xml"
 	sleep 2s
 
 }
@@ -428,8 +425,6 @@ function ps3_set_emulator_ids()
 
 	# Assign controller ID
 	sed -i "s|MAC_TEMP_$n|$GC_MAC_BLU|g" "$config_home/.dolphin-emu/Config/GCPadNew.ini"
-
-
 
 	sleep 2s
 }
