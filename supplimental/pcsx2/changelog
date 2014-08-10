@@ -1,0 +1,55 @@
+pcsx2 (version_placeholder) trusty; urgency=medium
+
+  * source code
+
+ -- Jens-Christian Lache <jc.lache@web.de>  Fri, 09 Aug 2014 20:45:00 +0200
+
+
+pcsx2 (1:1.2.2-4) trusty; urgency=medium
+
+  * New Upstream 1.2.2 release
+    + solve depth on Nvidia GPU
+    + solve crash on AMD GPU
+
+ -- Gregory Hainaut <gregory.hainaut@gmail.com>  Mon, 10 Feb 2014 20:29:34 +0100
+
+pcsx2 (1:1.2.2-3) Saucy; urgency=medium
+
+  * New Upstream 1.2.2 release
+    + solve depth on Nvidia GPU
+    + solve crash on AMD GPU
+
+ -- Gregory Hainaut <gregory.hainaut@gmail.com>  Mon, 10 Feb 2014 20:29:20 +0100
+
+pcsx2 (1:1.2.2-2) quantal; urgency=medium
+
+  * New Upstream 1.2.2 release
+    + solve depth on Nvidia GPU
+    + solve crash on AMD GPU
+
+ -- Gregory Hainaut <gregory.hainaut@gmail.com>  Mon, 10 Feb 2014 20:28:54 +0100
+
+pcsx2 (1:1.2.2-1) precise; urgency=medium
+
+  * New Upstream 1.2.2 release
+    + solve depth on Nvidia GPU
+    + solve crash on AMD GPU
+
+ -- Gregory Hainaut <gregory.hainaut@gmail.com>  Mon, 10 Feb 2014 20:26:17 +0100
+
+pcsx2 (1:1.2.0-4) trusty; urgency=medium
+
+  New Upstream 1.2 release => http://pcsx2.net/253-pcsx2-1-2-0-released.html
+
+  !!!! Enjoy !!!!
+
+ -- Gregory Hainaut <gregory.hainaut@gmail.com>  Sun, 02 Feb 2014 14:00:10 +0100
+
+pcsx2 (1:1.2.0-2) saucy; urgency=medium
+
+  New Upstream 1.2 release => http://pcsx2.net/253-pcsx2-1-2-0-released.html
+
+  !!!! Enjoy !!!!
+
+ -- Gregory Hainaut <gregory.hainaut@gmail.com>  Sun, 02 Feb 2014 13:57:10 +0100
+
