@@ -3,20 +3,20 @@
 #======================================================================== 
 #
 # Author:  Jens-Christian Lache
-# Date:    20140808
+# Date:    20140810
 # Version: Patch Level 0 (unpatched)
 # ========================================================================
 
 #define base version
-BASE=4:1.2.2
+BASE=0:1.2.1
 
 # define patch level
-PL=0
+PL=0-testunpatched
 
 clear
-echo "#########################################################"
+echo "#####################################################################"
 echo "Building custom pcsx2 Debian package (patch level $PL)"
-echo "#########################################################"
+echo "#####################################################################"
 echo ""
 if [[ -n "$1" ]]; then
 
@@ -31,6 +31,18 @@ else
 fi
 
 sleep 2s
+
+echo "This script needs to run on a 32bit environment."
+echo ""
+
+#check 32bit environment
+isKernel32bit=`uname -a |grep i686`
+if [[ -n "$isKernel32bit" ]]; then
+  echo "32bit environment found, good"
+else
+  echo "32bit environment not found, aborting. Are you running a 64bit system? This script must run on a i686 system."
+  exit 1
+fi
 
 # Fetch build pkgs
 if [[ -n "$2" ]]; then
@@ -124,7 +136,8 @@ fi
 cd pcsx2
 rm -rf debian-upstream/
 cd ..
-tar cfj pcsx2_$BASE.$PL.orig.tar.bz2 pcsx2
+tar cfj pcsx2.orig.tar.bz2 pcsx2
+mv pcsx2.orig.tar.bz2 pcsx2_$BASE.$PL.orig.tar.bz2
 
 echo "debian files"
 wget --tries=50 "https://launchpad.net/~gregory-hainaut/+archive/ubuntu/pcsx2.official.ppa/+files/pcsx2_1.2.2-4.debian.tar.xz"
