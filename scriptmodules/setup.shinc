@@ -127,7 +127,7 @@ function rrs_prepareFolders()
                 mkdir -p "$entry" 
                 chown "$user" "$entry"
                 chgrp "$user" "$entry"
-        fi
+            fi
 	done
 
 	# correct permissions

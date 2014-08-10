@@ -175,12 +175,26 @@ options=(1 "Current configuration"
 function h_file_loader()
 {
 
+# based on what the user want to do, instruct them to select a folder of ROMs or a BIOS file (singular)
+if [ "$loader_type" = "ROM" ]; then
+
 	dialog --msgbox "Usage:\n\nChoose the *FOLDER*, not the file(s) you wish to load ROMs from. Esc or Cancel to abort\n\n
 	(spacebar)                Select file\n
 	(double-tap spacebar)     Enter new directory\n
 	(Enter)                   Confirm selection\n
 	(Arrow keys)              Navigate" 15 50
+
+fi
+
+if [ "$loader_type" = "BIOS" ]; then
+
+	dialog --msgbox "Usage:\n\nChoose the *file*, not the folder(s) you wish to load BIOS files from. Esc or Cancel to abort\n\n
+	(spacebar)                Select file\n
+	(double-tap spacebar)     Enter new directory\n
+	(Enter)                   Confirm selection\n
+	(Arrow keys)              Navigate" 15 50
         
+fi
 
 	folder=$(dialog --stdout --cr-wrap --title "Please choose a file" --fselect "$home/" 14 48)
 
@@ -215,6 +229,7 @@ function h_file_loader()
 function h_rom_loader()
 {
 
+loader_type="ROM"
 
 while true; do
 cmd=(dialog --backtitle "LibreGeek.org RetroRig Installer" --menu "Load ROMs for which system?" 20 32 24)
@@ -540,6 +555,7 @@ function h_bios_loader()
 {
 	
 # present menu
+loader_type="BIOS"
 
 cmd=(dialog --backtitle "LibreGeek.org RetroRig Installer" --menu "Load BIOS files for which system?" 19 32 24)
 options=(1 "Neo-Geo CDZ"
