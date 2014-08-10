@@ -94,10 +94,6 @@ function gp_ps3_blu()
 	cp -v "$rootdir/gamepad-cfgs/ps3_blu_controller/psp_ps3_blu.lyt" "$config_home/.qjoypad3"
 	cp -v "$rootdir/gamepad-cfgs/ps3_blu_controller/dolphin_ps3_blu.lyt" "$config_home/.qjoypad3"
 
-	# copy in profiles for emulaotrs (antimicro)
-	cp -v "$rootdir/gamepad-cfgs/ps3_blu_controller/antimicro_settings.ini" "$config_home/.config/antimicro/"
-	cp -v "$rootdir/gamepad-cfgs/ps3_blu_controller/am_pcsx2_ps3_blu.joystick.xml" "$config_home/.config/antimicro/"
-
 	##################### 
 	# PSP 
 	##################### 
@@ -158,6 +154,10 @@ function gp_ps3_blu()
 	# Note: In due time, AntiMicro may replace qjoypad for all
 	# emulator control hotswaps for gamepads
 	###########################################################
+
+	# copy in profiles for emulators (antimicro)
+	cp -v "$rootdir/gamepad-cfgs/ps3_blu_controller/antimicro_settings.ini" "$config_home/.config/antimicro/"
+	cp -v "$rootdir/gamepad-cfgs/ps3_blu_controller/am_pcsx2_ps3_blu.joystick.xml" "$config_home/.config/antimicro/"
 
 	#####################
 	# PCSX2
@@ -504,6 +504,17 @@ function gp_ps3_usb()
 	# Main config
 	cp -v "$scriptdir/emu-cfgs/ps3_usb_controller/Stella/stellarc" "$config_home/.stella/"
 
+	# PCSX2
+	# base config folder
+	cp -v "$scriptdir/emu-cfgs/ps3_usb_controller/PCSX2/inisOnePAD.ini" "$config_home/.config/pcsx2/inisOnePAD.ini"
+	cp -v "$scriptdir/emu-cfgs/ps3_usb_controller/PCSX2/PCSX2-reg.ini" "$config_home/.config/pcsx2/PCSX2-reg.ini"
+	# inis
+	cp -v "$scriptdir/emu-cfgs/ps3_usb_controller/PCSX2/inis/GSdx.ini" "$config_home/.config/pcsx2/inis/GSdx.ini"
+	cp -v "$scriptdir/emu-cfgs/ps3_usb_controller/PCSX2/inis/OnePAD.ini" "$config_home/.config/pcsx2/inis/OnePAD.ini"
+	cp -v "$scriptdir/emu-cfgs/ps3_usb_controller/PCSX2/inis/PCSX2_ui.ini" "$config_home/.config/pcsx2/inis/PCSX2_vm.ini"
+	cp -v "$scriptdir/emu-cfgs/ps3_usb_controller/PCSX2/inis/PCSX2_vm.ini" "$config_home/.config/pcsx2/inis/PCSX2_vm.ini"
+	cp -v "$scriptdir/emu-cfgs/ps3_usb_controller/PCSX2/inis/spu2-x.ini" "$config_home/.config/pcsx2/inis/spu2-x.ini"
+
 	# PPSSPP
 	cp -v "$scriptdir/emu-cfgs/ps3_usb_controller/PPSSPP/ppsspp.ini" "$config_home/.config/ppsspp/PSP/SYSTEM"
 	cp -v "$scriptdir/emu-cfgs/ps3_usb_controller/PPSSPP/controls.ini" "$config_home/.config/ppsspp/PSP/SYSTEM"
@@ -638,6 +649,30 @@ RetorRig loads to use the gamepad" 14 60
 	###########################################################
 	# End qjoypad remappings
 	###########################################################
+
+	###########################################################
+	# Add emulator specifc control remaps here for AniMicro
+	###########################################################
+	# Note: In due time, AntiMicro may replace qjoypad for all
+	# emulator control hotswaps for gamepads
+	###########################################################
+
+	# copy in profiles for emulators (antimicro)
+	cp -v "$rootdir/gamepad-cfgs/ps3_usb_controller/antimicro_settings.ini" "$config_home/.config/antimicro/"
+	cp -v "$rootdir/gamepad-cfgs/ps3_usb_controller/am_pcsx2_ps3_blu.joystick.xml" "$config_home/.config/antimicro/"
+
+	#####################
+	# PCSX2
+	#####################
+
+	old_pre="ps2_pre"
+	old_post="ps2_post"
+	new_pre="antimicro --hidden --profile /home/test/.retrorig/.config/antimicro/am_pcsx2_ps3_usb.joystick.xml \&amp;"
+	# The line below is only for good measure
+	new_post="killall pcsx2 antimicro"
+	# perform actual changes
+	sed -i "s|$old_pre|$new_pre|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
+	sed -i "s|$old_post|$new_post|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
 
 	#update init scripts for xboxdrv
 	update-rc.d xboxdrv defaults
