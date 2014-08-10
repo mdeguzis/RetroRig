@@ -609,7 +609,7 @@ options=(1 "Neo-Geo CDZ"
 			old_ps2_bios=$(grep -e "BIOS=" "$config_home/.config/pcsx2/inis/PCSX2_ui.ini")
 			# use sed to replace the defined BIOS file
 			# perform actual changes
-			sed -i "s|$old_ps2_bios|BIOS=$folder|g" "$config_home/.config/pcsx2/inis/PCSX2_vm.ini"			
+			sed -i "s|$old_ps2_bios|BIOS=$folder|g" "$config_home/.config/pcsx2/inis/PCSX2_ui.ini"			
 		fi
 		;;
 
