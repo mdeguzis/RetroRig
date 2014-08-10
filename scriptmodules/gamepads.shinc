@@ -363,6 +363,14 @@ function ps3_set_ctrl_assignments()
 	# copy over default keyboard file:
 	cp "$rootdir/gamepad-cfgs/ps3_blu_controller/keyboard.xml" "$xbmc_home/userdata/keymaps/"
 
+	# Copy our keymap to the regular .xbmc dotfile directory if keyboard.xml exists:
+	if [[ -f "$home/.xbmc/userdata/keymaps/keyboard.xml" ]]; then
+		# back up current file
+		cp -v "$home/.xbmc/userdata/keymaps/keyboard.xml" "$home/.xbmc/userdata/keymaps/keyboard.xml.old"
+		# copy in keymap
+		cp "$rootdir/gamepad-cfgs/ps3_blu_controller/keyboard.xml" "$home/.xbmc/userdata/keymaps/"
+	fi
+
 	# First grab MAC Addresses:
 	# In the config file, the MAC is set to 00:00:00:00:00:00
 
@@ -371,6 +379,7 @@ function ps3_set_ctrl_assignments()
 
 	# Replace MAC Address for ***CONTROLLER 1 ONLY!*** This will be used to control XBMC		
 	sed -i "s|$PS3_MAC_OLD|$PS3_MAC_BLU|g" "$xbmc_home/userdata/keymaps/keyboard.xml"
+	sed -i "s|$PS3_MAC_OLD|$PS3_MAC_BLU|g" "$home/.xbmc/userdata/keymaps/keyboard.xml"
 	sleep 2s
 
 }
@@ -527,6 +536,13 @@ function gp_ps3_usb()
 	cp -v "$rootdir/init-scripts/ps3_usb_controller/xboxdrv" "/etc/init.d/"
 	cp -v "$rootdir/init-scripts/ps3_usb_controller/default/xboxdrv" "/etc/default/xboxdrv"
 
+	# Copy our keymap to the regular .xbmc dotfile directory if keyboard.xml exists:
+	if [[ -f "$home/.xbmc/userdata/keymaps/keyboard.xml" ]]; then
+		# back up current file
+		cp -v "$home/.xbmc/userdata/keymaps/keyboard.xml" "$home/.xbmc/userdata/keymaps/keyboard.xml.old"
+		# copy in keymap
+		cp "$rootdir/gamepad-cfgs/ps3_usb_controller/keyboard.xml" "$home/.xbmc/userdata/keymaps/"
+	fi
 	
 	# blacklist xpad
 	cp -v "$rootdir/init-scripts/ps3_usb_controller/blacklist.conf" "/etc/modprobe.d/"
@@ -748,6 +764,17 @@ function gp_x360_wireless()
 	cp -v "$scriptdir/emu-cfgs/x360_wireless_controller/Dolphin/GCPadNew.ini" "$config_home/.dolphin-emu/Config"
 	cp -v "$scriptdir/emu-cfgs/x360_wireless_controller/Dolphin/Dolphin.ini" "$config_home/.dolphin-emu/Config"
 
+	# PCSX2
+	# base config folder
+	cp -v "$scriptdir/emu-cfgs/x360_wireless_controller/PCSX2/inisOnePAD.ini" "$config_home/.config/pcsx2/inisOnePAD.ini"
+	cp -v "$scriptdir/emu-cfgs/x360_wireless_controller/PCSX2/PCSX2-reg.ini" "$config_home/.config/pcsx2/PCSX2-reg.ini"
+	# inis
+	cp -v "$scriptdir/emu-cfgs/x360_wireless_controller/PCSX2/inis/GSdx.ini" "$config_home/.config/pcsx2/inis/GSdx.ini"
+	cp -v "$scriptdir/emu-cfgs/x360_wireless_controller/PCSX2/inis/OnePAD.ini" "$config_home/.config/pcsx2/inis/OnePAD.ini"
+	cp -v "$scriptdir/emu-cfgs/x360_wireless_controller/PCSX2/inis/PCSX2_ui.ini" "$config_home/.config/pcsx2/inis/PCSX2_vm.ini"
+	cp -v "$scriptdir/emu-cfgs/x360_wireless_controller/PCSX2/inis/PCSX2_vm.ini" "$config_home/.config/pcsx2/inis/PCSX2_vm.ini"
+	cp -v "$scriptdir/emu-cfgs/x360_wireless_controller/PCSX2/inis/spu2-x.ini" "$config_home/.config/pcsx2/inis/spu2-x.ini"
+
 	#Stella
 	#default path: /home/$USER/.config/mupen64plus
 	#Main config
@@ -876,6 +903,29 @@ RetorRig loads to use the gamepad" 14 60
 	# End qjoypad remappings
 	###########################################################
 
+	###########################################################
+	# Add emulator specifc control remaps here for AniMicro
+	###########################################################
+	# Note: In due time, AntiMicro may replace qjoypad for all
+	# emulator control hotswaps for gamepads
+	###########################################################
+
+	# copy in profiles for emulators (antimicro)
+	cp -v "$rootdir/gamepad-cfgs/ps3_usb_controller/antimicro_settings.ini" "$config_home/.config/antimicro/"
+	cp -v "$rootdir/gamepad-cfgs/ps3_usb_controller/am_pcsx2_ps3_blu.joystick.xml" "$config_home/.config/antimicro/"
+
+	#####################
+	# PCSX2
+	#####################
+
+	old_pre="ps2_pre"
+	old_post="ps2_post"
+	new_pre="antimicro --hidden --profile /home/test/.retrorig/.config/antimicro/am_pcsx2_x360_wireless.joystick.xml \&amp;"
+	# The line below is only for good measure
+	new_post="killall pcsx2 antimicro"
+	# perform actual changes
+	sed -i "s|$old_pre|$new_pre|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
+	sed -i "s|$old_post|$new_post|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
 
 	#######################################################
 	# configure xboxdrv for 360 gamepad (wireless)
@@ -891,6 +941,14 @@ RetorRig loads to use the gamepad" 14 60
 	# copy keyboard.xml file for XBMC. Button id numbers are totally diffferent, due to the use of 
 	# the use-dpad-as-button, and use-trigger-as-button options used.
 	cp -v "$rootdir/gamepad-cfgs/x360_wireless_controller/keyboard.xml" "$xbmc_home/userdata/keymaps"
+
+	# Copy our keymap to the regular .xbmc dotfile directory if keyboard.xml exists:
+	if [[ -f "$home/.xbmc/userdata/keymaps/keyboard.xml" ]]; then
+		# back up current file
+		cp -v "$home/.xbmc/userdata/keymaps/keyboard.xml" "$home/.xbmc/userdata/keymaps/keyboard.xml.old"
+		# copy in keymap
+		cp "$rootdir/gamepad-cfgs/x360_wireless_controller/keyboard.xml" "$home/.xbmc/userdata/keymaps/"
+	fi
 
 	#update init scripts for xboxdrv
 	update-rc.d xboxdrv defaults
@@ -967,6 +1025,17 @@ function gp_x360_usb()
 	# Main config
 	cp -v "$scriptdir/emu-cfgs/x360_usb_controller//Dolphin/GCPadNew.ini" "$config_home/.dolphin-emu/Config"
 	cp -v "$scriptdir/emu-cfgs/x360_usb_controller//Dolphin/Dolphin.ini" "$config_home/.dolphin-emu/Config"
+
+	# PCSX2
+	# base config folder
+	cp -v "$scriptdir/emu-cfgs/x360_usb_controller/PCSX2/inisOnePAD.ini" "$config_home/.config/pcsx2/inisOnePAD.ini"
+	cp -v "$scriptdir/emu-cfgs/x360_usb_controller/PCSX2/PCSX2-reg.ini" "$config_home/.config/pcsx2/PCSX2-reg.ini"
+	# inis
+	cp -v "$scriptdir/emu-cfgs/x360_usb_controller/PCSX2/inis/GSdx.ini" "$config_home/.config/pcsx2/inis/GSdx.ini"
+	cp -v "$scriptdir/emu-cfgs/x360_usb_controller/PCSX2/inis/OnePAD.ini" "$config_home/.config/pcsx2/inis/OnePAD.ini"
+	cp -v "$scriptdir/emu-cfgs/x360_usb_controller/PCSX2/inis/PCSX2_ui.ini" "$config_home/.config/pcsx2/inis/PCSX2_vm.ini"
+	cp -v "$scriptdir/emu-cfgs/x360_usb_controller/PCSX2/inis/PCSX2_vm.ini" "$config_home/.config/pcsx2/inis/PCSX2_vm.ini"
+	cp -v "$scriptdir/emu-cfgs/x360_usb_controller/PCSX2/inis/spu2-x.ini" "$config_home/.config/pcsx2/inis/spu2-x.ini"
 
 	#Stella
 	#default path: /home/$USER/.config/mupen64plus
@@ -1093,6 +1162,30 @@ RetorRig loads to use the gamepad" 14 60
 	# End qjoypad remappings
 	###########################################################
 
+	###########################################################
+	# Add emulator specifc control remaps here for AniMicro
+	###########################################################
+	# Note: In due time, AntiMicro may replace qjoypad for all
+	# emulator control hotswaps for gamepads
+	###########################################################
+
+	# copy in profiles for emulators (antimicro)
+	cp -v "$rootdir/gamepad-cfgs/x360_usb_controller/antimicro_settings.ini" "$config_home/.config/antimicro/"
+	cp -v "$rootdir/gamepad-cfgs/x360_usb_controller/am_pcsx2_x360_usb.joystick.xml" "$config_home/.config/antimicro/"
+
+	#####################
+	# PCSX2
+	#####################
+
+	old_pre="ps2_pre"
+	old_post="ps2_post"
+	new_pre="antimicro --hidden --profile /home/test/.retrorig/.config/antimicro/am_pcsx2_x360_usb.joystick.xml \&amp;"
+	# The line below is only for good measure
+	new_post="killall pcsx2 antimicro"
+	# perform actual changes
+	sed -i "s|$old_pre|$new_pre|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
+	sed -i "s|$old_post|$new_post|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
+
 
 	############################################
 	# configure xboxdrv for 360 gamepad (wireless)
@@ -1108,6 +1201,14 @@ RetorRig loads to use the gamepad" 14 60
 	# copy keyboard.xml file for XBMC. Button id numbers are totally diffferent, due to the use of 
 	# the use-dpad-as-button, and use-trigger-as-button options used.
 	cp -v "$rootdir/gamepad-cfgs/x360_usb_controller/keyboard.xml" "$xbmc_home/userdata/keymaps"
+
+	# Copy our keymap to the regular .xbmc dotfile directory if keyboard.xml exists:
+	if [[ -f "$home/.xbmc/userdata/keymaps/keyboard.xml" ]]; then
+		# back up current file
+		cp -v "$home/.xbmc/userdata/keymaps/keyboard.xml" "$home/.xbmc/userdata/keymaps/keyboard.xml.old"
+		# copy in keymap
+		cp "$rootdir/gamepad-cfgs/x360_usb_controller/keyboard.xml" "$home/.xbmc/userdata/keymaps/"
+	fi
 
 	# update init scripts for xboxdrv
 	update-rc.d xboxdrv defaults
