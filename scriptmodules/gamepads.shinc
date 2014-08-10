@@ -757,6 +757,55 @@ function gp_x360_wireless()
 	cp -v "$scriptdir/emu-cfgs/x360_wireless_controller/PPSSPP/ppsspp.ini" "$config_home/.config/ppsspp/PSP/SYSTEM"
 	cp -v "$scriptdir/emu-cfgs/x360_wireless_controller/PPSSPP/controls.ini" "$config_home/.config/ppsspp/PSP/SYSTEM"
 
+	##############################################################
+	# Set number of controllers for /etc/default/xboxdrv
+	##############################################################
+
+	# grab the current number of controlls from file
+	cont_num_org=$(grep "CONTROLLER_NUM=" "/etc/default/xboxdrv")
+
+	# inform user that you must have controller connected or restart
+	dialog --msgbox "The xboxdrv userland module detects the number of USB PS3 controllers connected \
+when it starts. Therefore, we must specify how many you have connected or want to use. \
+You must reboot to have these changes take effect. If you tell xboxdrv I have 3 controllers, when you only have one, \
+the service may fail to start correctly.\n\nPlease see /etc/default/xboxdrv for more. Press the PS Button after \
+RetorRig loads to use the gamepad" 14 60
+
+	# Present small menu asking for number of controllers
+	cmd=(dialog --backtitle "LibreGeek.org RetroRig Installer" \
+		    --menu "Please select the number of USB PS3 controllers" 16 47 16)
+	options=(1 "1"
+	 	 2 "2"
+	 	 3 "3"
+	 	 4 "4")
+
+	#make menu choice
+	selection=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
+	#functions
+
+	for choice in $selection
+	do
+		case $choice in
+
+		1)
+		sed -i "s|$cont_num_org|CONTROLLER_NUM=1|g" "/etc/default/xboxdrv"
+		;;
+
+		2)
+		sed -i "s|$cont_num_org|CONTROLLER_NUM=2|g" "/etc/default/xboxdrv"
+		;;
+
+		3)
+		sed -i "s|$cont_num_org|CONTROLLER_NUM=3|g" "/etc/default/xboxdrv"
+		;;
+
+		4)
+		sed -i "s|$cont_num_org|CONTROLLER_NUM=4|g" "/etc/default/xboxdrv"
+		;;
+
+		esac
+	done
+
 	##########################################################
 	# Add emulator specifc control remaps here for qjoypad
 	##########################################################
