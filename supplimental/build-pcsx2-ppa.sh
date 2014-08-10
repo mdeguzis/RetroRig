@@ -8,7 +8,7 @@
 # ========================================================================
 
 #define base version
-BASE=2:1.2.2
+BASE=4:1.2.2
 
 # define patch level
 PL=0
@@ -42,61 +42,34 @@ if [[ -n "$2" ]]; then
   echo ""
 
   # pcsx2 emulator PPA
-  #sudo add-apt-repository -y ppa:gregory-hainaut/pcsx2.official.ppa
-  #sudo apt-get update
+  sudo add-apt-repository -y ppa:gregory-hainaut/pcsx2.official.ppa
+  sudo apt-get update
 
   #apt-get install packages
   sudo apt-get install -y build-essential fakeroot devscripts automake autoconf autotools-dev
 
   #get build dependencies
   sudo apt-get -y install cmake debhelper dpkg-dev \
-	libaio-dev:i386 \
-	libasound2-dev:i386 \
-	libbz2-dev:i386 \
-	libcg:i386 \
-	libcggl:i386 \
-	libegl1-mesa-dev:i386 \
-	libgl1-mesa-dev:i386 \
-	libglew-dev:i386 \
-	libglu1-mesa-dev:i386 \
-	libgtk2.0-dev:i386 \
-	libjpeg-dev:i386 \
-	libsdl1.2-dev:i386 \
-	libsoundtouch-dev:i386 \
+	libaio-dev \
+	libasound2-dev \
+	libbz2-dev \
+	libegl1-mesa-dev \
+	libgl1-mesa-dev \
+	libglew-dev \
+	libglu1-mesa-dev \
+	libgtk2.0-dev \
+	libjpeg-dev \
+	libsdl1.2-dev \
+	libsoundtouch-dev \
 	libsparsehash-dev \
-	libwxbase2.8-dev:i386 \
-	libwxgtk2.8-dev:i386 \
-	libx11-dev:i386 \
-	nvidia-cg-dev:i386 \
+	libwxbase2.8-dev \
+	libwxgtk2.8-dev \
+	libx11-dev \
+	locales \
+	libcg \
 	nvidia-cg-toolkit \
-	portaudio19-dev:i386 \
-	zlib1g-dev:i386 \
-	gir1.2-gtk-2.0:i386 \
-	libglib2.0-dev:i386 \
-	libgdk-pixbuf2.0-dev:i386 \
-	libpango1.0-dev:i386 \
-	libatk1.0-dev:i386 \
-	libcairo2-dev:i386 \
-	libcaca-dev:i386 \
-	libpulse-dev:i386 \
-	gir1.2-atk-1.0:i386 \
-	gir1.2-freedesktop:i386 \
-	gir1.2-gdkpixbuf-2.0:i386 \
-	gir1.2-glib-2.0:i386 \
-	gir1.2-pango-1.0:i386 \
-	libslang2-dev:i386 \
-	libfontconfig1-dev:i386 \
-	libfreetype6-dev:i386 \
-	libpng-dev:i386 \
-	libpng12-dev:i386 \
-	gir1.2-pango-1.0:i386 \
-	libfreetype6-dev:i386 \
-	libxft-dev:i386 \
-	libfontconfig1-dev:i386 \
-	libavahi-client-dev:i386 \
-	libgirepository-1.0-1:i386
-
-
+	portaudio19-dev \
+	zlib1g-dev
 
 else
   echo ""
@@ -133,7 +106,8 @@ cp ~/RetroRig/supplimental/pcsx2/pcsx2.dsc pcsx2_$BASE.$PL.dsc
 sed -i "s|version_placeholder|$BASE.$PL|g" "pcsx2_$BASE.$PL.dsc"
 
 echo "original tarball"
-cp ~/packaging/pcsx2-original/pcsx2_1.2.2.orig.tar.gz .
+wget --tries=50 "https://launchpad.net/~gregory-hainaut/+archive/ubuntu/pcsx2.official.ppa/+files/pcsx2_1.2.2.orig.tar.gz"
+#cp ~/packaging/pcsx2-original/pcsx2_1.2.2.orig.tar.gz .
 tar xfz pcsx2_1.2.2.orig.tar.gz
 rm pcsx2_1.2.2.orig.tar.gz
 mv pcsx2-1.2.2/ pcsx2
@@ -151,7 +125,6 @@ cd pcsx2
 rm -rf debian-upstream/
 cd ..
 tar cfj pcsx2_$BASE.$PL.orig.tar.bz2 pcsx2
-
 
 echo "debian files"
 wget --tries=50 "https://launchpad.net/~gregory-hainaut/+archive/ubuntu/pcsx2.official.ppa/+files/pcsx2_1.2.2-4.debian.tar.xz"
