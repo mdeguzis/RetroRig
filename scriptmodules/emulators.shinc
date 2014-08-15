@@ -149,7 +149,13 @@ function em_install_stella()
 function em_install_mupen64plus()
 {
 	echo "Installing MAME emulator"
-	apt-get install -y mupen64plus
+	# apt-get install -y mupen64plus
+
+	# temporary PPA addition for testing problems with package 
+	add-apt-repository -y ppa:ppa:sven-eckelmann/ppa-mupen64plus
+	apt-get update
+	# apply patched file
+	apt-get install -y libmupen64plus2='2.0-7~ppa2~trusty'
 }
 
 
