@@ -14,7 +14,7 @@
 BASE=2:2.0
 
 # define patch level
-PL=1
+PL=1.0
 
 #define branch
 BRANCH=patchlevel-1
@@ -50,7 +50,7 @@ if [[ -n "$2" ]]; then
   #apt-get build-deps
   sudo apt-get -y build-dep mupen64plus-core
   #apt-get install packages
-  sudo apt-get install -y build-essential fakeroot devscripts automake autoconf autotools-dev libmupen64plus-dev libsdl2-dev
+  sudo apt-get install -y build-essential fakeroot devscripts automake autoconf autotools-dev libmupen64plus-dev libsdl2-dev binutils-dev
 
 else
   echo ""

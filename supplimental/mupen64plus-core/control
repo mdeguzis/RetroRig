@@ -15,6 +15,7 @@ Build-Depends:
  libsdl2-dev,
  pkg-config,
  zlib1g-dev | libz-dev,
+ binutils-dev
 
 Package: libmupen64plus2
 Section: libs
