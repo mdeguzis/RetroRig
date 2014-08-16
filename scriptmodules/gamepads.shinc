@@ -57,14 +57,14 @@ function gp_ps3_blu()
 
 	# PCSX2
 	# base config folder
-	cp -v "$scriptdir/emu-cfgs/ps3_blu_controller/PCSX2/inisOnePAD.ini" "$config_home/.config/pcsx2/inisOnePAD.ini"
-	cp -v "$scriptdir/emu-cfgs/ps3_blu_controller/PCSX2/PCSX2-reg.ini" "$config_home/.config/pcsx2/PCSX2-reg.ini"
+	cp -v "$scriptdir/emu-cfgs/ps3_blu_controller/PCSX2/inisOnePAD.ini" "$config_home/.config/pcsx2/"
+	cp -v "$scriptdir/emu-cfgs/ps3_blu_controller/PCSX2/PCSX2-reg.ini" "$config_home/.config/pcsx2/"
 	# inis
-	cp -v "$scriptdir/emu-cfgs/ps3_blu_controller/PCSX2/inis/GSdx.ini" "$config_home/.config/pcsx2/inis/GSdx.ini"
-	cp -v "$scriptdir/emu-cfgs/ps3_blu_controller/PCSX2/inis/OnePAD.ini" "$config_home/.config/pcsx2/inis/OnePAD.ini"
-	cp -v "$scriptdir/emu-cfgs/ps3_blu_controller/PCSX2/inis/PCSX2_ui.ini" "$config_home/.config/pcsx2/inis/PCSX2_vm.ini"
-	cp -v "$scriptdir/emu-cfgs/ps3_blu_controller/PCSX2/inis/PCSX2_vm.ini" "$config_home/.config/pcsx2/inis/PCSX2_vm.ini"
-	cp -v "$scriptdir/emu-cfgs/ps3_blu_controller/PCSX2/inis/spu2-x.ini" "$config_home/.config/pcsx2/inis/spu2-x.ini"
+	cp -v "$scriptdir/emu-cfgs/ps3_blu_controller/PCSX2/inis/GSdx.ini" "$config_home/.config/pcsx2/inis/"
+	cp -v "$scriptdir/emu-cfgs/ps3_blu_controller/PCSX2/inis/OnePAD.ini" "$config_home/.config/pcsx2/inis/"
+	cp -v "$scriptdir/emu-cfgs/ps3_blu_controller/PCSX2/inis/PCSX2_ui.ini" "$config_home/.config/pcsx2/inis/"
+	cp -v "$scriptdir/emu-cfgs/ps3_blu_controller/PCSX2/inis/PCSX2_vm.ini" "$config_home/.config/pcsx2/inis/"
+	cp -v "$scriptdir/emu-cfgs/ps3_blu_controller/PCSX2/inis/spu2-x.ini" "$config_home/.config/pcsx2/inis/"
 
 	# Stella
 	# default path: /home/$USER/.config/mupen64plus
@@ -510,14 +510,14 @@ function gp_ps3_usb()
 
 	# PCSX2
 	# base config folder
-	cp -v "$scriptdir/emu-cfgs/ps3_usb_controller/PCSX2/inisOnePAD.ini" "$config_home/.config/pcsx2/inisOnePAD.ini"
-	cp -v "$scriptdir/emu-cfgs/ps3_usb_controller/PCSX2/PCSX2-reg.ini" "$config_home/.config/pcsx2/PCSX2-reg.ini"
+	cp -v "$scriptdir/emu-cfgs/ps3_usb_controller/PCSX2/inisOnePAD.ini" "$config_home/.config/pcsx2/"
+	cp -v "$scriptdir/emu-cfgs/ps3_usb_controller/PCSX2/PCSX2-reg.ini" "$config_home/.config/pcsx2/"
 	# inis
-	cp -v "$scriptdir/emu-cfgs/ps3_usb_controller/PCSX2/inis/GSdx.ini" "$config_home/.config/pcsx2/inis/GSdx.ini"
-	cp -v "$scriptdir/emu-cfgs/ps3_usb_controller/PCSX2/inis/OnePAD.ini" "$config_home/.config/pcsx2/inis/OnePAD.ini"
-	cp -v "$scriptdir/emu-cfgs/ps3_usb_controller/PCSX2/inis/PCSX2_ui.ini" "$config_home/.config/pcsx2/inis/PCSX2_vm.ini"
-	cp -v "$scriptdir/emu-cfgs/ps3_usb_controller/PCSX2/inis/PCSX2_vm.ini" "$config_home/.config/pcsx2/inis/PCSX2_vm.ini"
-	cp -v "$scriptdir/emu-cfgs/ps3_usb_controller/PCSX2/inis/spu2-x.ini" "$config_home/.config/pcsx2/inis/spu2-x.ini"
+	cp -v "$scriptdir/emu-cfgs/ps3_usb_controller/PCSX2/inis/GSdx.ini" "$config_home/.config/pcsx2/inis/"
+	cp -v "$scriptdir/emu-cfgs/ps3_usb_controller/PCSX2/inis/OnePAD.ini" "$config_home/.config/pcsx2/inis/"
+	cp -v "$scriptdir/emu-cfgs/ps3_usb_controller/PCSX2/inis/PCSX2_ui.ini" "$config_home/.config/pcsx2/inis/"
+	cp -v "$scriptdir/emu-cfgs/ps3_usb_controller/PCSX2/inis/PCSX2_vm.ini" "$config_home/.config/pcsx2/inis/"
+	cp -v "$scriptdir/emu-cfgs/ps3_usb_controller/PCSX2/inis/spu2-x.ini" "$config_home/.config/pcsx2/inis/"
 
 	# PPSSPP
 	cp -v "$scriptdir/emu-cfgs/ps3_usb_controller/PPSSPP/ppsspp.ini" "$config_home/.config/ppsspp/PSP/SYSTEM"
@@ -764,11 +764,11 @@ function gp_x360_wireless()
 	cp -v "$scriptdir/emu-cfgs/x360_wireless_controller/PCSX2/inisOnePAD.ini" "$config_home/.config/pcsx2/inisOnePAD.ini"
 	cp -v "$scriptdir/emu-cfgs/x360_wireless_controller/PCSX2/PCSX2-reg.ini" "$config_home/.config/pcsx2/PCSX2-reg.ini"
 	# inis
-	cp -v "$scriptdir/emu-cfgs/x360_wireless_controller/PCSX2/inis/GSdx.ini" "$config_home/.config/pcsx2/inis/GSdx.ini"
-	cp -v "$scriptdir/emu-cfgs/x360_wireless_controller/PCSX2/inis/OnePAD.ini" "$config_home/.config/pcsx2/inis/OnePAD.ini"
-	cp -v "$scriptdir/emu-cfgs/x360_wireless_controller/PCSX2/inis/PCSX2_ui.ini" "$config_home/.config/pcsx2/inis/PCSX2_vm.ini"
-	cp -v "$scriptdir/emu-cfgs/x360_wireless_controller/PCSX2/inis/PCSX2_vm.ini" "$config_home/.config/pcsx2/inis/PCSX2_vm.ini"
-	cp -v "$scriptdir/emu-cfgs/x360_wireless_controller/PCSX2/inis/spu2-x.ini" "$config_home/.config/pcsx2/inis/spu2-x.ini"
+	cp -v "$scriptdir/emu-cfgs/x360_wireless_controller/PCSX2/inis/GSdx.ini" "$config_home/.config/pcsx2/inis/"
+	cp -v "$scriptdir/emu-cfgs/x360_wireless_controller/PCSX2/inis/OnePAD.ini" "$config_home/.config/pcsx2/inis/"
+	cp -v "$scriptdir/emu-cfgs/x360_wireless_controller/PCSX2/inis/PCSX2_ui.ini" "$config_home/.config/pcsx2/inis/"
+	cp -v "$scriptdir/emu-cfgs/x360_wireless_controller/PCSX2/inis/PCSX2_vm.ini" "$config_home/.config/pcsx2/inis/"
+	cp -v "$scriptdir/emu-cfgs/x360_wireless_controller/PCSX2/inis/spu2-x.ini" "$config_home/.config/pcsx2/inis/"
 
 	#Stella
 	#default path: /home/$USER/.config/mupen64plus
@@ -1026,11 +1026,11 @@ function gp_x360_usb()
 	cp -v "$scriptdir/emu-cfgs/x360_usb_controller/PCSX2/inisOnePAD.ini" "$config_home/.config/pcsx2/inisOnePAD.ini"
 	cp -v "$scriptdir/emu-cfgs/x360_usb_controller/PCSX2/PCSX2-reg.ini" "$config_home/.config/pcsx2/PCSX2-reg.ini"
 	# inis
-	cp -v "$scriptdir/emu-cfgs/x360_usb_controller/PCSX2/inis/GSdx.ini" "$config_home/.config/pcsx2/inis/GSdx.ini"
-	cp -v "$scriptdir/emu-cfgs/x360_usb_controller/PCSX2/inis/OnePAD.ini" "$config_home/.config/pcsx2/inis/OnePAD.ini"
-	cp -v "$scriptdir/emu-cfgs/x360_usb_controller/PCSX2/inis/PCSX2_ui.ini" "$config_home/.config/pcsx2/inis/PCSX2_vm.ini"
-	cp -v "$scriptdir/emu-cfgs/x360_usb_controller/PCSX2/inis/PCSX2_vm.ini" "$config_home/.config/pcsx2/inis/PCSX2_vm.ini"
-	cp -v "$scriptdir/emu-cfgs/x360_usb_controller/PCSX2/inis/spu2-x.ini" "$config_home/.config/pcsx2/inis/spu2-x.ini"
+	cp -v "$scriptdir/emu-cfgs/x360_usb_controller/PCSX2/inis/GSdx.ini" "$config_home/.config/pcsx2/inis/"
+	cp -v "$scriptdir/emu-cfgs/x360_usb_controller/PCSX2/inis/OnePAD.ini" "$config_home/.config/pcsx2/inis/"
+	cp -v "$scriptdir/emu-cfgs/x360_usb_controller/PCSX2/inis/PCSX2_ui.ini" "$config_home/.config/pcsx2/inis/"
+	cp -v "$scriptdir/emu-cfgs/x360_usb_controller/PCSX2/inis/PCSX2_vm.ini" "$config_home/.config/pcsx2/inis/"
+	cp -v "$scriptdir/emu-cfgs/x360_usb_controller/PCSX2/inis/spu2-x.ini" "$config_home/.config/pcsx2/inis/"
 
 	#Stella
 	#default path: /home/$USER/.config/mupen64plus
