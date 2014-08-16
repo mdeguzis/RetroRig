@@ -153,7 +153,7 @@ function em_install_mupen64plus()
 
 	### TESTING ONLY!!!!!!!!!!!! ###
 	echo "Installing Mupen64plus emulator (test pkgs)"
-	apt-get install libmupen64plus2=2:2.0.1.0 libmupen64plus-dev=2:2.0.1.0 libmupen64plus2-dbg=2:2.0.1.0 mupen64plus-data=2:2.0.1.0 
+	apt-get install -y libmupen64plus2=2:2.0.1.0 mupen64plus-data=2:2.0.1.0 
 	apt-get install -y mupen64plus
 
 }
