@@ -138,7 +138,6 @@ function setDesktopEnvironment()
   checkValid=`echo $setDir|grep $xdg_dir=\"|grep home/`
  
   if [ -n "$checkValid" ]; then
-    echo "setting $"$xdg_dir "to" $target
     eval "$setDir"
 
   else

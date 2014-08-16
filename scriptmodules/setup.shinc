@@ -276,7 +276,7 @@ function rrs_software()
 	# install binaries
 	apt-get install -y xboxdrv curl python-software-properties \
 	pkg-config software-properties-common dconf-tools jstest-gtk \
-	qjoypad build-essential sixad libusb-dev libusb-0.1-4 libsdl2-dev
+	qjoypad sixad libusb-0.1-4
 
 	# Copy down utilites
 	cp -v "$rootdir/supplimental/antimicro" "/usr/bin/"
@@ -666,7 +666,7 @@ function rrs_reboot()
 	#confirm reboot is the intended action
 	dialog --title "Confirm yes/no" \
 	--backtitle "LibreGeek.org RetroRig Installer" \
-	--yesno "Are you sure you want to Reboot?"  6 0
+	--yesno "Are you sure you want to reboot?"  6 0
 
 	# Get exit status
 	# 0 means user hit [yes] button.
