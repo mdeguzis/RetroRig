@@ -149,13 +149,7 @@ function em_install_stella()
 function em_install_mupen64plus()
 {
 	echo "Installing mupen64plus emulator"
-	# apt-get install -y mupen64plus
-
-	### TESTING ONLY!!!!!!!!!!!! ###
-	echo "Installing Mupen64plus emulator (test pkgs)"
-	apt-get install -y libmupen64plus2=2:2.0.1.0 mupen64plus-data=2:2.0.1.0 
 	apt-get install -y mupen64plus
-
 }
 
 

@@ -210,7 +210,7 @@ function set_resolution() {
 #add res-switcher function to make new presets more modular to add
 while true; do
 cmd=(dialog --backtitle "RetroRig Settings" --menu "Choose your resolution" 16 0 16)
-options=(1 "Automatic Configuration (testing only)"
+options=(1 "Automatic Configuration"
 	 2 "Current Resolution"
 	 3 "1280x720  (720p)  (5:4)"
 	 4 "1280x1024 (SXGA)  (5:4)"
@@ -227,7 +227,9 @@ if [ "$choices" != "" ]; then
 
 	1) 
 		# set resolution paramters 
-		
+		dialog --msgbox "Resolution settings for emulators will automatically be synchronized with XBMC's settings." 8 60
+                return
+		;;		
 
 	2) 
 		#Need to use extended regexp's here because of nes being within nes
