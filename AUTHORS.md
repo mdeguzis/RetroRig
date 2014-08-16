@@ -12,7 +12,8 @@
    - <none@domain.com>
    - Contributor, tester
    - Notable Contributions: 
-      - PS3 Controller support fixes/patches
+      - PS3 Controller fixes/patches
+      - Packaging
       - RetroRig's patched XBMC package (a ton of changes)
       - Idea machine
 
