@@ -141,6 +141,9 @@ case $response in
 	rm -f /etc/default/xboxdrv
 	sed -i 's|blacklist xpad||g' "/etc/modprobe.d/blacklist.conf"
 
+	# Re-enable apport
+	sed -i "s|enabled=0|enabled=1|g" "/etc/default/apport"
+
 	# XBMC session (if applicable)
 	# change default xsession
 	session_org="user-session=XBMC"
