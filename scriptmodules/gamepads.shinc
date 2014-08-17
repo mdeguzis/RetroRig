@@ -170,6 +170,7 @@ function gp_ps3_blu()
 	new_post="killall pcsx2 antimicro"
 	# perform actual changes
 	sed -i "s|$old_pre|$new_pre|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
+	sed -i "s|$old_post|$new_post|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
  
 	# The PS3 pairing process should be handled interactively in a seperate function:
 	gp_ps3_blu_main
