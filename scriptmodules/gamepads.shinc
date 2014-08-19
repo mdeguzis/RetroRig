@@ -392,6 +392,10 @@ function ps3_set_emulator_ids()
 	# based off of $n, the current controller number being set by 
 	# gp_ps3_blu_main, and later paired
 	#################################################################### 
+
+	# Stella Notes:
+	# MAC ID temp placeholders seem "backwards" in stellarc due to P2 configuration showing at the top of the
+	# configuration files set of joymaps, rather than the bottom 
  
         if [ $n == "1" ]; then
 		# Dolphin
