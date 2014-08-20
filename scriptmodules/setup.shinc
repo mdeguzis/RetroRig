@@ -508,6 +508,9 @@ function rrs_xbmc_cfgs()
 	# corruption, segfaults, or other oddities.
 	sed -i "s|installdir_temp|$rootdir|g" "$xbmc_home/userdata/guisettings.xml"
 
+	# XBMC custom settings launchers (Advanced Launcher)
+	sed -i "s|installdir_temp|$rootdir|g" "$xbmc_home/userdata/guisettings.xml"
+
 	# echo user change
 	echo "The user applied to configuration files was: $user"
 	
