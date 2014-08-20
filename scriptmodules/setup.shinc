@@ -506,8 +506,20 @@ function rrs_xbmc_cfgs()
 	# RCB and some config files don't like using $config_home, rather /home/test/
 	# Let's change the config files to reflect the current username
 	sed -i "s|/home/test/|/home/$user/|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
-	echo "The user applied to configuration files was: $user"
 
+	# Change hardcoded paths in "$xbmc_home/userdata/guisettings.xml" (Ace XBMC skin adds these)
+	#
+	# Side note: For the Ace XBMC theme, backgrounds are loaded into "$xbmc_home/userdata/Database/Textures13.db"
+	# Therefore, it is VERY important to do a fresh install of the Ace theme, and configure from scatch to avoid
+	# corruption, segfaults, or other oddities.
+	sed -i "s|installdir_temp|$rootdir|g" "$xbmc_home/userdata/guisettings.xml"
+
+	# XBMC custom settings launchers (Advanced Launcher)
+	sed -i "s|config_temp|$config_home|g" "$xbmc_home/userdata/ddon_data/plugin.program.advanced.launcher/launchers.xml"
+
+	# echo user change
+	echo "The user applied to configuration files was: $user"
+	
 	# correct permissions
 	h_correct_perms
 }

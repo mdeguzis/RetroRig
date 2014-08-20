@@ -28,6 +28,14 @@ function em_add_repos()
 
 }
 
+function em_install_yabause()
+{
+	# This may be source compiled in the future
+	echo "Installing Sega Saturn emulator Yabause"
+	apt-get install -y yabause
+
+}
+
 function em_install_pcsx2()
 {
 	echo "Installing Playstation 2 emulator PCSX2"

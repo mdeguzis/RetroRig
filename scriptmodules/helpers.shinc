@@ -396,18 +396,17 @@ function h_res_switcher()
 	dialog --infobox "Setting resolution to selection" 3 36
 	#resolution is set via _resolution function		
 	
-	########################		
-	#Stella
-	########################
+	#############################################################		
+	# Stella (deprecated)
+	# OpenGL handles this now, 'fullres' no longer exists
+	############################################################
 	
 	# "fullres =" DOES NOT SEEM TO BE USED NOW IN THE SOURCE COMPILED VERSION
 	# IT WILL BE LEFT ALONE FOR NOW UNTIL DEEMED UNECESSARY
-	st_org=$(grep -Ee "\bfullres = \b" "$config_home/.stella/stellarc")
-	#make the changes, prefix new_X in case NULL was entered previously
-	if [ -n "$st_org" ]; then
-	  #st_org is not empty
-	  sed -i "s|$st_org|fullres = $st_new|g" "$config_home/.stella/stellarc"
-	fi
+	# st_org=$(grep -Ee "\bfullres = \b" "$config_home/.stella/stellarc")
+	# make the changes, prefix new_X in case NULL was entered previously
+	# sed -i "s|$st_org|fullres = $st_new|g" "$config_home/.stella/stellarc"
+
 	########################		
 	#mupen64plus
 	########################
