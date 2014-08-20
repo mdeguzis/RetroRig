@@ -396,6 +396,11 @@ function ps3_set_emulator_ids()
 	# Stella Notes:
 	# MAC ID temp placeholders seem "backwards" in stellarc due to P2 configuration showing at the top of the
 	# configuration files set of joymaps, rather than the bottom 
+
+	# PCSX2 Notes:
+	# The "am_pcsx2_ps3_blu.joystick.xml" gamepad config file for antimicro contains a PS3 Bluetooth MAC ID
+	# However, it is noted that it is "included for informational purposes only", so a sed swap should not
+	# Be necessary
  
         if [ $n == "1" ]; then
 		# Dolphin
