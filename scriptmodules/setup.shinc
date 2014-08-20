@@ -509,7 +509,7 @@ function rrs_xbmc_cfgs()
 	sed -i "s|installdir_temp|$rootdir|g" "$xbmc_home/userdata/guisettings.xml"
 
 	# XBMC custom settings launchers (Advanced Launcher)
-	sed -i "s|installdir_temp|$rootdir|g" "$xbmc_home/userdata/guisettings.xml"
+	sed -i "s|config_temp|$config_home|g" "$xbmc_home/userdata/ddon_data/plugin.program.advanced.launcher/launchers.xml"
 
 	# echo user change
 	echo "The user applied to configuration files was: $user"
