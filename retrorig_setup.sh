@@ -303,6 +303,9 @@ xbmc_home="$home/.retrorig/.xbmc"
 # and other utilities
 config_home="$home/.retrorig"
 
+#set RetroRig configuration file
+configFile=$config_home/retrorig.cfg
+
 #################################################################
 
 while true; do
@@ -333,6 +336,7 @@ Installer" --menu "| Main Menu (v.0.9.5b) | \
 		rrs_prepareFolders
 		rrs_software
 		rrs_emulators
+		rrs_retrorig_cfgs
 		rrs_xbmc_cfgs
 		rrs_gamepad
 		h_emu_user_fixes

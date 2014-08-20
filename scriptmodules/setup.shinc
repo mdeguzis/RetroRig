@@ -468,6 +468,12 @@ function rrs_xbmc_patched()
 
 }
 
+function rrs_retrorig_cfgs()
+{
+	cp -Rv "$scriptdir/retrorig.cfg" "$configFile"
+	ln -s "$scriptdir" "$config_home"
+}
+
 function rrs_xbmc_cfgs()
 {
 	clear

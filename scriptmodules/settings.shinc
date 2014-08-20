@@ -210,7 +210,6 @@ function set_resolution() {
 #add res-switcher function to make new presets more modular to add
 
 while true; do
-
 cmd=(dialog --backtitle "RetroRig Settings" --menu "Choose your resolution" 16 0 16)
 options=(1 "Automatic Configuration"
 	 2 "Current Resolution"
@@ -228,8 +227,7 @@ if [ "$choices" != "" ]; then
     case $choices in
 
 	1) 
-		# set resolution paramters 
-                #disable auto resoltuion
+                #enable auto resoltuion
 		setParameter "auto resolution" "true"
 		dialog --msgbox "Resolution settings for emulators will automatically be synchronized with XBMC's settings." 8 60
                 return
@@ -341,9 +339,9 @@ if [ "$choices" != "" ]; then
 		#set stella (Atari 2600)
 		st_new="1280x720"
 		# set the resolution with helper
-                #disable auto resoltuion
-		setParameter "auto resolution" "false"
 		h_res_switcher
+		#disable auto resoltuion
+		setParameter "auto resolution" "false"
 		#return to menu
 		return
 		;;  

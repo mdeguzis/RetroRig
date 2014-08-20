@@ -404,8 +404,10 @@ function h_res_switcher()
 	# IT WILL BE LEFT ALONE FOR NOW UNTIL DEEMED UNECESSARY
 	st_org=$(grep -Ee "\bfullres = \b" "$config_home/.stella/stellarc")
 	#make the changes, prefix new_X in case NULL was entered previously
-	sed -i "s|$st_org|fullres = $st_new|g" "$config_home/.stella/stellarc"
-
+	if [ -n "$st_org" ]; then
+	  #st_org is not empty
+	  sed -i "s|$st_org|fullres = $st_new|g" "$config_home/.stella/stellarc"
+	fi
 	########################		
 	#mupen64plus
 	########################
