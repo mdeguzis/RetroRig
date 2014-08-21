@@ -515,8 +515,8 @@
       <gameclient />
       <emulatorCmd>/usr/games/mednafen</emulatorCmd>
       <emulatorParams>"%ROM%"</emulatorParams>
-      <romPath>/home/test/RetroRig/ROMs/GB/*.zip</romPath>
-      <romPath>/home/test/RetroRig/ROMs/GB/*.gb</romPath>
+      <romPath>installdir_temp/ROMs/GB/*.zip</romPath>
+      <romPath>installdir_temp/ROMs/GB/*.gb</romPath>
       <saveStatePath />
       <saveStateParams />
       <mediaPath type="boxfront">installdir_temp/Artwork/GB/boxfront/%GAME%.*</mediaPath>
@@ -540,6 +540,37 @@
       <imagePlacingInfo>gameinfosmall</imagePlacingInfo>
       <scraper name="giantbomb.com" replaceKeyString="" replaceValueString="" />
       <scraper name="thegamesdb.net" replaceKeyString="" replaceValueString="" />
+      <scraper name="mobygames.com" replaceKeyString="" replaceValueString="" />
+    </RomCollection>
+    <RomCollection id="19" name="Atari Lynx">
+      <useBuiltinEmulator>False</useBuiltinEmulator>
+      <gameclient />
+      <emulatorCmd>/usr/games/mednafen</emulatorCmd>
+      <emulatorParams>"%ROM%"</emulatorParams>
+      <romPath>installdir_temp/ROMs/Atari Lynx/*.lnx</romPath>
+      <saveStatePath />
+      <saveStateParams />
+      <mediaPath type="boxfront">installdir_temp/Artwork/Atari Lynx/boxfront/%GAME%.*</mediaPath>
+      <mediaPath type="boxback">installdir_temp/Artwork/Atari Lynx/boxback/%GAME%.*</mediaPath>
+      <mediaPath type="cartridge">installdir_temp/Artwork/Atari Lynx/cartridge/%GAME%.*</mediaPath>
+      <mediaPath type="screenshot">installdir_temp/Artwork/Atari Lynx/screenshot/%GAME%.*</mediaPath>
+      <mediaPath type="fanart">installdir_temp/Artwork/Atari Lynx/fanart/%GAME%.*</mediaPath>
+      <preCmd>med_temp_pre</preCmd>
+      <postCmd>med_temp_post</postCmd>
+      <useEmuSolo>False</useEmuSolo>
+      <usePopen>False</usePopen>
+      <ignoreOnScan>False</ignoreOnScan>
+      <allowUpdate>True</allowUpdate>
+      <autoplayVideoMain>True</autoplayVideoMain>
+      <autoplayVideoInfo>True</autoplayVideoInfo>
+      <useFoldernameAsGamename>False</useFoldernameAsGamename>
+      <maxFolderDepth>99</maxFolderDepth>
+      <doNotExtractZipFiles>False</doNotExtractZipFiles>
+      <diskPrefix>_Disk.*</diskPrefix>
+      <imagePlacingMain>gameinfobig</imagePlacingMain>
+      <imagePlacingInfo>gameinfosmall</imagePlacingInfo>
+      <scraper name="thegamesdb.net" replaceKeyString="" replaceValueString="" />
+      <scraper name="archive.vg" replaceKeyString="" replaceValueString="" />
       <scraper name="mobygames.com" replaceKeyString="" replaceValueString="" />
     </RomCollection>
   </RomCollections>
