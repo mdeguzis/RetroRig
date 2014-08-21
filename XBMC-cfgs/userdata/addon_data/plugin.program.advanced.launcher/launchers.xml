@@ -68,7 +68,7 @@
 			<id>69acefb6b11bf7da54ba14b9426c093f_3</id>
 			<name>Dolphin</name>
 			<category>default</category>
-			<application>/usr/games/dolphin-emu-master</application>
+			<application>/usr/games/dolphin-emu</application>
 			<args></args>
 			<rompath></rompath>
 			<thumbpath></thumbpath>
