@@ -1,0 +1,235 @@
+----------------------------------------------------------------------------------
+00 RetroRig Standard developer checklist
+----------------------------------------------------------------------------------
+
+This is a standard checklist to go through when testing beta/master
+changes to your repo or local files. Please see the wiki under the
+"Helping out" for more on this test and other information.
+
+Any questions or concerns should be addressed to the maintainer,
+'ProfessorKaos64' on github.
+
+Thank you
+-pk
+
+##################################################################################
+Script Checks
+##################################################################################
+
+Does the RetroRig install start without errors?
+
+	[Yes] [No]
+
+Notes:
+
+
+
+----------------------------------------------------------------------------------
+Do modules load and XDG variables set correctly load on startup?
+
+	[Yes] [No]
+
+Notes:
+
+
+
+----------------------------------------------------------------------------------
+Are the pre-requisite checks successful (including XDG sets)?
+
+	[Yes] [No]
+
+Notes:
+
+
+
+----------------------------------------------------------------------------------
+Is the overall appearance of the menu fine?
+
+	[Yes] [No]
+
+Notes:
+
+
+
+----------------------------------------------------------------------------------
+Does main menu option (Install RetroRig) Complete without error?
+
+	[Yes] [No]
+
+Notes:
+
+
+
+----------------------------------------------------------------------------------
+Do all No/Yes/Cancel dialog boxes function as expected?
+
+	[Yes] [No]
+
+Notes:
+
+
+
+----------------------------------------------------------------------------------
+Does the main menu option (Pull latest files from git) function as expected?
+
+	[Yes] [No]
+
+Notes:
+
+
+
+----------------------------------------------------------------------------------
+Do all settings option act as expected?
+
+	[Yes] [No]
+
+Notes:
+
+
+
+----------------------------------------------------------------------------------
+Does the main menu option (Update emulator binaries) function as expected?
+
+	[Yes] [No]
+
+Notes:
+
+
+
+----------------------------------------------------------------------------------
+Does the main menu option (Update XBMC) function as expected?
+
+	[Yes] [No]
+
+Notes:
+
+
+
+----------------------------------------------------------------------------------
+Does the main menu option (Update System) function as expected?
+
+	[Yes] [No]
+
+Notes:
+
+
+
+----------------------------------------------------------------------------------
+Does the main menu option (Upgrade System) function as expected?
+
+	[Yes] [No]
+
+Notes:
+
+
+
+----------------------------------------------------------------------------------
+Does the main menu option (Reboot PC) function as expected?
+
+	[Yes] [No]
+
+Notes:
+
+
+
+----------------------------------------------------------------------------------
+Does the main menu option (Uninstall RetroRig) function as expected?
+
+	[Yes] [No]
+
+Notes: You can test this at the very end of this test checklist. -pk
+
+
+
+----------------------------------------------------------------------------------
+
+##################################################################################
+RetroRig Application Checks
+##################################################################################
+
+Does RetroRig start without issue?
+
+	[Yes] [No]
+
+Notes:
+
+
+----------------------------------------------------------------------------------
+Does Gamepads hotplug correctly and perform their control functions properly?
+
+	[Yes] [No]
+
+Notes:
+
+
+----------------------------------------------------------------------------------
+Do all home screen buttons function correctly?
+
+	[Yes] [No]
+
+Notes:
+
+
+----------------------------------------------------------------------------------
+Does RetroRig ask for games import on first run, and do they import correctly?
+
+	[Yes] [No]
+
+Notes:
+
+
+----------------------------------------------------------------------------------
+Do all test ROMs for systems run propery and exhibit expected controls as defined
+on the wiki? 
+
+	[Yes] [No]
+
+Notes:
+
+
+----------------------------------------------------------------------------------
+Does Rom Collection Browser function as expected? Options, Navigation, and so on
+
+	[Yes] [No]
+
+Notes:
+
+
+----------------------------------------------------------------------------------
+Does RetroRig exit without extremely long (+10s) pauses?
+
+	[Yes] [No]
+
+Notes:
+
+
+----------------------------------------------------------------------------------
+
+##################################################################################
+Cleanup
+##################################################################################
+
+Have you contacted any team members for questions or code review? (if applicable)
+
+	[Yes] [No]
+
+Notes:
+
+
+----------------------------------------------------------------------------------
+Have you submitted any pull requests needed after testing?
+
+	[Yes] [No]
+
+Notes:
+
+
+*--------------------------------------------------------------------------------*
+*--------------------------------------------------------------------------------*
+
+	Please submit this checklist to ProfessorKaos64@linux.com or via 
+	the retrorig-dev IRC channel on irc.freenode.net to a developer.
+
+
+*--------------------------------------------------------------------------------*
+*--------------------------------------------------------------------------------*

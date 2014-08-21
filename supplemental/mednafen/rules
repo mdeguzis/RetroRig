@@ -1,0 +1,24 @@
+#!/usr/bin/make -f
+# -*- makefile -*-
+
+# Uncomment this to turn on verbose mode.
+#export DH_VERBOSE=1
+
+liblzo2_source := $(shell dpkg-query -W -f='$${source:Package} (= $${source:Version})' liblzo2-dev)
+
+
+%:
+	dh $@ --with autoreconf
+
+override_dh_auto_build:
+	dh_auto_build
+
+override_dh_auto_clean:
+	dh_auto_clean
+
+override_dh_auto_configure:
+	autoreconf -fi
+	dh_auto_configure -- --bindir=/usr/games --enable-psx
+
+override_dh_gencontrol-arch:
+	dh_gencontrol -a -- '-Vbu:liblzo2=$(liblzo2_source)'

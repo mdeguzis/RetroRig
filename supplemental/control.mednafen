@@ -1,0 +1,22 @@
+Package: mednafen
+Version: 0.9.36.2-1~mednafen-patched-for-retrorig-patchlevel-1-0trusty
+Architecture: amd64
+Maintainer: RetroRig Development Team <jc.lache@gmail.com>
+Installed-Size: 10450
+Depends: libasound2 (>= 1.0.16), libc6 (>= 2.17), libcdio13 (>= 0.83), libgcc1 (>= 1:4.1.1), libjack-jackd2-0 (>= 1.9.5~dfsg-14) | libjack-0.116, libsdl2-2.0-0, libsndfile1 (>= 1.0.20), libstdc++6 (>= 4.6), zlib1g (>= 1:1.2.0)
+Provides: nes-emulator
+Section: games
+Priority: optional
+Homepage: https://github.com/beaumanvienna/mednafen-git
+Description: multi-platform emulator, including NES, GB/A, Lynx, PC Engine
+ Mednafen is a command-line driven emulator for many different systems. It
+ has full support for OpenGL and SDL graphics, network play, remappable input
+ configuration, joystick and keyboard support, save states, game rewinding,
+ GSF playback, and screenshots.
+ .
+ This package is derived from mednafen 0.9.36.2.
+ It is patched for SDL2.
+ Changes comprise: Support for dual monitors through environment 
+ variable "SDL_VIDEO_FULLSCREEN_HEAD".
+ .
+ This package contains all the binary data needed to have a working mednafen.
