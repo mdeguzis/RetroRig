@@ -18,10 +18,11 @@
 #
 ########################################################################
 
-source "scriptmodules/configuration.shinc"
+source "configuration.shinc"
 
 #define configuration file
-configFile="retrorig.cfg"
+#HOME is set in /usr/share/applications/startXBMC.sh
+configFile="$HOME/retrorig.cfg"
 
 
 ########################################################

@@ -208,6 +208,7 @@ function set_resolution() {
 
 #menu
 #add res-switcher function to make new presets more modular to add
+
 while true; do
 cmd=(dialog --backtitle "RetroRig Settings" --menu "Choose your resolution" 16 0 16)
 options=(1 "Automatic Configuration"
@@ -226,7 +227,8 @@ if [ "$choices" != "" ]; then
     case $choices in
 
 	1) 
-		# set resolution paramters 
+                #enable auto resoltuion
+		setParameter "auto resolution" "true"
 		dialog --msgbox "Resolution settings for emulators will automatically be synchronized with XBMC's settings." 8 60
                 return
 		;;		
@@ -239,7 +241,7 @@ if [ "$choices" != "" ]; then
 		dialog --msgbox "Please Note: emulators, such as MESS, will automatically adjust their resolution \
 				and do not require or need resolution input." 8 60
 
-		# echo curent resolution
+		# echo current resolution
 		# mupen64plus
 		echo "mupen64plus:" > "$scriptdir/logs/res.txt"
 		grep -Ee "\bScreenWidth = \b" "$config_home/.config/mupen64plus/mupen64plus.cfg" >> "$scriptdir/logs/res.txt"
@@ -298,6 +300,8 @@ if [ "$choices" != "" ]; then
 		dialog --textbox "$scriptdir/logs/res.txt" 33 0
 		#remove text file
 		rm "$scriptdir/logs/res.txt"
+                #disable auto resoltuion
+		setParameter "auto resolution" "false"
 		;;
 
 	3) 
@@ -336,6 +340,8 @@ if [ "$choices" != "" ]; then
 		st_new="1280x720"
 		# set the resolution with helper
 		h_res_switcher
+		#disable auto resoltuion
+		setParameter "auto resolution" "false"
 		#return to menu
 		return
 		;;  
@@ -375,6 +381,8 @@ if [ "$choices" != "" ]; then
 		st_new="1280x1024"
 		# set the resolution with helper
 		h_res_switcher
+                #disable auto resoltuion
+		setParameter "auto resolution" "false"
 		#return to menu
 		return
 		;;
@@ -414,6 +422,8 @@ if [ "$choices" != "" ]; then
 		st_new="1360x768"
 		# set the resolution with helper
 		h_res_switcher
+                #disable auto resoltuion
+		setParameter "auto resolution" "false"
 		#return to menu
 		return
 		;;
@@ -452,6 +462,8 @@ if [ "$choices" != "" ]; then
 		#set stella (Atari 2600)
 		st_new="1600x900"
 		# set the resolution with helper
+                #disable auto resoltuion
+		setParameter "auto resolution" "false"
 		h_res_switcher
 		#return to menu
 		return
@@ -492,6 +504,8 @@ if [ "$choices" != "" ]; then
 		st_new="1920x1080"
 		# set the resolution with helper
 		h_res_switcher
+                #disable auto resoltuion
+		setParameter "auto resolution" "false"
 		#return to menu
 		return
 		;;    
@@ -543,6 +557,8 @@ if [ "$choices" != "" ]; then
 		#remove temp files
 		rm -f /tmp/new_X
 		rm -f /tmp/new_Y
+                #disable auto resoltuion
+		setParameter "auto resolution" "false"
 		#return to menu
 		return
 		;; 

@@ -279,7 +279,7 @@ function parameterIsTrue()
 
 function setParameter()
 {
-  echo "setParameter $1, $2"
+  #echo "setParameter $1, $2"
   newLine="$1, $2"
 
   oldLine=`grep "$1" $configFile`
