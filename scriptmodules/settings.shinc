@@ -111,7 +111,7 @@ function set_enable_samba()
 	echo "####################################################"
 	echo ""
 	sleep 2s
-	cat "$rootdir/supplimental/samba_shares.txt" >> "/etc/samba/smb.conf"
+	cat "$rootdir/supplemental/samba_shares.txt" >> "/etc/samba/smb.conf"
 
 	# replace parameters of share
 	sed -i "s|/home/test/RetroRig|$rootdir|g" "/etc/samba/smb.conf"
