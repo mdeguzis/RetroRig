@@ -47,6 +47,7 @@ if [[ -n "$2" ]]; then
 
   # needed for ffmpeg-xbmc-dev
   sudo add-apt-repository -y ppa:wsnipex/xbmc-fernetmenta-master
+  sudo add-apt-repository -y ppa:wsnipex/xbmc-next
   sudo apt-get update
 
   #apt-get build-deps
