@@ -430,7 +430,6 @@ function ps3_set_emulator_ids()
 
         fi
 
-	clear
 	echo -e "Controller ID/MAC Address applied to the Dolphin emulator Controller $n was:\n$GC_MAC_BLU"
 	echo -e "\nController ID/MAC Address applied to the Stella emulator Controller $n was:\n$Stella_MAC_BLU"
 

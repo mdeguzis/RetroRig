@@ -600,7 +600,7 @@
       <diskPrefix>_Disk.*</diskPrefix>
       <imagePlacingMain>gameinfobig</imagePlacingMain>
       <imagePlacingInfo>gameinfosmall</imagePlacingInfo>
-      <scraper name="thegamesdb.net" replaceKeyString="" replaceValueString="" />
+      <scraper name="giantbomb.com" replaceKeyString="" replaceValueString="" />
       <scraper name="archive.vg" replaceKeyString="" replaceValueString="" />
       <scraper name="mobygames.com" replaceKeyString="" replaceValueString="" />
     </RomCollection>
