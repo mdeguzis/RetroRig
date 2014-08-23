@@ -220,11 +220,11 @@ if parameterIsTrue "auto resolution"; then
   #make the changes, prefix new_X in case NULL was entered previousey
 
   if [ -n "$ps2_org_X" ]; then
-    sed -i "s|$ps2_org_X|ScreenWidth = $ps2_new_X|g" "$config_home/.config/pcsx2/inis/GSdx.ini"  
+    sed -i "s|$ps2_org_X|resx = $ps2_new_X|g" "$config_home/.config/pcsx2/inis/GSdx.ini"  
   fi
   
   if [ -n "$ps2_org_Y" ]; then
-    sed -i "s|$ps2_org_Y|ScreenHeight = $ps2_new_Y|g" "$config_home/.config/pcsx2/inis/GSdx.ini"
+    sed -i "s|$ps2_org_Y|resy = $ps2_new_Y|g" "$config_home/.config/pcsx2/inis/GSdx.ini"
   fi
   
 else
