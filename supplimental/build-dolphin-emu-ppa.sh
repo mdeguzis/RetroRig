@@ -10,7 +10,7 @@
 # ========================================================================
 
 #define base version
-BASE=0:4.0.2
+BASE=2:4.0.2
 
 # define patch level
 PL=0
@@ -46,10 +46,18 @@ if [[ -n "$2" ]]; then
   echo "##########################################"
   echo ""
 
-  #apt-get build-deps
-  sudo apt-get -y build-dep dolphin-emu
+  # add Glenn Ricsters PPA to get packages like libminiupnpc-dev, ...
+  sudo add-apt-repository -y ppa:glennric/dolphin-emu
+
+  sudo apt-get update
+
   #apt-get install packages
-  sudo apt-get install -y build-essential fakeroot devscripts automake autoconf autotools-dev binutils-dev
+  sudo apt-get install -y build-essential fakeroot devscripts automake autoconf autotools-dev binutils-dev \
+			  debhelper cmake libao-dev libasound2-dev libavcodec-dev libavformat-dev \
+			  libbluetooth-dev libglew-dev libgtk2.0-dev liblzo2-dev libopenal-dev libpolarssl-dev \
+			  libpulse-dev libreadline6-dev libsdl1.2-dev libsfml-dev libsoil-dev libsoundtouch-dev \
+			  libswscale-dev libminiupnpc-dev libwxbase3.0-dev libwxgtk3.0-dev libxext-dev \
+			  libxrandr-dev lsb-release pkg-config portaudio19-dev wx3.0-headers zlib1g-dev
 
 else
   echo ""

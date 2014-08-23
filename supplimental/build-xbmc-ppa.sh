@@ -3,15 +3,15 @@
 #======================================================================== 
 #
 # Author:  Michael DeGuzis and Jens-Christian, 
-# Date:    20140805
-# Version: Patch Level 6
+# Date:    20140823
+# Version: Patch Level 7
 # ========================================================================
 
 #define base version
 BASE=13.1
 
 # define patch level
-PL=6
+PL=7
 
 #define xbmc branch to checkout
 BRANCH=gotham-retrorig-pl$PL
@@ -47,6 +47,7 @@ if [[ -n "$2" ]]; then
 
   # needed for ffmpeg-xbmc-dev
   sudo add-apt-repository -y ppa:wsnipex/xbmc-fernetmenta-master
+  sudo add-apt-repository -y ppa:wsnipex/xbmc-next
   sudo apt-get update
 
   #apt-get build-deps
