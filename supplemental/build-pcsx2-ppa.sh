@@ -114,7 +114,7 @@ echo "Setup package base files"
 echo "##########################################"
 
 echo "dsc file"
-cp ~/RetroRig/supplimental/pcsx2/pcsx2.dsc pcsx2_$BASE.$PL.dsc
+cp ~/RetroRig/supplemental/pcsx2/pcsx2.dsc pcsx2_$BASE.$PL.dsc
 sed -i "s|version_placeholder|$BASE.$PL|g" "pcsx2_$BASE.$PL.dsc"
 
 echo "original tarball"
@@ -161,13 +161,13 @@ mv debian/ pcsx2/
 cd pcsx2/
 
 echo "compat"
-cp ~/RetroRig/supplimental/pcsx2/compat debian/
+cp ~/RetroRig/supplemental/pcsx2/compat debian/
 
 echo "control"
-cp ~/RetroRig/supplimental/pcsx2/control debian/
+cp ~/RetroRig/supplemental/pcsx2/control debian/
 
 echo "rules"
-cp ~/RetroRig/supplimental/pcsx2/rules debian/
+cp ~/RetroRig/supplemental/pcsx2/rules debian/
 
 echo "setting up patches"
 rm -rf debian/patches/*
@@ -176,10 +176,10 @@ rm -f debian/source/options
 
 echo "format"
 mkdir -p debian/source
-cp ~/RetroRig/supplimental/pcsx2/format debian/source/
+cp ~/RetroRig/supplemental/pcsx2/format debian/source/
 
 echo "changelog"
-cp ~/RetroRig/supplimental/pcsx2/changelog debian/
+cp ~/RetroRig/supplemental/pcsx2/changelog debian/
 sed -i "s|version_placeholder|$BASE.$PL|g" debian/changelog
 #dch -i
 

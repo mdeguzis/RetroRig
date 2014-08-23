@@ -149,7 +149,7 @@ rm /tmp/RetroRig-bin/DEBIAN/control
 rm /tmp/RetroRig-bin/DEBIAN/md5sums
 
 #copy/create Debian customized files
-cp ~/RetroRig/supplimental/control.xbmc-bin /tmp/RetroRig-bin/DEBIAN/control
+cp ~/RetroRig/supplemental/control.xbmc-bin /tmp/RetroRig-bin/DEBIAN/control
 find /tmp/RetroRig-bin/usr -type f -exec md5sum {} \; > /tmp/RetroRig-bin/DEBIAN/md5sums
 
 # create xbmc-bin
@@ -164,7 +164,7 @@ rm /tmp/RetroRig/DEBIAN/control
 rm /tmp/RetroRig/DEBIAN/md5sums
 
 #copy Debian control file
-cp ~/RetroRig/supplimental/control.xbmc /tmp/RetroRig/DEBIAN/control
+cp ~/RetroRig/supplemental/control.xbmc /tmp/RetroRig/DEBIAN/control
 find /tmp/RetroRig/usr -type f -exec md5sum {} \; > /tmp/RetroRig/DEBIAN/md5sums
 
 # replace /tmp/RetroRig/user/share/xbmc with /usr/share/xbmc installed by 'sudo make install'

@@ -61,7 +61,7 @@ echo "Setup package base files"
 echo "##########################################"
 
 echo "dsc file"
-cp ~/RetroRig/supplimental/mednafen/mednafen.dsc mednafen_$BASE.$PL.dsc
+cp ~/RetroRig/supplemental/mednafen/mednafen.dsc mednafen_$BASE.$PL.dsc
 sed -i "s|version_placeholder|$BASE.$PL|g" "mednafen_$BASE.$PL.dsc"
 
 echo "original tarball"
@@ -108,14 +108,14 @@ echo ""
 cd mednafen/
 
 echo "control"
-cp ~/RetroRig/supplimental/mednafen/control debian/
+cp ~/RetroRig/supplemental/mednafen/control debian/
 
 echo "rules"
-cp ~/RetroRig/supplimental/mednafen/rules debian/
+cp ~/RetroRig/supplemental/mednafen/rules debian/
 
 
 echo "changelog"
-cp ~/RetroRig/supplimental/mednafen/changelog debian/
+cp ~/RetroRig/supplemental/mednafen/changelog debian/
 dch -i
 
 echo "setting up patches"

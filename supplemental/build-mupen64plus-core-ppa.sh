@@ -83,7 +83,7 @@ echo "Setup package base files"
 echo "##########################################"
 
 echo "dsc file"
-cp ~/RetroRig/supplimental/mupen64plus-core/mupen64plus-core.dsc mupen64plus-core_$BASE.$PL.dsc
+cp ~/RetroRig/supplemental/mupen64plus-core/mupen64plus-core.dsc mupen64plus-core_$BASE.$PL.dsc
 sed -i "s|version_placeholder|$BASE.$PL|g" "mupen64plus-core_$BASE.$PL.dsc"
 
 echo "original tarball"
@@ -128,15 +128,15 @@ mv debian/ mupen64plus-core/
 cd mupen64plus-core/
 
 echo "control"
-cp ~/RetroRig/supplimental/mupen64plus-core/control debian/
+cp ~/RetroRig/supplemental/mupen64plus-core/control debian/
 
 echo "format"
 rm -rf debian/source 
 mkdir debian/source
-cp ~/RetroRig/supplimental/mupen64plus-core/format debian/source/
+cp ~/RetroRig/supplemental/mupen64plus-core/format debian/source/
 
 echo "changelog"
-cp ~/RetroRig/supplimental/mupen64plus-core/changelog debian/
+cp ~/RetroRig/supplemental/mupen64plus-core/changelog debian/
 sed -i "s|version_placeholder|$BASE.$PL|g" debian/changelog
 #dch -i
 

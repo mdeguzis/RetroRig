@@ -90,7 +90,7 @@ echo "Setup package base files"
 echo "##########################################"
 
 echo "dsc file"
-cp ~/RetroRig/supplimental/dolphin-emu/dolphin-emu.dsc dolphin-emu_$BASE.$PL.dsc
+cp ~/RetroRig/supplemental/dolphin-emu/dolphin-emu.dsc dolphin-emu_$BASE.$PL.dsc
 sed -i "s|version_placeholder|$BASE.$PL|g" "dolphin-emu_$BASE.$PL.dsc"
 
 echo "original tarball"
@@ -136,15 +136,15 @@ mv debian/ dolphin-emu/
 cd dolphin-emu/
 
 echo "control"
-cp ~/RetroRig/supplimental/dolphin-emu/control debian/
+cp ~/RetroRig/supplemental/dolphin-emu/control debian/
 
 echo "format"
 rm -rf debian/source 
 mkdir debian/source
-cp ~/RetroRig/supplimental/dolphin-emu/format debian/source/
+cp ~/RetroRig/supplemental/dolphin-emu/format debian/source/
 
 echo "changelog"
-cp ~/RetroRig/supplimental/dolphin-emu/changelog debian/
+cp ~/RetroRig/supplemental/dolphin-emu/changelog debian/
 sed -i "s|version_placeholder|$BASE.$PL|g" debian/changelog
 #dch -i
 
