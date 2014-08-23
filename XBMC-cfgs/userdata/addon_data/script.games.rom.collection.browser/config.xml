@@ -323,14 +323,14 @@
       <gameclient />
       <emulatorCmd>/usr/games/mess</emulatorCmd>
       <emulatorParams>neocdz -cdrom "%ROM%"</emulatorParams>
-      <romPath>installdir_temp/ROMs/Neo-Geo/CDZ/*.cue</romPath>
+      <romPath>installdir_temp/ROMs/Neo Geo/CDZ/*.cue</romPath>
       <saveStatePath />
       <saveStateParams />
-      <mediaPath type="boxfront">installdir_temp/Artwork/Neo-Geo/CDZ/boxfront/%GAME%.*</mediaPath>
-      <mediaPath type="boxback">installdir_temp/Artwork/Neo-Geo/CDZ/boxback/%GAME%.*</mediaPath>
-      <mediaPath type="cartridge">installdir_temp/Artwork/Neo-Geo/CDZ/cartridge/%GAME%.*</mediaPath>
-      <mediaPath type="screenshot">installdir_temp/Artwork/Neo-Geo/CDZ/screenshot/%GAME%.*</mediaPath>
-      <mediaPath type="fanart">installdir_temp/Artwork/Neo-Geo/CDZ/fanart/%GAME%.*</mediaPath>
+      <mediaPath type="boxfront">installdir_temp/Artwork/Neo Geo/CDZ/boxfront/%GAME%.*</mediaPath>
+      <mediaPath type="boxback">installdir_temp/Artwork/Neo Geo/CDZ/boxback/%GAME%.*</mediaPath>
+      <mediaPath type="cartridge">installdir_temp/Artwork/Neo Geo/CDZ/cartridge/%GAME%.*</mediaPath>
+      <mediaPath type="screenshot">installdir_temp/Artwork/Neo Geo/CDZ/screenshot/%GAME%.*</mediaPath>
+      <mediaPath type="fanart">installdir_temp/Artwork/Neo Geo/CDZ/fanart/%GAME%.*</mediaPath>
       <preCmd />
       <postCmd />
       <useEmuSolo>False</useEmuSolo>
@@ -566,6 +566,37 @@
       <useFoldernameAsGamename>False</useFoldernameAsGamename>
       <maxFolderDepth>99</maxFolderDepth>
       <doNotExtractZipFiles>False</doNotExtractZipFiles>
+      <diskPrefix>_Disk.*</diskPrefix>
+      <imagePlacingMain>gameinfobig</imagePlacingMain>
+      <imagePlacingInfo>gameinfosmall</imagePlacingInfo>
+      <scraper name="thegamesdb.net" replaceKeyString="" replaceValueString="" />
+      <scraper name="archive.vg" replaceKeyString="" replaceValueString="" />
+      <scraper name="mobygames.com" replaceKeyString="" replaceValueString="" />
+    </RomCollection>
+    <RomCollection id="20" name="Neo Geo">
+      <useBuiltinEmulator>False</useBuiltinEmulator>
+      <gameclient />
+      <emulatorCmd>/usr/games/mess</emulatorCmd>
+      <emulatorParams>aes -cart "%ROMNAME%"</emulatorParams>
+      <romPath>installdir_temp/ROMs/Neo Geo/AES/*.zip</romPath>
+      <saveStatePath />
+      <saveStateParams />
+      <mediaPath type="boxfront">installdir_temp/Artwork/Neo Geo/AES/boxfront/%GAME%.*</mediaPath>
+      <mediaPath type="boxback">installdir_temp/Artwork/Neo Geo/AES/boxback/%GAME%.*</mediaPath>
+      <mediaPath type="cartridge">/installdir_temp/Artwork/Neo Geo/AES/cartridge/%GAME%.*</mediaPath>
+      <mediaPath type="screenshot">installdir_temp/Artwork/Neo Geo/AES/screenshot/%GAME%.*</mediaPath>
+      <mediaPath type="fanart">installdir_temp/Artwork/Neo Geo/AES/fanart/%GAME%.*</mediaPath>
+      <preCmd />
+      <postCmd />
+      <useEmuSolo>False</useEmuSolo>
+      <usePopen>False</usePopen>
+      <ignoreOnScan>False</ignoreOnScan>
+      <allowUpdate>True</allowUpdate>
+      <autoplayVideoMain>True</autoplayVideoMain>
+      <autoplayVideoInfo>True</autoplayVideoInfo>
+      <useFoldernameAsGamename>False</useFoldernameAsGamename>
+      <maxFolderDepth>99</maxFolderDepth>
+      <doNotExtractZipFiles>True</doNotExtractZipFiles>
       <diskPrefix>_Disk.*</diskPrefix>
       <imagePlacingMain>gameinfobig</imagePlacingMain>
       <imagePlacingInfo>gameinfosmall</imagePlacingInfo>
