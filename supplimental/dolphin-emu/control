@@ -22,14 +22,14 @@ Build-Depends:  debhelper (>= 7.0.50),
 		libsoundtouch-dev,
 		libswscale-dev,
 		libminiupnpc-dev (>= 1.7),
-		libwxbase2.9-dev,
-		libwxgtk2.9-dev,
+		libwxbase3.0-dev,
+		libwxgtk3.0-dev,
 		libxext-dev,
 		libxrandr-dev,
 		lsb-release,
 		pkg-config,
 		portaudio19-dev,
-		wx2.9-headers,
+		wx3.0-headers,
 		zlib1g-dev
 Standards-Version: 3.9.5
 Homepage: https://github.com/beaumanvienna/dolphin
