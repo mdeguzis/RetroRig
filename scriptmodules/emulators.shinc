@@ -10,7 +10,7 @@
 function em_add_repos()
 {
 	# For some reason, a syntax error occurs on script load without data in in this function
-	echo "No custom repos in use at the moment for emulator installs"
+	#echo "No custom repos in use at the moment for emulator installs"
 
 	# Add playdeb repo for later additions (disabled until needed!!!)
 	
@@ -21,7 +21,7 @@ function em_add_repos()
 	# rm -f getdeb.key
 
 	# dolphin emulator PPA
-	add-apt-repository -y ppa:glennric/dolphin-emu
+	#add-apt-repository -y ppa:glennric/dolphin-emu
 
 	# pcsx2 emulator PPA
 	add-apt-repository -y ppa:gregory-hainaut/pcsx2.official.ppa
@@ -58,7 +58,8 @@ function em_install_dolphin()
 {
 
 	echo "Installing Nintendo Gamecube emulator Dolphin"
-	apt-get install -y dolphin-emu-master
+	apt-get remove -y dolphin-emu dolphin-emu-master
+	apt-get install -y dolphin-emu
 
 }
 
