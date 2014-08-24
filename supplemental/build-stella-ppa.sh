@@ -79,7 +79,7 @@ echo "Setup package base files"
 echo "##########################################"
 
 echo "dsc file"
-cp ~/RetroRig/supplimental/stella/stella.dsc stella_$BASE.$PL.dsc
+cp ~/RetroRig/supplemental/stella/stella.dsc stella_$BASE.$PL.dsc
 sed -i "s|version_placeholder|$BASE.$PL|g" "stella_$BASE.$PL.dsc"
 
 echo "original tarball"
@@ -110,17 +110,17 @@ echo ""
 cd stella/
 
 echo "compat"
-cp ~/RetroRig/supplimental/stella/compat debian/
+cp ~/RetroRig/supplemental/stella/compat debian/
 
 echo "control"
-cp ~/RetroRig/supplimental/stella/control debian/
+cp ~/RetroRig/supplemental/stella/control debian/
 
 echo "format"
 mkdir debian/source
-cp ~/RetroRig/supplimental/stella/format debian/source/
+cp ~/RetroRig/supplemental/stella/format debian/source/
 
 echo "changelog"
-cp ~/RetroRig/supplimental/stella/changelog debian/
+cp ~/RetroRig/supplemental/stella/changelog debian/
 sed -i "s|version_placeholder|$BASE.$PL|g" debian/changelog
 #dch -i
 

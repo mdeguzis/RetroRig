@@ -3,15 +3,15 @@
 #======================================================================== 
 #
 # Author:  Michael DeGuzis and Jens-Christian, 
-# Date:    20140805
-# Version: Patch Level 6
+# Date:    20140823
+# Version: Patch Level 7
 # ========================================================================
 
 #define base version
 BASE=13.1
 
 # define patch level
-PL=6
+PL=7
 
 #define xbmc branch to checkout
 BRANCH=gotham-retrorig-pl$PL
@@ -47,6 +47,7 @@ if [[ -n "$2" ]]; then
 
   # needed for ffmpeg-xbmc-dev
   sudo add-apt-repository -y ppa:wsnipex/xbmc-fernetmenta-master
+  sudo add-apt-repository -y ppa:wsnipex/xbmc-next
   sudo apt-get update
 
   #apt-get build-deps
@@ -85,7 +86,7 @@ echo "Setup package base files"
 echo "##########################################"
 
 echo "dsc file"
-cp ~/RetroRig/supplimental/xbmc/xbmc.dsc xbmc_$BASE.$PL.dsc
+cp ~/RetroRig/supplemental/xbmc/xbmc.dsc xbmc_$BASE.$PL.dsc
 sed -i "s|version_placeholder|$BASE.$PL|g" "xbmc_$BASE.$PL.dsc"
 
 echo "original tarball"
@@ -135,13 +136,13 @@ echo ""
 cd xbmc/
 
 echo "compat"
-cp ~/RetroRig/supplimental/xbmc/compat debian/
+cp ~/RetroRig/supplemental/xbmc/compat debian/
 
 echo "control"
-cp ~/RetroRig/supplimental/xbmc/control debian/
+cp ~/RetroRig/supplemental/xbmc/control debian/
 
 echo "rules"
-cp ~/RetroRig/supplimental/xbmc/rules debian/
+cp ~/RetroRig/supplemental/xbmc/rules debian/
 
 echo "setting up patches"
 rm -rf debian/patches/*
@@ -149,10 +150,10 @@ rm -rf .pc/
 rm debian/source/options debian/source/include-binaries
 
 echo "format"
-cp ~/RetroRig/supplimental/xbmc/format debian/source/
+cp ~/RetroRig/supplemental/xbmc/format debian/source/
 
 echo "changelog"
-cp ~/RetroRig/supplimental/xbmc/changelog debian/
+cp ~/RetroRig/supplemental/xbmc/changelog debian/
 sed -i "s|version_placeholder|$BASE.$PL|g" debian/changelog
 #dch -i
 

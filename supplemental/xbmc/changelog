@@ -1,5 +1,11 @@
 xbmc (version_placeholder) trusty; urgency=medium
 
+  * Auto Resolution Function for RetroRig
+
+ -- Jens-Christian Lache <jc.lache@web.de>  Sun, 24 Aug 2014 00:35:00 +0200
+
+xbmc (3:13.1.6) trusty; urgency=medium
+
   * This version is based on fernetMenta xbmc. Added:
     - gamepad hotplug support
     - different icons and different splashscreens for native and RetroRig xbmc $

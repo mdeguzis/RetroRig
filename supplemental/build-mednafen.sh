@@ -99,7 +99,7 @@ rm /tmp/mednafen/DEBIAN/control
 rm /tmp/mednafen/DEBIAN/md5sums
 
 #copy/create Debian customized files
-cp ~/RetroRig/supplimental/control.mednafen /tmp/mednafen/DEBIAN/control
+cp ~/RetroRig/supplemental/control.mednafen /tmp/mednafen/DEBIAN/control
 find /tmp/mednafen/usr -type f -exec md5sum {} \; > /tmp/mednafen/DEBIAN/md5sums
 
 # create package
