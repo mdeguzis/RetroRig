@@ -408,14 +408,14 @@ function ps3_set_emulator_ids()
 		GC_MAC_BLU=$($scriptdir/supplemental/joydetect /dev/input/js0 | awk -F'[^:[a-zA-Z0-9]*' '{print $6}')
 		# Stella (supports only 2 players )
 		Stella_MAC_BLU=$($scriptdir/supplemental/joydetect /dev/input/js0 | awk -F'[^:[a-zA-Z0-9]*' '{print $6}')
-		sed -i "s|p1_stella_MAC_temp|$config_home|g" "$config_home/.stella/stellarc"
+		sed -i "s|p1_stella_MAC_temp|$Stella_MAC_BLU|g" "$config_home/.stella/stellarc"
 
 	elif [ $n == "2" ]; then
 		# Dolphin
 		GC_MAC_BLU=$($scriptdir/supplemental/joydetect /dev/input/js1 | awk -F'[^:[a-zA-Z0-9]*' '{print $6}')
 		# Stella (supports only 2 players )
 		Stella_MAC_BLU=$($scriptdir/supplemental/joydetect /dev/input/js1 | awk -F'[^:[a-zA-Z0-9]*' '{print $6}')
-		sed -i "s|p2_stella_MAC_temp|$config_home|g" "$config_home/.stella/stellarc"
+		sed -i "s|p2_stella_MAC_temp|$Stella_MAC_BLU|g" "$config_home/.stella/stellarc"
 
 	elif [ $n == "3" ]; then
 		# Dolphin
