@@ -1,5 +1,11 @@
 dolphin-emu (version_placeholder) trusty; urgency=medium
 
+  * changed: 
+
+ -- Jens-Christian Lache <jc.lache@web.de>  Sun, 31 Aug 2014 19:10:00 +0200
+
+dolphin-emu (2:4.0.2.1.0) trusty; urgency=medium
+
   * Built for project RetroRig (tag 4.0.2), Patch Level 1
 
   * changed: bug fix dual monitor support http://tinyurl.com/nofzflm

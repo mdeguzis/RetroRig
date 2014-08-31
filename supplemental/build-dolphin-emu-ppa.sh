@@ -3,9 +3,9 @@
 #======================================================================== 
 #
 # Author      : Jens-Christian Lache
-# Date        : 20140818
+# Date        : 20140831
 # Version     : 4.0.2
-# Descrition  : version 4.0.2 from Github, unpatched and unchanged
+# Description : version 4.0.2 from Github, Patch Level 1
 #               
 # ========================================================================
 
@@ -13,10 +13,10 @@
 BASE=2:4.0.2
 
 # define patch level
-PL=1
+PL=1.0
 
 #define branch
-BRANCH=retrorig-4.0.2.$PL
+BRANCH=retrorig-4.0.2.1
 
 clear
 echo "#################################################################"
