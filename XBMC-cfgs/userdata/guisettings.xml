@@ -360,7 +360,7 @@
         <preferedstereoscopicmode default="true">0</preferedstereoscopicmode>
         <resolution>15</resolution>
         <screen>-1</screen>
-        <screenmode>WINDOW</screenmode>
+        <screenmode>DESKTOP</screenmode>
         <stereoscopicmode default="true">0</stereoscopicmode>
         <vsync default="true">3</vsync>
     </videoscreen>
