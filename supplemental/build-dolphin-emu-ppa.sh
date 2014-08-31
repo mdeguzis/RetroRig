@@ -13,10 +13,10 @@
 BASE=2:4.0.2
 
 # define patch level
-PL=0
+PL=1
 
 #define branch
-BRANCH=retrorig-4.0.2.1
+BRANCH=retrorig-4.0.2.$PL
 
 clear
 echo "#################################################################"
