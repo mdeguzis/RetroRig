@@ -109,8 +109,7 @@ cd ..
 tar cfj xbmc_$BASE.$PL.orig.tar.bz2 xbmc
 
 echo "debian files"
-wget --tries=50 "https://launchpad.net/~aap/+archive/ubuntu/xbmc-release-fernetmenta/+files/xbmc_13.1-27182~e41281c-ppa1~trusty.debian.tar.bz2"
-
+wget --tries=50 "https://launchpad.net/~aap/+archive/ubuntu/xbmc-release-fernetmenta/+files/xbmc_13.2-27317~99e1f74-ppa1~trusty.debian.tar.bz2"
 echo ""
 echo "##########################################"
 echo "Unpacking debian files"
@@ -118,10 +117,10 @@ echo "##########################################"
 echo ""
 
 #unpack
-echo "unpacking template xbmc_13.1-27182~e41281c-ppa1~trusty.debian.tar.bz2"
-tar xfj xbmc_13.1-27182~e41281c-ppa1~trusty.debian.tar.bz2
+echo "unpacking template xbmc_13.2-27317~99e1f74-ppa1~trusty.debian.tar.bz2"
+tar xfj xbmc_13.2-27317~99e1f74-ppa1~trusty.debian.tar.bz2
 #remove template
-rm xbmc_13.1-27182~e41281c-ppa1~trusty.debian.tar.bz2
+rm xbmc_13.2-27317~99e1f74-ppa1~trusty.debian.tar.bz2
 
 #move debian folder into source folder
 mv debian/ xbmc/
