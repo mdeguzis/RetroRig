@@ -2,10 +2,10 @@
 
 ########################################################################
 # file        :     setResolution.sh
-# date        :     14/08/19
+# date        :     14/08/31
 # author      :     jc
-# description :     Take resoltuion arguments from command line 
-#                   and configure emulators accordingly.
+# description :     Take resoltuion arguments and display name from
+#                   command line and configure emulators accordingly.
 #
 #                   This will only be executed, if parameter
 #                   "auto resolution" is set in the configuration
@@ -78,7 +78,7 @@ configFile="$config_home/retrorig.cfg"
 
 if parameterIsTrue "auto resolution"; then
 
-  #echo "auto resolution is enabled, setting emulator configurations to" $1 "by" "$2"
+  #echo "auto resolution is enabled, setting emulator configurations to" $1 "by" "$2" ". Display name is $3."
   
   #set new resolution for emulators
   
@@ -121,6 +121,11 @@ if parameterIsTrue "auto resolution"; then
   #pcsx (PS2)
   ps2_new_X=$1
   ps2_new_Y=$2
+
+  #dolphin
+  dolphin_new_X=$1
+  dolphin_new_Y=$2
+  dolphin_monitor=$3
   
   ########################		
   #mupen64plus
@@ -217,7 +222,7 @@ if parameterIsTrue "auto resolution"; then
   ########################
   ps2_org_X=$(grep -Ee "\bresx = \b" "$config_home/.config/pcsx2/inis/GSdx.ini")
   ps2_org_Y=$(grep -Ee "\bresy = \b" "$config_home/.config/pcsx2/inis/GSdx.ini")
-  #make the changes, prefix new_X in case NULL was entered previousey
+  #make the changes, prefix new_X in case NULL was entered previously
 
   if [ -n "$ps2_org_X" ]; then
     sed -i "s|$ps2_org_X|resx = $ps2_new_X|g" "$config_home/.config/pcsx2/inis/GSdx.ini"  
@@ -226,6 +231,14 @@ if parameterIsTrue "auto resolution"; then
   if [ -n "$ps2_org_Y" ]; then
     sed -i "s|$ps2_org_Y|resy = $ps2_new_Y|g" "$config_home/.config/pcsx2/inis/GSdx.ini"
   fi
+
+  #dolphin (gamecube)
+  #old resolution
+  dolphin_org_Res=$(grep -Ee "FullscreenResolution = " "$config_home/.dolphin-emu/Config/Dolphin.ini")
+  #new resolution
+  dolphin_new_Res="FullscreenResolution = $dolphin_monitor"": ""$dolphin_new_X""x""$dolphin_new_Y"
+  #apply changes
+  sed -i "s|$dolphin_org_Res|$dolphin_new_Res|g" "$config_home/.dolphin-emu/Config/Dolphin.ini"  
   
 else
   echo "auto resolution is disabled, exiting"

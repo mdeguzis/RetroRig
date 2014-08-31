@@ -3,15 +3,15 @@
 #======================================================================== 
 #
 # Author:  Michael DeGuzis and Jens-Christian, 
-# Date:    20140823
-# Version: Patch Level 7
+# Date:    20140831
+# Version: Patch Level 8
 # ========================================================================
 
 #define base version
 BASE=3:13.1
 
 # define patch level
-PL=7
+PL=8
 
 #define xbmc branch to checkout
 BRANCH=gotham-retrorig-pl$PL

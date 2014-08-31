@@ -16,7 +16,7 @@ BASE=2:4.0.2
 PL=0
 
 #define branch
-BRANCH=4.0.2
+BRANCH=retrorig-4.0.2.1
 
 clear
 echo "#################################################################"
@@ -57,7 +57,8 @@ if [[ -n "$2" ]]; then
 			  libbluetooth-dev libglew-dev libgtk2.0-dev liblzo2-dev libopenal-dev libpolarssl-dev \
 			  libpulse-dev libreadline6-dev libsdl1.2-dev libsfml-dev libsoil-dev libsoundtouch-dev \
 			  libswscale-dev libminiupnpc-dev libwxbase3.0-dev libwxgtk3.0-dev libxext-dev \
-			  libxrandr-dev lsb-release pkg-config portaudio19-dev wx3.0-headers zlib1g-dev
+			  libxrandr-dev lsb-release pkg-config portaudio19-dev wx3.0-headers zlib1g-dev \
+			  libjack-dev libjack0
 
 else
   echo ""
