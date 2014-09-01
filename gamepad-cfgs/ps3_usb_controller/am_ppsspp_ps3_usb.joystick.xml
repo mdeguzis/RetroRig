@@ -16,7 +16,7 @@
             <button index="16">
                 <slots>
                     <slot>
-                        <code>0x1000030</code>
+                        <code>0x1000034</code>
                         <mode>keyboard</mode>
                     </slot>
                 </slots>
@@ -24,7 +24,7 @@
             <button index="17">
                 <slots>
                     <slot>
-                        <code>0x1000032</code>
+                        <code>0x1000036</code>
                         <mode>keyboard</mode>
                     </slot>
                 </slots>

@@ -13,22 +13,6 @@
                     </slot>
                 </slots>
             </button>
-            <button index="16">
-                <slots>
-                    <slot>
-                        <code>0x1000030</code>
-                        <mode>keyboard</mode>
-                    </slot>
-                </slots>
-            </button>
-            <button index="17">
-                <slots>
-                    <slot>
-                        <code>0x1000032</code>
-                        <mode>keyboard</mode>
-                    </slot>
-                </slots>
-            </button>
         </set>
     </sets>
 </joystick>

@@ -79,86 +79,30 @@ function gp_ps3_blu()
 	###########################################################
 	# Add emulator specifc control remaps here for qjoypad
 	###########################################################
+	# !!! Removed in favor of anitmicro since 0.9.5b !!!
+	###########################################################
 
-	# set vars for pre/post command for the PPSSPP emulator in RCB
-	# We need this unforuntely, since the SDL/sixad mapping are so screwy, we need ot use 
-	# keyboard.Esc instead of a button press (PS button is an axis in sixad anyway).
-	# It is very important that you preceed '&amp;' with a backslash to escape the '&' character
-	# so it is properly replaced. RCB requires '&amp' over the literal '&'.
-
-	# copy in default default config.xml for RCB (Which is cleaned/removed in h_clean_gamepad)
 	cp -v "$scriptdir/XBMC-cfgs/userdata/addon_data/script.games.rom.collection.browser/config.xml" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/"
-
-	# copy in profiles for emulators (qjoypad)
-	cp -v "$rootdir/gamepad-cfgs/ps3_blu_controller/mednafen_ps3_general_blu.lyt" "$config_home/.qjoypad3"
-	cp -v "$rootdir/gamepad-cfgs/ps3_blu_controller/mednafen_ps3_psx_blu.lyt" "$config_home/.qjoypad3"
-	cp -v "$rootdir/gamepad-cfgs/ps3_blu_controller/psp_ps3_blu.lyt" "$config_home/.qjoypad3"
-	cp -v "$rootdir/gamepad-cfgs/ps3_blu_controller/dolphin_ps3_blu.lyt" "$config_home/.qjoypad3"
-
-	##################### 
-	# PSP 
-	##################### 
-	old_pre="psp_temp_pre"
-	old_post="psp_temp_post"
-	new_pre="qjoypad psp_ps3_blu \&amp;"
-	new_post="killall qjoypad"
-	# perform actual changes
-	sed -i "s|$old_pre|$new_pre|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
-	sed -i "s|$old_post|$new_post|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
-
-	#####################
-	# mednafen (general)
-	##################### 
-
-	old_pre="med_temp_pre"
-	old_post="med_temp_post"
-	new_pre="qjoypad mednafen_ps3_general_blu \&amp;"
-	new_post="killall qjoypad"
-	# perform actual changes
-	sed -i "s|$old_pre|$new_pre|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
-	sed -i "s|$old_post|$new_post|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
-
-	#####################
-	# mednafen (PSX/PS1)
-	##################### 
-	
-	old_pre="med_psx_pre"
-	old_post="med_psx_post"
-	new_pre="qjoypad mednafen_ps3_psx_blu \&amp;"
-	new_post="killall qjoypad"
-	# perform actual changes
-	sed -i "s|$old_pre|$new_pre|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
-	sed -i "s|$old_post|$new_post|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
-
-	#####################
-	# dolphin
-	##################### 
-	
-	old_pre="dolphin_pre"
-	old_post="dolphin_post"
-	new_pre="qjoypad dolphin_ps3_blu \&amp;"
-	new_post="killall qjoypad"
-	# perform actual changes
-	sed -i "s|$old_pre|$new_pre|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
-	sed -i "s|$old_post|$new_post|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
 
 	# blacklist xpad
 	cp -v "$rootdir/init-scripts/ps3_blu_controller/blacklist.conf" "/etc/modprobe.d/"
 
-	###########################################################
-	# End qjoypad remappings
-	###########################################################
-
-	###########################################################
+	###############################################################################################
 	# Add emulator specifc control remaps here for AniMicro
-	###########################################################
-	# Note: In due time, AntiMicro may replace qjoypad for all
-	# emulator control hotswaps for gamepads
-	###########################################################
+	###############################################################################################
+	# set vars for pre/post command for the PPSSPP emulator in RCB
+	# We need this unforuntely, since the SDL/sixad mapping are so screwy, we need ot use 
+	# keyboard.Esc instead of a button press (PS button is an axis in sixad anyway).
+	# It is very important that you preceed '&amp;' with a backslash to escape the '&' character
+	# so it is properly replaced. RCB requires '&amp' over the literal '&'.s
+	###############################################################################################
 
 	# copy in profiles for emulators (antimicro)
 	cp -v "$rootdir/gamepad-cfgs/ps3_blu_controller/antimicro_settings.ini" "$config_home/.config/antimicro/"
 	cp -v "$rootdir/gamepad-cfgs/ps3_blu_controller/am_pcsx2_ps3_blu.joystick.xml" "$config_home/.config/antimicro/"
+	cp -v "$rootdir/gamepad-cfgs/ps3_blu_controller/am_mednafen_gen_ps3_blu.joystick.xml" "$config_home/.config/antimicro/"
+	cp -v "$rootdir/gamepad-cfgs/ps3_blu_controller/am_mednafen_ps1_ps3_blu.joystick.xml" "$config_home/.config/antimicro/"
+	cp -v "$rootdir/gamepad-cfgs/ps3_blu_controller/am_ppsspp_ps3_blu.joystick.xml" "$config_home/.config/antimicro/"
 
 	#####################
 	# PCSX2
@@ -166,13 +110,67 @@ function gp_ps3_blu()
 
 	old_pre="ps2_pre"
 	old_post="ps2_post"
-	new_pre="antimicro --hidden --profile /home/test/.retrorig/.config/antimicro/am_pcsx2_ps3_blu.joystick.xml \&amp;"
+	new_pre="antimicro --hidden --profile $config_home/.config/antimicro/am_pcsx2_ps3_blu.joystick.xml \&amp;"
 	# The line below is only for good measure
 	new_post="killall pcsx2 antimicro"
 	# perform actual changes
 	sed -i "s|$old_pre|$new_pre|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
 	sed -i "s|$old_post|$new_post|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
  
+
+	#####################
+	# PPSSPP
+	#####################
+
+	old_pre="psp_pre"
+	old_post="psp_post"
+	new_pre="antimicro --hidden --profile $config_home/.config/antimicro/am_ppsspp_ps3_blu.joystick.xml &amp;"
+	# The line below is only for good measure
+	new_post="killall antimicro"
+	# perform actual changes
+	sed -i "s|$old_pre|$new_pre|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
+	sed -i "s|$old_post|$new_post|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
+
+	#####################
+	# Mednafen (PSX/PS1)
+	#####################
+
+	old_pre="ps1_pre"
+	old_post="ps1_post"
+	new_pre="antimicro --hidden --profile $config_home/.config/antimicro/am_ps1_ps3_blu.joystick.xml &amp;"
+	# The line below is only for good measure
+	new_post="killall antimicro"
+	# perform actual changes
+	sed -i "s|$old_pre|$new_pre|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
+	sed -i "s|$old_post|$new_post|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
+
+	#####################
+	# Mednafen (general)
+	#####################
+
+	old_pre="med_gen_pre"
+	old_post="med_gen_post"
+	new_pre="antimicro --hidden --profile $config_home/.config/antimicro/am_mednafen_gen_ps3_blu.joystick.xml &amp;"
+	# The line below is only for good measure
+	new_post="killall antimicro"
+	# perform actual changes
+	sed -i "s|$old_pre|$new_pre|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
+	sed -i "s|$old_post|$new_post|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
+
+	#####################
+	# Dolphin (Gamecube)
+	#####################
+
+	old_pre="dolphin_pre"
+	old_post="dolphin_post"
+	new_pre="antimicro --hidden --profile $config_home/.config/antimicro/am_dolphin_ps3_blu.joystick.xml &amp;"
+	# The line below is only for good measure
+	new_post="killall antimicro"
+	# perform actual changes
+	sed -i "s|$old_pre|$new_pre|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
+	sed -i "s|$old_post|$new_post|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
+
+
 	# The PS3 pairing process should be handled interactively in a seperate function:
 	gp_ps3_blu_main
 
@@ -605,83 +603,33 @@ RetorRig loads to use the gamepad" 14 60
 		esac
 	done
 
-	##########################################################
+	###########################################################
 	# Add emulator specifc control remaps here for qjoypad
-	##########################################################
+	###########################################################
+	# !!! Removed in favor of anitmicro since 0.9.5b !!!
+	###########################################################
 
+	cp -v "$scriptdir/XBMC-cfgs/userdata/addon_data/script.games.rom.collection.browser/config.xml" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/"
+
+	# blacklist xpad
+	cp -v "$rootdir/init-scripts/ps3_blu_controller/blacklist.conf" "/etc/modprobe.d/"
+
+	###############################################################################################
+	# Add emulator specifc control remaps here for AniMicro
+	###############################################################################################
 	# set vars for pre/post command for the PPSSPP emulator in RCB
 	# We need this unforuntely, since the SDL/sixad mapping are so screwy, we need ot use 
 	# keyboard.Esc instead of a button press (PS button is an axis in sixad anyway).
 	# It is very important that you preceed '&amp;' with a backslash to escape the '&' character
-	# so it is properly replaced. RCB requires '&amp' over the literal '&'.
-
-	# copy in default default config.xml for RCB (Which is cleaned/removed in h_clean_gamepad)
-	cp -v "$scriptdir/XBMC-cfgs/userdata/addon_data/script.games.rom.collection.browser/config.xml" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/"
-
-	# copy in profiles for emulators
-	cp -v "$scriptdir/gamepad-cfgs/ps3_usb_controller/mednafen_ps3_general_usb.lyt" "$config_home/.qjoypad3"
-	cp -v "$scriptdir/gamepad-cfgs/ps3_usb_controller/mednafen_ps3_psx_usb.lyt" "$config_home/.qjoypad3"
-	cp -v "$scriptdir/gamepad-cfgs/ps3_usb_controller/psp_ps3_usb.lyt" "$config_home/.qjoypad3"
-	cp -v "$scriptdir/gamepad-cfgs/ps3_usb_controller/dolphin_ps3_usb.lyt" "$config_home/.qjoypad3"
-
-	##################### 
-	# PSP 
-	##################### 
-	old_pre="psp_temp_pre"
-	old_post="psp_temp_post"
-	new_pre="qjoypad psp_ps3_usb \&amp;"
-	new_post="killall qjoypad"
-	# perform actual changes
-	sed -i "s|$old_pre|$new_pre|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
-	sed -i "s|$old_post|$new_post|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
-
-	#####################
-	# mednafen (general)
-	##################### 
-	old_pre="med_temp_pre"
-	old_post="med_temp_post"
-	new_pre="qjoypad mednafen_ps3_general_usb \&amp;"
-	new_post="killall qjoypad"
-	# perform actual changes
-	sed -i "s|$old_pre|$new_pre|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
-	sed -i "s|$old_post|$new_post|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
-
-	#####################
-	# mednafen (PSX/PS1)
-	##################### 
-	old_pre="med_psx_pre"
-	old_post="med_psx_post"
-	new_pre="qjoypad mednafen_ps3_psx_usb \&amp;"
-	new_post="killall qjoypad"
-	# perform actual changes
-	sed -i "s|$old_pre|$new_pre|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
-	sed -i "s|$old_post|$new_post|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
-
-	#####################
-	# dolphin
-	##################### 
-	old_pre="dolphin_pre"
-	old_post="dolphin_post"
-	new_pre="qjoypad dolphin_ps3_usb \&amp;"
-	new_post="killall qjoypad"
-	# perform actual changes
-	sed -i "s|$old_pre|$new_pre|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
-	sed -i "s|$old_post|$new_post|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
-
-	###########################################################
-	# End qjoypad remappings
-	###########################################################
-
-	###########################################################
-	# Add emulator specifc control remaps here for AniMicro
-	###########################################################
-	# Note: In due time, AntiMicro may replace qjoypad for all
-	# emulator control hotswaps for gamepads
-	###########################################################
+	# so it is properly replaced. RCB requires '&amp' over the literal '&'.s
+	###############################################################################################
 
 	# copy in profiles for emulators (antimicro)
-	cp -v "$rootdir/gamepad-cfgs/ps3_usb_controller/antimicro_settings.ini" "$config_home/.config/antimicro/"
-	cp -v "$rootdir/gamepad-cfgs/ps3_usb_controller/am_pcsx2_ps3_blu.joystick.xml" "$config_home/.config/antimicro/"
+	cp -v "$rootdir/gamepad-cfgs/ps3_blu_controller/antimicro_settings.ini" "$config_home/.config/antimicro/"
+	cp -v "$rootdir/gamepad-cfgs/ps3_blu_controller/am_pcsx2_ps3_usb.joystick.xml" "$config_home/.config/antimicro/"
+	cp -v "$rootdir/gamepad-cfgs/ps3_blu_controller/am_mednafen_gen_ps3_usb.joystick.xml" "$config_home/.config/antimicro/"
+	cp -v "$rootdir/gamepad-cfgs/ps3_blu_controller/am_mednafen_ps1_ps3_usb.joystick.xml" "$config_home/.config/antimicro/"
+	cp -v "$rootdir/gamepad-cfgs/ps3_blu_controller/am_ppsspp_ps3_usb.joystick.xml" "$config_home/.config/antimicro/"
 
 	#####################
 	# PCSX2
@@ -689,9 +637,62 @@ RetorRig loads to use the gamepad" 14 60
 
 	old_pre="ps2_pre"
 	old_post="ps2_post"
-	new_pre="antimicro --hidden --profile /home/test/.retrorig/.config/antimicro/am_pcsx2_ps3_usb.joystick.xml \&amp;"
+	new_pre="antimicro --hidden --profile $config_home/.config/antimicro/am_pcsx2_ps3_usb.joystick.xml \&amp;"
 	# The line below is only for good measure
 	new_post="killall pcsx2 antimicro"
+	# perform actual changes
+	sed -i "s|$old_pre|$new_pre|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
+	sed -i "s|$old_post|$new_post|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
+ 
+
+	#####################
+	# PPSSPP
+	#####################
+
+	old_pre="psp_pre"
+	old_post="psp_post"
+	new_pre="antimicro --hidden --profile $config_home/.config/antimicro/am_ppsspp_ps3_usb.joystick.xml &amp;"
+	# The line below is only for good measure
+	new_post="killall antimicro"
+	# perform actual changes
+	sed -i "s|$old_pre|$new_pre|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
+	sed -i "s|$old_post|$new_post|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
+
+	#####################
+	# Mednafen (PSX/PS1)
+	#####################
+
+	old_pre="ps1_pre"
+	old_post="ps1_post"
+	new_pre="antimicro --hidden --profile $config_home/.config/antimicro/am_ps1_ps3_usb.joystick.xml &amp;"
+	# The line below is only for good measure
+	new_post="killall antimicro"
+	# perform actual changes
+	sed -i "s|$old_pre|$new_pre|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
+	sed -i "s|$old_post|$new_post|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
+
+	#####################
+	# Mednafen (general)
+	#####################
+
+	old_pre="med_gen_pre"
+	old_post="med_gen_post"
+	new_pre="antimicro --hidden --profile $config_home/.config/antimicro/am_mednafen_gen_ps3_usb.joystick.xml &amp;"
+	# The line below is only for good measure
+	new_post="killall antimicro"
+	# perform actual changes
+	sed -i "s|$old_pre|$new_pre|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
+	sed -i "s|$old_post|$new_post|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
+
+	#####################
+	# Dolphin (Gamecube)
+	#####################
+
+	old_pre="dolphin_pre"
+	old_post="dolphin_post"
+	new_pre="antimicro --hidden --profile $config_home/.config/antimicro/am_dolphin_ps3_usb.joystick.xml &amp;"
+	# The line below is only for good measure
+	new_post="killall antimicro"
 	# perform actual changes
 	sed -i "s|$old_pre|$new_pre|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
 	sed -i "s|$old_post|$new_post|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
@@ -863,74 +864,10 @@ RetorRig loads to use the gamepad" 14 60
 		esac
 	done
 
-	##########################################################
-	# Add emulator specifc control remaps here for qjoypad
-	##########################################################
-
-	# set vars for pre/post command for the PPSSPP emulator in RCB
-	# We need this unforuntely, since the SDL/sixad mapping are so screwy, we need ot use 
-	# keyboard.Esc instead of a button press (PS button is an axis in sixad anyway).
-	# It is very important that you preceed '&amp;' with a backslash to escape the '&' character
-	# so it is properly replaced. RCB requires '&amp' over the literal '&'.
-
-	# copy in default default config.xml for RCB (Which is cleaned/removed in h_clean_gamepad)
-	cp -v "$scriptdir/XBMC-cfgs/userdata/addon_data/script.games.rom.collection.browser/config.xml" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/"
-
-	# copy in profiles for emulators
-	cp -v "$scriptdir/gamepad-cfgs/x360_wireless_controller/mednafen_x360_general_wireless.lyt" "$config_home/.qjoypad3"
-	cp -v "$scriptdir/gamepad-cfgs/x360_wireless_controller/mednafen_x360_psx_wireless.lyt" "$config_home/.qjoypad3"
-	cp -v "$scriptdir/gamepad-cfgs/x360_wireless_controller/psp_x360_wireless.lyt" "$config_home/.qjoypad3"
-	cp -v "$scriptdir/gamepad-cfgs/x360_wireless_controller/dolphin_x360_wireless.lyt" "$config_home/.qjoypad3"
-
-	##################### 
-	# PSP 
-	##################### 
-	old_pre="psp_temp_pre"
-	old_post="psp_temp_post"
-	new_pre="qjoypad psp_x360_wireless \&amp;"
-	new_post="killall qjoypad"
-	# perform actual changes
-	sed -i "s|$old_pre|$new_pre|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
-	sed -i "s|$old_post|$new_post|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
-
-	#####################
-	# mednafen (general)
-	##################### 
-
-	old_pre="med_temp_pre"
-	old_post="med_temp_post"
-	new_pre="qjoypad mednafen_x360_general_wireless \&amp;"
-	new_post="killall qjoypad"
-	# perform actual changes
-	sed -i "s|$old_pre|$new_pre|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
-	sed -i "s|$old_post|$new_post|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
-
-	#####################
-	# mednafen (PSX/PS1)
-	##################### 
-	
-	old_pre="med_psx_pre"
-	old_post="med_psx_post"
-	new_pre="qjoypad mednafen_x360_psx_wireless \&amp;"
-	new_post="killall qjoypad"
-	# perform actual changes
-	sed -i "s|$old_pre|$new_pre|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
-	sed -i "s|$old_post|$new_post|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
-
-	#####################
-	# dolphin
-	##################### 
-	
-	old_pre="dolphin_pre"
-	old_post="dolphin_post"
-	new_pre="qjoypad dolphin_x360_wireless \&amp;"
-	new_post="killall qjoypad"
-	# perform actual changes
-	sed -i "s|$old_pre|$new_pre|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
-	sed -i "s|$old_post|$new_post|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
-
 	###########################################################
-	# End qjoypad remappings
+	# Add emulator specifc control remaps here for qjoypad
+	###########################################################
+	# !!! Removed in favor of anitmicro since 0.9.5b !!!
 	###########################################################
 
 	###########################################################
@@ -941,8 +878,12 @@ RetorRig loads to use the gamepad" 14 60
 	###########################################################
 
 	# copy in profiles for emulators (antimicro)
-	cp -v "$rootdir/gamepad-cfgs/ps3_usb_controller/antimicro_settings.ini" "$config_home/.config/antimicro/"
-	cp -v "$rootdir/gamepad-cfgs/ps3_usb_controller/am_pcsx2_ps3_blu.joystick.xml" "$config_home/.config/antimicro/"
+	cp -v "$rootdir/gamepad-cfgs/x360_wireless_controller/antimicro_settings.ini" "$config_home/.config/antimicro/"
+	cp -v "$rootdir/gamepad-cfgs/x360_wireless_controller/am_pcsx2_x360_wireless.joystick.xml" "$config_home/.config/antimicro/"
+	cp -v "$rootdir/gamepad-cfgs/x360_wireless_controller/am_mednafen_gen_x360_wireless.joystick.xml" "$config_home/.config/antimicro/"
+	cp -v "$rootdir/gamepad-cfgs/x360_wireless_controller/am_mednafen_ps1_x360_wireless.joystick.xml" "$config_home/.config/antimicro/"
+	cp -v "$rootdir/gamepad-cfgs/x360_wireless_controller/am_ppsspp_x360_wireless.joystick.xml" "$config_home/.config/antimicro/"
+	cp -v "$rootdir/gamepad-cfgs/x360_wireless_controller/am_dolphin_x360_wireless.joystick.xml" "$config_home/.config/antimicro/"
 
 	#####################
 	# PCSX2
@@ -950,7 +891,59 @@ RetorRig loads to use the gamepad" 14 60
 
 	old_pre="ps2_pre"
 	old_post="ps2_post"
-	new_pre="antimicro --hidden --profile /home/test/.retrorig/.config/antimicro/am_pcsx2_x360_wireless.joystick.xml \&amp;"
+	new_pre="antimicro --hidden --profile $config_home/.config/antimicro/am_pcsx2_x360_wireless.joystick.xml \&amp;"
+	# The line below is only for good measure
+	new_post="killall pcsx2 antimicro"
+	# perform actual changes
+	sed -i "s|$old_pre|$new_pre|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
+	sed -i "s|$old_post|$new_post|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
+
+	#####################
+	# Mednafen (general)
+	#####################
+
+	old_pre="med_gen_pre"
+	old_post="med_gen_post"
+	new_pre="antimicro --hidden --profile $config_home/.config/antimicro/am_mednafen_gen_x360_wireless.joystick.xml \&amp;"
+	# The line below is only for good measure
+	new_post="killall pcsx2 antimicro"
+	# perform actual changes
+	sed -i "s|$old_pre|$new_pre|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
+	sed -i "s|$old_post|$new_post|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
+
+	#####################
+	# Mednafen (PS1/PSX)
+	#####################
+
+	old_pre="ps1_pre"
+	old_post="ps1_post"
+	new_pre="antimicro --hidden --profile $config_home/.config/antimicro/am_mednafen_ps1_x360_wireless.joystick.xml \&amp;"
+	# The line below is only for good measure
+	new_post="killall pcsx2 antimicro"
+	# perform actual changes
+	sed -i "s|$old_pre|$new_pre|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
+	sed -i "s|$old_post|$new_post|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
+
+	#####################
+	# PPSSPP
+	#####################
+
+	old_pre="psp_pre"
+	old_post="psp_post"
+	new_pre="antimicro --hidden --profile $config_home/.config/antimicro/am_ppsspp_x360_wireless.joystick.xml \&amp;"
+	# The line below is only for good measure
+	new_post="killall pcsx2 antimicro"
+	# perform actual changes
+	sed -i "s|$old_pre|$new_pre|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
+	sed -i "s|$old_post|$new_post|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
+
+	#####################
+	# Dolphin
+	#####################
+
+	old_pre="dolphin_pre"
+	old_post="dolphin_post"
+	new_pre="antimicro --hidden --profile $config_home/.config/antimicro/am_ppsspp_x360_wireless.joystick.xml \&amp;"
 	# The line below is only for good measure
 	new_post="killall pcsx2 antimicro"
 	# perform actual changes
@@ -1127,71 +1120,10 @@ RetorRig loads to use the gamepad" 14 60
 		esac
 	done
 
-	##########################################################
-	# Add emulator specifc control remaps here for qjoypad
-	##########################################################
-
-	# set vars for pre/post command for the PPSSPP emulator in RCB
-	# We need this unforuntely, since the SDL/sixad mapping are so screwy, we need ot use 
-	# keyboard.Esc instead of a button press (PS button is an axis in sixad anyway).
-	# It is very important that you preceed '&amp;' with a backslash to escape the '&' character
-	# so it is properly replaced. RCB requires '&amp' over the literal '&'.
-
-	# copy in default default config.xml for RCB (Which is cleaned/removed in h_clean_gamepad)
-	cp -v "$scriptdir/XBMC-cfgs/userdata/addon_data/script.games.rom.collection.browser/config.xml" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/"
-
-	# copy in profiles for emulators
-	cp -v "$scriptdir/gamepad-cfgs/x360_usb_controller/mednafen_x360_general_usb.lyt" "$config_home/.qjoypad3"
-	cp -v "$scriptdir/gamepad-cfgs/x360_usb_controller/mednafen_x360_psx_usb.lyt" "$config_home/.qjoypad3"
-	cp -v "$scriptdir/gamepad-cfgs/x360_usb_controller/psp_x360_usb.lyt" "$config_home/.qjoypad3"
-	cp -v "$scriptdir/gamepad-cfgs/x360_usb_controller/dolphin_x360_usb.lyt" "$config_home/.qjoypad3"
-
-	##################### 
-	# PSP 
-	##################### 
-	old_pre="psp_temp_pre"
-	old_post="psp_temp_post"
-	new_pre="qjoypad psp_x360_usb \&amp;"
-	new_post="killall qjoypad"
-	# perform actual changes
-	sed -i "s|$old_pre|$new_pre|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
-	sed -i "s|$old_post|$new_post|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
-
-	#####################
-	# mednafen (general)
-	##################### 
-	old_pre="med_temp_pre"
-	old_post="med_temp_post"
-	new_pre="qjoypad mednafen_x360_general_usb \&amp;"
-	new_post="killall qjoypad"
-	# perform actual changes
-	sed -i "s|$old_pre|$new_pre|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
-	sed -i "s|$old_post|$new_post|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
-
-	#####################
-	# mednafen (PSX/PS1)
-	##################### 
-	old_pre="med_psx_pre"
-	old_post="med_psx_post"
-	new_pre="qjoypad mednafen_x360_psx_usb \&amp;"
-	new_post="killall qjoypad"
-	# perform actual changes
-	sed -i "s|$old_pre|$new_pre|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
-	sed -i "s|$old_post|$new_post|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
-
-	#####################
-	# dolphin
-	##################### 
-	old_pre="dolphin_pre"
-	old_post="dolphin_post"
-	new_pre="qjoypad dolphin_x360_usb \&amp;"
-	new_post="killall qjoypad"
-	# perform actual changes
-	sed -i "s|$old_pre|$new_pre|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
-	sed -i "s|$old_post|$new_post|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
-
 	###########################################################
-	# End qjoypad remappings
+	# Add emulator specifc control remaps here for qjoypad
+	###########################################################
+	# !!! Removed in favor of anitmicro since 0.9.5b !!!
 	###########################################################
 
 	###########################################################
@@ -1202,8 +1134,12 @@ RetorRig loads to use the gamepad" 14 60
 	###########################################################
 
 	# copy in profiles for emulators (antimicro)
-	cp -v "$rootdir/gamepad-cfgs/x360_usb_controller/antimicro_settings.ini" "$config_home/.config/antimicro/"
-	cp -v "$rootdir/gamepad-cfgs/x360_usb_controller/am_pcsx2_x360_usb.joystick.xml" "$config_home/.config/antimicro/"
+	cp -v "$rootdir/gamepad-cfgs/x360_wireless_controller/antimicro_settings.ini" "$config_home/.config/antimicro/"
+	cp -v "$rootdir/gamepad-cfgs/x360_wireless_controller/am_pcsx2_x360_usb.joystick.xml" "$config_home/.config/antimicro/"
+	cp -v "$rootdir/gamepad-cfgs/x360_wireless_controller/am_mednafen_gen_x360_usb.joystick.xml" "$config_home/.config/antimicro/"
+	cp -v "$rootdir/gamepad-cfgs/x360_wireless_controller/am_mednafen_ps1_x360_usb.joystick.xml" "$config_home/.config/antimicro/"
+	cp -v "$rootdir/gamepad-cfgs/x360_wireless_controller/am_ppsspp_x360_usb.joystick.xml" "$config_home/.config/antimicro/"
+	cp -v "$rootdir/gamepad-cfgs/x360_wireless_controller/am_dolphin_x360_usb.joystick.xml" "$config_home/.config/antimicro/"
 
 	#####################
 	# PCSX2
@@ -1211,7 +1147,59 @@ RetorRig loads to use the gamepad" 14 60
 
 	old_pre="ps2_pre"
 	old_post="ps2_post"
-	new_pre="antimicro --hidden --profile /home/test/.retrorig/.config/antimicro/am_pcsx2_x360_usb.joystick.xml \&amp;"
+	new_pre="antimicro --hidden --profile $config_home/.config/antimicro/am_pcsx2_x360_usb.joystick.xml \&amp;"
+	# The line below is only for good measure
+	new_post="killall pcsx2 antimicro"
+	# perform actual changes
+	sed -i "s|$old_pre|$new_pre|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
+	sed -i "s|$old_post|$new_post|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
+
+	#####################
+	# Mednafen (general)
+	#####################
+
+	old_pre="med_gen_pre"
+	old_post="med_gen_post"
+	new_pre="antimicro --hidden --profile $config_home/.config/antimicro/am_mednafen_gen_x360_usb.joystick.xml \&amp;"
+	# The line below is only for good measure
+	new_post="killall pcsx2 antimicro"
+	# perform actual changes
+	sed -i "s|$old_pre|$new_pre|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
+	sed -i "s|$old_post|$new_post|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
+
+	#####################
+	# Mednafen (PS1/PSX)
+	#####################
+
+	old_pre="ps1_pre"
+	old_post="ps1_post"
+	new_pre="antimicro --hidden --profile $config_home/.config/antimicro/am_mednafen_ps1_x360_usb.joystick.xml \&amp;"
+	# The line below is only for good measure
+	new_post="killall pcsx2 antimicro"
+	# perform actual changes
+	sed -i "s|$old_pre|$new_pre|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
+	sed -i "s|$old_post|$new_post|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
+
+	#####################
+	# PPSSPP
+	#####################
+
+	old_pre="psp_pre"
+	old_post="psp_post"
+	new_pre="antimicro --hidden --profile $config_home/.config/antimicro/am_ppsspp_x360_usb.joystick.xml \&amp;"
+	# The line below is only for good measure
+	new_post="killall pcsx2 antimicro"
+	# perform actual changes
+	sed -i "s|$old_pre|$new_pre|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
+	sed -i "s|$old_post|$new_post|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
+
+	#####################
+	# Dolphin
+	#####################
+
+	old_pre="dolphin_pre"
+	old_post="dolphin_post"
+	new_pre="antimicro --hidden --profile $config_home/.config/antimicro/am_ppsspp_x360_usb.joystick.xml \&amp;"
 	# The line below is only for good measure
 	new_post="killall pcsx2 antimicro"
 	# perform actual changes

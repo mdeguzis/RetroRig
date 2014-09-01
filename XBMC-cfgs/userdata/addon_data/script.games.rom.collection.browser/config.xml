@@ -46,8 +46,8 @@
       <mediaPath type="cartridge">installdir_temp/Artwork/Sega Master System/cartridge/%GAME%.*</mediaPath>
       <mediaPath type="screenshot">installdir_temp/Artwork/Sega Master System/screenshot/%GAME%.*</mediaPath>
       <mediaPath type="fanart">installdir_temp/Artwork/Sega Master System/fanart/%GAME%.*</mediaPath>
-      <preCmd>med_temp_pre</preCmd>
-      <postCmd>med_temp_post</postCmd>
+      <preCmd>med_gen_pre</preCmd>
+      <postCmd>med_gen_post</postCmd>
       <useEmuSolo>False</useEmuSolo>
       <usePopen>False</usePopen>
       <ignoreOnScan>False</ignoreOnScan>
@@ -78,8 +78,8 @@
       <mediaPath type="cartridge">installdir_temp/Artwork/GBA/cartridge/%GAME%.*</mediaPath>
       <mediaPath type="screenshot">installdir_temp/Artwork/GBA/screenshot/%GAME%.*</mediaPath>
       <mediaPath type="fanart">installdir_temp/Artwork/GBA/fanart/%GAME%.*</mediaPath>
-      <preCmd>med_temp_pre</preCmd>
-      <postCmd>med_temp_post</postCmd>
+      <preCmd>med_gen_pre</preCmd>
+      <postCmd>med_gen_post</postCmd>
       <useEmuSolo>False</useEmuSolo>
       <usePopen>False</usePopen>
       <ignoreOnScan>False</ignoreOnScan>
@@ -109,8 +109,8 @@
       <mediaPath type="cartridge">installdir_temp/Artwork/PSP/cartridge/%GAME%.*</mediaPath>
       <mediaPath type="screenshot">installdir_temp/Artwork/PSP/screenshot/%GAME%.*</mediaPath>
       <mediaPath type="fanart">installdir_temp/Artwork/PSP/fanart/%GAME%.*</mediaPath>
-      <preCmd>psp_temp_pre</preCmd>
-      <postCmd>psp_temp_post</postCmd>
+      <preCmd>psp_pre</preCmd>
+      <postCmd>psp_post</postCmd>
       <useEmuSolo>False</useEmuSolo>
       <usePopen>False</usePopen>
       <ignoreOnScan>False</ignoreOnScan>
@@ -141,8 +141,8 @@
       <mediaPath type="cartridge">installdir_temp/Artwork/PS1/cartridge/%GAME%.*</mediaPath>
       <mediaPath type="screenshot">installdir_temp/Artwork/PS1/screenshot/%GAME%.*</mediaPath>
       <mediaPath type="fanart">installdir_temp/Artwork/PS1/fanart/%GAME%.*</mediaPath>
-      <preCmd>med_psx_pre</preCmd>
-      <postCmd>med_psx_post</postCmd>
+      <preCmd>ps1_pre</preCmd>
+      <postCmd>ps1_post</postCmd>
       <useEmuSolo>False</useEmuSolo>
       <usePopen>False</usePopen>
       <ignoreOnScan>False</ignoreOnScan>
@@ -173,8 +173,8 @@
       <mediaPath type="cartridge">installdir_temp/Artwork/Genesis/cartridge/%GAME%.*</mediaPath>
       <mediaPath type="screenshot">installdir_temp/Artwork/Genesis/screenshot/%GAME%.*</mediaPath>
       <mediaPath type="fanart">installdir_temp/Artwork/Genesis/fanart/%GAME%.*</mediaPath>
-      <preCmd>med_temp_pre</preCmd>
-      <postCmd>med_temp_post</postCmd>
+      <preCmd>med_gen_pre</preCmd>
+      <postCmd>med_gen_post</postCmd>
       <useEmuSolo>False</useEmuSolo>
       <usePopen>False</usePopen>
       <ignoreOnScan>False</ignoreOnScan>
@@ -205,8 +205,8 @@
       <mediaPath type="cartridge">installdir_temp/Artwork/GBC/cartridge/%GAME%.*</mediaPath>
       <mediaPath type="screenshot">installdir_temp/Artwork/GBC/screenshot/%GAME%.*</mediaPath>
       <mediaPath type="fanart">installdir_temp/Artwork/GBC/fanart/%GAME%.*</mediaPath>
-      <preCmd>med_temp_pre</preCmd>
-      <postCmd>med_temp_post</postCmd>
+      <preCmd>med_gen_pre</preCmd>
+      <postCmd>med_gen_post</postCmd>
       <useEmuSolo>False</useEmuSolo>
       <usePopen>False</usePopen>
       <ignoreOnScan>False</ignoreOnScan>
@@ -237,8 +237,8 @@
       <mediaPath type="cartridge">installdir_temp/ROMs/TurboGraphx 16/cartridge/%GAME%.*</mediaPath>
       <mediaPath type="screenshot">installdir_temp/ROMs/TurboGraphx 16/screenshot/%GAME%.*</mediaPath>
       <mediaPath type="fanart">installdir_temp/ROMs/TurboGraphx 16/fanart/%GAME%.*</mediaPath>
-      <preCmd>med_temp_pre</preCmd>
-      <postCmd>med_temp_post</postCmd>
+      <preCmd>med_gen_pre</preCmd>
+      <postCmd>med_gen_post</postCmd>
       <useEmuSolo>False</useEmuSolo>
       <usePopen>False</usePopen>
       <ignoreOnScan>False</ignoreOnScan>
@@ -269,8 +269,8 @@
       <mediaPath type="cartridge">installdir_temp/Artwork/Sega Game Gear/cartridge/%GAME%.*</mediaPath>
       <mediaPath type="screenshot">installdir_temp/Artwork/Sega Game Gear/screenshot/%GAME%.*</mediaPath>
       <mediaPath type="fanart">installdir_temp/Artwork/Sega Game Gear/fanart/%GAME%.*</mediaPath>
-      <preCmd>med_temp_pre</preCmd>
-      <postCmd>med_temp_post</postCmd>
+      <preCmd>med_gen_pre</preCmd>
+      <postCmd>med_gen_post</postCmd>
       <useEmuSolo>False</useEmuSolo>
       <usePopen>False</usePopen>
       <ignoreOnScan>False</ignoreOnScan>
@@ -363,8 +363,8 @@
       <mediaPath type="cartridge">installdir_temp/Artwork/SNES/cartridge/%GAME%.*</mediaPath>
       <mediaPath type="screenshot">installdir_temp/Artwork/SNES/screenshot/%GAME%.*</mediaPath>
       <mediaPath type="fanart">installdir_temp/Artwork/SNES/fanart/%GAME%.*</mediaPath>
-      <preCmd>med_temp_pre</preCmd>
-      <postCmd>med_temp_post</postCmd>
+      <preCmd>med_gen_pre</preCmd>
+      <postCmd>med_gen_post</postCmd>
       <useEmuSolo>False</useEmuSolo>
       <usePopen>False</usePopen>
       <ignoreOnScan>False</ignoreOnScan>
@@ -428,8 +428,8 @@
       <mediaPath type="cartridge">installdir_temp/Artwork/NES/cartridge/%GAME%.*</mediaPath>
       <mediaPath type="screenshot">installdir_temp/Artwork/NES/screenshot/%GAME%.*</mediaPath>
       <mediaPath type="fanart">installdir_temp/Artwork/NES/fanart/%GAME%.*</mediaPath>
-      <preCmd>med_temp_pre</preCmd>
-      <postCmd>med_temp_post</postCmd>
+      <preCmd>med_gen_pre</preCmd>
+      <postCmd>med_gen_post</postCmd>
       <useEmuSolo>False</useEmuSolo>
       <usePopen>False</usePopen>
       <ignoreOnScan>False</ignoreOnScan>
@@ -524,8 +524,8 @@
       <mediaPath type="cartridge">installdir_temp/Artwork/GB/cartridge/%GAME%.*</mediaPath>
       <mediaPath type="screenshot">installdir_temp/Artwork/GB/screenshot/%GAME%.*</mediaPath>
       <mediaPath type="fanart">installdir_temp/Artwork/GB/fanart/%GAME%.*</mediaPath>
-      <preCmd>med_temp_pre</preCmd>
-      <postCmd>med_temp_post</postCmd>
+      <preCmd>med_gen_pre</preCmd>
+      <postCmd>med_gen_post</postCmd>
       <useEmuSolo>False</useEmuSolo>
       <usePopen>False</usePopen>
       <ignoreOnScan>False</ignoreOnScan>
@@ -555,8 +555,8 @@
       <mediaPath type="cartridge">installdir_temp/Artwork/Atari Lynx/cartridge/%GAME%.*</mediaPath>
       <mediaPath type="screenshot">installdir_temp/Artwork/Atari Lynx/screenshot/%GAME%.*</mediaPath>
       <mediaPath type="fanart">installdir_temp/Artwork/Atari Lynx/fanart/%GAME%.*</mediaPath>
-      <preCmd>med_temp_pre</preCmd>
-      <postCmd>med_temp_post</postCmd>
+      <preCmd>med_gen_pre</preCmd>
+      <postCmd>med_gen_post</postCmd>
       <useEmuSolo>False</useEmuSolo>
       <usePopen>False</usePopen>
       <ignoreOnScan>False</ignoreOnScan>
