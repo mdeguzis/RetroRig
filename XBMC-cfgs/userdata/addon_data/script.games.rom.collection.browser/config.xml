@@ -389,6 +389,7 @@
       <romPath>installdir_temp/ROMs/N64/*.v64</romPath>
       <romPath>installdir_temp/ROMs/N64/*.z64</romPath>
       <romPath>installdir_temp/ROMs/N64/*.zip</romPath>
+      <romPath>installdir_temp/ROMs/N64/*.bin</romPath>
       <saveStatePath />
       <saveStateParams />
       <mediaPath type="boxfront">installdir_temp/Artwork/N64/boxfront/%GAME%.*</mediaPath>
