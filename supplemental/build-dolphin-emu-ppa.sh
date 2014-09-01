@@ -116,7 +116,7 @@ tar cfj dolphin-emu_orig.tar.bz2 dolphin-emu
 mv dolphin-emu_orig.tar.bz2 dolphin-emu_$BASE.$PL.orig.tar.bz2
 
 echo "debian files"
-wget --tries=50 "https://launchpad.net/~glennric/+archive/ubuntu/dolphin-emu/+files/dolphin-emu_4.0-0ubuntu1~saucy.debian.tar.bz2"
+wget --tries=50 "http://www.libregeek.org/RetroRig/Ubuntu-Trusty/templates/dolphin-emu.debian.tar.bz2"
 
 echo ""
 echo "##########################################"
@@ -125,10 +125,10 @@ echo "##########################################"
 echo ""
 
 #unpack
-echo "unpacking template dolphin-emu_4.0-0ubuntu1~saucy.debian.tar.bz2"
-tar xfj dolphin-emu_4.0-0ubuntu1~saucy.debian.tar.bz2
+echo "unpacking template dolphin-emu.debian.tar.bz2"
+tar xfj dolphin-emu.debian.tar.bz2
 #remove template
-rm dolphin-emu_4.0-0ubuntu1~saucy.debian.tar.bz2
+rm dolphin-emu.debian.tar.bz2
 
 #move debian folder into source folder
 mv debian/ dolphin-emu/

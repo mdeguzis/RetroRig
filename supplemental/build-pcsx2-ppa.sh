@@ -8,7 +8,7 @@
 # ========================================================================
 
 #define base version
-BASE=0:1.2.1
+BASE=2:1.2.2
 
 # define patch level
 PL=0-testunpatched
@@ -140,7 +140,7 @@ tar cfj pcsx2.orig.tar.bz2 pcsx2
 mv pcsx2.orig.tar.bz2 pcsx2_$BASE.$PL.orig.tar.bz2
 
 echo "debian files"
-wget --tries=50 "https://launchpad.net/~gregory-hainaut/+archive/ubuntu/pcsx2.official.ppa/+files/pcsx2_1.2.2-4.debian.tar.xz"
+wget --tries=50 "http://www.libregeek.org/RetroRig/Ubuntu-Trusty/templates/pcsx2.debian.tar.xz"
 
 echo ""
 echo "##########################################"
@@ -149,10 +149,10 @@ echo "##########################################"
 echo ""
 
 #unpack
-echo "unpacking template pcsx2_1.2.2-4.debian.tar.xz"
-tar xfJ pcsx2_1.2.2-4.debian.tar.xz
+echo "unpacking template pcsx2.debian.tar.xz"
+tar xfJ pcsx2.debian.tar.xz
 #remove template
-rm pcsx2_1.2.2-4.debian.tar.xz
+rm pcsx2.debian.tar.xz
 
 #move debian folder into source folder
 mv debian/ pcsx2/
