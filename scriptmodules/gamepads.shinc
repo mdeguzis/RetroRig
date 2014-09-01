@@ -126,7 +126,7 @@ function gp_ps3_blu()
 	old_post="psp_post"
 	new_pre="antimicro --hidden --profile $config_home/.config/antimicro/am_ppsspp_ps3_blu.joystick.xml \&amp;"
 	# The line below is only for good measure
-	new_post="killall antimicro"
+	new_post="killall antimicro"	
 	# perform actual changes
 	sed -i "s|$old_pre|$new_pre|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
 	sed -i "s|$old_post|$new_post|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
