@@ -124,7 +124,7 @@ function gp_ps3_blu()
 
 	old_pre="psp_pre"
 	old_post="psp_post"
-	new_pre="antimicro --hidden --profile $config_home/.config/antimicro/am_ppsspp_ps3_blu.joystick.xml &amp;"
+	new_pre="antimicro --hidden --profile $config_home/.config/antimicro/am_ppsspp_ps3_blu.joystick.xml \&amp;"
 	# The line below is only for good measure
 	new_post="killall antimicro"
 	# perform actual changes
@@ -137,7 +137,7 @@ function gp_ps3_blu()
 
 	old_pre="ps1_pre"
 	old_post="ps1_post"
-	new_pre="antimicro --hidden --profile $config_home/.config/antimicro/am_ps1_ps3_blu.joystick.xml &amp;"
+	new_pre="antimicro --hidden --profile $config_home/.config/antimicro/am_ps1_ps3_blu.joystick.xml \&amp;"
 	# The line below is only for good measure
 	new_post="killall antimicro"
 	# perform actual changes
@@ -150,7 +150,7 @@ function gp_ps3_blu()
 
 	old_pre="med_gen_pre"
 	old_post="med_gen_post"
-	new_pre="antimicro --hidden --profile $config_home/.config/antimicro/am_mednafen_gen_ps3_blu.joystick.xml &amp;"
+	new_pre="antimicro --hidden --profile $config_home/.config/antimicro/am_mednafen_gen_ps3_blu.joystick.xml \&amp;"
 	# The line below is only for good measure
 	new_post="killall antimicro"
 	# perform actual changes
@@ -163,7 +163,7 @@ function gp_ps3_blu()
 
 	old_pre="dolphin_pre"
 	old_post="dolphin_post"
-	new_pre="antimicro --hidden --profile $config_home/.config/antimicro/am_dolphin_ps3_blu.joystick.xml &amp;"
+	new_pre="antimicro --hidden --profile $config_home/.config/antimicro/am_dolphin_ps3_blu.joystick.xml \&amp;"
 	# The line below is only for good measure
 	new_post="killall antimicro"
 	# perform actual changes
@@ -651,7 +651,7 @@ RetorRig loads to use the gamepad" 14 60
 
 	old_pre="psp_pre"
 	old_post="psp_post"
-	new_pre="antimicro --hidden --profile $config_home/.config/antimicro/am_ppsspp_ps3_usb.joystick.xml &amp;"
+	new_pre="antimicro --hidden --profile $config_home/.config/antimicro/am_ppsspp_ps3_usb.joystick.xml \&amp;"
 	# The line below is only for good measure
 	new_post="killall antimicro"
 	# perform actual changes
@@ -664,7 +664,7 @@ RetorRig loads to use the gamepad" 14 60
 
 	old_pre="ps1_pre"
 	old_post="ps1_post"
-	new_pre="antimicro --hidden --profile $config_home/.config/antimicro/am_ps1_ps3_usb.joystick.xml &amp;"
+	new_pre="antimicro --hidden --profile $config_home/.config/antimicro/am_ps1_ps3_usb.joystick.xml \&amp;"
 	# The line below is only for good measure
 	new_post="killall antimicro"
 	# perform actual changes
@@ -677,7 +677,7 @@ RetorRig loads to use the gamepad" 14 60
 
 	old_pre="med_gen_pre"
 	old_post="med_gen_post"
-	new_pre="antimicro --hidden --profile $config_home/.config/antimicro/am_mednafen_gen_ps3_usb.joystick.xml &amp;"
+	new_pre="antimicro --hidden --profile $config_home/.config/antimicro/am_mednafen_gen_ps3_usb.joystick.xml \&amp;"
 	# The line below is only for good measure
 	new_post="killall antimicro"
 	# perform actual changes
@@ -690,7 +690,7 @@ RetorRig loads to use the gamepad" 14 60
 
 	old_pre="dolphin_pre"
 	old_post="dolphin_post"
-	new_pre="antimicro --hidden --profile $config_home/.config/antimicro/am_dolphin_ps3_usb.joystick.xml &amp;"
+	new_pre="antimicro --hidden --profile $config_home/.config/antimicro/am_dolphin_ps3_usb.joystick.xml \&amp;"
 	# The line below is only for good measure
 	new_post="killall antimicro"
 	# perform actual changes
