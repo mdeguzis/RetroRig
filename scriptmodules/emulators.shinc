@@ -192,3 +192,25 @@ function em_install_mess()
 	echo "Installing MESS emulator"
 	apt-get install -y mess
 }
+
+function em_install_gens()
+{
+
+	# release aptitude hold for upgrade/install
+	apt-mark unhold gens
+
+        #remove any previously installed version
+	apt-get remove -y gens
+
+	echo "Installing Gens Sega CD/32X emulator"
+	wget --tries=50 -P /tmp "www.libregeek.org/RetroRig/Ubuntu-Trusty/gens/Gens_2.16.7_i386.deb"
+        dpkg -i "/tmp/Gens_2.16.7_i386.deb"
+
+	# cleanup pkg file
+	rm -f "/tmp/Gens_2.16.7_i386.deb"
+
+	# hold package after install against upgrades
+	apt-mark hold mednafen
+
+}
+
