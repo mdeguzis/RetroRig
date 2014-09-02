@@ -83,7 +83,7 @@ cd ..
 tar cfj mednafen_$BASE.$PL.orig.tar.bz2 mednafen
 
 echo "debian files"
-wget --tries=50 "http://archive.ubuntu.com/ubuntu/pool/universe/m/mednafen/mednafen_0.9.33.3-1.debian.tar.xz"
+wget --tries=50 "http://www.libregeek.org/RetroRig/Ubuntu-Trusty/templates/mednafen.debian.tar.xz"
 
 echo ""
 echo "##########################################"
@@ -92,8 +92,10 @@ echo "##########################################"
 echo ""
 
 #unpack
-echo "mednafen_0.9.36.2-1.debian.tar.xz"
-tar xfJ mednafen_0.9.33.3-1.debian.tar.xz
+echo "unpacking template mednafen.debian.tar.xz"
+tar xfJ mednafen.debian.tar.xz
+#remove template
+rm mednafen.debian.tar.xz
 
 #move debian folder into source folder
 mv debian/ mednafen/

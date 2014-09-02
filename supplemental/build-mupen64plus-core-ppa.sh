@@ -107,7 +107,7 @@ tar cfj mupen64plus-core_orig.tar.bz2 mupen64plus-core
 mv mupen64plus-core_orig.tar.bz2 mupen64plus-core_$BASE.$PL.orig.tar.bz2
 
 echo "debian files"
-wget --tries=50 "https://launchpad.net/~sven-eckelmann/+archive/ubuntu/ppa-mupen64plus/+files/mupen64plus-core_2.0-7~ppa2~trusty.debian.tar.xz"
+wget --tries=50 "http://www.libregeek.org/RetroRig/Ubuntu-Trusty/templates/mupen64plus-core.debian.tar.xz"
 
 echo ""
 echo "##########################################"
@@ -116,10 +116,10 @@ echo "##########################################"
 echo ""
 
 #unpack
-echo "unpacking template mupen64plus-core_2.0-7~ppa2~trusty.debian.tar.xz"
-tar xfJ mupen64plus-core_2.0-7~ppa2~trusty.debian.tar.xz
+echo "unpacking template mupen64plus-core.debian.tar.xz"
+tar xfJ mupen64plus-core.debian.tar.xz
 #remove template
-rm mupen64plus-core_2.0-7~ppa2~trusty.debian.tar.xz
+rm mupen64plus-core.debian.tar.xz
 
 #move debian folder into source folder
 mv debian/ mupen64plus-core/

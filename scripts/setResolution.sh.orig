@@ -122,10 +122,16 @@ if parameterIsTrue "auto resolution"; then
   ps2_new_X=$1
   ps2_new_Y=$2
 
+<<<<<<< HEAD
+  #pcsx (PS2)
+  scd_new_X=$1
+  scd_new_Y=$2
+=======
   #dolphin
   dolphin_new_X=$1
   dolphin_new_Y=$2
   dolphin_monitor=$3
+>>>>>>> 99e5b003f4897d05e59fcf9d480eb62eed39b4ba
   
   ########################		
   #mupen64plus

@@ -3,9 +3,9 @@
 #======================================================================== 
 #
 # Author      : Jens-Christian Lache
-# Date        : 20140818
+# Date        : 20140831
 # Version     : 4.0.2
-# Descrition  : version 4.0.2 from Github, unpatched and unchanged
+# Description : version 4.0.2 from Github, Patch Level 1
 #               
 # ========================================================================
 
@@ -13,10 +13,10 @@
 BASE=2:4.0.2
 
 # define patch level
-PL=0
+PL=1.0
 
 #define branch
-BRANCH=4.0.2
+BRANCH=retrorig-4.0.2.1
 
 clear
 echo "#################################################################"
@@ -57,7 +57,8 @@ if [[ -n "$2" ]]; then
 			  libbluetooth-dev libglew-dev libgtk2.0-dev liblzo2-dev libopenal-dev libpolarssl-dev \
 			  libpulse-dev libreadline6-dev libsdl1.2-dev libsfml-dev libsoil-dev libsoundtouch-dev \
 			  libswscale-dev libminiupnpc-dev libwxbase3.0-dev libwxgtk3.0-dev libxext-dev \
-			  libxrandr-dev lsb-release pkg-config portaudio19-dev wx3.0-headers zlib1g-dev
+			  libxrandr-dev lsb-release pkg-config portaudio19-dev wx3.0-headers zlib1g-dev \
+			  libjack-dev libjack0
 
 else
   echo ""
@@ -115,7 +116,7 @@ tar cfj dolphin-emu_orig.tar.bz2 dolphin-emu
 mv dolphin-emu_orig.tar.bz2 dolphin-emu_$BASE.$PL.orig.tar.bz2
 
 echo "debian files"
-wget --tries=50 "https://launchpad.net/~glennric/+archive/ubuntu/dolphin-emu/+files/dolphin-emu_4.0-0ubuntu1~saucy.debian.tar.bz2"
+wget --tries=50 "http://www.libregeek.org/RetroRig/Ubuntu-Trusty/templates/dolphin-emu.debian.tar.bz2"
 
 echo ""
 echo "##########################################"
@@ -124,10 +125,10 @@ echo "##########################################"
 echo ""
 
 #unpack
-echo "unpacking template dolphin-emu_4.0-0ubuntu1~saucy.debian.tar.bz2"
-tar xfj dolphin-emu_4.0-0ubuntu1~saucy.debian.tar.bz2
+echo "unpacking template dolphin-emu.debian.tar.bz2"
+tar xfj dolphin-emu.debian.tar.bz2
 #remove template
-rm dolphin-emu_4.0-0ubuntu1~saucy.debian.tar.bz2
+rm dolphin-emu.debian.tar.bz2
 
 #move debian folder into source folder
 mv debian/ dolphin-emu/

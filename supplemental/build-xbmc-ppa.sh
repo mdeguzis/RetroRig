@@ -3,15 +3,15 @@
 #======================================================================== 
 #
 # Author:  Michael DeGuzis and Jens-Christian, 
-# Date:    20140823
-# Version: Patch Level 7
+# Date:    20140831
+# Version: Patch Level 8
 # ========================================================================
 
 #define base version
 BASE=3:13.1
 
 # define patch level
-PL=7
+PL=8
 
 #define xbmc branch to checkout
 BRANCH=gotham-retrorig-pl$PL
@@ -109,8 +109,7 @@ cd ..
 tar cfj xbmc_$BASE.$PL.orig.tar.bz2 xbmc
 
 echo "debian files"
-wget --tries=50 "https://launchpad.net/~aap/+archive/ubuntu/xbmc-release-fernetmenta/+files/xbmc_13.1-27182~e41281c-ppa1~trusty.debian.tar.bz2"
-
+wget --tries=50 "http://www.libregeek.org/RetroRig/Ubuntu-Trusty/templates/xbmc.debian.tar.bz2"
 echo ""
 echo "##########################################"
 echo "Unpacking debian files"
@@ -118,10 +117,10 @@ echo "##########################################"
 echo ""
 
 #unpack
-echo "unpacking template xbmc_13.1-27182~e41281c-ppa1~trusty.debian.tar.bz2"
-tar xfj xbmc_13.1-27182~e41281c-ppa1~trusty.debian.tar.bz2
+echo "unpacking template xbmc.debian.tar.bz2"
+tar xfj xbmc.debian.tar.bz2
 #remove template
-rm xbmc_13.1-27182~e41281c-ppa1~trusty.debian.tar.bz2
+rm xbmc.debian.tar.bz2
 
 #move debian folder into source folder
 mv debian/ xbmc/
@@ -218,7 +217,7 @@ case "$arg0" in
         ls -lah ~/packaging/xbmc
         echo ""
         echo ""
-        echo "you can upload the package with dput ppa:beauman/retrorig ~/packaging/xbmc/xbmc_$BASE.$PL""_source.changes"
+        echo "you can upload the package with dput ppa:beauman/retrorig ~/packaging/xbmc/xbmc_*_source.changes"
         echo "all good"
         echo ""
         echo ""
@@ -226,7 +225,7 @@ case "$arg0" in
         while true; do
             read -p "Do you wish to upload the source package?    " yn
             case $yn in
-                [Yy]* ) dput ppa:beauman/retrorig ~/packaging/xbmc/xbmc_$BASE.$PL""_source.changes; break;;
+                [Yy]* ) dput ppa:beauman/retrorig ~/packaging/xbmc/xbmc_*_source.changes; break;;
                 [Nn]* ) break;;
                 * ) echo "Please answer yes or no.";;
             esac
