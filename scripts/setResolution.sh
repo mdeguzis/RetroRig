@@ -121,6 +121,10 @@ if parameterIsTrue "auto resolution"; then
   #pcsx (PS2)
   ps2_new_X=$1
   ps2_new_Y=$2
+
+  #pcsx (PS2)
+  scd_new_X=$1
+  scd_new_Y=$2
   
   ########################		
   #mupen64plus
@@ -211,6 +215,13 @@ if parameterIsTrue "auto resolution"; then
   #make the changes, prefix new_X in case NULL was entered previously
   sed -i "s|$psx_org_X|psx.xres $psx_new_X|g" "$config_home/.mednafen/mednafen-09x.cfg"
   sed -i "s|$psx_org_Y|psx.yres $psx_new_Y|g" "$config_home/.mednafen/mednafen-09x.cfg"
+
+  # Gens GS (Sega CD)
+  gens_org_X=$(grep -Ee "\bOpenGL Width=\b" "/home/test/.retrorig/.gens/gens.cfg")
+  gens_org_Y=$(grep -Ee "\bOpenGL Height=\b" "/home/test/.retrorig/.gens/gens.cfg")
+  #make the changes, prefix new_X in case NULL was entered previously
+  sed -i "s|$gens_org_X|OpenGL Width= $gens_new_X|g" "$config_home/.mednafen/mednafen-09x.cfg"
+  sed -i "s|$gens_org_Y|OpenGL Height= $gens_new_Y|g" "$config_home/.mednafen/mednafen-09x.cfg"
 
   ########################    
   # pcsx2

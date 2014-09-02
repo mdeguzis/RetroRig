@@ -11,6 +11,15 @@
 			<finished>false</finished>
 		</category>
 		<category>
+			<id>3e1af442184bf24ba6e98df5185fdab8_2</id>
+			<name>Extra</name>
+			<thumb></thumb>
+			<fanart></fanart>
+			<genre></genre>
+			<description></description>
+			<finished>false</finished>
+		</category>
+		<category>
 			<id>6e961fc526e5e94777f290581d0a4a48</id>
 			<name>Ubuntu System Settings</name>
 			<thumb></thumb>
@@ -22,15 +31,6 @@
 		<category>
 			<id>3e1af442184bf24ba6e98df5185fdab8</id>
 			<name>Utilities / Tools</name>
-			<thumb></thumb>
-			<fanart></fanart>
-			<genre></genre>
-			<description></description>
-			<finished>false</finished>
-		</category>
-		<category>
-			<id>3e1af442184bf24ba6e98df5185fdab8_2</id>
-			<name>Extra</name>
 			<thumb></thumb>
 			<fanart></fanart>
 			<genre></genre>
@@ -70,6 +70,56 @@
 			<category>default</category>
 			<application>/usr/games/dolphin-emu</application>
 			<args></args>
+			<rompath></rompath>
+			<thumbpath></thumbpath>
+			<fanartpath></fanartpath>
+			<trailerpath></trailerpath>
+			<custompath></custompath>
+			<romext></romext>
+			<platform>Linux</platform>
+			<thumb></thumb>
+			<fanart></fanart>
+			<genre></genre>
+			<release></release>
+			<publisher></publisher>
+			<launcherplot></launcherplot>
+			<finished>false</finished>
+			<minimize>false</minimize>
+			<lnk></lnk>
+			<roms>
+			</roms>
+		</launcher>
+		<launcher>
+			<id>3592178e384cbd43f74a7bb506850e9e_2</id>
+			<name>Firefox Web Browser</name>
+			<category>3e1af442184bf24ba6e98df5185fdab8_2</category>
+			<application>/usr/bin/firefox</application>
+			<args></args>
+			<rompath></rompath>
+			<thumbpath></thumbpath>
+			<fanartpath></fanartpath>
+			<trailerpath></trailerpath>
+			<custompath></custompath>
+			<romext></romext>
+			<platform>Linux</platform>
+			<thumb></thumb>
+			<fanart></fanart>
+			<genre></genre>
+			<release></release>
+			<publisher></publisher>
+			<launcherplot></launcherplot>
+			<finished>false</finished>
+			<minimize>false</minimize>
+			<lnk></lnk>
+			<roms>
+			</roms>
+		</launcher>
+		<launcher>
+			<id>369391b6fb7e88576b15411bb921840d</id>
+			<name>Gens/GS (Main Configuration)</name>
+			<category>default</category>
+			<application>/usr/bin/gedit</application>
+			<args>config_temp/.gens/gens.cfg</args>
 			<rompath></rompath>
 			<thumbpath></thumbpath>
 			<fanartpath></fanartpath>
@@ -240,31 +290,6 @@
 			</roms>
 		</launcher>
 		<launcher>
-			<id>3592178e384cbd43f74a7bb506850e9e</id>
-			<name>Qjoypad</name>
-			<category>3e1af442184bf24ba6e98df5185fdab8</category>
-			<application>/usr/bin/qjoypad</application>
-			<args>--no tray</args>
-			<rompath></rompath>
-			<thumbpath></thumbpath>
-			<fanartpath></fanartpath>
-			<trailerpath></trailerpath>
-			<custompath></custompath>
-			<romext></romext>
-			<platform>Linux</platform>
-			<thumb></thumb>
-			<fanart></fanart>
-			<genre></genre>
-			<release></release>
-			<publisher></publisher>
-			<launcherplot></launcherplot>
-			<finished>false</finished>
-			<minimize>false</minimize>
-			<lnk></lnk>
-			<roms>
-			</roms>
-		</launcher>
-		<launcher>
 			<id>69acefb6b11bf7da54ba14b9426c093f_2</id>
 			<name>Stella</name>
 			<category>default</category>
@@ -272,31 +297,6 @@
 			<args></args>
 			<rompath></rompath>
 			<thumbpath>/home/test/.retrorig/</thumbpath>
-			<fanartpath></fanartpath>
-			<trailerpath></trailerpath>
-			<custompath></custompath>
-			<romext></romext>
-			<platform>Linux</platform>
-			<thumb></thumb>
-			<fanart></fanart>
-			<genre></genre>
-			<release></release>
-			<publisher></publisher>
-			<launcherplot></launcherplot>
-			<finished>false</finished>
-			<minimize>false</minimize>
-			<lnk></lnk>
-			<roms>
-			</roms>
-		</launcher>
-		<launcher>
-			<id>bae6c5949b359f995c0dcd7907ef8b60</id>
-			<name>Update System</name>
-			<category>6e961fc526e5e94777f290581d0a4a48</category>
-			<application>/usr/bin/python3</application>
-			<args>/usr/bin/update-manager</args>
-			<rompath></rompath>
-			<thumbpath></thumbpath>
 			<fanartpath></fanartpath>
 			<trailerpath></trailerpath>
 			<custompath></custompath>
@@ -340,11 +340,11 @@
 			</roms>
 		</launcher>
 		<launcher>
-			<id>3592178e384cbd43f74a7bb506850e9e_2</id>
-			<name>Firefox Web Browser</name>
-			<category>3e1af442184bf24ba6e98df5185fdab8_2</category>
-			<application>/usr/bin/firefox</application>
-			<args></args>
+			<id>bae6c5949b359f995c0dcd7907ef8b60</id>
+			<name>Update System</name>
+			<category>6e961fc526e5e94777f290581d0a4a48</category>
+			<application>/usr/bin/python3</application>
+			<args>/usr/bin/update-manager</args>
 			<rompath></rompath>
 			<thumbpath></thumbpath>
 			<fanartpath></fanartpath>

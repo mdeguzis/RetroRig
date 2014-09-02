@@ -293,8 +293,12 @@ if [ "$choices" != "" ]; then
 		echo "" >> "$scriptdir/logs/res.txt"
 		# PCSX2
 		echo "PCSX2" >> "$scriptdir/logs/res.txt"
-		grep -Ee "\bresx = \b" "/home/test/.config/pcsx2/inis/GSdx.ini" >> "$scriptdir/logs/res.txt"
-		grep -Ee "\bresy = \b" "/home/test/.config/pcsx2/inis/GSdx.ini" >> "$scriptdir/logs/res.txt"
+		grep -Ee "\bresx = \b" "$config_home/pcsx2/inis/GSdx.ini" >> "$scriptdir/logs/res.txt"
+		grep -Ee "\bresy = \b" "$config_home/pcsx2/inis/GSdx.ini" >> "$scriptdir/logs/res.txt"
+		# Gens GS (Sega CD/32X)
+		echo "Gens GS" >> "$scriptdir/logs/res.txt"
+		grep -Ee "\bOpenGL Width=\b" "$config_home/.gens/gens.cfg" >> "$scriptdir/logs/res.txt"
+		grep -Ee "\bOpenGL Height=\b" "$config_home/.gens/gens.cfg" >> "$scriptdir/logs/res.txt"
 	
 		#report current resolution
 		dialog --textbox "$scriptdir/logs/res.txt" 33 0
@@ -336,6 +340,9 @@ if [ "$choices" != "" ]; then
 		#set pcsx2 (PS2) value
 		ps2_new_X="1280"
 		ps2_new_Y="720"
+		# gens gs (CD/32X)
+		gens_new_X="1280"
+		gens_new_Y="720"
 		#set stella (Atari 2600)
 		st_new="1280x720"
 		# set the resolution with helper
@@ -377,6 +384,9 @@ if [ "$choices" != "" ]; then
 		#set pcsx2 (PS2) value
 		ps2_new_X="1280"
 		ps2_new_Y="1024"
+		# gens gs (CD/32X)
+		gens_new_X="1280"
+		gens_new_Y="1024"
 		#set stella (Atari 2600)
 		st_new="1280x1024"
 		# set the resolution with helper
@@ -418,6 +428,9 @@ if [ "$choices" != "" ]; then
 		#set pcsx2 (PS2) value
 		ps2_new_X="1360"
 		ps2_new_Y="768"
+		# gens gs (CD/32X)
+		gens_new_X="1360"
+		gens_new_Y="768"
 		#set stella (Atari 2600)
 		st_new="1360x768"
 		# set the resolution with helper
@@ -432,33 +445,36 @@ if [ "$choices" != "" ]; then
 		#set mupen64plus value
 		m_new_X="1600"
 		m_new_Y="900"
-		#set mednafen (GBC) value
+		# set mednafen (GBC) value
 		gb_new_X="1600"
 		gb_new_Y="900"
-		#set mednafen (GBA) value
+		# set mednafen (GBA) value
 		gba_new_X="1600"
 		gba_new_Y="900"
-		#set mednafen (NES) value
+		# set mednafen (NES) value
 		nes_new_X="1600"
 		nes_new_Y="900"
-		#set mednafen (SNES) value
+		# set mednafen (SNES) value
 		snes_new_X="1600"
 		snes_new_Y="900"
-		#set mednafen (Sega Master System) value
+		# set mednafen (Sega Master System) value
 		sms_new_X="1600"
 		sms_new_Y="900"
-		#set mednafen (Sega Game Gear) value
+		# set mednafen (Sega Game Gear) value
 		gg_new_X="1600"
 		gg_new_Y="900"
-		#set mednafen (Turbographx 16) value
+		# set mednafen (Turbographx 16) value
 		pce_new_X="1600"
 		pce_new_Y="900"
-		#set mednafen (PSX) value
+		# set mednafen (PSX) value
 		psx_new_X="1600"
 		psx_new_Y="900"
-		#set pcsx2 (PS2) value
+		# set pcsx2 (PS2) value
 		ps2_new_X="1600"
 		ps2_new_Y="900"
+		# gens gs (CD/32X)
+		gens_new_X="1600"
+		gens_new_Y="900"
 		#set stella (Atari 2600)
 		st_new="1600x900"
 		# set the resolution with helper
@@ -469,38 +485,41 @@ if [ "$choices" != "" ]; then
 		return
 		;;
 	7) 
-		#setting chosen: "1920x1080 (1080p) (16:9)"
-		#set mupen64plus value
+		# setting chosen: "1920x1080 (1080p) (16:9)"
+		# set mupen64plus value
 		m_new_X="1920"
 		m_new_Y="1080"
-		#set mednafen (GBC) value
+		# set mednafen (GBC) value
 		gb_new_X="1920"
 		gb_new_Y="1080"
-		#set mednafen (GBA) value
+		# set mednafen (GBA) value
 		gba_new_X="1920"
 		gba_new_Y="1080"
-		#set mednafen (NES) value
+		# set mednafen (NES) value
 		nes_new_X="1920"
 		nes_new_Y="1080"
-		#set mednafen (SNES) value
+		# set mednafen (SNES) value
 		snes_new_X="1920"
 		snes_new_Y="1080"
-		#set mednafen (Sega Master System) value
+		# set mednafen (Sega Master System) value
 		sms_new_X="1920"
 		sms_new_Y="1080"
-		#set mednafen (Sega Game Gear) value
+		# set mednafen (Sega Game Gear) value
 		gg_new_X="1920"
 		gg_new_Y="1080"
-		#set mednafen (Turbographx 16) value
+		# set mednafen (Turbographx 16) value
 		pce_new_X="1920"
 		pce_new_Y="1080"
-		#set mednafen (PSX) value
+		# set mednafen (PSX) value
 		psx_new_X="1920"
 		psx_new_Y="1080"
-		#set pcsx2 (PS2) value
+		# set pcsx2 (PS2) value
 		ps2_new_X="1920"
 		ps2_new_Y="1080"
-		#set stella (Atari 2600)
+		# gens gs (CD/32X)
+		gens_new_X="1920"
+		gens_new_Y="1080"
+		# set stella (Atari 2600)
 		st_new="1920x1080"
 		# set the resolution with helper
 		h_res_switcher
@@ -511,42 +530,45 @@ if [ "$choices" != "" ]; then
 		;;    
 	8) 
 		dialog --infobox  "Setting resolution from user input" 3 40
-		#set new resolution(s) from user input
+		# set new resolution(s) from user input
 		dialog --title "Set Custom Resolution" --inputbox "Enter Width (X)" 10 4 2> /tmp/new_X
 		dialog --title "Set Custom Resolution" --inputbox "Enter Length (Y)" 10 4 2> /tmp/new_Y
 
-		#set new resolution(s) from configs
-		#mupen64plus
+		# set new resolution(s) from configs
+		# mupen64plus
 		m_new_X=$(cat '/tmp/new_X')
 		m_new_Y=$(cat '/tmp/new_Y')
-		#mednafen (GBC)
+		# mednafen (GBC)
 		gb_new_X=$(cat '/tmp/new_X')
 		gb_new_Y=$(cat '/tmp/new_Y')
-		#mednafen (GBA)
+		# mednafen (GBA)
 		gba_new_X=$(cat '/tmp/new_X')
 		gba_new_Y=$(cat '/tmp/new_Y')
-		#mednafen (NES)
+		# mednafen (NES)
 		nes_new_X=$(cat '/tmp/new_X')
 		nes_new_Y=$(cat '/tmp/new_Y')
-		#mednafen (SNES)
+		# mednafen (SNES)
 		snes_new_X=$(cat '/tmp/new_X')
 		snes_new_Y=$(cat '/tmp/new_Y')
-		#mednafen (Sega Master System)
+		# mednafen (Sega Master System)
 		sms_new_X=$(cat '/tmp/new_X')
 		sms_new_Y=$(cat '/tmp/new_Y')
-		#mednafen (Sega Game Gear)
+		# mednafen (Sega Game Gear)
 		gg_new_X=$(cat '/tmp/new_X')
 		gg_new_Y=$(cat '/tmp/new_Y')
-		#mednafen (Turbographx 16)
+		# mednafen (Turbographx 16)
 		pce_new_X=$(cat '/tmp/new_X')
 		pce_new_Y=$(cat '/tmp/new_Y')
-		#mednafen (PSX)
+		# mednafen (PSX)
 		psx_new_X=$(cat '/tmp/new_X')
 		psx_new_Y=$(cat '/tmp/new_Y')
-		#pcsx (PS2)
+		# pcsx (PS2)
 		ps2_new_X=$(cat '/tmp/new_X')
 		ps2_new_Y=$(cat '/tmp/new_Y')
-		#set stella (Atari 2600)
+		# gens gs (CD/32X)
+		gens_new_X=$(cat '/tmp/new_X')
+		gens_new_Y=$(cat '/tmp/new_Y')
+		# set stella (Atari 2600)
 		st1=$(cat '/tmp/new_X')
 		stdelim=$('x')
 		st2=$(cat '/tmp/new_Y')

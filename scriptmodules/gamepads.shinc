@@ -23,27 +23,27 @@ function gp_ps3_blu()
 	#mame
 	# default path: /home/$USER/.mame
 	# Main config
-	cp -v "$scriptdir/emu-cfgs/ps3_blu_controller/MAME/default.cfg" "$config_home/.mame/cfg"
-	cp -v "$scriptdir/emu-cfgs/ps3_blu_controller/MAME/mame.ini" "$config_home/.mame"
+	cp -v "$scriptdir/emu-cfgs/ps3_blu_controller/MAME/default.cfg" "$config_home/.mame/cfg/"
+	cp -v "$scriptdir/emu-cfgs/ps3_blu_controller/MAME/mame.ini" "$config_home/.mame/"
  
 	# offline artwork scrapper configs
-	cp -v "$scriptdir/emu-cfgs/ps3_blu_controller/MAME/parserConfig.xml" "$rootdir/Artwork/MAME"
-	cp -v "$scriptdir/emu-cfgs/ps3_blu_controller/MAME/MAME.txt" "$rootdir/Artwork/MAME"
-	cp -v "$scriptdir/emu-cfgs/ps3_blu_controller/MAME/MAME synopsis RCB 201202.zip" "$rootdir/Artwork/MAME"
+	cp -v "$scriptdir/emu-cfgs/ps3_blu_controller/MAME/parserConfig.xml" "$rootdir/Artwork/MAME/"
+	cp -v "$scriptdir/emu-cfgs/ps3_blu_controller/MAME/MAME.txt" "$rootdir/Artwork/MAME/"
+	cp -v "$scriptdir/emu-cfgs/ps3_blu_controller/MAME/MAME synopsis RCB 201202.zip" "$rootdir/Artwork/MAME/"
 
 	# mess
 	# default path: /home/$USER/.retrorig/.mess
 	# Main config
-	cp -v "$scriptdir/emu-cfgs/ps3_blu_controller/MESS/mess.ini" "$config_home/.mess"
-	cp -v "$scriptdir/emu-cfgs/ps3_blu_controller/MESS/default.cfg" "$config_home/.mess/cfg"
-	cp -v "$scriptdir/emu-cfgs/ps3_blu_controller/MESS/neocdz.cfg" "$config_home/.mess/cfg"
-	cp -v "$scriptdir/emu-cfgs/ps3_blu_controller/MESS/aes.cfg" "$config_home/.mess/cfg"
-	cp -v "$scriptdir/emu-cfgs/ps3_blu_controller/MESS/default.cfg" "$config_home/.mess/cfg"
+	cp -v "$scriptdir/emu-cfgs/ps3_blu_controller/MESS/mess.ini" "$config_home/.mess/"
+	cp -v "$scriptdir/emu-cfgs/ps3_blu_controller/MESS/default.cfg" "$config_home/.mess/cfg/"
+	cp -v "$scriptdir/emu-cfgs/ps3_blu_controller/MESS/neocdz.cfg" "$config_home/.mess/cfg/"
+	cp -v "$scriptdir/emu-cfgs/ps3_blu_controller/MESS/aes.cfg" "$config_home/.mess/cfg/"
+	cp -v "$scriptdir/emu-cfgs/ps3_blu_controller/MESS/default.cfg" "$config_home/.mess/cfg/"
 
 	# mednafen
 	# default path: /home/$USER/.retrorig/.mednafen
 	# Main config
-	cp -v "$scriptdir/emu-cfgs/ps3_blu_controller/mednafen/mednafen-09x.cfg" "$config_home/.mednafen"
+	cp -v "$scriptdir/emu-cfgs/ps3_blu_controller/mednafen/mednafen-09x.cfg" "$config_home/.mednafen/"
 
 	# mupen64plus
 	# default path: /home/$USER/.retrorig/.config/mupen64plus
@@ -73,8 +73,11 @@ function gp_ps3_blu()
 	cp -v "$scriptdir/emu-cfgs/ps3_blu_controller/Stella/stellarc" "$config_home/.stella/"
 
 	# PPSSPP
-	cp -v "$scriptdir/emu-cfgs/ps3_blu_controller/PPSSPP/ppsspp.ini" "$config_home/.config/ppsspp/PSP/SYSTEM"
-	cp -v "$scriptdir/emu-cfgs/ps3_blu_controller/PPSSPP/controls.ini" "$config_home/.config/ppsspp/PSP/SYSTEM"
+	cp -v "$scriptdir/emu-cfgs/ps3_blu_controller/PPSSPP/ppsspp.ini" "$config_home/.config/ppsspp/PSP/SYSTEM/"
+	cp -v "$scriptdir/emu-cfgs/ps3_blu_controller/PPSSPP/controls.ini" "$config_home/.config/ppsspp/PSP/SYSTEM/"
+
+	# Gens GS (Sega CD/32X)
+	cp -v "$scriptdir/emu-cfgs/ps3_blu_controller/GensGS/gens.cfg" "$config_home/.gens/"
 
 	###########################################################
 	# Add emulator specifc control remaps here for qjoypad
@@ -82,6 +85,7 @@ function gp_ps3_blu()
 	# !!! Removed in favor of anitmicro since 0.9.5b !!!
 	###########################################################
 
+	# copy in fresh copy of RCB's config.xml to make replacements
 	cp -v "$scriptdir/XBMC-cfgs/userdata/addon_data/script.games.rom.collection.browser/config.xml" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/"
 
 	# blacklist xpad
@@ -103,6 +107,8 @@ function gp_ps3_blu()
 	cp -v "$rootdir/gamepad-cfgs/ps3_blu_controller/am_mednafen_gen_ps3_blu.joystick.xml" "$config_home/.config/antimicro/"
 	cp -v "$rootdir/gamepad-cfgs/ps3_blu_controller/am_mednafen_ps1_ps3_blu.joystick.xml" "$config_home/.config/antimicro/"
 	cp -v "$rootdir/gamepad-cfgs/ps3_blu_controller/am_ppsspp_ps3_blu.joystick.xml" "$config_home/.config/antimicro/"
+	cp -v "$rootdir/gamepad-cfgs/ps3_blu_controller/am_gensgs_ps3_blu.joystick.xml" "$config_home/.config/antimicro/"
+	cp -v "$rootdir/gamepad-cfgs/ps3_blu_controller/am_dolphin_ps3_blu.joystick.xml" "$config_home/.config/antimicro/"
 
 	#####################
 	# PCSX2
@@ -170,6 +176,19 @@ function gp_ps3_blu()
 	sed -i "s|$old_pre|$new_pre|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
 	sed -i "s|$old_post|$new_post|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
 
+
+	########################
+	# Gens GS (Sega CD/32X)
+	########################
+
+	old_pre="gens_pre"
+	old_post="gens_post"
+	new_pre="antimicro --hidden --profile $config_home/.config/antimicro/am_gensgs_ps3_blu.joystick.xml \&amp;"
+	# The line below is only for good measure
+	new_post="killall antimicro"
+	# perform actual changes
+	sed -i "s|$old_pre|$new_pre|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
+	sed -i "s|$old_post|$new_post|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
 
 	# The PS3 pairing process should be handled interactively in a seperate function:
 	gp_ps3_blu_main
@@ -355,7 +374,7 @@ function ps3_set_ctrl_assignments()
 	# Set PS3 Blu MAC value with the "joydetect" C program
 	# Credit for this goes entirely to http://www.reddit.com/user/ElFeesho
  	PS3_MAC_BLU=$($scriptdir/supplemental/joydetect /dev/input/js0 | awk -F'[^:[a-zA-Z0-9]*' '{print $6}')
-	echo -e "\nController ID/MAC Address applied to XBMC/emulators was:\n$PS3_MAC_BLU \n"
+	echo -e "\nController ID/MAC Address applied to XBMC controls was:\n$PS3_MAC_BLU \n"
 	sleep 2s
 
 	# copy over default keyboard file:
@@ -532,6 +551,9 @@ function gp_ps3_usb()
 	cp -v "$scriptdir/emu-cfgs/ps3_usb_controller/PPSSPP/ppsspp.ini" "$config_home/.config/ppsspp/PSP/SYSTEM"
 	cp -v "$scriptdir/emu-cfgs/ps3_usb_controller/PPSSPP/controls.ini" "$config_home/.config/ppsspp/PSP/SYSTEM"
 
+	# Gens GS (Sega CD/32X)
+	cp -v "$scriptdir/emu-cfgs/ps3_usb_controller/GensGS/gens.cfg" "$config_home/.gens/"
+
 	##############################################################
 	# Set system objects
 	##############################################################
@@ -609,6 +631,7 @@ RetorRig loads to use the gamepad" 14 60
 	# !!! Removed in favor of anitmicro since 0.9.5b !!!
 	###########################################################
 
+	# copy in fresh copy of RCB's config.xml to make replacements
 	cp -v "$scriptdir/XBMC-cfgs/userdata/addon_data/script.games.rom.collection.browser/config.xml" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/"
 
 	# blacklist xpad
@@ -625,11 +648,13 @@ RetorRig loads to use the gamepad" 14 60
 	###############################################################################################
 
 	# copy in profiles for emulators (antimicro)
-	cp -v "$rootdir/gamepad-cfgs/ps3_blu_controller/antimicro_settings.ini" "$config_home/.config/antimicro/"
-	cp -v "$rootdir/gamepad-cfgs/ps3_blu_controller/am_pcsx2_ps3_usb.joystick.xml" "$config_home/.config/antimicro/"
-	cp -v "$rootdir/gamepad-cfgs/ps3_blu_controller/am_mednafen_gen_ps3_usb.joystick.xml" "$config_home/.config/antimicro/"
-	cp -v "$rootdir/gamepad-cfgs/ps3_blu_controller/am_mednafen_ps1_ps3_usb.joystick.xml" "$config_home/.config/antimicro/"
-	cp -v "$rootdir/gamepad-cfgs/ps3_blu_controller/am_ppsspp_ps3_usb.joystick.xml" "$config_home/.config/antimicro/"
+	cp -v "$rootdir/gamepad-cfgs/ps3_usb_controller/antimicro_settings.ini" "$config_home/.config/antimicro/"
+	cp -v "$rootdir/gamepad-cfgs/ps3_usb_controller/am_pcsx2_ps3_usb.joystick.xml" "$config_home/.config/antimicro/"
+	cp -v "$rootdir/gamepad-cfgs/ps3_usb_controller/am_mednafen_gen_ps3_usb.joystick.xml" "$config_home/.config/antimicro/"
+	cp -v "$rootdir/gamepad-cfgs/ps3_usb_controller/am_mednafen_ps1_ps3_usb.joystick.xml" "$config_home/.config/antimicro/"
+	cp -v "$rootdir/gamepad-cfgs/ps3_usb_controller/am_dolphin_ps3_usb.joystick.xml" "$config_home/.config/antimicro/"
+	cp -v "$rootdir/gamepad-cfgs/ps3_usb_controller/am_ppsspp_ps3_usb.joystick.xml" "$config_home/.config/antimicro/"
+	cp -v "$rootdir/gamepad-cfgs/ps3_usb_controller/am_gensgs_ps3_blu.joystick.xml" "$config_home/.config/antimicro/"
 
 	#####################
 	# PCSX2
@@ -691,6 +716,19 @@ RetorRig loads to use the gamepad" 14 60
 	old_pre="dolphin_pre"
 	old_post="dolphin_post"
 	new_pre="antimicro --hidden --profile $config_home/.config/antimicro/am_dolphin_ps3_usb.joystick.xml \&amp;"
+	# The line below is only for good measure
+	new_post="killall antimicro"
+	# perform actual changes
+	sed -i "s|$old_pre|$new_pre|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
+	sed -i "s|$old_post|$new_post|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
+
+	########################
+	# Gens GS (Sega CD/32X)
+	########################
+
+	old_pre="gens_pre"
+	old_post="gens_post"
+	new_pre="antimicro --hidden --profile $config_home/.config/antimicro/am_gensgs_ps3_usb.joystick.xml \&amp;"
 	# The line below is only for good measure
 	new_post="killall antimicro"
 	# perform actual changes
@@ -792,6 +830,9 @@ function gp_x360_wireless()
 	cp -v "$scriptdir/emu-cfgs/x360_wireless_controller/PPSSPP/ppsspp.ini" "$config_home/.config/ppsspp/PSP/SYSTEM"
 	cp -v "$scriptdir/emu-cfgs/x360_wireless_controller/PPSSPP/controls.ini" "$config_home/.config/ppsspp/PSP/SYSTEM"
 
+	# Gens GS (Sega CD/32X)
+	cp -v "$scriptdir/emu-cfgs/x360_wireless_controller/GensGS/gens.cfg" "$config_home/.gens/"
+
 	#######################################################
 	# configure xboxdrv for 360 gamepad (wireless)
 	#######################################################
@@ -870,6 +911,12 @@ RetorRig loads to use the gamepad" 14 60
 	# !!! Removed in favor of anitmicro since 0.9.5b !!!
 	###########################################################
 
+	# copy in fresh copy of RCB's config.xml to make replacements
+	cp -v "$scriptdir/XBMC-cfgs/userdata/addon_data/script.games.rom.collection.browser/config.xml" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/"
+
+	# blacklist xpad
+	cp -v "$rootdir/init-scripts/x360_wireless_controller/blacklist.conf" "/etc/modprobe.d/"
+
 	###########################################################
 	# Add emulator specifc control remaps here for AniMicro
 	###########################################################
@@ -884,6 +931,7 @@ RetorRig loads to use the gamepad" 14 60
 	cp -v "$rootdir/gamepad-cfgs/x360_wireless_controller/am_mednafen_ps1_x360_wireless.joystick.xml" "$config_home/.config/antimicro/"
 	cp -v "$rootdir/gamepad-cfgs/x360_wireless_controller/am_ppsspp_x360_wireless.joystick.xml" "$config_home/.config/antimicro/"
 	cp -v "$rootdir/gamepad-cfgs/x360_wireless_controller/am_dolphin_x360_wireless.joystick.xml" "$config_home/.config/antimicro/"
+	cp -v "$rootdir/gamepad-cfgs/x360_wireless_controller/am_gensgs_x360_wireless.joystick.xml" "$config_home/.config/antimicro/"
 
 	#####################
 	# PCSX2
@@ -946,6 +994,19 @@ RetorRig loads to use the gamepad" 14 60
 	new_pre="antimicro --hidden --profile $config_home/.config/antimicro/am_ppsspp_x360_wireless.joystick.xml \&amp;"
 	# The line below is only for good measure
 	new_post="killall pcsx2 antimicro"
+	# perform actual changes
+	sed -i "s|$old_pre|$new_pre|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
+	sed -i "s|$old_post|$new_post|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
+
+	########################
+	# Gens GS (Sega CD/32X)
+	########################
+
+	old_pre="gens_pre"
+	old_post="gens_post"
+	new_pre="antimicro --hidden --profile $config_home/.config/antimicro/am_gensgs_x360_wireless.joystick.xml \&amp;"
+	# The line below is only for good measure
+	new_post="killall antimicro"
 	# perform actual changes
 	sed -i "s|$old_pre|$new_pre|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
 	sed -i "s|$old_post|$new_post|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
@@ -1048,6 +1109,9 @@ function gp_x360_usb()
 	cp -v "$scriptdir/emu-cfgs/x360_usb_controller/PPSSPP/ppsspp.ini" "$config_home/.config/ppsspp/PSP/SYSTEM"
 	cp -v "$scriptdir/emu-cfgs/x360_usb_controller/PPSSPP/controls.ini" "$config_home/.config/ppsspp/PSP/SYSTEM"
 
+	# Gens GS (Sega CD/32X)
+	cp -v "$scriptdir/emu-cfgs/x360_usb_controller/GensGS/gens.cfg" "$config_home/.gens/"
+
 	############################################
 	# configure xboxdrv for 360 gamepad (USB)
 	############################################
@@ -1081,7 +1145,7 @@ function gp_x360_usb()
 	# inform user that you must have controller connected or restart
 	dialog --msgbox "The xboxdrv userland module detects the number of USB PS3 controllers connected \
 when it starts. Therefore, we must specify how many you have connected or want to use. \
-You must reboot to have these changes take effect. If you tell xboxdrv I have 3 controllers, when you only have one, \
+Please reboot to have these changes take effect! If you tell xboxdrv I have 3 controllers, when you only have one, \
 the service may fail to start correctly.\n\nPlease see /etc/default/xboxdrv for more. Press the PS Button after \
 RetorRig loads to use the gamepad" 14 60
 
@@ -1126,6 +1190,12 @@ RetorRig loads to use the gamepad" 14 60
 	# !!! Removed in favor of anitmicro since 0.9.5b !!!
 	###########################################################
 
+	# copy in fresh copy of RCB's config.xml to make replacements
+	cp -v "$scriptdir/XBMC-cfgs/userdata/addon_data/script.games.rom.collection.browser/config.xml" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/"
+
+	# blacklist xpad
+	cp -v "$rootdir/init-scripts/x360_usb_controller/blacklist.conf" "/etc/modprobe.d/"
+
 	###########################################################
 	# Add emulator specifc control remaps here for AniMicro
 	###########################################################
@@ -1134,12 +1204,13 @@ RetorRig loads to use the gamepad" 14 60
 	###########################################################
 
 	# copy in profiles for emulators (antimicro)
-	cp -v "$rootdir/gamepad-cfgs/x360_wireless_controller/antimicro_settings.ini" "$config_home/.config/antimicro/"
-	cp -v "$rootdir/gamepad-cfgs/x360_wireless_controller/am_pcsx2_x360_usb.joystick.xml" "$config_home/.config/antimicro/"
-	cp -v "$rootdir/gamepad-cfgs/x360_wireless_controller/am_mednafen_gen_x360_usb.joystick.xml" "$config_home/.config/antimicro/"
-	cp -v "$rootdir/gamepad-cfgs/x360_wireless_controller/am_mednafen_ps1_x360_usb.joystick.xml" "$config_home/.config/antimicro/"
-	cp -v "$rootdir/gamepad-cfgs/x360_wireless_controller/am_ppsspp_x360_usb.joystick.xml" "$config_home/.config/antimicro/"
-	cp -v "$rootdir/gamepad-cfgs/x360_wireless_controller/am_dolphin_x360_usb.joystick.xml" "$config_home/.config/antimicro/"
+	cp -v "$rootdir/gamepad-cfgs/x360_usb_controller/antimicro_settings.ini" "$config_home/.config/antimicro/"
+	cp -v "$rootdir/gamepad-cfgs/x360_usb_controller/am_pcsx2_x360_usb.joystick.xml" "$config_home/.config/antimicro/"
+	cp -v "$rootdir/gamepad-cfgs/x360_usb_controller/am_mednafen_gen_x360_usb.joystick.xml" "$config_home/.config/antimicro/"
+	cp -v "$rootdir/gamepad-cfgs/x360_usb_controller/am_mednafen_ps1_x360_usb.joystick.xml" "$config_home/.config/antimicro/"
+	cp -v "$rootdir/gamepad-cfgs/x360_usb_controller/am_ppsspp_x360_usb.joystick.xml" "$config_home/.config/antimicro/"
+	cp -v "$rootdir/gamepad-cfgs/x360_usb_controller/am_dolphin_x360_usb.joystick.xml" "$config_home/.config/antimicro/"
+	cp -v "$rootdir/gamepad-cfgs/x360_usb_controller/am_gensgs_x360_usb.joystick.xml" "$config_home/.config/antimicro/"
 
 	#####################
 	# PCSX2
@@ -1202,6 +1273,19 @@ RetorRig loads to use the gamepad" 14 60
 	new_pre="antimicro --hidden --profile $config_home/.config/antimicro/am_ppsspp_x360_usb.joystick.xml \&amp;"
 	# The line below is only for good measure
 	new_post="killall pcsx2 antimicro"
+	# perform actual changes
+	sed -i "s|$old_pre|$new_pre|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
+	sed -i "s|$old_post|$new_post|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
+
+	########################
+	# Gens GS (Sega CD/32X)
+	########################
+
+	old_pre="gens_pre"
+	old_post="gens_post"
+	new_pre="antimicro --hidden --profile $config_home/.config/antimicro/am_gensgs_x360_usb.joystick.xml \&amp;"
+	# The line below is only for good measure
+	new_post="killall antimicro"
 	# perform actual changes
 	sed -i "s|$old_pre|$new_pre|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
 	sed -i "s|$old_post|$new_post|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"

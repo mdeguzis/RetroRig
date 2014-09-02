@@ -164,15 +164,15 @@
       <gameclient />
       <emulatorCmd>/usr/games/mednafen</emulatorCmd>
       <emulatorParams>"%ROM%"</emulatorParams>
-      <romPath>installdir_temp/ROMs/Genesis/*.bin</romPath>
-      <romPath>installdir_temp/ROMs/Genesis/*.zip</romPath>
+      <romPath>installdir_temp/ROMs/Sega Genesis/*.bin</romPath>
+      <romPath>installdir_temp/ROMs/Sega Genesis/*.zip</romPath>
       <saveStatePath />
       <saveStateParams />
-      <mediaPath type="boxfront">installdir_temp/Artwork/Genesis/boxfront/%GAME%.*</mediaPath>
-      <mediaPath type="boxback">installdir_temp/Artwork/Genesis/boxback/%GAME%.*</mediaPath>
-      <mediaPath type="cartridge">installdir_temp/Artwork/Genesis/cartridge/%GAME%.*</mediaPath>
-      <mediaPath type="screenshot">installdir_temp/Artwork/Genesis/screenshot/%GAME%.*</mediaPath>
-      <mediaPath type="fanart">installdir_temp/Artwork/Genesis/fanart/%GAME%.*</mediaPath>
+      <mediaPath type="boxfront">installdir_temp/Artwork/Sega Genesis/boxfront/%GAME%.*</mediaPath>
+      <mediaPath type="boxback">installdir_temp/Artwork/Sega Genesis/boxback/%GAME%.*</mediaPath>
+      <mediaPath type="cartridge">installdir_temp/Artwork/Sega Genesis/cartridge/%GAME%.*</mediaPath>
+      <mediaPath type="screenshot">installdir_temp/Artwork/Sega Genesis/screenshot/%GAME%.*</mediaPath>
+      <mediaPath type="fanart">installdir_temp/Artwork/Sega Genesis/fanart/%GAME%.*</mediaPath>
       <preCmd>med_gen_pre</preCmd>
       <postCmd>med_gen_post</postCmd>
       <useEmuSolo>False</useEmuSolo>
@@ -386,17 +386,17 @@
       <gameclient />
       <emulatorCmd>/usr/games/mupen64plus</emulatorCmd>
       <emulatorParams>"%ROM%"</emulatorParams>
-      <romPath>installdir_temp/ROMs/N64/*.v64</romPath>
-      <romPath>installdir_temp/ROMs/N64/*.z64</romPath>
-      <romPath>installdir_temp/ROMs/N64/*.zip</romPath>
-      <romPath>installdir_temp/ROMs/N64/*.bin</romPath>
+      <romPath>installdir_temp/ROMs/Nintendo 64/*.v64</romPath>
+      <romPath>installdir_temp/ROMs/Nintendo 64/*.z64</romPath>
+      <romPath>installdir_temp/ROMs/Nintendo 64/*.zip</romPath>
+      <romPath>installdir_temp/ROMs/Nintendo 64/*.bin</romPath>
       <saveStatePath />
       <saveStateParams />
-      <mediaPath type="boxfront">installdir_temp/Artwork/N64/boxfront/%GAME%.*</mediaPath>
-      <mediaPath type="boxback">installdir_temp/Artwork/N64/boxback/%GAME%.*</mediaPath>
-      <mediaPath type="cartridge">installdir_temp/Artwork/N64/cartridge/%GAME%.*</mediaPath>
-      <mediaPath type="screenshot">installdir_temp/Artwork/N64/screenshot/%GAME%.*</mediaPath>
-      <mediaPath type="fanart">installdir_temp/Artwork/N64/fanart/%GAME%.*</mediaPath>
+      <mediaPath type="boxfront">installdir_temp/Artwork/Nintendo 64/boxfront/%GAME%.*</mediaPath>
+      <mediaPath type="boxback">installdir_temp/Artwork/Nintendo 64/boxback/%GAME%.*</mediaPath>
+      <mediaPath type="cartridge">installdir_temp/Artwork/Nintendo 64/cartridge/%GAME%.*</mediaPath>
+      <mediaPath type="screenshot">installdir_temp/Artwork/Nintendo 64/screenshot/%GAME%.*</mediaPath>
+      <mediaPath type="fanart">installdir_temp/Artwork/Nintendo 64/fanart/%GAME%.*</mediaPath>
       <preCmd />
       <postCmd />
       <useEmuSolo>False</useEmuSolo>
@@ -602,6 +602,69 @@
       <imagePlacingMain>gameinfobig</imagePlacingMain>
       <imagePlacingInfo>gameinfosmall</imagePlacingInfo>
       <scraper name="giantbomb.com" replaceKeyString="" replaceValueString="" />
+      <scraper name="archive.vg" replaceKeyString="" replaceValueString="" />
+      <scraper name="mobygames.com" replaceKeyString="" replaceValueString="" />
+    </RomCollection>
+    <RomCollection id="21" name="SEGA CD">
+      <useBuiltinEmulator>False</useBuiltinEmulator>
+      <gameclient />
+      <emulatorCmd>/usr/bin/gens</emulatorCmd>
+      <emulatorParams>"%ROM%"</emulatorParams>
+      <romPath>/installdir_temp/ROMs/Sega CD/*.iso</romPath>
+      <saveStatePath />
+      <saveStateParams />
+      <mediaPath type="boxfront">installdir_temp/Artwork/Sega CD/boxfront/%GAME%.*</mediaPath>
+      <mediaPath type="boxback">installdir_temp/Artwork/Sega CD/boxback/%GAME%.*</mediaPath>
+      <mediaPath type="cartridge">installdir_temp/Artwork/Sega CD/cartridge/%GAME%.*</mediaPath>
+      <mediaPath type="screenshot">installdir_temp/Artwork/Sega CD/screenshot/%GAME%.*</mediaPath>
+      <mediaPath type="fanart">installdir_tempArtwork/Sega CD/fanart/%GAME%.*</mediaPath>
+      <preCmd>gens_pre</preCmd>
+      <postCmd>gens_post</postCmd>
+      <useEmuSolo>False</useEmuSolo>
+      <usePopen>False</usePopen>
+      <ignoreOnScan>False</ignoreOnScan>
+      <allowUpdate>True</allowUpdate>
+      <autoplayVideoMain>True</autoplayVideoMain>
+      <autoplayVideoInfo>True</autoplayVideoInfo>
+      <useFoldernameAsGamename>False</useFoldernameAsGamename>
+      <maxFolderDepth>99</maxFolderDepth>
+      <doNotExtractZipFiles>False</doNotExtractZipFiles>
+      <diskPrefix>_Disk.*</diskPrefix>
+      <imagePlacingMain>gameinfobig</imagePlacingMain>
+      <imagePlacingInfo>gameinfosmall</imagePlacingInfo>
+      <scraper name="thegamesdb.net" replaceKeyString="" replaceValueString="" />
+      <scraper name="archive.vg" replaceKeyString="" replaceValueString="" />
+      <scraper name="mobygames.com" replaceKeyString="" replaceValueString="" />
+    </RomCollection>
+    <RomCollection id="22" name="SEGA 32X">
+      <useBuiltinEmulator>False</useBuiltinEmulator>
+      <gameclient />
+      <emulatorCmd>/usr/bin/gens</emulatorCmd>
+      <emulatorParams>"%ROM%"</emulatorParams>
+      <romPath>installdir_temp/ROMs/Sega 32X/*.zip</romPath>
+      <romPath>installdir_temp/ROMs/Sega 32X/*.bin</romPath>
+      <saveStatePath />
+      <saveStateParams />
+      <mediaPath type="boxfront">installdir_temp/ROMs/Sega 32X/boxfront/%GAME%.*</mediaPath>
+      <mediaPath type="boxback">installdir_temp/ROMs/Sega 32X/boxback/%GAME%.*</mediaPath>
+      <mediaPath type="cartridge">installdir_temp/ROMs/Sega 32X/cartridge/%GAME%.*</mediaPath>
+      <mediaPath type="screenshot">installdir_temp/ROMs/Sega 32X/screenshot/%GAME%.*</mediaPath>
+      <mediaPath type="fanart">installdir_temp/ROMs/Sega 32X/fanart/%GAME%.*</mediaPath>
+      <preCmd>gens_pre</preCmd>
+      <postCmd>gens_post/postCmd>
+      <useEmuSolo>False</useEmuSolo>
+      <usePopen>False</usePopen>
+      <ignoreOnScan>False</ignoreOnScan>
+      <allowUpdate>True</allowUpdate>
+      <autoplayVideoMain>True</autoplayVideoMain>
+      <autoplayVideoInfo>True</autoplayVideoInfo>
+      <useFoldernameAsGamename>False</useFoldernameAsGamename>
+      <maxFolderDepth>99</maxFolderDepth>
+      <doNotExtractZipFiles>False</doNotExtractZipFiles>
+      <diskPrefix>_Disk.*</diskPrefix>
+      <imagePlacingMain>gameinfobig</imagePlacingMain>
+      <imagePlacingInfo>gameinfosmall</imagePlacingInfo>
+      <scraper name="thegamesdb.net" replaceKeyString="" replaceValueString="" />
       <scraper name="archive.vg" replaceKeyString="" replaceValueString="" />
       <scraper name="mobygames.com" replaceKeyString="" replaceValueString="" />
     </RomCollection>
