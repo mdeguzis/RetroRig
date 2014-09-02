@@ -82,50 +82,54 @@ if parameterIsTrue "auto resolution"; then
   
   #set new resolution for emulators
   
-  #mupen64plus
+  # mupen64plus
   m_new_X=$1
   m_new_Y=$2
   
-  #mednafen (GBC)
+  # mednafen (GBC)
   gb_new_X=$1
   gb_new_Y=$2
   
-  #mednafen (GBA)
+  # mednafen (GBA)
   gba_new_X=$1
   gba_new_Y=$2
   
-  #mednafen (NES)
+  # mednafen (NES)
   nes_new_X=$1
   nes_new_Y=$2
   
-  #mednafen (SNES)
+  # mednafen (SNES)
   snes_new_X=$1
   snes_new_Y=$2
   
-  #mednafen (Sega Master System)
+  # mednafen (Sega Master System)
   sms_new_X=$1
   sms_new_Y=$2
   
-  #mednafen (Sega Game Gear)
+  # mednafen (Sega Game Gear)
   gg_new_X=$1
   gg_new_Y=$2
   
-  #mednafen (Turbographx 16)
+  # mednafen (Turbographx 16)
   pce_new_X=$1
   pce_new_Y=$2
   
-  #mednafen (PSX)
+  # mednafen (PSX)
   psx_new_X=$1
   psx_new_Y=$2
   
-  #pcsx (PS2)
+  # pcsx (PS2)
   ps2_new_X=$1
   ps2_new_Y=$2
 
-  #dolphin
+  # dolphin
   dolphin_new_X=$1
   dolphin_new_Y=$2
   dolphin_monitor=$3
+
+  # Gens/GS (Sega CD/32X)
+  gens_new_X=$1
+  gens_new_X=$2
   
   ########################		
   #mupen64plus
