@@ -716,6 +716,7 @@ options=(1 "Neo-Geo CDZ"
 				# use sed to replace the defined BIOS file
 				# perform actual changes
 				sed -i "s|$old_scd_bios|USA CD BIOS=$folder|g" "$config_home/.gens/gens.cfg"	
+				;;
 
 				2)
 				# assess current BIOS file
@@ -723,6 +724,7 @@ options=(1 "Neo-Geo CDZ"
 				# use sed to replace the defined BIOS file
 				# perform actual changes
 				sed -i "s|$old_scd_bios|Japan CD BIOS=$folder|g" "$config_home/.gens/gens.cfg"
+				;;
 
 				3)
 				# assess current BIOS file
@@ -730,6 +732,7 @@ options=(1 "Neo-Geo CDZ"
 				# use sed to replace the defined BIOS file
 				# perform actual changes
 				sed -i "s|$old_scd_bios|Europe CD BIOS=$folder|g" "$config_home/.gens/gens.cfg"
+				;;
 
 				4)
 				return
