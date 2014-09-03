@@ -870,6 +870,7 @@ function h_emu_user_fixes()
 	# Gens GS (Sega CD)
 	sed -i "s|config_temp|$config_home|g" "$config_home/.gens/gens.cfg"
 	sed -i "s|installdir_temp|$rootdir|g" "$config_home/.gens/gens.cfg"
+	sed -i "s|xbmc_temp|$xbmc_home|g" "$config_home/.gens/gens.cfg"
 
 	# Advanced Launcher (XBMC)
 	sed -i "s|config_temp|$config_home|g" "$config_home/"

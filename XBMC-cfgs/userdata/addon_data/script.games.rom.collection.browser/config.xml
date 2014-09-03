@@ -645,13 +645,13 @@
       <romPath>installdir_temp/ROMs/Sega 32X/*.bin</romPath>
       <saveStatePath />
       <saveStateParams />
-      <mediaPath type="boxfront">installdir_temp/ROMs/Sega 32X/boxfront/%GAME%.*</mediaPath>
-      <mediaPath type="boxback">installdir_temp/ROMs/Sega 32X/boxback/%GAME%.*</mediaPath>
-      <mediaPath type="cartridge">installdir_temp/ROMs/Sega 32X/cartridge/%GAME%.*</mediaPath>
-      <mediaPath type="screenshot">installdir_temp/ROMs/Sega 32X/screenshot/%GAME%.*</mediaPath>
-      <mediaPath type="fanart">installdir_temp/ROMs/Sega 32X/fanart/%GAME%.*</mediaPath>
+      <mediaPath type="boxfront">installdir_temp/Artwork/Sega 32X/boxfront/%GAME%.*</mediaPath>
+      <mediaPath type="boxback">installdir_temp/Artwork/Sega 32X/boxback/%GAME%.*</mediaPath>
+      <mediaPath type="cartridge">installdir_temp/Artwork/Sega 32X/cartridge/%GAME%.*</mediaPath>
+      <mediaPath type="screenshot">installdir_temp/Artwork/Sega 32X/screenshot/%GAME%.*</mediaPath>
+      <mediaPath type="fanart">installdir_temp/Artwork/Sega 32X/fanart/%GAME%.*</mediaPath>
       <preCmd>gens_pre</preCmd>
-      <postCmd>gens_post/postCmd>
+      <postCmd>gens_post</postCmd>
       <useEmuSolo>False</useEmuSolo>
       <usePopen>False</usePopen>
       <ignoreOnScan>False</ignoreOnScan>
