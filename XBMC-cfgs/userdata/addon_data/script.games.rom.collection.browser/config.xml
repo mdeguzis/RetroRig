@@ -613,11 +613,11 @@
       <romPath>/installdir_temp/ROMs/Sega CD/*.iso</romPath>
       <saveStatePath />
       <saveStateParams />
-      <mediaPath type="boxfront">installdir_temp/Artwork/Sega CD/boxfront/%GAME%.*</mediaPath>
+      <mediaPath type="boxfront">installdir_temp/Artwork/boxfront/%GAME%.*</mediaPath>
       <mediaPath type="boxback">installdir_temp/Artwork/Sega CD/boxback/%GAME%.*</mediaPath>
       <mediaPath type="cartridge">installdir_temp/Artwork/Sega CD/cartridge/%GAME%.*</mediaPath>
       <mediaPath type="screenshot">installdir_temp/Artwork/Sega CD/screenshot/%GAME%.*</mediaPath>
-      <mediaPath type="fanart">installdir_tempArtwork/Sega CD/fanart/%GAME%.*</mediaPath>
+      <mediaPath type="fanart">installdir_temp/Artwork/Sega CD/fanart/%GAME%.*</mediaPath>
       <preCmd>gens_pre</preCmd>
       <postCmd>gens_post</postCmd>
       <useEmuSolo>False</useEmuSolo>
