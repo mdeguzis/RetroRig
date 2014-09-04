@@ -121,6 +121,7 @@ if parameterIsTrue "auto resolution"; then
   # pcsx (PS2)
   ps2_new_X=$1
   ps2_new_Y=$2
+  ps2_monitor=$3
 
   # dolphin
   dolphin_new_X=$1
@@ -241,6 +242,24 @@ if parameterIsTrue "auto resolution"; then
   
   if [ -n "$ps2_org_Y" ]; then
     sed -i "s|$ps2_org_Y|resy = $ps2_new_Y|g" "$config_home/.config/pcsx2/inis/GSdx.ini"
+  fi
+  
+  #pcsx2 ui settings
+  ps2_ui_org_X=$(grep -Ee "FullscreenX=" "$config_home/.config/pcsx2/inis/PCSX2_ui.ini")
+  ps2_ui_org_Y=$(grep -Ee "FullscreenY=" "$config_home/.config/pcsx2/inis/PCSX2_ui.ini")
+  ps2_ui_org_monitor=$(grep -Ee "MonitorName=" "$config_home/.config/pcsx2/inis/PCSX2_ui.ini")
+  #make the changes, prefix new_X in case NULL was entered previously
+
+  if [ -n "$ps2_ui_org_X" ]; then
+    sed -i "s|$ps2_ui_org_X|FullscreenX=$ps2_new_X|g" "$config_home/.config/pcsx2/inis/PCSX2_ui.ini"  
+  fi
+  
+  if [ -n "$ps2_ui_org_Y" ]; then
+    sed -i "s|$ps2_ui_org_Y|FullscreenY=$ps2_new_Y|g" "$config_home/.config/pcsx2/inis/PCSX2_ui.ini"
+  fi
+
+  if [ -n "$ps2_ui_org_monitor" ]; then
+    sed -i "s|$ps2_ui_org_monitor|MonitorName=$ps2_monitor|g" "$config_home/.config/pcsx2/inis/PCSX2_ui.ini"
   fi
 
   #dolphin (gamecube)
