@@ -76,6 +76,9 @@ config_home=$HOME
 #define configuration file
 configFile="$config_home/retrorig.cfg"
 
+#clear configuration folder
+rm -f $config_home/xbmc_crashlog-*.log
+
 if parameterIsTrue "auto resolution"; then
 
   #echo "auto resolution is enabled, setting emulator configurations to" $1 "by" "$2" ". Display name is $3."
@@ -223,11 +226,20 @@ if parameterIsTrue "auto resolution"; then
   sed -i "s|$psx_org_Y|psx.yres $psx_new_Y|g" "$config_home/.mednafen/mednafen-09x.cfg"
 
   # Gens GS (Sega CD)
-  gens_org_X=$(grep -Ee "\bOpenGL Width=\b" "/home/test/.retrorig/.gens/gens.cfg")
-  gens_org_Y=$(grep -Ee "\bOpenGL Height=\b" "/home/test/.retrorig/.gens/gens.cfg")
-  #make the changes, prefix new_X in case NULL was entered previously
-  sed -i "s|$gens_org_X|OpenGL Width= $gens_new_X|g" "$config_home/.mednafen/mednafen-09x.cfg"
-  sed -i "s|$gens_org_Y|OpenGL Height= $gens_new_Y|g" "$config_home/.mednafen/mednafen-09x.cfg"
+  if [ -e "$config_home/.gens/gens.cfg" ]; then
+
+    gens_org_X=$(grep -Ee "\bOpenGL Width=\b" "$config_home/.gens/gens.cfg")
+    gens_org_Y=$(grep -Ee "\bOpenGL Height=\b" "$config_home/.gens/gens.cfg")
+    #make the changes, prefix new_X in case NULL was entered previously
+    if [ -n "$gens_org_X" ]; then
+      sed -i "s|$gens_org_X|OpenGL Width= $gens_new_X|g" "$config_home/.gens/gens.cfg"
+    fi
+  
+    if [ -n "$gens_org_Y" ]; then
+      sed -i "s|$gens_org_Y|OpenGL Height= $gens_new_Y|g" "$config_home/.gens/gens.cfg"
+    fi
+
+  fi
 
   ########################    
   # pcsx2
