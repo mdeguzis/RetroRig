@@ -285,6 +285,11 @@ if parameterIsTrue "auto resolution"; then
   dolphin_new_Res="FullscreenResolution = $dolphin_monitor"": ""$dolphin_new_X""x""$dolphin_new_Y"
   #apply changes
   sed -i "s|$dolphin_org_Res|$dolphin_new_Res|g" "$config_home/.dolphin-emu/Config/Dolphin.ini"  
+  #enable vsync
+  dolphin_org_vsync=$(grep -Ee "VSync = " "$config_home/.dolphin-emu/Config/gfx_opengl.ini")
+  if [ -n "$dolphin_org_vsync" ]; then
+    sed -i "s|$dolphin_org_vsync|VSync = True|g" "$config_home/.dolphin-emu/Config/gfx_opengl.ini"  
+  fi
   
 else
   echo "auto resolution is disabled, exiting"
