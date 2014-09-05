@@ -1,9 +1,19 @@
 pcsx2 (version_placeholder) trusty; urgency=medium
 
-  * source code
+  * patch level 1 "dual monitor support"
+  * source code from https://github.com/beaumanvienna/pcsx2, 
+      branch "retrorig-pl1"
+  * description: xrandr added to calculate the start position 
+                 of the GS window from the display name
+
+ -- Jens-Christian Lache <jc.lache@web.de>  Thu, 4 Sep 2014 22:15:00 +0200
+
+pcsx2 (2:1.2.2.0-testunpatched) trusty; urgency=medium
+
+  * source code from https://launchpad.net/~gregory-hainaut/
+      +archive/ubuntu/pcsx2.official.ppa/+files/pcsx2_1.2.2.orig.tar.gz
 
  -- Jens-Christian Lache <jc.lache@web.de>  Sun, 10 Aug 2014 22:58:50 +0200
-
 
 pcsx2 (1:1.2.2-4) trusty; urgency=medium
 

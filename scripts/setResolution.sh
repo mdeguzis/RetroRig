@@ -76,6 +76,9 @@ config_home=$HOME
 #define configuration file
 configFile="$config_home/retrorig.cfg"
 
+#clear configuration folder
+rm -f $config_home/xbmc_crashlog-*.log
+
 if parameterIsTrue "auto resolution"; then
 
   #echo "auto resolution is enabled, setting emulator configurations to" $1 "by" "$2" ". Display name is $3."
@@ -121,6 +124,7 @@ if parameterIsTrue "auto resolution"; then
   # pcsx (PS2)
   ps2_new_X=$1
   ps2_new_Y=$2
+  ps2_monitor=$3
 
   # dolphin
   dolphin_new_X=$1
@@ -222,11 +226,20 @@ if parameterIsTrue "auto resolution"; then
   sed -i "s|$psx_org_Y|psx.yres $psx_new_Y|g" "$config_home/.mednafen/mednafen-09x.cfg"
 
   # Gens GS (Sega CD)
-  gens_org_X=$(grep -Ee "\bOpenGL Width=\b" "/home/test/.retrorig/.gens/gens.cfg")
-  gens_org_Y=$(grep -Ee "\bOpenGL Height=\b" "/home/test/.retrorig/.gens/gens.cfg")
-  #make the changes, prefix new_X in case NULL was entered previously
-  sed -i "s|$gens_org_X|OpenGL Width= $gens_new_X|g" "$config_home/.mednafen/mednafen-09x.cfg"
-  sed -i "s|$gens_org_Y|OpenGL Height= $gens_new_Y|g" "$config_home/.mednafen/mednafen-09x.cfg"
+  if [ -e "$config_home/.gens/gens.cfg" ]; then
+
+    gens_org_X=$(grep -Ee "\bOpenGL Width=\b" "$config_home/.gens/gens.cfg")
+    gens_org_Y=$(grep -Ee "\bOpenGL Height=\b" "$config_home/.gens/gens.cfg")
+    #make the changes, prefix new_X in case NULL was entered previously
+    if [ -n "$gens_org_X" ]; then
+      sed -i "s|$gens_org_X|OpenGL Width= $gens_new_X|g" "$config_home/.gens/gens.cfg"
+    fi
+  
+    if [ -n "$gens_org_Y" ]; then
+      sed -i "s|$gens_org_Y|OpenGL Height= $gens_new_Y|g" "$config_home/.gens/gens.cfg"
+    fi
+
+  fi
 
   ########################    
   # pcsx2
@@ -242,6 +255,28 @@ if parameterIsTrue "auto resolution"; then
   if [ -n "$ps2_org_Y" ]; then
     sed -i "s|$ps2_org_Y|resy = $ps2_new_Y|g" "$config_home/.config/pcsx2/inis/GSdx.ini"
   fi
+  
+  #pcsx2 ui settings
+  ps2_ui_org_X=$(grep -Ee "FullscreenX=" "$config_home/.config/pcsx2/inis/PCSX2_ui.ini")
+  ps2_ui_org_Y=$(grep -Ee "FullscreenY=" "$config_home/.config/pcsx2/inis/PCSX2_ui.ini")
+  ps2_ui_org_monitor=$(grep -Ee "MonitorName=" "$config_home/.config/pcsx2/inis/PCSX2_ui.ini")
+  #apply the changes
+  if [ -n "$ps2_ui_org_X" ]; then
+    sed -i "s|$ps2_ui_org_X|FullscreenX=$ps2_new_X|g" "$config_home/.config/pcsx2/inis/PCSX2_ui.ini"  
+  fi
+  
+  if [ -n "$ps2_ui_org_Y" ]; then
+    sed -i "s|$ps2_ui_org_Y|FullscreenY=$ps2_new_Y|g" "$config_home/.config/pcsx2/inis/PCSX2_ui.ini"
+  fi
+
+  if [ -n "$ps2_ui_org_monitor" ]; then
+    sed -i "s|$ps2_ui_org_monitor|MonitorName=$ps2_monitor|g" "$config_home/.config/pcsx2/inis/PCSX2_ui.ini"
+  fi
+  #set pcsx2 to fullscreen
+  ps2_ui_org_fs=$(grep -Ee "DefaultToFullscreen=" "$config_home/.config/pcsx2/inis/PCSX2_ui.ini")
+  if [ -n "$ps2_ui_org_fs" ]; then
+    sed -i "s|$ps2_ui_org_fs|DefaultToFullscreen=enabled|g" "$config_home/.config/pcsx2/inis/PCSX2_ui.ini"
+  fi
 
   #dolphin (gamecube)
   #old resolution
@@ -250,6 +285,11 @@ if parameterIsTrue "auto resolution"; then
   dolphin_new_Res="FullscreenResolution = $dolphin_monitor"": ""$dolphin_new_X""x""$dolphin_new_Y"
   #apply changes
   sed -i "s|$dolphin_org_Res|$dolphin_new_Res|g" "$config_home/.dolphin-emu/Config/Dolphin.ini"  
+  #enable vsync
+  dolphin_org_vsync=$(grep -Ee "VSync = " "$config_home/.dolphin-emu/Config/gfx_opengl.ini")
+  if [ -n "$dolphin_org_vsync" ]; then
+    sed -i "s|$dolphin_org_vsync|VSync = True|g" "$config_home/.dolphin-emu/Config/gfx_opengl.ini"  
+  fi
   
 else
   echo "auto resolution is disabled, exiting"

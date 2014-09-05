@@ -24,7 +24,8 @@ Build-Depends: cmake (>= 2.8.5),
 # Future: depends on "nvidia-cg-dev" directly
     libcg, nvidia-cg-toolkit (>= 3),
     portaudio19-dev,
-    zlib1g-dev (>= 1:1.2.3.3)
+    zlib1g-dev (>= 1:1.2.3.3),
+    libxrandr-dev
 Standards-Version: 3.9.3
 Homepage: http://pcsx2.net/
 

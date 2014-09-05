@@ -3,15 +3,18 @@
 #======================================================================== 
 #
 # Author:  Jens-Christian Lache
-# Date:    20140810
-# Version: Patch Level 0 (unpatched)
+# Date:    20140904
+# Version: Patch Level 1 (xrandr for dual monitor support)
 # ========================================================================
 
 #define base version
 BASE=2:1.2.2
 
 # define patch level
-PL=0-testunpatched
+PL=1
+
+#define branch
+BRANCH=retrorig-pl$PL
 
 clear
 echo "#####################################################################"
@@ -81,7 +84,8 @@ if [[ -n "$2" ]]; then
 	libcg \
 	nvidia-cg-toolkit \
 	portaudio19-dev \
-	zlib1g-dev
+	zlib1g-dev \
+	libxrandr-dev
 
 else
   echo ""
@@ -118,11 +122,7 @@ cp ~/RetroRig/supplemental/pcsx2/pcsx2.dsc pcsx2_$BASE.$PL.dsc
 sed -i "s|version_placeholder|$BASE.$PL|g" "pcsx2_$BASE.$PL.dsc"
 
 echo "original tarball"
-wget --tries=50 "https://launchpad.net/~gregory-hainaut/+archive/ubuntu/pcsx2.official.ppa/+files/pcsx2_1.2.2.orig.tar.gz"
-#cp ~/packaging/pcsx2-original/pcsx2_1.2.2.orig.tar.gz .
-tar xfz pcsx2_1.2.2.orig.tar.gz
-rm pcsx2_1.2.2.orig.tar.gz
-mv pcsx2-1.2.2/ pcsx2
+git clone https://github.com/beaumanvienna/pcsx2
 
 file pcsx2/
 
@@ -134,8 +134,10 @@ else
 fi 
 
 cd pcsx2
-rm -rf debian-upstream/
+git checkout $BRANCH
+rm -rf .git .gitignore .hgeol .hgignore
 cd ..
+
 tar cfj pcsx2.orig.tar.bz2 pcsx2
 mv pcsx2.orig.tar.bz2 pcsx2_$BASE.$PL.orig.tar.bz2
 
