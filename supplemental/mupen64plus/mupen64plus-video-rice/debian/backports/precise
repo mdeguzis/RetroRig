@@ -1,0 +1,6 @@
+#! /bin/sh
+
+# Work around gcc bug in Ubuntu 12.04 LTS (Precise Pangolin)
+sed -i -e 's/-flto//' debian/rules
+
+exit 0
