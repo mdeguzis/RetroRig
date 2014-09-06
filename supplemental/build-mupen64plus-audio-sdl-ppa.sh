@@ -1,29 +1,26 @@
-#=========================================================================
-# Build Script for custom mupen64plus-core RetroRig PPA
-#=========================================================================
+#========================================================================
+# Build Script for custom mupen64plus-audio-sdl RetroRig PPA
+#======================================================================== 
 #
 # Author      : Jens-Christian Lache
 # Date        : 20140906
-# Version     : Patch Level 1 
-# Descrition  : This package is provided to replace the original buggy
-#               version 2.0-1 from Thrusty Thar. It was changed to not
-#               switch display resolutions (SDL_WINDOW_FULLSCREEN_DESKTOP).
-#               The Debian package now exports "mupen64plus-config-abi-2.3"
-# =========================================================================
+# Version     : Patch Level 0
+# Descrition  : unpatched
+# ========================================================================
 
 #define base version
 BASE=2:2.0
 
 # define patch level
-PL=1.1
+PL=0.0
 
 #define branch
-BRANCH=patchlevel-1
+BRANCH=patchlevel-0
 
 clear
-echo "#################################################################"
-echo "Building custom mupen64plus-core Debian package (patch level $PL)"
-echo "#################################################################"
+echo "##########################################################################"
+echo "Building custom mupen64plus-audio-sdl Debian package (patch level $PL)"
+echo "##########################################################################"
 echo ""
 if [[ -n "$1" ]]; then
 
@@ -49,14 +46,14 @@ if [[ -n "$2" ]]; then
   echo ""
 
   #apt-get build-deps
-  sudo apt-get -y build-dep mupen64plus-core
+  sudo apt-get -y build-dep mupen64plus-audio-sdl
   #apt-get install packages
-  sudo apt-get install -y build-essential fakeroot devscripts automake autoconf autotools-dev libmupen64plus-dev libsdl2-dev binutils-dev
-
+  sudo apt-get install -y build-essential fakeroot devscripts automake autoconf autotools-dev binutils-dev debhelper pkg-config dpkg-dev \
+                          libmupen64plus-dev libsdl2-dev libsamplerate0-dev libspeexdsp-dev
 else
   echo ""
   echo "skipping installation of build packages, use arbitrary second argument to get those packages"
-  echo "e.g ./build-mupen64plus-core-ppa.sh compile update"
+  echo "e.g ./build-mupen64plus-audio-sdl-ppa.sh compile update"
   echo ""
 fi
 
@@ -65,18 +62,18 @@ echo "##########################################"
 echo "Setup build directory"
 echo "##########################################"
 echo ""
-echo "~/packaging/mupen64plus-core"
+echo "~/packaging/mupen64plus-audio-sdl"
 # start in $HOME
 cd
 
 # remove old build directory
-rm -rf ~/packaging/mupen64plus-core
+rm -rf ~/packaging/mupen64plus-audio-sdl
 
 #create build directory
-mkdir -p ~/packaging/mupen64plus-core
+mkdir -p ~/packaging/mupen64plus-audio-sdl
 
 #change to build directory
-cd ~/packaging/mupen64plus-core
+cd ~/packaging/mupen64plus-audio-sdl
 
 echo ""
 echo "##########################################"
@@ -84,13 +81,13 @@ echo "Setup package base files"
 echo "##########################################"
 
 echo "dsc file"
-cp ~/RetroRig/supplemental/mupen64plus-core/mupen64plus-core.dsc mupen64plus-core_$BASE.$PL.dsc
-sed -i "s|version_placeholder|$BASE.$PL|g" "mupen64plus-core_$BASE.$PL.dsc"
+cp ~/RetroRig/supplemental/mupen64plus/mupen64plus-audio-sdl/mupen64plus-audio-sdl.dsc mupen64plus-audio-sdl_$BASE.$PL.dsc
+sed -i "s|version_placeholder|$BASE.$PL|g" "mupen64plus-audio-sdl_$BASE.$PL.dsc"
 
 echo "original tarball"
-git clone https://github.com/beaumanvienna/mupen64plus-core
+git clone https://github.com/beaumanvienna/mupen64plus-audio-sdl
 
-file mupen64plus-core/
+file mupen64plus-audio-sdl/
 
 if [ $? -eq 0 ]; then  
     echo "successfully cloned"
@@ -99,16 +96,16 @@ else
     exit
 fi
 
-cd mupen64plus-core/
+cd mupen64plus-audio-sdl/
 git checkout $BRANCH
 rm -rf .git .gitattributes .gitignore .travis.yml
 cd ..
 
-tar cfj mupen64plus-core_orig.tar.bz2 mupen64plus-core
-mv mupen64plus-core_orig.tar.bz2 mupen64plus-core_$BASE.$PL.orig.tar.bz2
+tar cfj mupen64plus-audio-sdl_orig.tar.bz2 mupen64plus-audio-sdl
+mv mupen64plus-audio-sdl_orig.tar.bz2 mupen64plus-audio-sdl_$BASE.$PL.orig.tar.bz2
 
 echo "debian files"
-wget --tries=50 "http://www.libregeek.org/RetroRig/Ubuntu-Trusty/templates/mupen64plus-core.debian.tar.xz"
+cp ~/RetroRig/supplemental/mupen64plus/mupen64plus-audio-sdl/mupen64plus-audio-sdl.debian.tar.xz .
 
 echo ""
 echo "##########################################"
@@ -117,27 +114,27 @@ echo "##########################################"
 echo ""
 
 #unpack
-echo "unpacking template mupen64plus-core.debian.tar.xz"
-tar xfJ mupen64plus-core.debian.tar.xz
+echo "unpacking template mupen64plus-audio-sdl.debian.tar.xz"
+tar xfJ mupen64plus-audio-sdl.debian.tar.xz
 #remove template
-rm mupen64plus-core.debian.tar.xz
+rm mupen64plus-audio-sdl.debian.tar.xz
 
 #move debian folder into source folder
-mv debian/ mupen64plus-core/
+mv debian/ mupen64plus-audio-sdl/
 
 #change to source folder
-cd mupen64plus-core/
+cd mupen64plus-audio-sdl/
 
 echo "control"
-cp ~/RetroRig/supplemental/mupen64plus-core/control debian/
+cp ~/RetroRig/supplemental/mupen64plus/mupen64plus-audio-sdl/control debian/
 
 echo "format"
 rm -rf debian/source 
 mkdir debian/source
-cp ~/RetroRig/supplemental/mupen64plus-core/format debian/source/
+cp ~/RetroRig/supplemental/mupen64plus/mupen64plus-audio-sdl/format debian/source/
 
 echo "changelog"
-cp ~/RetroRig/supplemental/mupen64plus-core/changelog debian/
+cp ~/RetroRig/supplemental/mupen64plus/mupen64plus-audio-sdl/changelog debian/
 sed -i "s|version_placeholder|$BASE.$PL|g" debian/changelog
 #dch -i
 
@@ -145,9 +142,10 @@ echo "patches"
 rm -rf debian/patches
 
 echo "clean up"
-rm -f debian/upstream/
+rm -rf debian/upstream/
 rm -f debian/upstream-signing-key.pgp
 rm -f debian/watch
+rm -rf debian/backports
 
 if [[ -n "$1" ]]; then
   arg0=$1
@@ -173,7 +171,7 @@ case "$arg0" in
         echo "Building finished"
         echo "##########################################"
         echo ""
-        ls -lah ~/packaging/mupen64plus-core
+        ls -lah ~/packaging/mupen64plus-audio-sdl
          exit 0
     else  
         echo "debuild failed to generate the binary package, aborting"
@@ -202,10 +200,10 @@ case "$arg0" in
       if [ $? -eq 0 ]; then
         echo ""
         echo ""
-        ls -lah ~/packaging/mupen64plus-core
+        ls -lah ~/packaging/mupen64plus-audio-sdl
         echo ""
         echo ""
-        echo "you can upload the package with dput ppa:beauman/retrorig ~/packaging/mupen64plus-core/mupen64plus-core_$BASE.$PL""_source.changes"
+        echo "you can upload the package with dput ppa:beauman/retrorig ~/packaging/mupen64plus-audio-sdl/mupen64plus-audio-sdl_$BASE.$PL""_source.changes"
         echo "all good"
         echo ""
         echo ""
@@ -213,7 +211,7 @@ case "$arg0" in
         while true; do
             read -p "Do you wish to upload the source package?    " yn
             case $yn in
-                [Yy]* ) dput ppa:beauman/retrorig ~/packaging/mupen64plus-core/mupen64plus-core_*.$PL""_source.changes; break;;
+                [Yy]* ) dput ppa:beauman/retrorig ~/packaging/mupen64plus-audio-sdl/mupen64plus-audio-sdl_*.$PL""_source.changes; break;;
                 [Nn]* ) break;;
                 * ) echo "Please answer yes or no.";;
             esac

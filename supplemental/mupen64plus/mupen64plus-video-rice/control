@@ -34,3 +34,19 @@ Description: Rice's high-level graphics emulation for mupen64plus
  It supports advanced graphics effects of the N64 and loading of high
  resolution texture packs.
 
+Package: mupen64plus-video-rice-dbg
+Section: debug
+Priority: extra
+Architecture: any-i386 any-amd64
+Multi-Arch: same
+Pre-Depends:
+ ${misc:Pre-Depends},
+Depends:
+ ${misc:Depends},
+ mupen64plus-video-rice (= ${binary:Version}),
+Description: Rice's graphics hle for mupen64plus debug symbols package
+ High-level graphics emulation plugin for known microcodes based on OpenGL.
+ It supports advanced graphics effects of the N64 and loading of high
+ resolution texture packs.
+ .
+ This package contains the debug files.

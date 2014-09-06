@@ -9,18 +9,18 @@
 # ========================================================================
 
 #define base version
-BASE=0:2.0
+BASE=2:2.0
 
 # define patch level
-PL=0
+PL=0.0
 
 #define branch
 BRANCH=patchlevel-0
 
 clear
-echo "#################################################################"
+echo "##########################################################################"
 echo "Building custom mupen64plus-video-rice Debian package (patch level $PL)"
-echo "#################################################################"
+echo "##########################################################################"
 echo ""
 if [[ -n "$1" ]]; then
 
@@ -49,7 +49,7 @@ if [[ -n "$2" ]]; then
   sudo apt-get -y build-dep mupen64plus-video-rice
   #apt-get install packages
   sudo apt-get install -y build-essential fakeroot devscripts automake autoconf autotools-dev binutils-dev debhelper pkg-config dpkg-dev \
-                          libmupen64plus-dev libsdl2-dev libpng-dev libmupen64plus-dev libgl-dev
+                          libmupen64plus-dev libsdl2-dev libpng-dev libgl-dev
 else
   echo ""
   echo "skipping installation of build packages, use arbitrary second argument to get those packages"
@@ -105,7 +105,7 @@ tar cfj mupen64plus-video-rice_orig.tar.bz2 mupen64plus-video-rice
 mv mupen64plus-video-rice_orig.tar.bz2 mupen64plus-video-rice_$BASE.$PL.orig.tar.bz2
 
 echo "debian files"
-wget --tries=50 "https://launchpad.net/~sven-eckelmann/+archive/ubuntu/ppa-mupen64plus/+files/mupen64plus-video-rice_2.0%2B57%2Bg134f5dc-1~ppa1~trusty.debian.tar.xz"
+cp ~/RetroRig/supplemental/mupen64plus/mupen64plus-video-rice/mupen64plus-video-rice.debian.tar.xz .
 
 echo ""
 echo "##########################################"
@@ -114,10 +114,10 @@ echo "##########################################"
 echo ""
 
 #unpack
-echo "unpacking template mupen64plus-video-rice_2.0+57+g134f5dc-1~ppa1~trusty.debian.tar.xz"
-tar xfJ mupen64plus-video-rice_2.0+57+g134f5dc-1~ppa1~trusty.debian.tar.xz
+echo "unpacking template mupen64plus-video-rice.debian.tar.xz"
+tar xfJ mupen64plus-video-rice.debian.tar.xz
 #remove template
-rm mupen64plus-video-rice_2.0+57+g134f5dc-1~ppa1~trusty.debian.tar.xz
+rm mupen64plus-video-rice.debian.tar.xz
 
 #move debian folder into source folder
 mv debian/ mupen64plus-video-rice/

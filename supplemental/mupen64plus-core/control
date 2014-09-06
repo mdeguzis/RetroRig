@@ -31,6 +31,7 @@ Depends:
 Provides:
  mupen64plus-audio-abi-2,
  mupen64plus-config-abi-2.2,
+ mupen64plus-config-abi-2.3,
  mupen64plus-debug-abi-2,
  mupen64plus-frontend-abi-2.1.1,
  mupen64plus-gfx-abi-2.1,
