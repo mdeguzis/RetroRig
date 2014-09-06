@@ -44,6 +44,7 @@ function rrs_prepareFolders()
 	pathlist+=("$rootdir/ROMs/PSP")
 	pathlist+=("$rootdir/ROMs/PS1")
 	pathlist+=("$rootdir/ROMs/PS2")
+	pathlist+=("$rootdir/ROMs/Wii")
 
 	#Artwork 
 	pathlist+=("$rootdir/Artwork/Atari 2600")
@@ -66,6 +67,7 @@ function rrs_prepareFolders()
 	pathlist+=("$rootdir/Artwork/PSP")
 	pathlist+=("$rootdir/Artwork/PS1")
 	pathlist+=("$rootdir/Artwork/PS2")
+	pathlist+=("$rootdir/Artwork/Wii")
 
 	#Artwork - MAME offline scraper
 	pathlist+=("$rootdir/Artwork/MAME")
@@ -99,6 +101,7 @@ function rrs_prepareFolders()
 	pathlist+=("$rootdir/Saves/PSP")
 	pathlist+=("$rootdir/Saves/PS1")
 	pathlist+=("$rootdir/Saves/PS2")
+	pathlist+=("$rootdir/Saves/Wii")
 
 	# create dotfiles
 	pathlist+=("$home/.retrorig")
