@@ -1,4 +1,4 @@
-Format: 3.0 (native)
+Format: 3.0 (quilt)
 Source: antimicro
 Binary: antimicro
 Architecture: i386 amd64
