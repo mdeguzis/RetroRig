@@ -668,6 +668,37 @@
       <scraper name="archive.vg" replaceKeyString="" replaceValueString="" />
       <scraper name="mobygames.com" replaceKeyString="" replaceValueString="" />
     </RomCollection>
+    <RomCollection id="24" name="Wii">
+      <useBuiltinEmulator>False</useBuiltinEmulator>
+      <gameclient />
+      <emulatorCmd>/usr/games/dolphin-emu</emulatorCmd>
+      <emulatorParams>-b -e "%ROM%"</emulatorParams>
+      <romPath>installdir_temp/ROMs/Wii/*.iso</romPath>
+      <saveStatePath />
+      <saveStateParams />
+      <mediaPath type="boxfront">installdir_temp/Artwork/Wii/boxfront/%GAME%.*</mediaPath>
+      <mediaPath type="boxback">installdir_temp/Artwork/Wii/boxback/%GAME%.*</mediaPath>
+      <mediaPath type="cartridge">installdir_temp/Artwork/Wii/cartridge/%GAME%.*</mediaPath>
+      <mediaPath type="screenshot">installdir_temp/Artwork/Wii/screenshot/%GAME%.*</mediaPath>
+      <mediaPath type="fanart">installdir_temp/Artwork/Wii/fanart/%GAME%.*</mediaPath>
+      <preCmd>dolphin_pre</preCmd>
+      <postCmd>dolphin_post</postCmd>
+      <useEmuSolo>False</useEmuSolo>
+      <usePopen>False</usePopen>
+      <ignoreOnScan>False</ignoreOnScan>
+      <allowUpdate>True</allowUpdate>
+      <autoplayVideoMain>True</autoplayVideoMain>
+      <autoplayVideoInfo>True</autoplayVideoInfo>
+      <useFoldernameAsGamename>False</useFoldernameAsGamename>
+      <maxFolderDepth>99</maxFolderDepth>
+      <doNotExtractZipFiles>False</doNotExtractZipFiles>
+      <diskPrefix>_Disk.*</diskPrefix>
+      <imagePlacingMain>gameinfobig</imagePlacingMain>
+      <imagePlacingInfo>gameinfosmall</imagePlacingInfo>
+      <scraper name="thegamesdb.net" replaceKeyString="" replaceValueString="" />
+      <scraper name="archive.vg" replaceKeyString="" replaceValueString="" />
+      <scraper name="mobygames.com" replaceKeyString="" replaceValueString="" />
+    </RomCollection>
   </RomCollections>
   <FileTypes>
     <FileType id="1" name="boxfront">

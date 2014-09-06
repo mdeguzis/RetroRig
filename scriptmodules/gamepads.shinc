@@ -50,7 +50,7 @@ function gp_ps3_blu()
 	# Main config
 	cp -v "$scriptdir/emu-cfgs/ps3_blu_controller/mupen64plus/mupen64plus.cfg" "$config_home/.config/mupen64plus/"
 
-	# Dolphin
+	# Dolphin (GameCube/Wii)
 	# default path: /home/$USER/.retrorig/.dolphin-emu
 	# Main config
 	cp -v "$scriptdir/emu-cfgs/ps3_blu_controller/Dolphin/GCPadNew.ini" "$config_home/.dolphin-emu/Config"
@@ -163,9 +163,9 @@ function gp_ps3_blu()
 	sed -i "s|$old_pre|$new_pre|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
 	sed -i "s|$old_post|$new_post|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
 
-	#####################
-	# Dolphin (Gamecube)
-	#####################
+	#########################
+	# Dolphin (Gamecube/Wii)
+	#########################
 
 	old_pre="dolphin_pre"
 	old_post="dolphin_post"
@@ -422,36 +422,36 @@ function ps3_set_emulator_ids()
  
         if [ $n == "1" ]; then
 		# Dolphin
-		GC_MAC_BLU=$($scriptdir/supplemental/joydetect /dev/input/js0 | awk -F'[^:[a-zA-Z0-9]*' '{print $6}')
+		dolphin_MAC_BLU=$($scriptdir/supplemental/joydetect /dev/input/js0 | awk -F'[^:[a-zA-Z0-9]*' '{print $6}')
 		# Stella (supports only 2 players )
 		Stella_MAC_BLU=$($scriptdir/supplemental/joydetect /dev/input/js0 | awk -F'[^:[a-zA-Z0-9]*' '{print $6}')
 		sed -i "s|p1_stella_MAC_temp|$Stella_MAC_BLU|g" "$config_home/.stella/stellarc"
 
 	elif [ $n == "2" ]; then
 		# Dolphin
-		GC_MAC_BLU=$($scriptdir/supplemental/joydetect /dev/input/js1 | awk -F'[^:[a-zA-Z0-9]*' '{print $6}')
+		dolphin_MAC_BLU=$($scriptdir/supplemental/joydetect /dev/input/js1 | awk -F'[^:[a-zA-Z0-9]*' '{print $6}')
 		# Stella (supports only 2 players )
 		Stella_MAC_BLU=$($scriptdir/supplemental/joydetect /dev/input/js1 | awk -F'[^:[a-zA-Z0-9]*' '{print $6}')
 		sed -i "s|p2_stella_MAC_temp|$Stella_MAC_BLU|g" "$config_home/.stella/stellarc"
 
 	elif [ $n == "3" ]; then
 		# Dolphin
-		GC_MAC_BLU=$($scriptdir/supplemental/joydetect /dev/input/js2 | awk -F'[^:[a-zA-Z0-9]*' '{print $6}')
+		dolphin_MAC_BLU=$($scriptdir/supplemental/joydetect /dev/input/js2 | awk -F'[^:[a-zA-Z0-9]*' '{print $6}')
 
 	elif [ $n == "4" ]; then
 		# Dolphin
-		GC_MAC_BLU=$($scriptdir/supplemental/joydetect /dev/input/js3 | awk -F'[^:[a-zA-Z0-9]*' '{print $6}')
+		dolphin_MAC_BLU=$($scriptdir/supplemental/joydetect /dev/input/js3 | awk -F'[^:[a-zA-Z0-9]*' '{print $6}')
 
 	else
 		echo "Error settings MAC/ID for emulator"
 
         fi
 
-	echo -e "Controller ID/MAC Address applied to the Dolphin emulator Controller $n was:\n$GC_MAC_BLU"
+	echo -e "Controller ID/MAC Address applied to the Dolphin emulator Controller $n was:\n$dolphin_MAC_BLU"
 	echo -e "\nController ID/MAC Address applied to the Stella emulator Controller $n was:\n$Stella_MAC_BLU"
 
 	# Assign controller ID
-	sed -i "s|MAC_TEMP_$n|$GC_MAC_BLU|g" "$config_home/.dolphin-emu/Config/GCPadNew.ini"
+	sed -i "s|MAC_TEMP_$n|$dolphin_MAC_BLU|g" "$config_home/.dolphin-emu/Config/GCPadNew.ini"
 
 	sleep 2s
 }
@@ -525,7 +525,7 @@ function gp_ps3_usb()
 	# Main config
 	cp -v "$scriptdir/emu-cfgs/ps3_usb_controller/mupen64plus/mupen64plus.cfg" "$config_home/.config/mupen64plus/"
 
-	# Dolphin
+	# Dolphin (GameCube/Wii)
 	# default path: /home/$USER/.retrorig/.dolphin-emu
 	# Main config
 	cp -v "$scriptdir/emu-cfgs/ps3_usb_controller/Dolphin/GCPadNew.ini" "$config_home/.dolphin-emu/Config"
@@ -709,9 +709,9 @@ RetorRig loads to use the gamepad" 14 60
 	sed -i "s|$old_pre|$new_pre|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
 	sed -i "s|$old_post|$new_post|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
 
-	#####################
-	# Dolphin (Gamecube)
-	#####################
+	#########################
+	# Dolphin (GameCube/Wii)
+	#########################
 
 	old_pre="dolphin_pre"
 	old_post="dolphin_post"
@@ -804,7 +804,7 @@ function gp_x360_wireless()
 	# Main config
 	cp -v "$scriptdir/emu-cfgs/x360_wireless_controller/mupen64plus/mupen64plus.cfg" "$config_home/.config/mupen64plus/"
 
-	# Dolphin
+	# Dolphin (GameCube/Wii)
 	# default path: /home/$USER/.retrorig/.dolphin-emu
 	# Main config
 	cp -v "$scriptdir/emu-cfgs/x360_wireless_controller/Dolphin/GCPadNew.ini" "$config_home/.dolphin-emu/Config"
@@ -985,9 +985,9 @@ RetorRig loads to use the gamepad" 14 60
 	sed -i "s|$old_pre|$new_pre|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
 	sed -i "s|$old_post|$new_post|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
 
-	#####################
-	# Dolphin
-	#####################
+	###########################
+	# Dolphin  (GameCube/Wii)
+	###########################
 
 	old_pre="dolphin_pre"
 	old_post="dolphin_post"
@@ -1083,7 +1083,7 @@ function gp_x360_usb()
 	# Main config
 	cp -v "$scriptdir/emu-cfgs/x360_usb_controller/mupen64plus/mupen64plus.cfg" "$config_home/.config/mupen64plus/"
 
-	# Dolphin
+	# Dolphin (GameCube/Wii)
 	# default path: /home/$USER/.retrorig/.dolphin-emu
 	# Main config
 	cp -v "$scriptdir/emu-cfgs/x360_usb_controller//Dolphin/GCPadNew.ini" "$config_home/.dolphin-emu/Config"
@@ -1264,9 +1264,9 @@ RetorRig loads to use the gamepad" 14 60
 	sed -i "s|$old_pre|$new_pre|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
 	sed -i "s|$old_post|$new_post|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
 
-	#####################
-	# Dolphin
-	#####################
+	##########################
+	# Dolphin (GameCube/Wii)
+	##########################
 
 	old_pre="dolphin_pre"
 	old_post="dolphin_post"
