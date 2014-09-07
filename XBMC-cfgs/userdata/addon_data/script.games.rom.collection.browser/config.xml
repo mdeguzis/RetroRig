@@ -450,7 +450,7 @@
     <RomCollection id="16" name="GameCube">
       <useBuiltinEmulator>False</useBuiltinEmulator>
       <gameclient />
-      <emulatorCmd>/usr/games/dolphin-emu</emulatorCmd>
+      <emulatorCmd>/usr/bin/dolphin-emu</emulatorCmd>
       <emulatorParams>-b -e "%ROM%"</emulatorParams>
       <romPath>installdir_temp/ROMs/Gamecube/*.iso</romPath>
       <saveStatePath />
@@ -671,7 +671,7 @@
     <RomCollection id="24" name="Wii">
       <useBuiltinEmulator>False</useBuiltinEmulator>
       <gameclient />
-      <emulatorCmd>/usr/games/dolphin-emu</emulatorCmd>
+      <emulatorCmd>/usr/bin/dolphin-emu</emulatorCmd>
       <emulatorParams>-b -e "%ROM%"</emulatorParams>
       <romPath>installdir_temp/ROMs/Wii/*.iso</romPath>
       <saveStatePath />
