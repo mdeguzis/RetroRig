@@ -28,7 +28,7 @@ Thank you for your patience.
 
 ## Demo Video
 
-[![ScreenShot](http://i.imgur.com/bkSJfPJ.jpg)](http://youtu.be/60FPTfjmbO4)
+[![ScreenShot](http://i.imgur.com/bkSJfPJ.jpg)](https://www.youtube.com/watch?v=G49MMQi2zHE)
 
 ## Warning
 
