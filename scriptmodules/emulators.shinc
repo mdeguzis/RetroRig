@@ -49,8 +49,8 @@ function em_install_pcsx2()
 	# will not be created in setup.shinc 
 	ln -s "$config_home/.config/pcsx2/bios" "$rootdir/BIOS/PCSX2"
 
-
-ln -s /home/test/.retrorig/.config/pcsx2/bios /home/test/RetroRig/BIOS/PCSX2
+	# Link BIOS path
+	ln -s /home/test/.retrorig/.config/pcsx2/bios /home/test/RetroRig/BIOS/PCSX2
 
 }
 
@@ -207,7 +207,7 @@ function em_install_gens()
 	apt-get remove -y gens
 
 	echo "Installing Gens Sega CD/32X emulator"
-	wget --tries=50 -P /tmp "www.libregeek.org/RetroRig/Ubuntu-Trusty/gens/Gens_2.16.7_i386.deb"
+	wget --tries=50 -P /tmp "http://www.libregeek.org/RetroRig/Ubuntu-Trusty/emulators/gens//Gens_2.16.7_i386.deb"
         dpkg -i "/tmp/Gens_2.16.7_i386.deb"
 
 	# cleanup pkg file
