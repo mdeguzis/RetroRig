@@ -467,6 +467,9 @@ function rrs_xbmc_patched()
 
         chmod 755 "/etc/init.d/rescan"  
 
+	# Link the startXBMC.sh startup script to /usr/bin, so users can call "retrorig" at will
+	ln -s "/usr/share/applications/startXBMC.sh" "/usr/bin/retrorig"
+
         # update init scripts
 	update-rc.d rescan defaults
 
