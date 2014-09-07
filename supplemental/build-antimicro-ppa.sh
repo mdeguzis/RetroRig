@@ -1,29 +1,30 @@
-#=========================================================================
-# Build Script for custom mupen64plus-core RetroRig PPA
-#=========================================================================
+#========================================================================
+# Build Script for custom antimicro RetroRig PPA
+#======================================================================== 
 #
-# Author      : Jens-Christian Lache
-# Date        : 20140906
-# Version     : Patch Level 1 
-# Descrition  : This package is provided to replace the original buggy
-#               version 2.0-1 from Thrusty Thar. It was changed to not
-#               switch display resolutions (SDL_WINDOW_FULLSCREEN_DESKTOP).
-#               The Debian package now exports "mupen64plus-config-abi-2.3"
-# =========================================================================
+# Author:  Jens-Christian Lache
+# Date:    20140905
+# Version: Patch Level 0 
+#          (unpatched version forked and baselined on Fri, 5 Sep 2014
+#           as "github.com/beaumanvienna/antimicro/tree/retrorig-pl0")
+# ========================================================================
+
+# date of github baseline
+BASELINE_DATE=20140905
 
 #define base version
-BASE=2:2.0
+BASE=2.5.$BASELINE_DATE
 
 # define patch level
-PL=1.1
+PL=0
 
 #define branch
-BRANCH=patchlevel-1
+BRANCH=retrorig-pl$PL
 
 clear
-echo "#################################################################"
-echo "Building custom mupen64plus-core Debian package (patch level $PL)"
-echo "#################################################################"
+echo "#####################################################################"
+echo "Building custom antimicro Debian package (patch level $PL)"
+echo "#####################################################################"
 echo ""
 if [[ -n "$1" ]]; then
 
@@ -48,15 +49,20 @@ if [[ -n "$2" ]]; then
   echo "##########################################"
   echo ""
 
-  #apt-get build-deps
-  sudo apt-get -y build-dep mupen64plus-core
   #apt-get install packages
-  sudo apt-get install -y build-essential fakeroot devscripts automake autoconf autotools-dev libmupen64plus-dev libsdl2-dev binutils-dev
+  sudo apt-get install -y build-essential fakeroot devscripts automake autoconf autotools-dev
 
+  #get build dependencies
+  sudo apt-get -y install cmake debhelper dpkg-dev \
+	libsdl2-dev \
+	qt4-qmake \
+	libqt4-dev \
+	libxtst-dev \
+	libX11-dev
 else
   echo ""
   echo "skipping installation of build packages, use arbitrary second argument to get those packages"
-  echo "e.g ./build-mupen64plus-core-ppa.sh compile update"
+  echo "e.g ./build-antimicro-ppa.sh compile update"
   echo ""
 fi
 
@@ -65,18 +71,18 @@ echo "##########################################"
 echo "Setup build directory"
 echo "##########################################"
 echo ""
-echo "~/packaging/mupen64plus-core"
+echo "~/packaging/antimicro"
 # start in $HOME
 cd
 
 # remove old build directory
-rm -rf ~/packaging/mupen64plus-core
+rm -rf ~/packaging/antimicro
 
 #create build directory
-mkdir -p ~/packaging/mupen64plus-core
+mkdir -p ~/packaging/antimicro
 
 #change to build directory
-cd ~/packaging/mupen64plus-core
+cd ~/packaging/antimicro
 
 echo ""
 echo "##########################################"
@@ -84,31 +90,31 @@ echo "Setup package base files"
 echo "##########################################"
 
 echo "dsc file"
-cp ~/RetroRig/supplemental/mupen64plus-core/mupen64plus-core.dsc mupen64plus-core_$BASE.$PL.dsc
-sed -i "s|version_placeholder|$BASE.$PL|g" "mupen64plus-core_$BASE.$PL.dsc"
+cp ~/RetroRig/supplemental/Antimicro/antimicro.dsc antimicro_$BASE.$PL.dsc
+sed -i "s|version_placeholder|$BASE.$PL|g" "antimicro_$BASE.$PL.dsc"
 
 echo "original tarball"
-git clone https://github.com/beaumanvienna/mupen64plus-core
+git clone https://github.com/beaumanvienna/antimicro
 
-file mupen64plus-core/
+file antimicro/
 
 if [ $? -eq 0 ]; then  
     echo "successfully cloned"
 else  
     echo "git clone failed, aborting"
     exit
-fi
+fi 
 
-cd mupen64plus-core/
+cd antimicro
 git checkout $BRANCH
-rm -rf .git .gitattributes .gitignore .travis.yml
+rm -rf .git .gitignore .hgeol .hgignore
 cd ..
 
-tar cfj mupen64plus-core_orig.tar.bz2 mupen64plus-core
-mv mupen64plus-core_orig.tar.bz2 mupen64plus-core_$BASE.$PL.orig.tar.bz2
+tar cfj antimicro.orig.tar.bz2 antimicro
+mv antimicro.orig.tar.bz2 antimicro_$BASE.$PL.orig.tar.bz2
 
 echo "debian files"
-wget --tries=50 "http://www.libregeek.org/RetroRig/Ubuntu-Trusty/templates/mupen64plus-core.debian.tar.xz"
+cp -r ~/RetroRig/supplemental/Antimicro/debian antimicro/
 
 echo ""
 echo "##########################################"
@@ -116,38 +122,12 @@ echo "Unpacking debian files"
 echo "##########################################"
 echo ""
 
-#unpack
-echo "unpacking template mupen64plus-core.debian.tar.xz"
-tar xfJ mupen64plus-core.debian.tar.xz
-#remove template
-rm mupen64plus-core.debian.tar.xz
-
-#move debian folder into source folder
-mv debian/ mupen64plus-core/
-
 #change to source folder
-cd mupen64plus-core/
-
-echo "control"
-cp ~/RetroRig/supplemental/mupen64plus-core/control debian/
-
-echo "format"
-rm -rf debian/source 
-mkdir debian/source
-cp ~/RetroRig/supplemental/mupen64plus-core/format debian/source/
+cd antimicro/
 
 echo "changelog"
-cp ~/RetroRig/supplemental/mupen64plus-core/changelog debian/
 sed -i "s|version_placeholder|$BASE.$PL|g" debian/changelog
 #dch -i
-
-echo "patches"
-rm -rf debian/patches
-
-echo "clean up"
-rm -f debian/upstream/
-rm -f debian/upstream-signing-key.pgp
-rm -f debian/watch
 
 if [[ -n "$1" ]]; then
   arg0=$1
@@ -173,7 +153,7 @@ case "$arg0" in
         echo "Building finished"
         echo "##########################################"
         echo ""
-        ls -lah ~/packaging/mupen64plus-core
+        ls -lah ~/packaging/antimicro
          exit 0
     else  
         echo "debuild failed to generate the binary package, aborting"
@@ -202,10 +182,10 @@ case "$arg0" in
       if [ $? -eq 0 ]; then
         echo ""
         echo ""
-        ls -lah ~/packaging/mupen64plus-core
+        ls -lah ~/packaging/antimicro
         echo ""
         echo ""
-        echo "you can upload the package with dput ppa:beauman/retrorig ~/packaging/mupen64plus-core/mupen64plus-core_$BASE.$PL""_source.changes"
+        echo "you can upload the package with dput ppa:beauman/retrorig ~/packaging/antimicro/antimicro_$BASE.$PL""_source.changes"
         echo "all good"
         echo ""
         echo ""
@@ -213,7 +193,7 @@ case "$arg0" in
         while true; do
             read -p "Do you wish to upload the source package?    " yn
             case $yn in
-                [Yy]* ) dput ppa:beauman/retrorig ~/packaging/mupen64plus-core/mupen64plus-core_*.$PL""_source.changes; break;;
+                [Yy]* ) dput ppa:beauman/retrorig ~/packaging/antimicro/antimicro_*.$PL""_source.changes; break;;
                 [Nn]* ) break;;
                 * ) echo "Please answer yes or no.";;
             esac
@@ -230,7 +210,6 @@ case "$arg0" in
     fi
     ;;
 esac
-
 
 
 

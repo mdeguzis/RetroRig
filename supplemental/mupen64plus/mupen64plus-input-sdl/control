@@ -1,0 +1,50 @@
+Source: mupen64plus-input-sdl
+Section: games
+Priority: optional
+Maintainer: Tobias Loose <TobiasLoose@gmx.de>
+Uploaders: RetroRig Development Team <jc.lache@gmail.com>
+Standards-Version: 3.9.5
+Homepage: http://code.google.com/p/mupen64plus/
+Build-Depends:
+ debhelper (>= 9.20130604),
+ dpkg-dev (>= 1.16.1.1),
+ libmupen64plus-dev (>= 1.99.5),
+ libsdl2-dev,
+
+Package: mupen64plus-input-sdl
+Architecture: any-i386 any-amd64
+Multi-Arch: same
+Pre-Depends:
+ ${misc:Pre-Depends},
+Depends:
+ ${misc:Depends},
+ ${shlibs:Depends},
+ mupen64plus-config-abi-2.2,
+ mupen64plus-input-abi-2,
+Provides:
+ mupen64plus-input,
+Breaks:
+ libmupen64plus2 (<< 2.0),
+Description: sdl input device plugin for mupen64plus
+ Input device plugin for mupen64plus which can use either keyboard or all by
+ SDL supported input devices. All devices are autoconfigured using a
+ database supplied with this package or through manual button mappings inside
+ the local mupen64plus configuration.
+
+Package: mupen64plus-input-sdl-dbg
+Section: debug
+Priority: extra
+Architecture: any-i386 any-amd64
+Multi-Arch: same
+Pre-Depends:
+ ${misc:Pre-Depends},
+Depends:
+ ${misc:Depends},
+ mupen64plus-input-sdl (= ${binary:Version}),
+Description: sdl input device plugin for mupen64plus debug symbols package
+ Input device plugin for mupen64plus which can use either keyboard or all by
+ SDL supported input devices. All devices are autoconfigured using a
+ database or through manual button mappings inside the local mupen64plus
+ configuration.
+ .
+ This package contains the debug files.

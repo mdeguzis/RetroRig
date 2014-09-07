@@ -1,13 +1,19 @@
 mupen64plus-core (version_placeholder) trusty; urgency=medium
 
-  * source code: 
+  * same as 2:2.0.1.0 (patchlevel 1),
+    additionally exporting virtual package "mupen64plus-config-abi-2.3"
+
+ -- Jens-Christian Lache <jc.lache@web.de>  Sat, 06 Aug 2014 20:00:00 +0200
+
+mupen64plus-core (2:2.0.1.0) trusty; urgency=medium
+
+  * source code:
 
     https://github.com/beaumanvienna/mupen64plus-core
 
   * Fullscreen mode changed to SDL_WINDOW_FULLSCREEN_DESKTOP
   * Compiled and packaged for project RetroRig.
-
- -- Jens-Christian Lache <jc.lache@web.de>  Fri, 15 Aug 2014 20:00:00 +0200
+ -- Jens-Christian Lache <email address hidden>   Fri, 15 Aug 2014 20:00:00 +0200
 
 mupen64plus-core (2.0-6) unstable; urgency=medium
 
