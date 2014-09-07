@@ -110,13 +110,7 @@ case $response in
    	1) 
 	# User hit [No]
 	# remove dotfiles
-	rm -rf "$config_home/.qjoypad3" 
-	rm -rf "$config_home/.config/mupen64plus" 
-	rm -rf "$config_home/.mame" 
-	rm -rf "$config_home/.stella" 
-	rm -rf "$config_home/.mednafen" 
-	rm -rf "$config_home/.mess" 
-	rm -rf "$xbmc_home"
+	rm -rf "$config_home"
 
 	# user home objects
 	rm -f "$home/.config/autostart/qjoypad.desktop"
@@ -152,8 +146,9 @@ case $response in
 	# auto start entries
 	rm -f "$home/.config/autostart/RetroRig.desktop"
 
-	# shortcuts
+	# shortcuts / symlinks
 	rm -f "$xdg_desktop_dir/RetroRig.desktop"
+	rm -f "/usr/bin/retrorig"
 
 	# change the session
 	# NOTE! As of Ubuntu Trusy 14.04, lightdm-set-defaults is no longer available. This is because 

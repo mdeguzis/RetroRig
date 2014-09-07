@@ -20,8 +20,8 @@ function em_add_repos()
 	# apt-key add getdeb.key 
 	# rm -f getdeb.key
 
-	# dolphin emulator PPA
-	#add-apt-repository -y ppa:glennric/dolphin-emu
+	# Dolphin emulator PPA / Libretro / RetroArch
+	add-apt-repository -y ppa:hunter-kaller/ppa
 
 	# pcsx2 emulator PPA
 	add-apt-repository -y ppa:gregory-hainaut/pcsx2.official.ppa
@@ -59,7 +59,11 @@ function em_install_dolphin()
 
 	echo "Installing Nintendo Gamecube emulator Dolphin"
 	apt-get remove -y dolphin-emu dolphin-emu-master
-	apt-get install -y dolphin-emu
+	#apt-get install -y dolphin-emu
+
+	# Hunter Kaller version specified here until further notice
+	# Currently there are some performance issues with our PPA
+	apt-get install -y dolphin-emu=4.0git-0ubuntu1~filthypants1
 
 }
 
