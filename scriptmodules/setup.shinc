@@ -405,12 +405,12 @@ function rrs_xbmc_patched()
 
 	# create autostart for XBMC and place our modified files
 	# Custom script for reboots/hotplugging
-	cp -v "$rootdir/XBMC-cfgs/extra/gp_autodetect_xbmc.sh" "/usr/share/applications/"
-	cp -v "$rootdir/XBMC-cfgs/extra/RetroRig.desktop" "/usr/share/applications/"
-	cp -v "$rootdir/XBMC-cfgs/extra/RetroRig.desktop" "$xdg_desktop_dir"
-	cp -v "$rootdir/XBMC-cfgs/extra/retro-icon.png" "$xdg_pictures_dir"
-	cp -v "$rootdir/XBMC-cfgs/extra/retro-icon.png" "/usr/share/icons/"
-	cp -v "$rootdir/XBMC-cfgs/extra/startXBMC.sh" "/usr/share/applications/"
+	cp -v "$scriptdir/XBMC-cfgs/extra/gp_autodetect_xbmc.sh" "/usr/share/applications/"
+	cp -v "$scriptdir/XBMC-cfgs/extra/RetroRig.desktop" "/usr/share/applications/"
+	cp -v "$scriptdir/XBMC-cfgs/extra/RetroRig.desktop" "$xdg_desktop_dir"
+	cp -v "$scriptdir/XBMC-cfgs/extra/retro-icon.png" "$xdg_pictures_dir"
+	cp -v "$scriptdir/XBMC-cfgs/extra/retro-icon.png" "/usr/share/icons/"
+	cp -v "$scriptdir/XBMC-cfgs/extra/startXBMC.sh" "/usr/share/applications/"
 
 	# insert restarting xboxdrv specifically into /etc/sudoers
 	cat "$scriptdir/XBMC-cfgs/extra/sudoers.txt" >> "/etc/sudoers"
@@ -423,7 +423,7 @@ function rrs_xbmc_patched()
 
 	# create autostart entry, remove prior if it exists
 	rm -f "$home.config/autostart/RetroRig.desktop"
-	cp -v "$rootdir/XBMC-cfgs/extra/RetroRig.desktop" "$home/.config/autostart"
+	cp -v "$scriptdir/XBMC-cfgs/extra/RetroRig.desktop" "$home/.config/autostart"
 
 	# Can't use $config_home in the desktop file, so need to replace $user string
 	sed -i "s|/home/test/Pictures|$xdg_pictures_dir|g" "$home/.config/autostart/"
@@ -456,7 +456,7 @@ function rrs_xbmc_patched()
         # get SHA1 tag from patched XBMC version
         sha1=`file /usr/lib/xbmc/xbmc.bin | cut -f 19 -d ' '| cut -f 2 -d '='|cut -f 1 -d ','`
         # insert SHA1 tag to rescan by replacing the place holder
-        cat "$rootdir/XBMC-cfgs/extra/rescan" | sed s/placeholderSHA1/$sha1/ > /tmp/rescan
+        cat "$scriptdir/XBMC-cfgs/extra/rescan" | sed s/placeholderSHA1/$sha1/ > /tmp/rescan
         # move to /etc/init.d
 	mv "/tmp/rescan" "/etc/init.d/rescan"
 
