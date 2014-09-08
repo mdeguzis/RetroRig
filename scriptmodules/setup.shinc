@@ -357,7 +357,6 @@ function rrs_debug()
 	h_filechecker "$home/.config/autostart/RetroRig.desktop"
 	h_filechecker "$home/.config/autostart/qjoypad.desktop"
 
-
 	# init file checks	
 	echo "Available init files:" >> "$rootdir/logs/debug.log"
 	echo "Has xboxdrv been loaded?" >> "$rootdir/logs/debug.log"

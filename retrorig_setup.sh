@@ -217,8 +217,6 @@ echo "Please start the RetroRig Setup Script not as user 'root', but, e.g., as u
     exit
 fi
 
-esscrapimgw=275 # width in pixel for EmulationStation games scraper
-
 home=$(eval echo ~$user)
 
 #################################################################

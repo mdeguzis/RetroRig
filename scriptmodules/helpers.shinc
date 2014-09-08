@@ -770,6 +770,8 @@ function h_correct_perms()
 	# correct permissions since we use sudo
 	chgrp -Rv "$user" "$rootdir" > /dev/null 2>&1
     	chown -Rv "$user" "$rootdir" > /dev/null 2>&1
+	chgrp -Rv "$user" "$scriptdir" > /dev/null 2>&1
+    	chown -Rv "$user" "$scriptdir" > /dev/null 2>&1
 
 	# correct the desktop permissions so we can add our own launcher
 	# This will allow permissions change for all languages. Thanks JC!
