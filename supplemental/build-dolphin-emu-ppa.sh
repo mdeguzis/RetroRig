@@ -5,7 +5,7 @@
 # Author      : Jens-Christian Lache
 # Date        : 20140908
 # Version     : 4.0.0
-# Description : version 4.0.1 from Hunter-Kaller, Patch Level 1
+# Description : Version 4.0.0 from Hunter-Kaller, Patch Level 1
 #               
 # ========================================================================
 
