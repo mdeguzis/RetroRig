@@ -49,9 +49,6 @@ function em_install_pcsx2()
 	# will not be created in setup.shinc 
 	ln -s "$config_home/.config/pcsx2/bios" "$rootdir/BIOS/PCSX2"
 
-
-ln -s /home/test/.retrorig/.config/pcsx2/bios /home/test/RetroRig/BIOS/PCSX2
-
 }
 
 function em_install_dolphin()
@@ -59,11 +56,7 @@ function em_install_dolphin()
 
 	echo "Installing Nintendo Gamecube emulator Dolphin"
 	apt-get remove -y dolphin-emu dolphin-emu-master
-	#apt-get install -y dolphin-emu
-
-	# Hunter Kaller version specified here until further notice
-	# Currently there are some performance issues with our PPA
-	apt-get install -y dolphin-emu=4.0git-0ubuntu1~filthypants1
+	apt-get install -y dolphin-emu
 
 }
 
