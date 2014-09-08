@@ -49,9 +49,12 @@ function em_install_pcsx2()
 	# will not be created in setup.shinc 
 	ln -s "$config_home/.config/pcsx2/bios" "$rootdir/BIOS/PCSX2"
 
+<<<<<<< HEAD
 	# Link BIOS path
 	ln -s /home/test/.retrorig/.config/pcsx2/bios /home/test/RetroRig/BIOS/PCSX2
 
+=======
+>>>>>>> 863d943b5bd318fe443df09a39f2f8473ce9acf7
 }
 
 function em_install_dolphin()

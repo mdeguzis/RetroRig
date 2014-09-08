@@ -1,68 +1,22 @@
 dolphin-emu (version_placeholder) trusty; urgency=medium
 
-  * changed: 
+  * changed: dual-head fix (start position by XRandr, not configuration file)
 
- -- Jens-Christian Lache <jc.lache@web.de>  Sun, 31 Aug 2014 19:10:00 +0200
+    source code from 
 
-dolphin-emu (2:4.0.2.1.0) trusty; urgency=medium
+    https://launchpad.net/~hunter-kaller/+archive/ubuntu/ppa/
+            +files/dolphin-emu_4.0git-0ubuntu1~filthypants1.tar.gz
 
-  * Built for project RetroRig (tag 4.0.2), Patch Level 1
+    and patched for project RetroRig.
 
-  * changed: bug fix dual monitor support http://tinyurl.com/nofzflm
+ -- Jens-Christian Lache <jc.lache@web.de>  Mon, 08 Sep 2014 19:00:00 +0200
 
- -- Jens-Christian Lache <jc.lache@web.de>  Sun, 31 Aug 2014 19:10:00 +0200
+dolphin-emu (4.0git-0ubuntu1~filthypants1) trusty; urgency=low
 
-dolphin-emu (2:4.0.2.0) trusty; urgency=medium
+  * Includes tev_fixes...?
+  * Hopefully fix dependency issue.
 
-  * source code: 
-
-    https://github.com/beaumanvienna/dolphin
-
-  * Built for project RetroRig (tag 4.0.2)
-
- -- Jens-Christian Lache <jc.lache@web.de>  Mon, 18 Aug 2014 23:45:00 +0200
-
-dolphin-emu (4.0-0ubuntu1~saucy) saucy; urgency=low
-
-  * Rebuilt for saucy
-
- -- Glenn Rice <glennricster@gmail.com>  Sat, 19 Oct 2013 08:49:14 -0500
-
-dolphin-emu (4.0-0ubuntu1~raring) raring; urgency=low
-
-  * Upstream stable relase
-
- -- Glenn Rice <glennricster@gmail.com>  Sun, 22 Sep 2013 15:44:39 -0500
-
-dolphin-emu (3.5-0ubuntu1~raring) raring; urgency=low
-
-  * Repackaged for raring
-
- -- Glenn Rice <glennricster@gmail.com>  Fri, 26 Apr 2013 15:36:00 -0500
-
-dolphin-emu (3.5-0ubuntu1~quantal) quantal; urgency=low
-
-  * Upstream stable release
-
- -- Glenn Rice <glennricster@gmail.com>  Tue, 25 Dec 2012 11:08:34 -0600
-
-dolphin-emu (3.0-0ubuntu2~quantal) quantal; urgency=low
-
-  * Repackaged for quantal
-
- -- Glenn Rice <glennricster@gmail.com>  Sun, 21 Oct 2012 20:03:53 -0500
-
-dolphin-emu (3.0-0ubuntu2~precise) precise; urgency=low
-
-  * Built without libav framedumping support.
-
- -- Glenn Rice <glennricster@gmail.com>  Sun, 27 May 2012 09:56:58 -0500
-
-dolphin-emu (3.0-0ubuntu1~precise) precise; urgency=low
-
-  * Repackaged for precise
-
- -- Glenn Rice <glennricster@gmail.com>  Sun, 27 May 2012 09:28:05 -0500
+ -- Hunter Kaller (hizzlekizzle) <hunter_kaller@yahoo.com>  Sun, 23 Mar 2014 13:24:59 -0500
 
 dolphin-emu (3.0-0ubuntu1~oneiric) oneiric; urgency=low
 

@@ -3,20 +3,20 @@
 #======================================================================== 
 #
 # Author      : Jens-Christian Lache
-# Date        : 20140831
-# Version     : 4.0.2
-# Description : version 4.0.2 from Github, Patch Level 1
+# Date        : 20140908
+# Version     : 4.0.0
+# Description : Version 4.0.0 from Hunter-Kaller, Patch Level 1
 #               
 # ========================================================================
 
 #define base version
-BASE=2:4.0.2
+PRE=3
+BASE=4.0.0
 
 # define patch level
-PL=1.0
+PL=1
 
-#define branch
-BRANCH=retrorig-4.0.2.1
+
 
 clear
 echo "#################################################################"
@@ -58,7 +58,7 @@ if [[ -n "$2" ]]; then
 			  libpulse-dev libreadline6-dev libsdl1.2-dev libsfml-dev libsoil-dev libsoundtouch-dev \
 			  libswscale-dev libminiupnpc-dev libwxbase3.0-dev libwxgtk3.0-dev libxext-dev \
 			  libxrandr-dev lsb-release pkg-config portaudio19-dev wx3.0-headers zlib1g-dev \
-			  libjack-dev libjack0
+			  libjack-dev libjack0 libportaudio-dev
 
 else
   echo ""
@@ -91,14 +91,19 @@ echo "Setup package base files"
 echo "##########################################"
 
 echo "dsc file"
-cp ~/RetroRig/supplemental/dolphin-emu/dolphin-emu.dsc dolphin-emu_$BASE.$PL.dsc
-sed -i "s|version_placeholder|$BASE.$PL|g" "dolphin-emu_$BASE.$PL.dsc"
+cp ~/RetroRig/supplemental/dolphin-emu/dolphin-emu.dsc dolphin-emu-$PRE:$BASE.$PL.dsc
+sed -i "s|version_placeholder|$PRE:$BASE.$PL|g" "dolphin-emu-$PRE:$BASE.$PL.dsc"
 
 echo "original tarball"
-git clone https://github.com/beaumanvienna/dolphin
-mv dolphin dolphin-emu
+wget https://launchpad.net/~hunter-kaller/+archive/ubuntu/ppa/+files/dolphin-emu_4.0git-0ubuntu1~filthypants1.tar.gz
+tar xfz dolphin-emu_4.0git-0ubuntu1~filthypants1.tar.gz
+rm dolphin-emu_4.0git-0ubuntu1~filthypants1.tar.gz
 
-file dolphin-emu/
+SRC_FOLDER=dolphin-emu-$BASE.$PL
+
+mv dolphin $SRC_FOLDER
+
+file $SRC_FOLDER
 
 if [ $? -eq 0 ]; then  
     echo "successfully cloned"
@@ -107,53 +112,19 @@ else
     exit
 fi
 
-cd dolphin-emu/
-git checkout $BRANCH
-rm -rf .git .gitignore .hgeol .hgignore
-cd ..
-
-tar cfj dolphin-emu_orig.tar.bz2 dolphin-emu
-mv dolphin-emu_orig.tar.bz2 dolphin-emu_$BASE.$PL.orig.tar.bz2
-
-echo "debian files"
-wget --tries=50 "http://www.libregeek.org/RetroRig/Ubuntu-Trusty/templates/dolphin-emu.debian.tar.bz2"
-
-echo ""
-echo "##########################################"
-echo "Unpacking debian files"
-echo "##########################################"
-echo ""
-
-#unpack
-echo "unpacking template dolphin-emu.debian.tar.bz2"
-tar xfj dolphin-emu.debian.tar.bz2
-#remove template
-rm dolphin-emu.debian.tar.bz2
-
-#move debian folder into source folder
-mv debian/ dolphin-emu/
-
 #change to source folder
-cd dolphin-emu/
+cd $SRC_FOLDER
 
-echo "control"
-cp ~/RetroRig/supplemental/dolphin-emu/control debian/
-
-echo "format"
-rm -rf debian/source 
-mkdir debian/source
-cp ~/RetroRig/supplemental/dolphin-emu/format debian/source/
+#echo "patching .."
+patch Source/Core/DolphinWX/X11Utils.cpp < ~/RetroRig/supplemental/dolphin-emu/X11Utils.cpp.patch
+patch Source/Core/DolphinWX/FrameTools.cpp < ~/RetroRig/supplemental/dolphin-emu/FrameTools.cpp.patch
 
 echo "changelog"
 cp ~/RetroRig/supplemental/dolphin-emu/changelog debian/
-sed -i "s|version_placeholder|$BASE.$PL|g" debian/changelog
-#dch -i
+sed -i "s|version_placeholder|$PRE:$BASE.$PL|g" debian/changelog
 
-echo "patches"
-rm -rf debian/patches
-
-echo "clean up"
-rm -f debian/watch
+echo "control"
+cp ~/RetroRig/supplemental/dolphin-emu/control debian/
 
 if [[ -n "$1" ]]; then
   arg0=$1
