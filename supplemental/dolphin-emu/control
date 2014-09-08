@@ -2,41 +2,14 @@ Source: dolphin-emu
 Section: games
 Priority: optional
 Maintainer: RetroRig Development Team <jc.lache@gmail.com>
-Build-Depends:  debhelper (>= 7.0.50),
-		cmake,
-		libao-dev,
-		libasound2-dev,
-		libavcodec-dev,
-		libavformat-dev,
-		libbluetooth-dev,
-		libglew-dev,
-		libgtk2.0-dev,
-		liblzo2-dev,
-		libopenal-dev,
-		libpolarssl-dev (>= 1.2.8),
-		libpulse-dev,
-		libreadline6-dev,
-		libsdl1.2-dev,
-		libsfml-dev (>= 1.6),
-		libsoil-dev,
-		libsoundtouch-dev,
-		libswscale-dev,
-		libminiupnpc-dev (>= 1.7),
-		libwxbase3.0-dev,
-		libwxgtk3.0-dev,
-		libxext-dev,
-		libxrandr-dev,
-		lsb-release,
-		pkg-config,
-		portaudio19-dev,
-		wx3.0-headers,
-		zlib1g-dev
+XSBC-Original-Maintainer: Glenn Rice <glennricster@gmail.com>
+Build-Depends:  debhelper (>= 7.0.50), cmake, libwxbase2.8-dev, libgtk2.0-dev, nvidia-cg-toolkit, libbluetooth-dev, libxrandr-dev, libxext-dev, libreadline-dev, libasound-dev, libpulse-dev, libao-dev, libopenal-dev, libavcodec-dev, libavformat-dev, libswscale-dev, libglew1.5-dev, liblzo2-dev, libsdl1.2-dev, libsoil-dev, libsfml-dev, libportaudio-dev
 Standards-Version: 3.9.5
-Homepage: https://github.com/beaumanvienna/dolphin
+Homepage: http://www.dolphin-emu.com
 
 Package: dolphin-emu
 Architecture: i386 amd64
-Depends: ${shlibs:Depends}, ${misc:Depends}
+Depends: nvidia-cg-toolkit (>= 2.2), libsfml-network2, libsoil1, libao4, ${shlibs:Depends}, ${misc:Depends}
 Description: Gamecube, Wii and Triforce emulator
  Dolphin is a Gamecube, Wii and Triforce (the arcade machine based on the
  Gamecube) emulator.

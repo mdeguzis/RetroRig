@@ -1,0 +1,13 @@
+918,919c918,926
+< 		wxPoint position(SConfig::GetInstance().m_LocalCoreStartupParameter.iRenderWindowXPos,
+< 				SConfig::GetInstance().m_LocalCoreStartupParameter.iRenderWindowYPos);
+---
+> //#define RETRORIG_PL1
+> 	  #ifdef RETRORIG_PL1
+> 	  	printf("Retrorig: rendering *NOT* into main window\n");
+> 	  #endif
+> 	  extern int renderWindowXPos,renderWindowYPos;
+> 	  wxPoint position(renderWindowXPos,renderWindowYPos);
+> 
+> 		/*wxPoint position(SConfig::GetInstance().m_LocalCoreStartupParameter.iRenderWindowXPos,
+> 				SConfig::GetInstance().m_LocalCoreStartupParameter.iRenderWindowYPos);*/
