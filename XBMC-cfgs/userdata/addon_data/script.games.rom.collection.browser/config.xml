@@ -356,6 +356,7 @@
       <emulatorParams>"%ROM%"</emulatorParams>
       <romPath>installdir_temp/ROMs/SNES/*.smc</romPath>
       <romPath>installdir_temp/ROMs/SNES/*.zip</romPath>
+      <romPath>installdir_temp/ROMs/SNES/*.sfc</romPath>
       <saveStatePath />
       <saveStateParams />
       <mediaPath type="boxfront">installdir_temp/Artwork/SNES/boxfront/%GAME%.*</mediaPath>
