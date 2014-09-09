@@ -24,7 +24,8 @@ while true; do
 	     10 "Restore first run configs"
 	     11 "Update XBMC configs"
 	     12 "Upgrade Ubuntu kernel (PS3 USB Support)"
- 	     13 "Back to main menu")
+	     13 "Enable XBMC Session (Experimental Beta!)"
+ 	     14 "Back to main menu")
 
 	#make menu choice
 	choices=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
@@ -82,6 +83,10 @@ while true; do
 		;;
 
 		13)
+		set_xbmc_session
+		;;
+
+		14)
 		return
 		;;
 
