@@ -205,6 +205,8 @@ function set_xbmc_session()
 	# edits the single configuration file.
 
 	sed -i "s|$session_org|$session_new|g" "/usr/share/lightdm/lightdm.conf.d/50-ubuntu.conf"
+	sleep 2s
+
 	# correct permissions
 	h_correct_perms
 }
