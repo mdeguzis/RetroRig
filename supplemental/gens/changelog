@@ -1,4 +1,4 @@
-gens (version_placeholder) lucid; urgency=medium
+gens (version_placeholder) trusty; urgency=medium
 
   * changed: compiled for project RetroRig
 

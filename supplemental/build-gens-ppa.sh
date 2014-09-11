@@ -3,10 +3,12 @@
 #======================================================================== 
 #
 # Author      : Jens-Christian Lache
-# Date        : 20140910
+# Date        : 20140911
 # Version     : 2.16.7
-# Description : Version 2.16.7 from gerbilsoft, unpatched 0
+# Description : Version 2.16.7 from gerbilsoft, patch level 1
 #               
+#               Amendmends to have gens compile under Trusty.
+#
 # ========================================================================
 
 #define base version
@@ -14,7 +16,7 @@ PRE=1
 BASE=2.16.7
 
 # define patch level
-PL=0.3
+PL=1
 
 
 
@@ -119,6 +121,10 @@ fi
 
 #change to source folder
 cd $SRC_FOLDER
+
+#echo "patching .."
+patch configure < ~/RetroRig/supplemental/gens/configure.patch
+patch src/gens/ui/gtk/gens/gens_window_callbacks.cpp < ~/RetroRig/supplemental/gens/gens_window_callbacks.cpp.patch
 
 
 echo "changelog"
