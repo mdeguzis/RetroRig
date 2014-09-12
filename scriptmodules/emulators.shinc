@@ -203,14 +203,16 @@ function em_install_gens()
 	apt-get remove -y gens
 
 	echo "Installing Gens Sega CD/32X emulator"
-	wget --tries=50 -P /tmp "http://www.libregeek.org/RetroRig/Ubuntu-Trusty/emulators/gens//Gens_2.16.7_i386.deb"
-        dpkg -i "/tmp/Gens_2.16.7_i386.deb"
+	apt-get -y install gens
 
+        # deprecated: installation from libregeek.org:
+	#wget --tries=50 -P /tmp "http://www.libregeek.org/RetroRig/Ubuntu-Trusty/emulators/gens//Gens_2.16.7_i386.deb"
+        #dpkg -i "/tmp/Gens_2.16.7_i386.deb"
 	# cleanup pkg file
-	rm -f "/tmp/Gens_2.16.7_i386.deb"
+	#rm -f "/tmp/Gens_2.16.7_i386.deb"
 
 	# hold package after install against upgrades
-	apt-mark hold mednafen
+	apt-mark hold gens
 
 }
 
