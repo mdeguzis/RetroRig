@@ -644,6 +644,7 @@
       <emulatorParams>"%ROM%"</emulatorParams>
       <romPath>installdir_temp/ROMs/Sega 32X/*.zip</romPath>
       <romPath>installdir_temp/ROMs/Sega 32X/*.bin</romPath>
+      <romPath>installdir_temp/ROMs/Sega 32X/*.32x</romPath>
       <saveStatePath />
       <saveStateParams />
       <mediaPath type="boxfront">installdir_temp/Artwork/Sega 32X/boxfront/%GAME%.*</mediaPath>
