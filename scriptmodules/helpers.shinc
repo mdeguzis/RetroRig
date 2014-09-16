@@ -628,23 +628,34 @@ function h_bios_loader()
 # present menu
 loader_type="BIOS"
 
+while true; do
 cmd=(dialog --backtitle "LibreGeek.org RetroRig Installer" --menu "Load BIOS files for which system?" 19 32 24)
-options=(1 "Neo-Geo CDZ"
-	 2 "MAME" 
-	 3 "PSX/PS1"
-	 4 "PS2"
-	 5 "Sega CD"    
-	 6 "Exit BIOS Loader")
+options=(1 "Atari Lynx"
+	 2 "Neo-Geo AES/CDZ"
+	 3 "MAME" 
+	 4 "PSX/PS1"
+	 5 "PS2"
+	 6 "Sega CD"    
+	 7 "Exit BIOS Loader")
 
 	#make menu choice
 	selection=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
 	#functions
 
-	for choice in $selection
-	do
-		case $choice in
+
+	if [ "$selection" != "" ]; then
+		case $selection in
 
 		1)
+		#call file loader
+		h_file_loader
+		# copy Atari Lynx BIOS file over to Mednafen (root emulator)
+		if [ -n "$folder" ]; then
+			cp -v "$folder" "$rootdir/BIOS/Mednafen/"
+		fi
+		;;
+
+		2)
 		# call file loader  	
 		h_file_loader
 		# copy Neo-Geo BIOS file over to MESS (root emulator)
@@ -653,7 +664,7 @@ options=(1 "Neo-Geo CDZ"
 		fi
 		;;
 
-		2)
+		3)
 		#call file loader
 		h_file_loader
 		# copy MAME BIOS file over to MESS (root emulator)
@@ -662,7 +673,7 @@ options=(1 "Neo-Geo CDZ"
 		fi
 		;;
 
-		3)
+		4)
 		#call file loader
 		h_file_loader
 		# copy PSX BIOS file over to Mednafen (root emulator)
@@ -671,7 +682,7 @@ options=(1 "Neo-Geo CDZ"
 		fi
 		;;
 
-		4)
+		5)
 		#call file loader
 		h_file_loader
 		# copy PS2 BIOS file over to PCSX2 (root emulator)
@@ -685,7 +696,7 @@ options=(1 "Neo-Geo CDZ"
 		fi
 		;;
 
-		5)
+		6)
 		# call file loader
 		h_file_loader
 		# copy Sega CD BIOS file over to KEGA Fusion (root emulator)
@@ -693,7 +704,7 @@ options=(1 "Neo-Geo CDZ"
 			cp -v "$folder" "$rootdir/BIOS/Gens/"
 
 			###############################################
-			#Determine which Region from user via menu
+			# Determine which Region from user via menu
 			###############################################
 
 			cmd=(dialog --backtitle "LibreGeek.org RetroRig Installer" --menu "Load BIOS files for which system?" 19 32 24)
@@ -747,12 +758,15 @@ options=(1 "Neo-Geo CDZ"
 			###############################################
 		;;
 
-		6)
+		7)
 		return
 		;;
 
 		esac
-	done
+	else
+		break
+	fi
+done
 	
 	#fix persmissions, post-copy
 	h_correct_perms
