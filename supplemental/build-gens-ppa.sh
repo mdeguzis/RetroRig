@@ -3,11 +3,11 @@
 #======================================================================== 
 #
 # Author      : Jens-Christian Lache
-# Date        : 20140911
-# Version     : 2.16.7
-# Description : Version 2.16.7 from gerbilsoft, patch level 1
+# Date        : 20140917
+# Version     : 2.16.7.2
+# Description : Version 2.16.7 from gerbilsoft, patch level 2
 #               
-#               Amendmends to have gens compile under Trusty.
+#               Ported to SDL2.
 #
 # ========================================================================
 
@@ -16,9 +16,10 @@ PRE=1
 BASE=2.16.7
 
 # define patch level
-PL=1
+PL=2.2
 
-
+#define branch
+BRANCH=retrorig-pl2
 
 clear
 echo "#################################################################"
@@ -101,31 +102,26 @@ echo "dsc file"
 cp ~/RetroRig/supplemental/gens/gens.dsc gens-$PRE:$BASE.$PL.dsc
 sed -i "s|version_placeholder|$PRE:$BASE.$PL|g" "gens-$PRE:$BASE.$PL.dsc"
 
-echo "original tarball"
-wget  http://www.soniccenter.org/gerbilsoft/gens/r7/gens-gs-r7.tar.gz
-tar xfz gens-gs-r7.tar.gz
-rm gens-gs-r7.tar.gz
-
 SRC_FOLDER=gens-$BASE.$PL
 
-mv gens-gs-r7 $SRC_FOLDER
-
-file $SRC_FOLDER
+echo "original tarball"
+git clone https://github.com/beaumanvienna/gens-gs
+file gens-gs/
 
 if [ $? -eq 0 ]; then  
     echo "successfully cloned"
 else  
     echo "git clone failed, aborting"
     exit
-fi
+fi 
+
+mv gens-gs/ $SRC_FOLDER
 
 #change to source folder
 cd $SRC_FOLDER
 
-#echo "patching .."
-patch configure < ~/RetroRig/supplemental/gens/configure.patch
-patch src/gens/ui/gtk/gens/gens_window_callbacks.cpp < ~/RetroRig/supplemental/gens/gens_window_callbacks.cpp.patch
-
+git checkout $BRANCH
+rm -rf .git .gitignore
 
 echo "changelog"
 cp ~/RetroRig/supplemental/gens/changelog debian/
@@ -133,6 +129,9 @@ sed -i "s|version_placeholder|$PRE:$BASE.$PL|g" debian/changelog
 
 echo "control"
 cp ~/RetroRig/supplemental/gens/control debian/
+
+#get Makefiles straight
+aclocal && autoconf && autoreconf -i && automake --add-missing
 
 if [[ -n "$1" ]]; then
   arg0=$1
