@@ -177,9 +177,9 @@ function gp_ps3_blu()
 	sed -i "s|$old_post|$new_post|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
 
 
-	########################
-	# Gens GS (Sega CD/32X)
-	########################
+	################################
+	# Gens GS (Sega CD/32X/Genesis)
+	################################
 
 	old_pre="gens_pre"
 	old_post="gens_post"
@@ -722,9 +722,9 @@ RetorRig loads to use the gamepad" 14 60
 	sed -i "s|$old_pre|$new_pre|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
 	sed -i "s|$old_post|$new_post|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
 
-	########################
-	# Gens GS (Sega CD/32X)
-	########################
+	################################
+	# Gens GS (Sega CD/32X/Genesis)
+	################################
 
 	old_pre="gens_pre"
 	old_post="gens_post"
@@ -998,9 +998,9 @@ RetorRig loads to use the gamepad" 14 60
 	sed -i "s|$old_pre|$new_pre|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
 	sed -i "s|$old_post|$new_post|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
 
-	########################
-	# Gens GS (Sega CD/32X)
-	########################
+	################################
+	# Gens GS (Sega CD/32X/Genesis)
+	################################
 
 	old_pre="gens_pre"
 	old_post="gens_post"
@@ -1277,9 +1277,9 @@ RetorRig loads to use the gamepad" 14 60
 	sed -i "s|$old_pre|$new_pre|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
 	sed -i "s|$old_post|$new_post|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
 
-	########################
-	# Gens GS (Sega CD/32X)
-	########################
+	################################
+	# Gens GS (Sega CD/32X/Genesis)
+	################################
 
 	old_pre="gens_pre"
 	old_post="gens_post"
