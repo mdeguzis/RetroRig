@@ -8,7 +8,11 @@
             <button index="15">
                 <slots>
                     <slot>
-                        <code>0x1000000</code>
+                        <code>0x1000021</code>
+                        <mode>keyboard</mode>
+                    </slot>
+                    <slot>
+                        <code>0x51</code>
                         <mode>keyboard</mode>
                     </slot>
                 </slots>
@@ -16,7 +20,7 @@
             <button index="16">
                 <slots>
                     <slot>
-                        <code>0x52</code>
+                        <code>0x1000034</code>
                         <mode>keyboard</mode>
                     </slot>
                 </slots>
@@ -24,7 +28,7 @@
             <button index="17">
                 <slots>
                     <slot>
-                        <code>0x51</code>
+                        <code>0x1000037</code>
                         <mode>keyboard</mode>
                     </slot>
                 </slots>

@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <joystick configversion="9" appversion="2.5">
     <!--The SDL name for a joystick is included for informational purposes only.-->
-    <sdlname>PLAYSTATION(R)3 Controller (04:98:F3:56:5B:D8)</sdlname>
+    <sdlname>PLAYSTATION(R)3 Controller (64:D4:BD:BD:24:60)</sdlname>
     <names/>
     <sets>
         <set index="1">
             <button index="2">
                 <slots>
                     <slot>
-                        <code>0x52</code>
+                        <code>0x1000034</code>
                         <mode>keyboard</mode>
                     </slot>
                 </slots>
@@ -16,7 +16,7 @@
             <button index="3">
                 <slots>
                     <slot>
-                        <code>0x51</code>
+                        <code>0x1000037</code>
                         <mode>keyboard</mode>
                     </slot>
                 </slots>
@@ -24,7 +24,11 @@
             <button index="17">
                 <slots>
                     <slot>
-                        <code>0x1000000</code>
+                        <code>0x1000021</code>
+                        <mode>keyboard</mode>
+                    </slot>
+                    <slot>
+                        <code>0x51</code>
                         <mode>keyboard</mode>
                     </slot>
                 </slots>
