@@ -16,10 +16,10 @@ PRE=1
 BASE=2.16.7
 
 # define patch level
-PL=2
+PL=2.2
 
 #define branch
-BRANCH=retrorig-pl$PL
+BRANCH=retrorig-pl2
 
 clear
 echo "#################################################################"
@@ -129,6 +129,9 @@ sed -i "s|version_placeholder|$PRE:$BASE.$PL|g" debian/changelog
 
 echo "control"
 cp ~/RetroRig/supplemental/gens/control debian/
+
+#get Makefiles straight
+aclocal && autoconf && autoreconf -i && automake --add-missing
 
 if [[ -n "$1" ]]; then
   arg0=$1
