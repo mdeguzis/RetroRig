@@ -65,7 +65,7 @@ if [[ -n "$2" ]]; then
 
   #apt-get install packages
   sudo apt-get install -y build-essential fakeroot devscripts  autoconf autotools-dev binutils-dev \
-			  debhelper autotools-dev automake1.10 pkg-config nasm libsdl1.2-dev \
+			  debhelper autotools-dev automake1.10 pkg-config nasm libsdl2-i386-dev \
                           libglib2.0-dev libgtk2.0-dev mesa-common-dev libgl1-mesa-dev zlib1g-dev libpng12-dev
 
 else
