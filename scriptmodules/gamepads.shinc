@@ -35,6 +35,7 @@ function gp_ps3_blu()
 	# default path: /home/$USER/.retrorig/.mess
 	# Main config
 	cp -v "$scriptdir/emu-cfgs/ps3_blu_controller/MESS/mess.ini" "$config_home/.mess/"
+	cp -v "$scriptdir/emu-cfgs/ps3_blu_controller/MESS/aes.ini" "$config_home/.mess/"
 	cp -v "$scriptdir/emu-cfgs/ps3_blu_controller/MESS/default.cfg" "$config_home/.mess/cfg/"
 	cp -v "$scriptdir/emu-cfgs/ps3_blu_controller/MESS/neocdz.cfg" "$config_home/.mess/cfg/"
 	cp -v "$scriptdir/emu-cfgs/ps3_blu_controller/MESS/aes.cfg" "$config_home/.mess/cfg/"
@@ -53,8 +54,8 @@ function gp_ps3_blu()
 	# Dolphin (GameCube/Wii)
 	# default path: /home/$USER/.retrorig/.dolphin-emu
 	# Main config
-	cp -v "$scriptdir/emu-cfgs/ps3_blu_controller/Dolphin/GCPadNew.ini" "$config_home/.dolphin-emu/Config"
-	cp -v "$scriptdir/emu-cfgs/ps3_blu_controller/Dolphin/Dolphin.ini" "$config_home/.dolphin-emu/Config"
+	cp -v "$scriptdir/emu-cfgs/ps3_blu_controller/Dolphin/GCPadNew.ini" "$config_home/.dolphin-emu/Config/"
+	cp -v "$scriptdir/emu-cfgs/ps3_blu_controller/Dolphin/Dolphin.ini" "$config_home/.dolphin-emu/Config/"
 
 	# PCSX2
 	# base config folder
@@ -500,7 +501,7 @@ function gp_ps3_usb()
 	# default path: /home/$USER/.retrorig/.mame
 	# Main config
 	cp -v "$scriptdir/emu-cfgs/ps3_usb_controller/MAME/default.cfg" "$config_home/.mame/cfg"
-	cp -v "$scriptdir/emu-cfgs/ps3_usb_controller/MAME/mame.ini" "$config_home/.mame"
+	cp -v "$scriptdir/emu-cfgs/ps3_usb_controller/MAME/mame.ini" "$config_home/.mame/"
  
 	# offline artwork scrapper configs
 	cp -v "$scriptdir/emu-cfgs/ps3_usb_controller/MAME/parserConfig.xml" "$rootdir/Artwork/MAME"
@@ -510,7 +511,8 @@ function gp_ps3_usb()
 	# mess
 	# default path: /home/$USER/.retrorig/.mednafen/mednafen.cfg
 	# Main config
-	cp -v "$scriptdir/emu-cfgs/ps3_usb_controller/MESS/mess.ini" "$config_home/.mess"
+	cp -v "$scriptdir/emu-cfgs/ps3_usb_controller/MESS/mess.ini" "$config_home/.mess/"
+	cp -v "$scriptdir/emu-cfgs/ps3_blu_controller/MESS/aes.ini" "$config_home/.mess/"
 	cp -v "$scriptdir/emu-cfgs/ps3_usb_controller/MESS/default.cfg" "$config_home/.mess/cfg"
 	cp -v "$scriptdir/emu-cfgs/ps3_usb_controller/MESS/neocdz.cfg" "$config_home/.mess/cfg"
 	cp -v "$scriptdir/emu-cfgs/ps3_usb_controller/MESS/aes.cfg" "$config_home/.mess/cfg"
@@ -548,8 +550,8 @@ function gp_ps3_usb()
 	cp -v "$scriptdir/emu-cfgs/ps3_usb_controller/PCSX2/inis/spu2-x.ini" "$config_home/.config/pcsx2/inis/"
 
 	# PPSSPP
-	cp -v "$scriptdir/emu-cfgs/ps3_usb_controller/PPSSPP/ppsspp.ini" "$config_home/.config/ppsspp/PSP/SYSTEM"
-	cp -v "$scriptdir/emu-cfgs/ps3_usb_controller/PPSSPP/controls.ini" "$config_home/.config/ppsspp/PSP/SYSTEM"
+	cp -v "$scriptdir/emu-cfgs/ps3_usb_controller/PPSSPP/ppsspp.ini" "$config_home/.config/ppsspp/PSP/SYSTEM/"
+	cp -v "$scriptdir/emu-cfgs/ps3_usb_controller/PPSSPP/controls.ini" "$config_home/.config/ppsspp/PSP/SYSTEM/"
 
 	# Gens GS (Sega CD/32X)
 	cp -v "$scriptdir/emu-cfgs/ps3_usb_controller/GensGS/gens.cfg" "$config_home/.gens/"
@@ -779,7 +781,7 @@ function gp_x360_wireless()
 	# default path: /home/$USER/.mame
 	# Main config
 	cp -v "$scriptdir/emu-cfgs/x360_wireless_controller/MAME/default.cfg" "$config_home/.mame/cfg"
-	cp -v "$scriptdir/emu-cfgs/x360_wireless_controller/MAME/mame.ini" "$config_home/.mame"
+	cp -v "$scriptdir/emu-cfgs/x360_wireless_controller/MAME/mame.ini" "$config_home/.mame/"
  
 	# offline artwork scrapper configs
 	cp -v "$scriptdir/emu-cfgs/x360_wireless_controller/MAME/parserConfig.xml" "$rootdir/Artwork/MAME"
@@ -789,7 +791,8 @@ function gp_x360_wireless()
 	# mess
 	# default path: /home/$USER/.mednafen/mednafen.cfg
 	# Main config
-	cp -v "$scriptdir/emu-cfgs/x360_wireless_controller/MESS/mess.ini" "$config_home/.mess"
+	cp -v "$scriptdir/emu-cfgs/x360_wireless_controller/MESS/mess.ini" "$config_home/.mess/"
+	cp -v "$scriptdir/emu-cfgs/ps3_blu_controller/MESS/aes.ini" "$config_home/.mess/"
 	cp -v "$scriptdir/emu-cfgs/x360_wireless_controller/MESS/default.cfg" "$config_home/.mess/cfg"
 	cp -v "$scriptdir/emu-cfgs/x360_wireless_controller/MESS/neocdz.cfg" "$config_home/.mess/cfg"
 	cp -v "$scriptdir/emu-cfgs/x360_wireless_controller/MESS/aes.cfg" "$config_home/.mess/cfg"
@@ -797,7 +800,7 @@ function gp_x360_wireless()
 	# mednafen
 	# default path: /home/$USER/.mednafen/mednafen.cfg
 	# Main config
-	cp -v "$scriptdir/emu-cfgs/x360_wireless_controller/mednafen/mednafen-09x.cfg" "$config_home/.mednafen"
+	cp -v "$scriptdir/emu-cfgs/x360_wireless_controller/mednafen/mednafen-09x.cfg" "$config_home/.mednafen/"
 
 	# mupen64plus
 	# default path: /home/$USER/.config/mupen64plus
@@ -807,8 +810,8 @@ function gp_x360_wireless()
 	# Dolphin (GameCube/Wii)
 	# default path: /home/$USER/.retrorig/.dolphin-emu
 	# Main config
-	cp -v "$scriptdir/emu-cfgs/x360_wireless_controller/Dolphin/GCPadNew.ini" "$config_home/.dolphin-emu/Config"
-	cp -v "$scriptdir/emu-cfgs/x360_wireless_controller/Dolphin/Dolphin.ini" "$config_home/.dolphin-emu/Config"
+	cp -v "$scriptdir/emu-cfgs/x360_wireless_controller/Dolphin/GCPadNew.ini" "$config_home/.dolphin-emu/Config/"
+	cp -v "$scriptdir/emu-cfgs/x360_wireless_controller/Dolphin/Dolphin.ini" "$config_home/.dolphin-emu/Config/"
 
 	# PCSX2
 	# base config folder
@@ -827,8 +830,8 @@ function gp_x360_wireless()
 	cp -v "$scriptdir/emu-cfgs/x360_wireless_controller/Stella/stellarc" "$config_home/.stella/"
 
 	# PPSSPP
-	cp -v "$scriptdir/emu-cfgs/x360_wireless_controller/PPSSPP/ppsspp.ini" "$config_home/.config/ppsspp/PSP/SYSTEM"
-	cp -v "$scriptdir/emu-cfgs/x360_wireless_controller/PPSSPP/controls.ini" "$config_home/.config/ppsspp/PSP/SYSTEM"
+	cp -v "$scriptdir/emu-cfgs/x360_wireless_controller/PPSSPP/ppsspp.ini" "$config_home/.config/ppsspp/PSP/SYSTEM/"
+	cp -v "$scriptdir/emu-cfgs/x360_wireless_controller/PPSSPP/controls.ini" "$config_home/.config/ppsspp/PSP/SYSTEM/"
 
 	# Gens GS (Sega CD/32X)
 	cp -v "$scriptdir/emu-cfgs/x360_wireless_controller/GensGS/gens.cfg" "$config_home/.gens/"
@@ -1058,7 +1061,7 @@ function gp_x360_usb()
 	# default path: /home/$USER/.mame
 	# Main config
 	cp -v "$scriptdir/emu-cfgs/x360_usb_controller/MAME/default.cfg" "$config_home/.mame/cfg"
-	cp -v "$scriptdir/emu-cfgs/x360_usb_controller/MAME/mame.ini" "$config_home/.mame"
+	cp -v "$scriptdir/emu-cfgs/x360_usb_controller/MAME/mame.ini" "$config_home/.mame/"
  
 	# offline artwork scrapper configs
 	cp -v "$scriptdir/emu-cfgs/x360_usb_controller/MAME/parserConfig.xml" "$rootdir/Artwork/MAME"
@@ -1068,15 +1071,16 @@ function gp_x360_usb()
 	# mess
 	# default path: /home/$USER/.mednafen/mednafen.cfg
 	# Main config
-	cp -v "$scriptdir/emu-cfgs/x360_usb_controller/MESS/mess.ini" "$config_home/.mess"
-	cp -v "$scriptdir/emu-cfgs/x360_usb_controller/MESS/default.cfg" "$config_home/.mess/cfg"
-	cp -v "$scriptdir/emu-cfgs/x360_usb_controller/MESS/neocdz.cfg" "$config_home/.mess/cfg"
-	cp -v "$scriptdir/emu-cfgs/x360_usb_controller/MESS/aes.cfg" "$config_home/.mess/cfg"
+	cp -v "$scriptdir/emu-cfgs/x360_usb_controller/MESS/mess.ini" "$config_home/.mess/"
+	cp -v "$scriptdir/emu-cfgs/ps3_blu_controller/MESS/aes.ini" "$config_home/.mess/"
+	cp -v "$scriptdir/emu-cfgs/x360_usb_controller/MESS/default.cfg" "$config_home/.mess/cfg/"
+	cp -v "$scriptdir/emu-cfgs/x360_usb_controller/MESS/neocdz.cfg" "$config_home/.mess/cfg/"
+	cp -v "$scriptdir/emu-cfgs/x360_usb_controller/MESS/aes.cfg" "$config_home/.mess/cfg/"
 
 	# mednafen
 	# default path: /home/$USER/.mednafen/mednafen.cfg
 	# Main config
-	cp -v "$scriptdir/emu-cfgs/x360_usb_controller/mednafen/mednafen-09x.cfg" "$config_home/.mednafen"
+	cp -v "$scriptdir/emu-cfgs/x360_usb_controller/mednafen/mednafen-09x.cfg" "$config_home/.mednafen/"
 
 	# mupen64plus
 	# default path: /home/$USER/.config/mupen64plus
@@ -1086,8 +1090,8 @@ function gp_x360_usb()
 	# Dolphin (GameCube/Wii)
 	# default path: /home/$USER/.retrorig/.dolphin-emu
 	# Main config
-	cp -v "$scriptdir/emu-cfgs/x360_usb_controller//Dolphin/GCPadNew.ini" "$config_home/.dolphin-emu/Config"
-	cp -v "$scriptdir/emu-cfgs/x360_usb_controller//Dolphin/Dolphin.ini" "$config_home/.dolphin-emu/Config"
+	cp -v "$scriptdir/emu-cfgs/x360_usb_controller//Dolphin/GCPadNew.ini" "$config_home/.dolphin-emu/Config/"
+	cp -v "$scriptdir/emu-cfgs/x360_usb_controller//Dolphin/Dolphin.ini" "$config_home/.dolphin-emu/Config/"
 
 	# PCSX2
 	# base config folder
@@ -1106,8 +1110,8 @@ function gp_x360_usb()
 	cp -v "$scriptdir/emu-cfgs/x360_usb_controller/Stella/stellarc" "$config_home/.stella/"
 
 	# PPSSPP
-	cp -v "$scriptdir/emu-cfgs/x360_usb_controller/PPSSPP/ppsspp.ini" "$config_home/.config/ppsspp/PSP/SYSTEM"
-	cp -v "$scriptdir/emu-cfgs/x360_usb_controller/PPSSPP/controls.ini" "$config_home/.config/ppsspp/PSP/SYSTEM"
+	cp -v "$scriptdir/emu-cfgs/x360_usb_controller/PPSSPP/ppsspp.ini" "$config_home/.config/ppsspp/PSP/SYSTEM/"
+	cp -v "$scriptdir/emu-cfgs/x360_usb_controller/PPSSPP/controls.ini" "$config_home/.config/ppsspp/PSP/SYSTEM/"
 
 	# Gens GS (Sega CD/32X)
 	cp -v "$scriptdir/emu-cfgs/x360_usb_controller/GensGS/gens.cfg" "$config_home/.gens/"
