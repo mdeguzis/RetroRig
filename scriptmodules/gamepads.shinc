@@ -36,6 +36,7 @@ function gp_ps3_blu()
 	# Main config
 	cp -v "$scriptdir/emu-cfgs/ps3_blu_controller/MESS/mess.ini" "$config_home/.mess/"
 	cp -v "$scriptdir/emu-cfgs/ps3_blu_controller/MESS/aes.ini" "$config_home/.mess/"
+	cp -v "$scriptdir/emu-cfgs/ps3_blu_controller/MESS/neocdz.ini" "$config_home/.mess/"
 	cp -v "$scriptdir/emu-cfgs/ps3_blu_controller/MESS/default.cfg" "$config_home/.mess/cfg/"
 	cp -v "$scriptdir/emu-cfgs/ps3_blu_controller/MESS/neocdz.cfg" "$config_home/.mess/cfg/"
 	cp -v "$scriptdir/emu-cfgs/ps3_blu_controller/MESS/aes.cfg" "$config_home/.mess/cfg/"
@@ -512,7 +513,8 @@ function gp_ps3_usb()
 	# default path: /home/$USER/.retrorig/.mednafen/mednafen.cfg
 	# Main config
 	cp -v "$scriptdir/emu-cfgs/ps3_usb_controller/MESS/mess.ini" "$config_home/.mess/"
-	cp -v "$scriptdir/emu-cfgs/ps3_blu_controller/MESS/aes.ini" "$config_home/.mess/"
+	cp -v "$scriptdir/emu-cfgs/ps3_usb_controller/MESS/aes.ini" "$config_home/.mess/"
+	cp -v "$scriptdir/emu-cfgs/ps3_usb_controller/MESS/neocdz.ini" "$config_home/.mess/"
 	cp -v "$scriptdir/emu-cfgs/ps3_usb_controller/MESS/default.cfg" "$config_home/.mess/cfg"
 	cp -v "$scriptdir/emu-cfgs/ps3_usb_controller/MESS/neocdz.cfg" "$config_home/.mess/cfg"
 	cp -v "$scriptdir/emu-cfgs/ps3_usb_controller/MESS/aes.cfg" "$config_home/.mess/cfg"
@@ -792,7 +794,8 @@ function gp_x360_wireless()
 	# default path: /home/$USER/.mednafen/mednafen.cfg
 	# Main config
 	cp -v "$scriptdir/emu-cfgs/x360_wireless_controller/MESS/mess.ini" "$config_home/.mess/"
-	cp -v "$scriptdir/emu-cfgs/ps3_blu_controller/MESS/aes.ini" "$config_home/.mess/"
+	cp -v "$scriptdir/emu-cfgs/x360_wireless_controller/MESS/aes.ini" "$config_home/.mess/"
+	cp -v "$scriptdir/emu-cfgs/x360_wireless_controller/MESS/neocdz.ini" "$config_home/.mess/"
 	cp -v "$scriptdir/emu-cfgs/x360_wireless_controller/MESS/default.cfg" "$config_home/.mess/cfg"
 	cp -v "$scriptdir/emu-cfgs/x360_wireless_controller/MESS/neocdz.cfg" "$config_home/.mess/cfg"
 	cp -v "$scriptdir/emu-cfgs/x360_wireless_controller/MESS/aes.cfg" "$config_home/.mess/cfg"
@@ -1072,7 +1075,8 @@ function gp_x360_usb()
 	# default path: /home/$USER/.mednafen/mednafen.cfg
 	# Main config
 	cp -v "$scriptdir/emu-cfgs/x360_usb_controller/MESS/mess.ini" "$config_home/.mess/"
-	cp -v "$scriptdir/emu-cfgs/ps3_blu_controller/MESS/aes.ini" "$config_home/.mess/"
+	cp -v "$scriptdir/emu-cfgs/x360_usb_controller/MESS/aes.ini" "$config_home/.mess/"
+	cp -v "$scriptdir/emu-cfgs/x360_usb_controller/MESS/neocdz.ini" "$config_home/.mess/"
 	cp -v "$scriptdir/emu-cfgs/x360_usb_controller/MESS/default.cfg" "$config_home/.mess/cfg/"
 	cp -v "$scriptdir/emu-cfgs/x360_usb_controller/MESS/neocdz.cfg" "$config_home/.mess/cfg/"
 	cp -v "$scriptdir/emu-cfgs/x360_usb_controller/MESS/aes.cfg" "$config_home/.mess/cfg/"
