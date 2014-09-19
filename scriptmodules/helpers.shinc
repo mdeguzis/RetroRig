@@ -64,6 +64,62 @@ h_clean_gamepad()
 
 	# XBMC
 	rm -f "$xbmc_home/userdata/keymaps/keyboard.xml"
+
+	##########################################
+	# Backup BIOS changes user has made
+	##########################################
+	# Needed for: PCSX2, Gens GS
+
+	# Gens GS
+	orig_bios_gens_68=$(grep "32X 68000 BIOS=" "$config_home/.gens")
+	orig_bios_gens_32m=$(grep "32X Master SH2 BIOS=" "$config_home/.gens")
+	orig_bios_gens_32s=$(grep "32X Slave SH2 BIOS=" "$config_home/.gens")
+	orig_bios_gens_e=$(grep "Europe CD BIOS=" "$config_home/.gens")
+	orig_bios_gens_g=$(grep "Genesis BIOS=" "$config_home/.gens")
+	orig_bios_gens_j=$(grep "Japan CD BIOS=" "$config_home/.gens")
+	orig_bios_gens_u=$(grep "USA CD BIOS=" "$config_home/.gens/gens.cfg")
+
+	# PCSX2
+	orig_bios_pcsx2=$(grep "BIOS=" "$config_home/.config/pcsx2/inis/PCSX2_ui.ini")
+
+}
+
+
+function h_restore_bios_cfg() 
+{
+	
+	#######################
+	# grab current sets:
+	#######################
+
+	# Gens
+	bios_gens_68=$(grep "32X 68000 BIOS=" "$config_home/.gens")
+	bios_gens_32m=$(grep "32X Master SH2 BIOS=" "$config_home/.gens")
+	bios_gens_32s=$(grep "32X Slave SH2 BIOS=" "$config_home/.gens")
+	bios_gens_e=$(grep "Europe CD BIOS=" "$config_home/.gens")
+	bios_gens_g=$(grep "Genesis BIOS=" "$config_home/.gens")
+	bios_gens_j=$(grep "Japan CD BIOS=" "$config_home/.gens")
+	bios_gens_u=$(grep "USA CD BIOS=" "$config_home/.gens/gens.cfg")
+
+	# PCSX2
+	bios_pcsx2=$(grep "BIOS=" "$config_home/.config/pcsx2/inis/PCSX2_ui.ini")
+
+	###################################################
+	# Restore afflicted BIOS configuration lines 
+	###################################################
+
+	# Gens GS
+	sed -i "s|$bios_gens_68|$orig_bios_gens_68|g" "$config_home/.gens"
+	sed -i "s|$bios_gens_32m|$orig_bios_gens_32m|g" "$config_home/.gens"
+	sed -i "s|$bios_gens_32s|$orig_bios_gens_32s|g" "$config_home/.gens"
+	sed -i "s|$bios_gens_e|$orig_bios_gens_e|g" "$config_home/.gens"
+	sed -i "s|$bios_gens_g|$orig_bios_gens_g|g" "$config_home/.gens"
+	sed -i "s|$bios_gens_j|$orig_bios_gens_j|g" "$config_home/.gens"
+	sed -i "s|$bios_gens_u|$orig_bios_gens_u|g" "$config_home/.gens"
+	
+	# PCSX2
+	sed -i "s|$bios_pcsx2|$orig_bios_pcsx2|g" "$config_home/.config/pcsx2/inis/PCSX2_ui.ini"
+
 }
 
 
