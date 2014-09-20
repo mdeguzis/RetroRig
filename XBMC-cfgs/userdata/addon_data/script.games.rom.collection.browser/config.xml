@@ -162,10 +162,11 @@
     <RomCollection id="14" name="Genesis">
       <useBuiltinEmulator>False</useBuiltinEmulator>
       <gameclient />
-      <emulatorCmd>/usr/games/mednafen</emulatorCmd>
+      <emulatorCmd>/usr/bin/gens</emulatorCmd>
       <emulatorParams>"%ROM%"</emulatorParams>
       <romPath>installdir_temp/ROMs/Sega Genesis/*.bin</romPath>
       <romPath>installdir_temp/ROMs/Sega Genesis/*.zip</romPath>
+      <romPath>installdir_temp/ROMs/Sega Genesis/*.smd</romPath>
       <saveStatePath />
       <saveStateParams />
       <mediaPath type="boxfront">installdir_temp/Artwork/Sega Genesis/boxfront/%GAME%.*</mediaPath>
@@ -173,8 +174,8 @@
       <mediaPath type="cartridge">installdir_temp/Artwork/Sega Genesis/cartridge/%GAME%.*</mediaPath>
       <mediaPath type="screenshot">installdir_temp/Artwork/Sega Genesis/screenshot/%GAME%.*</mediaPath>
       <mediaPath type="fanart">installdir_temp/Artwork/Sega Genesis/fanart/%GAME%.*</mediaPath>
-      <preCmd>med_gen_pre</preCmd>
-      <postCmd>med_gen_post</postCmd>
+      <preCmd>gens_pre</preCmd>
+      <postCmd>gens_post</postCmd>
       <useEmuSolo>False</useEmuSolo>
       <usePopen>False</usePopen>
       <ignoreOnScan>False</ignoreOnScan>
@@ -644,6 +645,7 @@
       <emulatorParams>"%ROM%"</emulatorParams>
       <romPath>installdir_temp/ROMs/Sega 32X/*.zip</romPath>
       <romPath>installdir_temp/ROMs/Sega 32X/*.bin</romPath>
+      <romPath>installdir_temp/ROMs/Sega 32X/*.32x</romPath>
       <saveStatePath />
       <saveStateParams />
       <mediaPath type="boxfront">installdir_temp/Artwork/Sega 32X/boxfront/%GAME%.*</mediaPath>
