@@ -57,6 +57,7 @@ function gp_ps3_blu()
 	# Main config
 	cp -v "$scriptdir/emu-cfgs/ps3_blu_controller/Dolphin/GCPadNew.ini" "$config_home/.dolphin-emu/Config/"
 	cp -v "$scriptdir/emu-cfgs/ps3_blu_controller/Dolphin/Dolphin.ini" "$config_home/.dolphin-emu/Config/"
+	cp -v "$scriptdir/emu-cfgs/ps3_blu_controller/Dolphin/WiimoteNew.ini" "$config_home/.dolphin-emu/Config/"
 
 	# PCSX2
 	# base config folder
@@ -454,6 +455,7 @@ function ps3_set_emulator_ids()
 
 	# Assign controller ID
 	sed -i "s|MAC_TEMP_$n|$dolphin_MAC_BLU|g" "$config_home/.dolphin-emu/Config/GCPadNew.ini"
+	sed -i "s|MAC_TEMP_$n|$dolphin_MAC_BLU|g" "$config_home/.dolphin-emu/Config/WiimoteNew.ini"
 
 	sleep 2s
 }
