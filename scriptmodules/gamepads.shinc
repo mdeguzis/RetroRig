@@ -457,6 +457,36 @@ function ps3_set_emulator_ids()
 	sed -i "s|MAC_TEMP_$n|$dolphin_MAC_BLU|g" "$config_home/.dolphin-emu/Config/GCPadNew.ini"
 	sed -i "s|MAC_TEMP_$n|$dolphin_MAC_BLU|g" "$config_home/.dolphin-emu/Config/WiimoteNew.ini"
 
+	#native or emulated Wii controller 1=emulated 2=native
+ 	clear
+        src=1
+	dialog --title "Confirm yes/no" \
+	--backtitle "Wii game controller" \
+	--yesno " Do you want to use a native controller for Wii games? "  6 60
+
+	# Get exit status
+	# 0 means user hit [yes] button.
+	# 1 means user hit [no] button.
+	# 255 means user hit [Esc] key.
+	response=$?
+	case $response in
+		0)
+		clear
+		src=2
+		dialog --msgbox "For Wii games, controls have been mapped to a native motion controller. Press 1+2 for older Wii controller, or the small button in the battery compartement to activate the controller every time after game start. Navigation in XBMC, game launch and exit for Wii games, as for all other games, is still handled by your primary controller. This applies also to the save state and load state functions. Use your primary controller in parallel to your Wii controller to save and load game states. " 14 60
+		;;
+
+		1)
+                src=1 
+		;;
+
+		255)
+                src=1
+		;;
+	esac
+
+	sed -i "s|PLAYER_SRC|$src|g" "$config_home/.dolphin-emu/Config/WiimoteNew.ini"
+
 	sleep 2s
 }
 
