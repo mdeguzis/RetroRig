@@ -296,11 +296,11 @@
       <romPath>installdir_temp/ROMs/Atari 2600/*.bin</romPath>
       <saveStatePath />
       <saveStateParams />
-      <mediaPath type="boxfront">installdir_temp/ROMs/Atari 2600/boxfront/%GAME%.*</mediaPath>
-      <mediaPath type="boxback">installdir_temp/ROMs/Atari 2600/boxback/%GAME%.*</mediaPath>
-      <mediaPath type="cartridge">installdir_temp/ROMs/Atari 2600/cartridge/%GAME%.*</mediaPath>
-      <mediaPath type="screenshot">installdir_temp/ROMs/Atari 2600/screenshot/%GAME%.*</mediaPath>
-      <mediaPath type="fanart">installdir_temp/ROMs/Atari 2600/fanart/%GAME%.*</mediaPath>
+      <mediaPath type="boxfront">installdir_temp/Artwork/Atari 2600/boxfront/%GAME%.*</mediaPath>
+      <mediaPath type="boxback">installdir_temp/Artwork/Atari 2600/boxback/%GAME%.*</mediaPath>
+      <mediaPath type="cartridge">installdir_temp/Artwork/Atari 2600/cartridge/%GAME%.*</mediaPath>
+      <mediaPath type="screenshot">installdir_temp/Artwork/Atari 2600/screenshot/%GAME%.*</mediaPath>
+      <mediaPath type="fanart">installdir_temp/Artwork/Atari 2600/fanart/%GAME%.*</mediaPath>
       <preCmd />
       <postCmd />
       <useEmuSolo>False</useEmuSolo>
