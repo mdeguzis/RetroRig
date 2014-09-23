@@ -2,24 +2,23 @@
 # Build Script for custom ppsspp RetroRig PPA
 #======================================================================== 
 #
-# Author      : Jens-Christian Lache
-# Date        : 20140917
-# Version     : 2.16.7.2
-# Description : Version 2.16.7 from gerbilsoft, patch level 2
+# Author      : Michael T. DeGuzis
+# Date        : 20140919
+# Version     : 0.9.9.1-132
+# Description : Version 0.9.9.1-132, patch level 0
 #               
-#               Ported to SDL2.
 #
 # ========================================================================
 
 #define base version
-PRE=1
-BASE=2.16.7
+PRE=0
+BASE=0.9.9.1-132
 
 # define patch level
 PL=2.2
 
 #define branch
-BRANCH=retrorig-pl2
+BRANCH=retrorig-pl0
 
 clear
 echo "#################################################################"
@@ -40,17 +39,17 @@ fi
 
 sleep 2s
 
-echo "This script needs to run on a 32bit environment."
-echo ""
+#echo "This script needs to run on a 32bit environment."
+#echo ""
 
 #check 32bit environment
-isKernel32bit=`uname -a |grep i686`
-if [[ -n "$isKernel32bit" ]]; then
-  echo "32bit environment found, good"
-else
-  echo "32bit environment not found, aborting. Are you running a 64bit system? This script must run on a i686 system."
-  exit 1
-fi
+#isKernel32bit=`uname -a |grep i686`
+#if [[ -n "$isKernel32bit" ]]; then
+#  echo "32bit environment found, good"
+#else
+#  echo "32bit environment not found, aborting. Are you running a 64bit system? This script must run on a i686 system."
+  # exit 1
+#fi
 
 # Fetch build pkgs
 if [[ -n "$2" ]]; then
@@ -61,12 +60,12 @@ if [[ -n "$2" ]]; then
   echo "##########################################"
   echo ""
 
-
-
   #apt-get install packages
-  sudo apt-get install -y build-essential fakeroot devscripts  autoconf autotools-dev binutils-dev \
-			  debhelper autotools-dev automake1.10 pkg-config nasm libsdl1.2-dev \
-                          libglib2.0-dev libgtk2.0-dev mesa-common-dev libgl1-mesa-dev zlib1g-dev libpng12-dev
+  sudo apt-get update -y
+  sudo apt-get install -y build-essential fakeroot devscripts autoconf autotools-dev binutils-dev \
+  debhelper autotools-dev automake1.10 pkg-config nasm libsdl1.2-dev \
+  libglib2.0-dev libgtk2.0-dev mesa-common-dev libgl1-mesa-dev zlib1g-dev \
+  libpng12-dev freeglut3 freeglut3-dev
 
 else
   echo ""
@@ -105,8 +104,8 @@ sed -i "s|version_placeholder|$PRE:$BASE.$PL|g" "ppsspp-$PRE:$BASE.$PL.dsc"
 SRC_FOLDER=ppsspp-$BASE.$PL
 
 echo "original tarball"
-git clone https://github.com/beaumanvienna/ppsspp-gs
-file ppsspp-gs/
+git clone https://github.com/ProfessorKaos64/ppsspp
+file ppsspp/
 
 if [ $? -eq 0 ]; then  
     echo "successfully cloned"
@@ -115,7 +114,7 @@ else
     exit
 fi 
 
-mv ppsspp-gs/ $SRC_FOLDER
+mv ppsspp/ $SRC_FOLDER
 
 #change to source folder
 cd $SRC_FOLDER
@@ -124,11 +123,11 @@ git checkout $BRANCH
 rm -rf .git .gitignore
 
 echo "changelog"
-cp ~/RetroRig/supplemental/ppsspp/changelog debian/
+cp ~/RetroRig/supplemental/ppsspp/debian/changelog debian/
 sed -i "s|version_placeholder|$PRE:$BASE.$PL|g" debian/changelog
 
 echo "control"
-cp ~/RetroRig/supplemental/ppsspp/control debian/
+cp ~/RetroRig/supplemental/ppsspp/debian/control debian/
 
 #get Makefiles straight
 aclocal && autoconf && autoreconf -i && automake --add-missing
