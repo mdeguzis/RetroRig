@@ -298,7 +298,10 @@ function rrs_software()
 	# install binaries
 	apt-get install -y xboxdrv curl python-software-properties \
 	pkg-config software-properties-common dconf-tools jstest-gtk \
-	qjoypad sixad libusb-0.1-4 antimicro
+	qjoypad sixad libusb-0.1-4 antimicro 
+
+	#wii motion support
+	apt-get install -y libcwiid1 lswm wmgui wminput
 
 	# call RetroRig's custom deb install for ps3 hotplugging. 
 	# Thankfully our package still works with the Xbox 360 implementation,

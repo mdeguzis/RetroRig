@@ -1,0 +1,89 @@
+Source: mame
+Section: non-free/games
+Priority: optional
+Maintainer: RetroRig Development Team <jc.lache@gmail.com>
+XSBC-Original-Maintainer: Cesare Falco <c.falco@ubuntu.com>
+Build-Depends: debhelper (>= 9),
+ libexpat1-dev,
+ libflac-dev,
+ libfontconfig1-dev,
+ libjpeg8-dev,
+ libportmidi-dev,
+ libqt4-dev (>= 4.7),
+ libsdl-ttf2.0-dev,
+ libsdl1.2-dev,
+ libxinerama-dev,
+ subversion,
+ python-dev,
+ zlib1g-dev
+Standards-Version: 3.9.4
+Homepage: http://mamedev.org/
+XS-Autobuild: yes
+
+Package: mame
+Architecture: any
+Depends: ${misc:Depends},
+ ${shlibs:Depends},
+ mess-data (= ${source:Version})
+Suggests: gnome-video-arcade,
+ mame-extra,
+ mame-tools
+Description: Multiple Arcade Machine Emulator (MAME)
+ MAME is a hardware emulator: it faithfully reproduces the behavior of many
+ arcade machines (it is not a simulation). This program is not a game but can
+ directly, through ROM images, run the complete system of these old arcade
+ machines. These ROMs are subject to copyright and it is in most of the cases
+ illegal to use them if you do not own the arcade machine.
+ .
+ This package provides the MAME binary and configuration files.
+
+Package: mame-tools
+Section: non-free/utils
+Architecture: any
+Depends: ${misc:Depends},
+ ${shlibs:Depends}
+Recommends: mame (= ${source:Version})
+Description: Tools for MAME and MESS
+ MAME is a hardware emulator: it faithfully reproduces the behavior of many
+ arcade machines (it is not a simulation).
+ MESS is an emulator for various consoles and computing systems, sharing a
+ lot of codebase with the MAME project.
+ .
+ This package provides tools to be used with MAME and MESS. It currently
+ contains:
+  castool -- generic cassette manipulation tool for MESS
+  chdman -- MAME Compressed Hunks of Data CHD manager
+  imgtool -- generic image manipulation tool for MESS
+  jedutil -- binary to/from JEDEC file converter
+  ldresample -- Laserdisc audio synchronizer and resampler
+  ldverify -- Laserdisc AVI/CHD verifier
+  romcmp -- ROM comparison utility program
+  testkeys -- keyboard code viewer
+
+Package: mess
+Architecture: any
+Depends: ${misc:Depends},
+ ${shlibs:Depends},
+ mess-data (= ${source:Version})
+Suggests: mame-tools,
+ mess-desktop-entries
+Description: Multi Emulator Super System (MESS)
+ MESS is an emulator for various consoles and computing systems, sharing a
+ lot of codebase with the MAME project.
+ .
+ Some of the well known consoles and computers emulated are the Atari 2600,
+ Lynx, NES, SNES, Nintendo 64, GameBoy, Sega Master System, Sega Megadrive,
+ Game Gear, Colecovision, Vectrex, Apple II, Atari 400/800, Commodore 64/128,
+ IBM PC XT and AT (MDA and CGA), ZX80, ZX Spectrum, TI99/4, TRS-80, and the
+ MSX.
+ .
+ This package provides the MESS binary and configuration files.
+
+Package: mess-data
+Architecture: all
+Depends: ${misc:Depends}
+Description: Data files for the Multi Emulator Super System (MESS)
+ MESS is an emulator for various consoles and computing systems, sharing a
+ lot of codebase with the MAME project.
+ .
+ This package provides the MESS and MAME hash files, keymaps and artwork.
