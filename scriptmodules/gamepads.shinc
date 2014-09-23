@@ -1278,7 +1278,7 @@ RetorRig loads to use the gamepad" 14 60
 
 	old_pre="dolphin_pre"
 	old_post="dolphin_post"
-	new_pre="antimicro --hidden --profile $config_home/.config/antimicro/am_ppsspp_x360_usb.joystick.xml \&amp;"
+	new_pre="antimicro --hidden --profile $config_home/.config/antimicro/am_dolphin_x360_usb.joystick.xml \&amp;"
 	# The line below is only for good measure
 	new_post="killall pcsx2 antimicro"
 	# perform actual changes
