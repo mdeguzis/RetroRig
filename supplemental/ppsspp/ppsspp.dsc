@@ -1,12 +1,13 @@
-Format: 1.0
-Source: ppsspp
-Binary: ppsspp
+Format: 3.0 (native)
+Source: ppsspp-qt
+Binary: ppsspp-qt
 Architecture: any
 Version: version_placeholder
 Maintainer: RetroRig Development Team <mdeguzis@gmail.com>
-Homepage: http://ppsspp.org/
-Standards-Version: 3.9.4
-Build-Depends: debhelper (>= 7.0.50~), zlib1g-dev, freeglut, freeglut3-dev 
+Homepage: http://www.ppsspp.org/
+Standards-Version: 3.9.5
+Vcs-Browser: https://github.com/hrydgard/ppsspp
+Vcs-Git: git://github.com/hrydgard/ppsspp.git
+Build-Depends: debhelper (>= 9), libsdl1.2-dev, qt4-qmake, libqt4-dev, libqt4-opengl-dev
 Package-List: 
- ppsspp deb misc optional
-
+ ppsspp-qt deb games extra
