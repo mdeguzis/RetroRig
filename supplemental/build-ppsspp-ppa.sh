@@ -5,20 +5,22 @@
 # Author      : Michael T. DeGuzis
 # Date        : 20140919
 # Version     : 0.9.9.1-132
-# Description : Version 0.9.9.1-132, patch level 0
+# Description : Version 0.9.9.1, unpatched, pl0
 #               
-#
+# Notes: Base for pl0: 
+#	 https://launchpad.net/~ppsspp/+archive/ubuntu/stable/+packages
+#	
 # ========================================================================
 
 #define base version
 PRE=0
-BASE=0.9.9.1-132
+BASE=0.9.9.1
 
 # define patch level
-PL=2.2
+PL=0
 
 #define branch
-BRANCH=retrorig-pl0
+BRANCH=unpatched
 
 clear
 echo "#################################################################"
@@ -39,18 +41,6 @@ fi
 
 sleep 2s
 
-#echo "This script needs to run on a 32bit environment."
-#echo ""
-
-#check 32bit environment
-#isKernel32bit=`uname -a |grep i686`
-#if [[ -n "$isKernel32bit" ]]; then
-#  echo "32bit environment found, good"
-#else
-#  echo "32bit environment not found, aborting. Are you running a 64bit system? This script must run on a i686 system."
-  # exit 1
-#fi
-
 # Fetch build pkgs
 if [[ -n "$2" ]]; then
 
@@ -63,9 +53,7 @@ if [[ -n "$2" ]]; then
   #apt-get install packages
   sudo apt-get update -y
   sudo apt-get install -y build-essential fakeroot devscripts autoconf autotools-dev binutils-dev \
-  debhelper autotools-dev automake1.10 pkg-config nasm libsdl1.2-dev \
-  libglib2.0-dev libgtk2.0-dev mesa-common-dev libgl1-mesa-dev zlib1g-dev \
-  libpng12-dev freeglut3 freeglut3-dev
+  debhelper autotools-dev automake1.10 pkg-config libsdl1.2-dev, qt4-qmake, libqt4-dev, libqt4-opengl-dev
 
 else
   echo ""
@@ -123,11 +111,11 @@ git checkout $BRANCH
 rm -rf .git .gitignore
 
 echo "changelog"
-cp ~/RetroRig/supplemental/ppsspp/debian/changelog debian/
+cp ~/RetroRig/supplemental/ppsspp/changelog debian/
 sed -i "s|version_placeholder|$PRE:$BASE.$PL|g" debian/changelog
 
 echo "control"
-cp ~/RetroRig/supplemental/ppsspp/debian/control debian/
+cp ~/RetroRig/supplemental/ppsspp/control debian/
 
 #get Makefiles straight
 aclocal && autoconf && autoreconf -i && automake --add-missing
