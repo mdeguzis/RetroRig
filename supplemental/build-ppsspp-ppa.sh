@@ -53,7 +53,7 @@ if [[ -n "$2" ]]; then
   #apt-get install packages
   sudo apt-get update -y
   sudo apt-get install -y build-essential fakeroot devscripts autoconf autotools-dev binutils-dev \
-  debhelper autotools-dev automake1.10 pkg-config libsdl1.2-dev, qt4-qmake, libqt4-dev, libqt4-opengl-dev
+  debhelper autotools-dev automake1.10 pkg-config libsdl1.2-dev qt4-qmake libqt4-dev libqt4-opengl-dev
 
 else
   echo ""
