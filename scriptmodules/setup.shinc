@@ -550,13 +550,21 @@ function rrs_xbmc_cfgs()
 
 function rrs_done()
 {
-clear
+	kernelUpdate=`cat $scriptdir/logs/kernelUpdate`
 
-# inform user install is done (this is the last step of main, option 1)
-        dialog --backtitle "LibreGeek.org - RetroRig Setup. Installation folder: $rootdir for user $user" --msgbox "Finished main install tasks.\n\nYou now have to copy roms to the roms folders. \nThis can be done via SSH, Samba, or via your graphic folder manager (please see settings menu for more)\n\nAll current config folders used were appended with .old for restoration purposes.\n\nYou must reboot to complete the installation!\n\n" 18 50
+	clear
 
-# correct permissions
-h_correct_perms
+	# inform user install is done (this is the last step of main, option 1)
+	if [ "$kernelUpdate" == "true" ]; then
+
+        	dialog --backtitle "LibreGeek.org - RetroRig Setup. Installation folder: $rootdir for user $user" --msgbox "Finished main install tasks.\n\nYou now have to copy roms to the roms folders. \nThis can be done via SSH, Samba, or via your graphic folder manager (please see settings menu for more)\n\nAll current config folders used were appended with .old for restoration purposes.\n\nYou must reboot to complete the installation!\n\n" 18 50
+	else
+
+        	dialog --backtitle "LibreGeek.org - RetroRig Setup. Installation folder: $rootdir for user $user" --msgbox "Finished main install tasks.\n\nYou now have to copy roms to the roms folders. \nThis can be done via SSH, Samba, or via your graphic folder manager (please see settings menu for more)\n\nAll current config folders used were appended with .old for restoration purposes.\n\n" 18 50
+	fi
+
+	# correct permissions
+	h_correct_perms
 }
 
 function rrs_showHelp()
@@ -726,21 +734,27 @@ rrs_kernel_check()
 	    wget --tries=50 -P /tmp "http://kernel.ubuntu.com/~kernel-ppa/mainline/v3.14-trusty/linux-image-3.14.0-031400-generic_3.14.0-031400.201403310035_amd64.deb"
 	    cd /tmp
 	    dpkg -i linux-headers-3.14*.deb linux-image-3.14*.deb
+
+	    # Hold the kernel packages so the kernel is not upgrade by accident
+	    # Commented out for testing some errors with an old mednafen pkg
+	    #sudo aptitude hold linux-image-`uname -r` 
+
+	    # inform user of what was done
+	    dialog --msgbox "Upgrading the kernel to 3.14.0-031400-generic is complete. The packages 'linux-generic linux-headers-generic linux-image-generic' have been held to avoid falling back to a regressed kernel (sony-hid). If you wish to change your kernel, please run the following command in the terminal:\n\n'sudo apt-mark unhold linux-generic linux-headers-generic linux-image-generic'" 14 60
+
+	    # cleanup packages
+	    rm -f /tmp/linux-headers-3.14*
+	    rm -f /tmp/linux-image-3.14*
+
+	    echo "true" > "$scriptdir/logs/kernelUpdate"
+
 	elif [ $user_kernel -ge "$target_kernel" ]; then
    	    # Do nothing
 	    echo "Kernel 3.14.x or greater found, exiting"
 	    sleep 2s
+
+	    echo "false" > "$scriptdir/logs/kernelUpdate"
+
 	fi
-
-	# Hold the kernel packages so the kernel is not upgrade by accident
-	# Commented out for testing some errors with an old mednafen pkg
-	#sudo aptitude hold linux-image-`uname -r` 
-
-	# inform user of what was done
-	dialog --msgbox "Upgrading the kernel to 3.14.0-031400-generic is complete. The packages 'linux-generic linux-headers-generic linux-image-generic' have been held to avoid falling back to a regressed kernel (sony-hid). If you wish to change your kernel, please run the following command in the terminal:\n\n'sudo apt-mark unhold linux-generic linux-headers-generic linux-image-generic'" 14 60
-
-	# cleanup packages
-	rm -f /tmp/linux-headers-3.14*
-	rm -f /tmp/linux-image-3.14*
 
 }
