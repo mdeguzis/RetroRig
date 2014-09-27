@@ -1,9 +1,15 @@
 Source: ppsspp
-Section: misc
-Priority: optional
-Maintainer: Michael DeGuzis <mdeguzis@gmail.com>
-Build-Depends: debhelper (>= 7.0.50~)
-Standards-Version: 3.9.4
+Section: games
+Priority: extra
+Maintainer: pkgmaintainer
+Build-Depends: debhelper (>= 9), 
+		cmake,
+		chrpath,
+		libsdl1.2-dev,
+		libqt4-dev,
+		libqt4-opengl-dev,
+		qt4-qmake
+Standards-Version: 3.9.5
 Homepage: http://ppsspp.org/
 
 Package: ppsspp

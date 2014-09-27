@@ -1,101 +1,12 @@
 ppsspp (version_placeholder) trusty; urgency=medium
 
   * Packed for RetroRig
+    The Qt version of ppsspp in this package supports environment  
+    variable SDL_VIDEO_FULLSCREEN_HEAD to specify a start-up monitor.
 
- -- Michael DeGuzis <mdeguzis@gmail.com>  Saturday, 20 Sept 2014 8:46:49 +0200
+    Command line option "--fullscreen" is now additionally supported for the
+    Qt version.
 
-ppsspp (0.9.9.1-132~trusty~NoobsLab.com) trusty; urgency=high
+ -- uploader  Sat, 27 Sep 2014 11:41:00 +0200
 
-  * New Build by NoobsLab.com
-  * New Changes and Fixes
-
- -- Umair Riaz <noobslab.com@gmail.com>  Mon, 25 Aug 2014 19:46:49 +0200
-
-ppsspp (0.9.9-83~trusty~NoobsLab.com) trusty; urgency=high
-
-  * New Build by NoobsLab.com
-  * New Changes and Fixes
-
- -- Umair Riaz <noobslab.com@gmail.com>  Sat, 16 Aug 2014 13:45:51 +0200
-
-ppsspp (0.9.8-1614-a~trusty~NoobsLab.com) trusty; urgency=high
-
-  * New Build by NoobsLab.com
-
- -- Umair Riaz <noobslab.com@gmail.com>  Wed, 16 Jul 2014 03:01:56 +0200
-
-ppsspp (0.9.8-1552-a~trusty~NoobsLab.com) trusty; urgency=high
-
-  * New Build by NoobsLab.com
-
- -- Umair Riaz <noobslab.com@gmail.com>  Sat, 05 Jul 2014 20:05:31 +0200
-
-ppsspp (0.9.8-1333-a~trusty~NoobsLab.com) trusty; urgency=high
-
-  * New fixes (Build by NoobsLab.com)
-
- -- Umair Riaz <noobslab.com@gmail.com>  Sun, 22 Jun 2014 17:01:33 +0200
-
-ppsspp (0.9.8-1185~trusty~NoobsLab.com) trusty; urgency=high
-
-  * New version with fixes (Build by NoobsLab.com)
-  * Now 0.9.8 version is also available for 32bit/i386
-
- -- Umair Riaz <noobslab.com@gmail.com>  Sat, 14 Jun 2014 20:31:42 +0200
-
-ppsspp (0.9.8-1028~trusty~NoobsLab.com) trusty; urgency=high
-
-  * 0.9.8 version only for 64bit at this moment.
-  * 32bit/i386 still at version v0.9.6-289
-
- -- Umair Riaz <noobslab.com@gmail.com>  Thu, 05 Jun 2014 15:58:09 +0200
-
-ppsspp (0.9.8-0~trusty~NoobsLab.com) trusty; urgency=high
-
-  * 0.9.8 version only for 64bit at this moment.
-  * 32bit/i386 still at version 0.9.6.
-  * --------------------------------------------------
-  * More accurate audio mixing and emulation
-  * Software rendering and display list performance improvements
-  * Workaround for timing issue hanging Crash Tag Team Racing
-  * Galician language
-  * Built-in ARM disassembler improvements (dev feature)
-  * Fix for immersive mode volume key issue on Android Kitkat
-  * And more minor tweaks and fixes as always.
-
- -- Umair Riaz <noobslab.com@gmail.com>  Thu, 27 Mar 2014 18:35:26 +0200
-
-ppsspp (0.9.7-0~trusty~NoobsLab.com) trusty; urgency=high
-
-  * 0.9.7 version only for 64bit at this moment.
-  * 32bit/i386 still at version 0.9.6.
-  * --------------------------------------------------
-  * Several scheduling and audio fixes, fixing black screens in Yu Gi Oh games among other things.
-  * Screen rotation and immersive mode support on Android
-  * Large improvements to the software renderer (still not really playable, but looks right more often than not)
-  * New VPL allocator and bugfixes, fixing Pangya Golf performance problems.
-  * Some mpeg/video playback fixes, fixing Parappa The Rapper and others. Some issues remain.
-  * Fix save state bugs causing incompatibility between 32 and 64-bit platforms.
-  * Symbol map/debugger improvements
-  * Depth buffer copy, fixing Jeanne D'arc. May cause minor slowdowns though, this will be worked around in the future.
-  * MsgDialog fixes. Saving fixed in numerous games.
-
- -- Umair Riaz <noobslab.com@gmail.com>  Tue, 18 Feb 2014 22:50:54 +0200
-
-ppsspp (0.9.6-20.2~trusty~NoobsLab.com) trusty; urgency=high
-
-  * Large general speed improvements and assorted bug fixes
-  * "Software Skinning" option which speeds up many games with animated 3D characters (but may slow down a few, like Monster Hunter games - experiment with turning it off)
-  * Various fixes around stencil/alpha, reducing glow problems in Wipeout and Gods Eater Burst.
-  * Timing improvements making more games run at the correct FPS, also fixing some audio issues
-  * More debugger features
-  * Option for four-way touch dpad, avoiding diagonal dpad issues
-  * Better looking and individually resizable touch controls
-  * Add ability to switch UMD in multi-disc games (works for most)
-  * Emulate PSP-2000 rather than the 1000 model by default. Not much different in practice.
-  * Automatic install of games from ZIP files, like demos and many homebrew.
-  * VERY basic ad-hoc online play support, to be improved in future versions. See below.
-  * Software renderer improvements
-
- -- Umair Riaz <noobslab.com@gmail.com>  Mon, 03 Feb 2014 14:57:18 +0200
 
