@@ -94,34 +94,19 @@ function em_install_ppsspp_source()
 
 function em_install_ppsspp()
 {
-	# I have to compipile SDL support from source for now, since I need the
-	# multiple SDL joystick support for my use of xboxdrv 
-	# See: https://github.com/hrydgard/ppsspp/tree/master/SDL
+	echo "Installing Playstation Portable emulator ppsspp"
 
-	# I took that, compiled it from source, kept only the necessary files 
-	# (this means I removed the CMAKE files left over). Once a tar.gz file, 
-	# this resulted in a 21.8 MB "mobile" pkg :)
+	# release aptitude hold for upgrade/install
+	apt-mark unhold ppsspp
 
-	# install pre-requisites
-	apt-get install -y libsdl1.2-dev
+        #remove any previously installed version
+	apt-get remove -y ppsspp
 
-	# pull down emulator from libregeek (to avoid increasing the git repo)
-	wget --tries=50 -P /tmp "www.libregeek.org/RetroRig/Ubuntu-Trusty/emulators/karenbuildbot-net.angelxwind.ppsspp-linux-amd64-generic.tar.gz"
+        #install from PPA
+	apt-get install -y ppsspp
 
-	# Since ppsspp-0.9.8-SDL-pk64 is already in $rootdir/emulators, we just
-	# need to untar it:
-	tar -xzvf "/tmp/karenbuildbot-net.angelxwind.ppsspp-linux-amd64-generic.tar.gz" -C "$rootdir/emulators/PPSSPP"
-
-	# remove tmp file
-	rm -f "/tmp/karenbuildbot-net.angelxwind.ppsspp-linux-amd64-generic.tar.gz"
-
-	# Symlink  binary to common location to avoid path errors based on where
-	# user installs RetroRig. Remove link if it exists first.
-	rm -f "/usr/bin/PPSSPPSDL"
-	ln -s "$rootdir/emulators/PPSSPP/PPSSPPSDL" "/usr/bin/PPSSPPSDL"
-	chmod +x "/usr/bin/PPSSPPSDL"
-	
-	# XBMC will run the compiled executable file directly from this path
+	# hold package after install against upgrades
+	apt-mark hold ppsspp
 
 }
 
