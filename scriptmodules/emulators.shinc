@@ -21,10 +21,14 @@ function em_add_repos()
 	# rm -f getdeb.key
 
 	# Dolphin emulator PPA / Libretro / RetroArch
-	add-apt-repository -y ppa:hunter-kaller/ppa
+	#add-apt-repository -y ppa:hunter-kaller/ppa
 
 	# pcsx2 emulator PPA
-	add-apt-repository -y ppa:gregory-hainaut/pcsx2.official.ppa
+	#add-apt-repository -y ppa:gregory-hainaut/pcsx2.official.ppa
+  
+  #dummy instruction
+  sleep 1
+
 
 }
 

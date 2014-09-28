@@ -21,10 +21,10 @@ PRE=0
 BASE=0.9.9.1
 
 # define patch level
-PL=1
+PL=1.0
 
 #define branch
-BRANCH=retrorig-pl$PL
+BRANCH=retrorig-pl1
 
 #define upload target
 LAUNCHPAD_PPA="ppa:beauman/retrorig"
@@ -66,7 +66,7 @@ if [[ -n "$2" ]]; then
   #apt-get install packages
   sudo apt-get update -y
   sudo apt-get install -y build-essential fakeroot devscripts autoconf autotools-dev binutils-dev \
-  debhelper autotools-dev automake1.10 pkg-config libsdl1.2-dev qt4-qmake libqt4-dev libqt4-opengl-dev
+  debhelper autotools-dev automake1.10 pkg-config libsdl1.2-dev qt4-qmake libqt4-dev libqt4-opengl-dev chrpath
 
 else
   echo ""
