@@ -268,7 +268,7 @@
 			<id>69acefb6b11bf7da54ba14b9426c093f_10</id>
 			<name>PPSSPP</name>
 			<category>default</category>
-			<application>/usr/bin/PPSSPPSDL</application>
+			<application>/usr/games/ppsspp</application>
 			<args></args>
 			<rompath></rompath>
 			<thumbpath>/home/test/.retrorig/</thumbpath>
