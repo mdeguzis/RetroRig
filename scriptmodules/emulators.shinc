@@ -46,16 +46,13 @@ function em_install_pcsx2()
 	apt-get install -y pcsx2
 	# Unstable version still needs testing:
 	# apt-get install pcsx2-unstable
-
-	# PCSX2 will default the BIOS path we set to RetroRig/BIOS/PCSX2
-	# If the bios file is not specified in the [filenames] section under Bios=
-	# For that reason, the default directory will be symlinked and the PCSX2 BIOS folder
-	# will not be created in setup.shinc 
-	ln -s "$config_home/.config/pcsx2/bios" "$rootdir/BIOS/PCSX2"
+  
+	# Link BIOS path from home/RetroRig (source) to .retrorig/
+	ln -s "$rootdir/BIOS/PCSX2" "$config_home/.config/pcsx2/bios"
 
 	#User might have the idea to manually state a bios file in the terminal.
 	#To save them exporting HOME as /home/user/.retrorig,
-	#a symbolic link is created here.
+	#a symbolic link is created.
 
 	date=`date`
 	sudo -u $user mv "$HOME/.config/pcsx2" "$HOME/.config/pcsx2.backup_retrorig.$date"

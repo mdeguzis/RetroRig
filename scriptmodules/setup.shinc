@@ -115,7 +115,6 @@ function rrs_prepareFolders()
 	pathlist+=("$config_home/.mame/cfg")
 	pathlist+=("$config_home/.mess")
 	pathlist+=("$config_home/.gens")
-	pathlist+=("$config_home/.config/pcsx2/bios")
 	pathlist+=("$config_home/.config/pcsx2/inis")
 	pathlist+=("$config_home/.config/pcsx2/memcards")
 	pathlist+=("$config_home/.mess/cfg")
@@ -132,6 +131,7 @@ function rrs_prepareFolders()
 	# Note: PS1 BIOS path is set in mednafen under:
 	# filesys.path_firmware
 	pathlist+=("$rootdir/BIOS/Mednafen")
+	pathlist+=("$rootdir/BIOS/PCSX2")
 
 	#Configs (not needed at the moment)
 	# pathlist+=("$rootdir/Configs")
