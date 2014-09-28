@@ -45,12 +45,17 @@ function em_install_pcsx2()
 
 	# PCSX2 will default the BIOS path we set to RetroRig/BIOS/PCSX2
 	# If the bios file is not specified in the [filenames] section under Bios=
-	# For that reason, the default directory will be symlinked and the PCX2 BIOS folder
+	# For that reason, the default directory will be symlinked and the PCSX2 BIOS folder
 	# will not be created in setup.shinc 
 	ln -s "$config_home/.config/pcsx2/bios" "$rootdir/BIOS/PCSX2"
 
-	# Link BIOS path
-	ln -s /home/test/.retrorig/.config/pcsx2/bios /home/test/RetroRig/BIOS/PCSX2
+	#User might have the idea to manually state a bios file in the terminal.
+	#To save them exporting HOME as /home/user/.retrorig,
+	#a symbolic link is created here.
+
+	date=`date`
+	sudo -u $user mv "$HOME/.config/pcsx2" "$HOME/.config/pcsx2.backup_retrorig.$date"
+	sudo -u $user ln -vs "$config_home/.config/pcsx2/" "$HOME/.config"
 
 }
 
