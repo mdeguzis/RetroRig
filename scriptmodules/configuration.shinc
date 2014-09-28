@@ -71,8 +71,8 @@ function cfg_uninstall()
 		apt-get -y autoremove
 
 		# repositories
-		add-apt-repository -ry ppa:team-xbmc/ppa
-		add-apt-repository -ry ppa:falk-t-j/qtsixa
+		#add-apt-repository -ry ppa:team-xbmc/ppa
+		#add-apt-repository -ry ppa:falk-t-j/qtsixa
 		rm -f /etc/apt/sources.list.d/playdeb.list
 		;;
 

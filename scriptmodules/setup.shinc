@@ -223,13 +223,16 @@ function rrs_add_standard_repos()
 
 	# add repository for official team XBMC "stable"
 	# We still need this repository for xbmc.bin dependencies
-	add-apt-repository -y ppa:team-xbmc/ppa
+	#add-apt-repository -y ppa:team-xbmc/ppa
 
 	# add respository for qtsixa (PS3 pairing)
-	add-apt-repository -y ppa:falk-t-j/qtsixa
+	#add-apt-repository -y ppa:falk-t-j/qtsixa
 
 	# add respository for RetroRig backends (xbmc, mednafen,...)
 	add-apt-repository -y ppa:beauman/retrorig
+  
+	#add beauman's trusty repository for Debian systems other than "Trusty Thar"
+	echo "deb http://ppa.launchpad.net/beauman/retrorig/ubuntu trusty main" > /etc/apt/sources.list.d/beauman-ubuntu-retrorig-trusty.list
 
 }
 

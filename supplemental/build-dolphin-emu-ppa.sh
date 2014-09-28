@@ -46,8 +46,6 @@ if [[ -n "$2" ]]; then
   echo "##########################################"
   echo ""
 
-  # add Glenn Ricsters PPA to get packages like libminiupnpc-dev, ...
-  sudo add-apt-repository -y ppa:glennric/dolphin-emu
 
   sudo apt-get update
 
@@ -56,9 +54,9 @@ if [[ -n "$2" ]]; then
 			  debhelper cmake libao-dev libasound2-dev libavcodec-dev libavformat-dev \
 			  libbluetooth-dev libglew-dev libgtk2.0-dev liblzo2-dev libopenal-dev libpolarssl-dev \
 			  libpulse-dev libreadline6-dev libsdl1.2-dev libsfml-dev libsoil-dev libsoundtouch-dev \
-			  libswscale-dev libminiupnpc-dev libwxbase3.0-dev libwxgtk3.0-dev libxext-dev \
+			  libswscale-dev libminiupnpc-dev libwxbase2.8-dev libwxgtk3.0-dev libxext-dev \
 			  libxrandr-dev lsb-release pkg-config portaudio19-dev wx3.0-headers zlib1g-dev \
-			  libjack-dev libjack0 libportaudio-dev
+			  libjack-dev libjack0 libportaudio-dev libreadline-dev
 
 else
   echo ""
@@ -125,6 +123,9 @@ sed -i "s|version_placeholder|$PRE:$BASE.$PL|g" debian/changelog
 
 echo "control"
 cp ~/RetroRig/supplemental/dolphin-emu/control debian/
+
+echo "rules"
+cp ~/RetroRig/supplemental/dolphin-emu/rules debian/
 
 if [[ -n "$1" ]]; then
   arg0=$1
