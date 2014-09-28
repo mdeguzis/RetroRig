@@ -345,7 +345,13 @@ Installer" --menu "| Main Menu (v.0.9.5b) | \
 		} 2>&1 | tee "$scriptdir/logs/install_$now.log.txt"              	
 		chown -R "$user" "$scriptdir/logs/install_$now.log.txt"
 		chgrp -R "$user" "$scriptdir/logs/install_$now.log.txt"
-		rrs_reboot
+
+		kernelUpdate=`cat $scriptdir/logs/kernelUpdate`
+		rm -f "$scriptdir/logs/kernelUpdate"
+		if [ "$kernelUpdate" == "true" ]; then
+		  rrs_reboot
+		fi
+
 		;;
 
 	    2) 

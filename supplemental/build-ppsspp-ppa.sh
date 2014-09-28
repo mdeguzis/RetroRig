@@ -2,13 +2,17 @@
 # Build Script for custom ppsspp RetroRig PPA
 #======================================================================== 
 #
-# Author      : Michael T. DeGuzis
-# Date        : 20140919
+# Author      : Michael T. DeGuzis, Jens-Christian Lache
+# Date        : 20140925
 # Version     : 0.9.9.1-132
-# Description : Version 0.9.9.1, unpatched, pl0
+# Description : Version 0.9.9.1.1, patchlevel 1 for dual monitor support
 #               
 # Notes: Base for pl0: 
 #	 https://launchpad.net/~ppsspp/+archive/ubuntu/stable/+packages
+#
+# Notes: Base for pl1: 
+#	 The Qt version of ppsspp in patchlevel one supports environment  
+#        variable SDL_VIDEO_FULLSCREEN_HEAD to specify a start-up monitor.
 #	
 # ========================================================================
 
@@ -17,10 +21,19 @@ PRE=0
 BASE=0.9.9.1
 
 # define patch level
-PL=0
+PL=1
 
 #define branch
-BRANCH=unpatched
+BRANCH=retrorig-pl$PL
+
+#define upload target
+LAUNCHPAD_PPA="ppa:beauman/retrorig"
+
+#define uploader for changelog
+uploader="Jens-Christian Lache <jc.lache@web.de>"
+
+#define package maintainer for dsc and control file 
+pkgmaintainer="RetroRig Development Team <jc.lache@gmail.com>"
 
 clear
 echo "#################################################################"
@@ -88,11 +101,12 @@ echo "##########################################"
 echo "dsc file"
 cp ~/RetroRig/supplemental/ppsspp/ppsspp.dsc ppsspp-$PRE:$BASE.$PL.dsc
 sed -i "s|version_placeholder|$PRE:$BASE.$PL|g" "ppsspp-$PRE:$BASE.$PL.dsc"
+sed -i "s|pkgmaintainer|$pkgmaintainer|g" "ppsspp-$PRE:$BASE.$PL.dsc"
 
 SRC_FOLDER=ppsspp-$BASE.$PL
 
 echo "original tarball"
-git clone https://github.com/ProfessorKaos64/ppsspp
+git clone https://github.com/beaumanvienna/ppsspp
 file ppsspp/
 
 if [ $? -eq 0 ]; then  
@@ -108,17 +122,66 @@ mv ppsspp/ $SRC_FOLDER
 cd $SRC_FOLDER
 
 git checkout $BRANCH
-rm -rf .git .gitignore
+
+echo "subfolder native"
+rm -rf native
+git clone https://github.com/beaumanvienna/native
+file native/
+
+if [ $? -eq 0 ]; then  
+    echo "successfully cloned"
+else  
+    echo "git clone failed, aborting"
+    exit
+fi
+cd native
+git checkout $BRANCH
+cd ..
+
+echo "subfolder ffmpeg"
+rm -rf ffmpeg
+git clone https://github.com/beaumanvienna/ppsspp-ffmpeg
+file ppsspp-ffmpeg/
+if [ $? -eq 0 ]; then  
+    echo "successfully cloned"
+else  
+    echo "git clone failed, aborting"
+    exit
+fi 
+mv ppsspp-ffmpeg ffmpeg
+cd ffmpeg
+git checkout $BRANCH
+cd ..
+
+echo "subfolder lang"
+rm -rf lang
+git clone https://github.com/beaumanvienna/ppsspp-lang
+file ppsspp-lang/
+if [ $? -eq 0 ]; then  
+    echo "successfully cloned"
+else  
+    echo "git clone failed, aborting"
+    exit
+fi 
+mv ppsspp-lang lang
+cd lang
+git checkout $BRANCH
+cd ..
 
 echo "changelog"
 cp ~/RetroRig/supplemental/ppsspp/changelog debian/
 sed -i "s|version_placeholder|$PRE:$BASE.$PL|g" debian/changelog
+sed -i "s|uploader|$uploader|g" debian/changelog
 
 echo "control"
 cp ~/RetroRig/supplemental/ppsspp/control debian/
+sed -i "s|pkgmaintainer|$pkgmaintainer|g" debian/control
 
-#get Makefiles straight
-aclocal && autoconf && autoreconf -i && automake --add-missing
+echo "rules"
+cp ~/RetroRig/supplemental/ppsspp/rules debian/
+
+echo "format"
+cp ~/RetroRig/supplemental/ppsspp/format debian/source/
 
 if [[ -n "$1" ]]; then
   arg0=$1
@@ -184,7 +247,7 @@ case "$arg0" in
         while true; do
             read -p "Do you wish to upload the source package?    " yn
             case $yn in
-                [Yy]* ) dput ppa:beauman/retrorig ~/packaging/ppsspp/ppsspp_*.$PL""_source.changes; break;;
+                [Yy]* ) dput $LAUNCHPAD_PPA ~/packaging/ppsspp/ppsspp_*.$PL""_source.changes; break;;
                 [Nn]* ) break;;
                 * ) echo "Please answer yes or no.";;
             esac

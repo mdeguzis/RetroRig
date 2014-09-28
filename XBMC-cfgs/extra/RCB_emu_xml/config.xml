@@ -37,7 +37,7 @@
     <RomCollection id="12" name="PSP">
       <useBuiltinEmulator>False</useBuiltinEmulator>
       <gameclient />
-      <emulatorCmd>/usr/bin/PPSSPPSDL</emulatorCmd>
+      <emulatorCmd>/usr/games/ppsspp</emulatorCmd>
       <emulatorParams>--fullscreen --escape-exit "%ROM%"</emulatorParams>
       <romPath>installdir_temp/ROMs/PSP/*.iso</romPath>
       <saveStatePath />
