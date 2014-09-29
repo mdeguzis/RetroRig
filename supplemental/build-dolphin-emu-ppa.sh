@@ -54,9 +54,9 @@ if [[ -n "$2" ]]; then
 			  debhelper cmake libao-dev libasound2-dev libavcodec-dev libavformat-dev \
 			  libbluetooth-dev libglew-dev libgtk2.0-dev liblzo2-dev libopenal-dev libpolarssl-dev \
 			  libpulse-dev libreadline6-dev libsdl1.2-dev libsfml-dev libsoil-dev libsoundtouch-dev \
-			  libswscale-dev libminiupnpc-dev libwxbase2.8-dev libwxgtk3.0-dev libxext-dev \
-			  libxrandr-dev lsb-release pkg-config portaudio19-dev wx3.0-headers zlib1g-dev \
-			  libjack-dev libjack0 libportaudio-dev libreadline-dev
+			  libswscale-dev libminiupnpc-dev libwxbase2.8-dev libwxgtk2.8-dev libxext-dev \
+			  libxrandr-dev lsb-release pkg-config wx2.8-headers zlib1g-dev \
+			  libjack-dev libjack0 libportaudio-dev libreadline-dev nvidia-cg-toolkit
 
 else
   echo ""
