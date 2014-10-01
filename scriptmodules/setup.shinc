@@ -232,7 +232,7 @@ function rrs_add_standard_repos()
 	add-apt-repository -y ppa:beauman/retrorig
   
   ######################################################################
-	# install missing libraries
+	# install package repository and missing libraries
   ######################################################################
   
   #find type of operating system
