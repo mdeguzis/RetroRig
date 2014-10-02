@@ -1,0 +1,9 @@
+Format: http://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
+Upstream-Name: getpos
+Source: https://github.com/beaumanvienna/getpos
+
+Files: *
+Copyright: jc techno labs see https://github.com/beaumanvienna/getpos
+License: GPL-2
+
+
