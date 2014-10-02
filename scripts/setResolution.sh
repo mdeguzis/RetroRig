@@ -130,6 +130,8 @@ if parameterIsTrue "auto resolution"; then
   dolphin_new_X=$1
   dolphin_new_Y=$2
   dolphin_monitor=$3
+  dolphin_new_xpos=`getpos 2>/dev/null|grep xpos|cut -f 2 -d ' '`
+  dolphin_new_ypos=`getpos 2>/dev/null|grep ypos|cut -f 2 -d ' '`
 
   # Gens/GS (Sega CD/32X)
   gens_new_X=$1
@@ -141,8 +143,14 @@ if parameterIsTrue "auto resolution"; then
   m_org_X=$(grep -Ee "\bScreenWidth = \b" "$config_home/.config/mupen64plus/mupen64plus.cfg")
   m_org_Y=$(grep -Ee "\bScreenHeight = \b" "$config_home/.config/mupen64plus/mupen64plus.cfg")
   #make the changes, prefix new_X in case NULL was entered previousey
-  sed -i "s|$m_org_X|ScreenWidth = $m_new_X|g" "$config_home/.config/mupen64plus/mupen64plus.cfg"
-  sed -i "s|$m_org_Y|ScreenHeight = $m_new_Y|g" "$config_home/.config/mupen64plus/mupen64plus.cfg"
+
+  if [ -n "$m_org_X" ];then
+    sed -i "s|$m_org_X|ScreenWidth = $m_new_X|g" "$config_home/.config/mupen64plus/mupen64plus.cfg"
+  fi
+
+  if [ -n "$m_org_Y" ];then  
+    sed -i "s|$m_org_Y|ScreenHeight = $m_new_Y|g" "$config_home/.config/mupen64plus/mupen64plus.cfg"
+  fi
 
   ########################    
   #mednafen 
@@ -286,10 +294,20 @@ if parameterIsTrue "auto resolution"; then
   #apply changes
   sed -i "s|$dolphin_org_Res|$dolphin_new_Res|g" "$config_home/.dolphin-emu/Config/Dolphin.ini"  
   #enable vsync
-  dolphin_org_vsync=$(grep -Ee "VSync = " "$config_home/.dolphin-emu/Config/gfx_opengl.ini")
-  if [ -n "$dolphin_org_vsync" ]; then
-    sed -i "s|$dolphin_org_vsync|VSync = True|g" "$config_home/.dolphin-emu/Config/gfx_opengl.ini"  
+  if [ -f $config_home/.dolphin-emu/Config/gfx_opengl.ini ];then
+
+    dolphin_org_vsync=$(grep -Ee "VSync = " "$config_home/.dolphin-emu/Config/gfx_opengl.ini")
+    if [ -n "$dolphin_org_vsync" ]; then
+      sed -i "s|$dolphin_org_vsync|VSync = True|g" "$config_home/.dolphin-emu/Config/gfx_opengl.ini"  
+    fi 
   fi
+  
+  #old render position
+  dolphin_old_xpos=$(grep -Ee "RenderWindowXPos = " "$config_home/.dolphin-emu/Config/Dolphin.ini")
+  dolphin_old_ypos=$(grep -Ee "RenderWindowYPos = " "$config_home/.dolphin-emu/Config/Dolphin.ini")
+  #apply changes
+  sed -i "s|$dolphin_old_xpos|RenderWindowXPos = $dolphin_new_xpos|g" "$config_home/.dolphin-emu/Config/Dolphin.ini"  
+  sed -i "s|$dolphin_old_ypos|RenderWindowYPos = $dolphin_new_ypos|g" "$config_home/.dolphin-emu/Config/Dolphin.ini"  
   
 else
   echo "auto resolution is disabled, exiting"
