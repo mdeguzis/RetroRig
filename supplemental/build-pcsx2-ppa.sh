@@ -3,15 +3,16 @@
 #======================================================================== 
 #
 # Author:  Jens-Christian Lache
-# Date:    20140904
-# Version: Patch Level 1 (xrandr for dual monitor support)
+# Date:    20141003
+# Version: Patch Level 2, reverted to unpatched version from github 
+#          upstream, tagged 1.2.2 (multi monitor support from settings)
 # ========================================================================
 
 #define base version
 BASE=2:1.2.2
 
 # define patch level
-PL=1
+PL=2
 
 #define branch
 BRANCH=retrorig-pl$PL
