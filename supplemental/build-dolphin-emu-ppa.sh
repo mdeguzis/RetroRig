@@ -5,8 +5,9 @@
 # Author      : Jens-Christian Lache
 # Date        : 20140908
 # Version     : 4.0.0
-# Description : Version 4.0.0 from Hunter-Kaller, Patch Level 1
-#               
+# Description : reverted to unpatched version from  Version 4.0.0 
+#               from Hunter-Kaller
+#               (multi monitor support from settings)
 # ========================================================================
 
 #define base version
@@ -14,7 +15,7 @@ PRE=3
 BASE=4.0.0
 
 # define patch level
-PL=1
+PL=2
 
 
 
@@ -112,10 +113,6 @@ fi
 
 #change to source folder
 cd $SRC_FOLDER
-
-#echo "patching .."
-patch Source/Core/DolphinWX/X11Utils.cpp < ~/RetroRig/supplemental/dolphin-emu/X11Utils.cpp.patch
-patch Source/Core/DolphinWX/FrameTools.cpp < ~/RetroRig/supplemental/dolphin-emu/FrameTools.cpp.patch
 
 echo "changelog"
 cp ~/RetroRig/supplemental/dolphin-emu/changelog debian/
