@@ -125,6 +125,8 @@ if parameterIsTrue "auto resolution"; then
   ps2_new_X=$1
   ps2_new_Y=$2
   ps2_monitor=$3
+  ps2_new_xpos=`getpos 2>/dev/null|grep xpos|cut -f 2 -d ' '`
+  ps2_new_ypos=`getpos 2>/dev/null|grep ypos|cut -f 2 -d ' '`
 
   # dolphin
   dolphin_new_X=$1
@@ -267,7 +269,9 @@ if parameterIsTrue "auto resolution"; then
   #pcsx2 ui settings
   ps2_ui_org_X=$(grep -Ee "FullscreenX=" "$config_home/.config/pcsx2/inis/PCSX2_ui.ini")
   ps2_ui_org_Y=$(grep -Ee "FullscreenY=" "$config_home/.config/pcsx2/inis/PCSX2_ui.ini")
-  ps2_ui_org_monitor=$(grep -Ee "MonitorName=" "$config_home/.config/pcsx2/inis/PCSX2_ui.ini")
+
+  WindowPos_org=$(grep -Ee "WindowPos=" "$config_home/.config/pcsx2/inis/PCSX2_ui.ini")
+  WindowPos_new="$ps2_new_xpos,$ps2_new_ypos"
   #apply the changes
   if [ -n "$ps2_ui_org_X" ]; then
     sed -i "s|$ps2_ui_org_X|FullscreenX=$ps2_new_X|g" "$config_home/.config/pcsx2/inis/PCSX2_ui.ini"  
@@ -277,8 +281,8 @@ if parameterIsTrue "auto resolution"; then
     sed -i "s|$ps2_ui_org_Y|FullscreenY=$ps2_new_Y|g" "$config_home/.config/pcsx2/inis/PCSX2_ui.ini"
   fi
 
-  if [ -n "$ps2_ui_org_monitor" ]; then
-    sed -i "s|$ps2_ui_org_monitor|MonitorName=$ps2_monitor|g" "$config_home/.config/pcsx2/inis/PCSX2_ui.ini"
+  if [ -n "$WindowPos_org" ]; then
+    sed -i "s|$WindowPos_org|WindowPos=$WindowPos_new|g" "$config_home/.config/pcsx2/inis/PCSX2_ui.ini"
   fi
   #set pcsx2 to fullscreen
   ps2_ui_org_fs=$(grep -Ee "DefaultToFullscreen=" "$config_home/.config/pcsx2/inis/PCSX2_ui.ini")
