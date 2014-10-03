@@ -1,5 +1,14 @@
 dolphin-emu (version_placeholder) trusty; urgency=medium
 
+  * unpatched version from source code from 
+
+    https://launchpad.net/~hunter-kaller/+archive/ubuntu/ppa/
+            +files/dolphin-emu_4.0git-0ubuntu1~filthypants1.tar.gz
+
+ -- Jens-Christian Lache <jc.lache@web.de>  Mon, 03 Oct 2014 20:00:00 +0200
+
+dolphin-emu (3:4.0.0.1) trusty; urgency=medium
+
   * changed: dual-head fix (start position by XRandr, not configuration file)
 
     source code from 
