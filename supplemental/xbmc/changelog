@@ -1,8 +1,9 @@
 xbmc (version_placeholder) trusty; urgency=medium
 
-  * Changed:
+  * Changed: merged with upstream FernetMenta/XBMC V14.0 14/10/04 master and 
+             applied changes from patch level 8
 
- -- Jens-Christian Lache <jc.lache@web.de>  Sun, 31 Aug 2014 19:10:00 +0200
+ -- Jens-Christian Lache <jc.lache@web.de>  Sun, 04 Oct 2014 18:10:00 +0200
 
 xbmc (3:13.1.8) trusty; urgency=medium
 
