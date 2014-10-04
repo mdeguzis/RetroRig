@@ -230,6 +230,7 @@ function rrs_add_standard_repos()
 
 	# add respository for RetroRig backends (xbmc, mednafen,...)
 	add-apt-repository -y ppa:beauman/retrorig
+	add-apt-repository -y ppa:beauman/retrorig-testing
 
 ######################################################################
 # install package repository and missing libraries
@@ -248,14 +249,19 @@ function rrs_add_standard_repos()
 			case $OS_RELEASE in
 				"14.10")
 
+					echo "running Ubuntu 14.10"
+
 					#add beauman's trusty repository 
 					echo "deb http://ppa.launchpad.net/beauman/retrorig/ubuntu trusty main" >\
 					  /etc/apt/sources.list.d/beauman-ubuntu-retrorig-trusty.list
 
+					echo "deb http://ppa.launchpad.net/beauman/retrorig-testing/ubuntu trusty main" >\
+					  /etc/apt/sources.list.d/beauman-ubuntu-retrorig-testing-trusty.list
+
 					echo "copying missing libraries for Ubuntu 14.10"
 					mkdir -p /usr/lib/RetroRig
 					cd /usr/lib/RetroRig
-#TODO				#wget --tries=50 -P "/usr/bin/" libregeek.com/RetroRig/libs
+					wget --tries=50 -P /tmp "http://www.libregeek.org/RetroRig/libs/libs.Ubuntu.14.10.tar.bz"
 					tar xvfj /tmp/libs.Ubuntu.14.10.tar.bz
 
 					echo "installing librariessystem wide"
@@ -266,7 +272,8 @@ function rrs_add_standard_repos()
 #DEINSTALLATION CODE
 #
 #    # remove PPA
-#    rm /etc/apt/sources.list.d/beauman-ubuntu-retrorig-trusty.list
+#    rm -f /etc/apt/sources.list.d/beauman-ubuntu-retrorig-trusty.list
+#    rm -f /etc/apt/sources.list.d/beauman-ubuntu-retrorig-testing-trusty.list
 #    apt-get update
 #
 #    # remove supplemental libraries
@@ -280,7 +287,7 @@ function rrs_add_standard_repos()
 			esac
 		;;
 		"LinuxMint")
-			
+
 			#find version of operating system
 			OS_RELEASE_STRING=`lsb_release -a 2>/dev/null|grep "Release"`
 			OS_RELEASE=`echo $OS_RELEASE_STRING|cut -f 2 -d ' ' `
@@ -288,7 +295,6 @@ function rrs_add_standard_repos()
 			case $OS_RELEASE in
 				"17")
 					echo "running Linux Mint 17 Qiana"
-					#TODO				#fix xrandr here
 				;;
 
 				*)
