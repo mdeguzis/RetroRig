@@ -228,9 +228,6 @@ function rrs_add_standard_repos()
 	# add respository for qtsixa (PS3 pairing)
 	#add-apt-repository -y ppa:falk-t-j/qtsixa
 
-	#latest X11 drivers (Nvidia, etc.)
-	sudo add-apt-repository -y ppa:xorg-edgers/ppa
-
 	# add respository for RetroRig backends (xbmc, mednafen,...)
 	add-apt-repository -y ppa:beauman/retrorig
 	add-apt-repository -y ppa:beauman/retrorig-testing
