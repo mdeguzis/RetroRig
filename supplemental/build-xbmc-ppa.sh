@@ -16,6 +16,9 @@ PL=9
 #define xbmc branch to checkout
 BRANCH=retrorig-pl$PL
 
+UPLOAD_TRY=4
+
+PPA="ppa:beauman/retrorig-testing"
 
 clear
 echo "#########################################################"
@@ -94,11 +97,12 @@ echo "Setup package base files"
 echo "##########################################"
 
 echo "dsc file"
-cp ~/RetroRig/supplemental/xbmc/xbmc.dsc xbmc_$BASE.$PL.dsc
-sed -i "s|version_placeholder|$BASE.$PL|g" "xbmc_$BASE.$PL.dsc"
+cp ~/RetroRig/supplemental/xbmc/xbmc.dsc xbmc_$BASE.$PL.$UPLOAD_TRY.dsc
+sed -i "s|version_placeholder|$BASE.$PL.$UPLOAD_TRY|g" "xbmc_$BASE.$PL.$UPLOAD_TRY.dsc"
 
 echo "original tarball"
-git clone https://github.com/beaumanvienna/xbmc 
+#git clone https://github.com/beaumanvienna/xbmc 
+cp -r ~/xbmc .
 
 file xbmc/
 
@@ -121,7 +125,6 @@ fi
 
 cp ~/RetroRig/Artwork/XBMC/Splash_retrorig.png ~/RetroRig/Artwork/XBMC/Splash.png media/
 cd ..
-tar cfj xbmc_$BASE.$PL.orig.tar.bz2 xbmc
 
 echo "debian files"
 wget --tries=50 "http://www.libregeek.org/RetroRig/Ubuntu-Trusty/templates/xbmc.debian.tar.bz2"
@@ -156,13 +159,7 @@ echo "control"
 cp ~/RetroRig/supplemental/xbmc/control debian/
 
 echo "rules"
-if [ "$arg0" == "source" ]; then
-  cp ~/RetroRig/supplemental/xbmc/rules debian/
-else
-  cp ~/RetroRig/supplemental/xbmc/rules.localbuild debian/
-fi
-
-
+cp ~/RetroRig/supplemental/xbmc/rules debian/
 
 echo "setting up patches"
 rm -rf debian/patches/*
@@ -174,7 +171,7 @@ cp ~/RetroRig/supplemental/xbmc/format debian/source/
 
 echo "changelog"
 cp ~/RetroRig/supplemental/xbmc/changelog debian/
-sed -i "s|version_placeholder|$BASE.$PL|g" debian/changelog
+sed -i "s|version_placeholder|$BASE.$PL.$UPLOAD_TRY|g" debian/changelog
 #dch -i
 
 
@@ -184,6 +181,9 @@ cd ..
 
 #disable google test suite
 sed -i "s|configure_gtest=yes|configure_gtest=no|g" configure.in
+
+wget --tries=50 -P /tmp "http://www.libregeek.org/RetroRig/libs/ffmpeg-2.4-Helix-alpha4.tar.gz"
+cp /tmp/ffmpeg-2.4-Helix-alpha4.tar.gz ~/packaging/xbmc/xbmc/tools/depends/target/ffmpeg/ffmpeg-2.4-Helix-alpha4.tar.gz
 
 case "$arg0" in
   compile)
@@ -234,7 +234,7 @@ case "$arg0" in
         ls -lah ~/packaging/xbmc
         echo ""
         echo ""
-        echo "you can upload the package with dput ppa:beauman/retrorig ~/packaging/xbmc/xbmc_*_source.changes"
+        echo "you can upload the package with dput $PPA ~/packaging/xbmc/xbmc_*_source.changes"
         echo "all good"
         echo ""
         echo ""
@@ -242,7 +242,7 @@ case "$arg0" in
         while true; do
             read -p "Do you wish to upload the source package?    " yn
             case $yn in
-                [Yy]* ) dput ppa:beauman/retrorig ~/packaging/xbmc/xbmc_*_source.changes; break;;
+                [Yy]* ) dput $PPA ~/packaging/xbmc/xbmc_*_source.changes; break;;
                 [Nn]* ) break;;
                 * ) echo "Please answer yes or no.";;
             esac
