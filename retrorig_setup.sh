@@ -108,8 +108,8 @@ function loadConfig()
 #
 #  setDesktopEnvironment()
 #  
-#  Arguments:    Desktop folder identifier used in Unity/Gnome/Cinnamon
-#                in ~/.config/user-dirs.dirs. 
+#  Arguments:    Desktop folder identifier used in 
+#                Unity/Gnome/Cinnamonin/Deepin Desktop ~/.config/user-dirs.dirs. 
 #  
 #  Description:  The command to set a folder variable is already 
 #                contained in ~/.config/user-dirs.dirs. For example:
