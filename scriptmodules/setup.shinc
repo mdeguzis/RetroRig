@@ -512,12 +512,6 @@ function rrs_xbmc_patched()
 	# insert restarting xboxdrv specifically into /etc/sudoers
 	cat "$scriptdir/XBMC-cfgs/extra/sudoers.txt" >> "/etc/sudoers"
 
-	# Can't use $config_home in the desktop file, so need to replace $user string
-	sed -i "s|/home/test/Pictures|$xdg_pictures_dir|g" "/usr/share/applications/RetroRig.desktop"
-
-	# Can't use $config_home in the desktop file, so need to replace $user string
-	sed -i "s|/home/test/Pictures|$xdg_pictures_dir|g" "$xdg_desktop_dir/RetroRig.desktop"
-
 	# create autostart entry, remove prior if it exists
 	rm -f "$home.config/autostart/RetroRig.desktop"
 	cp -v "$scriptdir/XBMC-cfgs/extra/RetroRig.desktop" "$home/.config/autostart"
