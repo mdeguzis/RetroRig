@@ -132,7 +132,7 @@ function setDesktopEnvironment()
   XDG_DIR="XDG_"$arg_upper_case"_DIR"
   xdg_dir="xdg_"$arg_lower_case"_dir"
 
-  setDir=`cat ~/.config/user-dirs.dirs | grep $XDG_DIR| sed s/$XDG_DIR/$xdg_dir/|sed s/HOME/home/`
+  setDir=`cat $home/.config/user-dirs.dirs | grep $XDG_DIR| sed s/$XDG_DIR/$xdg_dir/|sed s/HOME/home/`
   target=`echo $setDir| cut -f 2 -d "="| sed s,'$home',$home,`
 
   checkValid=`echo $setDir|grep $xdg_dir=\"|grep home/`
