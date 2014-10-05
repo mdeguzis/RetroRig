@@ -301,6 +301,21 @@ function rrs_add_standard_repos()
 				;;
 			esac
 		;;
+		"Deepin")
+
+			#find version of operating system
+			OS_RELEASE_STRING=`lsb_release -a 2>/dev/null|grep "Release"`
+			OS_RELEASE=`echo $OS_RELEASE_STRING|cut -f 2 -d ' ' `
+
+			case $OS_RELEASE in
+				"2014")
+					echo "running Deepin 2014"
+				;;
+
+				*)
+				;;
+			esac
+		;;
 
 		*)
 		;;
@@ -372,7 +387,7 @@ function rrs_software()
 	# install binaries
 	apt-get install -y xboxdrv curl python-software-properties \
 	pkg-config software-properties-common dconf-tools jstest-gtk \
-	qjoypad sixad libusb-0.1-4 antimicro 
+	qjoypad sixad libusb-0.1-4 antimicro bluez
 
 	#wii motion support
 	apt-get install -y libcwiid1 lswm wmgui wminput
