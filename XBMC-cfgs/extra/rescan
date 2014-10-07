@@ -1,0 +1,115 @@
+#!/bin/bash
+### BEGIN INIT INFO
+# Provides: rescan
+# Required-Start:    
+# Required-Stop:     
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Short-Description: Start rescan
+# Short-Description: This script starts, stops or restarts /usr/share/applications/gp_autodetect_xbmc.sh from project RetroRig. For more information see there.
+### END INIT INFO
+#
+# Author:      beauman @ jc techno labs
+#
+# set -e 
+
+PATH=/bin:/usr/bin:/sbin:/usr/sbin
+DAEMON=/usr/share/applications/gp_autodetect_xbmc.sh
+SHA1=placeholderSHA1
+
+
+########################################################
+#
+# Function rescanIsRunning ()
+#
+# This function returns true (=0)
+# if the backend gp_autodetect_xbmc.sh is running.
+#
+########################################################
+
+rescanIsRunning () {
+  VAR=`ps ax| grep gp_autodetect_xbmc.sh|grep /bin/bash`
+  if [ -n "$VAR" ]; then
+    #"VAR is not empty"
+    return 0
+  else
+    return 1
+  fi
+}
+
+########################################################
+#
+# Function checkSHA1ofXBMC ()
+#
+# This function returns true (=0)
+# if xbmc.bin matches the SHA1 string,
+# that was inserted during RetroRig installation.
+#
+########################################################
+
+checkSHA1ofXBMC () {
+
+  VAR=`file /usr/lib/xbmc/xbmc.bin | cut -f 19 -d ' '| cut -f 2 -d '='|cut -f 1 -d ','| grep $SHA1`
+  # skip version test
+  # VAR=notEmpty
+
+  if [ -n "$VAR" ]; then
+    #"VAR is not empty"
+    return 0
+  else
+    return 1
+  fi
+}
+
+
+. /lib/lsb/init-functions
+
+case "$1" in
+  start)
+    if rescanIsRunning; then
+      log_warning_msg "rescan is already running"
+    else
+    {
+      if checkSHA1ofXBMC; then
+      {
+        log_daemon_msg "Starting gp_autodetect_xbmc.sh"
+        $DAEMON &>>/var/log/rescan &
+        log_end_msg 0
+      }
+      else
+      {
+        log_daemon_msg "Wrong version of XBMC. Daemon has not been started."
+      }
+      fi
+    }
+    fi
+    ;;
+  stop)
+    if rescanIsRunning; then
+    {
+      log_daemon_msg "Stopping rescan"
+      killall gp_autodetect_xbmc.sh
+      log_end_msg 0
+    }
+    else
+      log_warning_msg "rescan is not running"
+    fi
+    ;;
+  restart)
+    $0 stop
+    $0 start
+    ;;
+  status)
+    if rescanIsRunning; then
+      echo "rescan is running"
+    else
+      echo "rescan is not running"
+    fi
+    ;;
+  *)
+    echo "Usage: /etc/init.d/rescan {start|stop|restart|status}" >&2
+    exit 1
+    ;;
+esac
+
+exit 0

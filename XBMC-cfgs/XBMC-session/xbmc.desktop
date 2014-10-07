@@ -1,0 +1,7 @@
+[Desktop Entry]
+Encoding=UTF-8
+Name=XBMC
+Comment=
+Exec=/usr/share/applications/startXBMC.sh
+Icon=
+Type=Application

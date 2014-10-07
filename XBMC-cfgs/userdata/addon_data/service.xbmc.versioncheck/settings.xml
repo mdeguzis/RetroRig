@@ -1,0 +1,4 @@
+<settings>
+    <setting id="upgrade_system" value="false" />
+    <setting id="versioncheck_enable" value="false" />
+</settings>

@@ -1,0 +1,214 @@
+#!/bin/bash
+#
+# RetroRig configuration modules
+# This is a small script to copy over configuration files for emulators
+# append a "-x" on the end above for debugging if need be
+# Please report any errors via a pull request
+# You can also reach me on twitter: @N3RD42
+#
+# prepare folder structure for emulator, cores, front end, and roms
+
+function cfg_confirm()
+{
+
+	dialog --title "Confirm yes/no" \
+	--backtitle "LibreGeek.org RetroRig Installer" \
+	--yesno "Are you sure you want run the this option?"  7 50
+	 
+	# Get exit status
+	# 0 means user hit [yes] button.
+	# 1 means user hit [no] button.
+	# 255 means user hit [Esc] key.
+	response=$?
+	case $response in
+	   0) 
+	   #dialog --infobox "Continuing..." 3 17
+	   #continue on below function
+	   ;;
+
+	   1) 
+	   dialog --infobox "Exiting..."  3 15
+	   sleep 2s
+	   set_menu
+	   ;;
+
+	   255)
+	   dialog --infobox "Exiting..." 3 15
+	   sleep 2s
+	   set_menu
+	   ;;
+
+	esac
+}
+
+function cfg_uninstall()
+{
+
+	#Confirm with user that they want to uninstall
+	dialog --title "Confirm yes/no" \
+	--backtitle "LibreGeek.org RetroRig Installer" \
+	--yesno "Are you SURE you want to Remove RetroRig?"  6 0
+	 
+	# Get exit status
+	# 0 means user hit [yes] button.
+	# 1 means user hit [no] button.
+	# 255 means user hit [Esc] key.
+	response=$?
+	case $response in
+
+		0) 
+		# remove installed binaries
+		# do not remove software-properties-common, necessary pkg!
+		clear
+		apt-get autoremove -y xboxdrv curl python-software-properties \
+		pkg-config mednafen mame mupen64plus dconf-tools qjoypad xbmc \
+		stella sixad
+
+		# add apport, apport-gtk back
+		apt-get install -y apport apport-gtk
+		dpkg --remove-architecture i386
+
+		apt-get -y autoremove
+
+		# repositories
+		add-apt-repository -ry ppa:team-xbmc/ppa
+		add-apt-repository -ry ppa:falk-t-j/qtsixa
+		rm -f /etc/apt/sources.list.d/playdeb.list
+		;;
+
+	   	1)
+		return
+		;; 
+
+		255)
+		return
+		;;
+
+	esac
+
+#ask to keep folders
+#prompt user if they wish to keep folders from install
+dialog --title "Confirm yes/no" --backtitle "LibreGeek.org RetroRig Installer" \
+	--yesno "Do you wish to keep configuration folders?" 6 30	
+	 
+# Get exit status
+# 0 means user hit [yes] button.
+# 1 means user hit [no] button.
+# 255 means user hit [Esc] key.
+response=$?
+case $response in
+
+	0) 
+	# User hit [Yes]
+	# keep folders
+	sleep 2s
+	;;
+
+   	1) 
+	# User hit [No]
+	# remove dotfiles
+	rm -rf "$config_home/.qjoypad3" 
+	rm -rf "$config_home/.config/mupen64plus" 
+	rm -rf "$config_home/.mame" 
+	rm -rf "$config_home/.stella" 
+	rm -rf "$config_home/.mednafen" 
+	rm -rf "$config_home/.mess" 
+	rm -rf "$xbmc_home"
+
+	# user home objects
+	rm -f "$home/.config/autostart/qjoypad.desktop"
+
+	# Application entries
+	rm -f "/usr/share/applications/gp_autodetect_xbmc.sh"
+	rm -f "/usr/share/applications/startXBMC.sh"
+	rm -f "/usr/share/applications/RetriRig.desktop"
+
+	# remove system services
+	service xboxdrv stop
+	service rescan stop	
+	update-rc.d -f xboxdrv remove
+	rm -f /etc/init.d/xboxdrv
+	rm -f /etc/init.d/rescan
+	rm -f /etc/default/xboxdrv
+	sed -i 's|blacklist xpad||g' "/etc/modprobe.d/blacklist.conf"
+
+	# XBMC session (if applicable)
+	# change default xsession
+	session_org="user-session=XBMC"
+	session_new="user-session=ubuntu"
+
+	# auto start entries
+	rm -f "$home/.config/autostart/RetroRig.desktop"
+
+	# shortcuts
+	rm -f "$xdg_desktop_dir/RetroRig.desktop"
+
+	# change the session
+	# NOTE! As of Ubuntu Trusy 14.04, lightdm-set-defaults is no longer available. This is because 
+	# lightdm now using a configuration directory /etc/lightdm/lightdm.conf.d/ rather than a 
+	# single configuration file. The files in this directory can be edited by hand, new files 
+	# can be added, or files can be removed. There is no longer any need for a command that 
+	# edits the single configuration file.
+
+	sed -i "s|$session_org|$session_new|g" "/usr/share/lightdm/lightdm.conf.d/50-ubuntu.conf"
+	;;
+
+	255)
+	# User hit [Cancel/Esc]
+	# Keep folders and continue on"
+	sleep 2s
+	;;
+
+	esac	
+
+	#ask to keep folders
+	#prompt user if they wish to keep ROMs they loaded
+
+dialog --title "Confirm yes/no" --backtitle "LibreGeek.org RetroRig Installer" \
+	--yesno "Do you wish to keep ROM folders?" 6 30
+	 
+# Get exit status
+# 0 means user hit [yes] button.
+# 1 means user hit [no] button.
+# 255 means user hit [Esc] key.
+response=$?
+case $response in
+
+	0) 
+	#Keep ROMs
+	sleep 2s
+	;;
+
+   	1)
+	rm -rf "$rootdir/BIOS" 
+	rm -rf "$rootdir/ROMs"
+	rm -rf "$rootdir/Tools"
+	rm -rf "$rootdir/Artwork"
+	rm -rf "$rootdir/Saves"
+	rm -rf "$rootdir/Configs"
+	rm -rf "$rootdir/emulators"
+	;;
+
+	255)
+	#Keep ROMs
+	sleep 2s
+	;;
+
+	esac	
+
+# RENAME (not remove) wherever it was created, so uses can still refer to it
+mv "$rootdir" "$rootdir.old"
+
+#update Ubuntu repository listings
+apt-get update
+sleep 2s
+
+# correct permissions
+h_correct_perms
+
+# call reboot
+rrs_reboot
+
+}
+
+
