@@ -93,12 +93,10 @@ To clone this repo via the CLI:
 To install:
 ````
 cd RetroRig
-git checkout <platform>  
 sudo ./retrorig_setup.sh
 ````
 
-Substitute `<platform>` with your Linux distribution. See the branches pulldown menu for all available options. Currently,
-Only Ubuntu 14.04 is supported, but more will be added in due time!
+Currently,Only Ubuntu 14.04 LTS is supported, but more will be added in due time! You can perform a `git checkout Beta` to try our Beta branch, but please do so with caution and backup any file before hand!
 
 You can also download a zip file or by other means on the github page.
 
