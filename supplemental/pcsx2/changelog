@@ -1,0 +1,72 @@
+pcsx2 (version_placeholder) trusty; urgency=medium
+
+  * unpatched version from github upstream, tagged 1.2.2
+  * source code from https://github.com/beaumanvienna/pcsx2, 
+      branch "retrorig-pl2"
+
+ -- Jens-Christian Lache <jc.lache@web.de>  Fri, 3 Oct 2014 18:00:00 +0200
+ 
+ pcsx2 (2:1.2.2.1) trusty; urgency=medium
+
+  * patch level 1 "dual monitor support"
+  * source code from https://github.com/beaumanvienna/pcsx2,
+      branch "retrorig-pl1"
+  * description: xrandr added to calculate the start position
+                 of the GS window from the display name
+ -- Jens-Christian Lache <jc.lache@web.de>   Thu, 4 Sep 2014 22:15:00 +0200
+
+pcsx2 (2:1.2.2.0-testunpatched) trusty; urgency=medium
+
+  * source code from https://launchpad.net/~gregory-hainaut/
+      +archive/ubuntu/pcsx2.official.ppa/+files/pcsx2_1.2.2.orig.tar.gz
+
+ -- Jens-Christian Lache <jc.lache@web.de>  Sun, 10 Aug 2014 22:58:50 +0200
+
+pcsx2 (1:1.2.2-4) trusty; urgency=medium
+
+  * New Upstream 1.2.2 release
+    + solve depth on Nvidia GPU
+    + solve crash on AMD GPU
+
+ -- Gregory Hainaut <gregory.hainaut@gmail.com>  Mon, 10 Feb 2014 20:29:34 +0100
+
+pcsx2 (1:1.2.2-3) Saucy; urgency=medium
+
+  * New Upstream 1.2.2 release
+    + solve depth on Nvidia GPU
+    + solve crash on AMD GPU
+
+ -- Gregory Hainaut <gregory.hainaut@gmail.com>  Mon, 10 Feb 2014 20:29:20 +0100
+
+pcsx2 (1:1.2.2-2) quantal; urgency=medium
+
+  * New Upstream 1.2.2 release
+    + solve depth on Nvidia GPU
+    + solve crash on AMD GPU
+
+ -- Gregory Hainaut <gregory.hainaut@gmail.com>  Mon, 10 Feb 2014 20:28:54 +0100
+
+pcsx2 (1:1.2.2-1) precise; urgency=medium
+
+  * New Upstream 1.2.2 release
+    + solve depth on Nvidia GPU
+    + solve crash on AMD GPU
+
+ -- Gregory Hainaut <gregory.hainaut@gmail.com>  Mon, 10 Feb 2014 20:26:17 +0100
+
+pcsx2 (1:1.2.0-4) trusty; urgency=medium
+
+  New Upstream 1.2 release => http://pcsx2.net/253-pcsx2-1-2-0-released.html
+
+  !!!! Enjoy !!!!
+
+ -- Gregory Hainaut <gregory.hainaut@gmail.com>  Sun, 02 Feb 2014 14:00:10 +0100
+
+pcsx2 (1:1.2.0-2) saucy; urgency=medium
+
+  New Upstream 1.2 release => http://pcsx2.net/253-pcsx2-1-2-0-released.html
+
+  !!!! Enjoy !!!!
+
+ -- Gregory Hainaut <gregory.hainaut@gmail.com>  Sun, 02 Feb 2014 13:57:10 +0100
+

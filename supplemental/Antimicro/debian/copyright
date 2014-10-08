@@ -1,0 +1,9 @@
+Format: http://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
+Upstream-Name: antimicro
+Source: https://github.com/Ryochan7/antimicro
+
+Files: *
+Copyright: Travis Nickles see https://github.com/beaumanvienna/antimicro
+License: GPL-3
+
+

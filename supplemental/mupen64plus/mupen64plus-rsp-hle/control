@@ -1,0 +1,46 @@
+Source: mupen64plus-rsp-hle
+Section: games
+Priority: optional
+Maintainer: Tobias Loose <TobiasLoose@gmx.de>
+Uploaders: RetroRig Development Team <jc.lache@gmail.com>
+Standards-Version: 3.9.5
+Homepage: http://code.google.com/p/mupen64plus/
+Build-Depends:
+ debhelper (>= 9.20130604),
+ dpkg-dev (>= 1.16.1.1),
+ libmupen64plus-dev (>= 1.99.5),
+
+Package: mupen64plus-rsp-hle
+Architecture: any-i386 any-amd64
+Multi-Arch: same
+Pre-Depends:
+ ${misc:Pre-Depends},
+Depends:
+ ${misc:Depends},
+ ${shlibs:Depends},
+ mupen64plus-rsp-abi-2,
+Provides:
+ mupen64plus-rsp,
+Description: high-level rsp emulation for mupen64plus
+ N64 Reality Signal Processor function level emulation for graphics plugins
+ supporting vertex processing by their own. It supports memory and register
+ initialisation, audio and display lists processing including jpeg and mp3
+ decoding for common microcodes.
+
+Package: mupen64plus-rsp-hle-dbg
+Section: debug
+Priority: extra
+Architecture: any-i386 any-amd64
+Multi-Arch: same
+Pre-Depends:
+ ${misc:Pre-Depends},
+Depends:
+ ${misc:Depends},
+ mupen64plus-rsp-hle (= ${binary:Version}),
+Description: high-level rsp emulation for mupen64plus debug symbols package
+ N64 Reality Signal Processor function level emulation for graphics plugins
+ supporting vertex processing by their own. It supports memory and register
+ initialisation, audio and display lists processing including jpeg and mp3
+ decoding for common microcodes.
+ .
+ This package contains the debug files.

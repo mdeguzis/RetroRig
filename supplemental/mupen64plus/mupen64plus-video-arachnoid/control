@@ -1,0 +1,50 @@
+Source: mupen64plus-video-arachnoid
+Section: games
+Priority: optional
+Maintainer: Tobias Loose <TobiasLoose@gmx.de>
+Uploaders: RetroRig Development Team <jc.lache@gmail.com>
+Standards-Version: 3.9.5
+Homepage: http://code.google.com/p/mupen64plus/
+Build-Depends:
+ debhelper (>= 9.20130604),
+ dpkg-dev (>= 1.16.1.1),
+ libgl1-mesa-dev | libgl-dev,
+ libmupen64plus-dev (>= 2.0),
+ pkg-config,
+
+Package: mupen64plus-video-arachnoid
+Architecture: any-i386 any-amd64
+Multi-Arch: same
+Pre-Depends:
+ ${misc:Pre-Depends},
+Depends:
+ ${misc:Depends},
+ ${shlibs:Depends},
+ mupen64plus-config-abi-2.2,
+ mupen64plus-gfx-abi-2.2,
+ mupen64plus-vidext-abi-3,
+Provides:
+ mupen64plus-video,
+Description: Arachnoid high-level graphics emulation for mupen64plus
+ High-level graphics emulation plugin for known microcodes based on OpenGL, but
+ works completely without vertex and pixel shaders. This makes it a good choice
+ for older graphics hardware.
+ .
+ Arachnoid is based on a GPLv2+ fork of the glN64 source code.
+
+Package: mupen64plus-video-arachnoid-dbg
+Section: debug
+Priority: extra
+Architecture: any-i386 any-amd64
+Multi-Arch: same
+Pre-Depends:
+ ${misc:Pre-Depends},
+Depends:
+ ${misc:Depends},
+ mupen64plus-video-arachnoid (= ${binary:Version}),
+Description: Arachnoid graphics hle for mupen64plus debug symbols package
+ High-level graphics emulation plugin for known microcodes based on OpenGL, but
+ works completely without vertex and pixel shaders. This makes it a good choice
+ for older graphics hardware.
+ .
+ This package contains the debug files.

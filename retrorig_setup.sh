@@ -108,8 +108,8 @@ function loadConfig()
 #
 #  setDesktopEnvironment()
 #  
-#  Arguments:    Desktop folder identifier used in Unity/Gnome/Cinnamon
-#                in ~/.config/user-dirs.dirs. 
+#  Arguments:    Desktop folder identifier used in 
+#                Unity/Gnome/Cinnamonin/Deepin Desktop ~/.config/user-dirs.dirs. 
 #  
 #  Description:  The command to set a folder variable is already 
 #                contained in ~/.config/user-dirs.dirs. For example:
@@ -132,13 +132,12 @@ function setDesktopEnvironment()
   XDG_DIR="XDG_"$arg_upper_case"_DIR"
   xdg_dir="xdg_"$arg_lower_case"_dir"
 
-  setDir=`cat ~/.config/user-dirs.dirs | grep $XDG_DIR| sed s/$XDG_DIR/$xdg_dir/|sed s/HOME/home/`
+  setDir=`cat $home/.config/user-dirs.dirs | grep $XDG_DIR| sed s/$XDG_DIR/$xdg_dir/|sed s/HOME/home/`
   target=`echo $setDir| cut -f 2 -d "="| sed s,'$home',$home,`
 
   checkValid=`echo $setDir|grep $xdg_dir=\"|grep home/`
  
   if [ -n "$checkValid" ]; then
-    echo "setting $"$xdg_dir "to" $target
     eval "$setDir"
 
   else
@@ -217,8 +216,6 @@ if [[ $user == "root" ]]; then
 echo "Please start the RetroRig Setup Script not as user 'root', but, e.g., as user 'pi'."
     exit
 fi
-
-esscrapimgw=275 # width in pixel for EmulationStation games scraper
 
 home=$(eval echo ~$user)
 
@@ -304,6 +301,9 @@ xbmc_home="$home/.retrorig/.xbmc"
 # and other utilities
 config_home="$home/.retrorig"
 
+#set RetroRig configuration file
+configFile=$config_home/retrorig.cfg
+
 #################################################################
 
 while true; do
@@ -334,6 +334,7 @@ Installer" --menu "| Main Menu (v.0.9.5b) | \
 		rrs_prepareFolders
 		rrs_software
 		rrs_emulators
+		rrs_retrorig_cfgs
 		rrs_xbmc_cfgs
 		rrs_gamepad
 		h_emu_user_fixes
@@ -344,7 +345,13 @@ Installer" --menu "| Main Menu (v.0.9.5b) | \
 		} 2>&1 | tee "$scriptdir/logs/install_$now.log.txt"              	
 		chown -R "$user" "$scriptdir/logs/install_$now.log.txt"
 		chgrp -R "$user" "$scriptdir/logs/install_$now.log.txt"
-		rrs_reboot
+
+		kernelUpdate=`cat $scriptdir/logs/kernelUpdate`
+		rm -f "$scriptdir/logs/kernelUpdate"
+		if [ "$kernelUpdate" == "true" ]; then
+		  rrs_reboot
+		fi
+
 		;;
 
 	    2) 

@@ -1,0 +1,12 @@
+ppsspp (version_placeholder) trusty; urgency=medium
+
+  * Packed for RetroRig
+    The Qt version of ppsspp in this package supports environment  
+    variable SDL_VIDEO_FULLSCREEN_HEAD to specify a start-up monitor.
+
+    Command line option "--fullscreen" is now additionally supported for the
+    Qt version.
+
+ -- uploader  Sat, 27 Sep 2014 11:41:00 +0200
+
+

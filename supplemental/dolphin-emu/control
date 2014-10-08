@@ -1,0 +1,23 @@
+Source: dolphin-emu
+Section: games
+Priority: optional
+Maintainer: RetroRig Development Team <jc.lache@gmail.com>
+XSBC-Original-Maintainer: Glenn Rice <glennricster@gmail.com>
+Build-Depends:  debhelper (>= 7.0.50), cmake, libwxbase2.8-dev, libgtk2.0-dev, nvidia-cg-toolkit, libbluetooth-dev, libxrandr-dev, libxext-dev, libreadline-dev, libasound-dev, libpulse-dev, libao-dev, libopenal-dev, libavcodec-dev, libavformat-dev, libswscale-dev, libglew1.5-dev, liblzo2-dev, libsdl1.2-dev, libsoil-dev, libsfml-dev, libportaudio-dev
+Standards-Version: 3.9.5
+Homepage: http://www.dolphin-emu.com
+
+Package: dolphin-emu
+Architecture: i386 amd64
+Depends: nvidia-cg-toolkit (>= 2.2), libsfml-network2, libsoil1, libao4, ${shlibs:Depends}, ${misc:Depends}
+Description: Gamecube, Wii and Triforce emulator
+ Dolphin is a Gamecube, Wii and Triforce (the arcade machine based on the
+ Gamecube) emulator.
+ .
+ Gamecube compatibility is okay - lots of games work, many games don't work.
+ .
+ Wii compatibility is also good - a lot of games do work. Wii emulation
+ generally requires a bit more computing power than Gamecube emulation, though.
+ .
+ Triforce compatibility is not really known yet, but at least one game runs,
+ with minor glitches. 

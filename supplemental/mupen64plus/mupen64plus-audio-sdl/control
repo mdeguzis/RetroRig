@@ -1,0 +1,51 @@
+Source: mupen64plus-audio-sdl
+Section: games
+Priority: optional
+Maintainer: Tobias Loose <TobiasLoose@gmx.de>
+Uploaders: RetroRig Development Team <jc.lache@gmail.com>
+Standards-Version: 3.9.5
+Homepage: http://code.google.com/p/mupen64plus/
+Build-Depends:
+ debhelper (>= 9.20130604),
+ dpkg-dev (>= 1.16.1.1),
+ libmupen64plus-dev (>= 1.99.5),
+ libsamplerate0-dev | libsamplerate-dev,
+ libsdl2-dev,
+ libspeexdsp-dev,
+ pkg-config,
+
+Package: mupen64plus-audio-sdl
+Architecture: any-i386 any-amd64
+Multi-Arch: same
+Pre-Depends:
+ ${misc:Pre-Depends},
+Depends:
+ ${misc:Depends},
+ ${shlibs:Depends},
+ mupen64plus-audio-abi-2,
+ mupen64plus-config-abi-2.2,
+Provides:
+ mupen64plus-audio,
+Breaks:
+ libmupen64plus2 (<< 2.0),
+Description: sdl audio output plugin for mupen64plus
+ Audio output plugin for mupen64plus which can be used with all audio devices
+ which are supported by Simple DirectMedia Layer. It supports hardware volume
+ control through oss mixer or application specific volume through SDL.
+
+Package: mupen64plus-audio-sdl-dbg
+Section: debug
+Priority: extra
+Architecture: any-i386 any-amd64
+Multi-Arch: same
+Pre-Depends:
+ ${misc:Pre-Depends},
+Depends:
+ ${misc:Depends},
+ mupen64plus-audio-sdl (= ${binary:Version}),
+Description: sdl audio output plugin for mupen64plus debug symbols package
+ Audio output plugin for mupen64plus which can be used with all audio devices
+ which are supported by Simple DirectMedia Layer. It supports hardware volume
+ control through oss mixer or application specific volume through SDL.
+ .
+ This package contains the debug files.

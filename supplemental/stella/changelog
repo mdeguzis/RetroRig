@@ -1,0 +1,318 @@
+stella (version_placeholder) trusty; urgency=medium
+
+  * source code: svn co https://svn.code.sf.net/p/stella/code/trunk stella
+                 date 14/08/08
+                 revision 2972
+                 no patch level (unpatched)
+    Compiled and packaged for project RetroRig.
+
+ -- Jens-Christian Lache <jc.lache@web.de>  Fri, 08 Aug 2014 20:45:00 +0200
+
+
+stella (4.0-1) stable; urgency=high
+
+  * Version 4.0 release
+
+ -- Stephen Anthony <stephena@users.sf.net>  Tue, 01 Jul 2014 10:51:55 -0230
+
+
+stella (3.9.3-1) stable; urgency=high
+
+  * Version 3.9.3 release
+
+ -- Stephen Anthony <stephena@users.sf.net>  Sat, 18 Jan 2014 15:16:30 -0330
+
+
+stella (3.9.2-1) stable; urgency=high
+
+  * Version 3.9.2 release
+
+ -- Stephen Anthony <stephena@users.sf.net>  Sat, 31 Aug 2013 11:13:43 -0230
+
+
+stella (3.9.1-1) stable; urgency=high
+
+  * Version 3.9.1 release
+
+ -- Stephen Anthony <stephena@users.sf.net>  Wed, 21 Aug 2013 15:47:29 -0230
+
+
+stella (3.9-1) stable; urgency=high
+
+  * Version 3.9 release
+
+ -- Stephen Anthony <stephena@users.sf.net>  Thu, 27 Jun 2013 17:20:07 -0330
+
+
+stella (3.8.1-1) stable; urgency=high
+
+  * Version 3.8.1 release
+
+ -- Stephen Anthony <stephena@users.sf.net>  Sun, 03 Mar 2013 17:20:07 -0330
+
+
+stella (3.8-1) stable; urgency=high
+
+  * Version 3.8 release
+
+ -- Stephen Anthony <stephena@users.sf.net>  Thu, 21 Feb 2013 19:02:35 -0330
+
+
+stella (3.7.5-1) stable; urgency=high
+
+  * Version 3.7.5 release
+
+ -- Stephen Anthony <stephena@users.sf.net>  Sat, 22 Dec 2012 16:44:58 -0330
+
+
+stella (3.7.4-1) stable; urgency=high
+
+  * Version 3.7.4 release
+
+ -- Stephen Anthony <stephena@users.sf.net>  Wed, 31 Oct 2012 18:38:25 +0200
+
+
+stella (3.7.3-1) stable; urgency=high
+
+  * Version 3.7.3 release
+
+ -- Stephen Anthony <stephena@users.sf.net>  Fri, 26 Oct 2012 18:38:25 +0200
+
+
+stella (3.7.2-1) stable; urgency=high
+
+  * Version 3.7.2 release
+
+ -- Stephen Anthony <stephena@users.sf.net>  Sun, 10 Jun 2012 18:38:25 +0200
+
+
+stella (3.7.1-1) stable; urgency=high
+
+  * Version 3.7.1 release
+
+ -- Stephen Anthony <stephena@users.sf.net>  Fri, 8 Jun 2012 18:38:25 +0200
+
+
+stella (3.7-1) stable; urgency=high
+
+  * Version 3.7 release
+
+ -- Stephen Anthony <stephena@users.sf.net>  Fri, 1 Jun 2012 18:38:25 +0200
+
+
+stella (3.6.1-1) stable; urgency=high
+
+  * Version 3.6.1 release
+
+ -- Stephen Anthony <stephena@users.sf.net>  Fri, 30 Mar 2012 18:38:25 +0200
+
+
+stella (3.6-1) stable; urgency=high
+
+  * Version 3.6 release
+
+ -- Stephen Anthony <stephena@users.sf.net>  Fri, 16 Mar 2012 18:38:25 +0200
+
+
+stella (3.5.5-1) stable; urgency=high
+
+  * Version 3.5.5 release
+
+ -- Stephen Anthony <stephena@users.sf.net>  Sat, 4 Feb 2012 18:38:25 +0200
+
+
+stella (3.5-1) stable; urgency=high
+
+  * Version 3.5 release
+
+ -- Stephen Anthony <stephena@users.sf.net>  Thu, 29 Dec 2011 18:38:25 +0200
+
+
+stella (3.4.1-1) stable; urgency=high
+
+  * Version 3.4.1 release
+
+ -- Stephen Anthony <stephena@users.sf.net>  Sat, 11 June 2011 18:38:25 +0200
+
+
+stella (3.4-1) stable; urgency=high
+
+  * Version 3.4 release
+
+ -- Stephen Anthony <stephena@users.sf.net>  Sun, 29 May 2011 18:38:25 +0200
+
+
+stella (3.3-1) stable; urgency=high
+
+  * Version 3.3 release
+
+ -- Stephen Anthony <stephena@users.sf.net>  Fri, 12 Nov 2010 18:38:25 +0200
+
+
+stella (3.2.1-1) stable; urgency=high
+
+  * Version 3.2.1 release
+
+ -- Stephen Anthony <stephena@users.sf.net>  Wed, 25 Aug 2010 18:38:25 +0200
+
+
+stella (3.2-1) stable; urgency=high
+
+  * Version 3.2 release
+
+ -- Stephen Anthony <stephena@users.sf.net>  Fri 20 Aug 2010 18:38:25 +0200
+
+
+stella (3.1.2-1) stable; urgency=high
+
+  * Version 3.1.2 release
+
+ -- Stephen Anthony <stephena@users.sf.net>  Mon, 3 May 2010 18:38:25 +0200
+
+
+stella (3.1.1-1) stable; urgency=high
+
+  * Version 3.1.1 release
+
+ -- Stephen Anthony <stephena@users.sf.net>  Mon, 26 April 2010 18:38:25 +0200
+
+
+stella (3.1-1) stable; urgency=high
+
+  * Version 3.1 release
+
+ -- Stephen Anthony <stephena@users.sf.net>  Thu, 22 April 2010 18:38:25 +0200
+
+
+stella (3.0-1) stable; urgency=high
+
+  * Version 3.0 release
+
+ -- Stephen Anthony <stephena@users.sf.net>  Fri, 11 September 2009 18:38:25 +0200
+
+
+stella (2.8.4-1) stable; urgency=high
+
+  * Version 2.8.4 release
+
+ -- Stephen Anthony <stephena@users.sf.net>  Thu, 4 July 2009 18:38:25 +0200
+
+
+stella (2.8.3-1) stable; urgency=low
+
+  * Version 2.8.3 release
+
+ -- Stephen Anthony <stephena@users.sf.net>  Thu, 25 June 2009 18:38:25 +0200
+
+
+stella (2.8.2-1) stable; urgency=low
+
+  * Version 2.8.2 release
+
+ -- Stephen Anthony <stephena@users.sf.net>  Tue, 23 June 2009 18:38:25 +0200
+
+
+stella (2.8.1-1) stable; urgency=low
+
+  * Version 2.8.1 release
+
+ -- Stephen Anthony <stephena@users.sf.net>  Fri, 19 June 2009 18:38:25 +0200
+
+
+stella (2.8-1) stable; urgency=low
+
+  * Version 2.8 release
+
+ -- Stephen Anthony <stephena@users.sf.net>  Mon, 8 June 2009 18:38:25 +0200
+
+
+stella (2.7.7-1) stable; urgency=low
+
+  * Version 2.7.7 release
+
+ -- Stephen Anthony <stephena@users.sf.net>  Fri, 1 May 2009 18:38:25 +0200
+
+
+stella (2.7.6-1) stable; urgency=low
+
+  * Version 2.7.6 release
+
+ -- Stephen Anthony <stephena@users.sf.net>  Tue, 14 Apr 2009 18:38:25 +0200
+
+
+stella (2.7.5-1) stable; urgency=low
+
+  * Version 2.7.5 release
+
+ -- Stephen Anthony <stephena@users.sf.net>  Fri, 27 Mar 2009 18:38:25 +0200
+
+
+stella (2.7.3-1) stable; urgency=low
+
+  * Version 2.7.3 release
+
+ -- Stephen Anthony <stephena@users.sf.net>  Mon, 09 Feb 2009 18:38:25 +0200
+
+
+stella (2.7.2-1) stable; urgency=low
+
+  * Version 2.7.2 release
+
+ -- Stephen Anthony <stephena@users.sf.net>  Tue, 27 Jan 2009 18:38:25 +0200
+
+
+stella (2.7.1-1) stable; urgency=low
+
+  * Version 2.7.1 release
+
+ -- Stephen Anthony <stephena@users.sf.net>  Mon, 26 Jan 2009 18:38:25 +0200
+
+
+stella (2.7-1) stable; urgency=low
+
+  * Version 2.7 release
+
+ -- Stephen Anthony <stephena@users.sf.net>  Sat, 17 Jan 2009 18:38:25 +0200
+
+
+stella (2.6.1-1) stable; urgency=low
+
+  * Version 2.6.1 release
+
+ -- Stephen Anthony <stephena@users.sf.net>  Thu, 22 May 2008 18:38:25 +0200
+
+
+stella (2.6-1) stable; urgency=low
+
+  * Version 2.6 release
+
+ -- Stephen Anthony <stephena@users.sf.net>  Fri, 16 May 2008 18:38:25 +0200
+
+
+stella (2.5.1-1) stable; urgency=low
+
+  * Version 2.5.1 release
+
+ -- Stephen Anthony <stephena@users.sf.net>  Wed, 9 Apr 2008 18:38:25 +0200
+
+
+stella (2.5-1) stable; urgency=low
+
+  * Version 2.5 release
+
+ -- Stephen Anthony <stephena@users.sf.net>  Fri, 28 Mar 2008 18:38:25 +0200
+
+
+stella (2.4.2-1) stable; urgency=low
+
+  * Version 2.4.2 release
+
+ -- Stephen Anthony <stephena@users.sf.net>  Mon, 17 Sep 2007 18:38:25 +0200
+
+
+stella (2.4.1-1) stable; urgency=low
+
+  * Version 2.4.1 release
+
+ -- Stephen Anthony <stephena@users.sf.net>  Mon, 27 Aug 2007 18:38:25 +0200
+

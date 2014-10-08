@@ -1,0 +1,122 @@
+#!/usr/bin/make -f
+
+# These are used for cross-compiling and for saving the configure script
+# from having to guess our platform (since we know it already)
+DEB_HOST_GNU_TYPE   ?= $(shell dpkg-architecture -qDEB_HOST_GNU_TYPE)
+DEB_BUILD_GNU_TYPE  ?= $(shell dpkg-architecture -qDEB_BUILD_GNU_TYPE)
+DEB_HOST_ARCH ?= $(shell dpkg-architecture -qDEB_HOST_ARCH)
+#DEB_BUILD_OPTIONS = nostrip debug
+
+# Set this variable to yes for release builds to disable debugging and enable
+# optimizations.
+# NOTE: DEB_BUILD_OPTIONS must have 'nostrip' otherwise debugging symbols will
+# be stripped from binaries.
+XBMC_RELEASE = yes
+
+# Whether we're building for release or not
+ifeq (yes,$(XBMC_RELEASE))
+  DEBUG_OPTIONS = --disable-debug --enable-optimizations
+else
+  DEBUG_OPTIONS = --enable-debug --disable-optimizations
+endif
+
+# Enable gles for armel
+ifeq (,$(filter armel,$(DEB_HOST_ARCH)))
+GL_CONFIG_OPTIONS = --enable-gl --disable-gles
+else
+GL_CONFIG_OPTIONS = --disable-gl --enable-gles
+endif
+
+# Various environment variables to set
+ENV_OPTIONS = CFLAGS="$(DEB_CFLAGS)" CXXFLAGS="$(DEB_CXXFLAGS)"
+
+# List of options to pass to configure. Can be overridden.
+# Extra options can simply be passed using XBMC_CONFIG_EXTRA_OPTIONS env
+# variable.
+XBMC_CONFIG_OPTIONS ?= --host=$(DEB_HOST_GNU_TYPE) \
+  --build=$(DEB_BUILD_GNU_TYPE) \
+  --prefix=/usr --docdir=/usr/share/doc/xbmc \
+  $(DEBUG_OPTIONS) \
+  $(GL_CONFIG_OPTIONS) \
+  --enable-vdpau \
+  --enable-vaapi \
+  --enable-crystalhd \
+  --disable-vdadecoder \
+  --disable-vtbdecoder \
+  --disable-openmax \
+  --disable-tegra \
+  --disable-profiling \
+  --enable-joystick \
+  --enable-xrandr \
+  --disable-ccache \
+  --enable-pulse \
+  --enable-rtmp \
+  --disable-mid \
+  --enable-hal \
+  --enable-avahi \
+  --disable-asap-codec \
+  --enable-webserver \
+  --enable-optical-drive \
+  --enable-texturepacker \
+  --enable-nfs \
+  --enable-libcec \
+  --enable-afpclient \
+  --enable-airtunes \
+  --enable-libbluray \
+  --with-ffmpeg=force \
+  $(DISTRO_SPECIFIC_OPTIONS) \
+  $(XBMC_CONFIG_EXTRA_OPTIONS) \
+  $(ENV_OPTIONS)
+
+# Input files used for generating other files
+INPUT_FILES = debian/control.in
+
+%:
+	dh $@ --parallel
+#
+# Target for generating control files
+.PHONY: debian/var_info
+%.in: debian/var_info
+	@echo "Generating $$(echo $@ | sed 's/\.in$$//') from $@"
+	perl -p \
+	-e 's{#BUILD_DEPENDS#}{qx(sh debian/var_info BUILD_DEPENDS)}ge;' \
+	< $@ > $$(echo $@ | sed 's/\.in$$//')
+
+override_dh_clean:
+	dh_clean
+	find . -name config.status -o -name config.cache -o -name config.log \
+		-exec rm -f "{}" \;
+
+override_dh_auto_configure: 
+	./bootstrap
+	./configure $(XBMC_CONFIG_OPTIONS)
+
+override_dh_auto_install:
+	$(MAKE) install DESTDIR=$(CURDIR)/debian/tmp
+	$(MAKE) eventclients DESTDIR=$(CURDIR)/debian/tmp \
+		WII_EXTRA_OPTS=-DCWIID_OLD
+
+override_dh_install:
+	dh_install --sourcedir=$(CURDIR)/debian/tmp -XLICENCE \
+		-XLicence.txt -XLicense.txt -XLiberationSans-Regular.ttf \
+		-XDejaVuSans.ttf -XDejaVuSans-Bold.ttf
+	# Delete license file from package
+	rm -f debian/xbmc/usr/share/xbmc/addons/script.recentlyadded/LICENSE.txt
+
+override_dh_makeshlibs:
+	# We don't install shared libraries in standard locations so don't run
+	# dh_makeshlibs
+
+override_dh_auto_test:
+	# Do not run unittests, as they fail
+
+override_dh_shlibdeps: debian/tmp/xbmc-bin-dummy.so
+	dh_shlibdeps -a -O--parallel \
+		-l$(CURDIR)/debian/xbmc-bin/usr/lib/xbmc/system/players/dvdplayer
+	# Need to manually add dependencies for dlopened libs.
+	dpkg-shlibdeps -dRecommends -edebian/tmp/xbmc-bin-dummy.so -xlibc6 -O >>debian/xbmc-bin.substvars
+
+debian/tmp/xbmc-bin-dummy.so:
+	mkdir -p debian/tmp
+	cc -xc -shared -Wl,--no-as-needed -o $@ /dev/null \
+		-lrtmp \
