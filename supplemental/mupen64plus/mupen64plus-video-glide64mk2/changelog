@@ -1,0 +1,32 @@
+mupen64plus-video-glide64mk2 (version_placeholder) trusty; urgency=medium
+
+  * source code: (unpatched)
+
+    https://github.com/beaumanvienna/mupen64plus-video-glide64mk2
+    branch "patchlevel-0" forked and baselined from upstream on Sat, 06 Sep 2014
+
+  * Compiled and packaged for project RetroRig.
+
+ -- Jens-Christian Lache <jc.lache@web.de>  Sat, 06 Sep 2014 14:00:00 +0200
+
+mupen64plus-video-glide64mk2 (2.0-2~ppa1~trusty) trusty; urgency=medium
+
+  * Upload to trusty
+
+ -- Sven Eckelmann <sven@narfation.org>  Sun, 27 Apr 2014 09:54:12 +0200
+
+mupen64plus-video-glide64mk2 (2.0-2) unstable; urgency=low
+
+  * debian/patches:
+    - Add load_hires_cache.patch, Enable the dump_cache to allow loading of
+      *.dat files
+    - Add kfreebsd_hurd_support.patch, Allow to compile under kFreeBSD and Hurd
+    - Add path_max_war.patch, Add a workaround for systems not defining PATH_MAX
+
+ -- Sven Eckelmann <sven@narfation.org>  Sun, 01 Sep 2013 13:06:09 +0200
+
+mupen64plus-video-glide64mk2 (2.0-1) unstable; urgency=low
+
+  * Initial release (Closes: #714994)
+
+ -- Sven Eckelmann <sven@narfation.org>  Wed, 10 Jul 2013 23:25:40 +0200

@@ -1,0 +1,12 @@
+23c23
+< 
+---
+> int renderWindowXPos,renderWindowYPos;
+251a252,258
+> 
+> //#define RETRORIG_PL1		
+> 		#ifdef RETRORIG_PL1
+> 		  printf("Retrorig: fullWidth: %d, fullHeight: %d, name: %s, offset x: %d, offset y: %d\n",fullWidth,fullHeight,outputInfo->name,crtcInfo->x,crtcInfo->y);
+> 		#endif
+> 		renderWindowXPos=crtcInfo->x;
+> 		renderWindowYPos=crtcInfo->y;

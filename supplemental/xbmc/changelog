@@ -1,0 +1,32 @@
+xbmc (version_placeholder) trusty; urgency=medium
+
+  * Changed: merged with upstream FernetMenta/XBMC V14.0 14/10/04 master and 
+             applied changes from patch level 8
+
+ -- Jens-Christian Lache <jc.lache@web.de>  Sat, 04 Oct 2014 18:10:00 +0200
+
+xbmc (3:13.1.8) trusty; urgency=medium
+
+  * Auto Resolution Function / Dual Monitor Support for Dolphin
+    (passing down monitor name to RetroRig)
+
+ -- Jens-Christian Lache <jc.lache@web.de>  Sun, 31 Aug 2014 19:10:00 +0200
+
+xbmc (3:13.1.7) trusty; urgency=medium
+
+  * Auto Resolution Function for RetroRig
+
+ -- Jens-Christian Lache <jc.lache@web.de>  Sun, 24 Aug 2014 00:35:00 +0200
+
+xbmc (3:13.1.6) trusty; urgency=medium
+
+  * This version is based on fernetMenta xbmc. Added:
+    - gamepad hotplug support
+    - different icons and different splashscreens for native and RetroRig xbmc $
+    - Setting SDL_VIDEO_FULLSCREEN_HEAD for emulators
+    - disabled some code for python thread, to prevent xbmc from hanging
+
+ -- Jens-Christian Lache <jc.lache@web.de>  Fri, 01 Aug 2014 23:10:24 +0800
+
+
+

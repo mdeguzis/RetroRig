@@ -1,0 +1,201 @@
+Source: xbmc
+Section: video
+Priority: optional
+Maintainer: RetroRig Development Team <jc.lache@gmail.com>
+Uploaders: RetroRig Development Team <jc.lache@gmail.com>
+Build-Depends: debhelper (>= 7.0.50~),
+ autoconf,
+ automake,
+ autopoint | gettext,
+ autotools-dev,
+ cmake,
+ curl,
+ cvs,
+ default-jre | openjdk-6-jre | openjdk-7-jre,
+ fpc,
+ gawk,
+ gdc,
+ gperf,
+ libafpclient-dev,
+ libasound2-dev | libasound-dev,
+ libass-dev (>= 0.9.8),
+ libavahi-client-dev,
+ libavahi-common-dev,
+ libbluetooth-dev,
+ libbluray-dev,
+ libboost-dev,
+ libboost-thread-dev,
+ libbz2-dev,
+ libcdio-dev,
+ libcec2 (>= 2.1),
+ libcec-dev (>= 2.1),
+ libcrystalhd-dev,
+ libcurl4-openssl-dev | libcurl4-gnutls-dev | libcurl-dev,
+ libcwiid-dev,
+ libdbus-1-dev,
+ libenca-dev,
+ libflac-dev,
+ libfontconfig-dev,
+ libfreetype6-dev,
+ libfribidi-dev,
+ libgles2-mesa-dev [armel] | libgl1-mesa-dev | libgl-dev,
+ libglew-dev,
+ libglu1-mesa-dev | libglu-dev,
+ libgnutls-dev,
+ libiso9660-dev,
+ libjasper-dev,
+ libjpeg-dev,
+ libltdl-dev,
+ liblzo2-dev,
+ libmad0-dev,
+ libmicrohttpd-dev,
+ libmodplug-dev,
+ libmp3lame-dev,
+ libmpeg2-4-dev,
+ libmysqlclient-dev,
+ libnfs-dev,
+ libogg-dev,
+ libomxil-bellagio-dev [armel],
+ libpcre3-dev,
+ libplist-dev,
+ libpng12-dev | libpng-dev,
+ libpostproc-dev,
+ libpulse-dev,
+ librtmp-dev,
+ libsamplerate-dev,
+ libsdl-dev,
+ libsdl-image1.2-dev,
+ libsdl-mixer1.2-dev,
+ libshairplay-dev,
+ libsmbclient-dev,
+ libsqlite3-dev,
+ libssh-dev,
+ libssl-dev,
+ libtag1x8 | libtag1-dev (>= 1.8),
+ libtiff5-dev | libtiff-dev | libtiff4-dev,
+ libtinyxml-dev,
+ libtool,
+ libudev-dev,
+ libva-dev,
+ libvdpau-dev,
+ libvorbis-dev,
+ libxmu-dev,
+ libxrandr-dev,
+ libxslt1-dev | libxslt-dev,
+ libxt-dev,
+ libyajl-dev,
+ lsb-release,
+ nasm [!amd64],
+ python-dev,
+ python-imaging,
+ python-support,
+ swig,
+ unzip,
+ yasm,
+ zip,
+ zlib1g-dev
+Standards-Version: 3.9.3
+Homepage: https://github.com/beaumanvienna/
+Vcs-Browser: https://github.com/beaumanvienna/xbmc
+Vcs-Git: git://github.com/beaumanvienna/xbmc
+
+Package: xbmc
+Architecture: all
+Depends: xbmc-bin (>= ${source:Version}),
+         xbmc-bin (<< ${source:Version}.1~),
+         curl,
+         mesa-utils,
+         x11-utils,
+         ttf-liberation | fonts-liberation,
+         ttf-dejavu-core,
+         python-bluez | python-lightblue,
+         python-imaging,
+         python-simplejson,
+         libmad0,
+         libass4,
+         libssh-4 | libssh2-1,
+         libnfs1,
+         libbluray1,
+         libshairport1,
+         libshairplay0,
+         libmp3lame0,
+         libvorbisfile3,
+         libaacs0,
+         libflac8,
+         libcec2 (>= 2.1.1),
+         librtmp0,
+         libgnutls26 | libgnutls28,
+         libxslt1.1,
+         ${python:Depends},
+         ${misc:Depends}
+Recommends: libvdpau1,
+         libva-intel-vaapi-driver,
+         libva1
+Suggests: xbmc-test-helper,
+         xbmc-pvr-mythtv-cmyth,
+         xbmc-pvr-vuplus,
+         xbmc-pvr-vdr-vnsi,
+         xbmc-pvr-njoy,
+         xbmc-pvr-nextpvr,
+         xbmc-pvr-mediaportal-tvserver,
+         xbmc-pvr-tvheadend-hts,
+         xbmc-pvr-dvbviewer,
+         xbmc-pvr-argustv,
+         xbmc-pvr-iptvsimple,
+         xbmc-audioencoder-vorbis,
+         xbmc-audioencoder-flac,
+         xbmc-audioencoder-lame
+Provides: xbmc-standalone, xbmc-data, xbmc-skin-confluence
+Replaces: xbmc-standalone, xbmc-data, xbmc-skin-confluence
+Breaks: xbmc-standalone (<< 2:11.0~git20111222.22ad8e4),
+        xbmc-data (<< 2:11.0~git20111222.22ad8e4),
+        xbmc-skin-confluence (<< 2:11.0~git20111222.22ad8e4)
+Description: XBMC Media Center (arch-independent data package)
+ XBMC, recursive acronym for "XBMC Media Center", is an award winning free and
+ open source software media-player and entertainment hub for all your digital
+ media. XBMC is available for Linux, Mac OS X (Leopard, Tiger and Apple TV)
+ and Microsoft Windows, as well as the original Xbox game console. Created in
+ 2003 by a group of like minded programmers, XBMC is a non-profit project run
+ and developed by volunteers located around the world. More than 50 software
+ developers have contributed to XBMC, and 100-plus translators have worked to
+ expand its reach, making it available in more than 30 languages.
+ .
+ While XBMC functions very well as a standard media player application for
+ your computer, it has been designed to be the perfect companion for your
+ HTPC. Supporting an almost endless range of remote controls, and combined
+ with its beautiful interface and powerful skinning engine, XBMC feels very
+ natural to use from the couch and is the ideal solution for your home
+ theater. Once installed, your computer will become a fully functional
+ multimedia jukebox.
+ .
+ This package contains all the architecture independent data needed to have a
+ working XBMC.
+
+Package: xbmc-bin
+Architecture: i386 amd64 armhf
+Depends: ${shlibs:Depends},
+         ${misc:Depends}
+Recommends: ${shlibs:Recommends}
+Provides: xbmc-common
+Replaces: xbmc-common
+Conflicts: xbmc-common
+Description: XBMC Media Center (binary data package)
+ XBMC, recursive acronym for "XBMC Media Center", is an award winning free and
+ open source software media-player and entertainment hub for all your digital
+ media. XBMC is available for Linux, Mac OS X (Leopard, Tiger and Apple TV)
+ and Microsoft Windows, as well as the original Xbox game console. Created in
+ 2003 by a group of like minded programmers, XBMC is a non-profit project run
+ and developed by volunteers located around the world. More than 50 software
+ developers have contributed to XBMC, and 100-plus translators have worked to
+ expand its reach, making it available in more than 30 languages.
+ .
+ While XBMC functions very well as a standard media player application for
+ your computer, it has been designed to be the perfect companion for your
+ HTPC. Supporting an almost endless range of remote controls, and combined
+ with its beautiful interface and powerful skinning engine, XBMC feels very
+ natural to use from the couch and is the ideal solution for your home
+ theater. Once installed, your computer will become a fully functional
+ multimedia jukebox.
+ .
+ This package contains all the binary data needed to have a working XBMC.
+
