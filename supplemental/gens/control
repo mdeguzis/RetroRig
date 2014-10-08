@@ -1,0 +1,11 @@
+Source: gens
+Section: games
+Priority: extra
+Maintainer: RetroRig Development Team <jc.lache@gmail.com>
+Build-Depends: debhelper (>= 5), autotools-dev, automake1.10, pkg-config, nasm (>= 2.05.01), libsdl2-i386-dev, libglib2.0-dev (>= 2.4.0), libgtk2.0-dev (>= 2.4.0), mesa-common-dev, libgl1-mesa-dev, zlib1g-dev, libpng12-dev
+Standards-Version: 3.7.2
+
+Package: gens
+Architecture: i386
+Depends: libgcc1, libstdc++6, libc6, zlib1g, libglib2.0-0 (>= 2.4.0), libgtk2.0-0 (>= 2.4.0), libgl1-mesa-glx | libgl1, libsdl2-i386, libpng12-0, xdg-utils
+Description: Sega Genesis, Sega CD, and Sega 32X emulator

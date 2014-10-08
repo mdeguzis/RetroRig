@@ -1,0 +1,92 @@
+gens (version_placeholder) trusty; urgency=medium
+
+  * changed: ported to SDL 2 and linked against libSDL2-i386
+
+    compiled for project RetroRig
+
+    source code from 
+
+    https://github.com/beaumanvienna/gens-gs/tree/retrorig-pl2
+
+    version 2.16.7 (upstream version) / patch level 2
+
+ -- Jens-Christian Lache <jc.lache@web.de>  Wed, 17 Sep 2014 00:15:00 +0200
+
+gens (1:2.16.7.1) trusty; urgency=medium
+
+  * changed: compiled for project RetroRig
+
+    source code from 
+
+    http://www.soniccenter.org/gerbilsoft/gens/r7/gens-gs-r7.tar.gz
+
+    version 2.16.7 (upstream version) / 0.3 (unpatched, upload try 3)
+
+ -- Jens-Christian Lache <jc.lache@web.de>  Wed, 10 Sep 2014 23:00:00 +0200
+
+gens (2.16.7) unstable; urgency=low
+
+  * Release 7 version bump.
+
+ -- David Korth <gerbilsoft@verizon.net>  Sun, 22 Nov 2009 13:17:35 -0500
+
+gens (2.16.6.95) unstable; urgency=low
+
+  * Release 7, Preview 5 version bump.
+
+ -- David Korth <gerbilsoft@verizon.net>  Sat, 10 Oct 2009 22:20:12 -0400
+
+gens (2.16.6.94) unstable; urgency=low
+
+  * Release 7, Preview 4 version bump.
+
+ -- David Korth <gerbilsoft@verizon.net>  Sat, 12 Sep 2009 20:45:55 -0400
+
+gens (2.15.5-gs-r7-pre3) unstable; urgency=low
+
+  * Release 7, Preview 3 version bump.
+
+ -- David Korth <gerbilsoft@verizon.net>  Sun, 02 Aug 2009 20:49:05 -0400
+
+gens (2.15.5-gs-r7-pre2) unstable; urgency=low
+
+  * Release 7, Preview 2 version bump.
+
+ -- David Korth <gerbilsoft@verizon.net>  Tue, 28 Jul 2009 01:00:39 -0400
+
+gens (2.15.5-gs-r7-pre1) unstable; urgency=low
+
+  * Release 7, Preview 1 version bump.
+
+ -- David Korth <gerbilsoft@verizon.net>  Tue, 30 Jun 2009 11:34:10 -0400
+
+gens (2.15.5-gs-m6-1) unstable; urgency=low
+
+  * Milestone 6 version bump.
+
+ -- David Korth <gerbilsoft@verizon.net>  Sat,  7 Dec 2008 21:22:20 -0500
+
+gens (2.15.5-gs-m5.3-1) unstable; urgency=low
+
+  * Milestone 5.3 version bump.
+
+ -- David Korth <gerbilsoft@verizon.net>  Sat, 15 Nov 2008 18:37:20 -0500
+
+gens (2.15.5-gs-m5.2-1) unstable; urgency=low
+
+  * Milestone 5.2 version bump.
+
+ -- David Korth <gerbilsoft@verizon.net>  Sat, 15 Nov 2008 18:09:40 -0500
+
+gens (2.15.5-gs-m5.1-1) unstable; urgency=low
+
+  * Milestone 5.1 version bump.
+
+ -- David Korth <gerbilsoft@verizon.net>  Sat,  1 Nov 2008 19:12:45 -0400
+
+gens (2.15.5-gs-m5-1) unstable; urgency=low
+
+  * Initial Debian package.
+
+ -- David Korth <gerbilsoft@verizon.net>  Sun, 26 Oct 2008 02:00:00 -0400
+

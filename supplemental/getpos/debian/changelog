@@ -1,0 +1,11 @@
+getpos (version_placeholder) trusty; urgency=medium
+
+
+  * source code from https://github.com/beaumanvienna/getPos
+
+  This program prints the upper left position of a display exported
+  in environment variable SDL_VIDEO_FULLSCREEN_HEAD to stdout.
+
+
+ -- Jens-Christian Lache <jc.lache@web.de>  Thu, 2 Oct 2014 21:15:00 +0200
+

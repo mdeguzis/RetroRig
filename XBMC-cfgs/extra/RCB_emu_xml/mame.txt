@@ -1,0 +1,31 @@
+<RomCollection id="11" name="MAME">
+      <useBuiltinEmulator>False</useBuiltinEmulator>
+      <gameclient />
+      <emulatorCmd>/usr/games/mame</emulatorCmd>
+      <emulatorParams>"%ROM%"</emulatorParams>
+      <romPath>installdir_temp/ROMs/MAME/*.zip</romPath>
+      <saveStatePath />
+      <saveStateParams />
+      <mediaPath type="boxfront">installdir_temp/Artwork/MAME/boxfront/%GAME%.*</mediaPath>
+      <mediaPath type="title">installdir_temp/Artwork/MAME/title/%GAME%.*</mediaPath>
+      <mediaPath type="gameplay">installdir_temp/Artwork/MAME/gameplay/%GAME%.*</mediaPath>
+      <mediaPath type="action">installdir_temp/Artwork/MAME/action/%GAME%.*</mediaPath>
+      <mediaPath type="marquee">installdir_temp/Artwork/MAME/marquee/%GAME%.*</mediaPath>
+      <mediaPath type="romcollection">installdir_temp/Artwork/MAME/RCB/%ROMCOLLECTION%.*</mediaPath>
+      <mediaPath type="cabinet">installdir_temp/Artwork/MAME/cabinet/%GAME%.*</mediaPath>
+      <preCmd />
+      <postCmd />
+      <useEmuSolo>False</useEmuSolo>
+      <usePopen>False</usePopen>
+      <ignoreOnScan>False</ignoreOnScan>
+      <allowUpdate>True</allowUpdate>
+      <autoplayVideoMain>True</autoplayVideoMain>
+      <autoplayVideoInfo>True</autoplayVideoInfo>
+      <useFoldernameAsGamename>False</useFoldernameAsGamename>
+      <maxFolderDepth>99</maxFolderDepth>
+      <doNotExtractZipFiles>True</doNotExtractZipFiles>
+      <diskPrefix>_Disk</diskPrefix>
+      <imagePlacingMain>gameinfomamecabinet</imagePlacingMain>
+      <imagePlacingInfo>gameinfosmall</imagePlacingInfo>
+      <scraper name="MAME" replaceKeyString="" replaceValueString="" />
+    </RomCollection>
