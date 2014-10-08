@@ -387,7 +387,7 @@ function rrs_software()
 	# install binaries
 	apt-get install -y xboxdrv curl python-software-properties \
 	pkg-config software-properties-common dconf-tools jstest-gtk \
-	qjoypad sixad libusb-0.1-4 antimicro bluez getpos
+	qjoypad sixad libusb-0.1-4 antimicro bluez getpos unclutter
 
 	#wii motion support
 	apt-get install -y libcwiid1 lswm wmgui wminput
