@@ -1,0 +1,68 @@
+#!/usr/bin/make -f
+
+# Copyright (C) 2014 Jens-Christian Lache
+
+# This program is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 2, or (at your option)
+# any later version.
+
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, write to the Free Software Foundation,
+# Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+
+%:
+	dh $@
+
+
+override_dh_clean:
+	
+
+override_dh_auto_configure: 
+	
+
+override_dh_auto_install:
+	
+
+override_dh_install:
+
+	# Add here commands to install the package 
+	
+	#create system directories
+	mkdir -p $(CURDIR)/debian/tmp/usr/lib/RetroRig 
+	mkdir -p $(CURDIR)/debian/tmp/usr/bin 
+	mkdir -p $(CURDIR)/debian/tmp/usr/share/applications
+	mkdir -p $(CURDIR)/debian/tmp/usr/share/icons 
+	mkdir -p $(CURDIR)/debian/tmp/etc/init.d
+	
+	# copy base files
+	cp -r scripts/ gamepad-cfgs/ emu-cfgs/ init-scripts/ scriptmodules/  XBMC-cfgs/ $(CURDIR)/debian/tmp/usr/lib/RetroRig
+	
+	#copy executables
+	cp retrorig-setup $(CURDIR)/debian/tmp/usr/bin/ 
+	mv $(CURDIR)/debian/tmp/usr/lib/RetroRig/XBMC-cfgs/extra/xbmc-retrorig $(CURDIR)/debian/tmp/usr/bin 
+	
+	#icons
+	mv $(CURDIR)/debian/tmp/usr/lib/RetroRig/XBMC-cfgs/extra/retro-icon.png $(CURDIR)/debian/tmp/usr/share/icons 
+	
+	#supplemental application files
+	mv $(CURDIR)/debian/tmp/usr/lib/RetroRig/XBMC-cfgs/extra/startXBMC.sh $(CURDIR)/debian/tmp/usr/share/applications
+	mv $(CURDIR)/debian/tmp/usr/lib/RetroRig/XBMC-cfgs/extra/RetroRig.desktop $(CURDIR)/debian/tmp/usr/share/applications
+	mv $(CURDIR)/debian/tmp/usr/lib/RetroRig/XBMC-cfgs/extra/gp_autodetect_xbmc.sh $(CURDIR)/debian/tmp/usr/share/applications
+	
+	#services
+	mv $(CURDIR)/debian/tmp/usr/lib/RetroRig/XBMC-cfgs/extra/rescan $(CURDIR)/debian/tmp/etc/init.d/
+
+override_dh_makeshlibs:
+	
+
+override_dh_auto_test:
+	
+
+override_dh_shlibdeps: 
+	
