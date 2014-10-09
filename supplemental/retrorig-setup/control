@@ -1,0 +1,15 @@
+Source: retrorig-setup
+Section: games
+Priority: extra
+Maintainer: pkgmaintainer
+Build-Depends: debhelper (>= 9)
+Standards-Version: 3.9.5
+Homepage: https://github.com/ProfessorKaos64/RetroRig
+
+Package: retrorig-setup
+Architecture: any
+Depends: 
+Description: RetroRig is a suite of console emulators embedded in a 
+ home theater program. 
+ .    
+ Run "sudo retrorig-setup" to start the installation.
