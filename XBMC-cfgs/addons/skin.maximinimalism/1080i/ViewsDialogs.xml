@@ -4,15 +4,15 @@
     <include name="viewDialogList">
         <control type="panel" id="50">
             <posx>0</posx>
-            <posy>0</posy>
-            <width>16-col</width>
+            <posy>3-row</posy>
+            <width>22-col</width>
             <height>11-row</height>
             <onleft>9000</onleft>
             <onright>60</onright>
-            <ondown>51</ondown>
-            <onup>51</onup>
+            <ondown>50</ondown>
+            <onup>5</onup>
             <pagecontrol>60</pagecontrol>
-            <itemlayout height="1-row" width="8-col">
+            <itemlayout height="1-row" width="11-col">
                 <control type="image">
                     <posx>4</posx>
                     <posy>4</posy>
@@ -24,14 +24,14 @@
                 <control type="label">
                     <posx>1-col</posx>
                     <posy>0</posy>
-                    <width>4-col</width>
+                    <width>7-col</width>
                     <font>itemTitle</font>
                     <textcolor>selected</textcolor>
                     <shadowcolor>-</shadowcolor>
                     <label>$INFO[ListItem.Label]</label>
                 </control>
                 <control type="label">
-                    <posx>8-col-gutter</posx>
+                    <right>48</right>
                     <posy>0</posy>
                     <width>4-col</width>
                     <align>right</align>
@@ -40,14 +40,13 @@
                     <textcolor>selected</textcolor>
                     <selectedcolor>selected</selectedcolor>
                     <shadowcolor>-</shadowcolor>
-                    <textoffsetx>12</textoffsetx>
                 </control>
             </itemlayout>
-            <focusedlayout height="1-row" width="8-col">
+            <focusedlayout height="1-row" width="11-col">
                 <control type="image">
                     <posx>0</posx>
                     <posy>2</posy>
-                    <width>8-col-gutter</width>
+                    <width>11-col-gutter</width>
                     <height>53</height>
                     <aspectratio>stretch</aspectratio>
                     <texture border="24,0,24,0">UIControls/listitemFO.png</texture>
@@ -65,7 +64,7 @@
                 <control type="label">
                     <posx>1-col</posx>
                     <posy>0</posy>
-                    <width>4-col</width>
+                    <width>7-col</width>
                     <font>itemTitle</font>
                     <textcolor>black</textcolor>
                     <selectedcolor>black</selectedcolor>
@@ -73,7 +72,7 @@
                     <label>$INFO[ListItem.Label]</label>
                 </control>
                 <control type="label">
-                    <posx>8-col-gutter</posx>
+                    <right>48</right>
                     <posy>0</posy>
                     <width>4-col</width>
                     <align>right</align>
@@ -82,7 +81,6 @@
                     <textcolor>black</textcolor>
                     <selectedcolor>black</selectedcolor>
                     <shadowcolor>-</shadowcolor>
-                    <textoffsetx>12</textoffsetx>
                 </control>
             </focusedlayout>
         </control>

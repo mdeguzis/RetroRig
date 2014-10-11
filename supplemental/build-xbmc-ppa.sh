@@ -3,22 +3,22 @@
 #======================================================================== 
 #
 # Author:  Michael DeGuzis and Jens-Christian Lache, 
-# Date:    20141004
-# Version: Patch Level 9
+# Date:    20141011
+# Version: Patch Level 10
 # ========================================================================
 
 #define base version
 BASE=3:14.0
 
 # define patch level
-PL=9
+PL=10
 
 #define xbmc branch to checkout
 BRANCH=retrorig-pl$PL
 
-UPLOAD_TRY=4
+UPLOAD_TRY=1
 
-PPA="ppa:beauman/retrorig-testing"
+PPA="ppa:beauman/retrorig"
 
 clear
 echo "#########################################################"
@@ -101,8 +101,8 @@ cp ~/RetroRig/supplemental/xbmc/xbmc.dsc xbmc_$BASE.$PL.$UPLOAD_TRY.dsc
 sed -i "s|version_placeholder|$BASE.$PL.$UPLOAD_TRY|g" "xbmc_$BASE.$PL.$UPLOAD_TRY.dsc"
 
 echo "original tarball"
-#git clone https://github.com/beaumanvienna/xbmc 
-cp -r ~/xbmc .
+git clone https://github.com/beaumanvienna/xbmc 
+#cp -r ~/xbmc .
 
 file xbmc/
 
