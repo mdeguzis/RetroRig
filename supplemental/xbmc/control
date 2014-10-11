@@ -6,18 +6,15 @@ Uploaders: RetroRig Development Team <jc.lache@gmail.com>
 Build-Depends: debhelper (>= 7.0.50~),
  autoconf,
  automake,
- autopoint,
+ autopoint | gettext,
  autotools-dev,
- ccache,
  cmake,
  curl,
  cvs,
  default-jre | openjdk-6-jre | openjdk-7-jre,
- ffmpeg-xbmc-dev,
  fpc,
  gawk,
  gdc,
- gettext,
  gperf,
  libafpclient-dev,
  libasound2-dev | libasound-dev,
@@ -30,9 +27,10 @@ Build-Depends: debhelper (>= 7.0.50~),
  libboost-thread-dev,
  libbz2-dev,
  libcdio-dev,
- libcec-dev (>= 1.1),
+ libcec2 (>= 2.1),
+ libcec-dev (>= 2.1),
  libcrystalhd-dev,
- libcurl4-gnutls-dev | libcurl-dev,
+ libcurl4-openssl-dev | libcurl4-gnutls-dev | libcurl-dev,
  libcwiid-dev,
  libdbus-1-dev,
  libenca-dev,
@@ -68,7 +66,7 @@ Build-Depends: debhelper (>= 7.0.50~),
  libsdl-dev,
  libsdl-image1.2-dev,
  libsdl-mixer1.2-dev,
- libshairport-dev,
+ libshairplay-dev,
  libsmbclient-dev,
  libsqlite3-dev,
  libssh-dev,
@@ -105,17 +103,50 @@ Package: xbmc
 Architecture: all
 Depends: xbmc-bin (>= ${source:Version}),
          xbmc-bin (<< ${source:Version}.1~),
+         curl,
          mesa-utils,
          x11-utils,
          ttf-liberation | fonts-liberation,
          ttf-dejavu-core,
+         python-bluez | python-lightblue,
          python-imaging,
+         python-simplejson,
+         libmad0,
+         libass4,
+         libssh-4 | libssh2-1,
+         libnfs1,
+         libbluray1,
+         libshairport1,
+         libshairplay0,
+         libmp3lame0,
+         libvorbisfile3,
+         libaacs0,
+         libflac8,
+         libcec2 (>= 2.1.1),
+         librtmp0,
+         libgnutls26 | libgnutls28,
          libxslt1.1,
          ${python:Depends},
          ${misc:Depends}
-Recommends: python-qt3
-Provides: xbmc-standalone, xbmc-data, xbmc-skin-confluence, xbmc-live
-Replaces: xbmc-standalone, xbmc-data, xbmc-skin-confluence, xbmc-live
+Recommends: libvdpau1,
+         libva-intel-vaapi-driver,
+         libva1
+Suggests: xbmc-test-helper,
+         xbmc-pvr-mythtv-cmyth,
+         xbmc-pvr-vuplus,
+         xbmc-pvr-vdr-vnsi,
+         xbmc-pvr-njoy,
+         xbmc-pvr-nextpvr,
+         xbmc-pvr-mediaportal-tvserver,
+         xbmc-pvr-tvheadend-hts,
+         xbmc-pvr-dvbviewer,
+         xbmc-pvr-argustv,
+         xbmc-pvr-iptvsimple,
+         xbmc-audioencoder-vorbis,
+         xbmc-audioencoder-flac,
+         xbmc-audioencoder-lame
+Provides: xbmc-standalone, xbmc-data, xbmc-skin-confluence
+Replaces: xbmc-standalone, xbmc-data, xbmc-skin-confluence
 Breaks: xbmc-standalone (<< 2:11.0~git20111222.22ad8e4),
         xbmc-data (<< 2:11.0~git20111222.22ad8e4),
         xbmc-skin-confluence (<< 2:11.0~git20111222.22ad8e4)
@@ -129,10 +160,13 @@ Description: XBMC Media Center (arch-independent data package)
  developers have contributed to XBMC, and 100-plus translators have worked to
  expand its reach, making it available in more than 30 languages.
  .
- This package is derived from fernetMenta/XBMC, which is deployed in project "OpenELEC".
- FernetMenta XBMC supports dual monitors.
- Changes for RetroRig comprise: PS3 controller hotplug support, different application
- icons for XBMC in native and RetroRig mode, passing display settings to child processes.
+ While XBMC functions very well as a standard media player application for
+ your computer, it has been designed to be the perfect companion for your
+ HTPC. Supporting an almost endless range of remote controls, and combined
+ with its beautiful interface and powerful skinning engine, XBMC feels very
+ natural to use from the couch and is the ideal solution for your home
+ theater. Once installed, your computer will become a fully functional
+ multimedia jukebox.
  .
  This package contains all the architecture independent data needed to have a
  working XBMC.
@@ -140,7 +174,6 @@ Description: XBMC Media Center (arch-independent data package)
 Package: xbmc-bin
 Architecture: i386 amd64 armhf
 Depends: ${shlibs:Depends},
-         ${dlopenlibs:Depends},
          ${misc:Depends}
 Recommends: ${shlibs:Recommends}
 Provides: xbmc-common
@@ -156,10 +189,13 @@ Description: XBMC Media Center (binary data package)
  developers have contributed to XBMC, and 100-plus translators have worked to
  expand its reach, making it available in more than 30 languages.
  .
- This package is derived from fernetMenta/XBMC, which is deployed in project "OpenELEC".
- FernetMenta XBMC supports dual monitors.
- Changes for RetroRig comprise: PS3 controller hotplug support, different application
- icons for XBMC in native and RetroRig mode, passing display settings to child processes.
+ While XBMC functions very well as a standard media player application for
+ your computer, it has been designed to be the perfect companion for your
+ HTPC. Supporting an almost endless range of remote controls, and combined
+ with its beautiful interface and powerful skinning engine, XBMC feels very
+ natural to use from the couch and is the ideal solution for your home
+ theater. Once installed, your computer will become a fully functional
+ multimedia jukebox.
  .
  This package contains all the binary data needed to have a working XBMC.
 

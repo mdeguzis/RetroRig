@@ -5,8 +5,9 @@
 # Author      : Jens-Christian Lache
 # Date        : 20140908
 # Version     : 4.0.0
-# Description : Version 4.0.0 from Hunter-Kaller, Patch Level 1
-#               
+# Description : reverted to unpatched version from  Version 4.0.0 
+#               from Hunter-Kaller
+#               (multi monitor support from settings)
 # ========================================================================
 
 #define base version
@@ -14,7 +15,7 @@ PRE=3
 BASE=4.0.0
 
 # define patch level
-PL=1
+PL=2
 
 
 
@@ -46,8 +47,6 @@ if [[ -n "$2" ]]; then
   echo "##########################################"
   echo ""
 
-  # add Glenn Ricsters PPA to get packages like libminiupnpc-dev, ...
-  sudo add-apt-repository -y ppa:glennric/dolphin-emu
 
   sudo apt-get update
 
@@ -56,9 +55,9 @@ if [[ -n "$2" ]]; then
 			  debhelper cmake libao-dev libasound2-dev libavcodec-dev libavformat-dev \
 			  libbluetooth-dev libglew-dev libgtk2.0-dev liblzo2-dev libopenal-dev libpolarssl-dev \
 			  libpulse-dev libreadline6-dev libsdl1.2-dev libsfml-dev libsoil-dev libsoundtouch-dev \
-			  libswscale-dev libminiupnpc-dev libwxbase3.0-dev libwxgtk3.0-dev libxext-dev \
-			  libxrandr-dev lsb-release pkg-config portaudio19-dev wx3.0-headers zlib1g-dev \
-			  libjack-dev libjack0 libportaudio-dev
+			  libswscale-dev libminiupnpc-dev libwxbase2.8-dev libwxgtk2.8-dev libxext-dev \
+			  libxrandr-dev lsb-release pkg-config wx2.8-headers zlib1g-dev \
+			  libjack-dev libjack0 libportaudio-dev libreadline-dev nvidia-cg-toolkit
 
 else
   echo ""
@@ -115,16 +114,15 @@ fi
 #change to source folder
 cd $SRC_FOLDER
 
-#echo "patching .."
-patch Source/Core/DolphinWX/X11Utils.cpp < ~/RetroRig/supplemental/dolphin-emu/X11Utils.cpp.patch
-patch Source/Core/DolphinWX/FrameTools.cpp < ~/RetroRig/supplemental/dolphin-emu/FrameTools.cpp.patch
-
 echo "changelog"
 cp ~/RetroRig/supplemental/dolphin-emu/changelog debian/
 sed -i "s|version_placeholder|$PRE:$BASE.$PL|g" debian/changelog
 
 echo "control"
 cp ~/RetroRig/supplemental/dolphin-emu/control debian/
+
+echo "rules"
+cp ~/RetroRig/supplemental/dolphin-emu/rules debian/
 
 if [[ -n "$1" ]]; then
   arg0=$1

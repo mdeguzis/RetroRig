@@ -13,12 +13,12 @@
             <colordiffuse>99ffffff</colordiffuse>
         </control>
         <control type="group" id="9001">
-            <posx>col-5-begin</posx>
+            <posx>col-2-begin</posx>
             <posy>row-3-begin</posy>
             <!--animations-->
             <include>modalDialogInOutVertical</include>
             <control type="image">
-                <posx>-384</posx>
+                <posx>-168</posx>
                 <posy>44</posy>
                 <width>fullscreenWidth</width>
                 <height>1-row</height>
@@ -37,26 +37,47 @@
             </control>
             <control type="label">
                 <posx>12</posx>
-                <posy>47</posy>
+                <posy>44</posy>
                 <width>16-col</width>
                 <font>pageTitle</font>
                 <label>$LOCALIZE[31055]</label>
                 <textcolor>black</textcolor>
                 <shadowcolor>-</shadowcolor>
             </control>
+			<control type="grouplist">
+				<posx>10-col</posx>
+                <posy>46</posy>
+				<orientation>horizontal</orientation>
+                <control type="button" id="5">
+					<align>center</align>
+                    <aligny>center</aligny>
+                    <height>54</height>
+					<width>8-col</width>
+                    <font>pageTitle</font>
+                    <label>24063</label>
+                    <textcolor>black</textcolor>
+                    <focusedcolor>selected</focusedcolor>
+                    <texturefocus>colors/black.png</texturefocus>
+                    <textoffsetx>12</textoffsetx>
+                    <textoffsety>-6</textoffsety>
+                    <ondown>9999</ondown>
+                </control>
+            </control>
             <!--content listing-->
             <control type="group" id="9999">
-                <posy>120</posy>
+				<onup>5</onup>
+				<posx>0</posx>
+                <posy>-50</posy>
                 <include>viewDialogList</include>
             </control>
             <!--page scrollbar-->
             <control type="group" id="8000">
-                <visible>Control.IsVisible(60)</visible>
-                <animation effect="fade" start="100" end="0" time="100" condition="!controlgroup(8000).hasfocus">conditional</animation>
+                <visible>Control.IsVisible(60)</visible>               
+				<animation effect="fade" start="100" end="70" time="100" condition="!controlgroup(8000).hasfocus">conditional</animation>
                 <control type="scrollbar" id="60">
-                    <posx>col-16-begin</posx>
+                    <posx>col-22-begin</posx>
                     <posy>126</posy>
-                    <height>10-row</height>
+                    <height>11-row</height>
                     <onleft>9999</onleft>
                 </control>
             </control>

@@ -37,7 +37,7 @@
             <control type="label" id="20">
                 <description>header label</description>
                 <posx>12</posx>
-                <posy>47</posy>
+                <posy>44</posy>
                 <width>16-col</width>
                 <font>pageTitle</font>
                 <label>31033</label>
@@ -45,7 +45,7 @@
                 <shadowcolor>-</shadowcolor>
             </control>
             <!--dialog options-->
-            <control type="spincontrolex" id="3">
+            <control type="spincontrolex" id="20">
                 <description>Directory Content</description>
                 <posx>0</posx>
                 <posy>2-row</posy>
@@ -94,7 +94,7 @@
                 <colordiffuse>77ffffff</colordiffuse>
                 <aspectratio>stretch</aspectratio>
             </control>
-            <control type="panel" id="4">
+            <control type="panel" id="21">
                 <posx>12</posx>
                 <posy>256</posy>
                 <width>12-col</width>
@@ -181,7 +181,7 @@
                 </focusedlayout>
             </control>
             <!--specific media type settings-->
-            <control type="button" id="6">
+            <control type="button" id="22">
                 <description>Specific media type settings</description>
                 <posx>0</posx>
                 <posy>9-row</posy>

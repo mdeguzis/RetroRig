@@ -1,12 +1,19 @@
 pcsx2 (version_placeholder) trusty; urgency=medium
 
-  * patch level 1 "dual monitor support"
+  * unpatched version from github upstream, tagged 1.2.2
   * source code from https://github.com/beaumanvienna/pcsx2, 
-      branch "retrorig-pl1"
-  * description: xrandr added to calculate the start position 
-                 of the GS window from the display name
+      branch "retrorig-pl2"
 
- -- Jens-Christian Lache <jc.lache@web.de>  Thu, 4 Sep 2014 22:15:00 +0200
+ -- Jens-Christian Lache <jc.lache@web.de>  Fri, 3 Oct 2014 18:00:00 +0200
+ 
+ pcsx2 (2:1.2.2.1) trusty; urgency=medium
+
+  * patch level 1 "dual monitor support"
+  * source code from https://github.com/beaumanvienna/pcsx2,
+      branch "retrorig-pl1"
+  * description: xrandr added to calculate the start position
+                 of the GS window from the display name
+ -- Jens-Christian Lache <jc.lache@web.de>   Thu, 4 Sep 2014 22:15:00 +0200
 
 pcsx2 (2:1.2.2.0-testunpatched) trusty; urgency=medium
 
