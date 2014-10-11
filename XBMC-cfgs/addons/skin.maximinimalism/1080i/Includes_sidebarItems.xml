@@ -173,7 +173,6 @@
 
    	<control type="button" id="504">
         <description>Timers / scheduler</description>
-		<visible>window.isactive(pvr)</visible>
         <height>54</height>
         <width>4-col</width>
         <font>menuTitle</font>
@@ -263,6 +262,23 @@
         <onclick>right</onclick>
         <onclick>Filter</onclick>
     </control>
+
+	<control type="radiobutton" id="11">
+		<description>Unlock Shares</description>
+		<label>20336</label>
+		<height>54</height>
+        <width>4-col</width>
+        <font>menuTitle</font>
+        <textoffsetx>12</textoffsetx>
+        <textcolor>black</textcolor>
+        <focusedcolor>selected</focusedcolor>
+        <texturefocus>colors/black.png</texturefocus>
+        <texturenofocus>colors/unselected.png</texturenofocus>
+        <onclick>right</onclick>
+		<onclick>xbmc.mastermode</onclick>
+		<selected>system.ismaster</selected>
+		<visible>system.haslocks</visible>
+	</control>
 </include>
 
 <!--music menu items-->
@@ -376,6 +392,7 @@
         <onclick>right</onclick>
         <onclick>ActivateWindow(MusicFiles,root)</onclick>
         <onclick>Skin.SetString(showRecentMusicItems,false)</onclick>
+		<onclick>Control.SetFocus(51)</onclick>
     </control>
 
 	<control type="radiobutton" id="20">
@@ -436,6 +453,21 @@
         <alttexturefocus>colors/black.png</alttexturefocus>
         <texturenofocus>colors/unselected.png</texturenofocus>
         <textoffsetx>12</textoffsetx>
+    </control>
+
+	<control type="button" id="500">
+        <description>Files (pictures)</description>
+        <height>54</height>
+        <width>4-col</width>
+        <font>menuTitle</font>
+        <textcolor>black</textcolor>
+        <focusedcolor>selected</focusedcolor>
+        <texturefocus>colors/black.png</texturefocus>
+        <texturenofocus>colors/unselected.png</texturenofocus>
+        <textoffsetx>12</textoffsetx>
+        <label>1214</label>
+		<onclick>right</onclick>
+        <onclick>ActivateWindow(pictures,root)</onclick>
     </control>
 </include>
 

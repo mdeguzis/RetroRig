@@ -40,7 +40,7 @@
                 <font>smallMedium</font>
                 <textcolor>selected</textcolor>
                 <width>24-col</width>
-                <height>2-row</height>
+                <height>3-row</height>
                 <label>-</label>
                 <shadowcolor>-</shadowcolor>
             </control>

@@ -29,7 +29,7 @@
             </control>
             <control type="label">
                 <posx>12</posx>
-                <posy>47</posy>
+                <posy>44</posy>
                 <width>16-col</width>
                 <font>pageTitle</font>
                 <label>587</label>
@@ -63,18 +63,11 @@
             <control type="spincontrolex" id="9">
                 <description>Default SpinControlex</description>
             </control>
-            <control type="sliderex" id="10">
+            <control type="sliderex" id="13">
                 <description>Default Slider</description>
             </control>
             <control type="edit" id="12">
                 <description>Default Edit</description>
-                <height>54</height>
-                <font>itemTitle</font>
-                <textcolor>selected</textcolor>
-                <focusedcolor>black</focusedcolor>
-                <texturenofocus>-</texturenofocus>
-                <texturefocus>colors/selected.png</texturefocus>
-                <textoffsetx>12</textoffsetx>
             </control>
             <!--OK / Clear-->
             <control type="panel" id="9500">

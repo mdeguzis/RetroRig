@@ -44,7 +44,7 @@
                 </control>
                 <control type="label" id="2">
                     <posx>12</posx>
-                    <posy>47</posy>
+                    <posy>44</posy>
                     <width>16-col</width>
                     <font>pageTitle</font>
                     <label>-</label>
@@ -163,17 +163,11 @@
                 <control type="spincontrolex" id="9">
                     <description>Default spincontrolex</description>
                 </control>
-                <control type="sliderex" id="10">
+                <control type="sliderex" id="13">
                     <description>Default Slider</description>
                 </control>
                 <control type="edit" id="12">
                     <description>Default Edit</description>
-                    <height>40</height>
-                    <font>font13</font>
-                    <textcolor>grey2</textcolor>
-                    <focusedcolor>selected</focusedcolor>
-                    <texturefocus border="5">button-focus2.png</texturefocus>
-                    <texturenofocus border="5">button-nofocus.png</texturenofocus>
                 </control>
             </control>
             <control type="group">
