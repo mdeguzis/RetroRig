@@ -2,20 +2,23 @@
 # Build Script for custom XBMC RetroRig PPA
 #======================================================================== 
 #
-# Author:  Michael DeGuzis and Jens-Christian, 
-# Date:    20140831
-# Version: Patch Level 8
+# Author:  Michael DeGuzis and Jens-Christian Lache, 
+# Date:    20141011
+# Version: Patch Level 10
 # ========================================================================
 
 #define base version
-BASE=3:13.1
+BASE=3:14.0
 
 # define patch level
-PL=8
+PL=10
 
 #define xbmc branch to checkout
-BRANCH=gotham-retrorig-pl$PL
+BRANCH=retrorig-pl$PL
 
+UPLOAD_TRY=1
+
+PPA="ppa:beauman/retrorig"
 
 clear
 echo "#########################################################"
@@ -32,6 +35,14 @@ else
   echo ""
   echo "build target is source"
   echo ""
+fi
+
+#set build target
+if [[ -n "$1" ]]; then
+  arg0=$1
+else
+  # set up default
+  arg0=source
 fi
 
 sleep 2s
@@ -86,11 +97,12 @@ echo "Setup package base files"
 echo "##########################################"
 
 echo "dsc file"
-cp ~/RetroRig/supplemental/xbmc/xbmc.dsc xbmc_$BASE.$PL.dsc
-sed -i "s|version_placeholder|$BASE.$PL|g" "xbmc_$BASE.$PL.dsc"
+cp ~/RetroRig/supplemental/xbmc/xbmc.dsc xbmc_$BASE.$PL.$UPLOAD_TRY.dsc
+sed -i "s|version_placeholder|$BASE.$PL.$UPLOAD_TRY|g" "xbmc_$BASE.$PL.$UPLOAD_TRY.dsc"
 
 echo "original tarball"
 git clone https://github.com/beaumanvienna/xbmc 
+#cp -r ~/xbmc .
 
 file xbmc/
 
@@ -103,10 +115,16 @@ fi
 
 cd xbmc
 git checkout $BRANCH
-rm -rf .git 
+
+if [ "$arg0" == "source" ]; then
+  echo "removing .git folder"
+  rm -rf .git 
+else
+  echo "keeping .git folder"
+fi
+
 cp ~/RetroRig/Artwork/XBMC/Splash_retrorig.png ~/RetroRig/Artwork/XBMC/Splash.png media/
 cd ..
-tar cfj xbmc_$BASE.$PL.orig.tar.bz2 xbmc
 
 echo "debian files"
 wget --tries=50 "http://www.libregeek.org/RetroRig/Ubuntu-Trusty/templates/xbmc.debian.tar.bz2"
@@ -153,7 +171,7 @@ cp ~/RetroRig/supplemental/xbmc/format debian/source/
 
 echo "changelog"
 cp ~/RetroRig/supplemental/xbmc/changelog debian/
-sed -i "s|version_placeholder|$BASE.$PL|g" debian/changelog
+sed -i "s|version_placeholder|$BASE.$PL.$UPLOAD_TRY|g" debian/changelog
 #dch -i
 
 
@@ -161,12 +179,11 @@ cd debian
 rm xbmc-addon-dev.install xbmc-eventclients-common.install xbmc-eventclients-dev.examples xbmc-eventclients-dev.install xbmc-eventclients-j2me.install xbmc-eventclients-j2me.manpages xbmc-eventclients-ps3.install xbmc-eventclients-ps3.manpages xbmc-eventclients-wiiremote.install  xbmc-eventclients-wiiremote.manpages xbmc-eventclients-xbmc-send.install xbmc-eventclients-xbmc-send.manpages xbmc-pvr-dev.install xbmc-screensaver-dev.install xbmc-visualization-dev.install
 cd ..
 
-if [[ -n "$1" ]]; then
-  arg0=$1
-else
-  # set up default
-  arg0=source
-fi
+#disable google test suite
+sed -i "s|configure_gtest=yes|configure_gtest=no|g" configure.in
+
+wget --tries=50 -P /tmp "http://www.libregeek.org/RetroRig/libs/ffmpeg-2.4-Helix-alpha4.tar.gz"
+cp /tmp/ffmpeg-2.4-Helix-alpha4.tar.gz ~/packaging/xbmc/xbmc/tools/depends/target/ffmpeg/ffmpeg-2.4-Helix-alpha4.tar.gz
 
 case "$arg0" in
   compile)
@@ -217,7 +234,7 @@ case "$arg0" in
         ls -lah ~/packaging/xbmc
         echo ""
         echo ""
-        echo "you can upload the package with dput ppa:beauman/retrorig ~/packaging/xbmc/xbmc_*_source.changes"
+        echo "you can upload the package with dput $PPA ~/packaging/xbmc/xbmc_*_source.changes"
         echo "all good"
         echo ""
         echo ""
@@ -225,7 +242,7 @@ case "$arg0" in
         while true; do
             read -p "Do you wish to upload the source package?    " yn
             case $yn in
-                [Yy]* ) dput ppa:beauman/retrorig ~/packaging/xbmc/xbmc_*_source.changes; break;;
+                [Yy]* ) dput $PPA ~/packaging/xbmc/xbmc_*_source.changes; break;;
                 [Nn]* ) break;;
                 * ) echo "Please answer yes or no.";;
             esac

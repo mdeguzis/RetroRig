@@ -1,0 +1,17 @@
+retrorig-setup (version_placeholder) trusty; urgency=medium
+
+  * RetroRig is a suite of console emulators embedded in a 
+    home theater program. It features more than 15 console types,
+    and supports XBox360, PS3 and Wii motion control gamepads.
+    
+    Run "sudo retrorig-setup" to start the installation.
+    
+    Homepage: https://github.com/ProfessorKaos64/RetroRig
+    
+    Copyright Libregeek.org 2014
+    Copyright JC Techno Labs 2014
+    
+
+ -- uploader  Thu, 09 Oct 2014 20:41:00 +0200
+
+
