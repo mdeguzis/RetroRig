@@ -179,9 +179,25 @@
     </default>
     <default type="scrollbar">
         <width>12</width>
+		<texturesliderbar>colors/inactive.png</texturesliderbar>
         <texturesliderbackground>colors/black.png</texturesliderbackground>
         <texturesliderbarfocus>colors/selected.png</texturesliderbarfocus>
         <showonepage>false</showonepage>
         <orientation>vertical</orientation>
+    </default>
+	<default type="edit">
+        <width>8-col</width>
+        <height>1-row</height>
+        <font>itemTitle</font>
+        <textcolor>selected</textcolor>
+        <textoffsetx>12</textoffsetx>
+		<textoffsety>0</textoffsety>
+		<align>center</align>
+		<aligny>center</aligny>
+        <focusedcolor>selected</focusedcolor>
+        <shadowcolor>-</shadowcolor>
+        <texturefocus>colors/keyselected.png</texturefocus>
+        <texturenofocus>colors/offblack.png</texturenofocus>
+        <pulseonselect>false</pulseonselect>
     </default>
 </includes>

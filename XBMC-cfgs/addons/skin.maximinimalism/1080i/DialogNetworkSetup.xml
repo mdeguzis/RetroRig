@@ -36,7 +36,7 @@
             </control>
             <control type="label">
                 <posx>12</posx>
-                <posy>47</posy>
+                <posy>44</posy>
                 <width>8-col</width>
                 <font>pageTitle</font>
                 <label>1007</label>
@@ -58,19 +58,13 @@
 					<ondown>11</ondown>
 					<onright>9011</onright>
                 </control>
-				<control type="button" id="11">
+				<control type="edit" id="11">
                     <description>Server Address</description>
 					<posx>0</posx>
 	                <posy>1-row</posy>
                     <width>12-col-gutter</width>
                     <align>left</align>
                     <height>54</height>
-                    <font>itemTitle</font>
-                    <textcolor>selected</textcolor>
-                    <focusedcolor>black</focusedcolor>
-                    <texturefocus>colors/selected.png</texturefocus>
-                    <texturenofocus>-</texturenofocus>
-                    <textoffsetx>12</textoffsetx>
 					<ondown>12</ondown>
 					<onup>10</onup>
 					<onright>9011</onright>
@@ -93,24 +87,18 @@
 					<onup>11</onup>
 					<onright>9011</onright>
                 </control>
-                <control type="button" id="16">
+                <control type="edit" id="16">
                     <description>Remote</description>
 					<posx>0</posx>
 	                <posy>3-row</posy>
                     <width>12-col-gutter</width>
                     <align>left</align>
-                    <height>54</height>
-                    <font>itemTitle</font>
-                    <textcolor>selected</textcolor>
-                    <focusedcolor>black</focusedcolor>
-                    <texturefocus>colors/selected.png</texturefocus>
-                    <texturenofocus>-</texturenofocus>
-                    <textoffsetx>12</textoffsetx>
+                    <height>54</height>                   
 					<ondown>13</ondown>
 					<onup>12</onup>
 					<onright>9011</onright>
                 </control>
-				<control type="button" id="13">
+				<control type="edit" id="13">
                     <description>Port</description>
 					<posx>0</posx>
 	                <posy>4-row</posy>
@@ -118,17 +106,11 @@
                     <width>12-col-gutter</width>
                     <align>left</align>
                     <height>54</height>
-                    <font>itemTitle</font>
-                    <textcolor>selected</textcolor>
-                    <focusedcolor>black</focusedcolor>
-                    <texturefocus>colors/selected.png</texturefocus>
-                    <texturenofocus>-</texturenofocus>
-                    <textoffsetx>12</textoffsetx>
 					<ondown>14</ondown>
 					<onup>16</onup>
 					<onright>9011</onright>
                 </control>
-                <control type="button" id="14">
+                <control type="edit" id="14">
                     <description>Username</description>
 					<posx>0</posx>
 	                <posy>5-row</posy>
@@ -136,17 +118,11 @@
                     <width>12-col-gutter</width>
                     <align>left</align>
                     <height>54</height>
-                    <font>itemTitle</font>
-                    <textcolor>selected</textcolor>
-                    <focusedcolor>black</focusedcolor>
-                    <texturefocus>colors/selected.png</texturefocus>
-                    <texturenofocus>-</texturenofocus>
-                    <textoffsetx>12</textoffsetx>
 					<ondown>15</ondown>
 					<onup>13</onup>
 					<onright>9011</onright>
                 </control>
-                <control type="button" id="15">
+                <control type="edit" id="15">
                     <description>password</description>
 					<posx>0</posx>
 	                <posy>6-row</posy>
@@ -154,12 +130,6 @@
                     <width>12-col-gutter</width>
                     <align>left</align>
                     <height>54</height>
-                    <font>itemTitle</font>
-                    <textcolor>selected</textcolor>
-                    <focusedcolor>black</focusedcolor>
-                    <texturefocus>colors/selected.png</texturefocus>
-                    <texturenofocus>-</texturenofocus>
-                    <textoffsetx>12</textoffsetx>
 					<onup>14</onup>
 					<onright>9011</onright>
                 </control> 

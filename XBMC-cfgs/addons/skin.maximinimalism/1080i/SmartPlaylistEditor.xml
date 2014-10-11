@@ -41,7 +41,7 @@
                 </control>
                 <control type="label">
                     <posx>12</posx>
-                    <posy>47</posy>
+                    <posy>44</posy>
                     <width>16-col</width>
                     <font>pageTitle</font>
                     <label>21432</label>
@@ -72,18 +72,7 @@
                     <posx>4-col</posx>
                     <posy>3-row</posy>
                     <width>8-col-gutter</width>
-                    <height>1-row</height>
-                    <font>itemTitle</font>
-                    <align>left</align>
-                    <aligny>center</aligny>
-                    <textcolor>selected</textcolor>
-                    <focusedcolor>black</focusedcolor>
-                    <selectedcolor>black</selectedcolor>
                     <label>-</label>
-                    <textoffsetx>12</textoffsetx>
-                    <texturenofocus>colors/black.png</texturenofocus>
-                    <texturefocus>colors/selected.png</texturefocus>
-                    <pulseonselect>false</pulseonselect>
                     <onup>22</onup>
                     <onright>9002</onright>
                     <ondown>10</ondown>
