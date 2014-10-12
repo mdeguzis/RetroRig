@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <window>
-    <defaultcontrol always="true">11</defaultcontrol>
+    <defaultcontrol always="true">21</defaultcontrol>
     <allowoverlay>yes</allowoverlay>
     <coordinates>
-        <origin x="0" y="600" />
+        <origin x="0" y="540" />
     </coordinates>
     <controls>
         <posx>col-3-begin</posx>
         <!--background-->
         <control type="image">
             <posx>0</posx>
-            <posy>0</posy>
+            <posy>-24</posy>
             <width>fullscreenWidth</width>
             <height>10-row</height>
             <texture>colors/black.png</texture>
@@ -18,10 +18,20 @@
         </control>
         <!--headers-->
         <control type="group">
-            <posx>col-9-begin</posx>
+            <posx>col-1-begin</posx>
             <posy>row-1-begin</posy>
+			<control type="label" id="1">
+				<description>header label</description>
+				<posx>0</posx>
+                <posy>-64</posy>
+				<width>24-col-gutter</width>
+                <height>1-row</height>
+                <align>center</align>
+				<font>itemTitleSmall</font>
+				<textcolor>selected</textcolor>
+			</control>
             <control type="image">
-                <posx>0</posx>
+                <posx>8-col</posx>
                 <posy>-12</posy>
                 <width>8-col</width>
                 <height>1-row</height>
@@ -30,11 +40,13 @@
             </control>
             <control type="label" id="4">
                 <description>Edit Text</description>
-                <posx>0</posx>
+                <posx>8-col</posx>
                 <posy>-12</posy>
                 <width>8-col</width>
                 <height>1-row</height>
                 <align>center</align>
+				<textcolor>selected</textcolor>
+				<font>itemTitle</font>
             </control>
         </control>
         <!--keyboard-->
@@ -107,7 +119,7 @@
                 <onup>21</onup>
                 <ondown>21</ondown>
                 <texturenofocus>colors/keyunselected.png</texturenofocus>
-                <texturefocus>colors/keyselected.png</texturefocus>
+                <texturefocus>colors/keyaccent.png</texturefocus>
                 <focusedcolor>selected</focusedcolor>
                 <textcolor>selected</textcolor>
                 <font>buttonTitle</font>
@@ -178,7 +190,7 @@
                 <onup>23</onup>
                 <ondown>23</ondown>
                 <texturenofocus>colors/keyunselected.png</texturenofocus>
-                <texturefocus>colors/keyselected.png</texturefocus>
+                <texturefocus>colors/keyaccent.png</texturefocus>
                 <focusedcolor>selected</focusedcolor>
                 <textcolor>selected</textcolor>
                 <font>buttonTitle</font>
@@ -249,7 +261,7 @@
                 <onup>17</onup>
                 <ondown>11</ondown>
                 <texturenofocus>colors/keyunselected.png</texturenofocus>
-                <texturefocus>colors/keyselected.png</texturefocus>
+                <texturefocus>colors/keyaccent.png</texturefocus>
                 <focusedcolor>selected</focusedcolor>
                 <textcolor>selected</textcolor>
             </control>
@@ -283,7 +295,7 @@
                 <onup>19</onup>
                 <ondown>13</ondown>
                 <texturenofocus>colors/keyunselected.png</texturenofocus>
-                <texturefocus>colors/keyselected.png</texturefocus>
+                <texturefocus>colors/keyaccent.png</texturefocus>
                 <focusedcolor>selected</focusedcolor>
                 <textcolor>selected</textcolor>
             </control>

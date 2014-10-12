@@ -6,11 +6,13 @@
 # ==========================================================================
 # Author:  Jens-Christian, aka "beaumanvienna"
 # Contribitions: Michael DeGuzis, aka "ProfessorKaos64"
-# Date:    20140824
-# Version: Patch Level 7
+# Date:    20141004
+# Version: Patch Level 9
 # ==========================================================================
 
-PL=7
+PL=9
+BRANCH=retrorig-pl$PL
+
 clear
 echo "#######################################################"
 echo "Building custom XBMC Debian packages (patch level $PL)"
@@ -56,7 +58,7 @@ echo "##########################################"
 # This XBMC version is used in project OpenElec.
 git clone https://github.com/beaumanvienna/xbmc
 cd xbmc
-git checkout gotham-retrorig-pl$PL
+git checkout $BRANCH
 git pull
 ./bootstrap
 #./configure --disable-debug --prefix=/usr

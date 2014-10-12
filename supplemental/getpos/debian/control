@@ -1,0 +1,18 @@
+Source: getpos
+Section: contrib/games
+Priority: optional
+Maintainer: RetroRig Development Team <jc.lache@gmail.com>
+Build-Depends: debhelper, qt4-qmake, libqt4-dev
+Standards-Version: 3.9.3
+Homepage: https://github.com/beaumanvienna/getPos
+
+Package: getpos
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: gamepad key mapping
+ This program prints the upper left position of a display exported
+  in environment variable SDL_VIDEO_FULLSCREEN_HEAD to stdout.
+ .
+ Source code from https://github.com/beaumanvienna/getPos
+
+

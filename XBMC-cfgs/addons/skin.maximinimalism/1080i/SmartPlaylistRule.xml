@@ -36,16 +36,11 @@
                     <onup>15</onup>
                     <ondown>17</ondown>
                 </control>
-                <control type="button" id="17">
+                <control type="edit" id="17">
                     <description>Value Button</description>
                     <posx>0</posx>
                     <posy>2-row</posy>
                     <width>6-col</width>
-                    <height>1-row</height>
-                    <font>itemTitle</font>
-                    <texturefocus>colors/selected.png</texturefocus>
-                    <texturenofocus>colors/black.png</texturenofocus>
-                    <textoffsetx>12</textoffsetx>
                     <label>-</label>
                     <onup>16</onup>
                     <onright>20</onright>

@@ -3,7 +3,6 @@
     <defaultcontrol always="true">8000</defaultcontrol>
     <allowoverlay>no</allowoverlay>
     <controls>
-        <include>globalBackground</include>
         <!--fanart / coverart if available-->
         <control type="group">
             <posx>0</posx>
@@ -25,14 +24,20 @@
                 <aspectratio aligny="top">scale</aspectratio>
             </control>
         </control>
+		
+		<control type="group">
+			<visible>isEmpty(ListItem.art(fanart))</visible>
+			<include>globalBackground</include>
+		</control>
+
         <!--About this addon-->
         <control type="group">
-            <posx>col-5-begin</posx>
+            <posx>col-3-begin</posx>
             <posy>row-2-begin</posy>
             <!--animations-->
             <include>modalDialogInOutVertical</include>
             <control type="image">
-                <posx>-384</posx>
+                <posx>-240</posx>
                 <posy>44</posy>
                 <width>fullscreenWidth</width>
                 <height>1-row</height>
@@ -51,7 +56,7 @@
             </control>
             <control type="label">
                 <posx>12</posx>
-                <posy>47</posy>
+                <posy>44</posy>
                 <width>16-col</width>
                 <font>pageTitle</font>
                 <label>$INFO[ListItem.Property(Addon.Type)]</label>
@@ -167,8 +172,7 @@
                             <label>31117</label>
                             <label2></label2>
                             <thumb>-</thumb>
-                            <onclick>RunAddon($INFO[ListItem.Property(Addon.id)])</onclick>
-                            <onclick>action(back)</onclick>
+                            <onclick>sendclick(12)</onclick>
                         </item>
                         <item id="2">
                             <label>$INFO[Control.GetLabel(6)]</label>
@@ -240,6 +244,9 @@
             <control type="button" id="11">
                 <description>Rollback button</description>
                 <label>24048</label>
+            </control>
+			<control type="button" id="12">
+                <description>Launch addon</description>
             </control>
         </control>
         <!--debugging-->
