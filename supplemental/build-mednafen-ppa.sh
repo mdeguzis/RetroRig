@@ -6,15 +6,21 @@
 #
 # ==========================================================================
 # Author:  Jens-Christian, aka "beaumanvienna"
-# Date:    2014/07/31
-# Version: Patch Level 1
+# Date:    2014/10/12
+# Version: Patch Level 2 / upload try 2
+#
+#          update prefix of version to superseed getdeb repository
+#
 # ==========================================================================
+
+#define prefix
+PRE=1:
 
 #define base version
 BASE=0.9.36.2
 
 # define patch level
-PL=2
+PL=2.2
 
 #define mednafen branch to checkout
 BRANCH=mednafen-0.9.36.2-SDL2-dual-head
@@ -35,7 +41,9 @@ echo "##########################################"
 #apt-get build-deps
 sudo apt-get -y build-dep mednafen
 #apt-get install packages
-sudo apt-get install -y build-essential fakeroot devscripts automake autoconf autotools-dev libsdl2-dev libmpcdec-dev
+sudo apt-get install -y build-essential fakeroot devscripts automake autoconf \
+                        autotools-dev libsdl2-dev libmpcdec-dev dh-autoreconf \
+                        libjack-dev libsndfile1-dev libvorbisidec-dev libjack0 dput
 
 
 echo ""
@@ -61,8 +69,8 @@ echo "Setup package base files"
 echo "##########################################"
 
 echo "dsc file"
-cp ~/RetroRig/supplemental/mednafen/mednafen.dsc mednafen_$BASE.$PL.dsc
-sed -i "s|version_placeholder|$BASE.$PL|g" "mednafen_$BASE.$PL.dsc"
+cp ~/RetroRig/supplemental/mednafen/mednafen.dsc mednafen_$PRE$BASE.$PL.dsc
+sed -i "s|version_placeholder|$BASE.$PL|g" "mednafen_$PRE$BASE.$PL.dsc"
 
 echo "original tarball"
 git clone https://github.com/beaumanvienna/mednafen-git 
@@ -80,7 +88,8 @@ cd mednafen
 git checkout $BRANCH
 rm -rf .git instructions.txt patch-from.0.9.36.2-to-SDL2.txt
 cd ..
-tar cfj mednafen_$BASE.$PL.orig.tar.bz2 mednafen
+tar cfj mednafen.tar.bz2 mednafen
+mv mednafen.tar.bz2 "mednafen_$BASE.$PL.orig.tar.bz2"
 
 echo "debian files"
 wget --tries=50 "http://www.libregeek.org/RetroRig/Ubuntu-Trusty/templates/mednafen.debian.tar.xz"
@@ -118,7 +127,7 @@ cp ~/RetroRig/supplemental/mednafen/rules debian/
 
 echo "changelog"
 cp ~/RetroRig/supplemental/mednafen/changelog debian/
-dch -i
+sed -i "s|version_placeholder|$PRE$BASE.$PL|g" debian/changelog
 
 echo "setting up patches"
 rm debian/patches/*
