@@ -125,11 +125,15 @@ if parameterIsTrue "auto resolution"; then
   ps2_new_X=$1
   ps2_new_Y=$2
   ps2_monitor=$3
+  ps2_new_xpos=`getpos 2>/dev/null|grep xpos|cut -f 2 -d ' '`
+  ps2_new_ypos=`getpos 2>/dev/null|grep ypos|cut -f 2 -d ' '`
 
   # dolphin
   dolphin_new_X=$1
   dolphin_new_Y=$2
   dolphin_monitor=$3
+  dolphin_new_xpos=`getpos 2>/dev/null|grep xpos|cut -f 2 -d ' '`
+  dolphin_new_ypos=`getpos 2>/dev/null|grep ypos|cut -f 2 -d ' '`
 
   # Gens/GS (Sega CD/32X)
   gens_new_X=$1
@@ -141,8 +145,14 @@ if parameterIsTrue "auto resolution"; then
   m_org_X=$(grep -Ee "\bScreenWidth = \b" "$config_home/.config/mupen64plus/mupen64plus.cfg")
   m_org_Y=$(grep -Ee "\bScreenHeight = \b" "$config_home/.config/mupen64plus/mupen64plus.cfg")
   #make the changes, prefix new_X in case NULL was entered previousey
-  sed -i "s|$m_org_X|ScreenWidth = $m_new_X|g" "$config_home/.config/mupen64plus/mupen64plus.cfg"
-  sed -i "s|$m_org_Y|ScreenHeight = $m_new_Y|g" "$config_home/.config/mupen64plus/mupen64plus.cfg"
+
+  if [ -n "$m_org_X" ];then
+    sed -i "s|$m_org_X|ScreenWidth = $m_new_X|g" "$config_home/.config/mupen64plus/mupen64plus.cfg"
+  fi
+
+  if [ -n "$m_org_Y" ];then  
+    sed -i "s|$m_org_Y|ScreenHeight = $m_new_Y|g" "$config_home/.config/mupen64plus/mupen64plus.cfg"
+  fi
 
   ########################    
   #mednafen 
@@ -259,7 +269,9 @@ if parameterIsTrue "auto resolution"; then
   #pcsx2 ui settings
   ps2_ui_org_X=$(grep -Ee "FullscreenX=" "$config_home/.config/pcsx2/inis/PCSX2_ui.ini")
   ps2_ui_org_Y=$(grep -Ee "FullscreenY=" "$config_home/.config/pcsx2/inis/PCSX2_ui.ini")
-  ps2_ui_org_monitor=$(grep -Ee "MonitorName=" "$config_home/.config/pcsx2/inis/PCSX2_ui.ini")
+
+  WindowPos_org=$(grep -Ee "WindowPos=" "$config_home/.config/pcsx2/inis/PCSX2_ui.ini")
+  WindowPos_new="$ps2_new_xpos,$ps2_new_ypos"
   #apply the changes
   if [ -n "$ps2_ui_org_X" ]; then
     sed -i "s|$ps2_ui_org_X|FullscreenX=$ps2_new_X|g" "$config_home/.config/pcsx2/inis/PCSX2_ui.ini"  
@@ -269,8 +281,8 @@ if parameterIsTrue "auto resolution"; then
     sed -i "s|$ps2_ui_org_Y|FullscreenY=$ps2_new_Y|g" "$config_home/.config/pcsx2/inis/PCSX2_ui.ini"
   fi
 
-  if [ -n "$ps2_ui_org_monitor" ]; then
-    sed -i "s|$ps2_ui_org_monitor|MonitorName=$ps2_monitor|g" "$config_home/.config/pcsx2/inis/PCSX2_ui.ini"
+  if [ -n "$WindowPos_org" ]; then
+    sed -i "s|$WindowPos_org|WindowPos=$WindowPos_new|g" "$config_home/.config/pcsx2/inis/PCSX2_ui.ini"
   fi
   #set pcsx2 to fullscreen
   ps2_ui_org_fs=$(grep -Ee "DefaultToFullscreen=" "$config_home/.config/pcsx2/inis/PCSX2_ui.ini")
@@ -286,10 +298,20 @@ if parameterIsTrue "auto resolution"; then
   #apply changes
   sed -i "s|$dolphin_org_Res|$dolphin_new_Res|g" "$config_home/.dolphin-emu/Config/Dolphin.ini"  
   #enable vsync
-  dolphin_org_vsync=$(grep -Ee "VSync = " "$config_home/.dolphin-emu/Config/gfx_opengl.ini")
-  if [ -n "$dolphin_org_vsync" ]; then
-    sed -i "s|$dolphin_org_vsync|VSync = True|g" "$config_home/.dolphin-emu/Config/gfx_opengl.ini"  
+  if [ -f $config_home/.dolphin-emu/Config/gfx_opengl.ini ];then
+
+    dolphin_org_vsync=$(grep -Ee "VSync = " "$config_home/.dolphin-emu/Config/gfx_opengl.ini")
+    if [ -n "$dolphin_org_vsync" ]; then
+      sed -i "s|$dolphin_org_vsync|VSync = True|g" "$config_home/.dolphin-emu/Config/gfx_opengl.ini"  
+    fi 
   fi
+  
+  #old render position
+  dolphin_old_xpos=$(grep -Ee "RenderWindowXPos = " "$config_home/.dolphin-emu/Config/Dolphin.ini")
+  dolphin_old_ypos=$(grep -Ee "RenderWindowYPos = " "$config_home/.dolphin-emu/Config/Dolphin.ini")
+  #apply changes
+  sed -i "s|$dolphin_old_xpos|RenderWindowXPos = $dolphin_new_xpos|g" "$config_home/.dolphin-emu/Config/Dolphin.ini"  
+  sed -i "s|$dolphin_old_ypos|RenderWindowYPos = $dolphin_new_ypos|g" "$config_home/.dolphin-emu/Config/Dolphin.ini"  
   
 else
   echo "auto resolution is disabled, exiting"

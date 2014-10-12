@@ -35,7 +35,7 @@
                 <font>veryLarge</font>
                 <align>center</align>
                 <textcolor>selected</textcolor>
-
+                <label>$INFO[System.Time]</label>
             </control>
             <control type="label">
                 <posx>0</posx>
@@ -44,6 +44,7 @@
                 <align>center</align>
                 <font>Large</font>
                 <textcolor>selected</textcolor>
+                <label>$INFO[System.Date(DDD)] [B]$INFO[System.Date(dd)][/B] $INFO[System.Date(MMM)]</label>
             </control>
             <control type="label">
                 <visible>!IsEmpty(Weather.location)</visible>
@@ -53,7 +54,7 @@
                 <align>center</align>
                 <font>regular</font>
                 <textcolor>selected</textcolor>
-  
+                <label>$INFO[Window(Weather).Property(location)] [B]$INFO[Window(Weather).Property(Current.Temperature)]$INFO[System.TemperatureUnits][/B] [LOWERCASE]$INFO[Window(Weather).property(current.condition)][/LOWERCASE]</label>
             </control>
             <!--system info indicator-->
             <control type="label">
@@ -77,10 +78,13 @@
 			<animation condition="SubString(Container(9000).NumItems,4)" effect="slide" end="468,0" time="0">conditional</animation>
 			<animation condition="SubString(Container(9000).NumItems,5)" effect="slide" end="361,0" time="0">conditional</animation>
 			<animation condition="SubString(Container(9000).NumItems,6)" effect="slide" end="254,0" time="0">conditional</animation>
+			<animation condition="SubString(Container(9000).NumItems,7)" effect="slide" end="147,0" time="0">conditional</animation>
+			<animation condition="SubString(Container(9000).NumItems,8)" effect="slide" end="40,0" time="0">conditional</animation>
+			<animation condition="SubString(Container(9000).NumItems,9)" effect="slide" end="-67,0" time="0">conditional</animation>
             <control type="list" id="9000">
                 <posx>0</posx>
                 <posy>0</posy>
-                <width>24-col</width>
+                <width>2000</width>
                 <height>3-col</height>
                 <orientation>horizontal</orientation>
                 <onup>ActivateWindow(systeminfo)</onup>
@@ -135,9 +139,54 @@
                         <label>31000</label>
                         <label2></label2>
                         <thumb>-</thumb>
+                        <onclick>activateWindow(videolibrary)</onclick>
+                        <onclick>Skin.SetString(showRecentVideoItems,true)</onclick>
+                    </item>
+                    <item>
+						<visible>!Skin.HasSetting(hideMusic)</visible>
+                        <label>31001</label>
+                        <label2></label2>
+                        <thumb>-</thumb>
+                        <onclick>ActivateWindow(musiclibrary)</onclick>
+                        <onclick>Skin.SetString(showRecentMusicItems,true)</onclick>
+                    </item>
+                    <item>
+						<visible>!Skin.HasSetting(hidePictures)</visible>
+                        <label>31002</label>
+                        <label2></label2>
+                        <thumb>-</thumb>
+                        <onclick>ActivateWindow(pictures)</onclick>
+                    </item>
+					<item>
+						<visible>!Skin.HasSetting(hideGames) + System.HasAddon(script.games.rom.collection.browser)</visible>
+                        <label>31156</label>
+                        <label2></label2>
+                        <thumb>-</thumb>
                         <onclick>RunScript(script.games.rom.collection.browser)</onclick>
                     </item>
-					
+					<item>
+						<visible>!Skin.HasSetting(hidePrograms)</visible>
+                        <label>0</label>
+                        <label2></label2>
+                        <thumb>-</thumb>
+                        <onclick>ActivateWindow(programs,addons,return)</onclick>
+                    </item>
+					<item>
+						<visible>!Skin.HasSetting(hideSearch)</visible>
+                        <label>137</label>
+                        <label2></label2>
+                        <thumb>-</thumb>
+                        <onclick>RunScript(script.globalsearch)</onclick>
+						<onclick>Skin.SetString(showRecentMusicItems,false)</onclick>
+						<onclick>Skin.SetString(showRecentVideoItems,false)</onclick>
+                    </item>
+					<item>
+						<visible>!Skin.HasSetting(hideFavourites)</visible>
+                        <label>1036</label>
+                        <label2></label2>
+                        <thumb>-</thumb>
+                        <onclick>ReplaceWindow(favourites)</onclick>
+                    </item>
                     <item>
                         <label>5</label>
                         <label2></label2>
@@ -152,7 +201,7 @@
                     </item>
                 </content>
             </control>
-        </control>
+        </control>		
         <!--debugging-->
         <include>DebugGrid</include>
         <control type="label">
