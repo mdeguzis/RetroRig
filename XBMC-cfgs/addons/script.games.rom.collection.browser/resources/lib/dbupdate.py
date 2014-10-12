@@ -62,7 +62,7 @@ class DBUpdate:
 		
 		continueUpdate = True
 		#Added variable to allow user to continue on errors
-		ignoreErrors = False
+		ignoreErrors = True
 		
 		for romCollection in romCollections.values():
 			
