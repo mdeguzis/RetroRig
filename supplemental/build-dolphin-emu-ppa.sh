@@ -3,11 +3,10 @@
 #======================================================================== 
 #
 # Author      : Jens-Christian Lache
-# Date        : 20140908
+# Date        : 20141012
 # Version     : 4.0.0
-# Description : reverted to unpatched version from  Version 4.0.0 
-#               from Hunter-Kaller
-#               (multi monitor support from settings)
+# Description : patch level 3: XRaiseWindow(dpy,win)
+#
 # ========================================================================
 
 #define base version
@@ -15,13 +14,13 @@ PRE=3
 BASE=4.0.0
 
 # define patch level
-PL=2
+PL=3
 
 
 
 clear
 echo "#################################################################"
-echo "Building custom dolphin-emu Debian package (branch $BRANCH)"
+echo "Building custom dolphin-emu Debian package (branch Hunter-Kaller)"
 echo "#################################################################"
 echo ""
 if [[ -n "$1" ]]; then
@@ -107,12 +106,15 @@ file $SRC_FOLDER
 if [ $? -eq 0 ]; then  
     echo "successfully cloned"
 else  
-    echo "git clone failed, aborting"
+    echo "download failed, aborting"
     exit
 fi
 
 #change to source folder
 cd $SRC_FOLDER
+
+#echo "patching .."
+patch Source/Core/DolphinWX/X11Utils.cpp < ~/RetroRig/supplemental/dolphin-emu/X11Utils.cpp.patch
 
 echo "changelog"
 cp ~/RetroRig/supplemental/dolphin-emu/changelog debian/
