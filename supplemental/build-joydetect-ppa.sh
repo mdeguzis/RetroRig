@@ -1,37 +1,27 @@
 #========================================================================
-# Build Script for custom retrorig-setup RetroRig PPA
+# Build Script for getpos RetroRig PPA
 #======================================================================== 
 #
-# Author      : Michael T. DeGuzis, Jens-Christian Lache
-# Date        : 201401009
-# Version     : 0.9.5
-# Description : install RetroRig via Debian package
-#	
+# Author:  Jens-Christian Lache
+# Date:    20141002
+# Version: 1.1
+#          first approach 
 # ========================================================================
 
+
 #define base version
-PRE=0
-BASE=0.9.5
+BASE=1
 
 # define patch level
 PL=1
 
 #define branch
-BRANCH=beta
-
-#define upload target
-LAUNCHPAD_PPA="ppa:mdeguzis/retrorig"
-
-#define uploader for changelog
-uploader="Michael DeGuzis <mdeguzis@gmail.com>"
-
-#define package maintainer for dsc and control file 
-pkgmaintainer="RetroRig Development Team <mdeguzis@gmail.com>"
+BRANCH=retrorig-v$PL
 
 clear
-echo "#################################################################"
-echo "Building custom retrorig-setup Debian package (branch $BRANCH)"
-echo "#################################################################"
+echo "#####################################################################"
+echo "Building custom getpos Debian package (patch level $PL)"
+echo "#####################################################################"
 echo ""
 if [[ -n "$1" ]]; then
 
@@ -57,14 +47,15 @@ if [[ -n "$2" ]]; then
   echo ""
 
   #apt-get install packages
-  sudo apt-get update -y
-  sudo apt-get install -y build-essential fakeroot devscripts autoconf autotools-dev binutils-dev \
-  debhelper dput
+  sudo apt-get install -y build-essential fakeroot devscripts automake autoconf autotools-dev
+
+  #get build dependencies
+  sudo apt-get -y install debhelper qt4-qmake libqt4-dev 
 
 else
   echo ""
   echo "skipping installation of build packages, use arbitrary second argument to get those packages"
-  echo "e.g ./build-retrorig-setup-ppa.sh compile update"
+  echo "e.g ./build-getpos-ppa.sh compile update"
   echo ""
 fi
 
@@ -73,18 +64,18 @@ echo "##########################################"
 echo "Setup build directory"
 echo "##########################################"
 echo ""
-echo "~/packaging/retrorig-setup"
+echo "~/packaging/getpos"
 # start in $HOME
 cd
 
 # remove old build directory
-rm -rf ~/packaging/retrorig-setup
+rm -rf ~/packaging/getpos
 
 #create build directory
-mkdir -p ~/packaging/retrorig-setup
+mkdir -p ~/packaging/getpos
 
 #change to build directory
-cd ~/packaging/retrorig-setup
+cd ~/packaging/getpos
 
 echo ""
 echo "##########################################"
@@ -92,16 +83,13 @@ echo "Setup package base files"
 echo "##########################################"
 
 echo "dsc file"
-cp ~/RetroRig/supplemental/retrorig-setup/retrorig-setup.dsc retrorig-setup-$PRE:$BASE.$PL.dsc
-sed -i "s|version_placeholder|$PRE:$BASE.$PL|g" "retrorig-setup-$PRE:$BASE.$PL.dsc"
-sed -i "s|pkgmaintainer|$pkgmaintainer|g" "retrorig-setup-$PRE:$BASE.$PL.dsc"
+cp ~/RetroRig/supplemental/getpos/getpos.dsc getpos_$BASE.$PL.dsc
+sed -i "s|version_placeholder|$BASE.$PL|g" "getpos_$BASE.$PL.dsc"
 
-SRC_FOLDER=retrorig-setup-$BASE.$PL
+echo "original tarball"
+git clone https://github.com/beaumanvienna/getpos
 
-echo "cloning repository"
-#git clone https://github.com/beaumanvienna/RetroRig
-cp -r ~/pkg-build-tmp/RetroRig .
-file RetroRig/
+file getpos/
 
 if [ $? -eq 0 ]; then  
     echo "successfully cloned"
@@ -110,45 +98,29 @@ else
     exit
 fi 
 
-mv RetroRig/ $SRC_FOLDER
+cd getpos
+git checkout $BRANCH
+rm -rf .git .gitignore .hgeol .hgignore
+cd ..
+
+tar cfj getpos.orig.tar.bz2 getpos
+mv getpos.orig.tar.bz2 getpos_$BASE.$PL.orig.tar.bz2
+
+echo "debian files"
+cp -r ~/RetroRig/supplemental/getpos/debian getpos/
+
+echo ""
+echo "##########################################"
+echo "Unpacking debian files"
+echo "##########################################"
+echo ""
 
 #change to source folder
-cd $SRC_FOLDER
-
-git checkout $BRANCH
-
-mkdir -p debian/source
+cd getpos/
 
 echo "changelog"
-cp ~/RetroRig/supplemental/retrorig-setup/changelog debian/
-sed -i "s|version_placeholder|$PRE:$BASE.$PL|g" debian/changelog
-sed -i "s|uploader|$uploader|g" debian/changelog
-
-echo "control"
-cp ~/RetroRig/supplemental/retrorig-setup/control debian/
-sed -i "s|pkgmaintainer|$pkgmaintainer|g" debian/control
-
-echo "rules"
-cp ~/RetroRig/supplemental/retrorig-setup/rules debian/
-
-echo "format"
-cp ~/RetroRig/supplemental/retrorig-setup/format debian/source/
-
-echo "Makefile"
-cp ~/RetroRig/supplemental/retrorig-setup/Makefile .
-
-echo "removing internal files"
-rm -rf supplemental/ .git/
-
-echo "installation script"
-if [ -f retrorig-setup.sh ]; then  
-   mv retrorig-setup.sh retrorig-setup
-fi
-
-#installation script (deprecated notation)
-if [ -f retrorig_setup.sh ]; then  
-   mv retrorig_setup.sh retrorig-setup
-fi
+sed -i "s|version_placeholder|$BASE.$PL|g" debian/changelog
+#dch -i
 
 if [[ -n "$1" ]]; then
   arg0=$1
@@ -174,7 +146,7 @@ case "$arg0" in
         echo "Building finished"
         echo "##########################################"
         echo ""
-        ls -lah ~/packaging/retrorig-setup
+        ls -lah ~/packaging/getpos
          exit 0
     else  
         echo "debuild failed to generate the binary package, aborting"
@@ -203,10 +175,10 @@ case "$arg0" in
       if [ $? -eq 0 ]; then
         echo ""
         echo ""
-        ls -lah ~/packaging/retrorig-setup
+        ls -lah ~/packaging/getpos
         echo ""
         echo ""
-        echo "you can upload the package with dput $LAUNCHPAD_PPA ~/packaging/retrorig-setup/retrorig-setup_$BASE.$PL""_source.changes"
+        echo "you can upload the package with dput ppa:beauman/retrorig ~/packaging/getpos/getpos_$BASE.$PL""_source.changes"
         echo "all good"
         echo ""
         echo ""
@@ -214,7 +186,7 @@ case "$arg0" in
         while true; do
             read -p "Do you wish to upload the source package?    " yn
             case $yn in
-                [Yy]* ) dput $LAUNCHPAD_PPA ~/packaging/retrorig-setup/retrorig-setup_*.$PL""_source.changes; break;;
+                [Yy]* ) dput ppa:beauman/retrorig ~/packaging/getpos/getpos_*.$PL""_source.changes; break;;
                 [Nn]* ) break;;
                 * ) echo "Please answer yes or no.";;
             esac
@@ -231,7 +203,6 @@ case "$arg0" in
     fi
     ;;
 esac
-
 
 
 
