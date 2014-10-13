@@ -1,0 +1,15 @@
+Source: joydetect
+Section: contrib/games
+Priority: optional
+Maintainer: RetroRig Development Team <mdeguzis@gmail.com>
+Build-Depends: debhelper, gcc
+Standards-Version: 3.9.3
+Homepage: https://github.com/professorkaos64/RetroRig
+
+Package: joydetect
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: Small C utility to effectively grab PS3/PS4 MAC Address
+
+
+
