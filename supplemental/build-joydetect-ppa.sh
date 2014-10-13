@@ -1,11 +1,11 @@
 #========================================================================
-# Build Script for getpos RetroRig PPA
+# Build Script for Joydetect Utility - RetroRig PPA
 #======================================================================== 
 #
-# Author:  Jens-Christian Lache
-# Date:    20141002
-# Version: 1.1
-#          first approach 
+# Author:  Michael DeGuzis, 
+# Date:    20141012
+# Version: 1.0
+#          Inital upload 
 # ========================================================================
 
 
@@ -69,13 +69,13 @@ echo "~/packaging/getpos"
 cd
 
 # remove old build directory
-rm -rf ~/packaging/getpos
+rm -rf ~/pkg-build-tmp/joydetect
 
 #create build directory
-mkdir -p ~/packaging/getpos
+mkdir -p ~/pkg-build-tmp/joydetect
 
 #change to build directory
-cd ~/packaging/getpos
+cd ~/pkg-build-tmp/joydetect
 
 echo ""
 echo "##########################################"
@@ -83,31 +83,26 @@ echo "Setup package base files"
 echo "##########################################"
 
 echo "dsc file"
-cp ~/RetroRig/supplemental/getpos/getpos.dsc getpos_$BASE.$PL.dsc
+cp ~/RetroRig/supplemental/joydetect/joydetect.dsc getpos_$BASE.$PL.dsc
 sed -i "s|version_placeholder|$BASE.$PL|g" "getpos_$BASE.$PL.dsc"
 
 echo "original tarball"
-git clone https://github.com/beaumanvienna/getpos
+cp -r ~/pkg-build-tmp/joydetect
 
-file getpos/
+file joydetect/
 
 if [ $? -eq 0 ]; then  
-    echo "successfully cloned"
+    echo "successfully cloned/copied"
 else  
-    echo "git clone failed, aborting"
+    echo "git clone/copy failed, aborting"
     exit
 fi 
 
-cd getpos
-git checkout $BRANCH
-rm -rf .git .gitignore .hgeol .hgignore
-cd ..
-
-tar cfj getpos.orig.tar.bz2 getpos
-mv getpos.orig.tar.bz2 getpos_$BASE.$PL.orig.tar.bz2
+tar cfj joydetect.orig.tar.bz2 joydetect
+mv joydetect.orig.tar.bz2 joydetect_$BASE.$PL.orig.tar.bz2
 
 echo "debian files"
-cp -r ~/RetroRig/supplemental/getpos/debian getpos/
+cp -r ~/RetroRig/supplemental/joydetect/debian joydetect/
 
 echo ""
 echo "##########################################"
@@ -116,7 +111,7 @@ echo "##########################################"
 echo ""
 
 #change to source folder
-cd getpos/
+cd joydetect/
 
 echo "changelog"
 sed -i "s|version_placeholder|$BASE.$PL|g" debian/changelog
@@ -146,7 +141,7 @@ case "$arg0" in
         echo "Building finished"
         echo "##########################################"
         echo ""
-        ls -lah ~/packaging/getpos
+        ls -lah ~/packaging/joydetect
          exit 0
     else  
         echo "debuild failed to generate the binary package, aborting"
@@ -175,10 +170,10 @@ case "$arg0" in
       if [ $? -eq 0 ]; then
         echo ""
         echo ""
-        ls -lah ~/packaging/getpos
+        ls -lah ~/packaging/joydetect
         echo ""
         echo ""
-        echo "you can upload the package with dput ppa:beauman/retrorig ~/packaging/getpos/getpos_$BASE.$PL""_source.changes"
+        echo "you can upload the package with dput ppa:mdeguzis/retrorig ~/packaging/joydetect/joydetect_$BASE.$PL""_source.changes"
         echo "all good"
         echo ""
         echo ""
@@ -186,14 +181,14 @@ case "$arg0" in
         while true; do
             read -p "Do you wish to upload the source package?    " yn
             case $yn in
-                [Yy]* ) dput ppa:beauman/retrorig ~/packaging/getpos/getpos_*.$PL""_source.changes; break;;
+                [Yy]* ) dput ppa:mdeguzis/retrorig ~/packaging/joydetect/joydetect_*.$PL""_source.changes; break;;
                 [Nn]* ) break;;
                 * ) echo "Please answer yes or no.";;
             esac
         done
 
         exit 0
-      else
+      else	
         echo "debuild failed to generate the source package, aborting"
         exit 1
       fi

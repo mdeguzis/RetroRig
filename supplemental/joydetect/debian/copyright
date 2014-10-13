@@ -1,0 +1,9 @@
+Format: http://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
+Upstream-Name: joydetect
+Source: https://github.com/professorkaos64/joydetect
+
+Files: *
+Copyright: 2014 RetroRig
+License: GPL-3
+
+

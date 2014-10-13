@@ -1,0 +1,10 @@
+getpos (version_placeholder) trusty; urgency=medium
+
+
+  * source code from https://github.com/professorkaos64/retrorig
+
+  This C utility collects the accurate MAC Address for PS3/PS4 controllers
+
+
+ -- Michael DeGuzis <mdeguzis@gmail.com>  Thu, 12 Oct 2014 21:02:00 -0400
+
