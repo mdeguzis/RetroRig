@@ -10,17 +10,28 @@
 
 
 #define base version
+PRE=0
 BASE=1
 
 # define patch level
-PL=1
+PL=1.0
 
 #define branch
-BRANCH=retrorig-v$PL
+BRANCH=joydetect-pl0
+
+#define upload target
+LAUNCHPAD_PPA="ppa:mdeguzis/retrorig"
+
+#define uploader for changelog
+uploader="Michael DeGuzis <mdeguzis@gmail.com>"
+
+#define package maintainer for dsc and control file 
+pkgmaintainer="RetroRig Development Team <mdeguzis@gmail.com>"
+
 
 clear
 echo "#####################################################################"
-echo "Building custom getpos Debian package (patch level $PL)"
+echo "Building custom joydetect Debian package (patch level $PL)"
 echo "#####################################################################"
 echo ""
 if [[ -n "$1" ]]; then
@@ -50,12 +61,12 @@ if [[ -n "$2" ]]; then
   sudo apt-get install -y build-essential fakeroot devscripts automake autoconf autotools-dev
 
   #get build dependencies
-  sudo apt-get -y install debhelper qt4-qmake libqt4-dev 
+  sudo apt-get -y install debhelper cmake gcc
 
 else
   echo ""
   echo "skipping installation of build packages, use arbitrary second argument to get those packages"
-  echo "e.g ./build-getpos-ppa.sh compile update"
+  echo "e.g ./build-joydetect-ppa.sh compile update"
   echo ""
 fi
 
@@ -64,7 +75,7 @@ echo "##########################################"
 echo "Setup build directory"
 echo "##########################################"
 echo ""
-echo "~/packaging/getpos"
+echo "~/pkg-build-tmp/joydetect"
 # start in $HOME
 cd
 
@@ -83,12 +94,14 @@ echo "Setup package base files"
 echo "##########################################"
 
 echo "dsc file"
-cp ~/RetroRig/supplemental/joydetect/joydetect.dsc getpos_$BASE.$PL.dsc
-sed -i "s|version_placeholder|$BASE.$PL|g" "getpos_$BASE.$PL.dsc"
+cp ~/RetroRig/supplemental/joydetect/joydetect.dsc joydetect-$PRE:$BASE.$PL.dsc
+sed -i "s|version_placeholder|$PRE:$BASE.$PL|g" "joydetect-$PRE:$BASE.$PL.dsc"
+sed -i "s|pkgmaintainer|$pkgmaintainer|g" "joydetect-$PRE:$BASE.$PL.dsc"
 
 echo "original tarball"
-cp -r ~/pkg-build-tmp/joydetect
+git clone https://github.com/ProfessorKaos64/joydetect
 
+# sanity check
 file joydetect/
 
 if [ $? -eq 0 ]; then  
@@ -98,11 +111,32 @@ else
     exit
 fi 
 
+
+#change to source folder
+cd joydetect
+git pull
+git checkout $BRANCH
+rm -rf .git .gitignore .hgeol .hgignore
+
+echo "changelog"
+cp ~/RetroRig/supplemental/joydetect/debian/changelog debian/
+sed -i "s|version_placeholder|$PRE:$BASE.$PL|g" debian/changelog
+sed -i "s|uploader|$uploader|g" debian/changelog
+
+echo "control"
+cp ~/RetroRig/supplemental/joydetect/debian/control debian/
+sed -i "s|pkgmaintainer|$pkgmaintainer|g" debian/control
+
+echo "rules"
+cp ~/RetroRig/supplemental/joydetect/debian/rules debian/
+
+echo "format"
+cp ~/RetroRig/supplemental/joydetect/debian/format debian/source/
+
+# Create archive
+cd ..
 tar cfj joydetect.orig.tar.bz2 joydetect
 mv joydetect.orig.tar.bz2 joydetect_$BASE.$PL.orig.tar.bz2
-
-echo "debian files"
-cp -r ~/RetroRig/supplemental/joydetect/debian joydetect/
 
 echo ""
 echo "##########################################"
@@ -110,12 +144,9 @@ echo "Unpacking debian files"
 echo "##########################################"
 echo ""
 
-#change to source folder
-cd joydetect/
-
-echo "changelog"
-sed -i "s|version_placeholder|$BASE.$PL|g" debian/changelog
-#dch -i
+# already in the git repo / branch
+echo "Debian files are already contained in the github branch"
+echo "Skipping copy from ~/RetroRig/supplemental/joydetect"
 
 if [[ -n "$1" ]]; then
   arg0=$1
@@ -141,7 +172,7 @@ case "$arg0" in
         echo "Building finished"
         echo "##########################################"
         echo ""
-        ls -lah ~/packaging/joydetect
+        ls -lah ~/pkg-build-tmp/joydetect
          exit 0
     else  
         echo "debuild failed to generate the binary package, aborting"
@@ -170,10 +201,10 @@ case "$arg0" in
       if [ $? -eq 0 ]; then
         echo ""
         echo ""
-        ls -lah ~/packaging/joydetect
+        ls -lah ~/pkg-build-tmp/joydetect
         echo ""
         echo ""
-        echo "you can upload the package with dput ppa:mdeguzis/retrorig ~/packaging/joydetect/joydetect_$BASE.$PL""_source.changes"
+        echo "you can upload the package with dput ppa:mdeguzis/retrorig ~/pkg-build-tmp/joydetect/joydetect_$BASE.$PL""_source.changes"
         echo "all good"
         echo ""
         echo ""
@@ -181,7 +212,7 @@ case "$arg0" in
         while true; do
             read -p "Do you wish to upload the source package?    " yn
             case $yn in
-                [Yy]* ) dput ppa:mdeguzis/retrorig ~/packaging/joydetect/joydetect_*.$PL""_source.changes; break;;
+                [Yy]* ) dput ppa:mdeguzis/retrorig ~/pkg-build-tmp/joydetect/joydetect_*.$PL""_source.changes; break;;
                 [Nn]* ) break;;
                 * ) echo "Please answer yes or no.";;
             esac
