@@ -1,9 +1,8 @@
 Format: http://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
 Upstream-Name: joydetect
 Source: https://github.com/professorkaos64/joydetect
+Copyright: 2014 RetroRig <mdeguzis@gmail.com>
 
-Files: *
-Copyright: 2014 RetroRig
 License: GPL-3
-
+Comment: At the discretion of the user of this application,this software may be licensed under the terms of the GNU General Public License v3 as outlined in the LICENSE.txt files located at the root of the source distribution. These files may also be found in the public source code repository located at: http://github.com/professorkaos64/joydetect
 
