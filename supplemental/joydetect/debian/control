@@ -1,14 +1,15 @@
 Source: joydetect
-Section: contrib/games
+Section: contrib
 Priority: optional
 Maintainer: pkgmaintainer
+Build-Depends: gcc (>= 9), cmake (>= 2.8), debhelper (>= 9), libc-bin (>= 2)
 Standards-Version: 3.9.5
-Homepage: https://github.com/professorkaos64/RetroRig
+Homepage: https://github.com/professorkaos64/RetroRig/joydetect
 
 Package: joydetect
 Architecture: any
-Build-Depends: gcc (>= 9), cmake (>= 2.8)
-Description: Small C utility to effectively grab PS3/PS4 MAC Address
+Depends: ${misc:Depends}
+Descripton: Utility to effectively grab PS3/PS4 MAC Address from /dev/input
 
 
 
