@@ -943,6 +943,9 @@ function h_emu_user_fixes()
 	sed -i "s|config_temp|$config_home|g" "$config_home/.gens/gens.cfg"
 	sed -i "s|installdir_temp|$rootdir|g" "$config_home/.gens/gens.cfg"
 	sed -i "s|xbmc_temp|$xbmc_home|g" "$config_home/.gens/gens.cfg"
+	
+	# Mupen64Plus
+	sed -i "s|PLACEHOLDER_SAVESTATEPTH|$config_home/.config/mupen64plus/save|g" "$config_home/.config/mupen64plus/mupen64plus.cfg"
 
 	# Advanced Launcher (XBMC)
 	sed -i "s|config_temp|$config_home|g" "$config_home/"

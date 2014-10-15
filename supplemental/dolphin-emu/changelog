@@ -1,5 +1,17 @@
 dolphin-emu (version_placeholder) trusty; urgency=medium
 
+  * 
+
+ -- Jens-Christian Lache <jc.lache@web.de>  Mon, 03 Oct 2014 20:00:00 +0200
+
+dolphin-emu (3:4.0.0.3) trusty; urgency=medium
+
+  *  XRaiseWindow(dpy,win) after fullscreen
+
+ -- Jens-Christian Lache <jc.lache@web.de>  Sun, 12 Oct 2014 20:00:00 +0200
+
+dolphin-emu (3:4.0.0.2) trusty; urgency=medium
+
   * unpatched version from source code from 
 
     https://launchpad.net/~hunter-kaller/+archive/ubuntu/ppa/
