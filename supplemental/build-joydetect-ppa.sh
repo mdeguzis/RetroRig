@@ -4,8 +4,8 @@
 #
 # Author:  Michael DeGuzis, 
 # Date:    20141012
-# Version: 1.0
-#          Inital upload 
+# Version: 1.1
+#          Inital upload + lintian fixes for warnings/errors
 # ========================================================================
 
 
@@ -14,7 +14,7 @@ PRE=0
 BASE=1
 
 # define patch level
-PL=1.0
+PL=0
 
 #define branch
 BRANCH=joydetect-pl0
@@ -24,6 +24,9 @@ LAUNCHPAD_PPA="ppa:mdeguzis/retrorig"
 
 #define uploader for changelog
 uploader="Michael DeGuzis <mdeguzis@gmail.com>"
+
+#define manpage program author
+manpage_author="Michael DeGuzis <mdeguzis@gmail.com>"
 
 #define package maintainer for dsc and control file 
 pkgmaintainer="RetroRig Development Team <mdeguzis@gmail.com>"
@@ -139,6 +142,10 @@ cp ~/RetroRig/supplemental/joydetect/debian/changelog debian/
 sed -i "s|version_placeholder|$PRE:$BASE.$PL|g" debian/changelog
 sed -i "s|uploader|$uploader|g" debian/changelog
 
+echo "copyright"
+cp ~/RetroRig/supplemental/joydetect/debian/copyright debian/
+sed -i "s|pkgmaintainer|$pkgmaintainer|g" debian/copyright
+
 echo "control"
 cp ~/RetroRig/supplemental/joydetect/debian/control debian/
 sed -i "s|pkgmaintainer|$pkgmaintainer|g" debian/control
@@ -148,6 +155,11 @@ cp ~/RetroRig/supplemental/joydetect/debian/rules debian/
 
 echo "format"
 cp ~/RetroRig/supplemental/joydetect/debian/source/format debian/source/
+
+echo "manpage"
+cp ~/RetroRig/supplemental/joydetect/debian/joydetect.7 debian/
+cp ~/RetroRig/supplemental/joydetect/debian/joydetect.manpages debian/
+sed -i "s|author_temp|$manpage_author|g" debian/joydetect.7
 
 if [[ -n "$1" ]]; then
   arg0=$1
