@@ -791,7 +791,7 @@ RetorRig loads to use the gamepad" 14 60
 	h_correct_perms
 
 	# Let the user know about reboot
-	dialog --msgbox "Please reboot is needed to fully enable the controller"  5 60
+	dialog --msgbox "Please reboot to fully enable the controller!"  5 60
 
 }
 
