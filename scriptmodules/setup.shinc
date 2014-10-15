@@ -83,15 +83,10 @@ function rrs_prepareFolders()
 	pathlist+=("$rootdir/Saves/Atari 2600")
 	pathlist+=("$rootdir/Saves/Atari Lynx")
 	pathlist+=("$rootdir/Saves/MAME")
-	pathlist+=("$rootdir/Saves/Gamecube")
+	pathlist+=("$rootdir/Saves/Gamecube_Wii")
 	pathlist+=("$rootdir/Saves/Nintendo 64")
-	pathlist+=("$rootdir/Saves/NES")
-	pathlist+=("$rootdir/Saves/SNES")
-	pathlist+=("$rootdir/Saves/Sega Master System")
-	pathlist+=("$rootdir/Saves/Sega Game Gear")
-	pathlist+=("$rootdir/Saves/Sega Genesis")
-	pathlist+=("$rootdir/Saves/Sega CD")
-	pathlist+=("$rootdir/Saves/Sega 32X")
+	pathlist+=("$rootdir/Saves/NES_SNES_PS1_Sega")
+	pathlist+=("$rootdir/Saves/Sega")
 	pathlist+=("$rootdir/Saves/GB")
 	pathlist+=("$rootdir/Saves/GBC")
 	pathlist+=("$rootdir/Saves/GBA")
@@ -99,9 +94,7 @@ function rrs_prepareFolders()
 	pathlist+=("$rootdir/Saves/Neo Geo/CDZ")
 	pathlist+=("$rootdir/Saves/Neo Geo/AES")
 	pathlist+=("$rootdir/Saves/PSP")
-	pathlist+=("$rootdir/Saves/PS1")
 	pathlist+=("$rootdir/Saves/PS2")
-	pathlist+=("$rootdir/Saves/Wii")
 
 	# create dotfiles
 	pathlist+=("$home/.retrorig")
@@ -132,7 +125,15 @@ function rrs_prepareFolders()
 	# filesys.path_firmware
 	pathlist+=("$rootdir/BIOS/Mednafen")
 	pathlist+=("$rootdir/BIOS/PCSX2")
-
+	
+	#folder for savestates
+	pathlist+=("$home/.retrorig/.dolphin-emu")
+	pathlist+=("$home/.retrorig/.gens")
+	pathlist+=("$home/.retrorig/.mednafen")
+	pathlist+=("$home/.retrorig/.config/mupen64plus")
+	pathlist+=("$home/.retrorig/.config/pcsx2")
+	pathlist+=("$home/.retrorig/.config/ppsspp/PSP")
+	
 	#Configs (not needed at the moment)
 	# pathlist+=("$rootdir/Configs")
 
@@ -149,6 +150,96 @@ function rrs_prepareFolders()
 
 	# correct permissions
 	h_correct_perms
+	
+	#backup existing state saves, if a backup folder does not exist, and the save state folder a real directory is
+	if [ ! -d "$home/.retrorig/.dolphin-emu/StateSaves.old" ]; then
+		if [ ! -L "$home/.retrorig/.dolphin-emu/StateSaves" ]; then
+			mv -f "$home/.retrorig/.dolphin-emu/StateSaves" 		"$home/.retrorig/.dolphin-emu/StateSaves.old"
+			dolphin_backup=true
+		fi
+	fi
+	
+	if [ ! -d "$home/.retrorig/.config/mupen64plus/save.old" ]; then
+		if [ ! -L "$home/.retrorig/.config/mupen64plus/save" ]; then
+			mv -f "$home/.retrorig/.config/mupen64plus/save" 	"$home/.retrorig/.config/mupen64plus/save.old"
+			mupen64plus_backup=true
+		fi
+	fi
+	
+	if [ ! -d "$home/.retrorig/.mednafen/sav.old" ]; then
+		if [ ! -L "$home/.retrorig/.mednafen/sav" ]; then
+			mv -f "$home/.retrorig/.mednafen/sav" 					"$home/.retrorig/.mednafen/sav.old"
+			mednafen_backup=true
+		fi
+	fi
+	
+	if [ ! -d "$home/.retrorig/.gens/StateSaves.old" ]; then
+		if [ ! -L "$home/.retrorig/.gens/StateSaves" ]; then
+			mv -f "$home/.retrorig/.gens/StateSaves" 				"$home/.retrorig/.gens/StateSaves.old"
+			gens_backup=true
+		fi
+	fi
+	
+	if [ ! -d "$home/.retrorig/.config/ppsspp/PSP/SAVEDATA.old" ]; then
+		if [ ! -L "$home/.retrorig/.config/ppsspp/PSP/SAVEDATA" ]; then
+			mv -f "$home/.retrorig/.config/ppsspp/PSP/SAVEDATA" 	"$home/.retrorig/.config/ppsspp/PSP/SAVEDATA.old"
+			ppsspp_backup=true
+		fi
+	fi
+	
+	if [ ! -d "$home/.retrorig/.config/pcsx2/sstates.old" ]; then
+		if [ ! -L "$home/.retrorig/.config/pcsx2/sstates" ]; then
+			mv -f "$home/.retrorig/.config/pcsx2/sstates" 			"$home/.retrorig/.config/pcsx2/sstates.old"
+			pcsx2_backup=true
+		fi
+	fi
+	
+	#remove old links
+	rm -f "$home/.retrorig/.dolphin-emu/StateSaves"
+	rm -f "$home/.retrorig/.config/mupen64plus/save"
+	rm -f "$home/.retrorig/.mednafen/sav"
+	rm -f "$home/.retrorig/.gens/StateSaves"
+	rm -f "$home/.retrorig/.config/ppsspp/PSP/SAVEDATA"
+	rm -f "$home/.retrorig/.config/pcsx2/sstates"
+	
+	#create links 
+	ln -s "$rootdir/Saves/Gamecube_Wii" 					"$home/.retrorig/.dolphin-emu/StateSaves"
+	ln -s "$rootdir/Saves/Nintendo 64" 						"$home/.retrorig/.config/mupen64plus/save"
+	ln -s "$rootdir/Saves/NES_SNES_PS1_Sega" 				"$home/.retrorig/.mednafen/sav"
+	ln -s "$rootdir/Saves/Sega" 							"$home/.retrorig/.gens/StateSaves"
+	ln -s "$rootdir/Saves/PSP"								"$home/.retrorig/.config/ppsspp/PSP/SAVEDATA"
+	ln -s "$rootdir/Saves/PS2"								"$home/.retrorig/.config/pcsx2/sstates"
+	
+	#restore backup
+	if [ "$dolphin_backup" == "true" ]; then
+		cp -rf $home/.retrorig/.dolphin-emu/StateSaves.old/* 			"$home/.retrorig/.dolphin-emu/StateSaves/"
+	fi
+	
+	if [ "$mupen64plus_backup" == "true" ]; then
+		cp -rf $home/.retrorig/.config/mupen64plus/StateSaves.old/* 	"$home/.retrorig/.config/mupen64plus/StateSaves/"
+	fi
+	
+	if [ "$mednafen_backup" == "true" ]; then
+		cp -rf $home/.retrorig/.mednafen/sav.old/* 						"$home/.retrorig/.mednafen/sav/"
+	fi
+	
+	if [ "$gens_backup" == "true" ]; then
+		cp -rf $home/.retrorig/.gens/StateSaves.old/* 					"$home/.retrorig/.gens/StateSaves/"
+	fi
+	
+	if [ "$ppsspp_backup" == "true" ]; then
+		cp -rf $home/.retrorig/.config/ppsspp/PSP/SAVEDATA.old/* 		"$home/.retrorig/.config/ppsspp/PSP/SAVEDATA/"
+	fi
+	
+	if [ "$pcsx2_backup" == "true" ]; then
+		cp -rf $home/.retrorig/.config/pcsx2/sstates.old/* 				"$home/.retrorig/.config/pcsx2/sstates/"
+	fi
+	
+	#change permission
+	chown -R "$user" "$rootdir/Saves/"
+    chgrp -R "$user" "$rootdir/Saves/"
+    chown -R "$user" "$home/.retrorig/"
+    chgrp -R "$user" "$home/.retrorig/"
 
 }
 
