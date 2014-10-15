@@ -168,21 +168,6 @@ cd lang
 git checkout $BRANCH
 cd ..
 
-echo "changelog"
-cp ~/RetroRig/supplemental/ppsspp/changelog debian/
-sed -i "s|version_placeholder|$PRE:$BASE.$PL|g" debian/changelog
-sed -i "s|uploader|$uploader|g" debian/changelog
-
-echo "control"
-cp ~/RetroRig/supplemental/ppsspp/control debian/
-sed -i "s|pkgmaintainer|$pkgmaintainer|g" debian/control
-
-echo "rules"
-cp ~/RetroRig/supplemental/ppsspp/rules debian/
-
-echo "format"
-cp ~/RetroRig/supplemental/ppsspp/format debian/source/
-
 if [[ -n "$1" ]]; then
   arg0=$1
 else

@@ -1,11 +1,10 @@
 joydetect (version_placeholder) trusty; urgency=medium
 
-
   * source code from https://github.com/professorkaos64/tools
   * branch: joydetect
 
   This C utility collects the accurate MAC Address for PS3/PS4 controllers
 
 
- -- uploader Thu, 13 Oct 2014 20:01:00 -0400
+ --  uploader Thu, 13 Oct 2014 20:01:00 -0400 
 

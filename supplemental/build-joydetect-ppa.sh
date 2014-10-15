@@ -111,12 +111,28 @@ else
     exit
 fi 
 
-
-#change to source folder
+# change to source folder
 cd joydetect
 git pull
 git checkout $BRANCH
+# remove git files
 rm -rf .git .gitignore .hgeol .hgignore
+
+# Create archive
+cd ..
+tar cfj joydetect.orig.tar.bz2 joydetect
+mv joydetect.orig.tar.bz2 joydetect_$BASE.$PL.orig.tar.bz2
+
+echo ""
+echo "##########################################"
+echo "Unpacking debian files"
+echo "##########################################"
+echo ""
+
+# enter github repository
+cd joydetect
+# enter debian build folder
+cd joydetect
 
 echo "changelog"
 cp ~/RetroRig/supplemental/joydetect/debian/changelog debian/
@@ -131,22 +147,7 @@ echo "rules"
 cp ~/RetroRig/supplemental/joydetect/debian/rules debian/
 
 echo "format"
-cp ~/RetroRig/supplemental/joydetect/debian/format debian/source/
-
-# Create archive
-cd ..
-tar cfj joydetect.orig.tar.bz2 joydetect
-mv joydetect.orig.tar.bz2 joydetect_$BASE.$PL.orig.tar.bz2
-
-echo ""
-echo "##########################################"
-echo "Unpacking debian files"
-echo "##########################################"
-echo ""
-
-# already in the git repo / branch
-echo "Debian files are already contained in the github branch"
-echo "Skipping copy from ~/RetroRig/supplemental/joydetect"
+cp ~/RetroRig/supplemental/joydetect/debian/source/format debian/source/
 
 if [[ -n "$1" ]]; then
   arg0=$1
