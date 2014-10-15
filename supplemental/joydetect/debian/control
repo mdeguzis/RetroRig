@@ -7,7 +7,7 @@ Homepage: https://github.com/professorkaos64/RetroRig
 
 Package: joydetect
 Architecture: any
-Build-Depends: gcc (>= 9), ${debuilder:Depends}
+Build-Depends: gcc (>= 9), cmake (>= 2.8)
 Description: Small C utility to effectively grab PS3/PS4 MAC Address
 
 
