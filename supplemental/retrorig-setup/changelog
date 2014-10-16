@@ -13,9 +13,15 @@ retrorig-setup (version_placeholder) trusty; urgency=medium
 
   * Initial upload for PK's RetroRig repo
     
-
  -- uploader  Thu, 12 Oct 2014 18:31:00 -0400
 
+retrorig-setup (version_placeholder) trusty; urgency=medium
+
+  * Updated setup.shinc with joydetect ppa package
+  * Applied latest changes
+  * Bumped to patch level 2
+
+ -- uploader  Wed, 15 Oct 2014 19:45:00 -0400
 
 
 

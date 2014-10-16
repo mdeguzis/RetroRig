@@ -225,7 +225,7 @@ case "$arg0" in
         while true; do
             read -p "Do you wish to upload the source package?    " yn
             case $yn in
-                [Yy]* ) dput ppa:mdeguzis/retrorig ~/pkg-build-tmp/joydetect/joydetect_*.$PL""_source.changes; break;;
+                [Yy]* ) dput ppa:mdeguzis/retrorig ~/pkg-build-tmp/joydetect/joydetect/joydetect_*.$PL""_source.changes; break;;
                 [Nn]* ) break;;
                 * ) echo "Please answer yes or no.";;
             esac

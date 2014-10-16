@@ -3,10 +3,10 @@
 #======================================================================== 
 #
 # Author      : Michael T. DeGuzis, Jens-Christian Lache
-# Date        : 201401009
+# Date        : 201401015
 # Version     : 0.9.5
-# Description : install RetroRig via Debian package
-#	
+# Description : Install RetroRig via Debian package
+#		Please see changelog for latest alterations and fixes
 # ========================================================================
 
 #define base version
@@ -14,7 +14,10 @@ PRE=0
 BASE=0.9.5
 
 # define patch level
-PL=1
+# In this case, this level will be used to denote incremental changes
+# instead of a specific branch for now (beta/master only exist at the
+# momement).
+PL=2
 
 #define branch
 BRANCH=beta
@@ -56,8 +59,8 @@ if [[ -n "$2" ]]; then
   echo "##########################################"
   echo ""
 
-  #apt-get install packages
-  sudo apt-get update -y
+# apt-get install packages
+# sudo apt-get update -y
   sudo apt-get install -y build-essential fakeroot devscripts autoconf autotools-dev binutils-dev \
   debhelper dput
 
@@ -99,8 +102,7 @@ sed -i "s|pkgmaintainer|$pkgmaintainer|g" "retrorig-setup-$PRE:$BASE.$PL.dsc"
 SRC_FOLDER=retrorig-setup-$BASE.$PL
 
 echo "cloning repository"
-#git clone https://github.com/beaumanvienna/RetroRig
-cp -r ~/pkg-build-tmp/RetroRig .
+git clone https://github.com/ProfessorKaos64/RetroRig
 file RetroRig/
 
 if [ $? -eq 0 ]; then  
