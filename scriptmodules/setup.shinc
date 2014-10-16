@@ -321,7 +321,7 @@ function rrs_add_standard_repos()
 
 	# add respository for RetroRig backends (xbmc, mednafen,...)
 	add-apt-repository -y ppa:beauman/retrorig
-	#add-apt-repository -y ppa:beauman/retrorig-testing
+	add-apt-repository -y ppa:mdeguzis/retrorig	
 	
 	# latest X11 drivers
 	add-apt-repository -y ppa:xorg-edgers/ppa
