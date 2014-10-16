@@ -10,8 +10,12 @@ retrorig-setup (version_placeholder) trusty; urgency=medium
     
     Copyright Libregeek.org 2014
     Copyright JC Techno Labs 2014
+
+  * Initial upload for PK's RetroRig repo
     
 
- -- uploader  Thu, 09 Oct 2014 20:41:00 +0200
+ -- uploader  Thu, 12 Oct 2014 18:31:00 -0400
+
+
 
 

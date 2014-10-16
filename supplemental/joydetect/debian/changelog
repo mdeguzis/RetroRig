@@ -1,0 +1,18 @@
+joydetect (version_placeholder) trusty; urgency=medium
+
+  * source code from https://github.com/professorkaos64/joydetect
+  * branch: joydetect
+  * fix linitian warnings/errors
+    - [debian/control] debhelper-but-no-misc-depends
+    - [debian/control] missing-dependency-on-libc needed by usr/bin/joydetect
+    - [source/copyright] missing-license-paragraph-in-dep5-copyright gpl-3
+    - see http://osdir.com/ml/debian-policy/2014-02/msg00022.html
+    - fixed manpage format with rst2man, ammended "NAME" section afterwards
+    - added joydectect.7 manpage, formatted after by rst2man
+    - removed extra licence.txt in cmake source directory from github repo
+    - [debian/control] properly formatted control file
+    - rules changed to catch all "dh $@"
+    - [debian/copyright] updated for proper format
+
+ -- uploader  Wed, 15 Oct 2014 19:27:00 -0400 
+
