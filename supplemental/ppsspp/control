@@ -11,7 +11,7 @@ Homepage: http://ppsspp.org/
 
 Package: ppsspp
 Architecture: any
-Depends: libsdl2-dev
+Depends: ${misc:Depends}, libsdl2-dev
 Description: PPSSPP can run your PSP games on your PC in full HD resolution,
 	and play them on Android too. It can even upscale textures that would
 	otherwise be too blurry as they were made for the small screen of the

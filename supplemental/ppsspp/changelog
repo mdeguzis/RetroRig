@@ -1,7 +1,7 @@
 ppsspp (version_placeholder) trusty; urgency=medium
 
   * Packed for RetroRig
-    This packages features the SDL2 version of ppsspp which supports environment  
+    This package features the SDL2 version of ppsspp which supports environment  
     variable SDL_VIDEO_FULLSCREEN_HEAD to specify a start-up monitor.
 
 

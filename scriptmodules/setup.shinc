@@ -27,7 +27,7 @@ function rrs_prepareFolders()
 	pathlist+=("$rootdir/ROMs/Atari Lynx")
 	pathlist+=("$rootdir/ROMs/Gamecube")
 	pathlist+=("$rootdir/ROMs/MAME")
-	pathlist+=("$rootdir/ROMs/Nintendo 64")
+	pathlist+=("$rootdir/ROMs/mupen64plus")
 	pathlist+=("$rootdir/ROMs/NES")
 	pathlist+=("$rootdir/ROMs/SNES")
 	pathlist+=("$rootdir/ROMs/Sega Master System")
@@ -83,18 +83,18 @@ function rrs_prepareFolders()
 	pathlist+=("$rootdir/Saves/Atari 2600")
 	pathlist+=("$rootdir/Saves/Atari Lynx")
 	pathlist+=("$rootdir/Saves/MAME")
-	pathlist+=("$rootdir/Saves/Gamecube_Wii")
-	pathlist+=("$rootdir/Saves/Nintendo 64")
-	pathlist+=("$rootdir/Saves/NES_SNES_PS1_Sega")
-	pathlist+=("$rootdir/Saves/Sega")
+	pathlist+=("$rootdir/Saves/dolphin-emu")
+	pathlist+=("$rootdir/Saves/mupen64plus")
+	pathlist+=("$rootdir/Saves/mednafen")
+	pathlist+=("$rootdir/Saves/GensGS")
 	pathlist+=("$rootdir/Saves/GB")
 	pathlist+=("$rootdir/Saves/GBC")
 	pathlist+=("$rootdir/Saves/GBA")
 	pathlist+=("$rootdir/Saves/TurboGraphx 16")
 	pathlist+=("$rootdir/Saves/Neo Geo/CDZ")
 	pathlist+=("$rootdir/Saves/Neo Geo/AES")
-	pathlist+=("$rootdir/Saves/PSP")
-	pathlist+=("$rootdir/Saves/PS2")
+	pathlist+=("$rootdir/Saves/ppsspp")
+	pathlist+=("$rootdir/Saves/pcsx2")
 
 	# create dotfiles
 	pathlist+=("$home/.retrorig")
@@ -132,7 +132,7 @@ function rrs_prepareFolders()
 	pathlist+=("$home/.retrorig/.mednafen")
 	pathlist+=("$home/.retrorig/.config/mupen64plus")
 	pathlist+=("$home/.retrorig/.config/pcsx2")
-	pathlist+=("$home/.retrorig/.config/ppsspp/PSP")
+	pathlist+=("$home/.retrorig/.config/ppsspp/ppsspp")
 	
 	#Configs (not needed at the moment)
 	# pathlist+=("$rootdir/Configs")
@@ -203,12 +203,12 @@ function rrs_prepareFolders()
 	rm -f "$home/.retrorig/.config/pcsx2/sstates"
 	
 	#create links 
-	ln -s "$rootdir/Saves/Gamecube_Wii" 					"$home/.retrorig/.dolphin-emu/StateSaves"
-	ln -s "$rootdir/Saves/Nintendo 64" 						"$home/.retrorig/.config/mupen64plus/save"
-	ln -s "$rootdir/Saves/NES_SNES_PS1_Sega" 				"$home/.retrorig/.mednafen/sav"
-	ln -s "$rootdir/Saves/Sega" 							"$home/.retrorig/.gens/StateSaves"
-	ln -s "$rootdir/Saves/PSP"								"$home/.retrorig/.config/ppsspp/PSP/SAVEDATA"
-	ln -s "$rootdir/Saves/PS2"								"$home/.retrorig/.config/pcsx2/sstates"
+	ln -s "$rootdir/Saves/dolphin-emu" 			"$home/.retrorig/.dolphin-emu/StateSaves"
+	ln -s "$rootdir/Saves/mupen64plus" 			"$home/.retrorig/.config/mupen64plus/save"
+	ln -s "$rootdir/Saves/mednafen" 				"$home/.retrorig/.mednafen/sav"
+	ln -s "$rootdir/Saves/GensGS" 					"$home/.retrorig/.gens/StateSaves"
+	ln -s "$rootdir/Saves/ppsspp"						"$home/.retrorig/.config/ppsspp/PSP/SAVEDATA"
+	ln -s "$rootdir/Saves/pcsx2"						"$home/.retrorig/.config/pcsx2/sstates"
 	
 	#restore backup
 	if [ "$dolphin_backup" == "true" ]; then
@@ -481,7 +481,8 @@ function rrs_software()
 	# install binaries
 	apt-get install -y xboxdrv curl python-software-properties \
 	pkg-config software-properties-common dconf-tools jstest-gtk \
-	qjoypad sixad libusb-0.1-4 antimicro bluez getpos unclutter
+	qjoypad sixad libusb-0.1-4 antimicro bluez getpos unclutter \
+	joydetect
 
 	#wii motion support
 	apt-get install -y libcwiid1 lswm wmgui wminput
