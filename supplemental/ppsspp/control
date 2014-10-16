@@ -5,16 +5,13 @@ Maintainer: pkgmaintainer
 Build-Depends: debhelper (>= 9), 
 		cmake,
 		chrpath,
-		libsdl1.2-dev,
-		libqt4-dev,
-		libqt4-opengl-dev,
-		qt4-qmake
+		libsdl2-dev
 Standards-Version: 3.9.5
 Homepage: http://ppsspp.org/
 
 Package: ppsspp
 Architecture: any
-Depends: libsdl1.2-dev
+Depends: ${misc:Depends}, libsdl2-dev
 Description: PPSSPP can run your PSP games on your PC in full HD resolution,
 	and play them on Android too. It can even upscale textures that would
 	otherwise be too blurry as they were made for the small screen of the

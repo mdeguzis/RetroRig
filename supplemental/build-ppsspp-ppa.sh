@@ -3,15 +3,15 @@
 #======================================================================== 
 #
 # Author      : Michael T. DeGuzis, Jens-Christian Lache
-# Date        : 20140925
-# Version     : 0.9.9.1-132
-# Description : Version 0.9.9.1.1, patchlevel 1 for dual monitor support
+# Date        : 20141016
+# Version     : 0.9.9.1-2014/10/15
+# Description : Version 0.9.9.1.2, patchlevel 2 for dual monitor support
 #               
 # Notes: Base for pl0: 
 #	 https://launchpad.net/~ppsspp/+archive/ubuntu/stable/+packages
 #
 # Notes: Base for pl1: 
-#	 The Qt version of ppsspp in patchlevel one supports environment  
+#	 SDL2 support for   
 #        variable SDL_VIDEO_FULLSCREEN_HEAD to specify a start-up monitor.
 #	
 # ========================================================================
@@ -21,13 +21,13 @@ PRE=0
 BASE=0.9.9.1
 
 # define patch level
-PL=1.0
+PL=2
 
 #define branch
 BRANCH=retrorig-pl1
 
 #define upload target
-LAUNCHPAD_PPA="ppa:beauman/retrorig"
+LAUNCHPAD_PPA="ppa:beauman/retrorig-testing"
 
 #define uploader for changelog
 uploader="Jens-Christian Lache <jc.lache@web.de>"
@@ -66,7 +66,7 @@ if [[ -n "$2" ]]; then
   #apt-get install packages
   sudo apt-get update -y
   sudo apt-get install -y build-essential fakeroot devscripts autoconf autotools-dev binutils-dev \
-  debhelper autotools-dev automake1.10 pkg-config libsdl1.2-dev qt4-qmake libqt4-dev libqt4-opengl-dev chrpath
+  debhelper autotools-dev automake1.10 pkg-config libsdl2-dev qt4-qmake libqt4-dev libqt4-opengl-dev chrpath
 
 else
   echo ""
@@ -122,6 +122,7 @@ mv ppsspp/ $SRC_FOLDER
 cd $SRC_FOLDER
 
 git checkout $BRANCH
+rm -rf .git
 
 echo "subfolder native"
 rm -rf native
@@ -136,6 +137,7 @@ else
 fi
 cd native
 git checkout $BRANCH
+rm -rf .git
 cd ..
 
 echo "subfolder ffmpeg"
@@ -151,6 +153,7 @@ fi
 mv ppsspp-ffmpeg ffmpeg
 cd ffmpeg
 git checkout $BRANCH
+rm -rf .git
 cd ..
 
 echo "subfolder lang"
@@ -166,6 +169,7 @@ fi
 mv ppsspp-lang lang
 cd lang
 git checkout $BRANCH
+rm -rf .git
 cd ..
 
 if [[ -n "$1" ]]; then

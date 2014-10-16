@@ -6,6 +6,6 @@ Version: version_placeholder
 Maintainer: pkgmaintainer
 Homepage: http://www.ppsspp.org/
 Standards-Version: 3.9.5
-Build-Depends: debhelper (>= 9), libsdl1.2-dev, qt4-qmake, libqt4-dev, libqt4-opengl-dev, cmake, chrpath, libqt4-opengl-dev
+Build-Depends: debhelper (>= 9), libsdl2-dev, cmake, chrpath
 Package-List: 
  ppsspp deb games extra

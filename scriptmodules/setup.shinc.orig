@@ -321,8 +321,12 @@ function rrs_add_standard_repos()
 
 	# add respository for RetroRig backends (xbmc, mednafen,...)
 	add-apt-repository -y ppa:beauman/retrorig
+<<<<<<< HEAD
 	# Add repository for additional pkgs (retrorig-setup, joydetect)
 	add-apt-repository -y ppa:mdeguzis/retrorig
+=======
+	add-apt-repository -y ppa:mdeguzis/retrorig	
+>>>>>>> 04b1ec0c82d430bfcafbb7ba94a0183bb1b19abf
 	
 	# latest X11 drivers
 	add-apt-repository -y ppa:xorg-edgers/ppa
