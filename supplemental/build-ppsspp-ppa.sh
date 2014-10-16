@@ -27,7 +27,7 @@ PL=2
 BRANCH=retrorig-pl1
 
 #define upload target
-LAUNCHPAD_PPA="ppa:beauman/retrorig"
+LAUNCHPAD_PPA="ppa:beauman/retrorig-testing"
 
 #define uploader for changelog
 uploader="Jens-Christian Lache <jc.lache@web.de>"
@@ -122,6 +122,7 @@ mv ppsspp/ $SRC_FOLDER
 cd $SRC_FOLDER
 
 git checkout $BRANCH
+rm -rf .git
 
 echo "subfolder native"
 rm -rf native
@@ -136,6 +137,7 @@ else
 fi
 cd native
 git checkout $BRANCH
+rm -rf .git
 cd ..
 
 echo "subfolder ffmpeg"
@@ -151,6 +153,7 @@ fi
 mv ppsspp-ffmpeg ffmpeg
 cd ffmpeg
 git checkout $BRANCH
+rm -rf .git
 cd ..
 
 echo "subfolder lang"
@@ -166,6 +169,7 @@ fi
 mv ppsspp-lang lang
 cd lang
 git checkout $BRANCH
+rm -rf .git
 cd ..
 
 echo "changelog"
