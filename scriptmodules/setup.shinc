@@ -321,7 +321,8 @@ function rrs_add_standard_repos()
 
 	# add respository for RetroRig backends (xbmc, mednafen,...)
 	add-apt-repository -y ppa:beauman/retrorig
-	add-apt-repository -y ppa:mdeguzis/retrorig	
+	# Add repository for additional pkgs (retrorig-setup, joydetect)
+	add-apt-repository -y ppa:mdeguzis/retrorig
 	
 	# latest X11 drivers
 	add-apt-repository -y ppa:xorg-edgers/ppa
@@ -481,7 +482,8 @@ function rrs_software()
 	# install binaries
 	apt-get install -y xboxdrv curl python-software-properties \
 	pkg-config software-properties-common dconf-tools jstest-gtk \
-	qjoypad sixad libusb-0.1-4 antimicro bluez getpos unclutter
+	qjoypad sixad libusb-0.1-4 antimicro bluez getpos unclutter \
+	joydetect
 
 	#wii motion support
 	apt-get install -y libcwiid1 lswm wmgui wminput
@@ -599,7 +601,6 @@ function rrs_xbmc_patched()
 	cp -v "$scriptdir/XBMC-cfgs/extra/gp_autodetect_xbmc.sh" "/usr/share/applications/"
 	cp -v "$scriptdir/XBMC-cfgs/extra/RetroRig.desktop" "/usr/share/applications/"
 	cp -v "$scriptdir/XBMC-cfgs/extra/RetroRig.desktop" "$xdg_desktop_dir"
-	cp -v "$scriptdir/XBMC-cfgs/extra/retro-icon.png" "$xdg_pictures_dir"
 	cp -v "$scriptdir/XBMC-cfgs/extra/retro-icon.png" "/usr/share/icons/"
 	cp -v "$scriptdir/XBMC-cfgs/extra/startXBMC.sh" "/usr/share/applications/"
 
