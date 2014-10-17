@@ -5,7 +5,7 @@
 
 	
 	# copy base files
-	cp -r scripts/ gamepad-cfgs/ emu-cfgs/ init-scripts/ scriptmodules/  XBMC-cfgs/ /usr/lib/RetroRig
+	cp -r scripts/ gamepad-cfgs/ emu-cfgs/ init-scripts/ scriptmodules/ common/ XBMC-cfgs/ retrorig-cfgs/ /usr/lib/RetroRig
 	
 	#copy executables
 	cp retrorig-setup.sh /usr/bin/retrorig-setup
@@ -13,6 +13,7 @@
 	
 	#icons
 	cp /usr/lib/RetroRig/XBMC-cfgs/extra/retro-icon.png /usr/share/icons 
+	
 	
 	#supplemental application files
 	cp /usr/lib/RetroRig/XBMC-cfgs/extra/startXBMC.sh /usr/share/applications
