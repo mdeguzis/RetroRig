@@ -1,4 +1,12 @@
-retrorig-setup (version_placeholder) trusty; urgency=medium
+retrorig-setup (0.9.5.2) trusty; urgency=medium
+
+  * Updated setup.shinc with joydetect ppa package
+  * Applied latest changes
+  * Bumped to patch level 2
+
+ -- Michael DeGuzis <mdeguzis@gmail.com>  Wed, 15 Oct 2014 19:45:00 -0400
+
+retrorig-setup (0.9.5.1) trusty; urgency=medium
 
   * RetroRig is a suite of console emulators embedded in a 
     home theater program. It features more than 15 console types,
@@ -13,15 +21,7 @@ retrorig-setup (version_placeholder) trusty; urgency=medium
 
   * Initial upload for PK's RetroRig repo
     
- -- uploader  Thu, 12 Oct 2014 18:31:00 -0400
-
-retrorig-setup (version_placeholder) trusty; urgency=medium
-
-  * Updated setup.shinc with joydetect ppa package
-  * Applied latest changes
-  * Bumped to patch level 2
-
- -- uploader  Wed, 15 Oct 2014 19:45:00 -0400
+ -- Michael DeGuzis <mdeguzis@gmail.com>  Thu, 12 Oct 2014 18:31:00 -0400
 
 
 
