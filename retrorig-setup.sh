@@ -41,6 +41,12 @@ function import() {
     # @description if not found, search the module in the paths contained in $SHELL_LIBRARY_PATH environment variable
     # @param $1 the .shinc file to import, without .shinc extension
     module=$1
+    
+    if [ -f $module.shinc ]; then
+      source $module.shinc
+      echo "Loaded module $(basename $module.shinc)"
+      return
+    fi
 
     if test "x$module" == "x"
     then
@@ -74,16 +80,16 @@ function import() {
         IFS=':'
         for path in $SHELL_LIBRARY_PATH
         do
-    if test -e "$path/$module.shinc"
-            then
+          if test -e "$path/$module.shinc"
+          then
                 . "$path/$module.shinc"
                 return
-    fi
-done
+          fi
+        done
         # restore the standard separator
         IFS="$saved_IFS"
     fi
-    echo "$script_name : Unable to find module $module."
+    echo "$script_name : Unable to find module $module"
     exit 1
 }
 
@@ -147,21 +153,46 @@ function setDesktopEnvironment()
   fi
 }
 
-
-
 script_invoke_path="$0"
 script_name=$(basename "$0")
 getScriptAbsoluteDir "$script_invoke_path"
 script_absolute_dir=$RESULT
 
+#echo script_invoke_path=$script_invoke_path
+#echo script_name=$script_name
+#echo getScriptAbsoluteDir=$getScriptAbsoluteDir
+#echo script_absolute_dir=$script_absolute_dir
+
+if [ "$script_invoke_path" == "/usr/bin/retrorig-setup" ]; then
+
+	#install method via system folder
+	
+	#echo "install from system files"
+	
+	install_source=system
+	LIB_PATH=/usr/lib/RetroRig
+	
+else
+
+	#install method from local git clone
+	
+	#echo "install from local files"
+	
+	install_source=local
+	#echo dirname "$script_absolute_dir"
+	LIB_PATH=`dirname "$script_absolute_dir"`
+	#echo LIB_PATH=$LIB_PATH
+	
+fi
+
 # load script modules
 
-import "scriptmodules/helpers"
-import "scriptmodules/configuration"
-import "scriptmodules/settings"
-import "scriptmodules/setup"
-import "scriptmodules/gamepads"
-import "scriptmodules/emulators"           	
+import "$LIB_PATH/scriptmodules/helpers"
+import "$LIB_PATH/scriptmodules/configuration"
+import "$LIB_PATH/scriptmodules/settings"
+import "$LIB_PATH/scriptmodules/setup"
+import "$LIB_PATH/scriptmodules/gamepads"
+import "$LIB_PATH/scriptmodules/emulators"
 
 ######################################
 # Start main script
