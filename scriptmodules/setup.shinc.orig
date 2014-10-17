@@ -282,25 +282,21 @@ options=(1 "Xbox 360 Controller (wireless)"
 		case $choice in
 
 		1)
-		gp_common
 		gp_x360_wireless
 		h_restore_bios_cfg
 		;;
 
 		2)
-		gp_common
 		gp_x360_usb
 		h_restore_bios_cfg
 		;;
 
 		3)
-		gp_common
 		gp_ps3_blu
 		h_restore_bios_cfg
 		;;
 
 		4)
-		gp_common
 		gp_ps3_usb
 		h_restore_bios_cfg
 		;;
@@ -325,8 +321,12 @@ function rrs_add_standard_repos()
 
 	# add respository for RetroRig backends (xbmc, mednafen,...)
 	add-apt-repository -y ppa:beauman/retrorig
+<<<<<<< HEAD
 	# Add repository for additional pkgs (retrorig-setup, joydetect)
 	add-apt-repository -y ppa:mdeguzis/retrorig
+=======
+	add-apt-repository -y ppa:mdeguzis/retrorig	
+>>>>>>> 04b1ec0c82d430bfcafbb7ba94a0183bb1b19abf
 	
 	# latest X11 drivers
 	add-apt-repository -y ppa:xorg-edgers/ppa

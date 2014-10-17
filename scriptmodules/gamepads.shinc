@@ -7,6 +7,19 @@
 # You can also reach me on twitter: @N3RD42
 #
 
+function gp_common()
+{
+	############################################################
+	# Purpose: add files common to add gamepad configurations
+	############################################################
+
+	# offline artwork scrapper configs
+	cp -v "$scriptdir/common/MAME/parserConfig.xml" "$rootdir/Artwork/MAME/"
+	cp -v "$scriptdir/common/MAME/MAME.txt" "$rootdir/Artwork/MAME/"
+	cp -v "$scriptdir/common/MAME synopsis RCB 201202.zip" "$rootdir/Artwork/MAME/"
+
+}
+
 function gp_ps3_blu()
 {
 
@@ -26,11 +39,6 @@ function gp_ps3_blu()
 	cp -v "$scriptdir/emu-cfgs/ps3_blu_controller/MAME/default.cfg" "$config_home/.mame/cfg/"
 	cp -v "$scriptdir/emu-cfgs/ps3_blu_controller/MAME/mame.ini" "$config_home/.mame/"
  
-	# offline artwork scrapper configs
-	cp -v "$scriptdir/emu-cfgs/ps3_blu_controller/MAME/parserConfig.xml" "$rootdir/Artwork/MAME/"
-	cp -v "$scriptdir/emu-cfgs/ps3_blu_controller/MAME/MAME.txt" "$rootdir/Artwork/MAME/"
-	cp -v "$scriptdir/emu-cfgs/ps3_blu_controller/MAME/MAME synopsis RCB 201202.zip" "$rootdir/Artwork/MAME/"
-
 	# mess
 	# default path: /home/$USER/.retrorig/.mess
 	# Main config
@@ -535,11 +543,6 @@ function gp_ps3_usb()
 	# Main config
 	cp -v "$scriptdir/emu-cfgs/ps3_usb_controller/MAME/default.cfg" "$config_home/.mame/cfg"
 	cp -v "$scriptdir/emu-cfgs/ps3_usb_controller/MAME/mame.ini" "$config_home/.mame/"
- 
-	# offline artwork scrapper configs
-	cp -v "$scriptdir/emu-cfgs/ps3_usb_controller/MAME/parserConfig.xml" "$rootdir/Artwork/MAME"
-	cp -v "$scriptdir/emu-cfgs/ps3_usb_controller/MAME/MAME.txt" "$rootdir/Artwork/MAME"
-	cp -v "$scriptdir/emu-cfgs/ps3_usb_controller/MAME/MAME synopsis RCB 201202.zip" "$rootdir/Artwork/MAME"
 
 	# mess
 	# default path: /home/$USER/.retrorig/.mednafen/mednafen.cfg
@@ -816,11 +819,6 @@ function gp_x360_wireless()
 	# Main config
 	cp -v "$scriptdir/emu-cfgs/x360_wireless_controller/MAME/default.cfg" "$config_home/.mame/cfg"
 	cp -v "$scriptdir/emu-cfgs/x360_wireless_controller/MAME/mame.ini" "$config_home/.mame/"
- 
-	# offline artwork scrapper configs
-	cp -v "$scriptdir/emu-cfgs/x360_wireless_controller/MAME/parserConfig.xml" "$rootdir/Artwork/MAME"
-	cp -v "$scriptdir/emu-cfgs/x360_wireless_controller/MAME/MAME.txt" "$rootdir/Artwork/MAME"
-	cp -v "$scriptdir/emu-cfgs/x360_wireless_controller/MAME/MAME synopsis RCB 201202.zip" "$rootdir/Artwork/MAME"
 
 	# mess
 	# default path: /home/$USER/.mednafen/mednafen.cfg
@@ -1097,11 +1095,6 @@ function gp_x360_usb()
 	# Main config
 	cp -v "$scriptdir/emu-cfgs/x360_usb_controller/MAME/default.cfg" "$config_home/.mame/cfg"
 	cp -v "$scriptdir/emu-cfgs/x360_usb_controller/MAME/mame.ini" "$config_home/.mame/"
- 
-	# offline artwork scrapper configs
-	cp -v "$scriptdir/emu-cfgs/x360_usb_controller/MAME/parserConfig.xml" "$rootdir/Artwork/MAME"
-	cp -v "$scriptdir/emu-cfgs/x360_usb_controller/MAME/MAME.txt" "$rootdir/Artwork/MAME"
-	cp -v "$scriptdir/emu-cfgs/x360_usb_controller/MAME/MAME synopsis RCB 201202.zip" "$rootdir/Artwork/MAME"
 
 	# mess
 	# default path: /home/$USER/.mednafen/mednafen.cfg

@@ -102,7 +102,12 @@ sed -i "s|pkgmaintainer|$pkgmaintainer|g" "retrorig-setup-$PRE:$BASE.$PL.dsc"
 SRC_FOLDER=retrorig-setup-$BASE.$PL
 
 echo "cloning repository"
+<<<<<<< HEAD
 git clone https://github.com/ProfessorKaos64/RetroRig
+=======
+#git clone https://github.com/beaumanvienna/RetroRig
+cp -r ~/pkg-build-tmp/RetroRig .
+>>>>>>> 04b1ec0c82d430bfcafbb7ba94a0183bb1b19abf
 file RetroRig/
 
 if [ $? -eq 0 ]; then  
