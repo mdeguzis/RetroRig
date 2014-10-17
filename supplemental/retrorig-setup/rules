@@ -41,7 +41,7 @@ override_dh_install:
 	mkdir -p $(CURDIR)/debian/tmp/etc/init.d
 	
 	# copy base files
-	cp -r scripts/ gamepad-cfgs/ emu-cfgs/ init-scripts/ scriptmodules/  XBMC-cfgs/ $(CURDIR)/debian/tmp/usr/lib/RetroRig
+	cp -r scripts/ gamepad-cfgs/ emu-cfgs/ init-scripts/ scriptmodules/  XBMC-cfgs/ retrorig-cfgs/ common/ $(CURDIR)/debian/tmp/usr/lib/RetroRig
 	
 	#copy executables
 	cp retrorig-setup $(CURDIR)/debian/tmp/usr/bin/ 

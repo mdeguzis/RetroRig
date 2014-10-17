@@ -200,16 +200,16 @@ options=(1 "Current configuration"
 		#echo curent plugin settings
 		#mupen64plus
 		echo "Mupen64plus:" > res.txt
-		grep -i "VideoPlugin = " "$config_home/.config/mupen64plus/mupen64plus.cfg" >> "$scriptdir/logs/res.txt"
-		echo "" >> "$scriptdir/logs/res.txt"
+		grep -i "VideoPlugin = " "$config_home/.config/mupen64plus/mupen64plus.cfg" >> "$rootdir/logs/res.txt"
+		echo "" >> "$rootdir/logs/res.txt"
 		#Stella
-		echo "Stella:" >> "$scriptdir/logs/res.txt"
-		grep -i "tia_filter" "$config_home/.stella/stellarc" >> "$scriptdir/logs/res.txt"
+		echo "Stella:" >> "$rootdir/logs/res.txt"
+		grep -i "tia_filter" "$config_home/.stella/stellarc" >> "$rootdir/logs/res.txt"
 		echo "" >> res.txt
 		#report current resolution
 		dialog --textbox res.txt 33 0
 		#remove text file
-		rm "$scriptdir/logs/res.txt"	
+		rm "$rootdir/logs/res.txt"	
 		;;
 
 		2)
@@ -839,9 +839,7 @@ function h_correct_perms()
 
 	# correct permissions since we use sudo
 	chgrp -Rv "$user" "$rootdir" > /dev/null 2>&1
-    	chown -Rv "$user" "$rootdir" > /dev/null 2>&1
-	chgrp -Rv "$user" "$scriptdir" > /dev/null 2>&1
-    	chown -Rv "$user" "$scriptdir" > /dev/null 2>&1
+	chown -Rv "$user" "$rootdir" > /dev/null 2>&1
 
 	# correct the desktop permissions so we can add our own launcher
 	# This will allow permissions change for all languages. Thanks JC!
@@ -854,43 +852,26 @@ function h_correct_perms()
 	
 	# .retrorig
 	chgrp -R "$user" "$config_home" > /dev/null 2>&1
-     	chown -R "$user" "$config_home" > /dev/null 2>&1
+	chown -R "$user" "$config_home" > /dev/null 2>&1
 
 	# xbmc dotfile (our custom path)
 	chgrp -R "$user" "$xbmc_home" > /dev/null 2>&1
-     	chown -R "$user" "$xbmc_home" > /dev/null 2>&1
+	chown -R "$user" "$xbmc_home" > /dev/null 2>&1
 
 	# qjoypad files from user home directory
 	chgrp -R "$user" "$home/.qjoypad3" > /dev/null 2>&1
-     	chown -R "$user" "$home/.qjoypad3" > /dev/null 2>&1
+	chown -R "$user" "$home/.qjoypad3" > /dev/null 2>&1
 
 	# XBMC gamepad auto-detect helper
-	chgrp -R "$user" "/usr/share/applications/gp_autodetect_xbmc.sh" > /dev/null 2>&1
-     	chown -R "$user" "/usr/share/applications/gp_autodetect_xbmc.sh" > /dev/null 2>&1
 	chmod ugo+x "/usr/share/applications/gp_autodetect_xbmc.sh" > /dev/null 2>&1
 
 	# start script for RetroRig application
-	chgrp -R "$user" "/usr/share/applications/startXBMC.sh" > /dev/null 2>&1
-	chown -R "$user" "/usr/share/applications/startXBMC.sh" > /dev/null 2>&1
 	chmod ugo+x "/usr/share/applications/startXBMC.sh" > /dev/null 2>&1
 
 	# RetroRig autostart file
 	chgrp -R "$user" "$home/.config/autostart/RetroRig.desktop" > /dev/null 2>&1
 	chown -R "$user" "$home/.config/autostart/RetroRig.desktop" > /dev/null 2>&1
 	chmod ugo+x "$home/.config/autostart/RetroRig.desktop" > /dev/null 2>&1
-
-	# qjoypad autostart file
-	chgrp -R "$user" "$home/.config/autostart/qjoypad.desktop" > /dev/null 2>&1
-	chown -R "$user" "$home/.config/autostart/qjoypad.desktop" > /dev/null 2>&1
-
-	# Pictures directory
-	chgrp -R "$user" "$xdg_pictures_dir/retro-icon.png" > /dev/null 2>&1
-	chown -R "$user" "$xdg_pictures_dir/retro-icon.png" > /dev/null 2>&1
-
-	# antimicro
-	chgrp -R "$user" "$xdg_pictures_dir/retro-icon.png" > /dev/null 2>&1
-	chown -R "$user" "$xdg_pictures_dir/retro-icon.png" > /dev/null 2>&1
-	chmod ugo+x "/usr/bin/antimicro"
 
 	# correct our own start file for retrorig
 	chmod ugo+x /usr/bin/xbmc-retrorig
@@ -981,7 +962,7 @@ function h_update_git()
 {
 
 echo "Fetching latest version of the RetroRig Setup Script."
-pushd "$scriptdir"
+pushd "$rootdir"
 
 if [[ ! -d ".git" ]]; then
 	dialog --backtitle "LibreGeek.org - RetroRig Setup." --msgbox "Cannot find direcotry 	'.git'. Please clone the RetroRig setup script via \

@@ -14,8 +14,8 @@ function gp_common()
 	############################################################
 
 	# offline artwork scrapper configs
-	cp -v "$scriptdir/common/MAME/parserConfig.xml" "$rootdir/Artwork/MAME/"
-	cp -v "$scriptdir/common/MAME/MAME.txt" "$rootdir/Artwork/MAME/"
+	cp -v "$scriptdir/common/parserConfig.xml" "$rootdir/Artwork/MAME/"
+	cp -v "$scriptdir/common/MAME.txt" "$rootdir/Artwork/MAME/"
 	cp -v "$scriptdir/common/MAME synopsis RCB 201202.zip" "$rootdir/Artwork/MAME/"
 
 }
@@ -100,7 +100,7 @@ function gp_ps3_blu()
 	cp -v "$scriptdir/XBMC-cfgs/userdata/addon_data/script.games.rom.collection.browser/config.xml" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/"
 
 	# blacklist xpad
-	cp -v "$rootdir/init-scripts/ps3_blu_controller/blacklist.conf" "/etc/modprobe.d/"
+	cp -v "$scriptdir/init-scripts/ps3_blu_controller/blacklist.conf" "/etc/modprobe.d/"
 
 	###############################################################################################
 	# Add emulator specifc control remaps here for AniMicro
@@ -113,13 +113,13 @@ function gp_ps3_blu()
 	###############################################################################################
 
 	# copy in profiles for emulators (antimicro)
-	cp -v "$rootdir/gamepad-cfgs/ps3_blu_controller/antimicro_settings.ini" "$config_home/.config/antimicro/"
-	cp -v "$rootdir/gamepad-cfgs/ps3_blu_controller/am_pcsx2_ps3_blu.joystick.xml" "$config_home/.config/antimicro/"
-	cp -v "$rootdir/gamepad-cfgs/ps3_blu_controller/am_mednafen_gen_ps3_blu.joystick.xml" "$config_home/.config/antimicro/"
-	cp -v "$rootdir/gamepad-cfgs/ps3_blu_controller/am_mednafen_ps1_ps3_blu.joystick.xml" "$config_home/.config/antimicro/"
-	cp -v "$rootdir/gamepad-cfgs/ps3_blu_controller/am_ppsspp_ps3_blu.joystick.xml" "$config_home/.config/antimicro/"
-	cp -v "$rootdir/gamepad-cfgs/ps3_blu_controller/am_gensgs_ps3_blu.joystick.xml" "$config_home/.config/antimicro/"
-	cp -v "$rootdir/gamepad-cfgs/ps3_blu_controller/am_dolphin_ps3_blu.joystick.xml" "$config_home/.config/antimicro/"
+	cp -v "$scriptdir/gamepad-cfgs/ps3_blu_controller/antimicro_settings.ini" "$config_home/.config/antimicro/"
+	cp -v "$scriptdir/gamepad-cfgs/ps3_blu_controller/am_pcsx2_ps3_blu.joystick.xml" "$config_home/.config/antimicro/"
+	cp -v "$scriptdir/gamepad-cfgs/ps3_blu_controller/am_mednafen_gen_ps3_blu.joystick.xml" "$config_home/.config/antimicro/"
+	cp -v "$scriptdir/gamepad-cfgs/ps3_blu_controller/am_mednafen_ps1_ps3_blu.joystick.xml" "$config_home/.config/antimicro/"
+	cp -v "$scriptdir/gamepad-cfgs/ps3_blu_controller/am_ppsspp_ps3_blu.joystick.xml" "$config_home/.config/antimicro/"
+	cp -v "$scriptdir/gamepad-cfgs/ps3_blu_controller/am_gensgs_ps3_blu.joystick.xml" "$config_home/.config/antimicro/"
+	cp -v "$scriptdir/gamepad-cfgs/ps3_blu_controller/am_dolphin_ps3_blu.joystick.xml" "$config_home/.config/antimicro/"
 
 	#####################
 	# PCSX2
@@ -389,14 +389,14 @@ function ps3_set_ctrl_assignments()
 	sleep 2s
 
 	# copy over default keyboard file:
-	cp "$rootdir/gamepad-cfgs/ps3_blu_controller/keyboard.xml" "$xbmc_home/userdata/keymaps/"
+	cp "$scriptdir/gamepad-cfgs/ps3_blu_controller/keyboard.xml" "$xbmc_home/userdata/keymaps/"
 
 	# Copy our keymap to the regular .xbmc dotfile directory if keyboard.xml exists:
 	if [[ -f "$home/.xbmc/userdata/keymaps/keyboard.xml" ]]; then
 		# back up current file
 		cp -v "$home/.xbmc/userdata/keymaps/keyboard.xml" "$home/.xbmc/userdata/keymaps/keyboard.xml.old"
 		# copy in keymap
-		cp "$rootdir/gamepad-cfgs/ps3_blu_controller/keyboard.xml" "$home/.xbmc/userdata/keymaps/"
+		cp "$scriptdir/gamepad-cfgs/ps3_blu_controller/keyboard.xml" "$home/.xbmc/userdata/keymaps/"
 	fi
 
 	# First grab MAC Addresses:
@@ -598,22 +598,22 @@ function gp_ps3_usb()
 	##############################################################
 
 	# inject init script and default config for xboxdrv
-	cp -v "$rootdir/init-scripts/ps3_usb_controller/xboxdrv" "/etc/init.d/"
-	cp -v "$rootdir/init-scripts/ps3_usb_controller/default/xboxdrv" "/etc/default/xboxdrv"
+	cp -v "$scriptdir/init-scripts/ps3_usb_controller/xboxdrv" "/etc/init.d/"
+	cp -v "$scriptdir/init-scripts/ps3_usb_controller/default/xboxdrv" "/etc/default/xboxdrv"
 
 	# Copy our keymap to the regular .xbmc dotfile directory if keyboard.xml exists:
 	if [[ -f "$home/.xbmc/userdata/keymaps/keyboard.xml" ]]; then
 		# back up current file
 		cp -v "$home/.xbmc/userdata/keymaps/keyboard.xml" "$home/.xbmc/userdata/keymaps/keyboard.xml.old"
 		# copy in keymap
-		cp "$rootdir/gamepad-cfgs/ps3_usb_controller/keyboard.xml" "$home/.xbmc/userdata/keymaps/"
+		cp "$scriptdir/gamepad-cfgs/ps3_usb_controller/keyboard.xml" "$home/.xbmc/userdata/keymaps/"
 	fi
 	
 	# blacklist xpad
-	cp -v "$rootdir/init-scripts/ps3_usb_controller/blacklist.conf" "/etc/modprobe.d/"
+	cp -v "$scriptdir/init-scripts/ps3_usb_controller/blacklist.conf" "/etc/modprobe.d/"
 
 	# copy over default keyboard file:
-	cp -v "$rootdir/gamepad-cfgs/ps3_usb_controller/keyboard.xml" "$xbmc_home/userdata/keymaps/keyboard.xml"
+	cp -v "$scriptdir/gamepad-cfgs/ps3_usb_controller/keyboard.xml" "$xbmc_home/userdata/keymaps/keyboard.xml"
 
 	##############################################################
 	# Set number of controllers for /etc/default/xboxdrv
@@ -674,7 +674,7 @@ RetorRig loads to use the gamepad" 14 60
 	cp -v "$scriptdir/XBMC-cfgs/userdata/addon_data/script.games.rom.collection.browser/config.xml" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/"
 
 	# blacklist xpad
-	cp -v "$rootdir/init-scripts/ps3_blu_controller/blacklist.conf" "/etc/modprobe.d/"
+	cp -v "$scriptdir/init-scripts/ps3_blu_controller/blacklist.conf" "/etc/modprobe.d/"
 
 	###############################################################################################
 	# Add emulator specifc control remaps here for AniMicro
@@ -687,13 +687,13 @@ RetorRig loads to use the gamepad" 14 60
 	###############################################################################################
 
 	# copy in profiles for emulators (antimicro)
-	cp -v "$rootdir/gamepad-cfgs/ps3_usb_controller/antimicro_settings.ini" "$config_home/.config/antimicro/"
-	cp -v "$rootdir/gamepad-cfgs/ps3_usb_controller/am_pcsx2_ps3_usb.joystick.xml" "$config_home/.config/antimicro/"
-	cp -v "$rootdir/gamepad-cfgs/ps3_usb_controller/am_mednafen_gen_ps3_usb.joystick.xml" "$config_home/.config/antimicro/"
-	cp -v "$rootdir/gamepad-cfgs/ps3_usb_controller/am_mednafen_ps1_ps3_usb.joystick.xml" "$config_home/.config/antimicro/"
-	cp -v "$rootdir/gamepad-cfgs/ps3_usb_controller/am_dolphin_ps3_usb.joystick.xml" "$config_home/.config/antimicro/"
-	cp -v "$rootdir/gamepad-cfgs/ps3_usb_controller/am_ppsspp_ps3_usb.joystick.xml" "$config_home/.config/antimicro/"
-	cp -v "$rootdir/gamepad-cfgs/ps3_usb_controller/am_gensgs_ps3_blu.joystick.xml" "$config_home/.config/antimicro/"
+	cp -v "$scriptdir/gamepad-cfgs/ps3_usb_controller/antimicro_settings.ini" "$config_home/.config/antimicro/"
+	cp -v "$scriptdir/gamepad-cfgs/ps3_usb_controller/am_pcsx2_ps3_usb.joystick.xml" "$config_home/.config/antimicro/"
+	cp -v "$scriptdir/gamepad-cfgs/ps3_usb_controller/am_mednafen_gen_ps3_usb.joystick.xml" "$config_home/.config/antimicro/"
+	cp -v "$scriptdir/gamepad-cfgs/ps3_usb_controller/am_mednafen_ps1_ps3_usb.joystick.xml" "$config_home/.config/antimicro/"
+	cp -v "$scriptdir/gamepad-cfgs/ps3_usb_controller/am_dolphin_ps3_usb.joystick.xml" "$config_home/.config/antimicro/"
+	cp -v "$scriptdir/gamepad-cfgs/ps3_usb_controller/am_ppsspp_ps3_usb.joystick.xml" "$config_home/.config/antimicro/"
+	cp -v "$scriptdir/gamepad-cfgs/ps3_usb_controller/am_gensgs_ps3_blu.joystick.xml" "$config_home/.config/antimicro/"
 
 	#####################
 	# PCSX2
@@ -874,22 +874,22 @@ function gp_x360_wireless()
 	#######################################################
 	
 	#blacklist xpad
-	cp -v "$rootdir/init-scripts/x360_wireless_controller/blacklist.conf" "/etc/modprobe.d/"
+	cp -v "$scriptdir/init-scripts/x360_wireless_controller/blacklist.conf" "/etc/modprobe.d/"
 
 	#inject init script and default config
-	cp -v "$rootdir/init-scripts/x360_wireless_controller/xboxdrv" "/etc/init.d/"
-	cp -v "$rootdir/init-scripts/x360_wireless_controller/default/xboxdrv" "/etc/default/xboxdrv"
+	cp -v "$scriptdir/init-scripts/x360_wireless_controller/xboxdrv" "/etc/init.d/"
+	cp -v "$scriptdir/init-scripts/x360_wireless_controller/default/xboxdrv" "/etc/default/xboxdrv"
 
 	# copy keyboard.xml file for XBMC. Button id numbers are totally diffferent, due to the use of 
 	# the use-dpad-as-button, and use-trigger-as-button options used.
-	cp -v "$rootdir/gamepad-cfgs/x360_wireless_controller/keyboard.xml" "$xbmc_home/userdata/keymaps"
+	cp -v "$scriptdir/gamepad-cfgs/x360_wireless_controller/keyboard.xml" "$xbmc_home/userdata/keymaps"
 
 	# Copy our keymap to the regular .xbmc dotfile directory if keyboard.xml exists:
 	if [[ -f "$home/.xbmc/userdata/keymaps/keyboard.xml" ]]; then
 		# back up current file
 		cp -v "$home/.xbmc/userdata/keymaps/keyboard.xml" "$home/.xbmc/userdata/keymaps/keyboard.xml.old"
 		# copy in keymap
-		cp "$rootdir/gamepad-cfgs/x360_wireless_controller/keyboard.xml" "$home/.xbmc/userdata/keymaps/"
+		cp "$scriptdir/gamepad-cfgs/x360_wireless_controller/keyboard.xml" "$home/.xbmc/userdata/keymaps/"
 	fi
 
 	##############################################################
@@ -951,7 +951,7 @@ RetorRig loads to use the gamepad" 14 60
 	cp -v "$scriptdir/XBMC-cfgs/userdata/addon_data/script.games.rom.collection.browser/config.xml" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/"
 
 	# blacklist xpad
-	cp -v "$rootdir/init-scripts/x360_wireless_controller/blacklist.conf" "/etc/modprobe.d/"
+	cp -v "$scriptdir/init-scripts/x360_wireless_controller/blacklist.conf" "/etc/modprobe.d/"
 
 	###########################################################
 	# Add emulator specifc control remaps here for AniMicro
@@ -961,13 +961,13 @@ RetorRig loads to use the gamepad" 14 60
 	###########################################################
 
 	# copy in profiles for emulators (antimicro)
-	cp -v "$rootdir/gamepad-cfgs/x360_wireless_controller/antimicro_settings.ini" "$config_home/.config/antimicro/"
-	cp -v "$rootdir/gamepad-cfgs/x360_wireless_controller/am_pcsx2_x360_wireless.joystick.xml" "$config_home/.config/antimicro/"
-	cp -v "$rootdir/gamepad-cfgs/x360_wireless_controller/am_mednafen_gen_x360_wireless.joystick.xml" "$config_home/.config/antimicro/"
-	cp -v "$rootdir/gamepad-cfgs/x360_wireless_controller/am_mednafen_ps1_x360_wireless.joystick.xml" "$config_home/.config/antimicro/"
-	cp -v "$rootdir/gamepad-cfgs/x360_wireless_controller/am_ppsspp_x360_wireless.joystick.xml" "$config_home/.config/antimicro/"
-	cp -v "$rootdir/gamepad-cfgs/x360_wireless_controller/am_dolphin_x360_wireless.joystick.xml" "$config_home/.config/antimicro/"
-	cp -v "$rootdir/gamepad-cfgs/x360_wireless_controller/am_gensgs_x360_wireless.joystick.xml" "$config_home/.config/antimicro/"
+	cp -v "$scriptdir/gamepad-cfgs/x360_wireless_controller/antimicro_settings.ini" "$config_home/.config/antimicro/"
+	cp -v "$scriptdir/gamepad-cfgs/x360_wireless_controller/am_pcsx2_x360_wireless.joystick.xml" "$config_home/.config/antimicro/"
+	cp -v "$scriptdir/gamepad-cfgs/x360_wireless_controller/am_mednafen_gen_x360_wireless.joystick.xml" "$config_home/.config/antimicro/"
+	cp -v "$scriptdir/gamepad-cfgs/x360_wireless_controller/am_mednafen_ps1_x360_wireless.joystick.xml" "$config_home/.config/antimicro/"
+	cp -v "$scriptdir/gamepad-cfgs/x360_wireless_controller/am_ppsspp_x360_wireless.joystick.xml" "$config_home/.config/antimicro/"
+	cp -v "$scriptdir/gamepad-cfgs/x360_wireless_controller/am_dolphin_x360_wireless.joystick.xml" "$config_home/.config/antimicro/"
+	cp -v "$scriptdir/gamepad-cfgs/x360_wireless_controller/am_gensgs_x360_wireless.joystick.xml" "$config_home/.config/antimicro/"
 
 	#####################
 	# PCSX2
@@ -1150,22 +1150,22 @@ function gp_x360_usb()
 	############################################
 	
 	#blacklist xpad
-	cp -v "$rootdir/init-scripts/x360_usb_controller/blacklist.conf" "/etc/modprobe.d/"
+	cp -v "$scriptdir/init-scripts/x360_usb_controller/blacklist.conf" "/etc/modprobe.d/"
 
 	#inject init script and default config
-	cp -v "$rootdir/init-scripts/x360_usb_controller/xboxdrv" "/etc/init.d/"
-	cp -v "$rootdir/init-scripts/x360_usb_controller/default/xboxdrv" "/etc/default/xboxdrv"
+	cp -v "$scriptdir/init-scripts/x360_usb_controller/xboxdrv" "/etc/init.d/"
+	cp -v "$scriptdir/init-scripts/x360_usb_controller/default/xboxdrv" "/etc/default/xboxdrv"
 
 	# copy keyboard.xml file for XBMC. Button id numbers are totally diffferent, due to the use of 
 	# the use-dpad-as-button, and use-trigger-as-button options used.
-	cp -v "$rootdir/gamepad-cfgs/x360_usb_controller/keyboard.xml" "$xbmc_home/userdata/keymaps"
+	cp -v "$scriptdir/gamepad-cfgs/x360_usb_controller/keyboard.xml" "$xbmc_home/userdata/keymaps"
 
 	# Copy our keymap to the regular .xbmc dotfile directory if keyboard.xml exists:
 	if [[ -f "$home/.xbmc/userdata/keymaps/keyboard.xml" ]]; then
 		# back up current file
 		cp -v "$home/.xbmc/userdata/keymaps/keyboard.xml" "$home/.xbmc/userdata/keymaps/keyboard.xml.old"
 		# copy in keymap
-		cp "$rootdir/gamepad-cfgs/x360_usb_controller/keyboard.xml" "$home/.xbmc/userdata/keymaps/"
+		cp "$scriptdir/gamepad-cfgs/x360_usb_controller/keyboard.xml" "$home/.xbmc/userdata/keymaps/"
 	fi
 
 	##############################################################
@@ -1227,7 +1227,7 @@ RetorRig loads to use the gamepad" 14 60
 	cp -v "$scriptdir/XBMC-cfgs/userdata/addon_data/script.games.rom.collection.browser/config.xml" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/"
 
 	# blacklist xpad
-	cp -v "$rootdir/init-scripts/x360_usb_controller/blacklist.conf" "/etc/modprobe.d/"
+	cp -v "$scriptdir/init-scripts/x360_usb_controller/blacklist.conf" "/etc/modprobe.d/"
 
 	###########################################################
 	# Add emulator specifc control remaps here for AniMicro
@@ -1237,13 +1237,13 @@ RetorRig loads to use the gamepad" 14 60
 	###########################################################
 
 	# copy in profiles for emulators (antimicro)
-	cp -v "$rootdir/gamepad-cfgs/x360_usb_controller/antimicro_settings.ini" "$config_home/.config/antimicro/"
-	cp -v "$rootdir/gamepad-cfgs/x360_usb_controller/am_pcsx2_x360_usb.joystick.xml" "$config_home/.config/antimicro/"
-	cp -v "$rootdir/gamepad-cfgs/x360_usb_controller/am_mednafen_gen_x360_usb.joystick.xml" "$config_home/.config/antimicro/"
-	cp -v "$rootdir/gamepad-cfgs/x360_usb_controller/am_mednafen_ps1_x360_usb.joystick.xml" "$config_home/.config/antimicro/"
-	cp -v "$rootdir/gamepad-cfgs/x360_usb_controller/am_ppsspp_x360_usb.joystick.xml" "$config_home/.config/antimicro/"
-	cp -v "$rootdir/gamepad-cfgs/x360_usb_controller/am_dolphin_x360_usb.joystick.xml" "$config_home/.config/antimicro/"
-	cp -v "$rootdir/gamepad-cfgs/x360_usb_controller/am_gensgs_x360_usb.joystick.xml" "$config_home/.config/antimicro/"
+	cp -v "$scriptdir/gamepad-cfgs/x360_usb_controller/antimicro_settings.ini" "$config_home/.config/antimicro/"
+	cp -v "$scriptdir/gamepad-cfgs/x360_usb_controller/am_pcsx2_x360_usb.joystick.xml" "$config_home/.config/antimicro/"
+	cp -v "$scriptdir/gamepad-cfgs/x360_usb_controller/am_mednafen_gen_x360_usb.joystick.xml" "$config_home/.config/antimicro/"
+	cp -v "$scriptdir/gamepad-cfgs/x360_usb_controller/am_mednafen_ps1_x360_usb.joystick.xml" "$config_home/.config/antimicro/"
+	cp -v "$scriptdir/gamepad-cfgs/x360_usb_controller/am_ppsspp_x360_usb.joystick.xml" "$config_home/.config/antimicro/"
+	cp -v "$scriptdir/gamepad-cfgs/x360_usb_controller/am_dolphin_x360_usb.joystick.xml" "$config_home/.config/antimicro/"
+	cp -v "$scriptdir/gamepad-cfgs/x360_usb_controller/am_gensgs_x360_usb.joystick.xml" "$config_home/.config/antimicro/"
 
 	#####################
 	# PCSX2

@@ -141,11 +141,11 @@ function rrs_prepareFolders()
 	# Expanding arrays involves [@] and {}
 	for entry in "${pathlist[@]}"
 	do
-	    if [[ ! -d "$entry" ]]; then
-                mkdir -p "$entry" 
-                chown "$user" "$entry"
-                chgrp "$user" "$entry"
-            fi
+		if [[ ! -d "$entry" ]]; then
+			mkdir -p "$entry" 
+			chown "$user" "$entry"
+			chgrp "$user" "$entry"
+		fi
 	done
 
 	# correct permissions
@@ -154,42 +154,42 @@ function rrs_prepareFolders()
 	#backup existing state saves, if a backup folder does not exist, and the save state folder a real directory is
 	if [ ! -d "$home/.retrorig/.dolphin-emu/StateSaves.old" ]; then
 		if [ ! -L "$home/.retrorig/.dolphin-emu/StateSaves" ]; then
-			mv -f "$home/.retrorig/.dolphin-emu/StateSaves" 		"$home/.retrorig/.dolphin-emu/StateSaves.old"
+			mv -f "$home/.retrorig/.dolphin-emu/StateSaves" 			"$home/.retrorig/.dolphin-emu/StateSaves.old"
 			dolphin_backup=true
 		fi
 	fi
 	
 	if [ ! -d "$home/.retrorig/.config/mupen64plus/save.old" ]; then
 		if [ ! -L "$home/.retrorig/.config/mupen64plus/save" ]; then
-			mv -f "$home/.retrorig/.config/mupen64plus/save" 	"$home/.retrorig/.config/mupen64plus/save.old"
+			mv -f "$home/.retrorig/.config/mupen64plus/save" 			"$home/.retrorig/.config/mupen64plus/save.old"
 			mupen64plus_backup=true
 		fi
 	fi
 	
 	if [ ! -d "$home/.retrorig/.mednafen/sav.old" ]; then
 		if [ ! -L "$home/.retrorig/.mednafen/sav" ]; then
-			mv -f "$home/.retrorig/.mednafen/sav" 					"$home/.retrorig/.mednafen/sav.old"
+			mv -f "$home/.retrorig/.mednafen/sav" 								"$home/.retrorig/.mednafen/sav.old"
 			mednafen_backup=true
 		fi
 	fi
 	
 	if [ ! -d "$home/.retrorig/.gens/StateSaves.old" ]; then
 		if [ ! -L "$home/.retrorig/.gens/StateSaves" ]; then
-			mv -f "$home/.retrorig/.gens/StateSaves" 				"$home/.retrorig/.gens/StateSaves.old"
+			mv -f "$home/.retrorig/.gens/StateSaves" 							"$home/.retrorig/.gens/StateSaves.old"
 			gens_backup=true
 		fi
 	fi
 	
 	if [ ! -d "$home/.retrorig/.config/ppsspp/PSP/SAVEDATA.old" ]; then
 		if [ ! -L "$home/.retrorig/.config/ppsspp/PSP/SAVEDATA" ]; then
-			mv -f "$home/.retrorig/.config/ppsspp/PSP/SAVEDATA" 	"$home/.retrorig/.config/ppsspp/PSP/SAVEDATA.old"
+			mv -f "$home/.retrorig/.config/ppsspp/PSP/SAVEDATA"		"$home/.retrorig/.config/ppsspp/PSP/SAVEDATA.old"
 			ppsspp_backup=true
 		fi
 	fi
 	
 	if [ ! -d "$home/.retrorig/.config/pcsx2/sstates.old" ]; then
 		if [ ! -L "$home/.retrorig/.config/pcsx2/sstates" ]; then
-			mv -f "$home/.retrorig/.config/pcsx2/sstates" 			"$home/.retrorig/.config/pcsx2/sstates.old"
+			mv -f "$home/.retrorig/.config/pcsx2/sstates" 				"$home/.retrorig/.config/pcsx2/sstates.old"
 			pcsx2_backup=true
 		fi
 	fi
@@ -203,43 +203,43 @@ function rrs_prepareFolders()
 	rm -f "$home/.retrorig/.config/pcsx2/sstates"
 	
 	#create links 
-	ln -s "$rootdir/Saves/dolphin-emu" 			"$home/.retrorig/.dolphin-emu/StateSaves"
-	ln -s "$rootdir/Saves/mupen64plus" 			"$home/.retrorig/.config/mupen64plus/save"
-	ln -s "$rootdir/Saves/mednafen" 				"$home/.retrorig/.mednafen/sav"
-	ln -s "$rootdir/Saves/GensGS" 					"$home/.retrorig/.gens/StateSaves"
-	ln -s "$rootdir/Saves/ppsspp"						"$home/.retrorig/.config/ppsspp/PSP/SAVEDATA"
-	ln -s "$rootdir/Saves/pcsx2"						"$home/.retrorig/.config/pcsx2/sstates"
+	ln -sf "$rootdir/Saves/dolphin-emu"			"$home/.retrorig/.dolphin-emu/StateSaves"
+	ln -sf "$rootdir/Saves/mupen64plus"			"$home/.retrorig/.config/mupen64plus/save"
+	ln -sf "$rootdir/Saves/mednafen"				"$home/.retrorig/.mednafen/sav"
+	ln -sf "$rootdir/Saves/GensGS"					"$home/.retrorig/.gens/StateSaves"
+	ln -sf "$rootdir/Saves/ppsspp"					"$home/.retrorig/.config/ppsspp/PSP/SAVEDATA"
+	ln -sf "$rootdir/Saves/pcsx2"						"$home/.retrorig/.config/pcsx2/sstates"
 	
 	#restore backup
 	if [ "$dolphin_backup" == "true" ]; then
-		cp -rf $home/.retrorig/.dolphin-emu/StateSaves.old/* 			"$home/.retrorig/.dolphin-emu/StateSaves/"
+		cp -rf $home/.retrorig/.dolphin-emu/StateSaves.old/*				"$home/.retrorig/.dolphin-emu/StateSaves/"
 	fi
 	
 	if [ "$mupen64plus_backup" == "true" ]; then
-		cp -rf $home/.retrorig/.config/mupen64plus/StateSaves.old/* 	"$home/.retrorig/.config/mupen64plus/StateSaves/"
+		cp -rf $home/.retrorig/.config/mupen64plus/StateSaves.old/*	"$home/.retrorig/.config/mupen64plus/StateSaves/"
 	fi
 	
 	if [ "$mednafen_backup" == "true" ]; then
-		cp -rf $home/.retrorig/.mednafen/sav.old/* 						"$home/.retrorig/.mednafen/sav/"
+		cp -rf $home/.retrorig/.mednafen/sav.old/*									"$home/.retrorig/.mednafen/sav/"
 	fi
 	
 	if [ "$gens_backup" == "true" ]; then
-		cp -rf $home/.retrorig/.gens/StateSaves.old/* 					"$home/.retrorig/.gens/StateSaves/"
+		cp -rf $home/.retrorig/.gens/StateSaves.old/* 							"$home/.retrorig/.gens/StateSaves/"
 	fi
 	
 	if [ "$ppsspp_backup" == "true" ]; then
-		cp -rf $home/.retrorig/.config/ppsspp/PSP/SAVEDATA.old/* 		"$home/.retrorig/.config/ppsspp/PSP/SAVEDATA/"
+		cp -rf $home/.retrorig/.config/ppsspp/PSP/SAVEDATA.old/*		"$home/.retrorig/.config/ppsspp/PSP/SAVEDATA/"
 	fi
 	
 	if [ "$pcsx2_backup" == "true" ]; then
-		cp -rf $home/.retrorig/.config/pcsx2/sstates.old/* 				"$home/.retrorig/.config/pcsx2/sstates/"
+		cp -rf $home/.retrorig/.config/pcsx2/sstates.old/*					"$home/.retrorig/.config/pcsx2/sstates/"
 	fi
 	
 	#change permission
 	chown -R "$user" "$rootdir/Saves/"
-    chgrp -R "$user" "$rootdir/Saves/"
-    chown -R "$user" "$home/.retrorig/"
-    chgrp -R "$user" "$home/.retrorig/"
+	chgrp -R "$user" "$rootdir/Saves/"
+	chown -R "$user" "$home/.retrorig/"
+	chgrp -R "$user" "$home/.retrorig/"
 
 }
 
@@ -519,8 +519,8 @@ function rrs_software()
 See debug.log for more details. Continuing on to emulator installs..." 18 60
         fi
 
-        chown -R "$user" "$scriptdir/logs/install_$now.log.gz"
-        chgrp -R "$user" "$scriptdir/logs/install_$now.log.gz"
+        chown -R "$user" "$rootdir/logs/install_$now.log.gz"
+        chgrp -R "$user" "$rootdir/logs/install_$now.log.gz"
 	#END
 }
 
@@ -587,7 +587,7 @@ function rrs_debug()
 
    	echo -e "\nEnd of log file" >> "$rootdir/logs/debug.log" >> "$rootdir/logs/debug.log"
 	
-	dialog --backtitle "LibreGeek.org - RetroRig Setup. Installation folder: $rootdir for user $	user" --msgbox "Debug log was generated in $rootdir/logs/debug.log. Additional logs can be found in the folder $scriptdir/logs/." 10 60 
+	dialog --backtitle "LibreGeek.org - RetroRig Setup. Installation folder: $rootdir for user $	user" --msgbox "Debug log was generated in $rootdir/logs/debug.log. Additional logs can be found in the folder $rootdir/logs/." 10 60 
 
 	#corect permissions
 	h_correct_perms
@@ -616,7 +616,7 @@ function rrs_xbmc_patched()
 	cp -v "$scriptdir/XBMC-cfgs/extra/RetroRig.desktop" "$home/.config/autostart"
 
 	# Can't use $config_home in the desktop file, so need to replace $user string
-	sed -i "s|/home/test/Pictures|$xdg_pictures_dir|g" "$home/.config/autostart/"
+	sed -i "s|/home/test/Pictures|$xdg_pictures_dir|g" "$home/.config/autostart"
 
 	# fix their permissions
 	chmod 755 "/usr/share/applications/gp_autodetect_xbmc.sh" 
@@ -632,9 +632,9 @@ function rrs_xbmc_patched()
 	rm -f "/tmp/xbmc-bin_gotham-patched-for-retrorig-patchlevel-*-0trusty.deb"
 
 	#xbmc works fine w/o these librarys, but generates error messages in its log file
-        apt-get install -y libcec2 libcrystalhd3
+	apt-get install -y libcec2 libcrystalhd3
 
-        # release aptitude hold for upgrade/install
+	# release aptitude hold for upgrade/install
 	apt-mark unhold xbmc
 
 	echo "Installing xbmc"
@@ -643,23 +643,23 @@ function rrs_xbmc_patched()
 	# hold package after install against upgrades
 	apt-mark hold xbmc
 
-        # get SHA1 tag from patched XBMC version
-        sha1=`file /usr/lib/xbmc/xbmc.bin | cut -f 19 -d ' '| cut -f 2 -d '='|cut -f 1 -d ','`
-        # insert SHA1 tag to rescan by replacing the place holder
-        cat "$scriptdir/XBMC-cfgs/extra/rescan" | sed s/placeholderSHA1/$sha1/ > /tmp/rescan
-        # move to /etc/init.d
+	# get SHA1 tag from patched XBMC version
+	sha1=`file /usr/lib/xbmc/xbmc.bin | cut -f 19 -d ' '| cut -f 2 -d '='|cut -f 1 -d ','`
+	# insert SHA1 tag to rescan by replacing the place holder
+	cat "$scriptdir/XBMC-cfgs/extra/rescan" | sed s/placeholderSHA1/$sha1/ > /tmp/rescan
+	# move to /etc/init.d
 	mv "/tmp/rescan" "/etc/init.d/rescan"
 
 	# Create our on start file so we have use our own dotfile, rather than make the user
 	# use their existing .xbmc dotfile
-	cp -v "XBMC-cfgs/extra/xbmc-retrorig" "/usr/bin"
+	cp -v "$scriptdir/XBMC-cfgs/extra/xbmc-retrorig" "/usr/bin"
 
-        chmod 755 "/etc/init.d/rescan"  
+	chmod 755 "/etc/init.d/rescan"  
 
 	# Link the startXBMC.sh startup script to /usr/bin, so users can call "retrorig" at will
-	ln -s "/usr/share/applications/startXBMC.sh" "/usr/bin/retrorig"
+	ln -sf "/usr/share/applications/startXBMC.sh" "/usr/bin/retrorig"
 
-        # update init scripts
+	# update init scripts
 	update-rc.d rescan defaults
 
 	# start service
@@ -677,7 +677,19 @@ function rrs_xbmc_patched()
 function rrs_retrorig_cfgs()
 {
 	cp -Rv "$scriptdir/retrorig-cfgs/retrorig.cfg" "$configFile"
-	ln -s "$scriptdir" "$config_home"
+	ln -sf "$rootdir" "$config_home"
+	ln -sf "$scriptdir/scripts" "$config_home/scripts"
+	chown "$user" "$config_home/scripts"
+	chgrp "$user" "$config_home/scripts"
+	
+	#debug 
+	#ln -sf "$scriptdir/scripts" "$config_home/scripts" would hide 
+	# the script folder from the user
+	# --> the path of setResolution needs to be fixed in xbmc
+	ln -sf "$scriptdir/scripts" "$rootdir/scripts"
+	chown "$user" "$rootdir/scripts"
+	chgrp "$user" "$rootdir/scripts"
+
 }
 
 function rrs_xbmc_cfgs()
@@ -721,7 +733,7 @@ function rrs_xbmc_cfgs()
 	sed -i "s|installdir_temp|$rootdir|g" "$xbmc_home/userdata/guisettings.xml"
 
 	# XBMC custom settings launchers (Advanced Launcher)
-	sed -i "s|config_temp|$config_home|g" "$xbmc_home/userdata/ddon_data/plugin.program.advanced.launcher/launchers.xml"
+	sed -i "s|config_temp|$config_home|g" "$xbmc_home/userdata/addon_data/plugin.program.advanced.launcher/launchers.xml"
 
 	# echo user change
 	echo "The user applied to configuration files was: $user"
@@ -732,7 +744,7 @@ function rrs_xbmc_cfgs()
 
 function rrs_done()
 {
-	kernelUpdate=`cat $scriptdir/logs/kernelUpdate`
+	kernelUpdate=`cat $rootdir/logs/kernelUpdate`
 
 	clear
 
@@ -809,34 +821,34 @@ function rrs_prereq()
         apt-get update
         apt-get install -y git dialog figlet
         if [ $? == '0' ]; then
-            echo "Successfully installed 'git/dialog/figlet'." > "$scriptdir/logs/prechecks.log"
+            echo "Successfully installed 'git/dialog/figlet'." > "$rootdir/logs/prechecks.log"
 	    sleep 3s
 	    prereqs="true"
         else
-            echo "Could not install 'git' and/or 'dialog/figlet'. Exiting..." > "$scriptdir/logs/prechecks.log"
+            echo "Could not install 'git' and/or 'dialog/figlet'. Exiting..." > "$rootdir/logs/prechecks.log"
 	    prereqs="false"
 	    sleep 3s
             exit 1
         fi
     else
-        echo "Found needed packages 'git/dialog/figlet'." > "$scriptdir/logs/prechecks.log"
+        echo "Found needed packages 'git/dialog/figlet'." > "$rootdir/logs/prechecks.log"
 	prereqs="true"
 	sleep 2s
     fi
 
 
-echo "Current install user: $SUDO_USER" >> "$scriptdir/logs/prechecks.log"
-echo "Current install rootdir is: $rootdir" >>"$scriptdir/logs/prechecks.log"
-echo "Current script dir is:  $scriptdir" >>"$scriptdir/logs/prechecks.log"
+echo "Current install user: $SUDO_USER" >> "$rootdir/logs/prechecks.log"
+echo "Current install rootdir is: $rootdir" >>"$rootdir/logs/prechecks.log"
+echo "Current script dir is:  $rootdir" >>"$rootdir/logs/prechecks.log"
 
 if [ "$prereqs" == "true" ]; then
-    echo "Pre-checks were sucessful!!!" >> "$scriptdir/logs/prechecks.log"
+    echo "Pre-checks were sucessful!!!" >> "$rootdir/logs/prechecks.log"
 else
-    echo "Pre-checks were NOT sucessful. Sad crab!" >> "$scriptdir/logs/prechecks.log"
+    echo "Pre-checks were NOT sucessful. Sad crab!" >> "$rootdir/logs/prechecks.log"
 fi
 
-chown -R "$user" "$scriptdir/logs/prechecks.log"
-chgrp -R "$user" "$scriptdir/logs/prechecks.log"
+chown -R "$user" "$rootdir/logs/prechecks.log"
+chgrp -R "$user" "$rootdir/logs/prechecks.log"
 
 
 
@@ -928,14 +940,14 @@ rrs_kernel_check()
 	    rm -f /tmp/linux-headers-3.14*
 	    rm -f /tmp/linux-image-3.14*
 
-	    echo "true" > "$scriptdir/logs/kernelUpdate"
+	    echo "true" > "$rootdir/logs/kernelUpdate"
 
 	elif [ $user_kernel -ge "$target_kernel" ]; then
    	    # Do nothing
 	    echo "Kernel 3.14.x or greater found, exiting"
 	    sleep 2s
 
-	    echo "false" > "$scriptdir/logs/kernelUpdate"
+	    echo "false" > "$rootdir/logs/kernelUpdate"
 
 	fi
 

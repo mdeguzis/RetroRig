@@ -48,7 +48,7 @@ function em_install_pcsx2()
 	# apt-get install pcsx2-unstable
   
 	# Link BIOS path from home/RetroRig (source) to .retrorig/
-	ln -s "$rootdir/BIOS/PCSX2" "$config_home/.config/pcsx2/bios"
+	ln -sf "$rootdir/BIOS/PCSX2" "$config_home/.config/pcsx2/bios"
 
 	#User might have the idea to manually state a bios file in the terminal.
 	#To save them exporting HOME as /home/user/.retrorig,

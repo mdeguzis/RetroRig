@@ -158,48 +158,32 @@ script_name=$(basename "$0")
 getScriptAbsoluteDir "$script_invoke_path"
 script_absolute_dir=$RESULT
 
-#echo script_invoke_path=$script_invoke_path
-#echo script_name=$script_name
-#echo getScriptAbsoluteDir=$getScriptAbsoluteDir
-#echo script_absolute_dir=$script_absolute_dir
-
 if [ "$script_invoke_path" == "/usr/bin/retrorig-setup" ]; then
 
 	#install method via system folder
 	
-	#echo "install from system files"
-	
-	install_source=system
-	LIB_PATH=/usr/lib/RetroRig
+	scriptdir=/usr/lib/RetroRig
 	
 else
 
 	#install method from local git clone
 	
-	#echo "install from local files"
-	
-	install_source=local
-	#echo dirname "$script_absolute_dir"
-	LIB_PATH=`dirname "$script_absolute_dir"`
-	#echo LIB_PATH=$LIB_PATH
+	scriptdir=`dirname "$script_absolute_dir"`
 	
 fi
 
 # load script modules
 
-import "$LIB_PATH/scriptmodules/helpers"
-import "$LIB_PATH/scriptmodules/configuration"
-import "$LIB_PATH/scriptmodules/settings"
-import "$LIB_PATH/scriptmodules/setup"
-import "$LIB_PATH/scriptmodules/gamepads"
-import "$LIB_PATH/scriptmodules/emulators"
+import "$scriptdir/scriptmodules/helpers"
+import "$scriptdir/scriptmodules/configuration"
+import "$scriptdir/scriptmodules/settings"
+import "$scriptdir/scriptmodules/setup"
+import "$scriptdir/scriptmodules/gamepads"
+import "$scriptdir/scriptmodules/emulators"
 
 ######################################
 # Start main script
 ######################################
-
-scriptdir=$(dirname "$0")
-scriptdir=$(cd "$scriptdir" && pwd)
 
 if [[ "$1" == "--help" ]]; then
     rrs_showHelp
@@ -210,10 +194,13 @@ if [ "$(id -u)" -ne 0 ]; then
     printf "Script must be run as root! Try:"
     echo ""
     echo ""
-    printf "'sudo ./retrorig_setup'" 
+    printf "'sudo retrorig-setup'" 
     echo ""
-    echo "OR"
-    printf "'./retrorig_setup --help'"
+    echo "OR (for a git cloned version of RetroRig in its base directory)"
+    printf "'sudo ./retrorig-setup.sh'" 
+    echo ""
+    echo "OR "
+    printf "'retrorig-setup --help'"
     echo ""
     echo ""
     printf "for further information\n"
@@ -291,6 +278,8 @@ setDesktopEnvironment VIDEOS
 # make sure that RetroRig root directory exists
 if [[ ! -d $rootdir ]]; then
     mkdir -p "$rootdir"
+    chown $user:$user "$rootdir"
+    chgrp "$user" "$rootdir"
     if [[ ! -d $rootdir ]]; then
       echo "Couldn't make directory $rootdir"
       exit 1
@@ -298,12 +287,12 @@ if [[ ! -d $rootdir ]]; then
 fi
 
 # make sure that RetroRig-Setup log directory exists
-if [[ ! -d $scriptdir/logs ]]; then
-    mkdir -p "$scriptdir/logs"
-    chown "$user" "$scriptdir/logs"
-    chgrp "$user" "$scriptdir/logs"
-    if [[ ! -d $scriptdir/logs ]]; then
-      echo "Couldn't make directory $scriptdir/logs"
+if [[ ! -d $rootdir/logs ]]; then
+    mkdir -p "$rootdir/logs"
+    chown "$user" "$rootdir/logs"
+    chgrp "$user" "$rootdir/logs"
+    if [[ ! -d $rootdir/logs ]]; then
+      echo "Couldn't make directory $rootdir/logs"
       exit 1
     fi
 fi
@@ -334,6 +323,8 @@ config_home="$home/.retrorig"
 
 #set RetroRig configuration file
 configFile=$config_home/retrorig.cfg
+
+cd "$rootdir"
 
 #################################################################
 
@@ -373,12 +364,12 @@ Installer" --menu "| Main Menu (v.0.9.5b) | \
 		rrs_unity
 		rrs_kernel_check
 		rrs_done
-		} 2>&1 | tee "$scriptdir/logs/install_$now.log.txt"              	
-		chown -R "$user" "$scriptdir/logs/install_$now.log.txt"
-		chgrp -R "$user" "$scriptdir/logs/install_$now.log.txt"
+		} 2>&1 | tee "$rootdir/logs/install_$now.log.txt"              	
+		chown -R "$user" "$rootdir/logs/install_$now.log.txt"
+		chgrp -R "$user" "$rootdir/logs/install_$now.log.txt"
 
-		kernelUpdate=`cat $scriptdir/logs/kernelUpdate`
-		rm -f "$scriptdir/logs/kernelUpdate"
+		kernelUpdate=`cat $rootdir/logs/kernelUpdate`
+		rm -f "$rootdir/logs/kernelUpdate"
 		if [ "$kernelUpdate" == "true" ]; then
 		  rrs_reboot
 		fi
