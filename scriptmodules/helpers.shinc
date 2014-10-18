@@ -71,16 +71,20 @@ h_clean_gamepad()
 	# Needed for: PCSX2, Gens GS
 
 	# Gens GS
-	orig_bios_gens_68=$(grep "32X 68000 BIOS=" "$config_home/.gens")
-	orig_bios_gens_32m=$(grep "32X Master SH2 BIOS=" "$config_home/.gens")
-	orig_bios_gens_32s=$(grep "32X Slave SH2 BIOS=" "$config_home/.gens")
-	orig_bios_gens_e=$(grep "Europe CD BIOS=" "$config_home/.gens")
-	orig_bios_gens_g=$(grep "Genesis BIOS=" "$config_home/.gens")
-	orig_bios_gens_j=$(grep "Japan CD BIOS=" "$config_home/.gens")
-	orig_bios_gens_u=$(grep "USA CD BIOS=" "$config_home/.gens/gens.cfg")
+	if [ -f "$config_home/.gens/gens.cfg" ]; then
+		orig_bios_gens_68=$(grep "32X 68000 BIOS=" "$config_home/.gens/gens.cfg")
+		orig_bios_gens_32m=$(grep "32X Master SH2 BIOS=" "$config_home/.gens/gens.cfg")
+		orig_bios_gens_32s=$(grep "32X Slave SH2 BIOS=" "$config_home/.gens/gens.cfg")
+		orig_bios_gens_e=$(grep "Europe CD BIOS=" "$config_home/.gens/gens.cfg")
+		orig_bios_gens_g=$(grep "Genesis BIOS=" "$config_home/.gens/gens.cfg")
+		orig_bios_gens_j=$(grep "Japan CD BIOS=" "$config_home/.gens/gens.cfg")
+		orig_bios_gens_u=$(grep "USA CD BIOS=" "$config_home/.gens/gens.cfg")
+	fi
 
 	# PCSX2
-	orig_bios_pcsx2=$(grep "BIOS=" "$config_home/.config/pcsx2/inis/PCSX2_ui.ini")
+	if [ -f "$config_home/.config/pcsx2/inis/PCSX2_ui.ini" ]; then
+		orig_bios_pcsx2=$(grep "BIOS=" "$config_home/.config/pcsx2/inis/PCSX2_ui.ini")
+	fi
 
 }
 
@@ -93,32 +97,109 @@ function h_restore_bios_cfg()
 	#######################
 
 	# Gens
-	bios_gens_68=$(grep "32X 68000 BIOS=" "$config_home/.gens")
-	bios_gens_32m=$(grep "32X Master SH2 BIOS=" "$config_home/.gens")
-	bios_gens_32s=$(grep "32X Slave SH2 BIOS=" "$config_home/.gens")
-	bios_gens_e=$(grep "Europe CD BIOS=" "$config_home/.gens")
-	bios_gens_g=$(grep "Genesis BIOS=" "$config_home/.gens")
-	bios_gens_j=$(grep "Japan CD BIOS=" "$config_home/.gens")
-	bios_gens_u=$(grep "USA CD BIOS=" "$config_home/.gens/gens.cfg")
+	if [ -f "$config_home/.gens/gens.cfg" ]; then
+		bios_gens_68=$(grep "32X 68000 BIOS=" "$config_home/.gens/gens.cfg")
+		bios_gens_32m=$(grep "32X Master SH2 BIOS=" "$config_home/.gens/gens.cfg")
+		bios_gens_32s=$(grep "32X Slave SH2 BIOS=" "$config_home/.gens/gens.cfg")
+		bios_gens_e=$(grep "Europe CD BIOS=" "$config_home/.gens/gens.cfg")
+		bios_gens_g=$(grep "Genesis BIOS=" "$config_home/.gens/gens.cfg")
+		bios_gens_j=$(grep "Japan CD BIOS=" "$config_home/.gens/gens.cfg")
+		bios_gens_u=$(grep "USA CD BIOS=" "$config_home/.gens/gens.cfg")
+	fi
 
 	# PCSX2
-	bios_pcsx2=$(grep "BIOS=" "$config_home/.config/pcsx2/inis/PCSX2_ui.ini")
+	if [ -f "$config_home/.config/pcsx2/inis/PCSX2_ui.ini" ]; then
+		bios_pcsx2=$(grep "BIOS=" "$config_home/.config/pcsx2/inis/PCSX2_ui.ini")
+	fi
 
 	###################################################
 	# Restore afflicted BIOS configuration lines 
 	###################################################
 
 	# Gens GS
-	sed -i "s|$bios_gens_68|$orig_bios_gens_68|g" "$config_home/.gens"
-	sed -i "s|$bios_gens_32m|$orig_bios_gens_32m|g" "$config_home/.gens"
-	sed -i "s|$bios_gens_32s|$orig_bios_gens_32s|g" "$config_home/.gens"
-	sed -i "s|$bios_gens_e|$orig_bios_gens_e|g" "$config_home/.gens"
-	sed -i "s|$bios_gens_g|$orig_bios_gens_g|g" "$config_home/.gens"
-	sed -i "s|$bios_gens_j|$orig_bios_gens_j|g" "$config_home/.gens"
-	sed -i "s|$bios_gens_u|$orig_bios_gens_u|g" "$config_home/.gens"
+	if [ -n "$bios_gens_68" ]; then
+		if [ -n "$orig_bios_gens_68" ]; then
+			sed -i "s|$bios_gens_68|$orig_bios_gens_68|g" "$config_home/.gens/gens.cfg"
+		fi
+	fi
+	
+	if [ -n "$bios_gens_32m" ]; then
+		if [ -n "$orig_bios_gens_32m" ]; then
+			sed -i "s|$bios_gens_32m|$orig_bios_gens_32m|g" "$config_home/.gens/gens.cfg"
+		fi
+	fi
+			
+	if [ -n "$bios_gens_32s" ]; then
+		if [ -n "$orig_bios_gens_32s" ]; then
+			sed -i "s|$bios_gens_32s|$orig_bios_gens_32s|g" "$config_home/.gens/gens.cfg"
+		fi
+	fi
+			
+	if [ -n "$bios_gens_e" ]; then
+		if [ -n "$orig_bios_gens_e" ]; then
+			sed -i "s|$bios_gens_e|$orig_bios_gens_e|g" "$config_home/.gens/gens.cfg"
+		fi
+	fi
+			
+	if [ -n "$bios_gens_g" ]; then
+		if [ -n "$orig_bios_gens_g" ]; then
+			sed -i "s|$bios_gens_g|$orig_bios_gens_g|g" "$config_home/.gens/gens.cfg"
+		fi
+	fi
+			
+	if [ -n "$bios_gens_j" ]; then
+		if [ -n "$orig_bios_gens_j" ]; then
+			sed -i "s|$bios_gens_j|$orig_bios_gens_j|g" "$config_home/.gens/gens.cfg"
+		fi
+	fi
+			
+	if [ -n "$bios_gens_u" ]; then
+		if [ -n "$orig_bios_gens_u" ]; then
+			sed -i "s|$bios_gens_u|$orig_bios_gens_u|g" "$config_home/.gens/gens.cfg"
+		fi
+	fi
 	
 	# PCSX2
-	sed -i "s|$bios_pcsx2|$orig_bios_pcsx2|g" "$config_home/.config/pcsx2/inis/PCSX2_ui.ini"
+	if [ -f "$config_home/.config/pcsx2/inis/PCSX2_ui.ini" ]; then
+		
+		# if former entry exists
+		if [ -n "$orig_bios_pcsx2" ]; then
+			
+			#if new file contains "BIOS" entry (should actually nor be the case)
+			if [ -n "$bios_pcsx2" ]; then
+				
+				sed -i "s|$bios_pcsx2|$orig_bios_pcsx2|g" "$config_home/.config/pcsx2/inis/PCSX2_ui.ini"
+				echo "BIOS entry inserted"
+				
+			else
+				# usually a fresh ini file does not contain a BIOS line
+				echo "$orig_bios_pcsx2" >> "$config_home/.config/pcsx2/inis/PCSX2_ui.ini"
+				echo "BIOS entry appended"
+				
+			fi
+			
+			echo "former BIOS entry for pcsx2 restored"
+			
+		else
+			 #former entry does not exist, using default
+			 orig_bios_pcsx2="BIOS=$rootdir/BIOS/PCSX2/SCPH-77001_USA_Con_0220_20060210_v15_[026F6FE2].rom0"
+			 
+			 if [ -n "$bios_pcsx2" ]; then
+				
+				sed -i "s|$bios_pcsx2|$orig_bios_pcsx2|g" "$config_home/.config/pcsx2/inis/PCSX2_ui.ini"
+				echo "BIOS entry inserted"
+				
+			else
+				# usually a fresh ini file does not contain a BIOS line
+				echo "$orig_bios_pcsx2" >> "$config_home/.config/pcsx2/inis/PCSX2_ui.ini"
+				echo "BIOS entry appended"
+				
+			fi
+			
+			echo "default bios entry SCPH-77001_USA_Con_0220_20060210_v15_[026F6FE2].rom0 was applied"
+			
+		fi
+	fi
 
 }
 
@@ -931,7 +1012,12 @@ function h_emu_user_fixes()
 	sed -i "s|PLACEHOLDER_SAVESTATEPTH|$config_home/.config/mupen64plus/save|g" "$config_home/.config/mupen64plus/mupen64plus.cfg"
 
 	# Advanced Launcher (XBMC)
-	sed -i "s|config_temp|$config_home|g" "$config_home/"
+	echo "*****"
+	echo "*****"
+	echo "***** please fix me! Advanced Launcher (XBMC) in helpers.shinc *****"
+	echo "*****"
+	echo "*****"
+	#sed -i "s|config_temp|$config_home|g" "$config_home/"
 
 	# antimicro
 	sed -i "s|config_temp|$config_home|g" "$xbmc_home/userdata/addon_data/plugin.program.advanced.launcher/launchers.xml"		
