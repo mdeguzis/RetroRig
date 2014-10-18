@@ -2,6 +2,7 @@
 
 	#create system directories
 	mkdir -p /usr/lib/RetroRig 
+	mkdir -p /usr/lib/RetroRig/Artwork/XBMC
 
 	
 	# copy base files
@@ -13,6 +14,8 @@
 	
 	#icons
 	cp /usr/lib/RetroRig/XBMC-cfgs/extra/retro-icon.png /usr/share/icons 
+	cp Artwork/XBMC/XBMC-logo-Ace-Skin.png /usr/lib/RetroRig/Artwork/XBMC/
+	cp Artwork/XBMC/gears.png /usr/lib/RetroRig/Artwork/XBMC/
 	
 	
 	#supplemental application files

@@ -68,6 +68,7 @@ function rrs_prepareFolders()
 	pathlist+=("$rootdir/Artwork/PS1")
 	pathlist+=("$rootdir/Artwork/PS2")
 	pathlist+=("$rootdir/Artwork/Wii")
+	pathlist+=("$rootdir/Artwork/XBMC")
 
 	#Artwork - MAME offline scraper
 	pathlist+=("$rootdir/Artwork/MAME")
@@ -678,6 +679,19 @@ function rrs_xbmc_patched()
 	# Tell aptitude to hold our packages to avoid unwanted upgrades
 	# Please refer to the top of this script, where the hold is released for upgrade purposes
 	apt-mark hold xbmc xbmc-bin 
+
+	echo "*****"
+	echo "*****"
+	echo "***** please fix me! Background for xbmc *****"
+	echo "*****"
+	echo "*****"
+	# somewhere must be a command to set these files
+	# in guisetting.xml
+	# The settings should point directly to 
+	# $scriptdir/Artwork/XBMC/XBMC-logo-Ace-Skin.png and gears.png
+	ln -sf $scriptdir/Artwork/XBMC/* "$rootdir/Artwork/XBMC/"
+	chown $user $rootdir/Artwork/XBMC/*
+	chgrp $user $rootdir/Artwork/XBMC/*
 
 	#corect permissions
 	h_correct_perms

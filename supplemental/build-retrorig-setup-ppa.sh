@@ -3,7 +3,7 @@
 #======================================================================== 
 #
 # Author      : Michael T. DeGuzis, Jens-Christian Lache
-# Date        : 201401017
+# Date        : 201401018
 # Version     : 0.9.5
 # Description : Install RetroRig via Debian package
 #		Please see changelog for latest alterations and fixes
@@ -17,7 +17,7 @@ BASE=0.9.5
 # In this case, this level will be used to denote incremental changes
 # instead of a specific branch for now (beta/master only exist at the
 # momement).
-PL=3.0
+PL=3.1
 
 #define branch
 #BRANCH=beta
