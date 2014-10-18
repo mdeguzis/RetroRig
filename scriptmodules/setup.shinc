@@ -19,7 +19,7 @@ function rrs_prepareFolders()
 	pathlist+=("$home/.config/autostart/")
 
 	#emulator base directory
-	pathlist+=("$rootdir/emulators")
+	#pathlist+=("$rootdir/emulators")
 
 	#setup skelton folders for XBMC Rom Collection Browser
 	#ROMs
@@ -371,8 +371,8 @@ function rrs_add_standard_repos()
 #DEINSTALLATION CODE
 #
 #    # remove PPA
-#    rm -f /etc/apt/sources.list.d/beauman-ubuntu-retrorig-trusty.list
-#    rm -f /etc/apt/sources.list.d/beauman-ubuntu-retrorig-testing-trusty.list
+#    rm -f /etc/apt/sources.list.d/beauman-ubuntu-retrorig-trusty.list*
+#    rm -f /etc/apt/sources.list.d/beauman-ubuntu-retrorig-testing-trusty.list*
 #    apt-get update
 #
 #    # remove supplemental libraries
@@ -686,9 +686,11 @@ function rrs_retrorig_cfgs()
 	#ln -sf "$scriptdir/scripts" "$config_home/scripts" would hide 
 	# the script folder from the user
 	# --> the path of setResolution needs to be fixed in xbmc
-	ln -sf "$scriptdir/scripts" "$rootdir/scripts"
-	chown "$user" "$rootdir/scripts"
-	chgrp "$user" "$rootdir/scripts"
+	if [ ! -d "$rootdir/scripts" ]; then
+		ln -sf "$scriptdir/scripts" "$rootdir/scripts"
+		chown "$user" "$rootdir/scripts"
+		chgrp "$user" "$rootdir/scripts"
+	fi
 
 }
 
