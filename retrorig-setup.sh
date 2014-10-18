@@ -213,7 +213,7 @@ fi
 
 # We need to set "$home" for two reasons:
 # 1. $HOME is a system reserved var
-# 2. This path is needed to copy the dotfile configuration to the "real" home folder.
+# 2. This path is needs to copy the dotfile configuration to the "real" home folder.
     
 if [[ $# -lt 1 ]]; then
     user=$SUDO_USER
