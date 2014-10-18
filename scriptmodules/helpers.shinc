@@ -874,7 +874,9 @@ function h_correct_perms()
 	chmod ugo+x "$home/.config/autostart/RetroRig.desktop" > /dev/null 2>&1
 
 	# correct our own start file for retrorig
-	chmod ugo+x /usr/bin/xbmc-retrorig
+	if [ -f /usr/bin/xbmc-retrorig ]; then
+		chmod ugo+x /usr/bin/xbmc-retrorig
+	fi
 
 	# xboxdrv init script
 	chmod 755 /etc/init.d/xboxdrv > /dev/null 2>&1
