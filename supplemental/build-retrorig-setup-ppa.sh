@@ -3,7 +3,7 @@
 #======================================================================== 
 #
 # Author      : Michael T. DeGuzis, Jens-Christian Lache
-# Date        : 201401015
+# Date        : 201401018
 # Version     : 0.9.5
 # Description : Install RetroRig via Debian package
 #		Please see changelog for latest alterations and fixes
@@ -17,19 +17,26 @@ BASE=0.9.5
 # In this case, this level will be used to denote incremental changes
 # instead of a specific branch for now (beta/master only exist at the
 # momement).
-PL=2
+PL=3.1
 
 #define branch
-BRANCH=beta
+#BRANCH=beta
+BRANCH=draft
 
 #define upload target
-LAUNCHPAD_PPA="ppa:mdeguzis/retrorig"
+#LAUNCHPAD_PPA="ppa:mdeguzis/retrorig"
+LAUNCHPAD_PPA="ppa:beauman/retrorig-testing"
 
 #define uploader for changelog
-uploader="Michael DeGuzis <mdeguzis@gmail.com>"
+#uploader="Michael DeGuzis <mdeguzis@gmail.com>"
+uploader="Jens-Christian Lache <jc.lache@gmail.com>"
 
 #define package maintainer for dsc and control file 
 pkgmaintainer="RetroRig Development Team <mdeguzis@gmail.com>"
+
+#define github repository
+#source_reprository=https://github.com/ProfessorKaos64/RetroRig
+source_reprository="https://github.com/beaumanvienna/RetroRig"
 
 clear
 echo "#################################################################"
@@ -102,7 +109,7 @@ sed -i "s|pkgmaintainer|$pkgmaintainer|g" "retrorig-setup-$PRE:$BASE.$PL.dsc"
 SRC_FOLDER=retrorig-setup-$BASE.$PL
 
 echo "cloning repository"
-git clone https://github.com/ProfessorKaos64/RetroRig
+git clone $source_reprository  
 file RetroRig/
 
 if [ $? -eq 0 ]; then  

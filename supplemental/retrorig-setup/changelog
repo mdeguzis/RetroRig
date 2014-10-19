@@ -1,3 +1,9 @@
+retrorig-setup (version_placeholder) trusty; urgency=medium
+
+  * Installation from system folder
+
+ -- uploader  Fri, 17 Oct 2014 22:00:00 +0200
+
 retrorig-setup (0.9.5.2) trusty; urgency=medium
 
   * Updated setup.shinc with joydetect ppa package

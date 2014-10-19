@@ -2,8 +2,9 @@
 
 ########################################################################
 # file        :     setResolution.sh
-# date        :     14/08/31
+# date        :     14/10/18
 # author      :     jc
+# changelog   :     removed dependency from scriptmodules
 # description :     Take resoltuion arguments and display name from
 #                   command line and configure emulators accordingly.
 #
@@ -18,57 +19,101 @@
 #
 ########################################################################
 
+
+
+########################################################################
+#
+# Functions to handle configuration file
+#
+# Description :   A line in the configuration file looks like this:
+#
+#                 parameter name, parameter value
+#
+########################################################################
+
+
+########################################################################
+#
+#  parameterIsTrue()
+#  
+#  Arguments:    boolean parameter 
+#  
+#  Description:  Test if boolean parameter is true. 
+#
+#                A parameter is defined by a text string before the 
+#                comma delimeter in the configuration file.
+#
+#                A boolean parameter can be "true" or "false".
+#
+########################################################################
+
+function parameterIsTrue()
+{
+  VAR=`grep "$1" $configFile |cut -f 2 -d ','|grep true`
+
+  if [ -n "$VAR" ]; then
+    #VAR is not empty, return true
+    return 0
+  else
+    #return false
+    return 1
+  fi
+}
+
+########################################################################
+#
+#  setParameter()
+#  
+#  Arguments:    parameter name, parameter value 
+#  
+#  Description:  Append new line at the end of the config file, 
+#                if new parameter.
+#
+#                Exchange parameter value, if existing.
+#
+########################################################################
+
+
+function setParameter()
+{
+  #echo "setParameter $1, $2"
+  newLine="$1, $2"
+
+  oldLine=`grep "$1" $configFile`
+  if [ $? -eq 0 ]; then  
+    sed -i "s|$oldLine|$newLine|g" $configFile
+  else  
+    echo "$newLine" >> $configFile
+  fi
+
+}
+
+########################################################################
+#
+#  getParameter()
+#  
+#  Arguments:    parameter name
+#  
+#  Return:       parameter value
+#
+########################################################################
+
+
+function getParameter()
+{
+
+  VAR=`grep "$1" $configFile |cut -f 2 -d ','`
+
+  echo $VAR
+
+}
+
 ###############################################
 #
-# source function modules:
-#
-# Calculate path of script modules firstly,
-# then load them.
+#						main function module
 #
 ###############################################
 
-# name of this script
-thisScript=$0
-
-# test, if command line path to this script
-# contains folder name "scripts"
-if [[ $thisScript == *scripts/setResolution.sh* ]]
-then
-
-  # this script has been called 
-  # outside of folder "scripts"
-  
-  # remove last 24 chars = "scripts/setResolution.sh"
-  path=${thisScript:0:-24}  
-
-  # configuration module path relative to RetoRigs base directory
-  relativePath="scriptmodules/configuration.shinc"
-
-  #set up configuration module path
-  configurationModule=$path$relativePath
-  
-  # helpers module path relative to RetoRigs base directory
-  relativePath="scriptmodules/helpers.shinc"
-  
-  #set up helpers module path
-  helpersModule=$path$relativePath
-
-else
-
-  # this script has been called 
-  # within folder "scripts"
-
-  #set up configuration module path
-  configurationModule="../scriptmodules/configuration.shinc"
-  
-  #set up helpers module path
-  helpersModule="../scriptmodules/helpers.shinc"
-
-fi
-
-#load function modules
-source $configurationModule
-source $helpersModule
 
 #HOME is set in /usr/share/applications/startXBMC.sh
 config_home=$HOME
