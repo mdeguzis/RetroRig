@@ -19,7 +19,7 @@ function rrs_prepareFolders()
 	pathlist+=("$home/.config/autostart/")
 
 	#emulator base directory
-	pathlist+=("$rootdir/emulators")
+	#pathlist+=("$rootdir/emulators")
 
 	#setup skelton folders for XBMC Rom Collection Browser
 	#ROMs
@@ -68,6 +68,7 @@ function rrs_prepareFolders()
 	pathlist+=("$rootdir/Artwork/PS1")
 	pathlist+=("$rootdir/Artwork/PS2")
 	pathlist+=("$rootdir/Artwork/Wii")
+	pathlist+=("$rootdir/Artwork/XBMC")
 
 	#Artwork - MAME offline scraper
 	pathlist+=("$rootdir/Artwork/MAME")
@@ -141,11 +142,11 @@ function rrs_prepareFolders()
 	# Expanding arrays involves [@] and {}
 	for entry in "${pathlist[@]}"
 	do
-	    if [[ ! -d "$entry" ]]; then
-                mkdir -p "$entry" 
-                chown "$user" "$entry"
-                chgrp "$user" "$entry"
-            fi
+		if [[ ! -d "$entry" ]]; then
+			mkdir -p "$entry" 
+			chown "$user" "$entry"
+			chgrp "$user" "$entry"
+		fi
 	done
 
 	# correct permissions
@@ -154,43 +155,55 @@ function rrs_prepareFolders()
 	#backup existing state saves, if a backup folder does not exist, and the save state folder a real directory is
 	if [ ! -d "$home/.retrorig/.dolphin-emu/StateSaves.old" ]; then
 		if [ ! -L "$home/.retrorig/.dolphin-emu/StateSaves" ]; then
-			mv -f "$home/.retrorig/.dolphin-emu/StateSaves" 		"$home/.retrorig/.dolphin-emu/StateSaves.old"
-			dolphin_backup=true
+			if [ -d "$home/.retrorig/.dolphin-emu/StateSaves" ]; then
+				mv -f "$home/.retrorig/.dolphin-emu/StateSaves" 			"$home/.retrorig/.dolphin-emu/StateSaves.old"
+				dolphin_backup=true
+			fi
 		fi
 	fi
 	
 	if [ ! -d "$home/.retrorig/.config/mupen64plus/save.old" ]; then
 		if [ ! -L "$home/.retrorig/.config/mupen64plus/save" ]; then
-			mv -f "$home/.retrorig/.config/mupen64plus/save" 	"$home/.retrorig/.config/mupen64plus/save.old"
-			mupen64plus_backup=true
+			if [ -d "$home/.retrorig/.config/mupen64plus/save" ]; then
+				mv -f "$home/.retrorig/.config/mupen64plus/save" 			"$home/.retrorig/.config/mupen64plus/save.old"
+				mupen64plus_backup=true
+			fi
 		fi
 	fi
 	
 	if [ ! -d "$home/.retrorig/.mednafen/sav.old" ]; then
 		if [ ! -L "$home/.retrorig/.mednafen/sav" ]; then
-			mv -f "$home/.retrorig/.mednafen/sav" 					"$home/.retrorig/.mednafen/sav.old"
-			mednafen_backup=true
+			if [ -d "$home/.retrorig/.mednafen/sav" ]; then
+				mv -f "$home/.retrorig/.mednafen/sav" 								"$home/.retrorig/.mednafen/sav.old"
+				mednafen_backup=true
+			fi
 		fi
 	fi
 	
 	if [ ! -d "$home/.retrorig/.gens/StateSaves.old" ]; then
 		if [ ! -L "$home/.retrorig/.gens/StateSaves" ]; then
-			mv -f "$home/.retrorig/.gens/StateSaves" 				"$home/.retrorig/.gens/StateSaves.old"
-			gens_backup=true
+			if [ -d "$home/.retrorig/.gens/StateSaves" ]; then
+				mv -f "$home/.retrorig/.gens/StateSaves" 							"$home/.retrorig/.gens/StateSaves.old"
+				gens_backup=true
+			fi
 		fi
 	fi
 	
 	if [ ! -d "$home/.retrorig/.config/ppsspp/PSP/SAVEDATA.old" ]; then
 		if [ ! -L "$home/.retrorig/.config/ppsspp/PSP/SAVEDATA" ]; then
-			mv -f "$home/.retrorig/.config/ppsspp/PSP/SAVEDATA" 	"$home/.retrorig/.config/ppsspp/PSP/SAVEDATA.old"
-			ppsspp_backup=true
+			if [ -d "$home/.retrorig/.config/ppsspp/PSP/SAVEDATA" ]; then
+				mv -f "$home/.retrorig/.config/ppsspp/PSP/SAVEDATA"		"$home/.retrorig/.config/ppsspp/PSP/SAVEDATA.old"
+				ppsspp_backup=true
+			fi
 		fi
 	fi
 	
 	if [ ! -d "$home/.retrorig/.config/pcsx2/sstates.old" ]; then
 		if [ ! -L "$home/.retrorig/.config/pcsx2/sstates" ]; then
-			mv -f "$home/.retrorig/.config/pcsx2/sstates" 			"$home/.retrorig/.config/pcsx2/sstates.old"
-			pcsx2_backup=true
+			if [ -d "$home/.retrorig/.config/pcsx2/sstates" ]; then
+				mv -f "$home/.retrorig/.config/pcsx2/sstates" 				"$home/.retrorig/.config/pcsx2/sstates.old"
+				pcsx2_backup=true
+			fi
 		fi
 	fi
 	
@@ -203,43 +216,43 @@ function rrs_prepareFolders()
 	rm -f "$home/.retrorig/.config/pcsx2/sstates"
 	
 	#create links 
-	ln -s "$rootdir/Saves/dolphin-emu" 			"$home/.retrorig/.dolphin-emu/StateSaves"
-	ln -s "$rootdir/Saves/mupen64plus" 			"$home/.retrorig/.config/mupen64plus/save"
-	ln -s "$rootdir/Saves/mednafen" 				"$home/.retrorig/.mednafen/sav"
-	ln -s "$rootdir/Saves/GensGS" 					"$home/.retrorig/.gens/StateSaves"
-	ln -s "$rootdir/Saves/ppsspp"						"$home/.retrorig/.config/ppsspp/PSP/SAVEDATA"
-	ln -s "$rootdir/Saves/pcsx2"						"$home/.retrorig/.config/pcsx2/sstates"
+	ln -sf "$rootdir/Saves/dolphin-emu"			"$home/.retrorig/.dolphin-emu/StateSaves"
+	ln -sf "$rootdir/Saves/mupen64plus"			"$home/.retrorig/.config/mupen64plus/save"
+	ln -sf "$rootdir/Saves/mednafen"				"$home/.retrorig/.mednafen/sav"
+	ln -sf "$rootdir/Saves/GensGS"					"$home/.retrorig/.gens/StateSaves"
+	ln -sf "$rootdir/Saves/ppsspp"					"$home/.retrorig/.config/ppsspp/PSP/SAVEDATA"
+	ln -sf "$rootdir/Saves/pcsx2"						"$home/.retrorig/.config/pcsx2/sstates"
 	
 	#restore backup
 	if [ "$dolphin_backup" == "true" ]; then
-		cp -rf $home/.retrorig/.dolphin-emu/StateSaves.old/* 			"$home/.retrorig/.dolphin-emu/StateSaves/"
+		cp -rf $home/.retrorig/.dolphin-emu/StateSaves.old/*				"$home/.retrorig/.dolphin-emu/StateSaves/"
 	fi
 	
 	if [ "$mupen64plus_backup" == "true" ]; then
-		cp -rf $home/.retrorig/.config/mupen64plus/StateSaves.old/* 	"$home/.retrorig/.config/mupen64plus/StateSaves/"
+		cp -rf $home/.retrorig/.config/mupen64plus/StateSaves.old/*	"$home/.retrorig/.config/mupen64plus/StateSaves/"
 	fi
 	
 	if [ "$mednafen_backup" == "true" ]; then
-		cp -rf $home/.retrorig/.mednafen/sav.old/* 						"$home/.retrorig/.mednafen/sav/"
+		cp -rf $home/.retrorig/.mednafen/sav.old/*									"$home/.retrorig/.mednafen/sav/"
 	fi
 	
 	if [ "$gens_backup" == "true" ]; then
-		cp -rf $home/.retrorig/.gens/StateSaves.old/* 					"$home/.retrorig/.gens/StateSaves/"
+		cp -rf $home/.retrorig/.gens/StateSaves.old/* 							"$home/.retrorig/.gens/StateSaves/"
 	fi
 	
 	if [ "$ppsspp_backup" == "true" ]; then
-		cp -rf $home/.retrorig/.config/ppsspp/PSP/SAVEDATA.old/* 		"$home/.retrorig/.config/ppsspp/PSP/SAVEDATA/"
+		cp -rf $home/.retrorig/.config/ppsspp/PSP/SAVEDATA.old/*		"$home/.retrorig/.config/ppsspp/PSP/SAVEDATA/"
 	fi
 	
 	if [ "$pcsx2_backup" == "true" ]; then
-		cp -rf $home/.retrorig/.config/pcsx2/sstates.old/* 				"$home/.retrorig/.config/pcsx2/sstates/"
+		cp -rf $home/.retrorig/.config/pcsx2/sstates.old/*					"$home/.retrorig/.config/pcsx2/sstates/"
 	fi
 	
 	#change permission
 	chown -R "$user" "$rootdir/Saves/"
-    chgrp -R "$user" "$rootdir/Saves/"
-    chown -R "$user" "$home/.retrorig/"
-    chgrp -R "$user" "$home/.retrorig/"
+	chgrp -R "$user" "$rootdir/Saves/"
+	chown -R "$user" "$home/.retrorig/"
+	chgrp -R "$user" "$home/.retrorig/"
 
 }
 
@@ -327,9 +340,6 @@ function rrs_add_standard_repos()
 	add-apt-repository -y ppa:beauman/retrorig
 	# Add repository for additional pkgs (retrorig-setup, joydetect)
 	add-apt-repository -y ppa:mdeguzis/retrorig
-	
-	# latest X11 drivers
-	add-apt-repository -y ppa:xorg-edgers/ppa
 
 ######################################################################
 # install package repository and missing libraries
@@ -367,18 +377,19 @@ function rrs_add_standard_repos()
 					cd /etc/ld.so.conf.d/
 					echo /usr/lib/RetroRig > RetroRig.conf
 					ldconfig
-#TODO
-#DEINSTALLATION CODE
+					
+#					TODO
+#					DEINSTALLATION CODE
 #
-#    # remove PPA
-#    rm -f /etc/apt/sources.list.d/beauman-ubuntu-retrorig-trusty.list
-#    rm -f /etc/apt/sources.list.d/beauman-ubuntu-retrorig-testing-trusty.list
-#    apt-get update
+#					# remove PPA
+#					rm -f /etc/apt/sources.list.d/beauman-ubuntu-retrorig-trusty.list*
+#					rm -f /etc/apt/sources.list.d/beauman-ubuntu-retrorig-testing-trusty.list*
+#					apt-get update
 #
-#    # remove supplemental libraries
-#    rm -rf /usr/lib/RetroRig
-#    rm /etc/ld.so.conf.d/RetroRig.conf
-#    ldconfig
+#					# remove supplemental libraries
+#					rm -rf /usr/lib/RetroRig
+#					rm /etc/ld.so.conf.d/RetroRig.conf
+#					ldconfig
 				;;
 
 				*)
@@ -394,6 +405,9 @@ function rrs_add_standard_repos()
 			case $OS_RELEASE in
 				"17")
 					echo "running Linux Mint 17 Qiana"
+						
+						# latest X11 drivers
+						add-apt-repository -y ppa:xorg-edgers/ppa
 				;;
 
 				*)
@@ -467,7 +481,7 @@ function rrs_software()
 	# clear post install messages
 	__postMSGs=""
 	clear
-   	
+
 	echo "Binaries-based installation"
 
 	# add multi-arch support
@@ -502,8 +516,8 @@ function rrs_software()
 	# XBMC and emulators
 	sed -i "s|enabled=1|enabled=0|g" "/etc/default/apport"
 
-        #fix permissions since we are running as sudo
-        h_correct_perms
+	#fix permissions since we are running as sudo
+	h_correct_perms
 
 	# Run Debug checks
 	rrs_debug
@@ -514,13 +528,13 @@ function rrs_software()
 	# inject a space to seperate messages?
 	__postMSGs="$__postMSGs For VirtualBox users, please see the wiki under 'Installation' for notes on running RetroRig under a virtual machine! At the minimum, you will need to add a filter for your controller "
 	
-        if [[ ! -z $__postMSGs ]]; then
-            dialog --backtitle "LibreGeek.org - RetroRig Setup. Installation folder: $rootdir for user $user" --msgbox "$__postMSGs\n\nSoftware install complete. \
+	if [[ ! -z $__postMSGs ]]; then
+		dialog --backtitle "LibreGeek.org - RetroRig Setup. Installation folder: $rootdir for user $user" --msgbox "$__postMSGs\n\nSoftware install complete. \
 See debug.log for more details. Continuing on to emulator installs..." 18 60
-        fi
+	fi
 
-        chown -R "$user" "$scriptdir/logs/install_$now.log.gz"
-        chgrp -R "$user" "$scriptdir/logs/install_$now.log.gz"
+	chown -R "$user" "$rootdir/logs/install_$now.log.txt"
+	chgrp -R "$user" "$rootdir/logs/install_$now.log.txt"
 	#END
 }
 
@@ -552,7 +566,7 @@ function rrs_debug()
 
 	# autostart entries
 	h_filechecker "$home/.config/autostart/RetroRig.desktop"
-	h_filechecker "$home/.config/autostart/qjoypad.desktop"
+	#h_filechecker "$home/.config/autostart/qjoypad.desktop"
 
 	# init file checks	
 	echo "Available init files:" >> "$rootdir/logs/debug.log"
@@ -587,7 +601,7 @@ function rrs_debug()
 
    	echo -e "\nEnd of log file" >> "$rootdir/logs/debug.log" >> "$rootdir/logs/debug.log"
 	
-	dialog --backtitle "LibreGeek.org - RetroRig Setup. Installation folder: $rootdir for user $	user" --msgbox "Debug log was generated in $rootdir/logs/debug.log. Additional logs can be found in the folder $scriptdir/logs/." 10 60 
+	dialog --backtitle "LibreGeek.org - RetroRig Setup. Installation folder: $rootdir for user $	user" --msgbox "Debug log was generated in $rootdir/logs/debug.log. Additional logs can be found in the folder $rootdir/logs/." 10 60 
 
 	#corect permissions
 	h_correct_perms
@@ -615,9 +629,6 @@ function rrs_xbmc_patched()
 	rm -f "$home.config/autostart/RetroRig.desktop"
 	cp -v "$scriptdir/XBMC-cfgs/extra/RetroRig.desktop" "$home/.config/autostart"
 
-	# Can't use $config_home in the desktop file, so need to replace $user string
-	sed -i "s|/home/test/Pictures|$xdg_pictures_dir|g" "$home/.config/autostart/"
-
 	# fix their permissions
 	chmod 755 "/usr/share/applications/gp_autodetect_xbmc.sh" 
 	chmod 755 "$home/.config/autostart/RetroRig.desktop"
@@ -632,9 +643,9 @@ function rrs_xbmc_patched()
 	rm -f "/tmp/xbmc-bin_gotham-patched-for-retrorig-patchlevel-*-0trusty.deb"
 
 	#xbmc works fine w/o these librarys, but generates error messages in its log file
-        apt-get install -y libcec2 libcrystalhd3
+	apt-get install -y libcec2 libcrystalhd3
 
-        # release aptitude hold for upgrade/install
+	# release aptitude hold for upgrade/install
 	apt-mark unhold xbmc
 
 	echo "Installing xbmc"
@@ -643,23 +654,23 @@ function rrs_xbmc_patched()
 	# hold package after install against upgrades
 	apt-mark hold xbmc
 
-        # get SHA1 tag from patched XBMC version
-        sha1=`file /usr/lib/xbmc/xbmc.bin | cut -f 19 -d ' '| cut -f 2 -d '='|cut -f 1 -d ','`
-        # insert SHA1 tag to rescan by replacing the place holder
-        cat "$scriptdir/XBMC-cfgs/extra/rescan" | sed s/placeholderSHA1/$sha1/ > /tmp/rescan
-        # move to /etc/init.d
+	# get SHA1 tag from patched XBMC version
+	sha1=`file /usr/lib/xbmc/xbmc.bin | cut -f 19 -d ' '| cut -f 2 -d '='|cut -f 1 -d ','`
+	# insert SHA1 tag to rescan by replacing the place holder
+	cat "$scriptdir/XBMC-cfgs/extra/rescan" | sed s/placeholderSHA1/$sha1/ > /tmp/rescan
+	# move to /etc/init.d
 	mv "/tmp/rescan" "/etc/init.d/rescan"
 
 	# Create our on start file so we have use our own dotfile, rather than make the user
 	# use their existing .xbmc dotfile
-	cp -v "XBMC-cfgs/extra/xbmc-retrorig" "/usr/bin"
+	cp -v "$scriptdir/XBMC-cfgs/extra/xbmc-retrorig" "/usr/bin"
 
-        chmod 755 "/etc/init.d/rescan"  
+	chmod 755 "/etc/init.d/rescan"  
 
 	# Link the startXBMC.sh startup script to /usr/bin, so users can call "retrorig" at will
-	ln -s "/usr/share/applications/startXBMC.sh" "/usr/bin/retrorig"
+	ln -sf "/usr/share/applications/startXBMC.sh" "/usr/bin/retrorig"
 
-        # update init scripts
+	# update init scripts
 	update-rc.d rescan defaults
 
 	# start service
@@ -669,6 +680,19 @@ function rrs_xbmc_patched()
 	# Please refer to the top of this script, where the hold is released for upgrade purposes
 	apt-mark hold xbmc xbmc-bin 
 
+	echo "*****"
+	echo "*****"
+	echo "***** please fix me! Background for xbmc *****"
+	echo "*****"
+	echo "*****"
+	# somewhere must be a command to set these files
+	# in guisetting.xml
+	# The settings should point directly to 
+	# $scriptdir/Artwork/XBMC/XBMC-logo-Ace-Skin.png and gears.png
+	ln -sf $scriptdir/Artwork/XBMC/* "$rootdir/Artwork/XBMC/"
+	chown $user $rootdir/Artwork/XBMC/*
+	chgrp $user $rootdir/Artwork/XBMC/*
+
 	#corect permissions
 	h_correct_perms
 
@@ -677,7 +701,21 @@ function rrs_xbmc_patched()
 function rrs_retrorig_cfgs()
 {
 	cp -Rv "$scriptdir/retrorig-cfgs/retrorig.cfg" "$configFile"
-	ln -s "$scriptdir" "$config_home"
+	ln -sf "$rootdir" "$config_home"
+	ln -sf "$scriptdir/scripts" "$config_home/scripts"
+	chown "$user" "$config_home/scripts"
+	chgrp "$user" "$config_home/scripts"
+	
+	#debug 
+	#ln -sf "$scriptdir/scripts" "$config_home/scripts" would hide 
+	# the script folder from the user
+	# --> the path of setResolution needs to be fixed in xbmc
+	if [ ! -d "$rootdir/scripts" ]; then
+		ln -sf "$scriptdir/scripts" "$rootdir/scripts"
+		chown "$user" "$rootdir/scripts"
+		chgrp "$user" "$rootdir/scripts"
+	fi
+
 }
 
 function rrs_xbmc_cfgs()
@@ -721,7 +759,7 @@ function rrs_xbmc_cfgs()
 	sed -i "s|installdir_temp|$rootdir|g" "$xbmc_home/userdata/guisettings.xml"
 
 	# XBMC custom settings launchers (Advanced Launcher)
-	sed -i "s|config_temp|$config_home|g" "$xbmc_home/userdata/ddon_data/plugin.program.advanced.launcher/launchers.xml"
+	sed -i "s|config_temp|$config_home|g" "$xbmc_home/userdata/addon_data/plugin.program.advanced.launcher/launchers.xml"
 
 	# echo user change
 	echo "The user applied to configuration files was: $user"
@@ -732,7 +770,7 @@ function rrs_xbmc_cfgs()
 
 function rrs_done()
 {
-	kernelUpdate=`cat $scriptdir/logs/kernelUpdate`
+	kernelUpdate=`cat $rootdir/logs/kernelUpdate`
 
 	clear
 
@@ -797,48 +835,46 @@ echo -e "\e[0"$PATHCOLOR"ABSPATH for user USERNAME\e[0m"
 
 function rrs_prereq()
 {
-    if [[ -z $(type -P git) || -z $(type -P dialog) || -z $(type -P figlet) ]]; then
-	echo ""
-	echo "######################################"
-	echo "Pre-req checks"	
-	echo "######################################"
-        echo "Did not find 1 or more of the needed packages: git, dialog, or figlet"
-	echo "Attempting to install these now."
-	echo ""
-	sleep 3s
-        apt-get update
-        apt-get install -y git dialog figlet
-        if [ $? == '0' ]; then
-            echo "Successfully installed 'git/dialog/figlet'." > "$scriptdir/logs/prechecks.log"
-	    sleep 3s
-	    prereqs="true"
-        else
-            echo "Could not install 'git' and/or 'dialog/figlet'. Exiting..." > "$scriptdir/logs/prechecks.log"
-	    prereqs="false"
-	    sleep 3s
-            exit 1
-        fi
-    else
-        echo "Found needed packages 'git/dialog/figlet'." > "$scriptdir/logs/prechecks.log"
-	prereqs="true"
-	sleep 2s
-    fi
+	if [[ -z $(type -P git) || -z $(type -P dialog) || -z $(type -P figlet) ]]; then
+		echo ""
+		echo "######################################"
+		echo "Pre-req checks"	
+		echo "######################################"
+		echo "Did not find 1 or more of the needed packages: git, dialog, or figlet"
+		echo "Attempting to install these now."
+		echo ""
+		sleep 3s
+		apt-get update
+		apt-get install -y git dialog figlet
+		if [ $? == '0' ]; then
+			echo "Successfully installed 'git/dialog/figlet'." > "$rootdir/logs/prechecks.log"
+			sleep 3s
+			prereqs="true"
+		else
+			echo "Could not install 'git' and/or 'dialog/figlet'. Exiting..." > "$rootdir/logs/prechecks.log"
+			prereqs="false"
+			sleep 3s
+			exit 1
+		fi
+	else
+		echo "Found needed packages 'git/dialog/figlet'." > "$rootdir/logs/prechecks.log"
+		prereqs="true"
+		sleep 2s
+	fi
 
 
-echo "Current install user: $SUDO_USER" >> "$scriptdir/logs/prechecks.log"
-echo "Current install rootdir is: $rootdir" >>"$scriptdir/logs/prechecks.log"
-echo "Current script dir is:  $scriptdir" >>"$scriptdir/logs/prechecks.log"
+echo "Current install user: $SUDO_USER" >> "$rootdir/logs/prechecks.log"
+echo "Current install rootdir is: $rootdir" >>"$rootdir/logs/prechecks.log"
+echo "Current script dir is:  $rootdir" >>"$rootdir/logs/prechecks.log"
 
 if [ "$prereqs" == "true" ]; then
-    echo "Pre-checks were sucessful!!!" >> "$scriptdir/logs/prechecks.log"
+	echo "Pre-checks were sucessful!!!" >> "$rootdir/logs/prechecks.log"
 else
-    echo "Pre-checks were NOT sucessful. Sad crab!" >> "$scriptdir/logs/prechecks.log"
+	echo "Pre-checks were NOT sucessful. Sad crab!" >> "$rootdir/logs/prechecks.log"
 fi
 
-chown -R "$user" "$scriptdir/logs/prechecks.log"
-chgrp -R "$user" "$scriptdir/logs/prechecks.log"
-
-
+chown -R "$user" "$rootdir/logs/prechecks.log"
+chgrp -R "$user" "$rootdir/logs/prechecks.log"
 
 }
 
@@ -909,33 +945,33 @@ rrs_kernel_check()
 
 	# Check if 3.14.x exists
 	if [ $user_kernel -lt "$target_kernel" ]; then
-   	    echo "Kernel 3.14.x not found, installing"
-	    sleep 5s
-	    wget --tries=50 -P /tmp "http://kernel.ubuntu.com/~kernel-ppa/mainline/v3.14-trusty/linux-headers-3.14.0-031400_3.14.0-031400.201403310035_all.deb"
-	    wget --tries=50 -P /tmp "http://kernel.ubuntu.com/~kernel-ppa/mainline/v3.14-trusty/linux-headers-3.14.0-031400-generic_3.14.0-031400.201403310035_amd64.deb"
-	    wget --tries=50 -P /tmp "http://kernel.ubuntu.com/~kernel-ppa/mainline/v3.14-trusty/linux-image-3.14.0-031400-generic_3.14.0-031400.201403310035_amd64.deb"
-	    cd /tmp
-	    dpkg -i linux-headers-3.14*.deb linux-image-3.14*.deb
+		echo "Kernel 3.14.x not found, installing"
+		sleep 5s
+		wget --tries=50 -P /tmp "http://kernel.ubuntu.com/~kernel-ppa/mainline/v3.14-trusty/linux-headers-3.14.0-031400_3.14.0-031400.201403310035_all.deb"
+		wget --tries=50 -P /tmp "http://kernel.ubuntu.com/~kernel-ppa/mainline/v3.14-trusty/linux-headers-3.14.0-031400-generic_3.14.0-031400.201403310035_amd64.deb"
+		wget --tries=50 -P /tmp "http://kernel.ubuntu.com/~kernel-ppa/mainline/v3.14-trusty/linux-image-3.14.0-031400-generic_3.14.0-031400.201403310035_amd64.deb"
+		cd /tmp
+		dpkg -i linux-headers-3.14*.deb linux-image-3.14*.deb
 
-	    # Hold the kernel packages so the kernel is not upgrade by accident
-	    # Commented out for testing some errors with an old mednafen pkg
-	    #sudo aptitude hold linux-image-`uname -r` 
+		# Hold the kernel packages so the kernel is not upgrade by accident
+		# Commented out for testing some errors with an old mednafen pkg
+		#sudo aptitude hold linux-image-`uname -r` 
 
-	    # inform user of what was done
-	    dialog --msgbox "Upgrading the kernel to 3.14.0-031400-generic is complete. The packages 'linux-generic linux-headers-generic linux-image-generic' have been held to avoid falling back to a regressed kernel (sony-hid). If you wish to change your kernel, please run the following command in the terminal:\n\n'sudo apt-mark unhold linux-generic linux-headers-generic linux-image-generic'" 14 60
+		# inform user of what was done
+		dialog --msgbox "Upgrading the kernel to 3.14.0-031400-generic is complete. The packages 'linux-generic linux-headers-generic linux-image-generic' have been held to avoid falling back to a regressed kernel (sony-hid). If you wish to change your kernel, please run the following command in the terminal:\n\n'sudo apt-mark unhold linux-generic linux-headers-generic linux-image-generic'" 14 60
 
-	    # cleanup packages
-	    rm -f /tmp/linux-headers-3.14*
-	    rm -f /tmp/linux-image-3.14*
+		# cleanup packages
+		rm -f /tmp/linux-headers-3.14*
+		rm -f /tmp/linux-image-3.14*
 
-	    echo "true" > "$scriptdir/logs/kernelUpdate"
+		echo "true" > "$rootdir/logs/kernelUpdate"
 
 	elif [ $user_kernel -ge "$target_kernel" ]; then
-   	    # Do nothing
-	    echo "Kernel 3.14.x or greater found, exiting"
-	    sleep 2s
+		# Do nothing
+		echo "Kernel 3.14.x or greater found, exiting"
+		sleep 2s
 
-	    echo "false" > "$scriptdir/logs/kernelUpdate"
+		echo "false" > "$rootdir/logs/kernelUpdate"
 
 	fi
 

@@ -39,16 +39,19 @@ override_dh_install:
 	mkdir -p $(CURDIR)/debian/tmp/usr/share/applications
 	mkdir -p $(CURDIR)/debian/tmp/usr/share/icons 
 	mkdir -p $(CURDIR)/debian/tmp/etc/init.d
+	mkdir -p $(CURDIR)/debian/tmp/usr/lib/RetroRig/Artwork/XBMC
 	
 	# copy base files
-	cp -r scripts/ gamepad-cfgs/ emu-cfgs/ init-scripts/ scriptmodules/  XBMC-cfgs/ $(CURDIR)/debian/tmp/usr/lib/RetroRig
+	cp -r scripts/ gamepad-cfgs/ emu-cfgs/ init-scripts/ scriptmodules/  XBMC-cfgs/ retrorig-cfgs/ common/ $(CURDIR)/debian/tmp/usr/lib/RetroRig
 	
 	#copy executables
 	cp retrorig-setup $(CURDIR)/debian/tmp/usr/bin/ 
 	mv $(CURDIR)/debian/tmp/usr/lib/RetroRig/XBMC-cfgs/extra/xbmc-retrorig $(CURDIR)/debian/tmp/usr/bin 
 	
-	#icons
-	mv $(CURDIR)/debian/tmp/usr/lib/RetroRig/XBMC-cfgs/extra/retro-icon.png $(CURDIR)/debian/tmp/usr/share/icons 
+	#icons / pictures
+	mv $(CURDIR)/debian/tmp/usr/lib/RetroRig/XBMC-cfgs/extra/retro-icon.png $(CURDIR)/debian/tmp/usr/share/icons
+	cp Artwork/XBMC/XBMC-logo-Ace-Skin.png $(CURDIR)/debian/tmp/usr/lib/RetroRig/Artwork/XBMC/
+	cp Artwork/XBMC/gears.png $(CURDIR)/debian/tmp/usr/lib/RetroRig/Artwork/XBMC/
 	
 	#supplemental application files
 	mv $(CURDIR)/debian/tmp/usr/lib/RetroRig/XBMC-cfgs/extra/startXBMC.sh $(CURDIR)/debian/tmp/usr/share/applications

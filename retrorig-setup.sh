@@ -41,6 +41,12 @@ function import() {
     # @description if not found, search the module in the paths contained in $SHELL_LIBRARY_PATH environment variable
     # @param $1 the .shinc file to import, without .shinc extension
     module=$1
+    
+    if [ -f $module.shinc ]; then
+      source $module.shinc
+      echo "Loaded module $(basename $module.shinc)"
+      return
+    fi
 
     if test "x$module" == "x"
     then
@@ -74,16 +80,16 @@ function import() {
         IFS=':'
         for path in $SHELL_LIBRARY_PATH
         do
-    if test -e "$path/$module.shinc"
-            then
+          if test -e "$path/$module.shinc"
+          then
                 . "$path/$module.shinc"
                 return
-    fi
-done
+          fi
+        done
         # restore the standard separator
         IFS="$saved_IFS"
     fi
-    echo "$script_name : Unable to find module $module."
+    echo "$script_name : Unable to find module $module"
     exit 1
 }
 
@@ -147,28 +153,37 @@ function setDesktopEnvironment()
   fi
 }
 
-
-
 script_invoke_path="$0"
 script_name=$(basename "$0")
 getScriptAbsoluteDir "$script_invoke_path"
 script_absolute_dir=$RESULT
 
+if [ "$script_invoke_path" == "/usr/bin/retrorig-setup" ]; then
+
+	#install method via system folder
+	
+	scriptdir=/usr/lib/RetroRig
+	
+else
+
+	#install method from local git clone
+	
+	scriptdir=`dirname "$script_absolute_dir"`
+	
+fi
+
 # load script modules
 
-import "scriptmodules/helpers"
-import "scriptmodules/configuration"
-import "scriptmodules/settings"
-import "scriptmodules/setup"
-import "scriptmodules/gamepads"
-import "scriptmodules/emulators"           	
+import "$scriptdir/scriptmodules/helpers"
+import "$scriptdir/scriptmodules/configuration"
+import "$scriptdir/scriptmodules/settings"
+import "$scriptdir/scriptmodules/setup"
+import "$scriptdir/scriptmodules/gamepads"
+import "$scriptdir/scriptmodules/emulators"
 
 ######################################
 # Start main script
 ######################################
-
-scriptdir=$(dirname "$0")
-scriptdir=$(cd "$scriptdir" && pwd)
 
 if [[ "$1" == "--help" ]]; then
     rrs_showHelp
@@ -179,10 +194,13 @@ if [ "$(id -u)" -ne 0 ]; then
     printf "Script must be run as root! Try:"
     echo ""
     echo ""
-    printf "'sudo ./retrorig_setup'" 
+    printf "'sudo retrorig-setup'" 
     echo ""
-    echo "OR"
-    printf "'./retrorig_setup --help'"
+    echo "OR (for a git cloned version of RetroRig in its base directory)"
+    printf "'sudo ./retrorig-setup.sh'" 
+    echo ""
+    echo "OR "
+    printf "'retrorig-setup --help'"
     echo ""
     echo ""
     printf "for further information\n"
@@ -195,7 +213,7 @@ fi
 
 # We need to set "$home" for two reasons:
 # 1. $HOME is a system reserved var
-# 2. This path is needed to copy the dotfile configuration to the "real" home folder.
+# 2. This path is needs to copy the dotfile configuration to the "real" home folder.
     
 if [[ $# -lt 1 ]]; then
     user=$SUDO_USER
@@ -260,6 +278,8 @@ setDesktopEnvironment VIDEOS
 # make sure that RetroRig root directory exists
 if [[ ! -d $rootdir ]]; then
     mkdir -p "$rootdir"
+    chown $user:$user "$rootdir"
+    chgrp "$user" "$rootdir"
     if [[ ! -d $rootdir ]]; then
       echo "Couldn't make directory $rootdir"
       exit 1
@@ -267,12 +287,12 @@ if [[ ! -d $rootdir ]]; then
 fi
 
 # make sure that RetroRig-Setup log directory exists
-if [[ ! -d $scriptdir/logs ]]; then
-    mkdir -p "$scriptdir/logs"
-    chown "$user" "$scriptdir/logs"
-    chgrp "$user" "$scriptdir/logs"
-    if [[ ! -d $scriptdir/logs ]]; then
-      echo "Couldn't make directory $scriptdir/logs"
+if [[ ! -d $rootdir/logs ]]; then
+    mkdir -p "$rootdir/logs"
+    chown "$user" "$rootdir/logs"
+    chgrp "$user" "$rootdir/logs"
+    if [[ ! -d $rootdir/logs ]]; then
+      echo "Couldn't make directory $rootdir/logs"
       exit 1
     fi
 fi
@@ -303,6 +323,8 @@ config_home="$home/.retrorig"
 
 #set RetroRig configuration file
 configFile=$config_home/retrorig.cfg
+
+cd "$rootdir"
 
 #################################################################
 
@@ -342,12 +364,12 @@ Installer" --menu "| Main Menu (v.0.9.5b) | \
 		rrs_unity
 		rrs_kernel_check
 		rrs_done
-		} 2>&1 | tee "$scriptdir/logs/install_$now.log.txt"              	
-		chown -R "$user" "$scriptdir/logs/install_$now.log.txt"
-		chgrp -R "$user" "$scriptdir/logs/install_$now.log.txt"
+		} 2>&1 | tee "$rootdir/logs/install_$now.log.txt"              	
+		chown -R "$user" "$rootdir/logs/install_$now.log.txt"
+		chgrp -R "$user" "$rootdir/logs/install_$now.log.txt"
 
-		kernelUpdate=`cat $scriptdir/logs/kernelUpdate`
-		rm -f "$scriptdir/logs/kernelUpdate"
+		kernelUpdate=`cat $rootdir/logs/kernelUpdate`
+		rm -f "$rootdir/logs/kernelUpdate"
 		if [ "$kernelUpdate" == "true" ]; then
 		  rrs_reboot
 		fi
