@@ -997,24 +997,15 @@ popd
 dialog --backtitle "LibreGeek.org - RetroRig Setup." --msgbox "Fetched the latest version of the RetroRig repository. Please exit and restart the script." 7 60 
 }
 
-function h_update_system() 
-{
-
-
-# Update binaries that were installed via PPA's and Official Ubuntu repos
-apt-get update -y
-sleep 3s
-clear
-
-}
 
 function h_upgrade_system() 
 {
 
-clear
-apt-get update -y
-apt-get upgrade -y
-sleep 3s
-clear
+	clear
+	# Upgrade system pkgs, but do so intelligently
+	apt-get update -y
+	apt-get upgrade -y
+	sleep 3s
+	clear
 
 }

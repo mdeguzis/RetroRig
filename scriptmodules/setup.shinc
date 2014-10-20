@@ -479,8 +479,8 @@ function rrs_software()
 	# add extra repostories to the em_add_repos function!
 	em_add_repos
 
-	# update repository listings
-	h_update_system
+	# update system pkgs currently installed first
+	h_upgrade_system
 
 	# install software from repositories
 	# install binaries
