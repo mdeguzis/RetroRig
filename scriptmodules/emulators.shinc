@@ -9,12 +9,64 @@
 
 function em_add_repos()
 {
-	# Add playdeb repo for later additions (very useful) 
-	echo "deb http://archive.getdeb.net/ubuntu trusty-getdeb games" > /tmp/playdeb.list 
-	mv "/tmp/playdeb.list" "/etc/apt/sources.list.d/playdeb.list"
-	wget -q -O- http://archive.getdeb.net/getdeb-archive.key > getdeb.key 
-	apt-key add getdeb.key 
-	rm -f getdeb.key
+	# For some reason, a syntax error occurs on script load without data in in this function
+	#echo "No custom repos in use at the moment for emulator installs"
+
+	# Add playdeb repo for later additions (disabled until needed!!!)
+	
+	# echo "deb http://archive.getdeb.net/ubuntu trusty-getdeb games" > /tmp/playdeb.list 
+	# mv "/tmp/playdeb.list" "/etc/apt/sources.list.d/playdeb.list"
+	# wget -q -O- http://archive.getdeb.net/getdeb-archive.key > getdeb.key 
+	# apt-key add getdeb.key 
+	# rm -f getdeb.key
+
+	# Dolphin emulator PPA / Libretro / RetroArch
+	#add-apt-repository -y ppa:hunter-kaller/ppa
+
+	# pcsx2 emulator PPA
+	#add-apt-repository -y ppa:gregory-hainaut/pcsx2.official.ppa
+  
+  #dummy instruction
+  sleep 1
+
+
+}
+
+function em_install_yabause()
+{
+	# This may be source compiled in the future
+	echo "Installing Sega Saturn emulator Yabause"
+	apt-get install -y yabause
+
+}
+
+function em_install_pcsx2()
+{
+	echo "Installing Playstation 2 emulator PCSX2"
+	apt-get install -y pcsx2
+	# Unstable version still needs testing:
+	# apt-get install pcsx2-unstable
+  
+	# Link BIOS path from home/RetroRig (source) to .retrorig/
+	ln -sf "$rootdir/BIOS/PCSX2" "$config_home/.config/pcsx2/bios"
+
+	#User might have the idea to manually state a bios file in the terminal.
+	#To save them exporting HOME as /home/user/.retrorig,
+	#a symbolic link is created.
+
+	date=`date`
+	sudo -u $user mv "$HOME/.config/pcsx2" "$HOME/.config/pcsx2.backup_retrorig.$date"
+	sudo -u $user ln -vs "$config_home/.config/pcsx2/" "$HOME/.config"
+
+}
+
+function em_install_dolphin()
+{
+
+	echo "Installing Nintendo Gamecube emulator Dolphin"
+	apt-get remove -y dolphin-emu dolphin-emu-master
+	apt-get install -y dolphin-emu
+
 }
 
 function em_install_ppsspp_source()
@@ -48,46 +100,55 @@ function em_install_ppsspp_source()
 
 function em_install_ppsspp()
 {
-	# I have to compipile SDL support from source for now, since I need the
-	# multiple SDL joystick support for my use of xboxdrv 
-	# See: https://github.com/hrydgard/ppsspp/tree/master/SDL
+	echo "Installing Playstation Portable emulator ppsspp"
 
-	# I took that, compiled it from source, kept only the necessary files 
-	# (this means I removed the CMAKE files left over). Once a tar.gz file, 
-	# this resulted in a 21.8 MB "mobile" pkg :)
+	# release aptitude hold for upgrade/install
+	apt-mark unhold ppsspp
 
-	# install pre-requisites
-	apt-get install -y libsdl1.2-dev
+        #remove any previously installed version
+	apt-get remove -y ppsspp
 
-	# pull down emulator from libregeek (to avoid increasing the git repo)
-	wget -P /tmp "www.libregeek.org/RetroRig/Ubuntu-Trusty/emulators/karenbuildbot-net.angelxwind.ppsspp-linux-amd64-generic.tar.gz"
+        #install from PPA
+	apt-get install -y ppsspp
 
-	# Since ppsspp-0.9.8-SDL-pk64 is already in $rootdir/emulators, we just
-	# need to untar it:
-	tar -xzvf "/tmp/karenbuildbot-net.angelxwind.ppsspp-linux-amd64-generic.tar.gz" -C "$rootdir/emulators/PPSSPP"
-
-	# remove tmp file
-	rm -f "/tmp/karenbuildbot-net.angelxwind.ppsspp-linux-amd64-generic.tar.gz"
-
-	# Symlink  binary to common location to avoid path errors based on where
-	# user installs RetroRig. Remove link if it exists first.
-	rm -f "/usr/bin/PPSSPPSDL"
-	ln -s "$rootdir/emulators/PPSSPP/PPSSPPSDL" "/usr/bin/PPSSPPSDL"
-	chmod +x "/usr/bin/PPSSPPSDL"
-	
-	# XBMC will run the compiled executable file directly from this path
+	# hold package after install against upgrades
+	apt-mark hold ppsspp
 
 }
 
 function em_install_stella()
 {
 	echo "Installing Atari 2600 emulator Stella"
+
+	# release aptitude hold for upgrade/install
+	apt-mark unhold stella
+
+        #remove any previously installed version
+	apt-get remove -y stella
+
+        #install from PPA
 	apt-get install -y stella
+
+	# hold package after install against upgrades
+	apt-mark hold stella
+
+	############################################################################################################
+	# installation of stella from libregeek.org (deprecated)
+	#
+	#	# As of 20140802, Stella, at least in testing, would fail to launch when using OpenGL
+	#	# Stella was build from the latest SVN trunk, and works successfully
+	#	# Source: http://stella.sourceforge.net/development.php
+	#	# SVN trunk: 'svn co https://svn.code.sf.net/p/stella/code/trunk stella'
+	#
+	#	wget --tries=50 -P "/usr/bin/" "www.libregeek.org/RetroRig/Ubuntu-Trusty/emulators/Stella/stella"
+	#	chmod +x "/usr/bin/stella"
+	############################################################################################################
+
 }
 
 function em_install_mupen64plus()
 {
-	echo "Installing MAME emulator"
+	echo "Installing mupen64plus emulator"
 	apt-get install -y mupen64plus
 }
 
@@ -100,8 +161,21 @@ function em_install_mame()
 
 function em_install_mednafen()
 {
+	# release aptitude hold for upgrade/install
+	apt-mark unhold mednafen
+
+        #remove any previously installed version
+	apt-get remove -y mednafen
+
 	echo "Installing Mednafen emulator"
 	apt-get install -y mednafen
+	#wget --tries=50 -P /tmp "www.libregeek.org/RetroRig/Ubuntu-Trusty/mednafen/mednafen-patched-for-retrorig-patchlevel-1-0trusty.deb"
+	#apt-get install -y libsdl2-2.0-0
+        #dpkg -i "/tmp/mednafen-patched-for-retrorig-patchlevel-1-0trusty.deb"
+
+	# hold package after install against upgrades
+	apt-mark hold mednafen
+
 }
 
 function em_install_mess()
@@ -109,3 +183,27 @@ function em_install_mess()
 	echo "Installing MESS emulator"
 	apt-get install -y mess
 }
+
+function em_install_gens()
+{
+
+	# release aptitude hold for upgrade/install
+	apt-mark unhold gens
+
+        #remove any previously installed version
+	apt-get remove -y gens
+
+	echo "Installing Gens Sega CD/32X emulator"
+	apt-get -y install gens
+
+        # deprecated: installation from libregeek.org:
+	#wget --tries=50 -P /tmp "http://www.libregeek.org/RetroRig/Ubuntu-Trusty/emulators/gens//Gens_2.16.7_i386.deb"
+        #dpkg -i "/tmp/Gens_2.16.7_i386.deb"
+	# cleanup pkg file
+	#rm -f "/tmp/Gens_2.16.7_i386.deb"
+
+	# hold package after install against upgrades
+	apt-mark hold gens
+
+}
+

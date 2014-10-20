@@ -34,17 +34,29 @@ h_clean_gamepad()
 
 	# system objects that may interfere with switching gamepads
 	# The rescan service should be able to coexist with xboxdrv
+
+	# We need to remove config.xml from RCB when changing gamepads, since we do active 
+	# swaps of qjoypad profiles now 
+	rm -f "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
 	
 	# qjoypad 
 	rm -f "$home/.config/autostart/qjoypad.desktop"
 
 	# XBMC keymaps
 	rm -f "$xbmc_home/userdata/keymaps/keyboard.xml"
+	
+	# remove the /usr/share/applications/gp_autodetect_xbmc.sh file, so we can actively
+	# set the gamepad type on changes from user input in the script gamepad select
+	# THE LINE BELOW MUST* STAY COMMENTED OUT UNTIL THE "NEW" REVISIONS ARE MADE AND TESTED SUCCESSFULLY
+	# rm -f "/usr/share/applications/gp_autodetect_xbmc.sh"
 
 	# Xbox controller 
 	service xboxdrv stop
 	rm -f /etc/init.d/xboxdrv
 	rm -f /etc/default/xboxdrv
+
+	# PS3 controller
+	service sixad stop
 
 	# clean init scripts (rescan service shouldn't need cleaned right now)
 	# If it is required later, it will fall here.
@@ -52,6 +64,143 @@ h_clean_gamepad()
 
 	# XBMC
 	rm -f "$xbmc_home/userdata/keymaps/keyboard.xml"
+
+	##########################################
+	# Backup BIOS changes user has made
+	##########################################
+	# Needed for: PCSX2, Gens GS
+
+	# Gens GS
+	if [ -f "$config_home/.gens/gens.cfg" ]; then
+		orig_bios_gens_68=$(grep "32X 68000 BIOS=" "$config_home/.gens/gens.cfg")
+		orig_bios_gens_32m=$(grep "32X Master SH2 BIOS=" "$config_home/.gens/gens.cfg")
+		orig_bios_gens_32s=$(grep "32X Slave SH2 BIOS=" "$config_home/.gens/gens.cfg")
+		orig_bios_gens_e=$(grep "Europe CD BIOS=" "$config_home/.gens/gens.cfg")
+		orig_bios_gens_g=$(grep "Genesis BIOS=" "$config_home/.gens/gens.cfg")
+		orig_bios_gens_j=$(grep "Japan CD BIOS=" "$config_home/.gens/gens.cfg")
+		orig_bios_gens_u=$(grep "USA CD BIOS=" "$config_home/.gens/gens.cfg")
+	fi
+
+	# PCSX2
+	if [ -f "$config_home/.config/pcsx2/inis/PCSX2_ui.ini" ]; then
+		orig_bios_pcsx2=$(grep "BIOS=" "$config_home/.config/pcsx2/inis/PCSX2_ui.ini")
+	fi
+
+}
+
+
+function h_restore_bios_cfg() 
+{
+	
+	#######################
+	# grab current sets:
+	#######################
+
+	# Gens
+	if [ -f "$config_home/.gens/gens.cfg" ]; then
+		bios_gens_68=$(grep "32X 68000 BIOS=" "$config_home/.gens/gens.cfg")
+		bios_gens_32m=$(grep "32X Master SH2 BIOS=" "$config_home/.gens/gens.cfg")
+		bios_gens_32s=$(grep "32X Slave SH2 BIOS=" "$config_home/.gens/gens.cfg")
+		bios_gens_e=$(grep "Europe CD BIOS=" "$config_home/.gens/gens.cfg")
+		bios_gens_g=$(grep "Genesis BIOS=" "$config_home/.gens/gens.cfg")
+		bios_gens_j=$(grep "Japan CD BIOS=" "$config_home/.gens/gens.cfg")
+		bios_gens_u=$(grep "USA CD BIOS=" "$config_home/.gens/gens.cfg")
+	fi
+
+	# PCSX2
+	if [ -f "$config_home/.config/pcsx2/inis/PCSX2_ui.ini" ]; then
+		bios_pcsx2=$(grep "BIOS=" "$config_home/.config/pcsx2/inis/PCSX2_ui.ini")
+	fi
+
+	###################################################
+	# Restore afflicted BIOS configuration lines 
+	###################################################
+
+	# Gens GS
+	if [ -n "$bios_gens_68" ]; then
+		if [ -n "$orig_bios_gens_68" ]; then
+			sed -i "s|$bios_gens_68|$orig_bios_gens_68|g" "$config_home/.gens/gens.cfg"
+		fi
+	fi
+	
+	if [ -n "$bios_gens_32m" ]; then
+		if [ -n "$orig_bios_gens_32m" ]; then
+			sed -i "s|$bios_gens_32m|$orig_bios_gens_32m|g" "$config_home/.gens/gens.cfg"
+		fi
+	fi
+			
+	if [ -n "$bios_gens_32s" ]; then
+		if [ -n "$orig_bios_gens_32s" ]; then
+			sed -i "s|$bios_gens_32s|$orig_bios_gens_32s|g" "$config_home/.gens/gens.cfg"
+		fi
+	fi
+			
+	if [ -n "$bios_gens_e" ]; then
+		if [ -n "$orig_bios_gens_e" ]; then
+			sed -i "s|$bios_gens_e|$orig_bios_gens_e|g" "$config_home/.gens/gens.cfg"
+		fi
+	fi
+			
+	if [ -n "$bios_gens_g" ]; then
+		if [ -n "$orig_bios_gens_g" ]; then
+			sed -i "s|$bios_gens_g|$orig_bios_gens_g|g" "$config_home/.gens/gens.cfg"
+		fi
+	fi
+			
+	if [ -n "$bios_gens_j" ]; then
+		if [ -n "$orig_bios_gens_j" ]; then
+			sed -i "s|$bios_gens_j|$orig_bios_gens_j|g" "$config_home/.gens/gens.cfg"
+		fi
+	fi
+			
+	if [ -n "$bios_gens_u" ]; then
+		if [ -n "$orig_bios_gens_u" ]; then
+			sed -i "s|$bios_gens_u|$orig_bios_gens_u|g" "$config_home/.gens/gens.cfg"
+		fi
+	fi
+	
+	# PCSX2
+	if [ -f "$config_home/.config/pcsx2/inis/PCSX2_ui.ini" ]; then
+		
+		# if former entry exists
+		if [ -n "$orig_bios_pcsx2" ]; then
+			
+			#if new file contains "BIOS" entry (should actually nor be the case)
+			if [ -n "$bios_pcsx2" ]; then
+				
+				sed -i "s|$bios_pcsx2|$orig_bios_pcsx2|g" "$config_home/.config/pcsx2/inis/PCSX2_ui.ini"
+				echo "BIOS entry inserted"
+				
+			else
+				# usually a fresh ini file does not contain a BIOS line
+				echo "$orig_bios_pcsx2" >> "$config_home/.config/pcsx2/inis/PCSX2_ui.ini"
+				echo "BIOS entry appended"
+				
+			fi
+			
+			echo "former BIOS entry for pcsx2 restored"
+			
+		else
+			 #former entry does not exist, using default
+			 orig_bios_pcsx2="BIOS=$rootdir/BIOS/PCSX2/SCPH-77001_USA_Con_0220_20060210_v15_[026F6FE2].rom0"
+			 
+			 if [ -n "$bios_pcsx2" ]; then
+				
+				sed -i "s|$bios_pcsx2|$orig_bios_pcsx2|g" "$config_home/.config/pcsx2/inis/PCSX2_ui.ini"
+				echo "BIOS entry inserted"
+				
+			else
+				# usually a fresh ini file does not contain a BIOS line
+				echo "$orig_bios_pcsx2" >> "$config_home/.config/pcsx2/inis/PCSX2_ui.ini"
+				echo "BIOS entry appended"
+				
+			fi
+			
+			echo "default bios entry SCPH-77001_USA_Con_0220_20060210_v15_[026F6FE2].rom0 was applied"
+			
+		fi
+	fi
+
 }
 
 
@@ -132,16 +281,16 @@ options=(1 "Current configuration"
 		#echo curent plugin settings
 		#mupen64plus
 		echo "Mupen64plus:" > res.txt
-		grep -i "VideoPlugin = " "$config_home/.config/mupen64plus/mupen64plus.cfg" >> "$scriptdir/logs/res.txt"
-		echo "" >> "$scriptdir/logs/res.txt"
+		grep -i "VideoPlugin = " "$config_home/.config/mupen64plus/mupen64plus.cfg" >> "$rootdir/logs/res.txt"
+		echo "" >> "$rootdir/logs/res.txt"
 		#Stella
-		echo "Stella:" >> "$scriptdir/logs/res.txt"
-		grep -i "tia_filter" "$config_home/.stella/stellarc" >> "$scriptdir/logs/res.txt"
+		echo "Stella:" >> "$rootdir/logs/res.txt"
+		grep -i "tia_filter" "$config_home/.stella/stellarc" >> "$rootdir/logs/res.txt"
 		echo "" >> res.txt
 		#report current resolution
 		dialog --textbox res.txt 33 0
 		#remove text file
-		rm "$scriptdir/logs/res.txt"	
+		rm "$rootdir/logs/res.txt"	
 		;;
 
 		2)
@@ -163,12 +312,26 @@ options=(1 "Current configuration"
 function h_file_loader()
 {
 
+# based on what the user want to do, instruct them to select a folder of ROMs or a BIOS file (singular)
+if [ "$loader_type" = "ROM" ]; then
+
 	dialog --msgbox "Usage:\n\nChoose the *FOLDER*, not the file(s) you wish to load ROMs from. Esc or Cancel to abort\n\n
 	(spacebar)                Select file\n
 	(double-tap spacebar)     Enter new directory\n
 	(Enter)                   Confirm selection\n
 	(Arrow keys)              Navigate" 15 50
+
+fi
+
+if [ "$loader_type" = "BIOS" ]; then
+
+	dialog --msgbox "Usage:\n\nChoose the *file*, not the folder(s) you wish to load BIOS files from. Esc or Cancel to abort\n\n
+	(spacebar)                Select file\n
+	(double-tap spacebar)     Enter new directory\n
+	(Enter)                   Confirm selection\n
+	(Arrow keys)              Navigate" 15 50
         
+fi
 
 	folder=$(dialog --stdout --cr-wrap --title "Please choose a file" --fselect "$home/" 14 48)
 
@@ -203,23 +366,30 @@ function h_file_loader()
 function h_rom_loader()
 {
 
+loader_type="ROM"
 
 while true; do
 cmd=(dialog --backtitle "LibreGeek.org RetroRig Installer" --menu "Load ROMs for which system?" 20 32 24)
-options=(1 "Atari 2600" 
-	 2 "NES" 
-	 3 "SNES" 
-	 4 "Nintendo 64"
-	 5 "MAME"
-	 6 "Sega Master System"
-	 7 "Sega Game Gear"
-	 8 "GBC"
-	 9 "GBC"
-	 10 "TurboGraphx 16"
-	 11 "Neo-Geo CDZ"
-	 12 "PSP"
-	 13 "PSX/PS1"
-	 14 "Exit ROM Loader")
+options=(1 "Atari 2600"
+	 2 "Atari Lynx" 
+	 3 "NES" 
+	 4 "SNES" 
+	 5 "Nintendo 64"
+	 6 "MAME"
+	 7 "Sega Master System"
+	 8 "Sega Game Gear"
+	 9 "Sega Genesis"
+	 10 "Sega CD"
+	 11 "Sega 32X"
+	 12 "Nintendo GBA"
+	 13 "Nintendo GBC"
+	 14 "TurboGraphx 16"
+	 15 "Neo-Geo CDZ"
+	 16 "Neo-Geo AES"
+	 17 "Sony PSP"
+	 18 "Sony PSX/PS1"
+	 19 "Sony PS2"
+	 19 "Exit ROM Loader")
 
 	#make menu choice
 	choices=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
@@ -240,13 +410,22 @@ options=(1 "Atari 2600"
 		2)
 		#call file loader
 		h_file_loader
+		#copy Atari Lynx ROMs
+		if [ -n "$folder" ]; then
+			cp -R "$folder"/* "$rootdir/ROMs/Atari Lynx/"
+		fi
+		;;
+
+		3)
+		#call file loader  	
+		h_file_loader
 		#copy NES ROMs
 		if [ -n "$folder" ]; then
 			cp -R "$folder"/* "$rootdir/ROMs/NES/"
 		fi
 		;;
 
-		3)
+		4)
 		#call file loader  	
 		h_file_loader
 		#copy SNES ROMs
@@ -255,7 +434,7 @@ options=(1 "Atari 2600"
 		fi
 		;;
 
-		4)
+		5)
 		#call file loader  	
 		h_file_loader
 		#copy N64 ROMs
@@ -264,7 +443,7 @@ options=(1 "Atari 2600"
 		fi
 		;;
 
-		5)
+		6)
 		#call file loader  	
 		h_file_loader
 		#copy MAME ROMs
@@ -273,61 +452,97 @@ options=(1 "Atari 2600"
 		fi
 		;;
 
-		6)
+		7)
 		#call file loader  	
 		h_file_loader
 		#copy Sega Master System ROMs
 		if [ -n "$folder" ]; then
-			cp -R "$folder"/* "$rootdir/ROMs/Sega Master System"
-		fi
-		;;
-
-		7)
-		#call file loader  	
-		h_file_loader
-		#copy Sega Game Gear ROMs
-		if [ -n "$folder" ]; then
-			cp -R "$folder"/* "$rootdir/ROMs/Sega Game Gear"
+			cp -R "$folder"/* "$rootdir/ROMs/Sega Master System/"
 		fi
 		;;
 
 		8)
 		#call file loader  	
 		h_file_loader
-		#copy GBC ROMs
+		#copy Sega Game Gear ROMs
 		if [ -n "$folder" ]; then
-			cp -R "$folder"/* "$rootdir/ROMs/GBC/"
+			cp -R "$folder"/* "$rootdir/ROMs/Sega Game Gear/"
 		fi
 		;;
 
 		9)
 		#call file loader  	
 		h_file-loader
-		#copy GBA ROMs
+		#copy Sega Genesis ROMs
 		if [ -n "$folder" ]; then
-			cp -Rv "$folder"/* "$rootdir/ROMs/GBA/"
+			cp -Rv "$folder"/* "$rootdir/ROMs/Sega Genesis/"
 		fi
 		;;
 
 		10)
 		#call file loader  	
 		h_file_loader
-		#copy Turbographx 16 ROMs
+		#copy Sega CD ROMs
 		if [ -n "$folder" ]; then
-			cp -R "$folder"/* "$rootdir/ROMs/TurboGraphx 16/"
+			cp -R "$folder"/* "$rootdir/ROMs/Sega CD/"
 		fi
 		;;
 
 		11)  
 		#call file loader  	
 		h_file_loader
-		#copy Neo-Geo CDZ ROMs
+		#copy Sega 32X ROMs
 		if [ -n "$folder" ]; then
-			cp -R "$folder"/* "$rootdir/ROMs/Neo-Geo/CDZ/"
+			cp -R "$folder"/* "$rootdir/ROMs/Sega 32X/"
 		fi
 		;;
 
 		12)  
+		#call file loader  	
+		h_file_loader
+		#copy GBC ROMs
+		if [ -n "$folder" ]; then
+			cp -Rv "$folder"/* "$rootdir/ROMs/GBA/"
+		fi
+		;;
+
+		13)  
+		#call file loader  	
+		h_file_loader
+		#copy GBC ROMs
+		if [ -n "$folder" ]; then
+			cp -Rv "$folder"/* "$rootdir/ROMs/GBC/"
+		fi
+		;;
+
+		14)  
+		#call file loader  	
+		h_file_loader
+		#copy Turbographx 16 ROMs
+		if [ -n "$folder" ]; then
+			cp -Rv "$folder"/* "$rootdir/ROMs/TurboGraphx 16/"
+		fi
+		;;
+
+		15)  
+		#call file loader  	
+		h_file_loader
+		#copy Neo Geo CDZ ROMs
+		if [ -n "$folder" ]; then
+			cp -Rv "$folder"/* "$rootdir/ROMs/Neo Geo/CDZ/"
+		fi
+		;;
+
+		16)  
+		#call file loader  	
+		h_file_loader
+		#copy Neo Geo AES ROMs
+		if [ -n "$folder" ]; then
+			cp -Rv "$folder"/* "$rootdir/ROMs/Neo Geo/AES/"
+		fi
+		;;
+
+		17)  
 		#call file loader  	
 		h_file_loader
 		#copy PSP ROMs
@@ -336,16 +551,25 @@ options=(1 "Atari 2600"
 		fi
 		;;
 
-		13)  
+		18)  
 		#call file loader  	
 		h_file_loader
-		#copy PSX/PS1 ROMs
+		#copy PS1/PSX ROMs
 		if [ -n "$folder" ]; then
 			cp -Rv "$folder"/* "$rootdir/ROMs/PS1/"
 		fi
 		;;
 
-		14)  
+		19)  
+		#call file loader  	
+		h_file_loader
+		#copy PS2 ROMs
+		if [ -n "$folder" ]; then
+			cp -Rv "$folder"/* "$rootdir/ROMs/PS2/"
+		fi
+		;;
+
+		20)  
 		return
 		;;
 
@@ -369,12 +593,16 @@ function h_res_switcher()
 	dialog --infobox "Setting resolution to selection" 3 36
 	#resolution is set via _resolution function		
 	
-	########################		
-	#Stella
-	########################
-	st_org=$(grep -Ee "\bfullres = \b" "$config_home/.stella/stellarc")
-	#make the changes, prefix new_X in case NULL was entered previously
-	sed -i "s|$st_org|fullres = $st_new|g" "$config_home/.stella/stellarc"
+	#############################################################		
+	# Stella (deprecated)
+	# OpenGL handles this now, 'fullres' no longer exists
+	############################################################
+	
+	# "fullres =" DOES NOT SEEM TO BE USED NOW IN THE SOURCE COMPILED VERSION
+	# IT WILL BE LEFT ALONE FOR NOW UNTIL DEEMED UNECESSARY
+	# st_org=$(grep -Ee "\bfullres = \b" "$config_home/.stella/stellarc")
+	# make the changes, prefix new_X in case NULL was entered previously
+	# sed -i "s|$st_org|fullres = $st_new|g" "$config_home/.stella/stellarc"
 
 	########################		
 	#mupen64plus
@@ -466,6 +694,22 @@ function h_res_switcher()
 	sed -i "s|$psx_org_X|psx.xres $psx_new_X|g" "$config_home/.mednafen/mednafen-09x.cfg"
 	sed -i "s|$psx_org_Y|psx.yres $psx_new_Y|g" "$config_home/.mednafen/mednafen-09x.cfg"
 
+	# Gens GS (Sega CD)
+	gens_org_X=$(grep -Ee "\bOpenGL Width=\b" "/home/test/.retrorig/.gens/gens.cfg")
+	gens_org_Y=$(grep -Ee "\bOpenGL Height=\b" "/home/test/.retrorig/.gens/gens.cfg")
+	#make the changes, prefix new_X in case NULL was entered previously
+	sed -i "s|$gens_org_X|OpenGL Width= $gens_new_X|g" "$config_home/.mednafen/mednafen-09x.cfg"
+	sed -i "s|$gens_org_Y|OpenGL Height= $gens_new_Y|g" "$config_home/.mednafen/mednafen-09x.cfg"
+
+	########################		
+	# pcsx2
+	########################
+	ps2_org_X=$(grep -Ee "\bresx = \b" "$config_home/.config/pcsx2/inis/GSdx.ini")
+	ps2_org_Y=$(grep -Ee "\bresy = \b" "$config_home/.config/pcsx2/inis/GSdx.ini")
+	#make the changes, prefix new_X in case NULL was entered previousey
+	sed -i "s|$ps2_org_X|resx = $ps2_new_X|g" "$config_home/.config/pcsx2/inis/GSdx.ini"
+	sed -i "s|$ps2_org_Y|resy = $ps2_new_Y|g" "$config_home/.config/pcsx2/inis/GSdx.ini"
+
 	# correct permissions
 	h_correct_perms
 }
@@ -519,44 +763,147 @@ function h_bios_loader()
 {
 	
 # present menu
+loader_type="BIOS"
 
+while true; do
 cmd=(dialog --backtitle "LibreGeek.org RetroRig Installer" --menu "Load BIOS files for which system?" 19 32 24)
-options=(1 "Neo-Geo CDZ"
-	 2 "MAME" 
-	 3 "Exit BIOS Loader")
+options=(1 "Atari Lynx"
+	 2 "Neo-Geo AES/CDZ"
+	 3 "MAME" 
+	 4 "PSX/PS1"
+	 5 "PS2"
+	 6 "Sega CD"    
+	 7 "Exit BIOS Loader")
 
 	#make menu choice
 	selection=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
 	#functions
 
-	for choice in $selection
-	do
-		case $choice in
+
+	if [ "$selection" != "" ]; then
+		case $selection in
 
 		1)
-		# call file loader  	
+		#call file loader
 		h_file_loader
-		# copy Neo-Geo BIOS file over to MESS (root emulator)
+		# copy Atari Lynx BIOS file over to Mednafen (root emulator)
 		if [ -n "$folder" ]; then
-			cp -v "$folder" "$rootdir/BIOS/MESS"
+			cp -v "$folder" "$rootdir/BIOS/Mednafen/"
 		fi
 		;;
 
 		2)
-		#call file loader
+		# call file loader  	
 		h_file_loader
-		# copy MAME BIOS file over to MESS (root emulator)
+		# copy Neo-Geo BIOS file over to MESS (root emulator)
 		if [ -n "$folder" ]; then
-			cp -v "$folder" "$rootdir/BIOS/MAME"
+			cp -v "$folder" "$rootdir/BIOS/MESS/"
 		fi
 		;;
 
 		3)
+		#call file loader
+		h_file_loader
+		# copy MAME BIOS file over to MESS (root emulator)
+		if [ -n "$folder" ]; then
+			cp -v "$folder" "$rootdir/BIOS/MAME/"
+		fi
+		;;
+
+		4)
+		#call file loader
+		h_file_loader
+		# copy PSX BIOS file over to Mednafen (root emulator)
+		if [ -n "$folder" ]; then
+			cp -v "$folder" "$rootdir/BIOS/Mednafen/"
+		fi
+		;;
+
+		5)
+		#call file loader
+		h_file_loader
+		# copy PS2 BIOS file over to PCSX2 (root emulator)
+		if [ -n "$folder" ]; then
+			cp -v "$folder" "$rootdir/BIOS/PCSX2/"
+			# assess current BIOS file
+			old_ps2_bios=$(grep -e "BIOS=" "$config_home/.config/pcsx2/inis/PCSX2_ui.ini")
+			# use sed to replace the defined BIOS file
+			# perform actual changes
+			sed -i "s|$old_ps2_bios|BIOS=$folder|g" "$config_home/.config/pcsx2/inis/PCSX2_ui.ini"			
+		fi
+		;;
+
+		6)
+		# call file loader
+		h_file_loader
+		# copy Sega CD BIOS file over to KEGA Fusion (root emulator)
+		if [ -n "$folder" ]; then
+			cp -v "$folder" "$rootdir/BIOS/Gens/"
+
+			###############################################
+			# Determine which Region from user via menu
+			###############################################
+
+			cmd=(dialog --backtitle "LibreGeek.org RetroRig Installer" --menu "Load BIOS files for which system?" 19 32 24)
+				options=(1 "USA"
+					 2 "Japan"
+					 3 "Europe"  
+	 				 4 "Return to Previous")
+
+			#make menu choice
+			selection=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
+			#functions
+
+			for choice in $selection
+			do
+				case $choice in
+
+				1)
+				# assess current BIOS file
+				old_scd_bios=$(grep -e "USA CD BIOS=" "$config_home/.gens/gens.cfg")
+				# use sed to replace the defined BIOS file
+				# perform actual changes
+				sed -i "s|$old_scd_bios|USA CD BIOS=$folder|g" "$config_home/.gens/gens.cfg"	
+				;;
+
+				2)
+				# assess current BIOS file
+				old_scd_bios=$(grep -e "Japan CD BIOS=" "$config_home/.gens/gens.cfg")
+				# use sed to replace the defined BIOS file
+				# perform actual changes
+				sed -i "s|$old_scd_bios|Japan CD BIOS=$folder|g" "$config_home/.gens/gens.cfg"
+				;;
+
+				3)
+				# assess current BIOS file
+				old_scd_bios=$(grep -e "Europe CD BIOS=" "$config_home/.gens/gens.cfg")
+				# use sed to replace the defined BIOS file
+				# perform actual changes
+				sed -i "s|$old_scd_bios|Europe CD BIOS=$folder|g" "$config_home/.gens/gens.cfg"
+				;;
+
+				4)
+				return
+				;;
+
+				esac
+			done		
+		fi
+
+			###############################################
+			# End Sega CD BIOS routine
+			###############################################
+		;;
+
+		7)
 		return
 		;;
 
 		esac
-	done
+	else
+		break
+	fi
+done
 	
 	#fix persmissions, post-copy
 	h_correct_perms
@@ -573,7 +920,7 @@ function h_correct_perms()
 
 	# correct permissions since we use sudo
 	chgrp -Rv "$user" "$rootdir" > /dev/null 2>&1
-    	chown -Rv "$user" "$rootdir" > /dev/null 2>&1
+	chown -Rv "$user" "$rootdir" > /dev/null 2>&1
 
 	# correct the desktop permissions so we can add our own launcher
 	# This will allow permissions change for all languages. Thanks JC!
@@ -586,24 +933,20 @@ function h_correct_perms()
 	
 	# .retrorig
 	chgrp -R "$user" "$config_home" > /dev/null 2>&1
-     	chown -R "$user" "$config_home" > /dev/null 2>&1
+	chown -R "$user" "$config_home" > /dev/null 2>&1
 
 	# xbmc dotfile (our custom path)
 	chgrp -R "$user" "$xbmc_home" > /dev/null 2>&1
-     	chown -R "$user" "$xbmc_home" > /dev/null 2>&1
+	chown -R "$user" "$xbmc_home" > /dev/null 2>&1
 
 	# qjoypad files from user home directory
 	chgrp -R "$user" "$home/.qjoypad3" > /dev/null 2>&1
-     	chown -R "$user" "$home/.qjoypad3" > /dev/null 2>&1
+	chown -R "$user" "$home/.qjoypad3" > /dev/null 2>&1
 
 	# XBMC gamepad auto-detect helper
-	chgrp -R "$user" "/usr/share/applications/gp_autodetect_xbmc.sh" > /dev/null 2>&1
-     	chown -R "$user" "/usr/share/applications/gp_autodetect_xbmc.sh" > /dev/null 2>&1
 	chmod ugo+x "/usr/share/applications/gp_autodetect_xbmc.sh" > /dev/null 2>&1
 
 	# start script for RetroRig application
-	chgrp -R "$user" "/usr/share/applications/startXBMC.sh" > /dev/null 2>&1
-	chown -R "$user" "/usr/share/applications/startXBMC.sh" > /dev/null 2>&1
 	chmod ugo+x "/usr/share/applications/startXBMC.sh" > /dev/null 2>&1
 
 	# RetroRig autostart file
@@ -611,16 +954,10 @@ function h_correct_perms()
 	chown -R "$user" "$home/.config/autostart/RetroRig.desktop" > /dev/null 2>&1
 	chmod ugo+x "$home/.config/autostart/RetroRig.desktop" > /dev/null 2>&1
 
-	# qjoypad autostart file
-	chgrp -R "$user" "$home/.config/autostart/qjoypad.desktop" > /dev/null 2>&1
-	chown -R "$user" "$home/.config/autostart/qjoypad.desktop" > /dev/null 2>&1
-
-	# Pictures directory
-	chgrp -R "$user" "$xdg_pictures_dir/retro-icon.png" > /dev/null 2>&1
-	chown -R "$user" "$xdg_pictures_dir/retro-icon.png" > /dev/null 2>&1
-
 	# correct our own start file for retrorig
-	chmod ugo+x /usr/bin/xbmc-retrorig
+	if [ -f /usr/bin/xbmc-retrorig ]; then
+		chmod ugo+x /usr/bin/xbmc-retrorig
+	fi
 
 	# xboxdrv init script
 	chmod 755 /etc/init.d/xboxdrv > /dev/null 2>&1
@@ -633,22 +970,57 @@ function h_emu_user_fixes()
 	# set the system user to an absolute value for files that require it
 	# RCB and some config files don't like using $config_home, rather /home/test/
 	# Let's change the config files to reflect the current username
-
 	
 	# mame
-	sed -i "s|/home/test/RetroRig|$rootdir|g" $config_home/.mame/mame.ini | tee >> "$rootdir/logs/debug.log"
+	sed -i "s|installdir_temp|$rootdir|g" "$config_home/.mame/mame.ini" | tee >> "$rootdir/logs/debug.log"
+	sed -i "s|config_temp|$config_home|g" "$config_home/.mame/mame.ini" | tee >> "$rootdir/logs/debug.log"
 	
 	# MESS
-	sed -i "s|/home/test/RetroRig|$rootdir|g" $config_home/.mess/mess.ini | tee >> "$rootdir/logs/debug.log"
+	sed -i "s|installdir_temp|$rootdir|g" "$config_home/.mess/mess.ini" | tee >> "$rootdir/logs/debug.log"
+	sed -i "s|config_temp|$config_home|g" "$config_home/.mess/mess.ini" | tee >> "$rootdir/logs/debug.log"
 	
 	# XBMC
-	sed -i "s|/home/test/|/home/$user/|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml" | tee >> "$rootdir/logs/debug.log"
+	sed -i "s|installdir_temp|$rootdir|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml" | tee >> "$rootdir/logs/debug.log"
 	
 	# PPSSPP	
-	sed -i 's|test|$user|g' "$scriptdir/emu-cfgs/x360_controller/PPSSPP/ppsspp.ini"
+	sed -i "s|installdir_temp|$rootdir|g" "$config_home/.config/ppsspp/PSP/SYSTEM/ppsspp.ini"
+	sed -i "s|config_temp|$config_home|g" "$config_home/.config/ppsspp/PSP/SYSTEM/ppsspp.ini"
 
 	# Mednafen firmware location
-	sed -i "s|/home/test/RetroRig|$rootdir|g" "$config_home/.mednafen/mednafen-09x.cfg"
+	sed -i "s|firmware_temp|$rootdir/BIOS/Mednafen|g" "$config_home/.mednafen/mednafen-09x.cfg"
+
+	# Dolphin directories
+	sed -i "s|installdir_temp|$rootdir|g" "$config_home/.dolphin-emu/Config/Dolphin.ini"
+	sed -i "s|home_temp|$home|g" "$config_home/.dolphin-emu/Config/Dolphin.ini"
+	sed -i "s|config_temp|$config_home|g" "$config_home/.dolphin-emu/Config/Dolphin.ini"
+
+	# Stella
+	sed -i "s|config_temp|$config_home|g" "$config_home/.stella/stellarc"
+	sed -i "s|installdir_temp|$rootdir|g" "$config_home/.stella/stellarc"
+
+	# PCSX2
+	sed -i "s|config_temp|$config_home|g" "$config_home/.config/pcsx2/PCSX2-reg.ini"
+	sed -i "s|installdir_temp|$rootdir|g" "$config_home/.config/pcsx2/inis/PCSX2_ui.ini"
+	sed -i "s|config_temp|$config_home|g" "$config_home/.config/pcsx2/inis/PCSX2_ui.ini"
+
+	# Gens GS (Sega CD)
+	sed -i "s|config_temp|$config_home|g" "$config_home/.gens/gens.cfg"
+	sed -i "s|installdir_temp|$rootdir|g" "$config_home/.gens/gens.cfg"
+	sed -i "s|xbmc_temp|$xbmc_home|g" "$config_home/.gens/gens.cfg"
+	
+	# Mupen64Plus
+	sed -i "s|PLACEHOLDER_SAVESTATEPTH|$config_home/.config/mupen64plus/save|g" "$config_home/.config/mupen64plus/mupen64plus.cfg"
+
+	# Advanced Launcher (XBMC)
+	echo "*****"
+	echo "*****"
+	echo "***** please fix me! Advanced Launcher (XBMC) in helpers.shinc *****"
+	echo "*****"
+	echo "*****"
+	#sed -i "s|config_temp|$config_home|g" "$config_home/"
+
+	# antimicro
+	sed -i "s|config_temp|$config_home|g" "$xbmc_home/userdata/addon_data/plugin.program.advanced.launcher/launchers.xml"		
 
 	# echo change
 	echo "The user applied to configuration files was: $user" | tee >> "$rootdir/logs/debug.log"
@@ -678,7 +1050,7 @@ function h_update_git()
 {
 
 echo "Fetching latest version of the RetroRig Setup Script."
-pushd "$scriptdir"
+pushd "$rootdir"
 
 if [[ ! -d ".git" ]]; then
 	dialog --backtitle "LibreGeek.org - RetroRig Setup." --msgbox "Cannot find direcotry 	'.git'. Please clone the RetroRig setup script via \
@@ -694,24 +1066,15 @@ popd
 dialog --backtitle "LibreGeek.org - RetroRig Setup." --msgbox "Fetched the latest version of the RetroRig repository. Please exit and restart the script." 7 60 
 }
 
-function h_update_system() 
-{
-
-
-# Update binaries that were installed via PPA's and Official Ubuntu repos
-apt-get update -y
-sleep 3s
-clear
-
-}
 
 function h_upgrade_system() 
 {
 
-clear
-apt-get update -y
-apt-get upgrade -y
-sleep 3s
-clear
+	clear
+	# Upgrade system pkgs, but do so intelligently
+	apt-get update -y
+	apt-get upgrade -y
+	sleep 3s
+	clear
 
 }

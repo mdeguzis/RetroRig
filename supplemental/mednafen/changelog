@@ -1,0 +1,421 @@
+mednafen (version_placeholder) trusty; urgency=medium
+
+  * updated version prefix
+
+ -- Jens-Christian Lache <jc.lache@web.de>  Sun, 12 Oct 2014 13:15:00 +0200
+
+mednafen (0.9.36.2.2) trusty; urgency=medium
+
+  * window flags changed from SDL_WINDOW_FULLSCREEN to SDL_WINDOW_FULLSCREEN_DESKTOP
+
+ -- Jens-Christian Lache <jc.lache@web.de>  Fri, 08 Aug 2014 18:09:48 +0200
+
+mednafen (0.9.36.2.1) trusty; urgency=medium
+
+  * patched for SDL2 and added dual-head support
+
+ -- Jens-Christian Lache <jc.lache@web.de>  Wed, 30 Jul 2014 22:10:29 +0800
+
+mednafen (0.9.36.2-1) unstable; urgency=medium
+
+  * New upstream release.
+
+ -- Stephen Kitt <skitt@debian.org>  Wed, 02 Jul 2014 15:09:09 +0200
+
+mednafen (0.9.35.1-1) unstable; urgency=medium
+
+  * New upstream release.
+
+ -- Stephen Kitt <skitt@debian.org>  Sat, 07 Jun 2014 15:55:03 +0200
+
+mednafen (0.9.34.1-2) unstable; urgency=medium
+
+  * Link trio with libm to hopefully build on Ubuntu.
+
+ -- Stephen Kitt <skitt@debian.org>  Sun, 18 May 2014 22:37:51 +0200
+
+mednafen (0.9.34.1-1) unstable; urgency=medium
+
+  * New upstream release.
+
+ -- Stephen Kitt <skitt@debian.org>  Sat, 17 May 2014 21:36:36 +0200
+
+mednafen (0.9.33.3-2) unstable; urgency=medium
+
+  * Build using packaged libtrio (closes: #746817).
+
+ -- Stephen Kitt <skitt@debian.org>  Sun, 04 May 2014 14:33:54 +0200
+
+mednafen (0.9.33.3-1) unstable; urgency=medium
+
+  * New upstream release.
+
+ -- Stephen Kitt <skitt@debian.org>  Tue, 22 Apr 2014 23:51:55 +0200
+
+mednafen (0.9.33.2-1) unstable; urgency=medium
+
+  * New upstream release.
+
+ -- Stephen Kitt <skitt@debian.org>  Tue, 25 Mar 2014 23:48:28 +0100
+
+mednafen (0.9.33.1-1) unstable; urgency=medium
+
+  * New upstream release.
+  * Update priority to match override.
+  * Update description since this is not an experimental release.
+
+ -- Stephen Kitt <skitt@debian.org>  Sat, 22 Mar 2014 13:05:47 +0100
+
+mednafen (0.9.32.1-wip-1) experimental; urgency=low
+
+  * New upstream WIP release.
+  * Standards-Version 3.9.5, no change required.
+
+ -- Stephen Kitt <skitt@debian.org>  Fri, 29 Nov 2013 23:38:53 +0100
+
+mednafen (0.9.32-wip-1) experimental; urgency=low
+
+  * New upstream WIP version.
+
+ -- Stephen Kitt <skitt@debian.org>  Sat, 14 Sep 2013 00:14:39 +0200
+
+mednafen (0.9.29-wip-1) experimental; urgency=low
+
+  * New upstream WIP version. Follow upstream naming scheme strictly;
+    thanks to Bart Martens for the discussion concerning this.
+  * New watch file provided by Bart.
+  * Switch to my Debian address.
+  * Use canonical VCS URIs.
+  * Standards-Version 3.9.4, no further change required.
+
+ -- Stephen Kitt <skitt@debian.org>  Thu, 22 Aug 2013 22:52:47 +0200
+
+mednafen (0.9.28-1) experimental; urgency=low
+
+  * New upstream WIP version.
+  * Update debian/copyright for new SABR shader.
+
+ -- Stephen Kitt <steve@sk2.org>  Mon, 21 Jan 2013 06:54:11 +0100
+
+mednafen (0.9.27-1) experimental; urgency=low
+
+  * New upstream WIP version.
+
+ -- Stephen Kitt <steve@sk2.org>  Sat, 22 Dec 2012 15:29:44 +0100
+
+mednafen (0.9.26-1) experimental; urgency=low
+
+  * New upstream WIP version.
+  * Change priority to "extra" to match libvorbisidec1's.
+  * Drop "DM-Upload-Allowed" since it is no longer appropriate.
+  * Refresh patches, replacing MPC_STATUS_FAIL constant from older mpcdec
+    versions.
+
+ -- Stephen Kitt <steve@sk2.org>  Mon, 19 Nov 2012 07:00:37 +0100
+
+mednafen (0.9.24-1) experimental; urgency=low
+
+  * New upstream WIP version.
+  * Remove sdl-net build-dependency (no longer used).
+
+ -- Stephen Kitt <steve@sk2.org>  Sat, 14 Jul 2012 15:23:08 +0200
+
+mednafen (0.9.22-2) experimental; urgency=low
+
+  * Use ${source:Package} with dpkg-query to retrieve only the package
+    name in the Built-Using field (closes: #677867).
+
+ -- Stephen Kitt <steve@sk2.org>  Mon, 18 Jun 2012 06:52:11 +0200
+
+mednafen (0.9.22-1) experimental; urgency=low
+
+  * New upstream WIP version (breaks Genesis/Megadrive save games).
+  * Drop hardening-fixes.patch and cdromif-memset-fix.patch, merged
+    upstream.
+
+ -- Stephen Kitt <steve@sk2.org>  Wed, 30 May 2012 07:42:07 +0200
+
+mednafen (0.9.21-2) experimental; urgency=low
+
+  * Add a Built-Using relationship on the package MiniLZO was copied
+    from.
+  * Move away mpcdec and tremor at build time rather than through
+    patches (this makes maintaining the patches easier).
+  * Update README.source to indicate that mpcdec is now replaced as well
+    as tremor.
+  * Track upstream WIP versions published on sourceforge.net.
+
+ -- Stephen Kitt <steve@sk2.org>  Wed, 16 May 2012 20:42:34 +0200
+
+mednafen (0.9.21-1) experimental; urgency=low
+
+  * New upstream WIP version.
+  * Refresh use-system-tremor.patch and remove spelling-fixes.patch,
+    gzip-1.2.6-fix.patch and shader-fix.patch (applied upstream).
+  * Add use-system-mpcdec.patch to build using the Debian-provided
+    libmpcdec rather than the bundled version.
+  * Add cdrom-if-memset-fix.patch to fix an incorrect memset invocation
+    (spotted by gcc).
+  * Standard-Version 3.9.3, no change required.
+  * wrap-and-sort control files.
+
+ -- Stephen Kitt <steve@sk2.org>  Tue, 03 Apr 2012 00:05:58 +0200
+
+mednafen (0.9.19-2) experimental; urgency=low
+
+  * Build with zlib 1.2.6 and later (patch by Michał Ziąbkowski).
+  * Fix interpolation shaders (patch by "Valfar").
+
+ -- Stephen Kitt <steve@sk2.org>  Mon, 20 Feb 2012 06:52:07 +0100
+
+mednafen (0.9.19-1) experimental; urgency=low
+
+  * New upstream WIP version.
+  * Update copyright information.
+  * Refresh use-system-tremor.patch and remove psx-big-endian-only.patch.
+  * Add spelling-fixes.patch based on Lintian's recommendations.
+  * Build-depend on debhelper 9 or later and remove corresponding Lintian
+    override.
+
+ -- Stephen Kitt <steve@sk2.org>  Tue, 31 Jan 2012 07:21:35 +0100
+
+mednafen (0.9.18-1) experimental; urgency=low
+
+  * New upstream WIP version, adding PSX emulation (only on little-endian
+    systems).
+  * Update copyright information.
+  * Refresh use-system-tremor.patch and use dh-autoreconf to handle all
+    the autotools reconfiguration involved.
+  * Fix "debian/control uses hardcoded list of non-Linux architectures" -
+    qualify libasound2-dev dependency using [linux-any] instead of
+    [!kfreebsd-i386 !kfreebsd-amd64 !hurd-i386] (closes: #634461).
+  * Install .desktop file allowing file association, with known
+    supported MIME types, as suggested by Damian Yarrick (LP: #886912;
+    helps with #635538).
+  * Simplify rules using dh 9 and enable hardening.
+  * Build-conflict with autoconf2.13 which causes the build to fail.
+  * Set DM-Upload-Allowed flag, as done by Piotr Ożarowski in 0.8.D.3-2.
+
+ -- Stephen Kitt <steve@sk2.org>  Sat, 12 Nov 2011 01:15:38 +0100
+
+mednafen (0.9.17.1-1) experimental; urgency=low
+
+  * New upstream WIP version (closes: #614263), adding emulators for Sega
+    Genesis / Mega Drive, Virtual Boy, and Super Nintendo Entertainment
+    System.
+  * Use external libvorbisidec instead of the bundled copy.
+  * Use external minilzo instead of the bundled copy.
+  * Standards-Version 3.9.2, no change required.
+
+ -- Stephen Kitt <steve@sk2.org>  Wed, 13 Apr 2011 22:33:57 +0200
+
+mednafen (0.8.D.3-1) unstable; urgency=low
+
+  * New upstream version, fixing a significant memory leak.
+
+ -- Stephen Kitt <steve@sk2.org>  Fri, 17 Sep 2010 07:18:16 +0200
+
+mednafen (0.8.D.2-1) unstable; urgency=low
+
+  * New upstream version.
+  * Standards-Version 3.9.1, no change required.
+  * Add build dependency on libjack-dev.
+
+ -- Stephen Kitt <steve@sk2.org>  Thu, 05 Aug 2010 08:35:19 +0200
+
+mednafen (0.8.D-1) unstable; urgency=low
+
+  * New upstream version.
+  * Mention homepage.
+  * Update debian/copyright.
+  * Register documentation with doc-base.
+
+ -- Stephen Kitt <steve@sk2.org>  Mon, 31 May 2010 06:49:35 +0200
+
+mednafen (0.8.C-1) unstable; urgency=low
+
+  * New maintainer (closes: #510531).
+  * New upstream version (closes: #506462):
+    - 10-gcc4.4-const-char.patch: removed, merged upstream.
+  * Standards-Version 3.8.4, no change required.
+  * Provide nes-emulator (closes: #485974).
+
+ -- Stephen Kitt <steve@sk2.org>  Thu, 04 Feb 2010 14:50:12 +0100
+
+mednafen (0.8.9-1.1) unstable; urgency=low
+
+  [Jari Aalto]
+  * Non-maintainer upload.
+  * Update to packaging format "3.0 (quilt)" due to patch.
+  * debian/patches
+    - (number 10): Add patch to fix GCC 4.4
+      invalid conversion from const char* to char*.
+      (RC bug FTBFS serious; Closes: #560474).
+  * debian/source/format
+     - New file.
+
+ -- Jari Aalto <jari.aalto@cante.net>  Sat, 09 Jan 2010 21:00:28 +0200
+
+mednafen (0.8.9-1) unstable; urgency=low
+
+  * New upstream version.
+
+ -- Ryan Schultz <schultz.ryan@gmail.com>  Mon, 09 Jun 2008 16:38:25 -0400
+
+mednafen (0.8.8-1) unstable; urgency=low
+
+  * New upstream version.
+
+ -- Ryan Schultz <schultz.ryan@gmail.com>  Thu, 03 Apr 2008 10:43:51 -0400
+
+mednafen (0.8.7-1.1) unstable; urgency=low
+
+  * Non-maintainer upload.
+  * Explicitly include required headers to fix FTBFS with gcc-4.3.  (Closes:
+    #417446)
+
+ -- James Vega <jamessan@debian.org>  Sun, 09 Mar 2008 17:10:00 -0400
+
+mednafen (0.8.7-1) unstable; urgency=low
+
+  * New upstream version. 
+
+ -- Ryan Schultz <schultz.ryan@gmail.com>  Sun, 06 Jan 2008 11:58:07 -0500
+
+mednafen (0.8.6-1) unstable; urgency=low
+
+  * New upstream version.
+  * Closes: #417446. Upstream fixed this in a different way than the patch.
+  * Update Debian packaging to compat = 5.
+  * Update x-dev depend to x11proto-core-dev.
+  * Add copyright information for galois.
+  * Add copyright information for Debian packaging.
+
+ -- Ryan Schultz <schultz.ryan@gmail.com>  Fri, 04 Jan 2008 14:48:16 -0500
+
+mednafen (0.8.5-1) unstable; urgency=low
+
+  * New upstream version. 
+  * Closes: #449877. Patch from Raphael Geissert <atomo64@gmail.com>.
+
+ -- Ryan Schultz <schultz.ryan@gmail.com>  Sun, 16 Dec 2007 18:50:43 -0500
+
+mednafen (0.8.4-rc3-1) unstable; urgency=low
+
+  * New upstream version.
+  * Closes: #447551
+
+ -- Ryan Schultz <schultz.ryan@gmail.com>  Mon, 22 Oct 2007 22:27:12 -0400
+
+mednafen (0.8.1-1) unstable; urgency=low
+
+  * New upstream version.
+
+ -- Ryan Schultz <schultz.ryan@gmail.com>  Mon, 22 Oct 2007 22:26:23 -0400
+
+mednafen (0.7.2-1) unstable; urgency=low
+
+  * New upstream version. 
+
+ -- Ryan Schultz <schultz.ryan@gmail.com>  Thu, 22 Feb 2007 16:45:25 -0500
+
+mednafen (0.7.1-1) unstable; urgency=low
+
+  * New upstream release. 
+
+ -- Ryan Schultz <schultz.ryan@gmail.com>  Sun, 24 Dec 2006 13:19:55 -0500
+
+mednafen (0.7.0-1) unstable; urgency=low
+
+  * New upstream version.
+  * Updated copyright.
+  * Added build rules for ALSA on *BSDs.
+
+ -- Ryan Schultz <schultz.ryan@gmail.com>  Sat, 23 Dec 2006 12:34:18 -0500
+
+mednafen (0.6.5-1) unstable; urgency=low
+
+  * New upstream version. Closes: #385807
+
+ -- Ryan Schultz <schultz.ryan@gmail.com>  Wed,  6 Sep 2006 21:04:34 -0400
+
+mednafen (0.6.4-1) unstable; urgency=low
+
+  * New upstream version.
+  * Update copyrights.
+
+ -- Ryan Schultz <schultz.ryan@gmail.com>  Mon, 28 Aug 2006 13:32:02 -0400
+
+mednafen (0.6.3-1) unstable; urgency=low
+
+  * New upstream version. 
+
+ -- Ryan Schultz <schultz.ryan@gmail.com>  Thu, 10 Aug 2006 14:45:16 -0400
+
+mednafen (0.6.2-1) unstable; urgency=low
+
+  * New upstream version. 
+
+ -- Ryan Schultz <schultz.ryan@gmail.com>  Wed, 21 Jun 2006 16:26:18 -0400
+
+mednafen (0.6.1-1) unstable; urgency=low
+
+  * New upstream version. 
+
+ -- Ryan Schultz <schultz.ryan@gmail.com>  Thu,  1 Jun 2006 20:48:48 -0400
+
+mednafen (0.6.0-1) unstable; urgency=low
+
+  * New upstream version.
+
+ -- Ryan Schultz <schultz.ryan@gmail.com>  Tue, 16 May 2006 13:06:32 -0400
+
+mednafen (0.5.2-1) unstable; urgency=low
+
+  * New upstream version. Closes: #351586
+
+ -- Ryan Schultz <schultz.ryan@gmail.com>  Tue, 16 May 2006 13:06:27 -0400
+
+mednafen (0.4.7-1) unstable; urgency=low
+
+  * New upstream version. Closes: #349845
+  * Add Trio copyright info.
+
+ -- Ryan Schultz <schultz.ryan@gmail.com>  Thu,  2 Feb 2006 14:24:53 -0500
+
+mednafen (0.4.5-1) unstable; urgency=low
+
+  * New upstream version. Closes: #349633
+  * Remove JACK and ESD dependencies.
+  * Update description.
+
+ -- Ryan Schultz <schultz.ryan@gmail.com>  Tue, 24 Jan 2006 18:01:01 -0500
+
+mednafen (0.4.4-1) unstable; urgency=low
+
+  * New upstream version.
+  * Add debian/watch file.
+
+ -- Ryan Schultz <schultz.ryan@gmail.com>  Sun, 22 Jan 2006 21:43:34 -0500
+
+mednafen (0.4.1-1) unstable; urgency=low
+
+  * New upstream release.
+  * Fix some small packaging issues.
+  * Expand debian/copyright file.
+
+ -- Ryan Schultz <schultz.ryan@gmail.com>  Thu, 29 Dec 2005 17:43:00 -0500
+
+mednafen (0.4.0-1) unstable; urgency=low
+
+  * New upstream release. 
+
+ -- Ryan Schultz <schultz.ryan@gmail.com>  Fri, 16 Dec 2005 15:10:58 -0500
+
+mednafen (0.3.7-1) unstable; urgency=low
+
+  * Initial release Closes: #340378
+  * Upstream source repackaged to remove CVS dirs
+
+ -- Ryan Schultz <schultz.ryan@gmail.com>  Tue, 22 Nov 2005 22:48:43 -0500
+

@@ -1,0 +1,60 @@
+Source: mupen64plus-video-glide64mk2
+Section: games
+Priority: optional
+Maintainer: Tobias Loose <TobiasLoose@gmx.de>
+Uploaders: RetroRig Development Team <jc.lache@gmail.com>
+Standards-Version: 3.9.4
+Homepage: http://code.google.com/p/mupen64plus/
+Build-Depends:
+ debhelper (>= 9.20130604),
+ dpkg-dev (>= 1.16.1.1),
+ libboost-filesystem-dev,
+ libboost-system-dev,
+ libgl1-mesa-dev | libgl-dev,
+ libmupen64plus-dev (>= 2.0),
+ libpng-dev,
+ libsdl2-dev,
+ pkg-config,
+ zlib1g-dev | libz-dev,
+
+Package: mupen64plus-video-glide64mk2
+Architecture: any-i386 any-amd64
+Multi-Arch: same
+Pre-Depends:
+ ${misc:Pre-Depends},
+Depends:
+ ${misc:Depends},
+ ${shlibs:Depends},
+ libtxc-dxtn0,
+ mupen64plus-config-abi-2.2,
+ mupen64plus-gfx-abi-2.2,
+ mupen64plus-vidext-abi-3,
+Provides:
+ mupen64plus-video,
+Breaks:
+ libmupen64plus2 (<< 2.0),
+Description: Glide64Mk2 high-level graphics emulation for mupen64plus
+ High-level graphics emulation plugin for known microcodes based on Glide. This
+ version includes a Glide-to-OpenGL wrapper which makes it independent of
+ Voodoo cards. It supports advanced graphics effects of the N64 and loading of
+ high resolution texture packs.
+ .
+ It is based on Glide64 Napalm which was ported to Linux and amd64.
+
+Package: mupen64plus-video-glide64mk2-dbg
+Section: debug
+Priority: extra
+Architecture: any-i386 any-amd64
+Multi-Arch: same
+Pre-Depends:
+ ${misc:Pre-Depends},
+Depends:
+ ${misc:Depends},
+ mupen64plus-video-glide64mk2 (= ${binary:Version}),
+Description: Glide64Mk2 graphics hle for mupen64plus debug symbols package
+ High-level graphics emulation plugin for known microcodes based on Glide. This
+ version includes a Glide-to-OpenGL wrapper which makes it independent of
+ Voodoo cards. It supports advanced graphics effects of the N64 and loading of
+ high resolution texture packs.
+ .
+ This package contains the debug files.

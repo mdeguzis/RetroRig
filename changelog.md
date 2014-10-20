@@ -1,6 +1,36 @@
 RetroRig changelog
 ============================
 
+Version 0.9.5
+
+* Fix for BIOS specifications disappearing after controller type is switched.
+* Ubuntu PPA for core packages and utilities
+* Brand new theme (Rom Collection Browser themed as well)
+* Initial crude support for pulling up emulator settings, system updater / settings, and applicable utilities for RetroRig (Requires mouse at the moment). In due time, I hope to create a native settings menu.
+* Support for Playstation 2 (PCSX2)
+* Support for Gamecube / Wii (Dolphin, Wii: GC gamepad only)
+* Support for the Atari Lynx (Mednafen)
+* Support for the Sega CD / 32X (Gens GS)
+* Fixes for save state locations
+* Support introduced for Debian derivitives
+* 3.14 manual kernel update taken out (upstream fixed)
+* Code cleanup in master Ubuntu branch
+* SDL 2 upgrades for applicable emulators
+* Side step or RCB Artwork download error (artwork still downloads)
+* Remove uneeded branches
+* Major fixes to PS3 Bluetooth pairing to accurately set correct MAC Address/ID for external programs that require it
+* XBMC core code changes to allow RCB to act more console like
+* XBMC splash screen with RetroRig tag
+* Debian packaging control file for RetroRig
+* XBMC Display fixes
+* Add experimental SDL2 support for Mednafen
+* Updates to RCB code from SVN
+* Auto resolution detection
+* Hotpluggable antimicro profiles for RCB to allow modular control designs for obscure emulators
+* Blank screen bug temporarily fixed with 
+* Fullscreen/windowed fixes for ROM Collection Browser
+* Sound driver fixes for Mednafen (SDL drive support under SDL2)
+
 Version 0.9.1
 
 * Add PSX/PS1 Support
@@ -72,3 +102,4 @@ Release 0.6.2
 - XBMC autostarts directly into Rom Collection Browser
 - Rom Collection browser will prompt for games to import on first run
 - Mechanisms to update github repo in the install script itself
+

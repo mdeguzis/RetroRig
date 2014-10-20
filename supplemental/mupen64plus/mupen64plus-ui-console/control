@@ -1,0 +1,63 @@
+Source: mupen64plus-ui-console
+Section: games
+Priority: optional
+Maintainer: Tobias Loose <TobiasLoose@gmx.de>
+Uploaders: RetroRig Development Team <jc.lache@gmail.com>
+Standards-Version: 3.9.5
+Homepage: http://code.google.com/p/mupen64plus/
+Build-Depends:
+ debhelper (>= 9.20130604),
+ dpkg-dev (>= 1.16.1.1),
+ libmupen64plus-dev (>= 1.99.5),
+ libsdl2-dev,
+
+Package: mupen64plus-ui-console
+Architecture: any-i386 any-amd64
+Depends:
+ ${misc:Depends},
+ ${shlibs:Depends},
+ mupen64plus-audio-all | mupen64plus-audio,
+ mupen64plus-config-abi-2.2,
+ mupen64plus-data,
+ mupen64plus-frontend-abi-2.1.1,
+ mupen64plus-input-all | mupen64plus-input,
+ mupen64plus-rsp-all | mupen64plus-rsp,
+ mupen64plus-video-all | mupen64plus-video,
+Provides:
+ mupen64plus-ui,
+Breaks:
+ mupen64plus (<< 1.99.1)
+Replaces:
+ mupen64plus (<< 1.99.1)
+Description: console frontend for mupen64plus
+ Minimal console user interface for mupen64plus. Features provided:
+  * Changeable emulation plugins for audio, core, input, rsp, video
+  * Selection of emulation core
+  * Graphical OSD for status output
+  * Setting of configuration variable per session or in configuration file
+  * Cheat database support
+  * Loading of roms
+ .
+ It does not provide any sort of graphical setup or functionality to
+ uncompress files.
+
+Package: mupen64plus-ui-console-dbg
+Section: debug
+Priority: extra
+Architecture: any-i386 any-amd64
+Depends:
+ ${misc:Depends},
+ mupen64plus-ui-console (= ${binary:Version}),
+Description: console frontend for mupen64plus debug symbols package
+ Minimal console user interface for mupen64plus. Features provided:
+  * Changeable emulation plugins for audio, core, input, rsp, video
+  * Selection of emulation core
+  * Graphical OSD for status output
+  * Setting of configuration variable per session or in configuration file
+  * Cheat database support
+  * Loading of roms
+ .
+ It does not provide any sort of graphical setup or functionality to
+ uncompress files.
+ .
+ This package contains the debug files.

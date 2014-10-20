@@ -10,7 +10,6 @@
 function set_menu()
 {
 	
-
 while true; do
     cmd=(dialog --backtitle "LibreGeek.org RetroRig" --menu "Settings Menu" 18 0 12)
     options=(1 "Change resolution"  
@@ -24,7 +23,7 @@ while true; do
 	     9 "Backup existing configs"
 	     10 "Restore first run configs"
 	     11 "Update XBMC configs"
-	     12 "Upgrade Ubuntu kernel (PS3 USB Support)"
+	     12 "Enable XBMC Session (Experimental Beta!)"
  	     13 "Back to main menu")
 
 	#make menu choice
@@ -79,7 +78,7 @@ while true; do
 		;;
 
 		12)
-		rrs_kernel_3_14
+		set_xbmc_session
 		;;
 
 		13)
@@ -112,7 +111,7 @@ function set_enable_samba()
 	echo "####################################################"
 	echo ""
 	sleep 2s
-	cat "$rootdir/supplimental/samba_shares.txt" >> "/etc/samba/smb.conf"
+	cat "$rootdir/supplemental/samba_shares.txt" >> "/etc/samba/smb.conf"
 
 	# replace parameters of share
 	sed -i "s|/home/test/RetroRig|$rootdir|g" "/etc/samba/smb.conf"
@@ -201,6 +200,8 @@ function set_xbmc_session()
 	# edits the single configuration file.
 
 	sed -i "s|$session_org|$session_new|g" "/usr/share/lightdm/lightdm.conf.d/50-ubuntu.conf"
+	sleep 2s
+
 	# correct permissions
 	h_correct_perms
 }
@@ -209,16 +210,18 @@ function set_resolution() {
 
 #menu
 #add res-switcher function to make new presets more modular to add
+
 while true; do
 cmd=(dialog --backtitle "RetroRig Settings" --menu "Choose your resolution" 16 0 16)
-options=(1 "Current Resolution"
-	 2 "1280x720  (720p)  (5:4)"
-	 3 "1280x1024 (SXGA)  (5:4)"
-	 4 "1360x768  (720p)  (16:9)"
-	 5 "1600x900  (900p)  (16:9)"
-	 6 "1920x1080 (1080p) (16:9)"
-	 7 "Custom"
-	 8 "Exit resolution selection")
+options=(1 "Automatic Configuration"
+	 2 "Current Resolution"
+	 3 "1280x720  (720p)  (5:4)"
+	 4 "1280x1024 (SXGA)  (5:4)"
+	 5 "1360x768  (720p)  (16:9)"
+	 6 "1600x900  (900p)  (16:9)"
+	 7 "1920x1080 (1080p) (16:9)"
+	 8 "Custom"
+	 9 "Exit resolution selection")
 	
 # Expanding arrays involves [@] and {}
 choices=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
@@ -226,6 +229,13 @@ if [ "$choices" != "" ]; then
     case $choices in
 
 	1) 
+                #enable auto resoltuion
+		setParameter "auto resolution" "true"
+		dialog --msgbox "Resolution settings for emulators will automatically be synchronized with XBMC's settings." 8 60
+                return
+		;;		
+
+	2) 
 		#Need to use extended regexp's here because of nes being within nes
 		#grep -Ee '\bnes\b' [list of files]
 
@@ -233,63 +243,74 @@ if [ "$choices" != "" ]; then
 		dialog --msgbox "Please Note: emulators, such as MESS, will automatically adjust their resolution \
 				and do not require or need resolution input." 8 60
 
-		#echo curent resolution
-		#mupen64plus
-		echo "mupen64plus:" > "$scriptdir/logs/res.txt"
-		grep -Ee "\bScreenWidth = \b" "$config_home/.config/mupen64plus/mupen64plus.cfg" >> "$scriptdir/logs/res.txt"
-		grep -Ee "\bScreenHeight = \b" "$config_home/.config/mupen64plus/mupen64plus.cfg" >> "$scriptdir/logs/res.txt"
-		echo "" >> "$scriptdir/logs/res.txt"
-		#mednafen GBC
-		echo "Mednafen (GBC)" >> "$scriptdir/logs/res.txt"
-		grep -Ee "\bgb.xres\b" "$config_home/.mednafen/mednafen-09x.cfg" >> "$scriptdir/logs/res.txt"
-		grep -Ee "\bgb.yres\b" "$config_home/.mednafen/mednafen-09x.cfg" >> "$scriptdir/logs/res.txt"
-		echo "" >> "$scriptdir/logs/res.txt"
-		#mednafen GBA
-		echo "Mednafen (GBA)" >> "$scriptdir/logs/res.txt"
-		grep -Ee "\bgba.xres\b" "$config_home/.mednafen/mednafen-09x.cfg" >> "$scriptdir/logs/res.txt"
-		grep -Ee "\bgba.yres\b" "$config_home/.mednafen/mednafen-09x.cfg" >> "$scriptdir/logs/res.txt"
-		echo "" >> "$scriptdir/logs/res.txt"
-		#mednafen NES
-		echo "Mednafen (NES)" >> "$scriptdir/logs/res.txt"
-		grep -Ee "\bnes.xres\b" "$config_home/.mednafen/mednafen-09x.cfg" >> "$scriptdir/logs/res.txt"
-		grep -Ee "\bnes.yres\b" "$config_home/.mednafen/mednafen-09x.cfg" >> "$scriptdir/logs/res.txt"
-		echo "" >> "$scriptdir/logs/res.txt"
-		#mednafen Sega Sega Master System
-		echo "Mednafen (Sega Master System)" >> "$scriptdir/logs/res.txt"
-		grep -Ee "\bsms.xres\b" "$config_home/.mednafen/mednafen-09x.cfg" >> "$scriptdir/logs/res.txt"
-		grep -Ee "\bsms.yres\b" "$config_home/.mednafen/mednafen-09x.cfg" >> "$scriptdir/logs/res.txt"
-		echo "" >> "$scriptdir/logs/res.txt"
-		#mednafen Sega Game Gear
-		echo "Mednafen (Sega Game Gear)" >> "$scriptdir/logs/res.txt"
-		grep -Ee "\bgg.xres\b" "$config_home/.mednafen/mednafen-09x.cfg" >> "$scriptdir/logs/res.txt"
-		grep -Ee "\bgg.yres\b" "$config_home/.mednafen/mednafen-09x.cfg" >> "$scriptdir/logs/res.txt"
-		echo "" >> "$scriptdir/logs/res.txt"
-		#mednafen SNES
-		echo "Mednafen (SNES)" >> "$scriptdir/logs/res.txt"
-		grep -Ee "\bsnes.xres\b" "$config_home/.mednafen/mednafen-09x.cfg" >> "$scriptdir/logs/res.txt"
-		grep -Ee "\bsnes.yres\b" "$config_home/.mednafen/mednafen-09x.cfg" >> "$scriptdir/logs/res.txt"
-		echo "" >> "$scriptdir/logs/res.txt"
-		#mednafen Turbographx 16
-		echo "Mednafen (Turbographx 16)" >> "$scriptdir/logs/res.txt"
-		grep -Ee "\bpce.xres\b" "$config_home/.mednafen/mednafen-09x.cfg" >> "$scriptdir/logs/res.txt"
-		grep -Ee "\bpce.yres\b" "$config_home/.mednafen/mednafen-09x.cfg" >> "$scriptdir/logs/res.txt"
-		echo "" >> "$scriptdir/logs/res.txt"
-		#mednafen PSX
-		echo "Mednafen (PSX)" >> "$scriptdir/logs/res.txt"
-		grep -Ee "\bpsx.xres\b" "$config_home/.mednafen/mednafen-09x.cfg" >> "$scriptdir/logs/res.txt"
-		grep -Ee "\bpsx.yres\b" "$config_home/.mednafen/mednafen-09x.cfg" >> "$scriptdir/logs/res.txt"
-		echo "" >> "$scriptdir/logs/res.txt"
-		#Stella
-		echo "Stella" >> "$scriptdir/logs/res.txt"
-		grep -Ee "\bfullres = \b" "$config_home/.stella/stellarc" >> "$scriptdir/logs/res.txt"
-		echo "" >> "$scriptdir/logs/res.txt"
+		# echo current resolution
+		# mupen64plus
+		echo "mupen64plus:" > "$rootdir/logs/res.txt"
+		grep -Ee "\bScreenWidth = \b" "$config_home/.config/mupen64plus/mupen64plus.cfg" >> "$rootdir/logs/res.txt"
+		grep -Ee "\bScreenHeight = \b" "$config_home/.config/mupen64plus/mupen64plus.cfg" >> "$rootdir/logs/res.txt"
+		echo "" >> "$rootdir/logs/res.txt"
+		# mednafen GBC
+		echo "Mednafen (GBC)" >> "$rootdir/logs/res.txt"
+		grep -Ee "\bgb.xres\b" "$config_home/.mednafen/mednafen-09x.cfg" >> "$rootdir/logs/res.txt"
+		grep -Ee "\bgb.yres\b" "$config_home/.mednafen/mednafen-09x.cfg" >> "$rootdir/logs/res.txt"
+		echo "" >> "$rootdir/logs/res.txt"
+		# mednafen GBA
+		echo "Mednafen (GBA)" >> "$rootdir/logs/res.txt"
+		grep -Ee "\bgba.xres\b" "$config_home/.mednafen/mednafen-09x.cfg" >> "$rootdir/logs/res.txt"
+		grep -Ee "\bgba.yres\b" "$config_home/.mednafen/mednafen-09x.cfg" >> "$rootdir/logs/res.txt"
+		echo "" >> "$rootdir/logs/res.txt"
+		# mednafen NES
+		echo "Mednafen (NES)" >> "$rootdir/logs/res.txt"
+		grep -Ee "\bnes.xres\b" "$config_home/.mednafen/mednafen-09x.cfg" >> "$rootdir/logs/res.txt"
+		grep -Ee "\bnes.yres\b" "$config_home/.mednafen/mednafen-09x.cfg" >> "$rootdir/logs/res.txt"
+		echo "" >> "$rootdir/logs/res.txt"
+		# mednafen Sega Sega Master System
+		echo "Mednafen (Sega Master System)" >> "$rootdir/logs/res.txt"
+		grep -Ee "\bsms.xres\b" "$config_home/.mednafen/mednafen-09x.cfg" >> "$rootdir/logs/res.txt"
+		grep -Ee "\bsms.yres\b" "$config_home/.mednafen/mednafen-09x.cfg" >> "$rootdir/logs/res.txt"
+		echo "" >> "$rootdir/logs/res.txt"
+		# mednafen Sega Game Gear
+		echo "Mednafen (Sega Game Gear)" >> "$rootdir/logs/res.txt"
+		grep -Ee "\bgg.xres\b" "$config_home/.mednafen/mednafen-09x.cfg" >> "$rootdir/logs/res.txt"
+		grep -Ee "\bgg.yres\b" "$config_home/.mednafen/mednafen-09x.cfg" >> "$rootdir/logs/res.txt"
+		echo "" >> "$rootdir/logs/res.txt"
+		# mednafen SNES
+		echo "Mednafen (SNES)" >> "$rootdir/logs/res.txt"
+		grep -Ee "\bsnes.xres\b" "$config_home/.mednafen/mednafen-09x.cfg" >> "$rootdir/logs/res.txt"
+		grep -Ee "\bsnes.yres\b" "$config_home/.mednafen/mednafen-09x.cfg" >> "$rootdir/logs/res.txt"
+		echo "" >> "$rootdir/logs/res.txt"
+		# mednafen Turbographx 16
+		echo "Mednafen (Turbographx 16)" >> "$rootdir/logs/res.txt"
+		grep -Ee "\bpce.xres\b" "$config_home/.mednafen/mednafen-09x.cfg" >> "$rootdir/logs/res.txt"
+		grep -Ee "\bpce.yres\b" "$config_home/.mednafen/mednafen-09x.cfg" >> "$rootdir/logs/res.txt"
+		echo "" >> "$rootdir/logs/res.txt"
+		# mednafen PSX
+		echo "Mednafen (PSX)" >> "$rootdir/logs/res.txt"
+		grep -Ee "\bpsx.xres\b" "$config_home/.mednafen/mednafen-09x.cfg" >> "$rootdir/logs/res.txt"
+		grep -Ee "\bpsx.yres\b" "$config_home/.mednafen/mednafen-09x.cfg" >> "$rootdir/logs/res.txt"
+		echo "" >> "$rootdir/logs/res.txt"
+		# Stella
+		echo "Stella" >> "$rootdir/logs/res.txt"
+		grep -Ee "\bfullres = \b" "$config_home/.stella/stellarc" >> "$rootdir/logs/res.txt"
+		echo "" >> "$rootdir/logs/res.txt"
+		# PCSX2
+		echo "PCSX2" >> "$rootdir/logs/res.txt"
+		grep -Ee "\bresx = \b" "$config_home/pcsx2/inis/GSdx.ini" >> "$rootdir/logs/res.txt"
+		grep -Ee "\bresy = \b" "$config_home/pcsx2/inis/GSdx.ini" >> "$rootdir/logs/res.txt"
+		# Gens GS (Sega CD/32X)
+		echo "Gens GS" >> "$rootdir/logs/res.txt"
+		grep -Ee "\bOpenGL Width=\b" "$config_home/.gens/gens.cfg" >> "$rootdir/logs/res.txt"
+		grep -Ee "\bOpenGL Height=\b" "$config_home/.gens/gens.cfg" >> "$rootdir/logs/res.txt"
+	
 		#report current resolution
-		dialog --textbox "$scriptdir/logs/res.txt" 33 0
+		dialog --textbox "$rootdir/logs/res.txt" 33 0
 		#remove text file
-		rm "$scriptdir/logs/res.txt"
+		rm "$rootdir/logs/res.txt"
+                #disable auto resoltuion
+		setParameter "auto resolution" "false"
 		;;
 
-	2) 
+	3) 
 		#setting chosen: "1280x720  (720p)  (5:4)"
 		#set mupen64plus value
 		m_new_X="1280"
@@ -318,14 +339,22 @@ if [ "$choices" != "" ]; then
 		#set mednafen (PSX) value
 		psx_new_X="1280"
 		psx_new_Y="720"
+		#set pcsx2 (PS2) value
+		ps2_new_X="1280"
+		ps2_new_Y="720"
+		# gens gs (CD/32X)
+		gens_new_X="1280"
+		gens_new_Y="720"
 		#set stella (Atari 2600)
 		st_new="1280x720"
 		# set the resolution with helper
 		h_res_switcher
+		#disable auto resoltuion
+		setParameter "auto resolution" "false"
 		#return to menu
 		return
 		;;  
-	3) 
+	4) 
 		#setting chosen: "1280x1024 (SXGA)  (5:4)"
 		#set mupen64plus value
 		m_new_X="1280"
@@ -354,14 +383,22 @@ if [ "$choices" != "" ]; then
 		#set mednafen (PSX) value
 		psx_new_X="1280"
 		psx_new_Y="1024"
+		#set pcsx2 (PS2) value
+		ps2_new_X="1280"
+		ps2_new_Y="1024"
+		# gens gs (CD/32X)
+		gens_new_X="1280"
+		gens_new_Y="1024"
 		#set stella (Atari 2600)
 		st_new="1280x1024"
 		# set the resolution with helper
 		h_res_switcher
+                #disable auto resoltuion
+		setParameter "auto resolution" "false"
 		#return to menu
 		return
 		;;
-	4) 
+	5) 
 		#setting chosen: "1366x768  (720p)  (16:9)"
 		#set mupen64plus value
 		m_new_X="1360"
@@ -390,120 +427,150 @@ if [ "$choices" != "" ]; then
 		#set mednafen (PSX) value
 		psx_new_X="1360"
 		psx_new_Y="768"
+		#set pcsx2 (PS2) value
+		ps2_new_X="1360"
+		ps2_new_Y="768"
+		# gens gs (CD/32X)
+		gens_new_X="1360"
+		gens_new_Y="768"
 		#set stella (Atari 2600)
 		st_new="1360x768"
 		# set the resolution with helper
 		h_res_switcher
-		#return to menu
-		return
-		;;
-	5) 
-		#setting chosen: "1600x900  (900p)  (16:9)"
-		#set mupen64plus value
-		m_new_X="1600"
-		m_new_Y="900"
-		#set mednafen (GBC) value
-		gb_new_X="1600"
-		gb_new_Y="900"
-		#set mednafen (GBA) value
-		gba_new_X="1600"
-		gba_new_Y="900"
-		#set mednafen (NES) value
-		nes_new_X="1600"
-		nes_new_Y="900"
-		#set mednafen (SNES) value
-		snes_new_X="1600"
-		snes_new_Y="900"
-		#set mednafen (Sega Master System) value
-		sms_new_X="1600"
-		sms_new_Y="900"
-		#set mednafen (Sega Game Gear) value
-		gg_new_X="1600"
-		gg_new_Y="900"
-		#set mednafen (Turbographx 16) value
-		pce_new_X="1600"
-		pce_new_Y="900"
-		#set mednafen (PSX) value
-		psx_new_X="1600"
-		psx_new_Y="900"
-		#set stella (Atari 2600)
-		st_new="1600x900"
-		# set the resolution with helper
-		h_res_switcher
+                #disable auto resoltuion
+		setParameter "auto resolution" "false"
 		#return to menu
 		return
 		;;
 	6) 
-		#setting chosen: "1920x1080 (1080p) (16:9)"
+		#setting chosen: "1600x900  (900p)  (16:9)"
 		#set mupen64plus value
-		m_new_X="1920"
-		m_new_Y="1080"
-		#set mednafen (GBC) value
-		gb_new_X="1920"
-		gb_new_Y="1080"
-		#set mednafen (GBA) value
-		gba_new_X="1920"
-		gba_new_Y="1080"
-		#set mednafen (NES) value
-		nes_new_X="1920"
-		nes_new_Y="1080"
-		#set mednafen (SNES) value
-		snes_new_X="1920"
-		snes_new_Y="1080"
-		#set mednafen (Sega Master System) value
-		sms_new_X="1920"
-		sms_new_Y="1080"
-		#set mednafen (Sega Game Gear) value
-		gg_new_X="1920"
-		gg_new_Y="1080"
-		#set mednafen (Turbographx 16) value
-		pce_new_X="1920"
-		pce_new_Y="1080"
-		#set mednafen (PSX) value
-		psx_new_X="1920"
-		psx_new_Y="1080"
+		m_new_X="1600"
+		m_new_Y="900"
+		# set mednafen (GBC) value
+		gb_new_X="1600"
+		gb_new_Y="900"
+		# set mednafen (GBA) value
+		gba_new_X="1600"
+		gba_new_Y="900"
+		# set mednafen (NES) value
+		nes_new_X="1600"
+		nes_new_Y="900"
+		# set mednafen (SNES) value
+		snes_new_X="1600"
+		snes_new_Y="900"
+		# set mednafen (Sega Master System) value
+		sms_new_X="1600"
+		sms_new_Y="900"
+		# set mednafen (Sega Game Gear) value
+		gg_new_X="1600"
+		gg_new_Y="900"
+		# set mednafen (Turbographx 16) value
+		pce_new_X="1600"
+		pce_new_Y="900"
+		# set mednafen (PSX) value
+		psx_new_X="1600"
+		psx_new_Y="900"
+		# set pcsx2 (PS2) value
+		ps2_new_X="1600"
+		ps2_new_Y="900"
+		# gens gs (CD/32X)
+		gens_new_X="1600"
+		gens_new_Y="900"
 		#set stella (Atari 2600)
-		st_new="1920x1080"
+		st_new="1600x900"
 		# set the resolution with helper
+                #disable auto resoltuion
+		setParameter "auto resolution" "false"
 		h_res_switcher
 		#return to menu
 		return
-		;;    
+		;;
 	7) 
+		# setting chosen: "1920x1080 (1080p) (16:9)"
+		# set mupen64plus value
+		m_new_X="1920"
+		m_new_Y="1080"
+		# set mednafen (GBC) value
+		gb_new_X="1920"
+		gb_new_Y="1080"
+		# set mednafen (GBA) value
+		gba_new_X="1920"
+		gba_new_Y="1080"
+		# set mednafen (NES) value
+		nes_new_X="1920"
+		nes_new_Y="1080"
+		# set mednafen (SNES) value
+		snes_new_X="1920"
+		snes_new_Y="1080"
+		# set mednafen (Sega Master System) value
+		sms_new_X="1920"
+		sms_new_Y="1080"
+		# set mednafen (Sega Game Gear) value
+		gg_new_X="1920"
+		gg_new_Y="1080"
+		# set mednafen (Turbographx 16) value
+		pce_new_X="1920"
+		pce_new_Y="1080"
+		# set mednafen (PSX) value
+		psx_new_X="1920"
+		psx_new_Y="1080"
+		# set pcsx2 (PS2) value
+		ps2_new_X="1920"
+		ps2_new_Y="1080"
+		# gens gs (CD/32X)
+		gens_new_X="1920"
+		gens_new_Y="1080"
+		# set stella (Atari 2600)
+		st_new="1920x1080"
+		# set the resolution with helper
+		h_res_switcher
+                #disable auto resoltuion
+		setParameter "auto resolution" "false"
+		#return to menu
+		return
+		;;    
+	8) 
 		dialog --infobox  "Setting resolution from user input" 3 40
-		#set new resolution(s) from user input
+		# set new resolution(s) from user input
 		dialog --title "Set Custom Resolution" --inputbox "Enter Width (X)" 10 4 2> /tmp/new_X
 		dialog --title "Set Custom Resolution" --inputbox "Enter Length (Y)" 10 4 2> /tmp/new_Y
 
-		#set new resolution(s) from configs
-		#mupen64plus
+		# set new resolution(s) from configs
+		# mupen64plus
 		m_new_X=$(cat '/tmp/new_X')
 		m_new_Y=$(cat '/tmp/new_Y')
-		#mednafen (GBC)
+		# mednafen (GBC)
 		gb_new_X=$(cat '/tmp/new_X')
 		gb_new_Y=$(cat '/tmp/new_Y')
-		#mednafen (GBA)
+		# mednafen (GBA)
 		gba_new_X=$(cat '/tmp/new_X')
 		gba_new_Y=$(cat '/tmp/new_Y')
-		#mednafen (NES)
+		# mednafen (NES)
 		nes_new_X=$(cat '/tmp/new_X')
 		nes_new_Y=$(cat '/tmp/new_Y')
-		#mednafen (SNES)
+		# mednafen (SNES)
 		snes_new_X=$(cat '/tmp/new_X')
 		snes_new_Y=$(cat '/tmp/new_Y')
-		#mednafen (Sega Master System)
+		# mednafen (Sega Master System)
 		sms_new_X=$(cat '/tmp/new_X')
 		sms_new_Y=$(cat '/tmp/new_Y')
-		#mednafen (Sega Game Gear)
+		# mednafen (Sega Game Gear)
 		gg_new_X=$(cat '/tmp/new_X')
 		gg_new_Y=$(cat '/tmp/new_Y')
-		#mednafen (Turbographx 16)
+		# mednafen (Turbographx 16)
 		pce_new_X=$(cat '/tmp/new_X')
 		pce_new_Y=$(cat '/tmp/new_Y')
-		#mednafen (PSX)
+		# mednafen (PSX)
 		psx_new_X=$(cat '/tmp/new_X')
 		psx_new_Y=$(cat '/tmp/new_Y')
-		#set stella (Atari 2600)
+		# pcsx (PS2)
+		ps2_new_X=$(cat '/tmp/new_X')
+		ps2_new_Y=$(cat '/tmp/new_Y')
+		# gens gs (CD/32X)
+		gens_new_X=$(cat '/tmp/new_X')
+		gens_new_Y=$(cat '/tmp/new_Y')
+		# set stella (Atari 2600)
 		st1=$(cat '/tmp/new_X')
 		stdelim=$('x')
 		st2=$(cat '/tmp/new_Y')
@@ -514,10 +581,12 @@ if [ "$choices" != "" ]; then
 		#remove temp files
 		rm -f /tmp/new_X
 		rm -f /tmp/new_Y
+                #disable auto resoltuion
+		setParameter "auto resolution" "false"
 		#return to menu
 		return
 		;; 
-	8) 
+	9) 
 		return
 		;;
 

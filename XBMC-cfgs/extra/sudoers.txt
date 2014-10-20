@@ -1,0 +1,4 @@
+# RetroRig specific allowances
+%sudo   ALL=NOPASSWD: /usr/sbin/service xboxdrv restart
+%sudo   ALL=NOPASSWD: /sbin/rmmod hid_sony
+%sudo   ALL=NOPASSWD: /usr/bin/xboxdrv

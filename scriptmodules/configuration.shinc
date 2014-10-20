@@ -71,8 +71,8 @@ function cfg_uninstall()
 		apt-get -y autoremove
 
 		# repositories
-		add-apt-repository -ry ppa:team-xbmc/ppa
-		add-apt-repository -ry ppa:falk-t-j/qtsixa
+		#add-apt-repository -ry ppa:team-xbmc/ppa
+		#add-apt-repository -ry ppa:falk-t-j/qtsixa
 		rm -f /etc/apt/sources.list.d/playdeb.list
 		;;
 
@@ -85,6 +85,9 @@ function cfg_uninstall()
 		;;
 
 	esac
+
+# release holds on packages
+apt-mark unhold xbmc xbmc-bin mednafen
 
 #ask to keep folders
 #prompt user if they wish to keep folders from install
@@ -107,13 +110,7 @@ case $response in
    	1) 
 	# User hit [No]
 	# remove dotfiles
-	rm -rf "$config_home/.qjoypad3" 
-	rm -rf "$config_home/.config/mupen64plus" 
-	rm -rf "$config_home/.mame" 
-	rm -rf "$config_home/.stella" 
-	rm -rf "$config_home/.mednafen" 
-	rm -rf "$config_home/.mess" 
-	rm -rf "$xbmc_home"
+	rm -rf "$config_home"
 
 	# user home objects
 	rm -f "$home/.config/autostart/qjoypad.desktop"
@@ -122,6 +119,12 @@ case $response in
 	rm -f "/usr/share/applications/gp_autodetect_xbmc.sh"
 	rm -f "/usr/share/applications/startXBMC.sh"
 	rm -f "/usr/share/applications/RetriRig.desktop"
+
+	# remove /etc/sudoers lines we added
+	sed -i '/# RetroRig specific allowances/d' "/etc/sudoers"
+	sed -i '/%sudo   ALL=NOPASSWD: \/usr\/sbin\/service xboxdrv restart/d' "/etc/sudoers"
+	sed -i '/%sudo   ALL=NOPASSWD: \/sbin\/rmmod hid_sony/d' "/etc/sudoers"
+	sed -i '/%sudo   ALL=NOPASSWD: \/usr\/bin\/xboxdrv/d' "/etc/sudoers"
 
 	# remove system services
 	service xboxdrv stop
@@ -132,6 +135,9 @@ case $response in
 	rm -f /etc/default/xboxdrv
 	sed -i 's|blacklist xpad||g' "/etc/modprobe.d/blacklist.conf"
 
+	# Re-enable apport
+	sed -i "s|enabled=0|enabled=1|g" "/etc/default/apport"
+
 	# XBMC session (if applicable)
 	# change default xsession
 	session_org="user-session=XBMC"
@@ -140,8 +146,9 @@ case $response in
 	# auto start entries
 	rm -f "$home/.config/autostart/RetroRig.desktop"
 
-	# shortcuts
+	# shortcuts / symlinks
 	rm -f "$xdg_desktop_dir/RetroRig.desktop"
+	rm -f "/usr/bin/retrorig"
 
 	# change the session
 	# NOTE! As of Ubuntu Trusy 14.04, lightdm-set-defaults is no longer available. This is because 
@@ -211,4 +218,91 @@ rrs_reboot
 
 }
 
+
+########################################################################
+#
+# Functions to handle configuration file
+#
+# Description :   A line in the configuration file looks like this:
+#
+#                 parameter name, parameter value
+#
+########################################################################
+
+
+########################################################################
+#
+#  parameterIsTrue()
+#  
+#  Arguments:    boolean parameter 
+#  
+#  Description:  Test if boolean parameter is true. 
+#
+#                A parameter is defined by a text string before the 
+#                comma delimeter in the configuration file.
+#
+#                A boolean parameter can be "true" or "false".
+#
+########################################################################
+
+function parameterIsTrue()
+{
+  VAR=`grep "$1" $configFile |cut -f 2 -d ','|grep true`
+
+  if [ -n "$VAR" ]; then
+    #VAR is not empty, return true
+    return 0
+  else
+    #return false
+    return 1
+  fi
+}
+
+########################################################################
+#
+#  setParameter()
+#  
+#  Arguments:    parameter name, parameter value 
+#  
+#  Description:  Append new line at the end of the config file, 
+#                if new parameter.
+#
+#                Exchange parameter value, if existing.
+#
+########################################################################
+
+
+function setParameter()
+{
+  #echo "setParameter $1, $2"
+  newLine="$1, $2"
+
+  oldLine=`grep "$1" $configFile`
+  if [ $? -eq 0 ]; then  
+    sed -i "s|$oldLine|$newLine|g" $configFile
+  else  
+    echo "$newLine" >> $configFile
+  fi
+
+}
+
+########################################################################
+#
+#  getParameter()
+#  
+#  Arguments:    parameter name
+#  
+#  Return:       parameter value
+#
+########################################################################
+
+
+function getParameter()
+{
+
+  VAR=`grep "$1" $configFile |cut -f 2 -d ','`
+
+  echo $VAR
+
+}
 

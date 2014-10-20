@@ -1,7 +1,7 @@
 RetroRig Project
 ===================================================
 ![alt text](http://i.imgur.com/Irgv0Fx.png "RetroRig")
-###### [Version 0.9.1]
+###### [Version 0.9.5]
 
 RetroRig is shell script to setup a Linux x86_64 system  with several emulators, and XBMC as graphical
 front end.The inspiration for doing this lies almost completely with the RetroPie Project. I wanted to provide
@@ -84,16 +84,24 @@ You will need git,figlet and dialog to run the installer:
 
 RetroRig will try to install them for you (for instance, if you download the zip archive), but if you
 experience any issues starting the script,enusre they exist with the CLI commands 'which dialog' 
-and 'which git" to ensure they report back. Please also ensure your graphics card or onboard graphics chipset supports OpenGL.
+and 'which git" to ensure they report back. Please also ensure your graphics card or onboard graphics chipset supports OpenGL. All install commands below are done on the command line. You can however doubleclick on the Debian package to install it.
 
-To clone this repo via the CLI:
+
+##### Primary install method (GitHub source):
 
 `git clone https://github.com/ProfessorKaos64/RetroRig`
 
-To install:
+To install via GitHub source:
 ````
 cd RetroRig
 sudo ./retrorig_setup.sh
+````
+
+##### Alternative install method (Package):
+To install via [Debian package](https://launchpad.net/~mdeguzis/+archive/ubuntu/retrorig):
+````
+dpkg -i package_name_version.deb
+retrorig-setup 
 ````
 
 Currently,Only Ubuntu 14.04 LTS is supported, but more will be added in due time! You can perform a `git checkout Beta` to try our Beta branch, but please do so with caution and backup any file before hand!

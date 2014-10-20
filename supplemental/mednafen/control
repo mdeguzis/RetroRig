@@ -1,0 +1,63 @@
+Source: mednafen
+Section: games
+Priority: optional
+Maintainer: RetroRig Development Team <jc.lache@gmail.com>
+Uploaders: RetroRig Development Team <jc.lache@gmail.com>
+Build-Depends: autotools-dev,
+               debhelper (>= 9),
+               dh-autoreconf,
+               libasound2-dev [linux-any],
+               libcdio-dev,
+               libgl1-mesa-dev | libgl-dev,
+               libjack-dev,
+               liblzo2-dev,
+               libmpcdec-dev,
+               libsamplerate0-dev,
+               libsdl2-dev,
+               libsndfile1-dev | libsndfile-dev,
+               libvorbisidec-dev,
+               x11proto-core-dev,
+               zlib1g-dev | libz-dev
+Build-Conflicts: autoconf2.13
+Standards-Version: 3.9.5
+Homepage: https://github.com/beaumanvienna/mednafen-git
+Vcs-Git: git://github.com/beaumanvienna/mednafen-git
+Vcs-Browser: https://github.com/beaumanvienna/mednafen-git
+
+Package: mednafen
+Architecture: any
+Depends: ${misc:Depends}, ${shlibs:Depends}
+Provides: nes-emulator
+Built-Using: ${bu:liblzo2}
+Description: multi-platform emulator, including NES, GB/A, Lynx, PC Engine
+ Mednafen is a command-line driven emulator for many different systems. It
+ has full support for OpenGL and SDL graphics, network play, remappable input
+ configuration, joystick and keyboard support, save states, game rewinding,
+ GSF playback, and screenshots.
+ .
+ The systems supported by Mednafen are:
+    * Atari Lynx
+    * GameBoy
+    * GameBoy Color
+    * GameBoy Advance
+    * NES
+    * SNES
+    * Virtual Boy
+    * PC Engine (TurboGrafx 16)
+    * PC-FX
+    * SuperGrafx
+    * NeoGeo Pocket, NeoGeo Pocket Color
+    * WonderSwan
+    * Sega Genesis / Mega Drive
+    * Sony PlayStation
+ .
+ Hardware emulated by Mednafen includes:
+    * NES gamepad, Zapper, PowerPad
+    * Four-Score, Famicom multiplayer adapter
+    * Arkanoid, HyperShot, Space Shadow, Mahjong controllers
+    * Oeka Kids tablet, Quiz King buzzers, Family Trainer, Barcode World
+    * Game Genie
+ This package is derived from mednafen 0.9.36.2.
+ It is patched for SDL2.
+ Changes comprise: Support for dual monitors through environment 
+ variable "SDL_VIDEO_FULLSCREEN_HEAD".

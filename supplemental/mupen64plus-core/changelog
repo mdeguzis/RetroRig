@@ -1,0 +1,720 @@
+mupen64plus-core (version_placeholder) trusty; urgency=medium
+
+  * same as 2:2.0.1.0 (patchlevel 1),
+    additionally exporting virtual package "mupen64plus-config-abi-2.3"
+
+ -- Jens-Christian Lache <jc.lache@web.de>  Sat, 06 Aug 2014 20:00:00 +0200
+
+mupen64plus-core (2:2.0.1.0) trusty; urgency=medium
+
+  * source code:
+
+    https://github.com/beaumanvienna/mupen64plus-core
+
+  * Fullscreen mode changed to SDL_WINDOW_FULLSCREEN_DESKTOP
+  * Compiled and packaged for project RetroRig.
+ -- Jens-Christian Lache <email address hidden>   Fri, 15 Aug 2014 20:00:00 +0200
+
+mupen64plus-core (2.0-6) unstable; urgency=medium
+
+  * debian/control:
+    - Add Build-Depends for libminizip-dev
+
+ -- Sven Eckelmann <sven@narfation.org>  Wed, 25 Jun 2014 15:13:09 +0200
+
+mupen64plus-core (2.0-5) unstable; urgency=medium
+
+  * debian/patches:
+    - Add Origin information to patches
+    - Cleanup patch counter_per_op.patch
+    - Add format_eeprom.patch, A cleared EEPROM block has all bits to 1 and
+      not 0
+    - Add countperop_rominfo.patch, Allow to load CountPerOp info from
+      mupen64plus.ini
+    - Add countperop_romdb.patch, Add CountPerOp info to mupen64plus.ini
+    - Add sdl2_no_surface.patch, Remove unused SDL2 surface in compat code
+    - Add sdl2_destroywindow.patch, Close SDL2 window when quitting Video
+      subsystem
+    - Add interpreter_cmd_link_unconditionally.patch, Save link information
+      in *AL(L) instructions unconditionally
+    - Add cheat_multiconditions.patch, Allow multiple preconditions per cheat
+    - Add mario64_levitate.patch, Use same precondition for all parts of the
+      Mario64 Levitate cheat
+    - Add self_reference_romdb.patch, Fix self-references in mupen64plus.ini
+    - Add invalid_reference_romdb.patch, Fix incorrect md5 references in
+      mupen64plus.ini.
+    - Add countperop_hydrothunter.patch, Fix freezing of Hydro Thunder
+    - Add complete_resolve_romdb.patch, Only resolve using complete rom
+      database entries
+    - Add nondefault_resolve_romdb.patch, Don't overwrite rom specific
+      settings during resolve phase
+    - Add cheatengine_workarounds.patch, Use normal cheat engine to run
+      workaround cheats
+    - Add zelda_workarounds_romdb.patch, Add Zelda OoT cheats to
+      mupen64plus.ini
+    - Add workarounds_romdb.patch, Parse cheats from from mupen64plus.ini
+    - Add pilotwings_workarounds_romdb.patch, Add note about (broken)
+      Pilotwing64 shadow fix
+    - Add pokemon_snap_workarounds_romdb.patch, Add workaround to make
+      Pokemon Snap controls working and images selectable
+    - Add flashram_read_handing.patch, Add missing read mode check in
+      flashram_command -> execute
+    - Add duplicates_cheatdb.patch, Fix duplicate entries and broken
+      formatting in cheat files.
+    - Add whitelist_cheatdb.patch, Remove leading/trailing whitespace in
+      some cheat strings.
+    - Add nfl_duplicates_cheatdb.patch, Remove duplicate cheatfile entry
+      (NFL Quarterback Club 2000).
+    - Add turok2_duplicates_cheatdb.patch, Remove duplicate cheatfile
+      entry (Turok 2 - Seeds of Evil (FGD)).
+  * debian/watch:
+    - Change upstream check from bitbucket to github
+  * debian/copyright:
+    - Change upstream source to github
+  * debian/get-orig-source.sh
+    - Change upstream repository to github
+    - Change SCM from Mercurial to Git
+  * Update copyright years in debian/copyright
+  * Move keyring for signature verification to new debian/upstream/
+
+ -- Sven Eckelmann <sven@narfation.org>  Sun, 16 Mar 2014 19:10:06 +0100
+
+mupen64plus-core (2.0-4) unstable; urgency=low
+
+  * Fix version number of the unicode FTBFS bug in the changelog
+  * Upgraded to policy 3.9.5, no changes required
+  * debian/patches:
+    - Add oot_subscreen_delay_fix.patch, Add Missing Subscreen Delay Fix for
+      Ocarina of Time
+    - Add counter_per_op.patch, Allow to overwrite the cycles per instruction
+    - Add two_events_interrupt.patch, Don't insert a second interrupt event
+      from same type
+    - Add delay_si.patch, Allow to disable interrupt delay after DMA SI
+      read/write
+    - Add config_currentstateslot.patch, Use correct config parameter string
+      (CurrentSaveSlot->CurrentStateSlot)
+    - Add obsolete_variable.patch, Remove obsolete variable; caused crashes
+      in PD/Goldeneye in Android Ed.
+
+ -- Sven Eckelmann <sven@narfation.org>  Fri, 13 Dec 2013 16:30:01 +0100
+
+mupen64plus-core (2.0-3) unstable; urgency=low
+
+  * debian/patches:
+    - Add sdl2_no_unicode.patch, Remove SDL unicode keycode compat code
+      (Closes: #720815)
+
+ -- Sven Eckelmann <sven@narfation.org>  Sun, 25 Aug 2013 16:27:13 +0200
+
+mupen64plus-core (2.0-2) unstable; urgency=low
+
+  * debian/patches:
+    - Add n64_cic_nus_6105_reset.patch, Reset PIF_RAMb 46,47 after the
+      n64_cic_nus_6105 challenge
+    - Add sdl2_select_saveslot.patch, Fix saveslot selection for SDL2
+      (Closes: #717801)
+
+ -- Sven Eckelmann <sven@narfation.org>  Thu, 25 Jul 2013 13:25:47 +0200
+
+mupen64plus-core (2.0-1) unstable; urgency=low
+
+  * New Upstream Version
+  * Upload to unstable
+  * debian/patches:
+    - Add multiple_main.patch, Fix multiple definitions of main in same
+      namespace
+    - Remove dejavu-font.patch, Don't use Dejavu fonts because upstream
+      uses other font
+    - Add bitstream-font.patch, Use font from ttf-bitstream-vera instead
+      of installing own copy with libmupen64plus2
+    - Remove upstream merged country_code_bits.patch,
+      sdl2_joystick_events.patch, sdl2_keyrepeat.patch and
+      sdl2_resize.patch
+  * debian/control:
+    - Build-Depend on debhelper 9.20130604 for support of parameters when
+      detecting targets in dh_auto_*
+    - Replace dependency to ttf-dejavu-core with ttf-bitstream-vera
+  * debian/rules:
+    - Work around new debhelper 9.20130624 dh_auto_{clean,test} behavior
+      which is causing a FTBFS by adding an explicit
+      override_dh_auto_{clean,test} rule
+  * debian/watch:
+    - Verify new upstream versions using GPG key 954F81B094AA5BB226F5
+
+ -- Sven Eckelmann <sven@narfation.org>  Fri, 05 Jul 2013 22:52:30 +0200
+
+mupen64plus-core (2.0~rc3+3+5d46baa3dd76-2) experimental; urgency=low
+
+  * debian/rules:
+    - Switch from SDL 1.2 to SDL 2.0
+  * debian/control:
+    - Depend on libsdl2-dev instead of libsdl1.2-dev
+    - Add Breaks for pre-SDL2 plugins
+  * debian/patches:
+    - Add sdl2_resize.patch, Fix compiling against SDL2
+    - Add country_code_bits.patch, Ignore upper 8 bit of countrycode when
+      checking for PAL/NTSC system
+    - Add sdl2_keyrepeat.patch, Ignore key repeats caused by the OS keyrepeat
+    - Add sdl2_joystick_events.patch, Simply open joystick when needed in SDL2
+    - Add sdl2_keysym.patch, Use SDL1.2 keysym in the config when using SDL2
+  * Update debian/copyright
+
+ -- Sven Eckelmann <sven@narfation.org>  Sun, 23 Jun 2013 13:24:06 +0200
+
+mupen64plus-core (2.0~rc3+3+5d46baa3dd76-1) experimental; urgency=low
+
+  * New Upstream Snapshot from 5d46baa3dd7660365183e16596b288f824903007
+  * debian/control:
+    - Provide mupen64plus-frontend-abi-2.1.1
+    - Remove old mupen64plus-frontend-abi-2.0.1/2.0.2
+    - Provide mupen64plus-gfx-abi-2.2
+    - Provide mupen64plus-vidext-abi-3
+    - Remove old mupen64plus-vidext-abi-2
+  * Enable link-time optimization in debian/rules similar to upstream
+  * Add VidExt_ResizeWindow@Base to libmupen64plus2 symbols
+  * debian/patches:
+    - Rebase dejavu-font.patch, disable_recompiler_disassembler.patch and
+      printf_fixup.patch on top of 2.0~rc3+3+5d46baa3dd76
+
+ -- Sven Eckelmann <sven@narfation.org>  Wed, 05 Jun 2013 13:24:51 +0200
+
+mupen64plus-core (1.99.5+178+cbd1bb2a5d6a-1) experimental; urgency=low
+
+  * New Upstream Snapshot from cbd1bb2a5d6a9a04595a76412f89703d220981ed
+  * Disable extra debug code in release builds with -DNDEBUG in
+    debian/rules
+  * debian/patches:
+    - Rebase dejavu-font.patch and disable_recompiler_disassembler.patch on top
+      of 1.99.5+178+cbd1bb2a5d6a
+
+ -- Sven Eckelmann <sven@narfation.org>  Fri, 08 Feb 2013 10:15:13 +0100
+
+mupen64plus-core (1.99.5+148+f259cbe4c1cd-1) experimental; urgency=low
+
+  * New Upstream Snapshot from f259cbe4c1cd69f76aac9f8726c88993e3a96b70
+  * Remove obsolete DM-Upload-Allowed in debian/control
+  * debian/patches:
+    - Rebase dejavu-font.patch, disable_recompiler_disassembler.patch and
+      printf_fixup.patch on top of 1.99.5+148+f259cbe4c1cd
+
+ -- Sven Eckelmann <sven@narfation.org>  Sun, 02 Dec 2012 22:32:11 +0100
+
+mupen64plus-core (1.99.5+129+c7764c244288-1) experimental; urgency=low
+
+  * New Upstream Snapshot from c7764c2442889c9dc19648df11a89ca88fb2d8fa
+  * debian/patches:
+    - Remove upstream merged dynarec_amd64_nostackreg.patch
+
+ -- Sven Eckelmann <sven@narfation.org>  Tue, 30 Oct 2012 18:22:22 +0100
+
+mupen64plus-core (1.99.5+117+a5698f5f67c1-1) experimental; urgency=low
+
+  * New Upstream Snapshot from a5698f5f67c134bdaac66c04c09c2540cc62d606
+  * Upgraded to policy 3.9.4, no changes required
+  * debian/patches:
+    - Add dynarec_amd64_nostackreg.patch, Don't store mapped host registers on
+      stack before dynarec call
+
+ -- Sven Eckelmann <sven@narfation.org>  Sun, 07 Oct 2012 14:23:26 +0200
+
+mupen64plus-core (1.99.5+115+5afdc1c5e077-1) experimental; urgency=low
+
+  * New Upstream Snapshot from 5afdc1c5e07718865400ff038a5dc3660e86d7a4
+  * debian/patches:
+    - Remove upstream merged config_type_switch_invalid_free.patch
+
+ -- Sven Eckelmann <sven@narfation.org>  Sun, 16 Sep 2012 20:00:51 +0200
+
+mupen64plus-core (1.99.5+113+481cdd269905-1) experimental; urgency=low
+
+  * New Upstream Snapshot from 481cdd2699058351684be9415228fe7a156de464
+  * debian/patches:
+    - Add config_type_switch_invalid_free.patch, Don't free random memory
+      on config option type change
+
+ -- Sven Eckelmann <sven@narfation.org>  Tue, 11 Sep 2012 19:49:48 +0200
+
+mupen64plus-core (1.99.5+14+99517e4bc1b8-1) experimental; urgency=low
+
+  * New Upstream Snapshot from 99517e4bc1b80c0501fa2e50ba2024331e542f3c
+  * debian/patches:
+    - Remove upstream merged debugger_api.patch,
+      debugger_memory_breakpoints.patch, floatingpoint_config.patch,
+      gcc_lto.patch, printf_function_pointer.patch, rjump_gcc47.patch,
+      unused_bdslot.patch
+    - Rebase dejavu-font.patch, disable_recompiler_disassembler.patch,
+      printf_fixup.patch
+
+ -- Sven Eckelmann <sven@narfation.org>  Sun, 17 Jun 2012 00:39:37 +0200
+
+mupen64plus-core (1.99.5-6) unstable; urgency=low
+
+  * debian/patches:
+    - Add unused_bdslot.patch, Remove unused variable bdslot
+    - Add printf_function_pointer.patch, Print function pointer using %p instead
+      of %x
+    - Add gcc_lto.patch, Enable support for link-time optimization
+
+ -- Sven Eckelmann <sven@narfation.org>  Sat, 09 Jun 2012 00:36:43 +0200
+
+mupen64plus-core (1.99.5-5) unstable; urgency=low
+
+  * debian/patches:
+    - Add debugger_api.patch, Move breakpoint typedef and BPT_* macros to api
+      headers
+    - Add disable_recompiler_disassembler.patch, Disable the disassembler of the
+      recompiled code
+  * Enable debugger interface of the core
+
+ -- Sven Eckelmann <sven@narfation.org>  Mon, 28 May 2012 14:19:15 +0200
+
+mupen64plus-core (1.99.5-4) unstable; urgency=low
+
+  * debian/patches:
+    - Add rjump_gcc47.patch, Fix name of PIC thunks with gcc 4.7
+      (Closes: #672991)
+
+ -- Sven Eckelmann <sven@narfation.org>  Tue, 15 May 2012 23:07:14 +0200
+
+mupen64plus-core (1.99.5-3) unstable; urgency=low
+
+  * Add mupen64plus-data binary package for the rom catalog and cheat database 
+  * Install architecture independent files into /usr/share/games/mupen64plus
+
+ -- Sven Eckelmann <sven@narfation.org>  Tue, 01 May 2012 11:04:30 +0200
+
+mupen64plus-core (1.99.5-2) unstable; urgency=low
+
+  [ Simon Ruderich ]
+  * Let debhelper set the buildflags implicitly
+
+  [ Sven Eckelmann ]
+  * debian/patches:
+    - Add floatingpoint_config.patch, Support locales with commas instead of
+      periods for decimal separator
+    - Add debugger_memory_breakpoints.patch, Fix off-by-one error of memory in
+      memory debugger
+
+ -- Sven Eckelmann <sven@narfation.org>  Sat, 28 Apr 2012 14:49:16 +0200
+
+mupen64plus-core (1.99.5-1) unstable; urgency=low
+
+  * New Upstream Version
+  * Enable all hardening flags in debian/rules
+  * Upgrade debhelper compat to v9
+  * debian/patches:
+    - Rebase dejavu-font.patch and printf_fixup.patch on top of 1.99.5
+  * debian/control:
+    - Update ABI versions
+    - Upgraded to policy 3.9.3, no changes required
+  * Update debian/copyright
+  * Use buildflags.mk to set security flags in debian/rules
+
+ -- Sven Eckelmann <sven@narfation.org>  Sat, 17 Mar 2012 20:18:35 +0100
+
+mupen64plus-core (1.99.4+99+7f1880795b02-2) experimental; urgency=low
+
+  * Fix freetype initialization in debian/patches/dejavu-font.patch
+
+ -- Sven Eckelmann <sven@narfation.org>  Sun, 13 Nov 2011 09:42:34 +0100
+
+mupen64plus-core (1.99.4+99+7f1880795b02-1) experimental; urgency=low
+
+  * New upstream snapshot from revision 7f1880795b0235062a466c973d76333d258c2241
+  * debian/patches:
+    - Rebase dejavu-font.patch and printf_fixup.patch on top of
+      1.99.4+99+7f1880795b02
+    - Remove upstream merged double_percentage.patch, new_minizip.patch and
+      savestatepath_config.patch
+    - Remove ftgl_fontrendering.patch which was rejected by upstream
+  * Remove unnecessary --as-needed from linker flags in debian/rules
+
+ -- Sven Eckelmann <sven@narfation.org>  Sun, 13 Nov 2011 01:46:58 +0100
+
+mupen64plus-core (1.99.4+77+8bb0e6b3ae3a-1) experimental; urgency=low
+
+  * New upstream snapshot from revision 8bb0e6b3ae3a4020c12e601cfddf028fbb44a6ea
+  * debian/control:
+    - Depend on mupen64plus-*-abi-2
+  * Don't mix implicit and explicit rules to prevent FTBFS with make 3.82
+  * debian/patches:
+    - Remove upstream merged patches: allocate_mmap.patch, api_header.patch,
+      big_endian_conflict.patch, conflicting_symbol.patch,
+      info_configuration_failure.patch, interpreter_fpu_modes.patch,
+      interpreter_rw_memory.patch, mipmapping_doc.patch,
+      n64_cic_nus_6105.patch, n64_romswap.patch, osd_memory_corruption.patch,
+      privilege_segfault.patch, rewrite_makefile.patch, rjump_globber.patch,
+      rtc.patch
+    - Rebase dejavu-font.patch and printf_fixup.patch against
+      1.99.4+77+8bb0e6b3ae3a
+  * Add new files to debian/copyright
+  * Add debian/get-orig-source.sh for snapshots
+
+ -- Sven Eckelmann <sven@narfation.org>  Mon, 29 Aug 2011 17:05:24 +0200
+
+mupen64plus-core (1.99.4-5) unstable; urgency=low
+
+  * Update copyright years in debian/copyright
+  * Change dependency libpng12-dev to new name libpng-dev (Closes: #662439)
+
+ -- Sven Eckelmann <sven@narfation.org>  Mon, 05 Mar 2012 09:34:19 +0100
+
+mupen64plus-core (1.99.4-4) unstable; urgency=low
+
+  * debian/control:
+    - Add virtual package libsdl-dev as alternative build dependency
+  * Don't mix implicit and explicit rules to prevent FTBFS with make
+    3.82
+  * debian/patches:
+    - Add new_minizip.patch, Import minizip from zlib 1.2.5
+    - Add savestatepath_config.patch, Read option SaveStatePath from
+      config when set
+    - Update rewrite_makefile.patch and dejavu-font.patch; Fix
+      installation of cheat database
+    - Add double_percentage.patch, Don't print '%' twice in volume
+      string
+    - Add ftgl_fontrendering.patch, Replace builtin OGLFT with FTGL font
+      rendering library
+  * Remove hardening-includes which are now integrated in dpkg-
+    buildflags
+  * Use debian packaging manual URL as format identifier in
+    debian/copyright
+
+ -- Sven Eckelmann <sven@narfation.org>  Mon, 31 Oct 2011 12:48:50 +0100
+
+mupen64plus-core (1.99.4-3) unstable; urgency=low
+
+  * Upload to unstable
+  * debian/control:
+    - Fix spelling of "Flexible" (Closes: #633693)
+    - Depend on pkg-config for new Makefile
+  * debian/rules:
+    - Mark all targets as phony
+    - Force PIC using Makefile option
+    - Remove unintended optimization flags
+    - Automatically create the libmupen64plus.so.2 symlink
+  * debian/patches:
+    - Remove obsolete default-optimisations.patch
+    - Rebase debian/patches/dejavu-font.patch
+    - Add rewrite_makefile.patch, Rewrite Makefile to fix flags and
+      linking
+    - Add big_endian_conflict.patch, Don't use _BIG_ENDIAN to check for
+      endianness
+    - Add privilege_segfault.patch, Prevent segfault when
+      .local/share/mupen64plus/ owned by root
+    - Add info_configuration_failure.patch, Changed warning to info
+      message when core can not open config
+    - Add conflicting_symbol.patch, Don't define variable isGoldeneyeRom
+      in each file
+    - Add osd_memory_corruption.patch, Prevent data corruption with
+      caller managed OSD text
+    - Add allocate_mmap.patch, Allocate exec memory using mmap
+    - Add interpreter_fpu_modes.patch, Use common fpu implementation for
+      interpreter modes to fix missing
+      round/trunc/ceil/floor/set_rounding
+    - Add interpreter_rw_memory.patch, Don't require executable memory
+      for cached interpreter
+    - Add n64_cic_nus_6105.patch, use X-Scale's PIF-CIC algorithm
+      instead of the hard-coded challenge-response pairs
+    - Add mipmapping_doc.patch, Synchronize MipMapping options in
+      Arachnoid and Rice
+
+ -- Sven Eckelmann <sven@narfation.org>  Sun, 24 Jul 2011 14:23:31 +0200
+
+mupen64plus-core (1.99.4-2) experimental; urgency=low
+
+  * debian/patches:
+    - Add rtc.patch, Add support for n64 internal clock
+    - Add n64_romswap.patch, Fix swapping of n64 images
+    - Add rjump_globber.patch. Prevent over-optimization of rjump
+      related data
+  * Upgraded to policy 3.9.2, no changes required
+  * Update Vcs-* fields to new anonscm.debian.org URLs in debian/control
+  * Add multiarch support (Closes: #623765)
+
+ -- Sven Eckelmann <sven@narfation.org>  Sat, 11 Jun 2011 17:28:34 +0200
+
+mupen64plus-core (1.99.4-1) experimental; urgency=low
+
+  * New Upstream Version
+  * Updated my maintainer e-mail address
+  * Split source package to match upstreams modular release packages
+  * debian/copyright:
+    - Update to DEP5 revision 164
+    - Update copyright years
+  * debian/patches:
+    - Add printf_fixup.patch, Correct usage of printf format strings
+    - Add api_header.patch, Ensure all definition for front-ends is in
+      public headers
+    - Rebase default-optimisations.patch and dejavu-font.patch
+      against 1.99.4
+    - Remove upstream merged patches: as-needed.patch,
+      correct_fpr32_mapping.patch, correct_security_printf.patch,
+      debian-archs.patch, destdir.patch, dont-install-unneeded.patch,
+      fix-7z-subfolder.patch, fix-desktop-file.patch,
+      fix_r0_override.patch, fix_readpng.patch, ftbfs-debugger.patch,
+      ftbfs-dynarec.patch, ftbfs-glibc210.patch,
+      ftbfs-gvariant-type-conflicts.patch, ftbfs-kfreebsd.patch,
+      glide64_hurd.patch, glide64-noasm.patch, gtk-open-filter.patch,
+      interpreter_x86_fldcw.patch, jttl_fix_romclosed.patch,
+      link_gdk.patch, load_aidacrate.patch, load_vistatus.patch,
+      noexecstack.patch, optional_signinfo.patch, osd-pause-crash.patch,
+      path_max.patch, pie_support.patch, plugin-searchpath.patch,
+      remove-gln64.patch, remove-nondfsg-icons.patch,
+      resume_on_start.patch, rice-ati-symbols.patch,
+      rice-crash-vendorstring.patch, rice_fog.patch, rice_nodebug.patch,
+      rice-screenflickering.patch, rice-texturepack-crash.patch,
+      rsp_hle_bigendian.patch, rsp_ucode2_reset.patch,
+      static-binutils-libs.patch, system-libbz2.patch,
+      system-liblzma.patch, system-libpng.patch, system-zlib.patch,
+      version-string.patch, xdg-basedir.patch
+
+ -- Sven Eckelmann <sven@narfation.org>  Sat, 22 Jan 2011 11:05:28 +0100
+
+mupen64plus (1.5+dfsg1-14) experimental; urgency=low
+
+  * Upgraded to policy 3.9.1, no changes required
+  * Upgrade debhelper compat to v8
+  * debian/rules:
+    - set *FLAGS using dpkg-buildflags in debian/rules to work like
+      dpkg-buildpackage when called directly
+    - Use hardening-includes for CFLAGS and LDFLAGS hardened builds
+    - Use externally provided LDFLAGS
+    - Disable support for debugger due to missing pic/pie support of
+      libopcodes.a
+  * debian/patches:
+    - Add correct_security_printf.patch, Correct possible printf format
+      string vulnerability
+    - Add pie_support.patch, Add support for PIE/PIC
+
+ -- Sven Eckelmann <sven@narfation.org>  Thu, 23 Sep 2010 13:52:32 +0200
+
+mupen64plus (1.5+dfsg1-13) unstable; urgency=low
+
+  * debian/patches:
+    - Add path_max.patch, Add dummy PATH_MAX on systems without it
+      (Closes: #588066)
+    - Add optional_signinfo.patch, Only use siginfo subsystem if system
+      offers it (Closes: #588066)
+    - Add glide64_hurd.patch, Define GNU/Hurd as UNIX system for glide64
+      (Closes: #588066)
+
+ -- Sven Eckelmann <sven@narfation.org>  Mon, 12 Jul 2010 23:20:02 +0200
+
+mupen64plus (1.5+dfsg1-12) unstable; urgency=low
+
+  * Use googlecode.debian.net instead of complex own filters for
+    debian/watch
+  * Upgraded to policy 3.9.0, no changes required
+  * Build only on i386/amd64 because upstream doesn't to support more
+  * debian/patches:
+    - Add link_gdk.patch, Link directly against gdk-2.0 instead
+      indirectly through gtk+-2.0
+
+ -- Sven Eckelmann <sven@narfation.org>  Mon, 28 Jun 2010 21:31:48 +0200
+
+mupen64plus (1.5+dfsg1-11) unstable; urgency=low
+
+  * debian/patches:
+    - Rename ftbfs-gvariant-type-conflicts.path to
+      ftbfs-gvariant-type-conflicts.patch
+    - Add rice-ati-symbols.patch, Allow to load rice on systems with
+      missing opengl extensions
+
+ -- Sven Eckelmann <sven@narfation.org>  Sun, 23 May 2010 11:55:23 +0200
+
+mupen64plus (1.5+dfsg1-10) unstable; urgency=low
+
+  [ Sven Eckelmann ]
+  * debian/patches:
+    - Add rsp_ucode2_reset.patch, Reset status of specific ucode2 hacks
+      after starting again
+    - Add rsp_hle_bigendian.patch, Fix wrong high level emulation of rsp
+      on big endian systems
+    - Add rice-crash-vendorstring.patch, Don't crash on long OpenGL
+      vendor string (Closes: #580480, LP: #575968)
+
+  [ Piotr Ożarowski ]
+  * DMUA flag set to yes
+
+ -- Sven Eckelmann <sven@narfation.org>  Thu, 06 May 2010 11:34:46 +0200
+
+mupen64plus (1.5+dfsg1-9) unstable; urgency=low
+
+  * debian/patches:
+    - Add ftbfs-gvariant-type-conflicts.path, Fix FTBFS due to glib's
+      gvariant.h type definitions (Closes: #577329)
+    - Add dont-install-unneeded.patch, Don't install files which aren't
+      used by us
+  * debian/rules:
+    - Enable parallel builds using dh's --parallel
+    - Inform about missing installed files using dh's --list-missing
+    - Share options between dh_auto_build and dh_auto_install
+  * debian/control:
+    - Depend on debhelper 7.4.10 for --parallel and --list-missing
+
+ -- Sven Eckelmann <sven@narfation.org>  Sun, 11 Apr 2010 12:23:04 +0200
+
+mupen64plus (1.5+dfsg1-8) unstable; urgency=low
+
+  * debian/patches:
+    - Add rice_fog.patch, Reduce flickering when enabling fog in rice
+    - Update fix_readpng.patch, Fix FTBFS with libpng14 and remove
+      coding style only changes
+  * Convert to 3.0 (quilt) source format
+  * Remove outdated README.source
+  * debian/control:
+    - Remove shlibs:Depends for binary packages without shared libs
+      dependencies
+    - Remove unneeded build dependency to quilt
+    - Upgraded to policy 3.8.4, no changes required
+  * Correct spelling errors found by lintian
+  * debian/copyright: Update copyright years
+  * Check all files ever published on the download page in debian/watch
+
+ -- Sven Eckelmann <sven@narfation.org>  Mon, 15 Mar 2010 16:22:03 +0100
+
+mupen64plus (1.5+dfsg1-7) unstable; urgency=low
+
+  * debian/patches:
+    - Correct minor dep3 patch tagging format problems
+    - Update correct_fpr32_mapping.patch, prevent corruption of upper
+      registers in a register pair due to sign extension
+    - Add system-liblzma.patch, use liblzma from debian instead of
+      buildin (Closes: #543552)
+  * debian/control:
+    - Depend on liblzma-dev for lzma and xz support
+
+ -- Sven Eckelmann <sven@narfation.org>  Mon, 19 Oct 2009 12:38:26 +0200
+
+mupen64plus (1.5+dfsg1-6) unstable; urgency=low
+
+  * debian/patches:
+    - Add Origin information to patches
+    - Update fix_readpng.patch, Backport actual commit from upstream
+    - Update ftbfs-glibc210.patch, Backport actual commit from upstream
+    - Update noexecstack.patch, Backport actual commit from upstream
+    - Update jttl_fix_romclosed.patch, Backport actual commit from
+      upstream
+    - Add correct_fpr32_mapping.patch, Correct emulation of shared 32
+      bit wide and 64 bit wide FPR in MIPS I and MIPS III mode
+    - Remove load-fpr-location.patch which is replaced by
+      correct_fpr32_mapping.patch
+    - Add load_aidacrate.patch, Set aiDacrate during savestate load to
+      fix slowdowns after savestate load
+    - Add load_vistatus.patch, Set video width and status during
+      savestate load
+    - Add fix_r0_override.patch, Don't allow to override r0 register
+    - Add resume_on_start.patch, Resume when pressing on start when in
+      pause mode to prevent corruption
+    - Add osd-pause-crash.patch, Fix OSD crash after
+      pause-stop-start-pause of emulator
+
+ -- Sven Eckelmann <sven@narfation.org>  Thu, 08 Oct 2009 13:29:25 +0200
+
+mupen64plus (1.5+dfsg1-5) unstable; urgency=low
+
+  * debian/patches:
+    - Change to dep3 patch tagging guidelines
+    - Remove number before patches as order is given by
+      debian/patches/series
+    - Add gtk-open-filter.patch, Show files with .n64 and .v64 extension
+      in filtered open file dialog (Closes: #546046)
+    - Add noexecstack.patch, Don't enable executable stack by default
+      (Closes: #547644)
+    - Add fix_readpng.patch, Fix crash when loading png due to
+      reordering optimizer
+    - Add jttl_fix_romclosed.patch, Stop audio processing thread before
+      freeing buffers to fix segfault during stop of emulation
+    - Add rice_nodebug.patch, Don't enable excessive debug functionality
+      in rice_video
+    - Add interpreter_x86_fldcw.patch, Correctly set floating point
+      control word
+    - Add load-fpr-location.patch, Set register bank location when
+      loading savestate
+
+ -- Sven Eckelmann <sven@narfation.org>  Mon, 28 Sep 2009 15:23:17 +0200
+
+mupen64plus (1.5+dfsg1-4) unstable; urgency=low
+
+  * debian/patches;
+    - Update 119-debian-archs.patch, Correct detection of armel cpu
+      endianness (Closes: #545463)
+    - Add 120-ftbfs-glibc210, Fix FTBFS using g++-4.4 and glibc 2.10 due
+      to missing const keywords (Closes: #545462)
+    - Add 121-version-string.patch, remove misleading "-development" in
+      version string
+    - Add 122-default-optimisations.patch, Don't override optimisations
+      set by debian build environment
+
+ -- Sven Eckelmann <sven@narfation.org>  Tue, 08 Sep 2009 22:17:00 +0200
+
+mupen64plus (1.5+dfsg1-3) unstable; urgency=low
+
+  * debian/rules:
+    - Set host architecture to support build of i386 running on x86_64
+      kernel (Closes: #544670)
+    - Don't set NO_ASM parameter anymore as it is handled by
+      119-debian-archs.patch
+  * debian/patches:
+    - Add 119-debian-archs.patch, Define wordsize and endianness of
+      architectures supported by debian (Closes: #544673)
+    - Update 118-ftbfs-debugger.patch, define dummy functions to
+      decompile recompiled code on non-x86 architectures (Closes:
+      #544662)
+
+ -- Sven Eckelmann <sven@narfation.org>  Wed, 02 Sep 2009 23:18:11 +0200
+
+mupen64plus (1.5+dfsg1-2) unstable; urgency=low
+
+  * debian/patches
+    - Add 114-fix-7z-subfolder.patch, fix crash in romcache when reading
+      7zip archive with subfolders
+    - Add 115-xdg-basedir.patch, Use "XDG Base Directory" compliant
+      directories for files for each user (Closes: #544428)
+    - Add 116-ftbfs-dynarec.patch, Don't try to compile dynarec on
+      architectures without support (Closes: #544548)
+    - Add 117-ftbfs-kfreebsd.patch, Don't stop compilation due to
+      unknown OS kFreeBSD (Closes: #544550)
+    - Add 118-ftbfs-debugger.patch, Define CHECK_MEM for non-x86 systems
+      to prevent FTBFS due to dynarec checks (Closes: #544549)
+  * debian/control:
+    - Depend on libxdg-basedir-dev and pkg-config to support xdg-basedir
+      specification
+  * debian/rules:
+    - Disable assembler optimized parts on unsupported architectures
+  * Add README.source with information about patch management
+  * Add NEWS.Debian with information about migration of old data and
+    configuration to new xdg compliant directories
+
+ -- Sven Eckelmann <sven@narfation.org>  Tue, 01 Sep 2009 20:40:30 +0200
+
+mupen64plus (1.5+dfsg1-1) unstable; urgency=low
+
+  * Initial release (Closes: #513322)
+  * debian/patches:
+    - Add 100-fix-desktop-file.patch, fix desktop file
+    - Add 101-destdir.patch, fix usage of DESTDIR in install target
+    - Add 102-plugin-searchpath.patch, add search path for plugins
+    - Add 103-dejavu-font.patch, use font from ttf-dejavu-core package
+    - Add 104-as-needed.patch, allow --as-needed to reduce number of
+      linked libraries
+    - Add 105-system-libpng.patch, use libpng from debian instead of
+      buildin
+    - Add 106-system-zlib.patch, use zlib from debian instead of buildin
+    - Add 107-system-libbz2.patch, use libbz2 from debian instead of
+      buildin
+    - Add 108-remove-gln64.patch, don't try to build glN64 removed from
+      dfsg tar
+    - Add 109-remove-nondfsg-icons.patch, don't include non-dfsg icons
+      which are removed from dfsg tarball
+    - Add 110-glide64-noasm.patch, don't use x86-asm on non-x86
+      plattforms in glide64
+    - Add 111-rice-texturepack-crash.patch, Fix crash when loading
+      textures from texturepacks with rice_video
+    - Add 112-rice-screenflickering.patch, Reduce screenflickering in
+      some games when using rice_video
+    - Add 113-static-binutils-libs.patch, Link static against binutils
+      libraries with unstable abi
+
+ -- Sven Eckelmann <sven@narfation.org>  Mon, 17 Aug 2009 10:18:49 +0200

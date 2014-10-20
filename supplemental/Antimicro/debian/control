@@ -1,0 +1,24 @@
+Source: antimicro
+Section: contrib/games
+Priority: optional
+Maintainer: RetroRig Development Team <jc.lache@gmail.com>
+Build-Depends: cmake,
+    debhelper,
+    dpkg-dev,
+    libsdl2-dev,
+    qt4-qmake,
+    libqt4-dev,
+    libxtst-dev,
+    libx11-dev
+Standards-Version: 3.9.3
+Homepage: https://github.com/beaumanvienna/antimicro
+
+Package: antimicro
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: gamepad key mapping
+ Graphical program used to map keyboard keys and mouse controls to a gamepad
+ .
+ Useful for playing PC games with no gamepad or poor gamepad support.
+
+

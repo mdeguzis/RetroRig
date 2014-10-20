@@ -1,0 +1,23 @@
+Source: joydetect
+Section: utils
+Priority: optional
+Maintainer: pkgmaintainer
+Build-Depends: gcc (>= 9), cmake (>= 2.8), debhelper (>= 9), libc-bin (>= 2)
+Homepage: https://github.com/professorkaos64/RetroRig/joydetect
+Standards-Version: 3.9.5
+
+Package: joydetect
+Architecture: any
+Depends: ${misc:Depends}, ${shlibs:Depends}
+Description: Utility to effectively grab PS3/PS4 MAC Address from /dev/input.
+ Joydetect is a small C utility to grab the PS3/PS4 MAC address from the 
+ system if is run on. Typical usage is 'joydetect /dev/input1'. This 
+ program was graciously donated by a forum member to the RetroRig project. 
+ If I can ever find the name, I will most certainly add  attributes.
+ .
+ There are no real dependencies to run the package, as it is reliant on
+ typical system calls and built as a binary. If this description area is
+ not sufficient, please contact the maintainer noted about.
+
+
+

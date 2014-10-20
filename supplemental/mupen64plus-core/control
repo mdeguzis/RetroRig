@@ -1,0 +1,118 @@
+Source: mupen64plus-core
+Section: games
+Priority: optional
+Maintainer: RetroRig Development Team <jc.lache@gmail.com>
+Uploaders: RetroRig Development Team <jc.lache@gmail.com>
+Standards-Version: 3.9.5
+Homepage: https://github.com/beaumanvienna/mupen64plus-core
+Build-Depends:
+ debhelper (>= 9.20130604),
+ dpkg-dev (>= 1.16.1.1),
+ libfreetype6-dev,
+ libgl1-mesa-dev | libgl-dev,
+ libglu1-mesa-dev | libglu-dev,
+ libpng-dev,
+ libsdl2-dev,
+ pkg-config,
+ zlib1g-dev | libz-dev,
+ binutils-dev
+
+Package: libmupen64plus2
+Section: libs
+Architecture: any-i386 any-amd64
+Multi-Arch: same
+Pre-Depends:
+ ${misc:Pre-Depends},
+Depends:
+ ${misc:Depends},
+ ${shlibs:Depends},
+ mupen64plus-data,
+ ttf-bitstream-vera,
+Provides:
+ mupen64plus-audio-abi-2,
+ mupen64plus-config-abi-2.2,
+ mupen64plus-config-abi-2.3,
+ mupen64plus-debug-abi-2,
+ mupen64plus-frontend-abi-2.1.1,
+ mupen64plus-gfx-abi-2.1,
+ mupen64plus-gfx-abi-2.2,
+ mupen64plus-input-abi-2,
+ mupen64plus-rsp-abi-2,
+ mupen64plus-vidext-abi-3,
+Breaks:
+ mupen64plus-audio-sdl (<< 2.0),
+ mupen64plus-input-sdl (<< 2.0),
+ mupen64plus-video-glide64 (<< 2.0.0),
+ mupen64plus-video-glide64mk2 (<< 2.0),
+ mupen64plus-video-rice (<< 2.0),
+ mupen64plus-video-z64 (<< 2.0.0),
+Description: plugin-based Nintendo 64 emulator, core library
+ Flexible N64 Emulator for Linux that works with many ROMs that are publically
+ available. It consists of separate components to provide an user interface,
+ audio and graphics output, controller input, co-processor emulation and an
+ emulator core.
+ .
+ It has the following features:
+  * cheat system
+  * exchangeable plugins for graphics, sound and input emulation
+  * multiple save states
+  * common configuration system for all components
+ .
+ This package contains the actual emulator which must be loaded by a frontend.
+
+Package: libmupen64plus2-dbg
+Section: debug
+Priority: extra
+Architecture: any-i386 any-amd64
+Multi-Arch: same
+Pre-Depends:
+ ${misc:Pre-Depends},
+Depends:
+ ${misc:Depends},
+ libmupen64plus2 (= ${binary:Version}),
+Description: mupen64plus debug symbols package
+ Flexible N64 Emulator for Linux that works with many ROMs that are publically
+ available. It consists of separate components to provide an user interface,
+ audio and graphics output, controller input, co-processor emulation and an
+ emulator core.
+ .
+ This package contains the debug files.
+
+Package: libmupen64plus-dev
+Section: libdevel
+Architecture: all
+Depends:
+ ${misc:Depends},
+Description: mupen64plus development package
+ Flexible N64 Emulator for Linux that works with many ROMs that are publically
+ available. It consists of separate components to provide an user interface,
+ audio and graphics output, controller input, co-processor emulation and an
+ emulator core.
+ .
+ This package contains everything which is needed to build plugins or frontends
+ against the mupen64plus API.
+
+Package: mupen64plus-data
+Architecture: all
+Multi-Arch: foreign
+Depends:
+ ${misc:Depends},
+Breaks:
+ mupen64plus (<< 1.99.1),
+ libmupen64plus2 (<< 1.99.5-3),
+Replaces:
+ mupen64plus (<< 1.99.1),
+ libmupen64plus2 (<< 1.99.5-3),
+Description: plugin-based Nintendo 64 emulator, data files
+ Flexible N64 Emulator for Linux that works with many ROMs that are publically
+ available. It consists of separate components to provide an user interface,
+ audio and graphics output, controller input, co-processor emulation and an
+ emulator core.
+ .
+ It has the following features:
+  * cheat system
+  * exchangeable plugins for graphics, sound and input emulation
+  * multiple save states
+  * common configuration system for all components
+ .
+ This package contains the rom catalog and cheat database.

@@ -6,16 +6,13 @@
    - aka "ProfessorKaos64", "pk"
    - <ProfessorKaos64@linux.com>
    - Creator, main code, maintainer, project planning/management, tester
+   - Packaging
  
 **Jens-Christian**
    - aka "JC"
    - <none@domain.com>
-   - Contributor, tester
-   - Notable Contributions: 
-      - PS3 Controller fixes/patches
-      - Packaging
-      - RetroRig's patched XBMC package (a ton of changes)
-      - Idea machine
+   - Contributor, tester, packaging, code, patching
+   - Idea machine
 
 ***
 ### A big thanks goes out to
@@ -31,7 +28,7 @@
 - All the members of /r/LinuxActionShow 
 - The great work from FernetMenta's [xbmc branch](https://github.com/FernetMenta/xbmc)
 - [wsnipex](http://forum.xbmc.org/member.php?action=profile&uid=96724) from the XBMC forums
-- The creator of the [Maximinimalism](https://github.com/chrisbevan/skin.maximinimalism) XBMC theme
+- The creator of the [Ace](http://forum.xbmc.org/forumdisplay.php?fid=190) XBMC theme
 
 ##### If I missed you, please let me know so I can give you credit!
 
@@ -39,3 +36,4 @@
 ### Other
 ***
    - Thank you IMMENSELY for all other testing, ideas, and support!
+
