@@ -770,17 +770,14 @@ function rrs_xbmc_cfgs()
 
 function rrs_done()
 {
-	kernelUpdate=`cat $rootdir/logs/kernelUpdate`
 
-	clear
+	# The 3.14 manual kernel upgrade for Ubuntu systems is no longer necessary
+	# This is confirmed to be fixed since linux: 3.13.0-38.65
+	# Confirmed to be fine in current 3.13.0-37-generic.
+	# Please see commit efeb2bd for legacy code. This message will be 
+	# Removed in due time.
 
-	# inform user install is done (this is the last step of main, option 1)
-	if [ "$kernelUpdate" == "true" ]; then
-
-        	dialog --backtitle "LibreGeek.org - RetroRig Setup. Installation folder: $rootdir for user $user" --msgbox "Finished main install tasks.\n\nYou now have to copy roms to the roms folders. \nThis can be done via SSH, Samba, or via your graphic folder manager (please see settings menu for more)\n\nAll current config folders used were appended with .old for restoration purposes.\n\nYou must reboot to complete the installation!\n\n" 18 50
-	else
-
-        	dialog --backtitle "LibreGeek.org - RetroRig Setup. Installation folder: $rootdir for user $user" --msgbox "Finished main install tasks.\n\nYou now have to copy roms to the roms folders. \nThis can be done via SSH, Samba, or via your graphic folder manager (please see settings menu for more)\n\nAll current config folders used were appended with .old for restoration purposes.\n\n" 18 50
+       	dialog --backtitle "LibreGeek.org - RetroRig Setup. Installation folder: $rootdir for user $user" --msgbox "Finished main install tasks.\n\nYou now have to copy roms to the roms folders. \nThis can be done via SSH, Samba, or via your graphic folder manager (please see settings menu for more)\n\nAll current config folders used were appended with .old for restoration purposes.\n\n" 18 50
 	fi
 
 	# correct permissions
@@ -910,69 +907,12 @@ function rrs_reboot()
 rrs_kernel_check()
 {
 
-	##################################################################
-	# related documentation as to why this kernel upgrade is done:
-	# 
-	# hid-sony kernel module regression::
-	# https://bugs.launchpad.net/ubuntu/+source/linux/+bug/1326725
-	#
-	# PPA Page:
-	# http://kernel.ubuntu.com/~kernel-ppa/mainline/v3.14-trusty/
-	#
-	# WARNING:
-	# Canonical does not recommend updating your Linux kernel to other
-	# versions other than the ones provided on official channels. This 
-	# is not a totally safe procedure and you might have problems 
-	# afterwards, even system failures or applications not working 
-	# properly. On the other hand, you might get better performance 
-	# from your system.
-	# 
-	##################################################################
-	
-	clear
-	# alternatively: a=$(uname -r); user_kernel=${a//[^0-9]}
-	
-	# Get user's current kernel. We only need the 3.14.0 digits
-	# The rest can be different between kernels and is not needed
-	# To determine if we are on 3.14.x / 3.14.x.000000
-	user_kernel=$(uname -r | awk -F'[^0-9]*' '{print $1$2$3}')
-	echo "user's kernel is: $user_kernel"
-	sleep 2s
+	# The 3.14 manual kernel upgrade for Ubuntu systems is no longer necessary
+	# This is confirmed to be fixed since linux: 3.13.0-38.65
+	# Confirmed to be fine in current 3.13.0-37-generic.
+	# Please see commit efeb2bd for legacy code. This message will be 
+	# Removed in due time. 
 
-	target_kernel="3140"
-	echo "Target kernel is: $target_kernel"
-	sleep 2s
-
-	# Check if 3.14.x exists
-	if [ $user_kernel -lt "$target_kernel" ]; then
-		echo "Kernel 3.14.x not found, installing"
-		sleep 5s
-		wget --tries=50 -P /tmp "http://kernel.ubuntu.com/~kernel-ppa/mainline/v3.14-trusty/linux-headers-3.14.0-031400_3.14.0-031400.201403310035_all.deb"
-		wget --tries=50 -P /tmp "http://kernel.ubuntu.com/~kernel-ppa/mainline/v3.14-trusty/linux-headers-3.14.0-031400-generic_3.14.0-031400.201403310035_amd64.deb"
-		wget --tries=50 -P /tmp "http://kernel.ubuntu.com/~kernel-ppa/mainline/v3.14-trusty/linux-image-3.14.0-031400-generic_3.14.0-031400.201403310035_amd64.deb"
-		cd /tmp
-		dpkg -i linux-headers-3.14*.deb linux-image-3.14*.deb
-
-		# Hold the kernel packages so the kernel is not upgrade by accident
-		# Commented out for testing some errors with an old mednafen pkg
-		#sudo aptitude hold linux-image-`uname -r` 
-
-		# inform user of what was done
-		dialog --msgbox "Upgrading the kernel to 3.14.0-031400-generic is complete. The packages 'linux-generic linux-headers-generic linux-image-generic' have been held to avoid falling back to a regressed kernel (sony-hid). If you wish to change your kernel, please run the following command in the terminal:\n\n'sudo apt-mark unhold linux-generic linux-headers-generic linux-image-generic'" 14 60
-
-		# cleanup packages
-		rm -f /tmp/linux-headers-3.14*
-		rm -f /tmp/linux-image-3.14*
-
-		echo "true" > "$rootdir/logs/kernelUpdate"
-
-	elif [ $user_kernel -ge "$target_kernel" ]; then
-		# Do nothing
-		echo "Kernel 3.14.x or greater found, exiting"
-		sleep 2s
-
-		echo "false" > "$rootdir/logs/kernelUpdate"
-
-	fi
+	# System is upgraded during initial install
 
 }
