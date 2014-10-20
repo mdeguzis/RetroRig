@@ -45,8 +45,9 @@ wiki entries under "Installation," and "Advanced Configuration," or checkout the
 
 For all other features and future plans, please see the [wiki](https://github.com/ProfessorKaos64/RetroRig/wiki/Development-and-Features)
 
+* Concentration on a console-like experience from bootup to shutdown
 * No need to install an entire separate distro on your Mint/Debian machine
-* Custom XBMC binary package
+* Custom XBMC, emulator, utilties packages
 * Custom XBMC home screen and button layout
 * Seperate dot file (.retrorig, not .xbmc) so you can have your cake and eat it too!
 * Hotplugging support for supported wireles game controllers
