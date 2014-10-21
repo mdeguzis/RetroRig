@@ -114,24 +114,17 @@ function set_enable_samba()
 	cat "$rootdir/supplemental/samba_shares.txt" >> "/etc/samba/smb.conf"
 
 	# replace parameters of share
-	sed -i "s|/home/test/RetroRig|$rootdir|g" "/etc/samba/smb.conf"
-
-	# set samba password
-	# should this be left at guest access or set the user?
-
-	#echo ""
-	#echo "####################################################"
-	#echo "Setting samba password for user: $user"
-	#echo "####################################################"
-	#echo ""
-	#smbpasswd -a $user
-	#sleep 3s
+	sed -i "s|path_temp|$rootdir/ROMs|g" "/etc/samba/smb.conf"
 	
 	echo ""
 	echo "####################################################"
 	echo "Restarting samba services "
 	echo "####################################################"
 	echo ""
+
+	# Correct permissions on ROMs folder for guest access
+	chmod 777 -Rv "$rootdir/ROMs"
+
 	# restart services
 	service samba restart
 
