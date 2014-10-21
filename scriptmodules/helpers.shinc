@@ -932,16 +932,12 @@ function h_correct_perms()
 	# and emulators function and start properly
 	
 	# .retrorig
-	chgrp -R "$user" "$config_home" > /dev/null 2>&1
+	chgrp -Rv "$user" "$config_home" > /dev/null 2>&1
 	chown -R "$user" "$config_home" > /dev/null 2>&1
 
 	# xbmc dotfile (our custom path)
-	chgrp -R "$user" "$xbmc_home" > /dev/null 2>&1
-	chown -R "$user" "$xbmc_home" > /dev/null 2>&1
-
-	# qjoypad files from user home directory
-	chgrp -R "$user" "$home/.qjoypad3" > /dev/null 2>&1
-	chown -R "$user" "$home/.qjoypad3" > /dev/null 2>&1
+	chgrp -Rv "$user" "$xbmc_home" > /dev/null 2>&1
+	chown -Rv "$user" "$xbmc_home" > /dev/null 2>&1
 
 	# XBMC gamepad auto-detect helper
 	chmod ugo+x "/usr/share/applications/gp_autodetect_xbmc.sh" > /dev/null 2>&1
@@ -950,8 +946,8 @@ function h_correct_perms()
 	chmod ugo+x "/usr/share/applications/startXBMC.sh" > /dev/null 2>&1
 
 	# RetroRig autostart file
-	chgrp -R "$user" "$home/.config/autostart/RetroRig.desktop" > /dev/null 2>&1
-	chown -R "$user" "$home/.config/autostart/RetroRig.desktop" > /dev/null 2>&1
+	chgrp -Rv "$user" "$home/.config/autostart/RetroRig.desktop" > /dev/null 2>&1
+	chown -Rv "$user" "$home/.config/autostart/RetroRig.desktop" > /dev/null 2>&1
 	chmod ugo+x "$home/.config/autostart/RetroRig.desktop" > /dev/null 2>&1
 
 	# correct our own start file for retrorig

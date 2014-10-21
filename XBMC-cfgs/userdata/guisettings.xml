@@ -394,14 +394,6 @@
         <setting type="bool" name="skin.confluence.rcb_overwriteImportOptions">false</setting>
         <setting type="bool" name="skin.confluence.AutoScroll">false</setting>
         <setting type="bool" name="skin.confluence.FirstTimeRun">true</setting>
-        <setting type="bool" name="skin.maximinimalism.DebugGrid">false</setting>
-        <setting type="bool" name="skin.maximinimalism.DebugInfo">false</setting>
-        <setting type="bool" name="skin.maximinimalism.useGlobalFanartBackground">false</setting>
-        <setting type="bool" name="skin.maximinimalism.hideVideo">false</setting>
-        <setting type="bool" name="skin.maximinimalism.stopVideoOnMenu">false</setting>
-        <setting type="bool" name="skin.maximinimalism.exitFirst">false</setting>
-        <setting type="bool" name="skin.maximinimalism.rcb_disableRomcollections">false</setting>
-        <setting type="bool" name="skin.maximinimalism.rcb_overwriteImportOptions">false</setting>
         <setting type="bool" name="skin.ace.popupvoxcommando">false</setting>
         <setting type="bool" name="skin.ace.novideofurniture">false</setting>
         <setting type="bool" name="skin.ace.originaltitle">false</setting>
