@@ -17,26 +17,26 @@ BASE=0.9.5
 # In this case, this level will be used to denote incremental changes
 # instead of a specific branch for now (beta/master only exist at the
 # momement).
-PL=3.1
+PL=3
 
 #define branch
 #BRANCH=beta
-BRANCH=draft
+BRANCH=master
 
 #define upload target
 #LAUNCHPAD_PPA="ppa:mdeguzis/retrorig"
-LAUNCHPAD_PPA="ppa:beauman/retrorig-testing"
+LAUNCHPAD_PPA="ppa:mdeguzis/retrorig"
 
 #define uploader for changelog
 #uploader="Michael DeGuzis <mdeguzis@gmail.com>"
-uploader="Jens-Christian Lache <jc.lache@gmail.com>"
+uploader="Michael DeGuzis <mdeguzis@gmail.com>"
 
 #define package maintainer for dsc and control file 
 pkgmaintainer="RetroRig Development Team <mdeguzis@gmail.com>"
 
 #define github repository
-#source_reprository=https://github.com/ProfessorKaos64/RetroRig
-source_reprository="https://github.com/beaumanvienna/RetroRig"
+source_reprository=https://github.com/ProfessorKaos64/RetroRig
+#source_reprository="https://github.com/beaumanvienna/RetroRig"
 
 clear
 echo "#################################################################"
@@ -125,6 +125,7 @@ mv RetroRig/ $SRC_FOLDER
 cd $SRC_FOLDER
 
 git checkout $BRANCH
+git pull
 
 mkdir -p debian/source
 
