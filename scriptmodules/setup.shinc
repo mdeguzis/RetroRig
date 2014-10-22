@@ -913,5 +913,7 @@ rrs_kernel_check()
 	# Removed in due time. 
 
 	# System is upgraded during initial install
+	# Something needs to be here or otherwise there is a syntax error?
+	echo "" > /dev/null
 
 }
