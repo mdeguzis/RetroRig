@@ -1,8 +1,9 @@
-retrorig-setup (version_placeholder) trusty; urgency=medium
+retrorig-setup (0.9.5.3) trusty; urgency=medium
 
-  * Installation from system folder
+  * Updated splash screen version / artwork
+  * fixed samba share permissions issue
 
- -- uploader  Fri, 17 Oct 2014 22:00:00 +0200
+ -- Michael DeGuzis <mdeguzis@gmail.com>  Tue, 21 Oct 2014 19:21:00 -0400
 
 retrorig-setup (0.9.5.2) trusty; urgency=medium
 
