@@ -778,7 +778,6 @@ function rrs_done()
 	# Removed in due time.
 
        	dialog --backtitle "LibreGeek.org - RetroRig Setup. Installation folder: $rootdir for user $user" --msgbox "Finished main install tasks.\n\nYou now have to copy roms to the roms folders. \nThis can be done via SSH, Samba, or via your graphic folder manager (please see settings menu for more)\n\nAll current config folders used were appended with .old for restoration purposes.\n\n" 18 50
-	fi
 
 	# correct permissions
 	h_correct_perms
