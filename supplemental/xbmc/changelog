@@ -1,5 +1,18 @@
 xbmc (version_placeholder) trusty; urgency=medium
 
+  * new path for setResolution
+  * raiseMainWindow in ToggleFullScreenRoot
+
+ -- Jens-Christian Lache <jc.lache@web.de>  Thu, 23 Oct 2014 21:00:00 +0200
+ 
+xbmc (3:14.0.10.1) trusty; urgency=medium
+
+  * disabled support for external devices when in RetroRig Mode
+
+ -- Jens-Christian Lache <jc.lache@web.de>  Sat, 11 Oct 2014 18:10:00 +0200
+ 
+xbmc (3:14.0.9) trusty; urgency=medium
+
   * Changed: merged with upstream FernetMenta/XBMC V14.0 14/10/04 master and 
              applied changes from patch level 8
 
