@@ -1,5 +1,12 @@
 xbmc (version_placeholder) trusty; urgency=medium
 
+  * Changed: disable GUI dialog 
+    (Add-on is incompatible due to unmet dependencies.)
+
+ -- Jens-Christian Lache <jc.lache@web.de>  Fri, 24 Oct 2014 19:00:00 +0200
+
+xbmc (3:14.0.11.0) trusty; urgency=medium
+
   * new path for setResolution
   * raiseMainWindow in ToggleFullScreenRoot
 
