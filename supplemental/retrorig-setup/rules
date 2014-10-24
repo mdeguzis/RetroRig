@@ -55,7 +55,7 @@ override_dh_install:
 	
 	#supplemental application files
 	mv $(CURDIR)/debian/tmp/usr/lib/RetroRig/XBMC-cfgs/extra/startXBMC.sh $(CURDIR)/debian/tmp/usr/share/applications
-	mv $(CURDIR)/debian/tmp/usr/lib/RetroRig/XBMC-cfgs/extra/RetroRig.desktop $(CURDIR)/debian/tmp/usr/share/applications
+	cp $(CURDIR)/debian/tmp/usr/lib/RetroRig/XBMC-cfgs/extra/RetroRig.desktop $(CURDIR)/debian/tmp/usr/share/applications
 	mv $(CURDIR)/debian/tmp/usr/lib/RetroRig/XBMC-cfgs/extra/gp_autodetect_xbmc.sh $(CURDIR)/debian/tmp/usr/share/applications
 	
 	#services

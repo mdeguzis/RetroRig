@@ -639,10 +639,10 @@ def launchNonXbox(cmd, romCollection, gameRow, settings, precmd, postcmd, roms, 
 		if(isFullScreen and toggleScreenMode):
 			Logutil.log("Toggle to Windowed mode", util.LOG_LEVEL_INFO)
 			#this minimizes xbmc some apps seems to need it
-			try:
-				xbmc.executehttpapi("Action(199)")
-			except:
-				xbmc.executeJSONRPC('{"jsonrpc":"2.0","method":"Input.ExecuteAction","params":{"action":"togglefullscreen"},"id":"1"}')
+			#try:
+			#	xbmc.executehttpapi("Action(199)")
+			#except:
+			#	xbmc.executeJSONRPC('{"jsonrpc":"2.0","method":"Input.ExecuteAction","params":{"action":"togglefullscreen"},"id":"1"}')
 			
 			screenModeToggled = True
 		

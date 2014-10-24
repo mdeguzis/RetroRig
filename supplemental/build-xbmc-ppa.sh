@@ -3,20 +3,21 @@
 #======================================================================== 
 #
 # Author:  Michael DeGuzis and Jens-Christian Lache, 
-# Date:    20141011
-# Version: Patch Level 10
+# Date:    20141023
+# Version: Patch Level 11
+# Changed: path for setResolution / splash screen / raiseMainWindow
 # ========================================================================
 
 #define base version
 BASE=3:14.0
 
 # define patch level
-PL=10
+PL=11
 
 #define xbmc branch to checkout
 BRANCH=retrorig-pl$PL
 
-UPLOAD_TRY=1
+UPLOAD_TRY=0
 
 PPA="ppa:beauman/retrorig"
 
