@@ -1,9 +1,13 @@
 xbmc (version_placeholder) trusty; urgency=medium
 
-  * Changed: disable GUI dialog 
+  * Changed: disabled GUI dialog 
     (Add-on is incompatible due to unmet dependencies.)
+  
+  * Disabled dbus messages for UDev
+  
+  * Recreate main window after game exit (for Gnome Desktop)
 
- -- Jens-Christian Lache <jc.lache@web.de>  Fri, 24 Oct 2014 19:00:00 +0200
+ -- Jens-Christian Lache <jc.lache@web.de>  Fri, 25 Oct 2014 23:00:00 +0200
 
 xbmc (3:14.0.11.0) trusty; urgency=medium
 
