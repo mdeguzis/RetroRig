@@ -1,3 +1,22 @@
+retrorig-setup (version_placeholder) trusty; urgency=medium
+
+  * 
+
+ -- uploader  Tue, 21 Oct 2014 19:21:00 -0400
+ 
+ retrorig-setup (0:0.9.5.4.1) trusty; urgency=medium
+
+  * beta branch from beaumanvienna
+    xbmc pl12, SDL2 version of ppsspp, Wii motion controller query
+
+ -- Jens-Christian Lache <jc.lache@web.de>  Sat, 25 Oct 2014 12:00:00 +0200
+
+retrorig-setup (0.9.5.4) trusty; urgency=medium
+
+  * master branch packaged
+
+ -- Michael DeGuzis <mdeguzis@gmail.com>  Wed, 22 Oct 2014 19:21:00 -0400
+
 retrorig-setup (0.9.5.3) trusty; urgency=medium
 
   * Updated splash screen version / artwork
