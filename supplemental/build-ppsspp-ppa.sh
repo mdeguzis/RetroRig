@@ -3,14 +3,16 @@
 #======================================================================== 
 #
 # Author      : Michael T. DeGuzis, Jens-Christian Lache
-# Date        : 20141016
-# Version     : 0.9.9.1-2014/10/15
-# Description : Version 0.9.9.1.2, patchlevel 2 for dual monitor support
+# Date        : 20141024
+# Version     : 0.9.9.1 from upstream master 2014/10/24
+# Description : Version 0.9.9.1.2.2, 
+#               patchlevel 2 for dual monitor support
+#               upload try 2
 #               
-# Notes: Base for pl0: 
-#	 https://launchpad.net/~ppsspp/+archive/ubuntu/stable/+packages
-#
 # Notes: Base for pl1: 
+#	 dual monitor support only for Qt version, new CLI option "--fullscreen"
+#
+# Notes: Base for pl2: 
 #	 SDL2 support for   
 #        variable SDL_VIDEO_FULLSCREEN_HEAD to specify a start-up monitor.
 #	
@@ -20,11 +22,11 @@
 PRE=0
 BASE=0.9.9.1
 
-# define patch level
-PL=2
+# define patch level and upload try
+PL=2.2
 
 #define branch
-BRANCH=retrorig-pl1
+BRANCH=master
 
 #define upload target
 LAUNCHPAD_PPA="ppa:beauman/retrorig-testing"
@@ -122,7 +124,7 @@ mv ppsspp/ $SRC_FOLDER
 cd $SRC_FOLDER
 
 git checkout $BRANCH
-rm -rf .git
+#rm -rf .git
 
 echo "subfolder native"
 rm -rf native
@@ -137,7 +139,7 @@ else
 fi
 cd native
 git checkout $BRANCH
-rm -rf .git
+#rm -rf .git
 cd ..
 
 echo "subfolder ffmpeg"
@@ -153,7 +155,7 @@ fi
 mv ppsspp-ffmpeg ffmpeg
 cd ffmpeg
 git checkout $BRANCH
-rm -rf .git
+#rm -rf .git
 cd ..
 
 echo "subfolder lang"
@@ -169,7 +171,7 @@ fi
 mv ppsspp-lang lang
 cd lang
 git checkout $BRANCH
-rm -rf .git
+#rm -rf .git
 cd ..
 
 echo "changelog"
