@@ -375,7 +375,7 @@ function ps3_set_ctrl_assignments()
 	# Function Description:
 	# 
 	# This function sets the control methods for XBMC navigation
-	# and assignsthe unique MAC address of P1 to use as primary
+	# and assigns the unique MAC address of P1 to use as primary
 	####################################################################
 
 	# inform user
@@ -384,7 +384,32 @@ function ps3_set_ctrl_assignments()
 
 	# Set PS3 Blu MAC value with the "joydetect" C program
 	# Credit for this goes entirely to http://www.reddit.com/user/ElFeesho
- 	PS3_MAC_BLU=$(joydetect /dev/input/js0 | awk -F'[^:[a-zA-Z0-9]*' '{print $6}')
+	
+	device_id=`joydetect /dev/input/js0 2>/dev/null`
+	if [ -n "$device_id" ]; then 
+		echo "found controller on device 0"
+		PS3_MAC_BLU=$(echo $device_id | awk -F'[^:[a-zA-Z0-9]*' '{print $6}')
+	else
+		device_id=`joydetect /dev/input/js1 2>/dev/null`
+		if [ -n "$device_id" ]; then  
+			echo "found controller on device 1"
+			PS3_MAC_BLU=$(echo $device_id | awk -F'[^:[a-zA-Z0-9]*' '{print $6}')
+		else  
+			device_id=`joydetect /dev/input/js2 2>/dev/null`
+			if [ -n "$device_id" ]; then  
+				echo "found controller on device 2"
+				PS3_MAC_BLU=$(echo $device_id | awk -F'[^:[a-zA-Z0-9]*' '{print $6}')
+			else  
+				device_id=`joydetect /dev/input/js3 2>/dev/null`
+				if [ -n "$device_id" ]; then  
+					echo "found controller on device 3"
+					PS3_MAC_BLU=$(echo $device_id | awk -F'[^:[a-zA-Z0-9]*' '{print $6}')
+				else  
+					echo "No device found. Please try again under RetroRig Settings/Change Gamepad Type"
+				fi
+			fi
+		fi
+	fi
 	echo -e "\nController ID/MAC Address applied to XBMC controls was:\n$PS3_MAC_BLU \n"
 	sleep 2s
 
