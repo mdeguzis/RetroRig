@@ -788,8 +788,7 @@ function rrs_done()
 	# Please see commit efeb2bd for legacy code. This message will be 
 	# Removed in due time.
 
-       	dialog --backtitle "LibreGeek.org - RetroRig Setup. Installation folder: $rootdir for user $user" --msgbox "Finished main install tasks.\n\nYou now have to copy roms to the roms folders. \nThis can be done via SSH, Samba, or via your graphic folder manager (please see settings menu for more)\n\nAll current config folders used were appended with .old for restoration purposes.\n\n" 18 50
-	fi
+	dialog --backtitle "LibreGeek.org - RetroRig Setup. Installation folder: $rootdir for user $user" --msgbox "Finished main install tasks.\n\nYou now have to copy roms to the roms folders. \nThis can be done via SSH, Samba, or via your graphic folder manager (please see settings menu for more)\n\nAll current config folders used were appended with .old for restoration purposes.\n\n" 18 50
 
 	# correct permissions
 	h_correct_perms
@@ -915,7 +914,7 @@ function rrs_reboot()
 	esac
 }
 
-rrs_kernel_check()
+function rrs_kernel_check()
 {
 
 	# The 3.14 manual kernel upgrade for Ubuntu systems is no longer necessary
@@ -925,5 +924,6 @@ rrs_kernel_check()
 	# Removed in due time. 
 
 	# System is upgraded during initial install
+	echo rrs_kernel_check > /dev/null
 
 }
