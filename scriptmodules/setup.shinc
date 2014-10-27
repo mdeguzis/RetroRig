@@ -308,6 +308,9 @@ options=(1 "Xbox 360 Controller (wireless)"
 
 		esac
 	done
+	
+	wii_motion_controller_for_dolphin
+	
 }
 
 
@@ -1073,7 +1076,7 @@ function rrs_reboot()
 	esac
 }
 
-rrs_kernel_check()
+function rrs_kernel_check()
 {
 
 	# The 3.14 manual kernel upgrade for Ubuntu systems is no longer necessary
