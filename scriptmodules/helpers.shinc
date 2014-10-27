@@ -1033,8 +1033,8 @@ function h_filechecker()
 
 function h_pkgcheck()
 {
-    PKG_OK=$(dpkg-query -s "$1" | egrep -w "Status|Package|Version")
-    echo "Checking for somelib: $PKG_OK"
+    PKG_OK=$($cmd_remove_pkg "$1" | egrep -w "Status|Package|Version")
+    echo "Checking for some pkg/lib: $PKG_OK"
     if [ "" == "$PKG_OK" ]; then
         echo "NOT INSTALLED: $1" >> "$rootdir/logs/debug.log"
     else
@@ -1068,8 +1068,8 @@ function h_upgrade_system()
 
 	clear
 	# Upgrade system pkgs, but do so intelligently
-	apt-get update -y
-	apt-get upgrade -y
+	$cmd_update_system
+	$cmd_upgrade_system
 	sleep 3s
 	clear
 

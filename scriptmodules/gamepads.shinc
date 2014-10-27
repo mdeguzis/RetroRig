@@ -225,7 +225,7 @@ function gp_ps3_blu_main()
         echo "starting serives" | tee "$rootdir/logs/debug.log"
         echo "" | tee "$rootdir/logs/debug.log"
         # start service, but fork to background so when user exits script it is still running $
-        service sixad start | tee "$rootdir/logs/debug.log" &
+        $cmd_sixad_start | tee "$rootdir/logs/debug.log" &
         sleep 2s
         clear
 

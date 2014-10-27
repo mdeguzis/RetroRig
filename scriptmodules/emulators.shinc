@@ -36,16 +36,16 @@ function em_install_yabause()
 {
 	# This may be source compiled in the future
 	echo "Installing Sega Saturn emulator Yabause"
-	apt-get install -y yabause
+	$cmd_install_pkg yabause
 
 }
 
 function em_install_pcsx2()
 {
 	echo "Installing Playstation 2 emulator PCSX2"
-	apt-get install -y pcsx2
+	$cmd_install_pkg pcsx2
 	# Unstable version still needs testing:
-	# apt-get install pcsx2-unstable
+	# pkg_install pcsx2-unstable
   
 	# Link BIOS path from home/RetroRig (source) to .retrorig/
 	ln -sf "$rootdir/BIOS/PCSX2" "$config_home/.config/pcsx2/bios"
@@ -55,8 +55,8 @@ function em_install_pcsx2()
 	#a symbolic link is created.
 
 	date=`date`
-	sudo -u $user mv "$HOME/.config/pcsx2" "$HOME/.config/pcsx2.backup_retrorig.$date"
-	sudo -u $user ln -vs "$config_home/.config/pcsx2/" "$HOME/.config"
+	mv "$HOME/.config/pcsx2" "$HOME/.config/pcsx2.backup_retrorig.$date"
+	ln -vs "$config_home/.config/pcsx2/" "$HOME/.config"
 
 }
 
@@ -64,8 +64,8 @@ function em_install_dolphin()
 {
 
 	echo "Installing Nintendo Gamecube emulator Dolphin"
-	apt-get remove -y dolphin-emu dolphin-emu-master
-	apt-get install -y dolphin-emu
+	$cmd_remove_pkg dolphin-emu dolphin-emu-master
+	$cmd_install_pkg dolphin-emu
 
 }
 
@@ -82,7 +82,7 @@ function em_install_ppsspp_source()
 
 	echo "Installing (PSP Portable) emulator PPSSPP (from source)"
 	# install prereq packages
-	apt-get install -y gcc, cmake, zlib1g-dev, libsdl1.2-dev, qtmobility-dev, qt4-qmake, libqt4-opengl, libqt4-dev, dh-make
+	$cmd_install_pkg gcc, cmake, zlib1g-dev, libsdl1.2-dev, qtmobility-dev, qt4-qmake, libqt4-opengl, libqt4-dev, dh-make
 	cd "$rootdir/emulators"
 	# clone git repo and checkout modules
 	git clone https://github.com/hrydgard/ppsspp
@@ -103,16 +103,16 @@ function em_install_ppsspp()
 	echo "Installing Playstation Portable emulator ppsspp"
 
 	# release aptitude hold for upgrade/install
-	apt-mark unhold ppsspp
+	$cmd_unhold_pkg ppsspp
 
         #remove any previously installed version
-	apt-get remove -y ppsspp
+	$cmd_remove_pkg ppsspp
 
         #install from PPA
-	apt-get install -y ppsspp
+	$cmd_install_pkg ppsspp
 
 	# hold package after install against upgrades
-	apt-mark hold ppsspp
+	$cmd_hold_pkg ppsspp
 
 }
 
@@ -121,16 +121,16 @@ function em_install_stella()
 	echo "Installing Atari 2600 emulator Stella"
 
 	# release aptitude hold for upgrade/install
-	apt-mark unhold stella
+	$cmd_unhold_pkg stella
 
         #remove any previously installed version
-	apt-get remove -y stella
+	$cmd_remove_pkg stella
 
         #install from PPA
-	apt-get install -y stella
+	$cmd_install_pkg stella
 
 	# hold package after install against upgrades
-	apt-mark hold stella
+	$cmd_hold_pkg stella
 
 	############################################################################################################
 	# installation of stella from libregeek.org (deprecated)
@@ -149,52 +149,52 @@ function em_install_stella()
 function em_install_mupen64plus()
 {
 	echo "Installing mupen64plus emulator"
-	apt-get install -y mupen64plus
+	$cmd_install_pkg mupen64plus
 }
 
 
 function em_install_mame()
 {
 	echo "Installing MAME emulator"
-	apt-get install -y mame
+	$cmd_install_pkg mame
 }
 
 function em_install_mednafen()
 {
 	# release aptitude hold for upgrade/install
-	apt-mark unhold mednafen
+	$cmd_unhold_pkg mednafen
 
         #remove any previously installed version
-	apt-get remove -y mednafen
+	$cmd_remove_pkg mednafen
 
 	echo "Installing Mednafen emulator"
-	apt-get install -y mednafen
+	$cmd_install_pkg mednafen
 	#wget --tries=50 -P /tmp "www.libregeek.org/RetroRig/Ubuntu-Trusty/mednafen/mednafen-patched-for-retrorig-patchlevel-1-0trusty.deb"
-	#apt-get install -y libsdl2-2.0-0
+	#$cmd_install_pkg libsdl2-2.0-0
         #dpkg -i "/tmp/mednafen-patched-for-retrorig-patchlevel-1-0trusty.deb"
 
 	# hold package after install against upgrades
-	apt-mark hold mednafen
+	$cmd_hold_pkg mednafen
 
 }
 
 function em_install_mess()
 {
 	echo "Installing MESS emulator"
-	apt-get install -y mess
+	$cmd_install_pkg mess
 }
 
 function em_install_gens()
 {
 
 	# release aptitude hold for upgrade/install
-	apt-mark unhold gens
+	$cmd_unhold_pkg gens
 
         #remove any previously installed version
-	apt-get remove -y gens
+	$cmd_remove_pkg gens
 
 	echo "Installing Gens Sega CD/32X emulator"
-	apt-get -y install gens
+	$cmd_pkg_install install gens
 
         # deprecated: installation from libregeek.org:
 	#wget --tries=50 -P /tmp "http://www.libregeek.org/RetroRig/Ubuntu-Trusty/emulators/gens//Gens_2.16.7_i386.deb"
@@ -203,7 +203,7 @@ function em_install_gens()
 	#rm -f "/tmp/Gens_2.16.7_i386.deb"
 
 	# hold package after install against upgrades
-	apt-mark hold gens
+	$cmd_hold_pkg gens
 
 }
 
