@@ -178,16 +178,26 @@ else
 fi
 
 # load script modules
+echo "#####################################################"
+echo "Loading script modules"
+echo "#####################################################"
+
 import "$scriptdir/scriptmodules/helpers"
 import "$scriptdir/scriptmodules/configuration"
 import "$scriptdir/scriptmodules/settings"
 import "$scriptdir/scriptmodules/setup"
 import "$scriptdir/scriptmodules/gamepads"
 import "$scriptdir/scriptmodules/emulators"
+echo ""
 
 # DEBUG ONLY!
 # Remove the below comment to double check all modules load
 # sleep 10s
+
+echo "#####################################################"
+echo "Checking compatibility"
+echo "#####################################################"
+echo ""
 
 # Discover platform
 rrs_discover_distro

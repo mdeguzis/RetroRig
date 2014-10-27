@@ -370,13 +370,36 @@ function rrs_source_syscalls()
 	case $OS_TYPE in
 		Ubuntu)
 			source "$scriptdir/scriptmodules/syscalls-deb.shinc"
-			echo "Primary packagement management system: apt/aptitude"
+			platform_check="Yes"
+			pkg_manager="apt/aptitude"
+			;;
+
+		LinuxMint)
+			source "$scriptdir/scriptmodules/syscalls-deb.shinc"
+			platform_check="Yes"
+			pkg_manager= "apt/aptitude"
 			;;
 
 		*)
+			# This does not exit the script at this time, but will once 
+			# All proper support distros that work are identifed.
+			echo ""
+			echo "#####################################################"
+			echo "Distribution/Platform not supported at this time!"
+			echo "Proceed at your own risk."
+			echo "#####################################################"
+			echo ""
+			sleep 5s
+			#clear
+			#exit
 		;;
 
 	esac
+
+	echo "Supported Platform? $platform_check"
+	echo "Primary package management system: $pkg_manager"
+	echo ""
+	#sleep 5s
 
 }
 
