@@ -12,7 +12,7 @@ function rrs_prepareFolders()
 	echo "Creating folders for ROMs, Artwork, Saves, and dotfiles"
 	# We pass -p below,so all folders below are created for 
 	# a given path
-	
+
 	pathlist=()
 
 	# create autostart folder for manual desktop entries
@@ -114,7 +114,7 @@ function rrs_prepareFolders()
 	pathlist+=("$config_home/.mess/cfg")
 	pathlist+=("$config_home/.stella")
 	pathlist+=("$config_home/.mednafen")
-	
+
 	# xbmc folders
 	pathlist+=("$xbmc_home/userdata/keymaps")
 
@@ -126,7 +126,7 @@ function rrs_prepareFolders()
 	# filesys.path_firmware
 	pathlist+=("$rootdir/BIOS/Mednafen")
 	pathlist+=("$rootdir/BIOS/PCSX2")
-	
+
 	#folder for savestates
 	pathlist+=("$home/.retrorig/.dolphin-emu")
 	pathlist+=("$home/.retrorig/.gens")
@@ -134,7 +134,7 @@ function rrs_prepareFolders()
 	pathlist+=("$home/.retrorig/.config/mupen64plus")
 	pathlist+=("$home/.retrorig/.config/pcsx2")
 	pathlist+=("$home/.retrorig/.config/ppsspp/ppsspp")
-	
+
 	#Configs (not needed at the moment)
 	# pathlist+=("$rootdir/Configs")
 
@@ -151,62 +151,62 @@ function rrs_prepareFolders()
 
 	# correct permissions
 	h_correct_perms
-	
+
 	#backup existing state saves, if a backup folder does not exist, and the save state folder a real directory is
 	if [ ! -d "$home/.retrorig/.dolphin-emu/StateSaves.old" ]; then
 		if [ ! -L "$home/.retrorig/.dolphin-emu/StateSaves" ]; then
 			if [ -d "$home/.retrorig/.dolphin-emu/StateSaves" ]; then
-				mv -f "$home/.retrorig/.dolphin-emu/StateSaves" 			"$home/.retrorig/.dolphin-emu/StateSaves.old"
+				mv -f "$home/.retrorig/.dolphin-emu/StateSaves" "$home/.retrorig/.dolphin-emu/StateSaves.old"
 				dolphin_backup=true
 			fi
 		fi
 	fi
-	
+
 	if [ ! -d "$home/.retrorig/.config/mupen64plus/save.old" ]; then
 		if [ ! -L "$home/.retrorig/.config/mupen64plus/save" ]; then
 			if [ -d "$home/.retrorig/.config/mupen64plus/save" ]; then
-				mv -f "$home/.retrorig/.config/mupen64plus/save" 			"$home/.retrorig/.config/mupen64plus/save.old"
+				mv -f "$home/.retrorig/.config/mupen64plus/save" "$home/.retrorig/.config/mupen64plus/save.old"
 				mupen64plus_backup=true
 			fi
 		fi
 	fi
-	
+
 	if [ ! -d "$home/.retrorig/.mednafen/sav.old" ]; then
 		if [ ! -L "$home/.retrorig/.mednafen/sav" ]; then
 			if [ -d "$home/.retrorig/.mednafen/sav" ]; then
-				mv -f "$home/.retrorig/.mednafen/sav" 								"$home/.retrorig/.mednafen/sav.old"
+				mv -f "$home/.retrorig/.mednafen/sav" "$home/.retrorig/.mednafen/sav.old"
 				mednafen_backup=true
 			fi
 		fi
 	fi
-	
+
 	if [ ! -d "$home/.retrorig/.gens/StateSaves.old" ]; then
 		if [ ! -L "$home/.retrorig/.gens/StateSaves" ]; then
 			if [ -d "$home/.retrorig/.gens/StateSaves" ]; then
-				mv -f "$home/.retrorig/.gens/StateSaves" 							"$home/.retrorig/.gens/StateSaves.old"
+				mv -f "$home/.retrorig/.gens/StateSaves" "$home/.retrorig/.gens/StateSaves.old"
 				gens_backup=true
 			fi
 		fi
 	fi
-	
+
 	if [ ! -d "$home/.retrorig/.config/ppsspp/PSP/SAVEDATA.old" ]; then
 		if [ ! -L "$home/.retrorig/.config/ppsspp/PSP/SAVEDATA" ]; then
 			if [ -d "$home/.retrorig/.config/ppsspp/PSP/SAVEDATA" ]; then
-				mv -f "$home/.retrorig/.config/ppsspp/PSP/SAVEDATA"		"$home/.retrorig/.config/ppsspp/PSP/SAVEDATA.old"
+				mv -f "$home/.retrorig/.config/ppsspp/PSP/SAVEDATA" "$home/.retrorig/.config/ppsspp/PSP/SAVEDATA.old"
 				ppsspp_backup=true
 			fi
 		fi
 	fi
-	
+
 	if [ ! -d "$home/.retrorig/.config/pcsx2/sstates.old" ]; then
 		if [ ! -L "$home/.retrorig/.config/pcsx2/sstates" ]; then
 			if [ -d "$home/.retrorig/.config/pcsx2/sstates" ]; then
-				mv -f "$home/.retrorig/.config/pcsx2/sstates" 				"$home/.retrorig/.config/pcsx2/sstates.old"
+				mv -f "$home/.retrorig/.config/pcsx2/sstates" "$home/.retrorig/.config/pcsx2/sstates.old"
 				pcsx2_backup=true
 			fi
 		fi
 	fi
-	
+
 	#remove old links
 	rm -f "$home/.retrorig/.dolphin-emu/StateSaves"
 	rm -f "$home/.retrorig/.config/mupen64plus/save"
@@ -214,40 +214,40 @@ function rrs_prepareFolders()
 	rm -f "$home/.retrorig/.gens/StateSaves"
 	rm -f "$home/.retrorig/.config/ppsspp/PSP/SAVEDATA"
 	rm -f "$home/.retrorig/.config/pcsx2/sstates"
-	
+
 	#create links 
-	ln -sf "$rootdir/Saves/dolphin-emu"			"$home/.retrorig/.dolphin-emu/StateSaves"
-	ln -sf "$rootdir/Saves/mupen64plus"			"$home/.retrorig/.config/mupen64plus/save"
-	ln -sf "$rootdir/Saves/mednafen"				"$home/.retrorig/.mednafen/sav"
-	ln -sf "$rootdir/Saves/GensGS"					"$home/.retrorig/.gens/StateSaves"
-	ln -sf "$rootdir/Saves/ppsspp"					"$home/.retrorig/.config/ppsspp/PSP/SAVEDATA"
-	ln -sf "$rootdir/Saves/pcsx2"						"$home/.retrorig/.config/pcsx2/sstates"
-	
+	ln -sf "$rootdir/Saves/dolphin-emu" "$home/.retrorig/.dolphin-emu/StateSaves"
+	ln -sf "$rootdir/Saves/mupen64plus" "$home/.retrorig/.config/mupen64plus/save"
+	ln -sf "$rootdir/Saves/mednafen" "$home/.retrorig/.mednafen/sav"
+	ln -sf "$rootdir/Saves/GensGS" "$home/.retrorig/.gens/StateSaves"
+	ln -sf "$rootdir/Saves/ppsspp" "$home/.retrorig/.config/ppsspp/PSP/SAVEDATA"
+	ln -sf "$rootdir/Saves/pcsx2" "$home/.retrorig/.config/pcsx2/sstates"
+
 	#restore backup
 	if [ "$dolphin_backup" == "true" ]; then
-		cp -rf $home/.retrorig/.dolphin-emu/StateSaves.old/*				"$home/.retrorig/.dolphin-emu/StateSaves/"
+		cp -rf "$home/.retrorig/.dolphin-emu/StateSaves.old/*" "$home/.retrorig/.dolphin-emu/StateSaves/"
 	fi
-	
+
 	if [ "$mupen64plus_backup" == "true" ]; then
-		cp -rf $home/.retrorig/.config/mupen64plus/StateSaves.old/*	"$home/.retrorig/.config/mupen64plus/StateSaves/"
+		cp -rf "$home/.retrorig/.config/mupen64plus/StateSaves.old/*" "$home/.retrorig/.config/mupen64plus/StateSaves/"
 	fi
-	
+
 	if [ "$mednafen_backup" == "true" ]; then
-		cp -rf $home/.retrorig/.mednafen/sav.old/*									"$home/.retrorig/.mednafen/sav/"
+		cp -rf "$home/.retrorig/.mednafen/sav.old/*" "$home/.retrorig/.mednafen/sav/"
 	fi
-	
+
 	if [ "$gens_backup" == "true" ]; then
-		cp -rf $home/.retrorig/.gens/StateSaves.old/* 							"$home/.retrorig/.gens/StateSaves/"
+		cp -rf "$home/.retrorig/.gens/StateSaves.old/*" "$home/.retrorig/.gens/StateSaves/"
 	fi
-	
+
 	if [ "$ppsspp_backup" == "true" ]; then
-		cp -rf $home/.retrorig/.config/ppsspp/PSP/SAVEDATA.old/*		"$home/.retrorig/.config/ppsspp/PSP/SAVEDATA/"
+		cp -rf "$home/.retrorig/.config/ppsspp/PSP/SAVEDATA.old/*" "$home/.retrorig/.config/ppsspp/PSP/SAVEDATA/"
 	fi
-	
+
 	if [ "$pcsx2_backup" == "true" ]; then
-		cp -rf $home/.retrorig/.config/pcsx2/sstates.old/*					"$home/.retrorig/.config/pcsx2/sstates/"
+		cp -rf "$home/.retrorig/.config/pcsx2/sstates.old/*" "$home/.retrorig/.config/pcsx2/sstates/"
 	fi
-	
+
 	#change permission
 	chown -R "$user" "$rootdir/Saves/"
 	chgrp -R "$user" "$rootdir/Saves/"
@@ -255,22 +255,6 @@ function rrs_prepareFolders()
 	chgrp -R "$user" "$home/.retrorig/"
 
 }
-
-function rrs_unity()
-{
-
-# Disable screensaver, XBMC will manage this
-# Export display to allow gsettings running in terminal window
-export DISPLAY=:0.0
-gsettings set org.gnome.desktop.screensaver lock-enabled false
-gsettings set org.gnome.desktop.screensaver ubuntu-lock-on-suspend false
-gsettings set org.gnome.desktop.session idle-delay 3600
-
-# Create Unity launcher icon from existing /usr/share/applications/RetroRig.desktop
-gsettings set com.canonical.Unity.Launcher favorites "$(gsettings get com.canonical.Unity.Launcher favorites | sed "s/, *'RetroRig.desktop' *//g" | sed "s/'RetroRig.desktop' *, *//g" | sed -e "s/]$/, 'RetroRig.desktop']/")"
-
-}
-
 
 function rrs_gamepad ()
 {
@@ -329,37 +313,205 @@ options=(1 "Xbox 360 Controller (wireless)"
 	
 }
 
-function rrs_add_standard_repos()
+
+function rrs_post_install()
 {
 
-	# add repository for official team XBMC "stable"
-	# We still need this repository for xbmc.bin dependencies
-	#add-apt-repository -y ppa:team-xbmc/ppa
+	# Based on the type of type Desktop Environment
+	# This function targets DE-specific areas for screensavers,
+	# power functions, shortcuts and more.
 
-	# add respository for qtsixa (PS3 pairing)
-	#add-apt-repository -y ppa:falk-t-j/qtsixa
+	# $XDG_CURRENT_DESKTOP will tell you what DE you are using.
+	rrDE=$XDG_CURRENT_DESKTOP
 
-	# add respository for RetroRig backends (xbmc, mednafen,...)
-	add-apt-repository -y ppa:beauman/retrorig
-	# Add repository for additional pkgs (retrorig-setup, joydetect)
-	add-apt-repository -y ppa:mdeguzis/retrorig
+	case $rrDE in
+		Unity)
 
-######################################################################
-# install package repository and missing libraries
-######################################################################
+			# Disable screensaver, XBMC will manage this
+			# Export display to allow gsettings running in terminal window
+			export DISPLAY=:0.0
+			gsettings set org.gnome.desktop.screensaver lock-enabled false
+			gsettings set org.gnome.desktop.screensaver ubuntu-lock-on-suspend false
+			gsettings set org.gnome.desktop.session idle-delay 3600
 
-	#find type of operating system
-	OS_ID_STRING=`lsb_release -a 2>/dev/null|grep "Distributor ID"`
-	OS_TYPE=`echo $OS_ID_STRING|cut -f 3 -d ' ' `
+			# Create Unity launcher icon from existing /usr/share/applications/RetroRig.desktop
+			# This only applies to Unity desktop users.
+			gsettings set com.canonical.Unity.Launcher favorites "$(gsettings get com.canonical.Unity.Launcher favorites | sed "s/, *'RetroRig.desktop' *//g" | sed "s/'RetroRig.desktop' *, *//g" | sed -e "s/]$/, 'RetroRig.desktop'")"
+			;;
+
+		Gnome)
+			# Nothing to see here yet
+			;;
+
+		Cinnamon)
+			# Nothing to see here yet
+			;;			
+
+		*)
+		;;
+	esac
+
+}
+
+function rrs_discover_distro()
+{
+	# OS Distro
+	OS_ID_STRING=$(lsb_release -a 2>/dev/null|grep "Distributor ID")
+	OS_TYPE=$(echo $OS_ID_STRING|cut -f 3 -d ' ')
+
+	# Release
+	OS_RELEASE_STRING=$(lsb_release -a 2>/dev/null|grep "Release")
+	OS_RELEASE=$(echo $OS_RELEASE_STRING | sed s/' '//g | cut -f 2 -d ':')
+}
+
+function rrs_source_syscalls()
+{
+	# Source the correct syscalls for platform
+	# This largely alludes to the default package manager
+	echo "Setting syscalls based on package manager..."
+	
+	case $OS_TYPE in
+		Ubuntu)
+
+			case $OS_RELEASE in
+
+				14.04)
+					source "$scriptdir/scriptmodules/syscalls-deb.shinc"
+					platform_check="Yes"
+					pkg_manager="apt/aptitude"
+					;;
+
+				14.10)
+					source "$scriptdir/scriptmodules/syscalls-deb.shinc"
+					platform_check="Yes"
+					pkg_manager="apt/aptitude"
+					;;
+
+				*)
+
+					# This does not exit the script at this time, but will once 
+					# All proper support distros that work are identifed.
+					echo ""
+					echo "##################### WARNING ######################"
+					echo "Distro release version not supported at this time!"
+					echo "Proceed at your own risk."
+					echo "#####################################################"
+					echo ""
+					sleep 5s
+					#clear
+					#exit
+					;;
+			esac
+			;;
+
+		LinuxMint)
+
+			case $OS_RELEASE in
+
+				17)
+					source "$scriptdir/scriptmodules/syscalls-deb.shinc"
+					platform_check="Yes"
+					pkg_manager="apt/aptitude"
+					;;
+
+
+				*)
+
+					# This does not exit the script at this time, but will once 
+					# All proper support distros that work are identifed.
+					echo ""
+					echo "##################### WARNING ######################"
+					echo "Distro release version not supported at this time!"
+					echo "Proceed at your own risk."
+					echo "#####################################################"
+					echo ""
+					sleep 5s
+					#clear
+					#exit
+					;;
+			esac
+
+			;;
+
+		Deepin)
+
+			case $OS_RELEASE in
+
+				2014)
+					source "$scriptdir/scriptmodules/syscalls-deb.shinc"
+					platform_check="Yes"
+					pkg_manager="apt/aptitude"
+					;;
+
+
+				*)
+
+					# This does not exit the script at this time, but will once 
+					# All proper support distros that work are identifed.
+					echo ""
+					echo "##################### WARNING ######################"
+					echo "Distro release version not supported at this time!"
+					echo "Proceed at your own risk."
+					echo "#####################################################"
+					echo ""
+					sleep 5s
+					#clear
+					#exit
+					;;
+			esac
+
+			;;
+
+		*)
+			# This does not exit the script at this time, but will once 
+			# All proper support distros that work are identifed.
+			echo ""
+			echo "##################### WARNING ######################"
+			echo "Distribution/Platform not supported at this time!"
+			echo "Proceed at your own risk."
+			echo "#####################################################"
+			echo ""
+			sleep 5s
+			#clear
+			#exit
+		;;
+
+	esac
+
+	echo "Supported Platform? $platform_check"
+	echo "Primary package management system: $pkg_manager"
+	echo ""
+	sleep 5s
+
+}
+
+function rrs_add_standard_repos()
+{
+	########################################################
+	# install package repositories and missing libraries
+	########################################################
 
 	case $OS_TYPE in
 		"Ubuntu")
 			#find version of operating system
-			OS_RELEASE_STRING=`lsb_release -a 2>/dev/null|grep "Release"`
-			OS_RELEASE=`echo $OS_RELEASE_STRING|sed s/' '//g|cut -f 2 -d ':' `
+
+
+			###############################################################
+			# Add our standport Debian repositories for various pkgs
+			###############################################################
+			# add respository for RetroRig backends (xbmc, mednafen,...)
+			add-apt-repository -y ppa:beauman/retrorig
+			# Add repository for additional pkgs (retrorig-setup, joydetect)
+			add-apt-repository -y ppa:mdeguzis/retrorig
 
 			case $OS_RELEASE in
-				"14.10")
+
+				14.04)
+
+					echo "running Ubuntu 14.04 LTS"
+					;;
+
+				14.10)
 
 					echo "running Ubuntu 14.10"
 
@@ -380,7 +532,7 @@ function rrs_add_standard_repos()
 					cd /etc/ld.so.conf.d/
 					echo /usr/lib/RetroRig > RetroRig.conf
 					ldconfig
-					
+				
 #					TODO
 #					DEINSTALLATION CODE
 #
@@ -393,48 +545,57 @@ function rrs_add_standard_repos()
 #					rm -rf /usr/lib/RetroRig
 #					rm /etc/ld.so.conf.d/RetroRig.conf
 #					ldconfig
-				;;
+					;;
 
 				*)
-				;;
+					;;
 			esac
 		;;
-		"LinuxMint")
 
-			#find version of operating system
-			OS_RELEASE_STRING=`lsb_release -a 2>/dev/null|grep "Release"`
-			OS_RELEASE=`echo $OS_RELEASE_STRING|cut -f 2 -d ' ' `
+		LinuxMint)
+
+			###############################################################
+			# Add our standport Debian repositories for various pkgs
+			###############################################################
+			# add respository for RetroRig backends (xbmc, mednafen,...)
+			add-apt-repository -y ppa:beauman/retrorig
+			# Add repository for additional pkgs (retrorig-setup, joydetect)
+			add-apt-repository -y ppa:mdeguzis/retrorig
 
 			case $OS_RELEASE in
 				"17")
 					echo "running Linux Mint 17 Qiana"
-						
+					
 						# latest X11 drivers
-						add-apt-repository -y ppa:xorg-edgers/ppa
-				;;
+						$cmd_add_repo ppa:xorg-edgers/ppa
+					;;
 
 				*)
-				;;
+					;;
 			esac
 		;;
-		"Deepin")
+		Deepin)
 
-			#find version of operating system
-			OS_RELEASE_STRING=`lsb_release -a 2>/dev/null|grep "Release"`
-			OS_RELEASE=`echo $OS_RELEASE_STRING|cut -f 2 -d ' ' `
+			###############################################################
+			# Add our standport Debian repositories for various pkgs
+			###############################################################
+			# add respository for RetroRig backends (xbmc, mednafen,...)
+			add-apt-repository -y ppa:beauman/retrorig
+			# Add repository for additional pkgs (retrorig-setup, joydetect)
+			add-apt-repository -y ppa:mdeguzis/retrorig
 
 			case $OS_RELEASE in
 				"2014")
 					echo "running Deepin 2014"
-				;;
+					;;
 
 				*)
-				;;
+					;;
 			esac
 		;;
 
 		*)
-		;;
+			;;
 	esac
 }
 
@@ -488,9 +649,9 @@ function rrs_software()
 	echo "Binaries-based installation"
 
 	# add multi-arch support
-	dpkg --add-architecture i386
+	$cmd_add_32bit_arch
 
-	# add add repos
+	# add add repos and 
 	rrs_add_standard_repos
 
 	# add extra repostories to the em_add_repos function!
@@ -501,13 +662,13 @@ function rrs_software()
 
 	# install software from repositories
 	# install binaries
-	apt-get install -y xboxdrv curl python-software-properties \
+	$cmd_install_pkg xboxdrv curl python-software-properties \
 	pkg-config software-properties-common dconf-tools jstest-gtk \
 	qjoypad sixad libusb-0.1-4 antimicro bluez getpos unclutter \
-	joydetect
+	joydetect sudo
 
 	#wii motion support
-	apt-get install -y libcwiid1 lswm wmgui wminput
+	$cmd_install_pkg libcwiid1 lswm wmgui wminput
 
 	# call RetroRig's custom deb install for ps3 hotplugging. 
 	# Thankfully our package still works with the Xbox 360 implementation,
@@ -530,15 +691,14 @@ function rrs_software()
 
 	# inject a space to seperate messages?
 	__postMSGs="$__postMSGs For VirtualBox users, please see the wiki under 'Installation' for notes on running RetroRig under a virtual machine! At the minimum, you will need to add a filter for your controller "
-	
+
 	if [[ ! -z $__postMSGs ]]; then
-		dialog --backtitle "LibreGeek.org - RetroRig Setup. Installation folder: $rootdir for user $user" --msgbox "$__postMSGs\n\nSoftware install complete. \
-See debug.log for more details. Continuing on to emulator installs..." 18 60
+		dialog --backtitle "LibreGeek.org - RetroRig Setup. Installation folder: $rootdir for user $user" --msgbox "$__postMSGs\n\nSoftware install complete. See debug.log for more details. Continuing on to emulator installs..." 18 60
 	fi
 
 	chown -R "$user" "$rootdir/logs/install_$now.log.txt"
 	chgrp -R "$user" "$rootdir/logs/install_$now.log.txt"
-	#END
+
 }
 
 function rrs_debug()
@@ -587,7 +747,7 @@ function rrs_debug()
 	h_filechecker "$rootdir/emulators/PPSSPP/ppsspp-0.9.8-SDL-pk64"
 	h_filechecker "/ust/bin/PPSSPPSDL"
 
-	#APT pkg checks
+	# pkg checks
 	echo -e "\nCheck for needed pkgs installed via apt: " >> "$rootdir/logs/debug.log"
 	h_pkgcheck "stella"
 	h_pkgcheck "python-software-properties"
@@ -603,7 +763,7 @@ function rrs_debug()
 	h_pkgcheck "jstest-gtk"
 
    	echo -e "\nEnd of log file" >> "$rootdir/logs/debug.log" >> "$rootdir/logs/debug.log"
-	
+
 	dialog --backtitle "LibreGeek.org - RetroRig Setup. Installation folder: $rootdir for user $	user" --msgbox "Debug log was generated in $rootdir/logs/debug.log. Additional logs can be found in the folder $rootdir/logs/." 10 60 
 
 	#corect permissions
@@ -615,7 +775,7 @@ function rrs_xbmc_patched()
 
 	clear
 	# release the aptitdue hold to install/upgrade RetroRig's XBMC version
-	apt-mark unhold xbmc xbmc-bin
+	$cmd_unhold_pkg xbmc xbmc-bin
 
 	# create autostart for XBMC and place our modified files
 	# Custom script for reboots/hotplugging
@@ -653,26 +813,26 @@ function rrs_xbmc_patched()
 	chmod 755 "/usr/share/applications/startXBMC.sh" 
 
 	# remove old xbmc-bin, install our patched version
-	apt-get remove -y xbmc xbmc-bin
+	$cmd_remove_pkg xbmc xbmc-bin
 
 	# remove old /tmp files if they exist
 	rm -f "/tmp/xbmc_gotham-patched-for-retrorig-patchlevel-*-0trusty.deb"
 	rm -f "/tmp/xbmc-bin_gotham-patched-for-retrorig-patchlevel-*-0trusty.deb"
 
 	#xbmc works fine w/o these librarys, but generates error messages in its log file
-	apt-get install -y libcec2 libcrystalhd3
+	$cmd_install_pkg libcec2 libcrystalhd3
 
 	# release aptitude hold for upgrade/install
-	apt-mark unhold xbmc
+	$cmd_unhold_pkg xbmc
 
 	echo "Installing xbmc"
-	apt-get install -y xbmc
+	$cmd_install_pkg xbmc
 
 	# hold package after install against upgrades
-	apt-mark hold xbmc
+	$cmd_hold_pkg xbmc
 
 	# get SHA1 tag from patched XBMC version
-	sha1=`file /usr/lib/xbmc/xbmc.bin | cut -f 19 -d ' '| cut -f 2 -d '='|cut -f 1 -d ','`
+	sha1=$(file /usr/lib/xbmc/xbmc.bin | cut -f 19 -d ' '| cut -f 2 -d '='|cut -f 1 -d ',')
 
 	# insert SHA1 tag to rescan by replacing the placeholder
 	if [ -f "$scriptdir/XBMC-cfgs/extra/rescan" ]; then
@@ -696,11 +856,11 @@ function rrs_xbmc_patched()
 	update-rc.d rescan defaults
 
 	# start service
-	service rescan start
+	$cmd_rescan_start
 
 	# Tell aptitude to hold our packages to avoid unwanted upgrades
 	# Please refer to the top of this script, where the hold is released for upgrade purposes
-	apt-mark hold xbmc xbmc-bin 
+	$cmd_hold_pkg xbmc xbmc-bin 
 
 	echo "*****"
 	echo "*****"
@@ -732,7 +892,7 @@ function rrs_retrorig_cfgs()
 function rrs_xbmc_cfgs()
 {
 	clear
-	
+
 	# set local vars for this function
 	local gamedb_org="$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/MyGames.db"
 	local gamedb_tmp="/tmp/MyGames.db"
@@ -774,7 +934,7 @@ function rrs_xbmc_cfgs()
 
 	# echo user change
 	echo "The user applied to configuration files was: $user"
-	
+
 	# correct permissions
 	h_correct_perms
 }
@@ -788,7 +948,7 @@ function rrs_done()
 	# Please see commit efeb2bd for legacy code. This message will be 
 	# Removed in due time.
 
-	dialog --backtitle "LibreGeek.org - RetroRig Setup. Installation folder: $rootdir for user $user" --msgbox "Finished main install tasks.\n\nYou now have to copy roms to the roms folders. \nThis can be done via SSH, Samba, or via your graphic folder manager (please see settings menu for more)\n\nAll current config folders used were appended with .old for restoration purposes.\n\n" 18 50
+       	dialog --backtitle "LibreGeek.org - RetroRig Setup. Installation folder: $rootdir for user $user" --msgbox "Finished main install tasks.\n\nYou now have to copy roms to the roms folders. \nThis can be done via SSH, Samba, or via your graphic folder manager (please see settings menu for more)\n\nAll current config folders used were appended with .old for restoration purposes.\n\n" 18 50
 
 	# correct permissions
 	h_correct_perms
@@ -851,8 +1011,10 @@ function rrs_prereq()
 		echo "Attempting to install these now."
 		echo ""
 		sleep 3s
-		apt-get update
-		apt-get install -y git dialog figlet
+		# Update system first
+		$cmd_update_system
+		# fetch needed pkgs
+		$cmd_install_pkg git dialog figlet
 		if [ $? == '0' ]; then
 			echo "Successfully installed 'git/dialog/figlet'." > "$rootdir/logs/prechecks.log"
 			sleep 3s
@@ -901,7 +1063,7 @@ function rrs_reboot()
 	case $response in
 		0)
 		clear
-		reboot
+		$cmd_reboot
 		;;
 
 		1)
@@ -923,7 +1085,8 @@ function rrs_kernel_check()
 	# Please see commit efeb2bd for legacy code. This message will be 
 	# Removed in due time. 
 
-	# System is upgraded during initial install
-	echo rrs_kernel_check > /dev/null
+	# It may be a good idea to put the detection code back in here
+	# in case we actually need to use it for reference
+	echo "" > /dev/null
 
 }
