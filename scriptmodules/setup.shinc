@@ -369,22 +369,101 @@ function rrs_source_syscalls()
 	
 	case $OS_TYPE in
 		Ubuntu)
-			source "$scriptdir/scriptmodules/syscalls-deb.shinc"
-			platform_check="Yes"
-			pkg_manager="apt/aptitude"
+
+			case $OS_RELEASE in
+
+				14.04)
+					source "$scriptdir/scriptmodules/syscalls-deb.shinc"
+					platform_check="Yes"
+					pkg_manager="apt/aptitude"
+					;;
+
+				14.10)
+					source "$scriptdir/scriptmodules/syscalls-deb.shinc"
+					platform_check="Yes"
+					pkg_manager="apt/aptitude"
+					;;
+
+				*)
+
+					# This does not exit the script at this time, but will once 
+					# All proper support distros that work are identifed.
+					echo ""
+					echo "##################### WARNING ######################"
+					echo "Distro release version not supported at this time!"
+					echo "Proceed at your own risk."
+					echo "#####################################################"
+					echo ""
+					sleep 5s
+					#clear
+					#exit
+					;;
+			esac
 			;;
 
 		LinuxMint)
-			source "$scriptdir/scriptmodules/syscalls-deb.shinc"
-			platform_check="Yes"
-			pkg_manager= "apt/aptitude"
+
+			case $OS_RELEASE in
+
+				17)
+					source "$scriptdir/scriptmodules/syscalls-deb.shinc"
+					platform_check="Yes"
+					pkg_manager="apt/aptitude"
+					;;
+
+
+				*)
+
+					# This does not exit the script at this time, but will once 
+					# All proper support distros that work are identifed.
+					echo ""
+					echo "##################### WARNING ######################"
+					echo "Distro release version not supported at this time!"
+					echo "Proceed at your own risk."
+					echo "#####################################################"
+					echo ""
+					sleep 5s
+					#clear
+					#exit
+					;;
+			esac
+
+			;;
+
+		Deepin)
+
+			case $OS_RELEASE in
+
+				2014)
+					source "$scriptdir/scriptmodules/syscalls-deb.shinc"
+					platform_check="Yes"
+					pkg_manager="apt/aptitude"
+					;;
+
+
+				*)
+
+					# This does not exit the script at this time, but will once 
+					# All proper support distros that work are identifed.
+					echo ""
+					echo "##################### WARNING ######################"
+					echo "Distro release version not supported at this time!"
+					echo "Proceed at your own risk."
+					echo "#####################################################"
+					echo ""
+					sleep 5s
+					#clear
+					#exit
+					;;
+			esac
+
 			;;
 
 		*)
 			# This does not exit the script at this time, but will once 
 			# All proper support distros that work are identifed.
 			echo ""
-			echo "#####################################################"
+			echo "##################### WARNING ######################"
 			echo "Distribution/Platform not supported at this time!"
 			echo "Proceed at your own risk."
 			echo "#####################################################"
@@ -399,7 +478,7 @@ function rrs_source_syscalls()
 	echo "Supported Platform? $platform_check"
 	echo "Primary package management system: $pkg_manager"
 	echo ""
-	#sleep 5s
+	sleep 5s
 
 }
 
@@ -472,10 +551,6 @@ function rrs_add_standard_repos()
 
 		LinuxMint)
 
-			#find version of operating system
-			OS_RELEASE_STRING=`lsb_release -a 2>/dev/null|grep "Release"`
-			OS_RELEASE=`echo "$OS_RELEASE_STRING"|cut -f 2 -d ' ' `
-
 			###############################################################
 			# Add our standport Debian repositories for various pkgs
 			###############################################################
@@ -497,10 +572,6 @@ function rrs_add_standard_repos()
 			esac
 		;;
 		Deepin)
-
-			#find version of operating system
-			OS_RELEASE_STRING=`lsb_release -a 2>/dev/null|grep "Release"`
-			OS_RELEASE=`echo "$OS_RELEASE_STRING"|cut -f 2 -d ' ' `
 
 			###############################################################
 			# Add our standport Debian repositories for various pkgs
