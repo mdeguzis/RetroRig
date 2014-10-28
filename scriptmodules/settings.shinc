@@ -222,10 +222,10 @@ if [ "$choices" != "" ]; then
     case $choices in
 
 	1) 
-                #enable auto resoltuion
+		#enable auto resoltuion
 		setParameter "auto resolution" "true"
 		dialog --msgbox "Resolution settings for emulators will automatically be synchronized with XBMC's settings." 8 60
-                return
+		break
 		;;		
 
 	2) 
@@ -301,6 +301,7 @@ if [ "$choices" != "" ]; then
 		rm "$rootdir/logs/res.txt"
                 #disable auto resoltuion
 		setParameter "auto resolution" "false"
+		break
 		;;
 
 	3) 
@@ -345,7 +346,7 @@ if [ "$choices" != "" ]; then
 		#disable auto resoltuion
 		setParameter "auto resolution" "false"
 		#return to menu
-		return
+		break
 		;;  
 	4) 
 		#setting chosen: "1280x1024 (SXGA)  (5:4)"
@@ -389,7 +390,7 @@ if [ "$choices" != "" ]; then
                 #disable auto resoltuion
 		setParameter "auto resolution" "false"
 		#return to menu
-		return
+		break
 		;;
 	5) 
 		#setting chosen: "1366x768  (720p)  (16:9)"
@@ -433,7 +434,7 @@ if [ "$choices" != "" ]; then
                 #disable auto resoltuion
 		setParameter "auto resolution" "false"
 		#return to menu
-		return
+		break
 		;;
 	6) 
 		#setting chosen: "1600x900  (900p)  (16:9)"
@@ -477,7 +478,7 @@ if [ "$choices" != "" ]; then
 		setParameter "auto resolution" "false"
 		h_res_switcher
 		#return to menu
-		return
+		break
 		;;
 	7) 
 		# setting chosen: "1920x1080 (1080p) (16:9)"
@@ -521,7 +522,7 @@ if [ "$choices" != "" ]; then
                 #disable auto resoltuion
 		setParameter "auto resolution" "false"
 		#return to menu
-		return
+		break
 		;;    
 	8) 
 		dialog --infobox  "Setting resolution from user input" 3 40
@@ -577,16 +578,17 @@ if [ "$choices" != "" ]; then
                 #disable auto resoltuion
 		setParameter "auto resolution" "false"
 		#return to menu
-		return
+		break
 		;; 
 	9) 
-		return
+		break
 		;;
 
 	255)
 		# Next two lines for debugging only	
-	   	# dialog --infobox "Esc hit..." 3 14
-	   	# sleep 1s
+		# dialog --infobox "Esc hit..." 3 14
+		# sleep 1s
+		break
 	;;
 
 	esac
@@ -598,8 +600,9 @@ else
 fi
 done
 
-	# correct permissions
-	h_correct_perms
+	if [ ! -f "$home/.config/monitors.xml" ]; then
+		dialog --msgbox "Heads up for dual monitor users! You need to configure your displays via \"Desktop Settings -> Display Settings\" to get dual monitor support working. ($home/.config/monitors.xml not found) " 8 60
+	fi
 
 }
 

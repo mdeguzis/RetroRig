@@ -1,7 +1,7 @@
 RetroRig Project
 ===================================================
 ![alt text](http://i.imgur.com/Irgv0Fx.png "RetroRig")
-###### [Version 0.9.5]
+###### [Version 0.9.7]
 
 RetroRig is shell script to setup a Linux x86_64 system  with several emulators, and XBMC as graphical
 front end.The inspiration for doing this lies almost completely with the RetroPie Project. I wanted to provide
@@ -32,21 +32,21 @@ Thank you for your patience.
 
 ## Warning
 
-RetroRig is meant to be a standalone setup for XBMC on Ubuntu. Soon, RetorRig will use it's own dotfile so you can continue to use your own XBMC implementation. RetroRig now makes use of a custom-patched XBMC binary as well to allow hotplugging for support controllers is possible. It is mainly targeted at folks wishing to repurpose an old physical PC. VirtualBox support exists, (to an extent), but can behave erratcially with emulator speed/framerates and is not advised. I do hope to corrrect some of that in due time, but right now, it is more of an "extra" or a "test bed."
+RetroRig was originally meant to be a standalone setup for XBMC on Ubuntu from bootup to shutdown. If you wish to launch RetroRig on your own, simply remove the autostart entry. RetorRig uses it's own dotfile so you can continue to use your own XBMC implementation. RetroRig now makes use of a custom-patched XBMC binary as well to allow hotplugging for support controllers is possible, as well as proper dual monitor support. It is mainly targeted at folks wishing to repurpose an old physical PC. I do hope to corrrect some of that in due time, but right now, it is more of an "extra" or a "test bed."
 
-It is mainly targeted at folks wishing to repurpose an old physical PC. VirtualBox support exists, 
+It is mainly targeted at folks wishing to repurpose a spare physical PC. VirtualBox support exists, 
 (to an extent), but can behave erratcially with emulator speed/framerates and is not advised. I do
-hope to corrrect some of that in due time, but right now, it is more of an "extra" or a "test bed."
-
-It will overwrite some folders for supported emulators and a few system files. Please see the 
+hope to corrrect some of that in due time, but right now, it is more of an "extra" or a "test bed." 
+RetroRig will overwrite some folders for supported emulators and a few system files. Please see the 
 wiki entries under "Installation," and "Advanced Configuration," or checkout the source code.
 
 ## Some current features include
 
 For all other features and future plans, please see the [wiki](https://github.com/ProfessorKaos64/RetroRig/wiki/Development-and-Features)
 
+* Concentration on a console-like experience from bootup to shutdown
 * No need to install an entire separate distro on your Mint/Debian machine
-* Custom XBMC binary package
+* Custom XBMC, emulator, utilties packages
 * Custom XBMC home screen and button layout
 * Seperate dot file (.retrorig, not .xbmc) so you can have your cake and eat it too!
 * Hotplugging support for supported wireles game controllers
@@ -68,7 +68,7 @@ For all other features and future plans, please see the [wiki](https://github.co
 
 ## Wiki
 
-First, I must direct you to read the wiki on this github page, as it contains extra iformation outside this wiki. 
+First, I must direct you to read the wiki on this github page, as it contains extra information outside this wiki. A large amount of tips, tricks, and how-to information is located on this, all for your benefit.
 https://github.com/ProfessorKaos64/RetroRig/wiki
 
 **Please also note**  
@@ -104,7 +104,7 @@ dpkg -i package_name_version.deb
 retrorig-setup 
 ````
 
-Currently,Only Ubuntu 14.04 LTS is supported, but more will be added in due time! You can perform a `git checkout Beta` to try our Beta branch, but please do so with caution and backup any file before hand!
+The main disitribution target is Ubuntu 14.04 LTS, but support for derivitives is being worked on. For a currernt list of supported platofrms and distributions, see [this](https://github.com/ProfessorKaos64/RetroRig/wiki/Installation#platforms) wiki entry. You can also perform a `git checkout Beta` to try our Beta branch, but please do so with caution and backup any file before hand!
 
 You can also download a zip file or by other means on the github page.
 
