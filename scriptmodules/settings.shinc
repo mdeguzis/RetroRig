@@ -102,7 +102,7 @@ function set_enable_samba()
 	echo "####################################################"
 	echo ""
 	sleep 2s
-	apt-get install -y samba
+	$cmd_install_pkg samba
 	
 	# append samba share parameters
 	echo ""
@@ -126,7 +126,7 @@ function set_enable_samba()
 	chmod 777 -Rv "$rootdir/ROMs"
 
 	# restart services
-	service samba restart
+	$cmd_samba_restart
 
 	# inform user of quick tips and notes
 	dialog --msgbox "The share 'RetroRig_ROMs' has now been added your acessible samba shares. You can access this a number of ways:\n\n1. 'smbclient //test-pc/retrorig_roms -U $user' on the CLI of a terminal window such as bash \n\n2. 'smb://test-pc/retrorig_roms/' from the file manager address bar (Nautilus) \n\n3. Through an alternative GUI client" 15 60
@@ -141,7 +141,7 @@ function set_enable_ssh()
 	echo "Installing ssh services"
 	echo "####################################################"
 	echo ""
-	apt-get install -y openssh-server
+	$cmd_install_pkg openssh-server
 	
 	echo "####################################################"
 	echo "Configuring samba services"
@@ -156,7 +156,7 @@ function set_enable_ssh()
 	#set new port from user input
 	sed -i "s|$ssh_org|Port $ssh_new|g" /etc/ssh/sshd_config
 	#restart ssh service
-	service ssh restart
+	$cmd_ssh_restart
 	#remove temp file
 	rm -f /tmp/set_ssh
 }
@@ -642,4 +642,5 @@ options=(1 "Change Video Plugin"
 	# correct permissions
 	h_correct_perms
 }
+
 

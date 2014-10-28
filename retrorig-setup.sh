@@ -1,12 +1,17 @@
 #!/bin/bash
-#
+############################################################################
 # RetroRig Main Setup Script
 # This is a small script to copy over configuration files for emulators
 # append a "-x" on the end above for debugging if need be
-# Version 0.7.9
+# Version 0.9.7
+#
+# Note: Syscalls are now abstracted!
+# Please see syscalls-<pkg_mgr>.shinc for more.
+#
 # Please report any errors via a pull request
 # You can also reach me on twitter: @N3RD42
 #
+############################################################################
 
 clear
 #set up errmsgs and postmsgs
@@ -173,6 +178,9 @@ else
 fi
 
 # load script modules
+echo "#####################################################"
+echo "Loading script modules"
+echo "#####################################################"
 
 import "$scriptdir/scriptmodules/helpers"
 import "$scriptdir/scriptmodules/configuration"
@@ -180,6 +188,22 @@ import "$scriptdir/scriptmodules/settings"
 import "$scriptdir/scriptmodules/setup"
 import "$scriptdir/scriptmodules/gamepads"
 import "$scriptdir/scriptmodules/emulators"
+echo ""
+
+# DEBUG ONLY!
+# Remove the below comment to double check all modules load
+# sleep 10s
+
+echo "#####################################################"
+echo "Checking compatibility"
+echo "#####################################################"
+echo ""
+
+# Discover platform
+rrs_discover_distro
+
+# Source the correct distro/plaform for syscalls
+rrs_source_syscalls
 
 ######################################
 # Start main script
@@ -361,8 +385,7 @@ Installer" --menu "| Main Menu (v.0.9.5b) | \
 		rrs_gamepad
 		h_emu_user_fixes
 		set_resolution
-		rrs_unity
-		rrs_kernel_check
+		rrs_post_install
 		rrs_done
 		} 2>&1 | tee "$rootdir/logs/install_$now.log.txt"              	
 		chown -R "$user" "$rootdir/logs/install_$now.log.txt"
@@ -427,4 +450,5 @@ Installer" --menu "| Main Menu (v.0.9.5b) | \
     fi
 	done
 clear
+
 

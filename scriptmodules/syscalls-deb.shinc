@@ -1,0 +1,71 @@
+#!/bin/bash
+#
+# RetroRig Debian syscall module
+# This module converts the abstract syscall variable wrappers into
+# Distro-specific actions. This avoids having to write insane
+# amounts of if-statements and lengthening the code even more.
+#
+# Please report any errors via a pull request
+# You can also reach me on twitter: @N3RD42
+#
+# prepare folder structure for emulator, cores, front end, and roms
+
+##################
+# System only
+##################
+
+cmd_reboot="reboot"
+
+##################
+# Packaging
+##################
+
+cmd_install_pkg="apt-get install -y"
+cmd_remove_pkg="apt-get remove -y"
+cmd_autoremove_pkg="apt-get autoremove -y"
+cmd_query_pkg="dpkg-query -s"
+cmd_hold_pkg="apt-mark hold"
+cmd_unhold_pkg="apt-mark unhold"
+cmd_update_system="apt-get update -y"
+cmd_upgrade_system="apt-get upgrade -y"
+cmd_add_repo="add-apt-repository -y"
+
+##################
+# Init
+##################
+# update rescan init
+update_init_rescan="update-rc.d rescan defaults"
+
+
+##################
+# Services
+##################
+
+# sixad
+cmd_sixad_start="service sixad start"
+cmd_sixad_restart="service sixad restart"
+cmd_sixad_stop="service sixad stop"
+#rescan
+cmd_rescan_start="service rescan start"
+cmd_rescan_restart="service rescan restart"
+cmd_rescan_stop="service rescan stop"
+# xboxdrv
+cmd_xboxdrv_start="service xboxdrv start"
+cmd_xboxdrv_restart="service xboxdrv restart"
+cmd_xboxdrv_stop="service xboxdrv stop"
+cmd_remove_xboxdrv="update-rc.d -f xboxdrv remove"
+# samba
+cmd_samba_start="service samba start"
+cmd_samba_restart="service samba restart"
+cmd_samba_stop="service samba stop"
+# ssh
+cmd_ssh_start="service ssh start"
+cmd_ssh_restart="service ssh restart"
+cmd_ssh_stop="service ssh stop"
+
+##################
+# Various
+##################
+cmd_add_32bit_arch="dpkg --add-architecture i386"
+cmd_remove_32bit_arch="dpkg --remove-architecture i386"
+
