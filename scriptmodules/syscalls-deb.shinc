@@ -29,6 +29,7 @@ cmd_unhold_pkg="apt-mark unhold"
 cmd_update_system="apt-get update -y"
 cmd_upgrade_system="apt-get upgrade -y"
 cmd_add_repo="add-apt-repository -y"
+cmd_manual_pkg_install="dpkg -i"
 
 ##################
 # Init
@@ -36,6 +37,15 @@ cmd_add_repo="add-apt-repository -y"
 # update rescan init
 update_init_rescan="update-rc.d rescan defaults"
 
+##################
+# Kernel
+##################
+
+linux_headers_deb="http://kernel.ubuntu.com/~kernel-ppa/mainline/v3.14-trusty/linux-headers-3.14.0-031400_3.14.0-031400.201403310035_all.deb"
+
+linux_headers="http://kernel.ubuntu.com/~kernel-ppa/mainline/v3.14-trusty/linux-headers-3.14.0-031400-generic_3.14.0-031400.201403310035_amd64.deb"
+
+linux_image="http://kernel.ubuntu.com/~kernel-ppa/mainline/v3.14-trusty/linux-image-3.14.0-031400-generic_3.14.0-031400.201403310035_amd64.deb"
 
 ##################
 # Services
