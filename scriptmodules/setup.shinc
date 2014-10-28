@@ -308,181 +308,6 @@ options=(1 "Xbox 360 Controller (wireless)"
 
 		esac
 	done
-	
-	wii_motion_controller_for_dolphin
-	
-}
-
-
-function rrs_post_install()
-{
-
-	# Based on the type of type Desktop Environment
-	# This function targets DE-specific areas for screensavers,
-	# power functions, shortcuts and more.
-
-	# $XDG_CURRENT_DESKTOP will tell you what DE you are using.
-	rrDE=$XDG_CURRENT_DESKTOP
-
-	case $rrDE in
-		Unity)
-
-			# Disable screensaver, XBMC will manage this
-			# Export display to allow gsettings running in terminal window
-			export DISPLAY=:0.0
-			gsettings set org.gnome.desktop.screensaver lock-enabled false
-			gsettings set org.gnome.desktop.screensaver ubuntu-lock-on-suspend false
-			gsettings set org.gnome.desktop.session idle-delay 3600
-
-			# Create Unity launcher icon from existing /usr/share/applications/RetroRig.desktop
-			# This only applies to Unity desktop users.
-			gsettings set com.canonical.Unity.Launcher favorites "$(gsettings get com.canonical.Unity.Launcher favorites | sed "s/, *'RetroRig.desktop' *//g" | sed "s/'RetroRig.desktop' *, *//g" | sed -e "s/]$/, 'RetroRig.desktop'")"
-			;;
-
-		Gnome)
-			# Nothing to see here yet
-			;;
-
-		Cinnamon)
-			# Nothing to see here yet
-			;;			
-
-		*)
-		;;
-	esac
-
-}
-
-function rrs_discover_distro()
-{
-	# OS Distro
-	OS_ID_STRING=$(lsb_release -a 2>/dev/null|grep "Distributor ID")
-	OS_TYPE=$(echo $OS_ID_STRING|cut -f 3 -d ' ')
-
-	# Release
-	OS_RELEASE_STRING=$(lsb_release -a 2>/dev/null|grep "Release")
-	OS_RELEASE=$(echo $OS_RELEASE_STRING | sed s/' '//g | cut -f 2 -d ':')
-}
-
-function rrs_source_syscalls()
-{
-	# Source the correct syscalls for platform
-	# This largely alludes to the default package manager
-	echo "Setting syscalls based on package manager..."
-	
-	case $OS_TYPE in
-		Ubuntu)
-
-			case $OS_RELEASE in
-
-				14.04)
-					source "$scriptdir/scriptmodules/syscalls-deb.shinc"
-					platform_check="Yes"
-					pkg_manager="apt/aptitude"
-					;;
-
-				14.10)
-					source "$scriptdir/scriptmodules/syscalls-deb.shinc"
-					platform_check="Yes"
-					pkg_manager="apt/aptitude"
-					;;
-
-				*)
-
-					# This does not exit the script at this time, but will once 
-					# All proper support distros that work are identifed.
-					echo ""
-					echo "##################### WARNING ######################"
-					echo "Distro release version not supported at this time!"
-					echo "Proceed at your own risk."
-					echo "#####################################################"
-					echo ""
-					sleep 5s
-					#clear
-					#exit
-					;;
-			esac
-			;;
-
-		LinuxMint)
-
-			case $OS_RELEASE in
-
-				17)
-					source "$scriptdir/scriptmodules/syscalls-deb.shinc"
-					platform_check="Yes"
-					pkg_manager="apt/aptitude"
-					;;
-
-
-				*)
-
-					# This does not exit the script at this time, but will once 
-					# All proper support distros that work are identifed.
-					echo ""
-					echo "##################### WARNING ######################"
-					echo "Distro release version not supported at this time!"
-					echo "Proceed at your own risk."
-					echo "#####################################################"
-					echo ""
-					sleep 5s
-					#clear
-					#exit
-					;;
-			esac
-
-			;;
-
-		Deepin)
-
-			case $OS_RELEASE in
-
-				2014)
-					source "$scriptdir/scriptmodules/syscalls-deb.shinc"
-					platform_check="Yes"
-					pkg_manager="apt/aptitude"
-					;;
-
-
-				*)
-
-					# This does not exit the script at this time, but will once 
-					# All proper support distros that work are identifed.
-					echo ""
-					echo "##################### WARNING ######################"
-					echo "Distro release version not supported at this time!"
-					echo "Proceed at your own risk."
-					echo "#####################################################"
-					echo ""
-					sleep 5s
-					#clear
-					#exit
-					;;
-			esac
-
-			;;
-
-		*)
-			# This does not exit the script at this time, but will once 
-			# All proper support distros that work are identifed.
-			echo ""
-			echo "##################### WARNING ######################"
-			echo "Distribution/Platform not supported at this time!"
-			echo "Proceed at your own risk."
-			echo "#####################################################"
-			echo ""
-			sleep 5s
-			#clear
-			#exit
-		;;
-
-	esac
-
-	echo "Supported Platform? $platform_check"
-	echo "Primary package management system: $pkg_manager"
-	echo ""
-	sleep 5s
-
 }
 
 
@@ -1025,7 +850,7 @@ function rrs_xbmc_patched()
 	ln -sf "/usr/share/applications/startXBMC.sh" "/usr/bin/retrorig"
 
 	# update init scripts
-	update-rc.d rescan defaults
+	$update_init_rescan
 
 	# start service
 	$cmd_rescan_start
@@ -1248,7 +1073,7 @@ function rrs_reboot()
 	esac
 }
 
-function rrs_kernel_check()
+rrs_kernel_check()
 {
 
 	# The 3.14 manual kernel upgrade for Ubuntu systems is no longer necessary
