@@ -3,7 +3,7 @@
 # Project RetroRig: https://github.com/ProfessorKaos64/RetroRig
 # This script detects a change on available PS controller. If detected, it notifies XBMC.
 # Author: Jens-Christiansen, aka  beaumanvienna/JC
-# Revision: 2014/06/21, initial version
+# Revision: 2014/10/28, initial version
 
 
 controllerAvailable=`cat /proc/bus/input/devices | grep PLAYSTATION`
@@ -25,7 +25,7 @@ do
     #    # xbmc not running yet
     #    /usr/share/applications/startXBMC.sh
         
-    #    #make sure it knows of the controller just beeing switched on
+    #    #make sure it knows of the controller just being switched on
     #    sleep 5
     #    killall xbmc.bin -SIGUSR1
     #  fi
