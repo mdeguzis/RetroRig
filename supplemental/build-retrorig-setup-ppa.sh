@@ -19,7 +19,7 @@ BASE=0.9.5
 # In this case, this level will be used to denote incremental changes
 # instead of a specific branch for now (beta/master only exist at the
 # momement).
-PL=4.2
+PL=4.3
 
 #choose user
 #user="pk"
@@ -70,7 +70,7 @@ if [ "$user" == "jc" ]; then
 	LAUNCHPAD_PPA="ppa:beauman/retrorig-testing"
 
 	#define uploader, date and time zone for changelog
-	uploader_date="Jens-Christian Lache <jc.lache@web.de>  Sun, 26 Oct 2014 09:30:00 +0100"
+	uploader_date="Jens-Christian Lache <jc.lache@web.de>  Tue, 28 Oct 2014 19:00:00 +0100"
 
 	#define package maintainer for dsc and control file 
 	pkgmaintainer="RetroRig Development Team <jc.lache@gmail.com>"
