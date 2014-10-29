@@ -308,6 +308,9 @@ options=(1 "Xbox 360 Controller (wireless)"
 
 		esac
 	done
+	
+	wii_motion_controller_for_dolphin
+	
 }
 
 
