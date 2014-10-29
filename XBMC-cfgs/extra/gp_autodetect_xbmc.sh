@@ -28,7 +28,7 @@ do
     echo "sending gamepad reconfiguration request"
     killall xbmc.bin -SIGUSR1
     
-    #auto start xbmc for first controller to be switched on
+    #auto start xbmc for first controller being switched on
     if [ "$autostartXBMC_PS3_USB" == "enabled" ]; then
       echo "auto start function"
       autostarted=false
@@ -82,7 +82,7 @@ do
     echo "sending gamepad reconfiguration request"
     killall xbmc.bin -SIGUSR1
   
-    #auto start xbmc for first controller to be switched on
+    #auto start xbmc for first controller being switched on
     if [ "$autostartXBMC_PS3_BT" == "enabled" ]; then
       echo "auto start function"
       autostarted=false
