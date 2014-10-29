@@ -31,7 +31,7 @@ do
         
         export export DISPLAY=:0.0
         echo "auto starting RetroRig for user $user"
-        sudo -u $user /usr/share/applications/startXBMC.sh &
+        sudo -u $user -g $user -s /usr/share/applications/startXBMC.sh &
         autostarted=true
         
       fi
