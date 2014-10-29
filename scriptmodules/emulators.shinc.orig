@@ -170,7 +170,11 @@ function em_install_mess()
 function em_install_gens()
 {
 
+<<<<<<< HEAD
 	# release pkg hold for upgrade/install
+=======
+	# release aptitude hold for upgrade/install
+>>>>>>> 423e998258a746a6bf33be60c41035a5ad2dcead
 	$cmd_unhold_pkg gens
 
         #remove any previously installed version

@@ -829,7 +829,7 @@ RetorRig loads to use the gamepad" 14 60
 
 	# start the xboxdrv service
 	# disable for now, hangs script completion running in background
-	# service xboxdrv start &
+	# $cmd_xboxdrv_start &
 
 	# copy in the gp_autodetect_xbmc.sh template file, and change the gamepad type 
 	# Testing ONLY for gp_autodetect_xbmc.sh.testing
@@ -1378,7 +1378,7 @@ RetorRig loads to use the gamepad" 14 60
 
 	# start the xboxdrv service
 	# disable for now, hangs script completion running in background
-	# service xboxdrv start &
+	# $cmd_xboxdrv_start &
 
 	#####################################################################################
 	# THIS FUNCTION SECTION IS NOT USED AT THE MOMENT, MORE TESTING IS NEEDED!!!
