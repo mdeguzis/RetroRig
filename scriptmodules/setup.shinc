@@ -1141,16 +1141,14 @@ rrs_kernel_check()
 		# cleanup packages
 		rm -f /tmp/linux-headers-3.14*
 		rm -f /tmp/linux-image-3.14*
-		echo "true" > "$scriptdir/logs/kernelUpdate"
+		echo "true" > "$rootdir/logs/kernelUpdate"
 
 	elif [ $user_kernel -ge "$target_kernel" ]; then
 		# Do nothing
 		echo "Kernel 3.14.x or greater found, exiting"
 		sleep 2s
-		echo "false" > "$scriptdir/logs/kernelUpdate"
+		echo "false" > "$rootdir/logs/kernelUpdate"
 	fi
-
-}
 
 }
 
