@@ -10,7 +10,7 @@
 #
 # Author: Jens-Christian, aka  beaumanvienna/JC
 #
-# Revision: 2014/10/29, support for PS3 / USB and auto start XBMC function
+# Revision: 2014/10/30, support for PS3 / USB and auto start XBMC function
 
 autostartXBMC_PS3_USB=enabled
 autostartXBMC_PS3_BT=enabled
