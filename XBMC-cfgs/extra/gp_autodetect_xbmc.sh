@@ -1,15 +1,19 @@
 #!/bin/bash
 
 # Project RetroRig: https://github.com/ProfessorKaos64/RetroRig
-# This script detects a change on available PS controller. If detected, it notifies XBMC.
+#
+# This script detects a change of the amount available PS controller. 
+# If such a change was detected, it notifies XBMC.
+#
+# If enabled, it will start RetroRig automatically 
+# for the first game controller being switched on.
+#
 # Author: Jens-Christian, aka  beaumanvienna/JC
+#
 # Revision: 2014/10/29, support for PS3 / USB and auto start XBMC function
 
 autostartXBMC_PS3_USB=enabled
-#autostartXBMC_PS3_USB=disabled
-
 autostartXBMC_PS3_BT=enabled
-#autostartXBMC_PS3_BT=disabled
 
 PS3_BT_controllerAvailable=`cat /proc/bus/input/devices | grep "PLAYSTATION(R)3 Controller ("`
 PS3_USB_controllerAvailable=`lsusb | grep "PlayStation 3 Controller"`
@@ -24,6 +28,13 @@ do
   PS3_USB_controllerAvailable=`lsusb | grep "PlayStation 3 Controller"`
   if [ "$PS3_USB_controllerAvailable" != "$oldPS3_USB_controllerAvailable" ]; then
     echo "[begin:] PS3 / USB controller changed"
+    
+    #first attempt
+    service xboxdrv restart
+    echo "sending gamepad reconfiguration request"
+    killall xbmc.bin -SIGUSR1
+    
+    #second attempt
     service xboxdrv restart
     echo "sending gamepad reconfiguration request"
     killall xbmc.bin -SIGUSR1
@@ -32,23 +43,37 @@ do
     if [ "$autostartXBMC_PS3_USB" == "enabled" ]; then
       echo "auto start function"
       autostarted=false
-      if [ -z "$oldPS3_USB_controllerAvailable" ]; then
-        #first controller was switched on
-        echo "first controller was switched on"
+      setup_running=`ps ax|grep retrorig-setup| grep -v grep`
       
-        if [ -z "$(ps ax|grep xbmc.bin|grep -v grep)" ]; then
-          # xbmc not running yet
-          echo "xbmc not running yet"
+      if [ -z "$setup_running" ]; then
+        #retrorig-setup is not running
+        echo "retrorig-setup is not running"
         
-          # get user name
-          user=`ps aux |grep "/bin/dbus-daemon --config-file"|grep -v grep|cut -f 1 -d " "`
+        if [ -z "$oldPS3_USB_controllerAvailable" ]; then
+          #first controller was switched on
+          echo "first controller was switched on"
+          
+          xbmc_running=`ps ax|grep xbmc.bin|grep -v grep`
+          if [ -z "$xbmc_running" ]; then
+            # xbmc not running yet
+            echo "xbmc not running yet"
         
-          export export DISPLAY=:0.0
-          echo "auto starting RetroRig for user $user"
-          sudo -u $user -g $user -s /usr/share/applications/startXBMC.sh &
-          autostarted=true
+            # get user name
+            user=`ps aux |grep "/bin/dbus-daemon --config-file"|grep -v grep|cut -f 1 -d " "`
         
+            export export DISPLAY=:0.0
+            echo "auto starting RetroRig for user $user"
+            sudo -u $user -g $user -s /usr/share/applications/startXBMC.sh &
+            autostarted=true
+            
+          else
+            echo "RetroRig *not* started automatically: XBMC already running, xbmc_running="$xbmc_running
+          fi
+        else
+          echo "RetroRig *not* started automatically: first controller not switched on, oldPS3_USB_controllerAvailable="$oldPS3_USB_controllerAvailable
         fi
+      else
+        echo "RetroRig *not* started automatically: setup_running="$setup_running
       fi
     
       #diagnostic message
@@ -59,9 +84,8 @@ do
         else
           echo "attempt to start RetroRig failed"
         fi
-      else
-        echo "RetroRig *not* started automatically (either first controller not switched on or xbmc already running)"
       fi
+      
     else
       echo "auto start function disabled"
     fi
@@ -69,7 +93,7 @@ do
     #Avoid starting XBMC after USB is unplugged.
     #For some reasons the game controller connects via
     #BT after being unplugged from USB
-    autostartXBMC_PS3_BT=disabled
+    autostartXBMC_PS3_BT=enabled
     echo "[end:] PS3 / USB controller changed"
   fi
   
@@ -86,23 +110,36 @@ do
     if [ "$autostartXBMC_PS3_BT" == "enabled" ]; then
       echo "auto start function"
       autostarted=false
-      if [ -z "$oldPS3_BT_controllerAvailable" ]; then
-        #first controller was switched on
-        echo "first controller was switched on"
+      setup_running=`ps ax|grep retrorig-setup| grep -v grep`
       
-        if [ -z "$(ps ax|grep xbmc.bin|grep -v grep)" ]; then
-          # xbmc not running yet
-          echo "xbmc not running yet"
+      if [ -z "$setup_running" ]; then
+        #retrorig-setup is not running
+        echo "retrorig-setup is not running"
         
-          # get user name
-          user=`ps aux |grep "/bin/dbus-daemon --config-file"|grep -v grep|cut -f 1 -d " "`
+        if [ -z "$oldPS3_BT_controllerAvailable" ]; then
+          #first controller was switched on
+          echo "first controller was switched on"
+      
+          xbmc_running=`ps ax|grep xbmc.bin|grep -v grep`
+          if [ -z "$xbmc_running" ]; then
+            # xbmc not running yet
+            echo "xbmc not running yet"
         
-          export export DISPLAY=:0.0
-          echo "auto starting RetroRig for user $user"
-          sudo -u $user -g $user -s /usr/share/applications/startXBMC.sh &
-          autostarted=true
+            # get user name
+            user=`ps aux |grep "/bin/dbus-daemon --config-file"|grep -v grep|cut -f 1 -d " "`
         
+            export export DISPLAY=:0.0
+            echo "auto starting RetroRig for user $user"
+            sudo -u $user -g $user -s /usr/share/applications/startXBMC.sh &
+            autostarted=true
+          else
+            echo "RetroRig *not* started automatically: XBMC already running, xbmc_running="$xbmc_running
+          fi
+        else
+          echo "RetroRig *not* started automatically: first controller not switched on, oldPS3_BT_controllerAvailable="$oldPS3_BT_controllerAvailable
         fi
+      else
+        echo "RetroRig *not* started automatically: setup_running="$setup_running
       fi
     
       #diagnostic message
@@ -113,9 +150,8 @@ do
         else
           echo "attempt to start RetroRig failed"
         fi
-      else
-        echo "RetroRig *not* started automatically (either first controller not switched on or xbmc already running)"
       fi
+      
     else
       echo "auto start function disabled"
     fi

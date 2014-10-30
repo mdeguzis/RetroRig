@@ -310,6 +310,7 @@ options=(1 "Xbox 360 Controller (wireless)"
 	done
 	
 	wii_motion_controller_for_dolphin
+	enable_autostart_RetroRig
 	
 }
 

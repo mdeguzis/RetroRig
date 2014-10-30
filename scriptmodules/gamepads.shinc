@@ -255,7 +255,6 @@ function gp_ps3_blu_main()
 		ps3_set_ctrl_assignments
 		ps3_set_emulator_ids
 		dialog --msgbox "Pairing of Player 1 Controller complete" 5 43 
-		sleep 5s
 		;;
 
 		2)
@@ -505,6 +504,59 @@ function ps3_set_emulator_ids()
 
 }
 
+function enable_autostart_RetroRig()
+{
+	####################################################################
+	#
+	# Function Description:
+	# 
+	# enable / disable auto start function for RetroRig
+	#
+	#################################################################### 
+
+	clear
+	
+	PS3_USB=$(grep -m 1 -Ee "autostartXBMC_PS3_USB" "/usr/share/applications/gp_autodetect_xbmc.sh")
+	PS3_BT=$(grep -m 1 -Ee "autostartXBMC_PS3_BT" "/usr/share/applications/gp_autodetect_xbmc.sh")
+	
+	#default is disabled
+	autostart=disabled
+	
+	dialog --title "Confirm yes/no" \
+	--backtitle "Auto Start RetroRig" \
+	--yesno "Do you want to have RetroRig started automatically for the first gamepad being switch on? (Currently only for PS3 controller available)"  6 60
+	# Get exit status
+	# 0 means user hit [yes] button.
+	# 1 means user hit [no] button.
+	# 255 means user hit [Esc] key.
+	response=$?
+	case $response in
+		0)
+			autostart=enabled
+		;;
+
+		1)
+			autostart=disabled
+		;;
+
+		255)
+			autostart=disabled
+		;;
+	esac
+	
+	if [ "$autostart" == "enabled" ]; then
+		sed -i "s|$PS3_USB|autostartXBMC_PS3_USB=enabled|g" "/usr/share/applications/gp_autodetect_xbmc.sh"
+		sed -i "s|$PS3_BT|autostartXBMC_PS3_BT=enabled|g" "/usr/share/applications/gp_autodetect_xbmc.sh"
+	else
+		sed -i "s|$PS3_USB|autostartXBMC_PS3_USB=disabled|g" "/usr/share/applications/gp_autodetect_xbmc.sh"
+		sed -i "s|$PS3_BT|autostartXBMC_PS3_BT=disabled|g" "/usr/share/applications/gp_autodetect_xbmc.sh"
+	fi
+	
+	clear
+	service rescan restart
+	sleep 2
+}
+
 function wii_motion_controller_for_dolphin()
 {
 	####################################################################
@@ -544,8 +596,6 @@ function wii_motion_controller_for_dolphin()
 	esac
 
 	sed -i "s|PLAYER_SRC|$src|g" "$config_home/.dolphin-emu/Config/WiimoteNew.ini"
-
-	sleep 2s
 }
 
 function ps3_pair_blu()
@@ -846,6 +896,7 @@ RetorRig loads to use the gamepad" 14 60
 	# Let the user know about reboot
 	dialog --msgbox "Please reboot to fully enable the controller!"  5 60
 
+	sixad --boot-no
 }
 
 function gp_x360_wireless()
@@ -1122,6 +1173,8 @@ RetorRig loads to use the gamepad" 14 60
 
 	# Let the user know about reboot
 	dialog --msgbox "Please reboot to fully enable the controller(s)."  5 52
+	
+	sixad --boot-no
 }
 
 function gp_x360_usb()
@@ -1399,4 +1452,5 @@ RetorRig loads to use the gamepad" 14 60
 	dialog --msgbox "Using wired controllers, the pairing is in sequence. If you \
 received the wrong LED, unplug and plug the USB cable back in until you get the correct LED number. Please reboot to fully enable the controller"  10 40
 
+	sixad --boot-no
 }
