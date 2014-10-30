@@ -56,11 +56,11 @@ h_clean_gamepad()
 	rm -f /etc/default/xboxdrv
 
 	# PS3 controller
-	service sixad stop
+	$cmd_sixad_stop
 
 	# clean init scripts (rescan service shouldn't need cleaned right now)
 	# If it is required later, it will fall here.
-	update-rc.d -f xboxdrv remove
+	$cmd_remove_xboxdrv
 
 	# XBMC
 	rm -f "$xbmc_home/userdata/keymaps/keyboard.xml"
@@ -1045,21 +1045,22 @@ function h_pkgcheck()
 function h_update_git() 
 {
 
-echo "Fetching latest version of the RetroRig Setup Script."
-pushd "$rootdir"
+	echo "Fetching latest version of the RetroRig Setup Script."
+	pushd "$rootdir"
 
-if [[ ! -d ".git" ]]; then
-	dialog --backtitle "LibreGeek.org - RetroRig Setup." --msgbox "Cannot find direcotry 	'.git'. Please clone the RetroRig setup script via \
-	'git clone https://github.com/ProfessorKaos64/RetroRig'" 20 60
+	if [[ ! -d ".git" ]]; then
+		dialog --backtitle "LibreGeek.org - RetroRig Setup." --msgbox "Cannot find direcotry 	'.git'. Please clone the RetroRig setup script via \
+		'git clone https://github.com/ProfessorKaos64/RetroRig'" 20 60
+		popd
+		return
+	fi
+	git pull
+	#pause for quick review
+	sleep 3s
 	popd
-	return
-fi
-git pull
-#pause for quick review
-sleep 3s
-popd
 
-dialog --backtitle "LibreGeek.org - RetroRig Setup." --msgbox "Fetched the latest version of the RetroRig repository. Please exit and restart the script." 7 60 
+	dialog --backtitle "LibreGeek.org - RetroRig Setup." --msgbox "Fetched the latest version of the RetroRig repository. Please exit and restart the script." 7 60 
+
 }
 
 
@@ -1075,3 +1076,80 @@ function h_upgrade_system()
 
 }
 
+h_kernel_check()
+{
+
+	# The 3.14 manual kernel upgrade for Ubuntu systems is no longer necessary
+	# This is confirmed to be fixed since linux: 3.13.0-38.65
+	# Confirmed to be fine in current 3.13.0-37-generic.
+	# Please see commit efeb2bd for legacy code. This message will be 
+	# Removed in due time. 
+
+	# It may be a good idea to keep the detection code back in here
+	# in case we actually need to use it for reference:
+
+
+	##################################################################
+	# related documentation as to why this kernel upgrade is done:
+	#
+	# hid-sony kernel module regression (now fixed):
+	# https://bugs.launchpad.net/ubuntu/+source/linux/+bug/1326725
+	#
+	# PPA Page:
+	# http://kernel.ubuntu.com/~kernel-ppa/mainline/v3.14-trusty/
+	#
+	# WARNING:
+	# Canonical does not recommend updating your Linux kernel to other
+	# versions other than the ones provided on official channels. This
+	# is not a totally safe procedure and you might have problems
+	# afterwards, even system failures or applications not working
+	# properly. On the other hand, you might get better performance
+	# from your system.
+	#
+	##################################################################
+
+	clear
+	# alternatively: a=$(uname -r); user_kernel=${a//[^0-9]}
+	# Get user's current kernel. We only need the 3.14.0 digits
+	# The rest can be different between kernels and is not needed
+	# To determine if we are on 3.14.x / 3.14.x.000000
+	user_kernel=$(uname -r | awk -F'[^0-9]*' '{print $1$2$3}')
+	echo "user's kernel is: $user_kernel"
+	sleep 2s
+
+	target_kernel="3140"
+	echo "Target kernel is: $target_kernel"
+	sleep 2s
+
+	# Check if 3.14.x exists
+	if [ $user_kernel -lt "$target_kernel" ]; then
+		echo "Kernel 3.14.x not found, installing"
+		sleep 5s
+		wget --tries=50 -P /tmp $linux_headers_deb
+		wget --tries=50 -P /tmp $linux_headers
+		wget --tries=50 -P /tmp $linux_image
+		cd /tmp
+
+		$cmd_manual_pkg_install $linux_headers_deb
+		$cmd_manual_pkg_install $linux_headers
+		$cmd_manual_pkg_install $linux_image
+
+		# Hold the kernel packages so the kernel is not upgrade by accident
+		# Commented out for testing some errors with an old mednafen pkg
+		#sudo aptitude hold linux-image-`uname -r`
+		# inform user of what was done
+
+		dialog --msgbox "Upgrading the kernel to 3.14.0-031400-generic is complete. The packages 'linux-generic linux-headers-generic linux-image-generic' have been held to avoid falling back to a regressed kernel (sony-hid). If you wish to change your kernel, please run the following command in the terminal:\n\n'sudo apt-mark unhold linux-generic linux-headers-generic linux-image-generic'" 14 60
+		# cleanup packages
+		rm -f /tmp/linux-headers-3.14*
+		rm -f /tmp/linux-image-3.14*
+		echo "true" > "$scriptdir/logs/kernelUpdate"
+
+	elif [ $user_kernel -ge "$target_kernel" ]; then
+		# Do nothing
+		echo "Kernel 3.14.x or greater found, exiting"
+		sleep 2s
+		echo "false" > "$scriptdir/logs/kernelUpdate"
+	fi
+
+}
