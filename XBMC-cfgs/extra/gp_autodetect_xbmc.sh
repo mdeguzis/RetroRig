@@ -2,7 +2,7 @@
 
 # Project RetroRig: https://github.com/ProfessorKaos64/RetroRig
 #
-# This script detects a change of the amount available PS controller. 
+# This script detects a change of the amount of available PS controller. 
 # If such a change was detected, it notifies XBMC.
 #
 # If enabled, it will start RetroRig automatically 
