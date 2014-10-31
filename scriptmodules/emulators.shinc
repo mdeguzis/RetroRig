@@ -25,6 +25,10 @@ function em_install_yabause()
 
 function em_install_pcsx2()
 {
+
+	#prerequisites
+	$cmd_install_pkg libportaudio2:i386 libjack-jackd2-0:i386
+	
 	echo "Installing Playstation 2 emulator PCSX2"
 	$cmd_install_pkg pcsx2
 	# Unstable version still needs testing:
