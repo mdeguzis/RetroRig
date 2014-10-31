@@ -356,6 +356,14 @@ function rrs_post_install()
 
 function rrs_discover_distro()
 {
+
+	# Users that may run this on a non-Linux OS:
+	UNAME=`uname`
+	if [ "$UNAME" != "Linux" ]; then
+	   echo "Error: Unsupported Operating System"
+	   exit 1
+	fi
+
 	# OS Distro
 	OS_ID_STRING=$(lsb_release -a 2>/dev/null|grep "Distributor ID")
 	OS_TYPE=$(echo $OS_ID_STRING|cut -f 3 -d ' ')
@@ -363,6 +371,17 @@ function rrs_discover_distro()
 	# Release
 	OS_RELEASE_STRING=$(lsb_release -a 2>/dev/null|grep "Release")
 	OS_RELEASE=$(echo $OS_RELEASE_STRING | sed s/' '//g | cut -f 2 -d ':')
+
+	# Arch
+	case $(uname -m) in
+	*64)
+		echo "64-bit"
+		;;
+	*)
+		echo "32-bit"
+		;;
+	esac
+
 }
 
 function rrs_source_syscalls()
