@@ -553,7 +553,7 @@ function enable_autostart_RetroRig()
 	fi
 	
 	clear
-	service rescan restart
+	$cmd_rescan_restart
 	sleep 2
 }
 
