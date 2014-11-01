@@ -459,46 +459,47 @@ function ps3_set_emulator_ids()
 	# Be necessary
  
 	if [ $n == "1" ]; then
+		
 		i=$((device_index_PS3+0))
-
 		# Dolphin
 		dolphin_MAC_BLU=$(joydetect /dev/input/js$i | awk -F'[^:[a-zA-Z0-9]*' '{print $6}')
 		# Stella (supports only 2 players )
 		Stella_MAC_BLU=$(joydetect /dev/input/js$i | awk -F'[^:[a-zA-Z0-9]*' '{print $6}')
-		sed -i "s|p1_stella_MAC_temp|$Stella_MAC_BLU|g" "$config_home/.stella/stellarc"
 
 	elif [ $n == "2" ]; then
+		
 		i=$((device_index_PS3+1))
-
 		# Dolphin
 		dolphin_MAC_BLU=$(joydetect /dev/input/js$i | awk -F'[^:[a-zA-Z0-9]*' '{print $6}')
 		# Stella (supports only 2 players )
 		Stella_MAC_BLU=$(joydetect /dev/input/js$i | awk -F'[^:[a-zA-Z0-9]*' '{print $6}')
-		sed -i "s|p2_stella_MAC_temp|$Stella_MAC_BLU|g" "$config_home/.stella/stellarc"
 
 	elif [ $n == "3" ]; then
-	        i=$((device_index_PS3+2))
-
+	        
+		i=$((device_index_PS3+2))
 		# Dolphin
 		dolphin_MAC_BLU=$(joydetect /dev/input/js$i | awk -F'[^:[a-zA-Z0-9]*' '{print $6}')
 
 	elif [ $n == "4" ]; then
+		
 		i=$((device_index_PS3+3))
-
 		# Dolphin
 		dolphin_MAC_BLU=$(joydetect /dev/input/js$i | awk -F'[^:[a-zA-Z0-9]*' '{print $6}')
 
 	else
-		echo "Error settings MAC/ID for emulator"
+		echo "Error setting MAC/ID for emulator"
 
 	fi
 
 	echo -e "Controller ID/MAC Address applied to the Dolphin emulator Controller $n was:\n$dolphin_MAC_BLU"
 	echo -e "\nController ID/MAC Address applied to the Stella emulator Controller $n was:\n$Stella_MAC_BLU"
 
-	# Assign controller ID
+	# Assign controller ID for Dolphin
 	sed -i "s|MAC_TEMP_$n|$dolphin_MAC_BLU|g" "$config_home/.dolphin-emu/Config/GCPadNew.ini"
 	sed -i "s|MAC_TEMP_$n|$dolphin_MAC_BLU|g" "$config_home/.dolphin-emu/Config/WiimoteNew.ini"
+
+	# Assign controller ID for Stella
+	sed -i "s|MAC_TEMP_$n|$Stella_MAC_BLU|g" "$config_home/.stella/stellarc"
 	
 	sleep 2
 
