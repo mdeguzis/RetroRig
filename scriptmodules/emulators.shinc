@@ -181,7 +181,7 @@ function em_install_gens()
 	$cmd_remove_pkg gens
 
 	echo "Installing Gens Sega CD/32X emulator"
-	$cmd_pkg_install gens
+	$cmd_install_pkg gens
 
         # deprecated: installation from libregeek.org:
 	#wget --tries=50 -P /tmp "http://www.libregeek.org/RetroRig/Ubuntu-Trusty/emulators/gens//Gens_2.16.7_i386.deb"
