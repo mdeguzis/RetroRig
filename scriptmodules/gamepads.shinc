@@ -524,7 +524,7 @@ function enable_autostart_RetroRig()
 	
 	dialog --title "Confirm yes/no" \
 	--backtitle "Auto Start RetroRig" \
-	--yesno "Do you want to have RetroRig started automatically for the first gamepad being switch on? (Currently only for PS3 controller available)"  6 60
+	--yesno "Do you want to have RetroRig started automatically for the first gamepad being switch on? (Only PS3 ctrl.)"  6 60
 	# Get exit status
 	# 0 means user hit [yes] button.
 	# 1 means user hit [no] button.
