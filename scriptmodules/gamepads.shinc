@@ -725,7 +725,7 @@ function gp_ps3_usb()
 	# inform user that you must have controller connected or restart
 	dialog --msgbox "The xboxdrv userland module detects the number of USB PS3 controllers connected \
 when it starts. Therefore, we must specify how many you have connected or want to use. \
-You must reboot to have these changes take effect. If you tell xboxdrv I have 3 controllers, when you only have one, \
+If you tell xboxdrv I have 3 controllers, when you only have one, \
 the service may fail to start correctly.\n\nPlease see /etc/default/xboxdrv for more. Press the PS Button after \
 RetorRig loads to use the gamepad" 14 60
 
@@ -892,9 +892,6 @@ RetorRig loads to use the gamepad" 14 60
 
 	# correct permissions since we install using sudo access
 	h_correct_perms
-
-	# Let the user know about reboot
-	dialog --msgbox "Please reboot to fully enable the controller!"  5 60
 
 	sixad --boot-no
 }
