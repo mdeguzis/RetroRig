@@ -308,10 +308,12 @@ options=(1 "Xbox 360 Controller (wireless)"
 
 		esac
 	done
-
+	
 	wii_motion_controller_for_dolphin
-
+	enable_autostart_RetroRig
+	
 }
+
 
 function rrs_post_install()
 {

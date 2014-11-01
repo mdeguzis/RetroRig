@@ -19,7 +19,7 @@ BASE=0.9.5
 # In this case, this level will be used to denote incremental changes
 # instead of a specific branch for now (beta/master only exist at the
 # momement).
-PL=4.2
+PL=4.5
 
 #choose user
 #user="pk"
@@ -41,6 +41,9 @@ if [ "$user" == "pk" ]; then
 	#define upload target
 	LAUNCHPAD_PPA="ppa:mdeguzis/retrorig"
 	#LAUNCHPAD_PPA="ppa:mdeguzis/pkg-testing"
+	
+	#changed in package
+	CHANGE_TEXT="add comments here"
 
 	#define uploader, date and time zone for changelog
 	uploader_date="Michael DeGuzis <mdeguzis@gmail.com>  Sun, 26 Oct 2014 00:00:00 -0300"
@@ -69,8 +72,11 @@ if [ "$user" == "jc" ]; then
 	#define upload target
 	LAUNCHPAD_PPA="ppa:beauman/retrorig-testing"
 
+	#changed in package
+	CHANGE_TEXT="PS3 controller reworked (js device index bug, auto start function and USB hotplug support)"
+
 	#define uploader, date and time zone for changelog
-	uploader_date="Jens-Christian Lache <jc.lache@web.de>  Sun, 26 Oct 2014 09:30:00 +0100"
+	uploader_date="Jens-Christian Lache <jc.lache@web.de>  Tue, 31 Oct 2014 23:00:00 +0100"
 
 	#define package maintainer for dsc and control file 
 	pkgmaintainer="RetroRig Development Team <jc.lache@gmail.com>"
@@ -92,7 +98,10 @@ echo ""
 echo "user is: "$user
 echo "package maintainer is: "$pkgmaintainer
 echo ""
-echo "version: *** "$PRE.$BASE.$PL" *** from "$source_reprository", branch "$BRANCH
+echo "version: *** "$PRE:$BASE.$PL" *** from "$source_reprository", branch "$BRANCH
+echo ""
+echo "changed: "$CHANGE_TEXT
+echo ""
 echo "uploading to: "$LAUNCHPAD_PPA
 echo ""
 echo "Did you adapt debian/changelog accordingly?"
@@ -194,6 +203,7 @@ echo "changelog"
 cp ~/RetroRig/supplemental/retrorig-setup/changelog debian/
 sed -i "s|version_placeholder|$PRE:$BASE.$PL|g" debian/changelog
 sed -i "s|uploader_date|$uploader_date|g" debian/changelog
+sed -i "s|changelog_text|$CHANGE_TEXT|g" debian/changelog
 
 echo "control"
 cp ~/RetroRig/supplemental/retrorig-setup/control debian/
