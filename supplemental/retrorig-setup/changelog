@@ -4,6 +4,12 @@ retrorig-setup (version_placeholder) trusty; urgency=medium
 
  -- uploader_date
  
+retrorig-setup (0:0.9.5.4.5) trusty; urgency=medium
+
+  * PS3 controller reworked (js device index bug, auto start function and USB hotplug support)
+
+ -- Jens-Christian Lache <jc.lache@web.de>  Tue, 31 Oct 2014 23:00:00 +0100
+ 
 retrorig-setup (0:0.9.5.4.4) trusty; urgency=medium
 
   * PS3 controller reworked (js device index bug, auto start function and USB hotplug support)
