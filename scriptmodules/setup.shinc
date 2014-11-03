@@ -399,12 +399,14 @@ function rrs_source_syscalls()
 					source "$scriptdir/scriptmodules/syscalls-deb.shinc"
 					platform_check="Yes"
 					pkg_manager="apt/aptitude"
+					init_system="upstart"
 					;;
 
 				14.10)
 					source "$scriptdir/scriptmodules/syscalls-deb.shinc"
 					platform_check="Yes"
 					pkg_manager="apt/aptitude"
+					init_system="upstart"
 					;;
 
 				*)
@@ -432,6 +434,7 @@ function rrs_source_syscalls()
 					source "$scriptdir/scriptmodules/syscalls-deb.shinc"
 					platform_check="Yes"
 					pkg_manager="apt/aptitude"
+					init_system="upstart"
 					;;
 
 
@@ -461,6 +464,7 @@ function rrs_source_syscalls()
 					source "$scriptdir/scriptmodules/syscalls-deb.shinc"
 					platform_check="Yes"
 					pkg_manager="apt/aptitude"
+					init_system="upstart"
 					;;
 
 
