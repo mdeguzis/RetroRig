@@ -34,7 +34,9 @@ Thank you for your patience.
 
 RetroRig was originally meant to be a standalone setup for XBMC on Ubuntu from bootup to shutdown. If you wish to launch RetroRig on your own, simply remove the autostart entry. RetorRig uses it's own dotfile so you can continue to use your own XBMC implementation. RetroRig now makes use of a custom-patched XBMC binary as well to allow hotplugging for support controllers is possible, as well as proper dual monitor support. It is mainly targeted at folks wishing to repurpose an old physical PC. I do hope to corrrect some of that in due time, but right now, it is more of an "extra" or a "test bed."
 
-It is mainly targeted at folks wishing to repurpose a spare physical PC. VirtualBox support exists, 
+RetroRig implements a separated ".xbmc" configuration folder, however, we do not have separated xbmc itself. RetroRig will upgrade XBMC to the latest Helix (Now called Kodi). It is paramount to check in advance, if all your regular xbmc plugins, skins, etc. still work under Helix. 
+
+This is mainly targeted at folks wishing to repurpose a spare physical PC. VirtualBox support exists, 
 (to an extent), but can behave erratcially with emulator speed/framerates and is not advised. I do
 hope to corrrect some of that in due time, but right now, it is more of an "extra" or a "test bed." 
 RetroRig will overwrite some folders for supported emulators and a few system files. Please see the 
