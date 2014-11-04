@@ -413,13 +413,9 @@ function rrs_source_syscalls()
 
 					# This does not exit the script at this time, but will once 
 					# All proper support distros that work are identifed.
-					echo ""
-					echo "##################### WARNING ######################"
-					echo "Distro release version not supported at this time!"
-					echo "Proceed at your own risk."
-					echo ""
 					platform_check="No"
 					pkg_manager="N/A"
+					init_system="N/A"
 					#clear
 					#exit
 					;;
@@ -442,13 +438,9 @@ function rrs_source_syscalls()
 
 					# This does not exit the script at this time, but will once 
 					# All proper support distros that work are identifed.
-					echo ""
-					echo "##################### WARNING ######################"
-					echo "Distro release version not supported at this time!"
-					echo "Proceed at your own risk."
-					echo "" 
 					platform_check="No"
 					pkg_manager="N/A"
+					init_system="N/A"
 					#clear
 					#exit
 					;;
@@ -472,13 +464,9 @@ function rrs_source_syscalls()
 
 					# This does not exit the script at this time, but will once 
 					# All proper support distros that work are identifed.
-					echo ""
-					echo "##################### WARNING ######################"
-					echo "Distro release version not supported at this time!"
-					echo "Proceed at your own risk."
-					echo ""
 					platform_check="No"
 					pkg_manager="N/A"
+					init_system="N/A"
 					#clear
 					#exit
 					;;
@@ -489,13 +477,9 @@ function rrs_source_syscalls()
 		*)
 			# This does not exit the script at this time, but will once 
 			# All proper support distros that work are identifed.
-			echo ""
-			echo "##################### WARNING ######################"
-			echo "Distribution/Platform not supported at this time!"
-			echo "Proceed at your own risk."
-			echo ""
 			platform_check="No"
 			pkg_manager="N/A"
+			init_system="N/A"
 			#clear
 			#exit
 		;;
@@ -505,6 +489,7 @@ function rrs_source_syscalls()
 	echo "Supported Platform? $platform_check"
 	echo "Distro: $OS_TYPE"
 	echo "Release: $OS_RELEASE"
+	echo "Defautl init system: $init_system"
 	echo "Primary package management system: $pkg_manager"
 	echo ""
 	echo "#####################################################"
