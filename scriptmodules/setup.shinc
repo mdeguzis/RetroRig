@@ -84,7 +84,8 @@ function rrs_prepareFolders()
 	pathlist+=("$rootdir/Saves/Atari 2600")
 	pathlist+=("$rootdir/Saves/Atari Lynx")
 	pathlist+=("$rootdir/Saves/MAME")
-	pathlist+=("$rootdir/Saves/dolphin-emu")
+	pathlist+=("$rootdir/Saves/dolphin-emu/GC")
+	pathlist+=("$rootdir/Saves/dolphin-emu/Wii")
 	pathlist+=("$rootdir/Saves/mupen64plus")
 	pathlist+=("$rootdir/Saves/mednafen")
 	pathlist+=("$rootdir/Saves/GensGS")
@@ -101,9 +102,8 @@ function rrs_prepareFolders()
 	pathlist+=("$home/.retrorig")
 	pathlist+=("$config_home/.qjoypad3")
 	pathlist+=("$config_home/.config/antimicro")
-	pathlist+=("$config_home/.dolphin-emu/Config")
-
-	# XBMC's path is set to our .retrorig directory, on with the rest:
+	pathlist+=("$config_home/.dolphin-emu/GC/Config")
+	pathlist+=("$config_home/.dolphin-emu/Wii/Config")
 	pathlist+=("$config_home/.config/mupen64plus")
 	pathlist+=("$config_home/.config/ppsspp/PSP/SYSTEM")
 	pathlist+=("$config_home/.mame/cfg")
@@ -127,13 +127,8 @@ function rrs_prepareFolders()
 	pathlist+=("$rootdir/BIOS/Mednafen")
 	pathlist+=("$rootdir/BIOS/PCSX2")
 
-	#folder for savestates
-	pathlist+=("$home/.retrorig/.dolphin-emu")
-	pathlist+=("$home/.retrorig/.gens")
-	pathlist+=("$home/.retrorig/.mednafen")
-	pathlist+=("$home/.retrorig/.config/mupen64plus")
-	pathlist+=("$home/.retrorig/.config/pcsx2")
-	pathlist+=("$home/.retrorig/.config/ppsspp/ppsspp")
+	# folder for savestates 
+	# Moved if statements below to backup folders
 
 	#Configs (not needed at the moment)
 	# pathlist+=("$rootdir/Configs")
@@ -155,8 +150,9 @@ function rrs_prepareFolders()
 	#backup existing state saves, if a backup folder does not exist, and the save state folder a real directory is
 	if [ ! -d "$home/.retrorig/.dolphin-emu/StateSaves.old" ]; then
 		if [ ! -L "$home/.retrorig/.dolphin-emu/StateSaves" ]; then
-			if [ -d "$home/.retrorig/.dolphin-emu/StateSaves" ]; then
-				mv -f "$home/.retrorig/.dolphin-emu/StateSaves" "$home/.retrorig/.dolphin-emu/StateSaves.old"
+			if [ -d "$home/.retrorig/.dolphin-emu/GC/StateSaves" ] || [ -d "$home/.retrorig/.dolphin-emu/Wii/StateSaves" ]; then
+				mv -f "$home/.retrorig/.dolphin-emu/GC/StateSaves" "$home/.retrorig/.dolphin-emu/GC/StateSaves.old"
+				mv -f "$home/.retrorig/.dolphin-emu/Wii/StateSaves" "$home/.retrorig/.dolphin-emu/Wii/StateSaves.old"
 				dolphin_backup=true
 			fi
 		fi
@@ -209,6 +205,8 @@ function rrs_prepareFolders()
 
 	#remove old links
 	rm -f "$home/.retrorig/.dolphin-emu/StateSaves"
+	rm -f "$home/.retrorig/.dolphin-emu/GC/StateSaves"
+	rm -f "$home/.retrorig/.dolphin-emu/Wii/StateSaves"
 	rm -f "$home/.retrorig/.config/mupen64plus/save"
 	rm -f "$home/.retrorig/.mednafen/sav"
 	rm -f "$home/.retrorig/.gens/StateSaves"
@@ -216,7 +214,8 @@ function rrs_prepareFolders()
 	rm -f "$home/.retrorig/.config/pcsx2/sstates"
 
 	#create links 
-	ln -sf "$rootdir/Saves/dolphin-emu" "$home/.retrorig/.dolphin-emu/StateSaves"
+	ln -sf "$rootdir/Saves/dolphin-emu/GC" "$home/.retrorig/.dolphin-emu/GC/StateSaves"
+	ln -sf "$rootdir/Saves/dolphin-emu/Wii" "$home/.retrorig/.dolphin-emu/Wii/StateSaves"
 	ln -sf "$rootdir/Saves/mupen64plus" "$home/.retrorig/.config/mupen64plus/save"
 	ln -sf "$rootdir/Saves/mednafen" "$home/.retrorig/.mednafen/sav"
 	ln -sf "$rootdir/Saves/GensGS" "$home/.retrorig/.gens/StateSaves"
@@ -225,34 +224,35 @@ function rrs_prepareFolders()
 
 	#restore backup
 	if [ "$dolphin_backup" == "true" ]; then
-		cp -rf "$home/.retrorig/.dolphin-emu/StateSaves.old/*" "$home/.retrorig/.dolphin-emu/StateSaves/"
+		# Place legacy save folder in its own area, as to not confuse the new directory split
+		cp -rf "$home/.retrorig/.dolphin-emu/StateSaves.old/*" "$home/.retrorig/.dolphin-emu/legacy/StateSaves"
+		# Restore split directory save files
+		cp -rf "$home/.retrorig/.dolphin-emu/GC/StateSaves.old/*" "$home/.retrorig/.dolphin-emu/GC/StateSaves"
+		cp -rf "$home/.retrorig/.dolphin-emu/Wii/StateSaves.old/*" "$home/.retrorig/.dolphin-emu/Wii/StateSaves"
 	fi
 
 	if [ "$mupen64plus_backup" == "true" ]; then
-		cp -rf "$home/.retrorig/.config/mupen64plus/StateSaves.old/*" "$home/.retrorig/.config/mupen64plus/StateSaves/"
+		cp -rf "$home/.retrorig/.config/mupen64plus/StateSaves.old/*" "$home/.retrorig/.config/mupen64plus/StateSaves"
 	fi
 
 	if [ "$mednafen_backup" == "true" ]; then
-		cp -rf "$home/.retrorig/.mednafen/sav.old/*" "$home/.retrorig/.mednafen/sav/"
+		cp -rf "$home/.retrorig/.mednafen/sav.old/*" "$home/.retrorig/.mednafen/sav"
 	fi
 
 	if [ "$gens_backup" == "true" ]; then
-		cp -rf "$home/.retrorig/.gens/StateSaves.old/*" "$home/.retrorig/.gens/StateSaves/"
+		cp -rf "$home/.retrorig/.gens/StateSaves.old/*" "$home/.retrorig/.gens/StateSaves"
 	fi
 
 	if [ "$ppsspp_backup" == "true" ]; then
-		cp -rf "$home/.retrorig/.config/ppsspp/PSP/SAVEDATA.old/*" "$home/.retrorig/.config/ppsspp/PSP/SAVEDATA/"
+		cp -rf "$home/.retrorig/.config/ppsspp/PSP/SAVEDATA.old/*" "$home/.retrorig/.config/ppsspp/PSP/SAVEDATA"
 	fi
 
 	if [ "$pcsx2_backup" == "true" ]; then
-		cp -rf "$home/.retrorig/.config/pcsx2/sstates.old/*" "$home/.retrorig/.config/pcsx2/sstates/"
+		cp -rf "$home/.retrorig/.config/pcsx2/sstates.old/*" "$home/.retrorig/.config/pcsx2/sstates"
 	fi
 
-	#change permission
-	chown -R "$user" "$rootdir/Saves/"
-	chgrp -R "$user" "$rootdir/Saves/"
-	chown -R "$user" "$home/.retrorig/"
-	chgrp -R "$user" "$home/.retrorig/"
+	# correct permissions
+	h_correct_perms
 
 }
 
@@ -417,9 +417,9 @@ function rrs_source_syscalls()
 					echo "##################### WARNING ######################"
 					echo "Distro release version not supported at this time!"
 					echo "Proceed at your own risk."
-					echo "#####################################################"
 					echo ""
-					sleep 5s
+					platform_check="No"
+					pkg_manager="N/A"
 					#clear
 					#exit
 					;;
@@ -446,9 +446,9 @@ function rrs_source_syscalls()
 					echo "##################### WARNING ######################"
 					echo "Distro release version not supported at this time!"
 					echo "Proceed at your own risk."
-					echo "#####################################################"
-					echo ""
-					sleep 5s
+					echo "" 
+					platform_check="No"
+					pkg_manager="N/A"
 					#clear
 					#exit
 					;;
@@ -476,9 +476,9 @@ function rrs_source_syscalls()
 					echo "##################### WARNING ######################"
 					echo "Distro release version not supported at this time!"
 					echo "Proceed at your own risk."
-					echo "#####################################################"
 					echo ""
-					sleep 5s
+					platform_check="No"
+					pkg_manager="N/A"
 					#clear
 					#exit
 					;;
@@ -493,19 +493,22 @@ function rrs_source_syscalls()
 			echo "##################### WARNING ######################"
 			echo "Distribution/Platform not supported at this time!"
 			echo "Proceed at your own risk."
-			echo "#####################################################"
 			echo ""
-			sleep 5s
+			platform_check="No"
+			pkg_manager="N/A"
 			#clear
 			#exit
 		;;
 
 	esac
-
+	# Display system information
 	echo "Supported Platform? $platform_check"
+	echo "Distro: $OS_TYPE"
+	echo "Release: $OS_RELEASE"
 	echo "Primary package management system: $pkg_manager"
 	echo ""
-	sleep 5s
+	echo "#####################################################"
+	sleep 4s
 
 }
 

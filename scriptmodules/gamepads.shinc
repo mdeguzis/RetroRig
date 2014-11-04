@@ -61,11 +61,16 @@ function gp_ps3_blu()
 	cp -v "$scriptdir/emu-cfgs/ps3_blu_controller/mupen64plus/mupen64plus.cfg" "$config_home/.config/mupen64plus/"
 
 	# Dolphin (GameCube/Wii)
-	# default path: /home/$USER/.retrorig/.dolphin-emu
-	# Main config
-	cp -v "$scriptdir/emu-cfgs/ps3_blu_controller/Dolphin/GCPadNew.ini" "$config_home/.dolphin-emu/Config/"
-	cp -v "$scriptdir/emu-cfgs/ps3_blu_controller/Dolphin/Dolphin.ini" "$config_home/.dolphin-emu/Config/"
-	cp -v "$scriptdir/emu-cfgs/ps3_blu_controller/Dolphin/WiimoteNew.ini" "$config_home/.dolphin-emu/Config/"
+	# default path: /home/$USER/.retrorig/.dolphin-emu/Wii/
+	# default path: /home/$USER/.retrorig/.dolphin-emu/GC/
+	## GC config ##
+	cp -v "$scriptdir/emu-cfgs/ps3_blu_controller/Dolphin/GC/GCPadNew.ini" "$config_home/.dolphin-emu/GC/Config/"
+	cp -v "$scriptdir/emu-cfgs/ps3_blu_controller/Dolphin/GC/Dolphin.ini" "$config_home/.dolphin-emu/GC/Config/"
+	cp -v "$scriptdir/emu-cfgs/ps3_blu_controller/Dolphin/GC/WiimoteNew.ini" "$config_home/.dolphin-emu/GC/Config/"
+	## Wii config ##
+	cp -v "$scriptdir/emu-cfgs/ps3_blu_controller/Dolphin/Wii/GCPadNew.ini" "$config_home/.dolphin-emu/Wii/Config/"
+	cp -v "$scriptdir/emu-cfgs/ps3_blu_controller/Dolphin/Wii/Dolphin.ini" "$config_home/.dolphin-emu/Wii/Config/"
+	cp -v "$scriptdir/emu-cfgs/ps3_blu_controller/Dolphin/Wii/WiimoteNew.ini" "$config_home/.dolphin-emu/Wii/Config/"
 
 	# PCSX2
 	# base config folder
@@ -495,8 +500,12 @@ function ps3_set_emulator_ids()
 	echo -e "\nController ID/MAC Address applied to the Stella emulator Controller $n was:\n$Stella_MAC_BLU"
 
 	# Assign controller ID for Dolphin
-	sed -i "s|MAC_TEMP_$n|$dolphin_MAC_BLU|g" "$config_home/.dolphin-emu/Config/GCPadNew.ini"
-	sed -i "s|MAC_TEMP_$n|$dolphin_MAC_BLU|g" "$config_home/.dolphin-emu/Config/WiimoteNew.ini"
+	## GC ##
+	sed -i "s|MAC_TEMP_$n|$dolphin_MAC_BLU|g" "$config_home/.dolphin-emu/GC/Config/GCPadNew.ini"
+	sed -i "s|MAC_TEMP_$n|$dolphin_MAC_BLU|g" "$config_home/.dolphin-emu/GC/Config/WiimoteNew.ini"
+	## Wii ##
+	sed -i "s|MAC_TEMP_$n|$dolphin_MAC_BLU|g" "$config_home/.dolphin-emu/Wii/Config/GCPadNew.ini"
+	sed -i "s|MAC_TEMP_$n|$dolphin_MAC_BLU|g" "$config_home/.dolphin-emu/Wii/Config/WiimoteNew.ini"
 
 	# Assign controller ID for Stella
 	sed -i "s|MAC_TEMP_$n|$Stella_MAC_BLU|g" "$config_home/.stella/stellarc"
@@ -571,32 +580,76 @@ function wii_motion_controller_for_dolphin()
 	#native or emulated Wii controller 1=emulated 2=native
 	clear
 	src=1
-	dialog --title "Confirm yes/no" \
-	--backtitle "Wii game controller" \
-	--yesno " Do you want to use a native controller for Wii games? "  6 60
 
-	# Get exit status
-	# 0 means user hit [yes] button.
-	# 1 means user hit [no] button.
-	# 255 means user hit [Esc] key.
-	response=$?
-	case $response in
-		0)
-		clear
-		src=2
-		dialog --msgbox "For Wii games, controls have been mapped to a native motion controller. Press 1+2 for older Wii controller, or the small button in the battery compartement to activate the controller every time after game start. Navigation in XBMC, game launch and exit for Wii games, as for all other games, is still handled by your primary controller. This applies also to the save state and load state functions. Use your primary controller in parallel to your Wii controller to save and load game states. " 14 60
-		;;
+	# get the current state of GC controller state
+	# on state = 6
+	# off state = 0
+	gc1_state=$(grep "SIDevice0 = " "$config_home/.dolphin-emu/Wii/Config/Dolphin.ini" | cut -c 13-14)
+	gc2_state=$(grep "SIDevice1 = " "$config_home/.dolphin-emu/Wii/Config/Dolphin.ini" | cut -c 13-14)
+	gc2_state=$(grep "SIDevice2 = " "$config_home/.dolphin-emu/Wii/Config/Dolphin.ini" | cut -c 13-14)
+	gc2_state=$(grep "SIDevice3 = " "$config_home/.dolphin-emu/Wii/Config/Dolphin.ini" | cut -c 13-14)
+
+while true; do
+    cmd=(dialog --backtitle "LibreGeek.org RetroRig" --menu "Do you want to use a native controller for Wii games" 18 0 12)
+    options=(1 "Real Wiimote"  
+	     2 "Emulated Wiimote"
+	     3 "None")
+
+	#make menu choice
+	choices=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
+	
+	if [ "$choices" != "" ]; then
+	    case $choices in
 
 		1)
-			src=1 
+			clear
+			src=2
+			dialog --msgbox "For Wii games, controls have been mapped to a native motion controller. Press 1+2 for older Wii controller, or the small button in the battery compartement to activate the controller every time after game start. Navigation in XBMC, game launch and exit for Wii games, as for all other games, is still handled by your primary controller. This applies also to the save state and load state functions. Use your primary controller in parallel to your Wii controller to save and load game states. " 14 60
+
+			# DISABLE GC controller since user wants to use the Wiimote
+			# This was noted by a user to cause conflicts with using a Wii mote at the same time
+			sed -i "s|$gc1_state|0|g" "$config_home/.dolphin-emu/Wii/Config/Dolphin.ini"
+			sed -i "s|$gc2_state|0|g" "$config_home/.dolphin-emu/Wii/Config/Dolphin.ini"
+			sed -i "s|$gc3_state|0|g" "$config_home/.dolphin-emu/Wii/Config/Dolphin.ini"
+			sed -i "s|$gc4_state|0|g" "$config_home/.dolphin-emu/Wii/Config/Dolphin.ini"
+
+			# assign Wiimote
+			sed -i "s|PLAYER_SRC|$src|g" "$config_home/.dolphin-emu/Wii/Config/WiimoteNew.ini"
+
 		;;
 
-		255)
+		2)
 			src=1
-		;;
-	esac
+			# DISABLE GC controller since user wants to use the emulated Wiimote
+			# This was noted by a user to cause conflicts with using a Wii mote at the same time
+			sed -i "s|$gc1_state|0|g" "$config_home/.dolphin-emu/Wii/Config/Dolphin.ini"
+			sed -i "s|$gc2_state|0|g" "$config_home/.dolphin-emu/Wii/Config/Dolphin.ini"
+			sed -i "s|$gc3_state|0|g" "$config_home/.dolphin-emu/Wii/Config/Dolphin.ini"
+			sed -i "s|$gc4_state|0|g" "$config_home/.dolphin-emu/Wii/Config/Dolphin.ini"
 
-	sed -i "s|PLAYER_SRC|$src|g" "$config_home/.dolphin-emu/Config/WiimoteNew.ini"
+			# assign Wiimote
+			sed -i "s|PLAYER_SRC|$src|g" "$config_home/.dolphin-emu/Wii/Config/WiimoteNew.ini"
+			
+		;;
+
+		3)
+			src=0
+			# ENABLE GC controller since user does not want to use a Wiimote
+			sed -i "s|$gc1_state|6|g" "$config_home/.dolphin-emu/Wii/Config/Dolphin.ini"
+			sed -i "s|$gc2_state|6|g" "$config_home/.dolphin-emu/Wii/Config/Dolphin.ini"
+			sed -i "s|$gc3_state|6|g" "$config_home/.dolphin-emu/Wii/Config/Dolphin.ini"
+			sed -i "s|$gc4_state|6|g" "$config_home/.dolphin-emu/Wii/Config/Dolphin.ini"
+
+			# disable Wiimote with 0 value
+			sed -i "s|PLAYER_SRC|$src|g" "$config_home/.dolphin-emu/Wii/Config/WiimoteNew.ini"
+		;;
+		
+		esac
+	else
+		break
+	fi
+done
+
 }
 
 function ps3_pair_blu()
@@ -666,10 +719,16 @@ function gp_ps3_usb()
 	cp -v "$scriptdir/emu-cfgs/ps3_usb_controller/mupen64plus/mupen64plus.cfg" "$config_home/.config/mupen64plus/"
 
 	# Dolphin (GameCube/Wii)
-	# default path: /home/$USER/.retrorig/.dolphin-emu
-	# Main config
-	cp -v "$scriptdir/emu-cfgs/ps3_usb_controller/Dolphin/GCPadNew.ini" "$config_home/.dolphin-emu/Config"
-	cp -v "$scriptdir/emu-cfgs/ps3_usb_controller/Dolphin/Dolphin.ini" "$config_home/.dolphin-emu/Config"
+	# default path: /home/$USER/.retrorig/.dolphin-emu/Wii/
+	# default path: /home/$USER/.retrorig/.dolphin-emu/GC/
+	## GC config ##
+	cp -v "$scriptdir/emu-cfgs/ps3_usb_controller/Dolphin/GC/GCPadNew.ini" "$config_home/.dolphin-emu/GC/Config/"
+	cp -v "$scriptdir/emu-cfgs/ps3_usb_controller/Dolphin/GC/Dolphin.ini" "$config_home/.dolphin-emu/GC/Config/"
+	cp -v "$scriptdir/emu-cfgs/ps3_usb_controller/Dolphin/GC/WiimoteNew.ini" "$config_home/.dolphin-emu/GC/Config/"
+	## Wii config ##
+	cp -v "$scriptdir/emu-cfgs/ps3_usb_controller/Dolphin/Wii/GCPadNew.ini" "$config_home/.dolphin-emu/Wii/Config/"
+	cp -v "$scriptdir/emu-cfgs/ps3_usb_controller/Dolphin/Wii/Dolphin.ini" "$config_home/.dolphin-emu/Wii/Config/"
+	cp -v "$scriptdir/emu-cfgs/ps3_usb_controller/Dolphin/Wii/WiimoteNew.ini" "$config_home/.dolphin-emu/Wii/Config/"
 
 	# Stella
 	# default path: /home/$USER/.retrorig/.config/mupen64plus
@@ -940,10 +999,16 @@ function gp_x360_wireless()
 	cp -v "$scriptdir/emu-cfgs/x360_wireless_controller/mupen64plus/mupen64plus.cfg" "$config_home/.config/mupen64plus/"
 
 	# Dolphin (GameCube/Wii)
-	# default path: /home/$USER/.retrorig/.dolphin-emu
-	# Main config
-	cp -v "$scriptdir/emu-cfgs/x360_wireless_controller/Dolphin/GCPadNew.ini" "$config_home/.dolphin-emu/Config/"
-	cp -v "$scriptdir/emu-cfgs/x360_wireless_controller/Dolphin/Dolphin.ini" "$config_home/.dolphin-emu/Config/"
+	# default path: /home/$USER/.retrorig/.dolphin-emu/Wii/
+	# default path: /home/$USER/.retrorig/.dolphin-emu/GC/
+	## GC config ##
+	cp -v "$scriptdir/emu-cfgs/x360_wireless_controller/Dolphin/GC/GCPadNew.ini" "$config_home/.dolphin-emu/GC/Config/"
+	cp -v "$scriptdir/emu-cfgs/px360_wireless_controller/Dolphin/GC/Dolphin.ini" "$config_home/.dolphin-emu/GC/Config/"
+	cp -v "$scriptdir/emu-cfgs/x360_wireless_controller/Dolphin/GC/WiimoteNew.ini" "$config_home/.dolphin-emu/GC/Config/"
+	## Wii config ##
+	cp -v "$scriptdir/emu-cfgs/x360_wireless_controller/Dolphin/Wii/GCPadNew.ini" "$config_home/.dolphin-emu/Wii/Config/"
+	cp -v "$scriptdir/emu-cfgs/x360_wireless_controller/Dolphin/Wii/Dolphin.ini" "$config_home/.dolphin-emu/Wii/Config/"
+	cp -v "$scriptdir/emu-cfgs/x360_wireless_controller/Dolphin/Wii/WiimoteNew.ini" "$config_home/.dolphin-emu/Wii/Config/"
 
 	# PCSX2
 	# base config folder
@@ -1218,10 +1283,16 @@ function gp_x360_usb()
 	cp -v "$scriptdir/emu-cfgs/x360_usb_controller/mupen64plus/mupen64plus.cfg" "$config_home/.config/mupen64plus/"
 
 	# Dolphin (GameCube/Wii)
-	# default path: /home/$USER/.retrorig/.dolphin-emu
-	# Main config
-	cp -v "$scriptdir/emu-cfgs/x360_usb_controller//Dolphin/GCPadNew.ini" "$config_home/.dolphin-emu/Config/"
-	cp -v "$scriptdir/emu-cfgs/x360_usb_controller//Dolphin/Dolphin.ini" "$config_home/.dolphin-emu/Config/"
+	# default path: /home/$USER/.retrorig/.dolphin-emu/Wii/
+	# default path: /home/$USER/.retrorig/.dolphin-emu/GC/
+	## GC config ##
+	cp -v "$scriptdir/emu-cfgs/x360_usb_controller/Dolphin/GC/GCPadNew.ini" "$config_home/.dolphin-emu/GC/Config/"
+	cp -v "$scriptdir/emu-cfgs/px360_usb_controller/Dolphin/GC/Dolphin.ini" "$config_home/.dolphin-emu/GC/Config/"
+	cp -v "$scriptdir/emu-cfgs/x360_usb_controller/Dolphin/GC/WiimoteNew.ini" "$config_home/.dolphin-emu/GC/Config/"
+	## Wii config ##
+	cp -v "$scriptdir/emu-cfgs/x360_usb_controller/Dolphin/Wii/GCPadNew.ini" "$config_home/.dolphin-emu/Wii/Config/"
+	cp -v "$scriptdir/emu-cfgs/x360_usb_controller/Dolphin/Wii/Dolphin.ini" "$config_home/.dolphin-emu/Wii/Config/"
+	cp -v "$scriptdir/emu-cfgs/x360_usb_controller/Dolphin/Wii/WiimoteNew.ini" "$config_home/.dolphin-emu/Wii/Config/"
 
 	# PCSX2
 	# base config folder
@@ -1285,7 +1356,7 @@ RetorRig loads to use the gamepad" 14 60
 
 	# Present small menu asking for number of controllers
 	cmd=(dialog --backtitle "LibreGeek.org RetroRig Installer" \
-		    --menu "Please select the number of USB PS3 controllers" 16 47 16)
+		    --menu "Please select the number of USB Xbox controllers" 16 47 16)
 	options=(1 "1"
 	 	 2 "2"
 	 	 3 "3"

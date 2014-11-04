@@ -918,9 +918,13 @@ function h_correct_perms()
 	echo "Correcting permissions on folders due to use of sudo."
 	echo "Please wait..."
 
-	# correct permissions since we use sudo
+	# Root folder
 	chgrp -Rv "$user" "$rootdir" > /dev/null 2>&1
 	chown -Rv "$user" "$rootdir" > /dev/null 2>&1
+
+	# Config folder
+	chgrp -Rv "$user" "$config_home" > /dev/null 2>&1
+	chown -Rv "$user" "$config_home" > /dev/null 2>&1
 
 	# correct the desktop permissions so we can add our own launcher
 	# This will allow permissions change for all languages. Thanks JC!
@@ -930,10 +934,6 @@ function h_correct_perms()
 
 	# replace "test" username in config files here to ensure games
 	# and emulators function and start properly
-	
-	# .retrorig
-	chgrp -Rv "$user" "$config_home" > /dev/null 2>&1
-	chown -R "$user" "$config_home" > /dev/null 2>&1
 
 	# xbmc dotfile (our custom path)
 	chgrp -Rv "$user" "$xbmc_home" > /dev/null 2>&1
@@ -968,15 +968,16 @@ function h_emu_user_fixes()
 	# Let's change the config files to reflect the current username
 	
 	# mame
-	sed -i "s|installdir_temp|$rootdir|g" "$config_home/.mame/mame.ini" | tee >> "$rootdir/logs/debug.log"
-	sed -i "s|config_temp|$config_home|g" "$config_home/.mame/mame.ini" | tee >> "$rootdir/logs/debug.log"
+	sed -i "s|installdir_temp|$rootdir|g" "$config_home/.mame/mame.ini"
+	sed -i "s|config_temp|$config_home|g" "$config_home/.mame/mame.ini"
 	
 	# MESS
-	sed -i "s|installdir_temp|$rootdir|g" "$config_home/.mess/mess.ini" | tee >> "$rootdir/logs/debug.log"
-	sed -i "s|config_temp|$config_home|g" "$config_home/.mess/mess.ini" | tee >> "$rootdir/logs/debug.log"
+	sed -i "s|installdir_temp|$rootdir|g" "$config_home/.mess/mess.ini"
+	sed -i "s|config_temp|$config_home|g" "$config_home/.mess/mess.ini"
 	
 	# XBMC
-	sed -i "s|installdir_temp|$rootdir|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml" | tee >> "$rootdir/logs/debug.log"
+	sed -i "s|installdir_temp|$rootdir|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
+	sed -i "s|config_temp|$config_home|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
 	
 	# PPSSPP	
 	sed -i "s|installdir_temp|$rootdir|g" "$config_home/.config/ppsspp/PSP/SYSTEM/ppsspp.ini"
@@ -986,9 +987,18 @@ function h_emu_user_fixes()
 	sed -i "s|firmware_temp|$rootdir/BIOS/Mednafen|g" "$config_home/.mednafen/mednafen-09x.cfg"
 
 	# Dolphin directories
-	sed -i "s|installdir_temp|$rootdir|g" "$config_home/.dolphin-emu/Config/Dolphin.ini"
-	sed -i "s|home_temp|$home|g" "$config_home/.dolphin-emu/Config/Dolphin.ini"
-	sed -i "s|config_temp|$config_home|g" "$config_home/.dolphin-emu/Config/Dolphin.ini"
+	## GC ##
+	sed -i "s|home_temp|$home|g" "$config_home/.dolphin-emu/GC/Config/Dolphin.ini"
+	sed -i "s|installdir_temp|$rootdir|g" "$config_home/.dolphin-emu/GC/Config/Dolphin.ini"
+	sed -i "s|config_temp|$config_home|g" "$config_home/.dolphin-emu/GC/Config/Dolphin.ini"
+	sed -i "s|config_temp|$config_home|g" "$config_home/.dolphin-emu/GC/Config/GCPadNew.ini"
+	sed -i "s|config_temp|$config_home|g" "$config_home/.dolphin-emu/GC/Config/WiimoteNew.ini"
+	## Wii ##
+	sed -i "s|home_temp|$home|g" "$config_home/.dolphin-emu/Wii/Config/Dolphin.ini"
+	sed -i "s|installdir_temp|$rootdir|g" "$config_home/.dolphin-emu/Wii/Config/Dolphin.ini"
+	sed -i "s|config_temp|$config_home|g" "$config_home/.dolphin-emu/Wii/Config/Dolphin.ini"
+	sed -i "s|config_temp|$config_home|g" "$config_home/.dolphin-emu/Wii/Config/GCPadNew.ini"
+	sed -i "s|config_temp|$config_home|g" "$config_home/.dolphin-emu/Wii/Config/WiimoteNew.ini"
 
 	# Stella
 	sed -i "s|config_temp|$config_home|g" "$config_home/.stella/stellarc"

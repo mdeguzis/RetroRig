@@ -46,7 +46,7 @@ function import() {
     # @description if not found, search the module in the paths contained in $SHELL_LIBRARY_PATH environment variable
     # @param $1 the .shinc file to import, without .shinc extension
     module=$1
-    
+
     if [ -f $module.shinc ]; then
       source $module.shinc
       echo "Loaded module $(basename $module.shinc)"
@@ -182,6 +182,7 @@ echo "#####################################################"
 echo "Loading script modules"
 echo "#####################################################"
 
+echo ""
 import "$scriptdir/scriptmodules/helpers"
 import "$scriptdir/scriptmodules/configuration"
 import "$scriptdir/scriptmodules/settings"
@@ -336,7 +337,7 @@ echo ""
 COLUMNS=$(tput cols) 
 title2="www.libregeek.org" 
 printf "%*s\n" $(((${#title2}+$COLUMNS)/2)) "$title2"
-sleep 3s
+sleep 2s
 
 # set the directory '$home/.retrorig' as a variable for easy reading
 xbmc_home="$home/.retrorig/.xbmc"
@@ -354,7 +355,7 @@ cd "$rootdir"
 
 while true; do
     cmd=(dialog --backtitle "LibreGeek.org RetroRig 
-Installer" --menu "| Main Menu (v.0.9.5b) | \
+Installer" --menu "| Main Menu (v.0.9.7b) | \
  			 BIOS files are NOT provided!" 17 62 16)
     options=(1 "Install RetroRig" 
 	     2 "Retro Rig Settings" 
