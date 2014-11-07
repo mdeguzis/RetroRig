@@ -80,16 +80,27 @@ You may add the `--help` flag to the script for a quick help file. Come on, do i
 
 Pre-requisites:
 
-You will need git,figlet and dialog to run the installer:
+You will need git, dialog to run the installer and for updating:
 
-    sudo apt-get install dialog git figlet
+    sudo apt-get install dialog git
 
-RetroRig will try to install them for you (for instance, if you download the zip archive), but if you
+RetroRig will try to install them automatically for you (for instance, if you download the zip archive), but if you
 experience any issues starting the script,enusre they exist with the CLI commands 'which dialog' 
-and 'which git" to ensure they report back. Please also ensure your graphics card or onboard graphics chipset supports OpenGL. All install commands below are done on the command line. You can however doubleclick on the Debian package to install it.
+and 'which git" to ensure they report back. Please also ensure your graphics card or onboard graphics chipset supports OpenGL. 
+All install commands below are done on the command line. You can however doubleclick on the Debian package to install it.
 
+##### Preferred method: package installation
 
-##### Primary install method (GitHub source):
+```
+sudo add-apt-repository ppa:mdeguzis/retrorig
+sudo apt-get update
+sudo apt-get install retrorig-setup
+sudo retrorig-setup
+```
+
+Pre-built packages for other distributions will be coming in the future. Stay tuned.
+
+##### Alternate install method (GitHub source):
 
 `git clone https://github.com/ProfessorKaos64/RetroRig`
 
@@ -99,14 +110,7 @@ cd RetroRig
 sudo ./retrorig_setup.sh
 ````
 
-##### Alternative install method (Package):
-To install via [Debian package](https://launchpad.net/~mdeguzis/+archive/ubuntu/retrorig):
-````
-dpkg -i package_name_version.deb
-retrorig-setup 
-````
-
-The main disitribution target is Ubuntu 14.04 LTS, but support for derivitives is being worked on. For a currernt list of supported platofrms and distributions, see [this](https://github.com/ProfessorKaos64/RetroRig/wiki/Installation#platforms) wiki entry. You can also perform a `git checkout Beta` to try our Beta branch, but please do so with caution and backup any file before hand!
+The main disitribution target is Ubuntu 14.04 LTS, but support for other platforms is being worked on. For a currernt list of supported platofrms and distributions, see [this](https://github.com/ProfessorKaos64/RetroRig/wiki/Installation#platforms) wiki entry. You can also perform a `git checkout Beta` to try our Beta branch, but please do so with caution and backup any file before hand!
 
 You can also download a zip file or by other means on the github page.
 

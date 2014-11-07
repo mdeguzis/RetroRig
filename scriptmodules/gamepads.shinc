@@ -534,7 +534,7 @@ function enable_autostart_RetroRig()
 	
 	dialog --title "Confirm yes/no" \
 	--backtitle "Auto Start RetroRig" \
-	--yesno "Do you want to have RetroRig started automatically for the first gamepad being switch on? (Only PS3 ctrl.)"  6 60
+	--yesno "Do you want to have RetroRig started automatically for the first gamepad being switch on? (PS3 Sixaxis only)"  6 60
 	# Get exit status
 	# 0 means user hit [yes] button.
 	# 1 means user hit [no] button.
@@ -590,10 +590,10 @@ function wii_motion_controller_for_dolphin()
 	gc2_state=$(grep "SIDevice3 = " "$config_home/.dolphin-emu/Wii/Config/Dolphin.ini" | cut -c 13-14)
 
 while true; do
-    cmd=(dialog --backtitle "LibreGeek.org RetroRig" --menu "Do you want to use a native controller for Wii games" 18 0 12)
+    cmd=(dialog --backtitle "LibreGeek.org RetroRig" --menu "Do you want to use Wiimote controller for Wii games?" 18 0 12)
     options=(1 "Real Wiimote"  
 	     2 "Emulated Wiimote"
-	     3 "None")
+	     3 "No")
 
 	#make menu choice
 	choices=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
@@ -783,9 +783,9 @@ function gp_ps3_usb()
 	cont_num_org=$(grep "CONTROLLER_NUM=" "/etc/default/xboxdrv")
 
 	# inform user that you must have controller connected or restart
-	dialog --msgbox "The xboxdrv userland module detects the number of USB PS3 controllers connected \
+	dialog --msgbox "The xboxdrv userland module detects the number of PS3 controllers connected \
 when it starts. Therefore, we must specify how many you have connected or want to use. \
-If you tell xboxdrv I have 3 controllers, when you only have one, \
+If you tell xboxdrv that you have 3 controllers, when you only have one, \
 the service may fail to start correctly.\n\nPlease see /etc/default/xboxdrv for more. Press the PS Button after \
 RetorRig loads to use the gamepad" 14 60
 
@@ -941,12 +941,6 @@ RetorRig loads to use the gamepad" 14 60
 	# disable for now, hangs script completion running in background
 	# $cmd_xboxdrv_start &
 
-	# copy in the gp_autodetect_xbmc.sh template file, and change the gamepad type 
-	# Testing ONLY for gp_autodetect_xbmc.sh.testing
-	# new_controller_type="ps3_usb"
-	# cp -v "$scriptdir/XBMC-cfgs/extra/gp_autodetect_xbmc.sh" "/usr/share/applications/" 
-	# sed -i "s|controller_temp|$new_controller_type|g" "/usr/share/applications/gp_autodetect_xbmc.sh"
-
 	# replace specific user paths that emulators and files may use
 	h_emu_user_fixes
 
@@ -1064,11 +1058,11 @@ function gp_x360_wireless()
 	cont_num_org=$(grep "CONTROLLER_NUM=" "/etc/default/xboxdrv")
 
 	# inform user that you must have controller connected or restart
-	dialog --msgbox "The xboxdrv userland module detects the number of USB PS3 controllers connected \
+	dialog --msgbox "The xboxdrv userland module detects the number of Xbox controllers connected \
 when it starts. Therefore, we must specify how many you have connected or want to use. \
-You must reboot to have these changes take effect. If you tell xboxdrv I have 3 controllers, when you only have one, \
-the service may fail to start correctly.\n\nPlease see /etc/default/xboxdrv for more. Press the PS Button after \
-RetorRig loads to use the gamepad" 14 60
+You must reboot to have these changes take effect. If you tell xboxdrv that you have 3 controllers, when you only have one, \
+the service may fail to start correctly.\n\nPlease see /etc/default/xboxdrv for more. Press the center Guide Button after \
+RetorRig loads to use the gamepad." 14 60
 
 	# Present small menu asking for number of controllers
 	cmd=(dialog --backtitle "LibreGeek.org RetroRig Installer" \
@@ -1237,6 +1231,7 @@ RetorRig loads to use the gamepad" 14 60
 	# Let the user know about reboot
 	dialog --msgbox "Please reboot to fully enable the controller(s)."  5 52
 	
+	# Turn off the sixad service
 	sixad --boot-no
 }
 

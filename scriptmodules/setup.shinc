@@ -1019,7 +1019,7 @@ function rrs_prereq()
 		echo "######################################"
 		echo "Pre-req checks"	
 		echo "######################################"
-		echo "Did not find 1 or more of the needed packages: git, dialog, or figlet"
+		echo "Did not find 1 or more of the packages: git, dialog, or figlet"
 		echo "Attempting to install these now."
 		echo ""
 		sleep 3s
@@ -1038,7 +1038,7 @@ function rrs_prereq()
 			exit 1
 		fi
 	else
-		echo "Found needed packages 'git/dialog/figlet'." > "$rootdir/logs/prechecks.log"
+		echo "Found packages 'git/dialog/figlet'." > "$rootdir/logs/prechecks.log"
 		prereqs="true"
 		sleep 2s
 	fi
