@@ -615,8 +615,9 @@ while true; do
 
 			# assign Wiimote
 			sed -i "s|PLAYER_SRC|$src|g" "$config_home/.dolphin-emu/Wii/Config/WiimoteNew.ini"
-
-		;;
+	
+			break
+			;;
 
 		2)
 			src=1
@@ -629,8 +630,9 @@ while true; do
 
 			# assign Wiimote
 			sed -i "s|PLAYER_SRC|$src|g" "$config_home/.dolphin-emu/Wii/Config/WiimoteNew.ini"
-			
-		;;
+
+			break
+			;;
 
 		3)
 			src=0
@@ -642,7 +644,9 @@ while true; do
 
 			# disable Wiimote with 0 value
 			sed -i "s|PLAYER_SRC|$src|g" "$config_home/.dolphin-emu/Wii/Config/WiimoteNew.ini"
-		;;
+
+			break
+			;;
 		
 		esac
 	else
