@@ -5,7 +5,7 @@
 # Author      : Jens-Christian Lache
 # Date        : 20141109
 # Version     : 4.0.2.20141109 snapshot from upstream master
-# Description : patch level 0: unpatched
+# Description : patch level 3: XRaiseWindow(dpy,win);
 #
 # ========================================================================
 
@@ -14,7 +14,9 @@ PRE=3
 BASE=4.0.2.20141109
 
 # define patch level
-PL=0
+PL=3
+
+BRANCH=retrorig-4.0.2.20141109.3
 
 clear
 echo "#################################################################"
@@ -94,8 +96,9 @@ echo "original tarball"
 #wget https://launchpad.net/~hunter-kaller/+archive/ubuntu/ppa/+files/dolphin-emu_4.0git-0ubuntu1~filthypants1.tar.gz
 #tar xfz dolphin-emu_4.0git-0ubuntu1~filthypants1.tar.gz
 #rm dolphin-emu_4.0git-0ubuntu1~filthypants1.tar.gz
-#cp -r ~/dolphin .
-git clone https://github.com/beaumanvienna/dolphin
+cp -r ~/dolphin .
+#git clone https://github.com/beaumanvienna/dolphin
+#git checkout $BRANCH
 SRC_FOLDER=dolphin-emu-$BASE.$PL
 
 mv dolphin $SRC_FOLDER
