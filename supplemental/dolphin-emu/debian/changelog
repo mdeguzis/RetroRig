@@ -1,37 +1,3 @@
-dolphin-emu (version_placeholder) trusty; urgency=medium
-
-  * snapshot upstream master from 2014/11/09 (unpatched)
-
- -- Jens-Christian Lache <jc.lache@web.de>  Sun, 09 Nov 2014 23:25:00 +0100
-
-dolphin-emu (3:4.0.0.3) trusty; urgency=medium
-
-  *  XRaiseWindow(dpy,win) after fullscreen
-
- -- Jens-Christian Lache <jc.lache@web.de>  Sun, 12 Oct 2014 20:00:00 +0200
-
-dolphin-emu (3:4.0.0.2) trusty; urgency=medium
-
-  * unpatched version from source code from 
-
-    https://launchpad.net/~hunter-kaller/+archive/ubuntu/ppa/
-            +files/dolphin-emu_4.0git-0ubuntu1~filthypants1.tar.gz
-
- -- Jens-Christian Lache <jc.lache@web.de>  Mon, 03 Oct 2014 20:00:00 +0200
-
-dolphin-emu (3:4.0.0.1) trusty; urgency=medium
-
-  * changed: dual-head fix (start position by XRandr, not configuration file)
-
-    source code from 
-
-    https://launchpad.net/~hunter-kaller/+archive/ubuntu/ppa/
-            +files/dolphin-emu_4.0git-0ubuntu1~filthypants1.tar.gz
-
-    and patched for project RetroRig.
-
- -- Jens-Christian Lache <jc.lache@web.de>  Mon, 08 Sep 2014 19:00:00 +0200
-
 dolphin-emu (4.0git-0ubuntu1~filthypants1) trusty; urgency=low
 
   * Includes tev_fixes...?

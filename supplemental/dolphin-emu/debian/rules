@@ -14,11 +14,8 @@ configure: configure-stamp
 configure-stamp:
 	dh_testdir
 	# Add here commands to configure the package.
-	mkdir build ; cd build ; \
-	cmake .. \
-    -DCMAKE_INSTALL_PREFIX='/usr' \
-    -DCMAKE_CXX_FLAGS='-fno-inline-functions' \
-    -DENABLE_LTO='TRUE'
+	mkdir build ; cd build ; cmake -DCMAKE_INSTALL_PREFIX:PATH=/usr ..
+
 
 build: build-stamp
 
@@ -26,7 +23,7 @@ build-stamp: configure-stamp
 	dh_testdir
 
 	# Add here commands to compile the package.
-	cd build ; $(MAKE) -j8
+	cd build ; $(MAKE)
 	#docbook-to-man debian/dolphin-emu.sgml > dolphin-emu
 
 	touch $@

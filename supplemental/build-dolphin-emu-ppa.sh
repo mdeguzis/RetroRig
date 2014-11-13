@@ -3,24 +3,22 @@
 #======================================================================== 
 #
 # Author      : Jens-Christian Lache
-# Date        : 20141012
-# Version     : 4.0.0
-# Description : patch level 3: XRaiseWindow(dpy,win)
+# Date        : 20141109
+# Version     : 4.0.2.20141109 snapshot from upstream master
+# Description : patch level 0: unpatched
 #
 # ========================================================================
 
 #define base version
 PRE=3
-BASE=4.0.0
+BASE=4.0.2.20141109
 
 # define patch level
-PL=3
-
-
+PL=0
 
 clear
 echo "#################################################################"
-echo "Building custom dolphin-emu Debian package (branch Hunter-Kaller)"
+echo "Building custom dolphin-emu Debian package "
 echo "#################################################################"
 echo ""
 if [[ -n "$1" ]]; then
@@ -93,10 +91,11 @@ cp ~/RetroRig/supplemental/dolphin-emu/dolphin-emu.dsc dolphin-emu-$PRE:$BASE.$P
 sed -i "s|version_placeholder|$PRE:$BASE.$PL|g" "dolphin-emu-$PRE:$BASE.$PL.dsc"
 
 echo "original tarball"
-wget https://launchpad.net/~hunter-kaller/+archive/ubuntu/ppa/+files/dolphin-emu_4.0git-0ubuntu1~filthypants1.tar.gz
-tar xfz dolphin-emu_4.0git-0ubuntu1~filthypants1.tar.gz
-rm dolphin-emu_4.0git-0ubuntu1~filthypants1.tar.gz
-
+#wget https://launchpad.net/~hunter-kaller/+archive/ubuntu/ppa/+files/dolphin-emu_4.0git-0ubuntu1~filthypants1.tar.gz
+#tar xfz dolphin-emu_4.0git-0ubuntu1~filthypants1.tar.gz
+#rm dolphin-emu_4.0git-0ubuntu1~filthypants1.tar.gz
+#cp -r ~/dolphin .
+git clone https://github.com/beaumanvienna/dolphin
 SRC_FOLDER=dolphin-emu-$BASE.$PL
 
 mv dolphin $SRC_FOLDER
@@ -113,8 +112,10 @@ fi
 #change to source folder
 cd $SRC_FOLDER
 
+cp -r ~/RetroRig/supplemental/dolphin-emu/debian/ .
+
 #echo "patching .."
-patch Source/Core/DolphinWX/X11Utils.cpp < ~/RetroRig/supplemental/dolphin-emu/X11Utils.cpp.patch
+#patch Source/Core/DolphinWX/X11Utils.cpp < ~/RetroRig/supplemental/dolphin-emu/X11Utils.cpp.patch
 
 echo "changelog"
 cp ~/RetroRig/supplemental/dolphin-emu/changelog debian/
