@@ -50,7 +50,7 @@ override_dh_install:
 	
 	#icons / pictures
 	mv $(CURDIR)/debian/tmp/usr/lib/RetroRig/XBMC-cfgs/extra/retro-icon.png $(CURDIR)/debian/tmp/usr/share/icons
-	cp Artwork/XBMC/XBMC-logo-Ace-Skin.png $(CURDIR)/debian/tmp/usr/lib/RetroRig/Artwork/XBMC/
+	cp Artwork/XBMC/RetroMain-0-9-7b.png $(CURDIR)/debian/tmp/usr/lib/RetroRig/Artwork/XBMC/
 	cp Artwork/XBMC/gears.png $(CURDIR)/debian/tmp/usr/lib/RetroRig/Artwork/XBMC/
 	
 	#supplemental application files
