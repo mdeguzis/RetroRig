@@ -335,28 +335,51 @@ if parameterIsTrue "auto resolution"; then
     sed -i "s|$ps2_ui_org_fs|DefaultToFullscreen=enabled|g" "$config_home/.config/pcsx2/inis/PCSX2_ui.ini"
   fi
 
-  #dolphin (gamecube)
+  #dolphin (Wii)
   #old resolution
-  dolphin_org_Res=$(grep -Ee "FullscreenResolution = " "$config_home/.dolphin-emu/Config/Dolphin.ini")
+  dolphin_org_Res=$(grep -Ee "FullscreenResolution = " "$config_home/.dolphin-emu/Wii/Config/Dolphin.ini")
   #new resolution
   dolphin_new_Res="FullscreenResolution = $dolphin_monitor"": ""$dolphin_new_X""x""$dolphin_new_Y"
   #apply changes
-  sed -i "s|$dolphin_org_Res|$dolphin_new_Res|g" "$config_home/.dolphin-emu/Config/Dolphin.ini"  
+  sed -i "s|$dolphin_org_Res|$dolphin_new_Res|g" "$config_home/.dolphin-emu/Wii/Config/Dolphin.ini"  
   #enable vsync
-  if [ -f $config_home/.dolphin-emu/Config/gfx_opengl.ini ];then
+  if [ -f $config_home/.dolphin-emu/Wii/Config/gfx_opengl.ini ];then
 
-    dolphin_org_vsync=$(grep -Ee "VSync = " "$config_home/.dolphin-emu/Config/gfx_opengl.ini")
+    dolphin_org_vsync=$(grep -Ee "VSync = " "$config_home/.dolphin-emu/Wii/Config/gfx_opengl.ini")
     if [ -n "$dolphin_org_vsync" ]; then
-      sed -i "s|$dolphin_org_vsync|VSync = True|g" "$config_home/.dolphin-emu/Config/gfx_opengl.ini"  
+      sed -i "s|$dolphin_org_vsync|VSync = True|g" "$config_home/.dolphin-emu/Wii/Config/gfx_opengl.ini"  
     fi 
   fi
   
   #old render position
-  dolphin_old_xpos=$(grep -Ee "RenderWindowXPos = " "$config_home/.dolphin-emu/Config/Dolphin.ini")
-  dolphin_old_ypos=$(grep -Ee "RenderWindowYPos = " "$config_home/.dolphin-emu/Config/Dolphin.ini")
+  dolphin_old_xpos=$(grep -Ee "RenderWindowXPos = " "$config_home/.dolphin-emu/Wii/Config/Dolphin.ini")
+  dolphin_old_ypos=$(grep -Ee "RenderWindowYPos = " "$config_home/.dolphin-emu/Wii/Config/Dolphin.ini")
   #apply changes
-  sed -i "s|$dolphin_old_xpos|RenderWindowXPos = $dolphin_new_xpos|g" "$config_home/.dolphin-emu/Config/Dolphin.ini"  
-  sed -i "s|$dolphin_old_ypos|RenderWindowYPos = $dolphin_new_ypos|g" "$config_home/.dolphin-emu/Config/Dolphin.ini"  
+  sed -i "s|$dolphin_old_xpos|RenderWindowXPos = $dolphin_new_xpos|g" "$config_home/.dolphin-emu/Wii/Config/Dolphin.ini"  
+  sed -i "s|$dolphin_old_ypos|RenderWindowYPos = $dolphin_new_ypos|g" "$config_home/.dolphin-emu/Wii/Config/Dolphin.ini"  
+  
+  #dolphin (Gamecube)
+  #old resolution
+  dolphin_org_Res=$(grep -Ee "FullscreenResolution = " "$config_home/.dolphin-emu/GC/Config/Dolphin.ini")
+  #new resolution
+  dolphin_new_Res="FullscreenResolution = $dolphin_monitor"": ""$dolphin_new_X""x""$dolphin_new_Y"
+  #apply changes
+  sed -i "s|$dolphin_org_Res|$dolphin_new_Res|g" "$config_home/.dolphin-emu/GC/Config/Dolphin.ini"  
+  #enable vsync
+  if [ -f $config_home/.dolphin-emu/GC/Config/gfx_opengl.ini ];then
+
+    dolphin_org_vsync=$(grep -Ee "VSync = " "$config_home/.dolphin-emu/GC/Config/gfx_opengl.ini")
+    if [ -n "$dolphin_org_vsync" ]; then
+      sed -i "s|$dolphin_org_vsync|VSync = True|g" "$config_home/.dolphin-emu/GC/Config/gfx_opengl.ini"  
+    fi 
+  fi
+  
+  #old render position
+  dolphin_old_xpos=$(grep -Ee "RenderWindowXPos = " "$config_home/.dolphin-emu/GC/Config/Dolphin.ini")
+  dolphin_old_ypos=$(grep -Ee "RenderWindowYPos = " "$config_home/.dolphin-emu/GC/Config/Dolphin.ini")
+  #apply changes
+  sed -i "s|$dolphin_old_xpos|RenderWindowXPos = $dolphin_new_xpos|g" "$config_home/.dolphin-emu/GC/Config/Dolphin.ini"  
+  sed -i "s|$dolphin_old_ypos|RenderWindowYPos = $dolphin_new_ypos|g" "$config_home/.dolphin-emu/GC/Config/Dolphin.ini"  
   
 else
   echo "auto resolution is disabled, exiting"

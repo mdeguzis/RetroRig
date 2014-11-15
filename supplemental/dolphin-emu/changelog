@@ -1,8 +1,15 @@
 dolphin-emu (version_placeholder) trusty; urgency=medium
 
-  * 
+  * snapshot upstream master from 2014/11/09 
+    patched with XRaiseWindow(dpy,win)
 
- -- Jens-Christian Lache <jc.lache@web.de>  Mon, 03 Oct 2014 20:00:00 +0200
+ -- Jens-Christian Lache <jc.lache@web.de>  Thu, 13 Nov 2014 22:30:00 +0100
+ 
+dolphin-emu (3:4.0.2.20141109.0) trusty; urgency=medium
+
+  * snapshot upstream master from 2014/11/09 (unpatched)
+
+ -- Jens-Christian Lache <jc.lache@web.de>  Sun, 09 Nov 2014 23:25:00 +0100
 
 dolphin-emu (3:4.0.0.3) trusty; urgency=medium
 

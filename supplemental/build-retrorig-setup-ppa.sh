@@ -3,23 +3,25 @@
 #======================================================================== 
 #
 # Author      : Michael T. DeGuzis, Jens-Christian Lache
-# Date        : 201401026
-# Version     : 0.9.5
+# Date        : 201401115
+# Version     : 0.9.7
 # Description : Install RetroRig via Debian package
+#
 #		Please see changelog for latest alterations and fixes
+#
 # ========================================================================
 
 clear
 
 #define base version
 PRE=0
-BASE=0.9.5
+BASE=0.9.7
 
 # define patch level
 # In this case, this level will be used to denote incremental changes
 # instead of a specific branch for now (beta/master only exist at the
 # momement).
-PL=4.5
+PL=1.2
 
 #choose user
 #user="pk"
@@ -73,10 +75,10 @@ if [ "$user" == "jc" ]; then
 	LAUNCHPAD_PPA="ppa:beauman/retrorig-testing"
 
 	#changed in package
-	CHANGE_TEXT="PS3 controller reworked (js device index bug, auto start function and USB hotplug support)"
+	CHANGE_TEXT=" New dolphin version / splitted configuration folder for Wii and Gamecube"
 
 	#define uploader, date and time zone for changelog
-	uploader_date="Jens-Christian Lache <jc.lache@web.de>  Tue, 31 Oct 2014 23:00:00 +0100"
+	uploader_date="Jens-Christian Lache <jc.lache@web.de>  Sat, 15 Nov 2014 16:00:00 +0100"
 
 	#define package maintainer for dsc and control file 
 	pkgmaintainer="RetroRig Development Team <jc.lache@gmail.com>"
