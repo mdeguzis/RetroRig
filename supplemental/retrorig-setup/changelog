@@ -3,8 +3,8 @@ retrorig-setup (version_placeholder) trusty; urgency=medium
   * changelog_text
 
  -- uploader_date
-
-retrorig-setup (0:0.9.7.1) trusty; urgency=medium
+ 
+retrorig-setup (0:0.9.7.1.2) trusty; urgency=medium
 
   *  New dolphin version / splitted configuration folder for Wii and Gamecube
 

@@ -21,7 +21,7 @@ BASE=0.9.7
 # In this case, this level will be used to denote incremental changes
 # instead of a specific branch for now (beta/master only exist at the
 # momement).
-PL=1
+PL=1.2
 
 #choose user
 #user="pk"
