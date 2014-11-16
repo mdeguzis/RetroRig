@@ -1,6 +1,6 @@
 #!/usr/bin/make -f
 
-# Copyright (C) 2014 Jens-Christian Lache
+# Copyright (C) 2014 JC Techno Labs
 
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -34,32 +34,40 @@ override_dh_install:
 	# Add here commands to install the package 
 	
 	#create system directories
-	mkdir -p $(CURDIR)/debian/tmp/usr/lib/RetroRig 
+	mkdir -p $(CURDIR)/debian/tmp/usr/share/RetroRig 
 	mkdir -p $(CURDIR)/debian/tmp/usr/bin 
 	mkdir -p $(CURDIR)/debian/tmp/usr/share/applications
 	mkdir -p $(CURDIR)/debian/tmp/usr/share/icons 
 	mkdir -p $(CURDIR)/debian/tmp/etc/init.d
-	mkdir -p $(CURDIR)/debian/tmp/usr/lib/RetroRig/Artwork/XBMC
+	mkdir -p $(CURDIR)/debian/tmp/usr/share/RetroRig/Artwork/XBMC
+	mkdir -p $(CURDIR)/debian/tmp/usr/share/man/man7
 	
 	# copy base files
-	cp -r scripts/ gamepad-cfgs/ emu-cfgs/ init-scripts/ scriptmodules/  XBMC-cfgs/ retrorig-cfgs/ common/ $(CURDIR)/debian/tmp/usr/lib/RetroRig
+	cp -r scripts/ gamepad-cfgs/ emu-cfgs/ init-scripts/ scriptmodules/  XBMC-cfgs/ retrorig-cfgs/ common/ $(CURDIR)/debian/tmp/usr/share/RetroRig
 	
 	#copy executables
 	cp retrorig-setup $(CURDIR)/debian/tmp/usr/bin/ 
-	mv $(CURDIR)/debian/tmp/usr/lib/RetroRig/XBMC-cfgs/extra/xbmc-retrorig $(CURDIR)/debian/tmp/usr/bin 
+	mv $(CURDIR)/debian/tmp/usr/share/RetroRig/XBMC-cfgs/extra/xbmc-retrorig $(CURDIR)/debian/tmp/usr/bin 
 	
 	#icons / pictures
-	mv $(CURDIR)/debian/tmp/usr/lib/RetroRig/XBMC-cfgs/extra/retro-icon.png $(CURDIR)/debian/tmp/usr/share/icons
-	cp Artwork/XBMC/RetroMain-0-9-7b.png $(CURDIR)/debian/tmp/usr/lib/RetroRig/Artwork/XBMC/
-	cp Artwork/XBMC/gears.png $(CURDIR)/debian/tmp/usr/lib/RetroRig/Artwork/XBMC/
+	mv $(CURDIR)/debian/tmp/usr/share/RetroRig/XBMC-cfgs/extra/retro-icon.png $(CURDIR)/debian/tmp/usr/share/icons
+	cp Artwork/XBMC/RetroMain-0-9-7b.png $(CURDIR)/debian/tmp/usr/share/RetroRig/Artwork/XBMC/
+	cp Artwork/XBMC/gears.png $(CURDIR)/debian/tmp/usr/share/RetroRig/Artwork/XBMC/
 	
 	#supplemental application files
-	mv $(CURDIR)/debian/tmp/usr/lib/RetroRig/XBMC-cfgs/extra/startXBMC.sh $(CURDIR)/debian/tmp/usr/share/applications
-	cp $(CURDIR)/debian/tmp/usr/lib/RetroRig/XBMC-cfgs/extra/RetroRig.desktop $(CURDIR)/debian/tmp/usr/share/applications
-	mv $(CURDIR)/debian/tmp/usr/lib/RetroRig/XBMC-cfgs/extra/gp_autodetect_xbmc.sh $(CURDIR)/debian/tmp/usr/share/applications
+	mv $(CURDIR)/debian/tmp/usr/share/RetroRig/XBMC-cfgs/extra/startXBMC.sh $(CURDIR)/debian/tmp/usr/share/applications
+	cp $(CURDIR)/debian/tmp/usr/share/RetroRig/XBMC-cfgs/extra/RetroRig.desktop $(CURDIR)/debian/tmp/usr/share/applications
+	mv $(CURDIR)/debian/tmp/usr/share/RetroRig/XBMC-cfgs/extra/gp_autodetect_xbmc.sh $(CURDIR)/debian/tmp/usr/share/applications
 	
 	#services
-	mv $(CURDIR)/debian/tmp/usr/lib/RetroRig/XBMC-cfgs/extra/rescan $(CURDIR)/debian/tmp/etc/init.d/
+	mv $(CURDIR)/debian/tmp/usr/share/RetroRig/XBMC-cfgs/extra/rescan $(CURDIR)/debian/tmp/etc/init.d/
+	
+	#delete testing files
+	rm -f $(CURDIR)/debian/tmp/usr/share/RetroRig/XBMC-cfgs/extra/gp_autodetect_xbmc.sh.testing
+	
+	#man page
+	gzip -c supplemental/retrorig-setup/retrorig-setup.7 > $(CURDIR)/debian/tmp/usr/share/man/man7/retrorig-setup.7.gz
+	gzip -c supplemental/retrorig-setup/xbmc-retrorig.7 > $(CURDIR)/debian/tmp/usr/share/man/man7/xbmc-retrorig.7.gz
 
 override_dh_makeshlibs:
 	
@@ -68,4 +76,23 @@ override_dh_auto_test:
 	
 
 override_dh_shlibdeps: 
-	
+	#set executable attribute
+	chmod 755 $(CURDIR)/debian/tmp/usr/share/RetroRig/XBMC-cfgs/addons/script.games.rom.collection.browser/resources/scriptfiles/applaunch.sh
+	chmod 755 $(CURDIR)/debian/tmp/usr/share/RetroRig/scriptmodules/configuration.shinc
+	chmod 755 $(CURDIR)/debian/tmp/usr/share/RetroRig/scriptmodules/emulators.shinc
+	chmod 755 $(CURDIR)/debian/tmp/usr/share/RetroRig/scriptmodules/gamepads.shinc
+	chmod 755 $(CURDIR)/debian/tmp/usr/share/RetroRig/scriptmodules/helpers.shinc
+	chmod 755 $(CURDIR)/debian/tmp/usr/share/RetroRig/scriptmodules/settings.shinc
+	chmod 755 $(CURDIR)/debian/tmp/usr/share/RetroRig/scriptmodules/setup.shinc
+	chmod 755 $(CURDIR)/debian/tmp/usr/share/RetroRig/scriptmodules/syscalls-deb.shinc
+	chmod 755 $(CURDIR)/debian/tmp/usr/share/applications/gp_autodetect_xbmc.sh
+	chmod 755 $(CURDIR)/debian/tmp/usr/share/applications/startXBMC.sh
+
+	#removing unnecessary executable attributes
+	chmod 644 $(CURDIR)/debian/tmp/usr/share/RetroRig/common/parserConfig.xml
+	chmod 644 $(CURDIR)/debian/tmp/usr/share/RetroRig/XBMC-cfgs/extra/RCB_emu_xml/sega_master_system.txt
+	chmod 644 $(CURDIR)/debian/tmp/usr/share/RetroRig/gamepad-cfgs/ps3_blu_controller/keyboard.xml
+	chmod 644 $(CURDIR)/debian/tmp/usr/share/RetroRig/common/MAME\ synopsis\ RCB\ 201202.zip
+	chmod 644 $(CURDIR)/debian/tmp/usr/share/RetroRig/XBMC-cfgs/XBMC-session/xbmc.desktop
+	chmod 644 $(CURDIR)/debian/tmp/usr/share/RetroRig/XBMC-cfgs/extra/RCB_emu_xml/mame.txt
+

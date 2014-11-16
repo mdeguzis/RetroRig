@@ -21,7 +21,7 @@ BASE=0.9.7
 # In this case, this level will be used to denote incremental changes
 # instead of a specific branch for now (beta/master only exist at the
 # momement).
-PL=1.2
+PL=1.3
 
 #choose user
 #user="pk"
@@ -75,10 +75,10 @@ if [ "$user" == "jc" ]; then
 	LAUNCHPAD_PPA="ppa:beauman/retrorig-testing"
 
 	#changed in package
-	CHANGE_TEXT=" New dolphin version / splitted configuration folder for Wii and Gamecube"
+	CHANGE_TEXT="Lintian messages reduced"
 
 	#define uploader, date and time zone for changelog
-	uploader_date="Jens-Christian Lache <jc.lache@web.de>  Sat, 15 Nov 2014 16:00:00 +0100"
+	uploader_date="Jens-Christian Lache <jc.lache@web.de>  Sun, 16 Nov 2014 16:00:00 +0100"
 
 	#define package maintainer for dsc and control file 
 	pkgmaintainer="RetroRig Development Team <jc.lache@gmail.com>"
@@ -181,7 +181,11 @@ sed -i "s|pkgmaintainer|$pkgmaintainer|g" "retrorig-setup-$PRE:$BASE.$PL.dsc"
 SRC_FOLDER=retrorig-setup-$BASE.$PL
 
 echo "cloning repository"
-git clone $source_reprository  
+
+echo "################# DEBUG #################"
+#git clone $source_reprository  
+cp -r ~/tmp/RetroRig .
+
 file RetroRig/
 
 if [ $? -eq 0 ]; then  
@@ -198,6 +202,9 @@ cd $SRC_FOLDER
 
 git checkout $BRANCH
 git pull
+
+echo "################# DEBUG #################"
+cp ~/RetroRig/supplemental/retrorig-setup/retrorig-setup.7 supplemental/retrorig-setup/
 
 mkdir -p debian/source
 
@@ -221,7 +228,7 @@ echo "Makefile"
 cp ~/RetroRig/supplemental/retrorig-setup/Makefile .
 
 echo "removing internal files"
-rm -rf supplemental/ .git/
+rm -rf .git/
 
 echo "installation script"
 if [ -f retrorig-setup.sh ]; then  

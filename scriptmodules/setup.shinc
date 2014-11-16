@@ -531,18 +531,15 @@ function rrs_add_standard_repos()
 					echo "deb http://ppa.launchpad.net/beauman/retrorig/ubuntu trusty main" >\
 					  /etc/apt/sources.list.d/beauman-ubuntu-retrorig-trusty.list
 
-					echo "deb http://ppa.launchpad.net/beauman/retrorig-testing/ubuntu trusty main" >\
-					  /etc/apt/sources.list.d/beauman-ubuntu-retrorig-testing-trusty.list
-
 					echo "copying missing libraries for Ubuntu 14.10"
-					mkdir -p /usr/lib/RetroRig
-					cd /usr/lib/RetroRig
+					mkdir -p /usr/share/RetroRig
+					cd /usr/share/RetroRig
 					wget --tries=50 -P /tmp "http://www.libregeek.org/RetroRig/libs/libs.Ubuntu.14.10.tar.bz"
 					tar xvfj /tmp/libs.Ubuntu.14.10.tar.bz
 
-					echo "installing librariessystem wide"
+					echo "installing libraries system wide"
 					cd /etc/ld.so.conf.d/
-					echo /usr/lib/RetroRig > RetroRig.conf
+					echo /usr/share/RetroRig > RetroRig.conf
 					ldconfig
 				
 #					TODO
@@ -554,7 +551,7 @@ function rrs_add_standard_repos()
 #					apt-get update
 #
 #					# remove supplemental libraries
-#					rm -rf /usr/lib/RetroRig
+#					rm -rf /usr/share/RetroRig
 #					rm /etc/ld.so.conf.d/RetroRig.conf
 #					ldconfig
 					;;
