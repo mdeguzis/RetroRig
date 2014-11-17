@@ -99,6 +99,10 @@ case "$1" in
     $0 stop
     $0 start
     ;;
+  force-reload)
+    $0 stop
+    $0 start
+    ;;
   status)
     if rescanIsRunning; then
       echo "rescan is running"
