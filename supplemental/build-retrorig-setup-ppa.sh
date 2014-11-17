@@ -227,6 +227,12 @@ cp ~/RetroRig/supplemental/retrorig-setup/format debian/source/
 echo "Makefile"
 cp ~/RetroRig/supplemental/retrorig-setup/Makefile .
 
+echo "copyright"
+cp ~/RetroRig/supplemental/retrorig-setup/copyright debian/copyright
+
+echo "compat"
+cp ~/RetroRig/supplemental/retrorig-setup/compat debian/compat
+
 echo "removing internal files"
 rm -rf .git/
 

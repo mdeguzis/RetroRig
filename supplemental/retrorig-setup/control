@@ -1,5 +1,5 @@
 Source: retrorig-setup
-Section: games
+Section: video
 Priority: extra
 Maintainer: pkgmaintainer
 Build-Depends: debhelper (>= 9)
@@ -8,7 +8,7 @@ Homepage: https://github.com/ProfessorKaos64/RetroRig
 
 Package: retrorig-setup
 Architecture: any
-Depends: 
+Depends: ${misc:Depends}
 Description: RetroRig is a suite of console emulators embedded in a 
  home theater program. 
  .    
