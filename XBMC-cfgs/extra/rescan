@@ -6,7 +6,7 @@
 # Default-Start:     2 3 4 5
 # Default-Stop:      0 1 6
 # Short-Description: Start rescan
-# Short-Description: This script starts, stops or restarts /usr/share/applications/gp_autodetect_xbmc.sh from project RetroRig. For more information see there.
+# Description: This script starts, stops or restarts /usr/share/applications/gp_autodetect_xbmc.sh from project RetroRig. For more information see there.
 ### END INIT INFO
 #
 # Author:      beauman @ jc techno labs
