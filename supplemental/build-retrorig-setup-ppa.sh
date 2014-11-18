@@ -233,6 +233,10 @@ cp ~/RetroRig/supplemental/retrorig-setup/copyright debian/copyright
 echo "compat"
 cp ~/RetroRig/supplemental/retrorig-setup/compat debian/compat
 
+echo "postinst/postrm"
+cp ~/RetroRig/supplemental/retrorig-setup/postinst debian/postinst
+cp ~/RetroRig/supplemental/retrorig-setup/postrm debian/postrm
+
 echo "removing internal files"
 rm -rf .git/
 

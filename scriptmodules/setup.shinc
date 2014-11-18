@@ -674,7 +674,7 @@ function rrs_software()
 	$cmd_install_pkg xboxdrv curl python-software-properties \
 	pkg-config software-properties-common dconf-tools jstest-gtk \
 	qjoypad sixad libusb-0.1-4 antimicro bluez getpos unclutter \
-	joydetect sudo
+	joydetect sudo ttf-dejavu-core ttf-dejavu-core ttf-liberation
 
 	#wii motion support
 	$cmd_install_pkg libcwiid1 lswm wmgui wminput

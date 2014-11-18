@@ -42,6 +42,7 @@ override_dh_install:
 	mkdir -p $(CURDIR)/debian/retrorig-setup/usr/share/RetroRig/Artwork/XBMC
 	mkdir -p $(CURDIR)/debian/retrorig-setup/usr/share/man/man7
 	mkdir -p $(CURDIR)/debian/retrorig-setup/usr/share/doc/RetroRig/
+	mkdir -p $(CURDIR)/debian/retrorig-setup/usr/lib
 	
 	# copy base files
 	cp -r scripts/ gamepad-cfgs/ emu-cfgs/ init-scripts/ scriptmodules/  XBMC-cfgs/ retrorig-cfgs/ common/ $(CURDIR)/debian/retrorig-setup/usr/share/RetroRig
@@ -70,6 +71,9 @@ override_dh_install:
 	rm -f $(CURDIR)/debian/retrorig-setup/usr/share/RetroRig/XBMC-cfgs/addons/script.games.rom.collection.browser/LICENSE.txt
 	rm -f $(CURDIR)/debian/retrorig-setup/usr/share/RetroRig/XBMC-cfgs/addons/service.rom.collection.browser/LICENSE.txt
 	rm -f $(CURDIR)/debian/retrorig-setup/usr/share/RetroRig/XBMC-cfgs/addons/skin.ace/LICENSE.txt
+	rm -f $(CURDIR)/debian/retrorig-setup/usr/share/RetroRig/XBMC-cfgs/addons/script.games.rom.collection.browser/resources/skins/fonts/DejaVuSans-Bold.ttf
+	rm -f $(CURDIR)/debian/retrorig-setup/usr/share/RetroRig/XBMC-cfgs/addons/script.games.rom.collection.browser/resources/skins/fonts/DejaVuSans.ttf
+	rm -f $(CURDIR)/debian/retrorig-setup/usr/share/RetroRig/XBMC-cfgs/addons/script.games.rom.collection.browser/resources/skins/fonts/LiberationSans-Regular.ttf
 	
 	#man page
 	gzip -c supplemental/retrorig-setup/retrorig-setup.7 > $(CURDIR)/debian/retrorig-setup/usr/share/man/man7/retrorig-setup.7.gz
@@ -77,14 +81,17 @@ override_dh_install:
 	
 	#copyright
 	cp -r debian/copyright $(CURDIR)/debian/retrorig-setup/usr/share/doc/RetroRig
+	
+	#libraries
+	#delete libs
+	find $(CURDIR)/debian/retrorig-setup/usr/share/RetroRig/XBMC-cfgs/addons/script.games.rom.collection.browser/resources/platform_libraries/ -name "*.so" -exec rm -f {} \;
+	#mkdir -p $(CURDIR)/debian/retrorig-setup/usr/lib/RetroRig/XBMC-cfgs/addons/script.games.rom.collection.browser/resources/platform_libraries/
+	#mv $(CURDIR)/debian/retrorig-setup/usr/share/RetroRig/XBMC-cfgs/addons/script.games.rom.collection.browser/resources/platform_libraries/Linux64/ \
+	#$(CURDIR)/debian/retrorig-setup/usr/lib/RetroRig/XBMC-cfgs/addons/script.games.rom.collection.browser/resources/platform_libraries/
+	
+
 
 override_dh_makeshlibs:
-	
-
-override_dh_auto_test:
-	
-
-override_dh_shlibdeps: 
 	#set executable attribute
 	chmod 755 $(CURDIR)/debian/retrorig-setup/usr/share/RetroRig/XBMC-cfgs/addons/script.games.rom.collection.browser/resources/scriptfiles/applaunch.sh
 	chmod 755 $(CURDIR)/debian/retrorig-setup/usr/share/RetroRig/scriptmodules/configuration.shinc
@@ -104,4 +111,6 @@ override_dh_shlibdeps:
 	chmod 644 $(CURDIR)/debian/retrorig-setup/usr/share/RetroRig/common/MAME\ synopsis\ RCB\ 201202.zip
 	chmod 644 $(CURDIR)/debian/retrorig-setup/usr/share/RetroRig/XBMC-cfgs/XBMC-session/xbmc.desktop
 	chmod 644 $(CURDIR)/debian/retrorig-setup/usr/share/RetroRig/XBMC-cfgs/extra/RCB_emu_xml/mame.txt
+	chmod 644 $(CURDIR)/debian/retrorig-setup/usr/share/RetroRig/init-scripts/ps3_blu_controller/default/xboxdrv
+	chmod 644 $(CURDIR)/debian/retrorig-setup/usr/share/RetroRig/init-scripts/x360_wireless_controller/default/xboxdrv
 
