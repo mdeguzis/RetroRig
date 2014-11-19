@@ -489,7 +489,7 @@ function rrs_source_syscalls()
 	echo "Supported Platform? $platform_check"
 	echo "Distro: $OS_TYPE"
 	echo "Release: $OS_RELEASE"
-	echo "Defautl init system: $init_system"
+	echo "Default init system: $init_system"
 	echo "Primary package management system: $pkg_manager"
 	echo ""
 	echo "#####################################################"

@@ -584,10 +584,10 @@ function wii_motion_controller_for_dolphin()
 	# get the current state of GC controller state
 	# on state = 6
 	# off state = 0
-	gc1_state=$(grep "SIDevice0 = " "$config_home/.dolphin-emu/Wii/Config/Dolphin.ini" | cut -c 13-14)
-	gc2_state=$(grep "SIDevice1 = " "$config_home/.dolphin-emu/Wii/Config/Dolphin.ini" | cut -c 13-14)
-	gc2_state=$(grep "SIDevice2 = " "$config_home/.dolphin-emu/Wii/Config/Dolphin.ini" | cut -c 13-14)
-	gc2_state=$(grep "SIDevice3 = " "$config_home/.dolphin-emu/Wii/Config/Dolphin.ini" | cut -c 13-14)
+	gc1_state=$(grep "SIDevice0 = " "$config_home/.dolphin-emu/Wii/Config/Dolphin.ini")
+	gc2_state=$(grep "SIDevice1 = " "$config_home/.dolphin-emu/Wii/Config/Dolphin.ini")
+	gc3_state=$(grep "SIDevice2 = " "$config_home/.dolphin-emu/Wii/Config/Dolphin.ini")
+	gc4_state=$(grep "SIDevice3 = " "$config_home/.dolphin-emu/Wii/Config/Dolphin.ini")
 
 
 cmd=(dialog --backtitle "LibreGeek.org RetroRig" --menu "How do you wish to play your Wii games?" 18 0 12)
@@ -610,10 +610,11 @@ options=(1 "Real Wiimote"
 
 			# DISABLE GC controller since user wants to use the Wiimote
 			# This was noted by a user to cause conflicts with using a Wii mote at the same time
-			sed -i "s|$gc1_state|0|g" "$config_home/.dolphin-emu/Wii/Config/Dolphin.ini"
-			sed -i "s|$gc2_state|0|g" "$config_home/.dolphin-emu/Wii/Config/Dolphin.ini"
-			sed -i "s|$gc3_state|0|g" "$config_home/.dolphin-emu/Wii/Config/Dolphin.ini"
-			sed -i "s|$gc4_state|0|g" "$config_home/.dolphin-emu/Wii/Config/Dolphin.ini"
+
+			sed -i "s|$gc1_state|SIDevice0 = 0|g" "$config_home/.dolphin-emu/Wii/Config/Dolphin.ini"
+			sed -i "s|$gc2_state|SIDevice1 = 0|g" "$config_home/.dolphin-emu/Wii/Config/Dolphin.ini"
+			sed -i "s|$gc3_state|SIDevice2 = 0|g" "$config_home/.dolphin-emu/Wii/Config/Dolphin.ini"
+			sed -i "s|$gc4_state|SIDevice3 = 0|g" "$config_home/.dolphin-emu/Wii/Config/Dolphin.ini"
 
 			# assign Wiimote
 			sed -i "s|PLAYER_SRC|$src|g" "$config_home/.dolphin-emu/Wii/Config/WiimoteNew.ini"
@@ -623,10 +624,10 @@ options=(1 "Real Wiimote"
 			src=1
 			# DISABLE GC controller since user wants to use the emulated Wiimote
 			# This was noted by a user to cause conflicts with using a Wii mote at the same time
-			sed -i "s|$gc1_state|0|g" "$config_home/.dolphin-emu/Wii/Config/Dolphin.ini"
-			sed -i "s|$gc2_state|0|g" "$config_home/.dolphin-emu/Wii/Config/Dolphin.ini"
-			sed -i "s|$gc3_state|0|g" "$config_home/.dolphin-emu/Wii/Config/Dolphin.ini"
-			sed -i "s|$gc4_state|0|g" "$config_home/.dolphin-emu/Wii/Config/Dolphin.ini"
+			sed -i "s|$gc1_state|SIDevice0 = 0|g" "$config_home/.dolphin-emu/Wii/Config/Dolphin.ini"
+			sed -i "s|$gc2_state|SIDevice1 = 0|g" "$config_home/.dolphin-emu/Wii/Config/Dolphin.ini"
+			sed -i "s|$gc3_state|SIDevice2 = 0|g" "$config_home/.dolphin-emu/Wii/Config/Dolphin.ini"
+			sed -i "s|$gc4_state|SIDevice3 = 0|g" "$config_home/.dolphin-emu/Wii/Config/Dolphin.ini"
 
 			# assign Wiimote
 			sed -i "s|PLAYER_SRC|$src|g" "$config_home/.dolphin-emu/Wii/Config/WiimoteNew.ini"
@@ -635,10 +636,10 @@ options=(1 "Real Wiimote"
 		3)
 			src=0
 			# ENABLE GC controller since user does not want to use a Wiimote
-			sed -i "s|$gc1_state|6|g" "$config_home/.dolphin-emu/Wii/Config/Dolphin.ini"
-			sed -i "s|$gc2_state|6|g" "$config_home/.dolphin-emu/Wii/Config/Dolphin.ini"
-			sed -i "s|$gc3_state|6|g" "$config_home/.dolphin-emu/Wii/Config/Dolphin.ini"
-			sed -i "s|$gc4_state|6|g" "$config_home/.dolphin-emu/Wii/Config/Dolphin.ini"
+			sed -i "s|$gc1_state|SIDevice0 = 6|g" "$config_home/.dolphin-emu/Wii/Config/Dolphin.ini"
+			sed -i "s|$gc2_state|SIDevice1 = 6|g" "$config_home/.dolphin-emu/Wii/Config/Dolphin.ini"
+			sed -i "s|$gc3_state|SIDevice2 = 6|g" "$config_home/.dolphin-emu/Wii/Config/Dolphin.ini"
+			sed -i "s|$gc4_state|SIDevice3 = 6|g" "$config_home/.dolphin-emu/Wii/Config/Dolphin.ini"
 
 			# disable Wiimote with 0 value
 			sed -i "s|PLAYER_SRC|$src|g" "$config_home/.dolphin-emu/Wii/Config/WiimoteNew.ini"
