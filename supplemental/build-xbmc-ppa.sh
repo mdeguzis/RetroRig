@@ -3,21 +3,29 @@
 #======================================================================== 
 #
 # Author:  Michael DeGuzis and Jens-Christian Lache, 
-# Date:    20141023
-# Version: Patch Level 11
-# Changed: path for setResolution / splash screen / raiseMainWindow
+# Date:    20141025
+# Version: Patch Level 12
+# Changed: 
+#
+#          Disabled GUI dialog 
+#          "Add-on is incompatible due to unmet dependencies."
+#
+#          Disabled dbus messages for UDev
+#
+#          Recreate main window after game exit (for Gnome Desktop)
+#
 # ========================================================================
 
 #define base version
 BASE=3:14.0
 
 # define patch level
-PL=11
+PL=12
 
 #define xbmc branch to checkout
 BRANCH=retrorig-pl$PL
 
-UPLOAD_TRY=0
+UPLOAD_TRY=2
 
 PPA="ppa:beauman/retrorig"
 

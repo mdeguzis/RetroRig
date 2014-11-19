@@ -60,19 +60,14 @@ function cfg_uninstall()
 		# remove installed binaries
 		# do not remove software-properties-common, necessary pkg!
 		clear
-		apt-get autoremove -y xboxdrv curl python-software-properties \
+		$cmd_autoremove_pkg xboxdrv curl python-software-properties \
 		pkg-config mednafen mame mupen64plus dconf-tools qjoypad xbmc \
 		stella sixad
 
 		# add apport, apport-gtk back
-		apt-get install -y apport apport-gtk
-		dpkg --remove-architecture i386
+		$cmd_install_pkg apport apport-gtk
+		$cmd_remove_32bit_arch
 
-		apt-get -y autoremove
-
-		# repositories
-		#add-apt-repository -ry ppa:team-xbmc/ppa
-		#add-apt-repository -ry ppa:falk-t-j/qtsixa
 		rm -f /etc/apt/sources.list.d/playdeb.list
 		;;
 
@@ -87,7 +82,7 @@ function cfg_uninstall()
 	esac
 
 # release holds on packages
-apt-mark unhold xbmc xbmc-bin mednafen
+$cmd_unhold_pkg xbmc xbmc-bin mednafen
 
 #ask to keep folders
 #prompt user if they wish to keep folders from install
@@ -127,9 +122,9 @@ case $response in
 	sed -i '/%sudo   ALL=NOPASSWD: \/usr\/bin\/xboxdrv/d' "/etc/sudoers"
 
 	# remove system services
-	service xboxdrv stop
-	service rescan stop	
-	update-rc.d -f xboxdrv remove
+	$cmd_xboxdrv_stop=
+	$cmd_rescan_stop	
+	$cmd_remove_xboxdrv
 	rm -f /etc/init.d/xboxdrv
 	rm -f /etc/init.d/rescan
 	rm -f /etc/default/xboxdrv
@@ -207,7 +202,7 @@ case $response in
 mv "$rootdir" "$rootdir.old"
 
 #update Ubuntu repository listings
-apt-get update
+$cmd_update_system
 sleep 2s
 
 # correct permissions
@@ -305,4 +300,5 @@ function getParameter()
   echo $VAR
 
 }
+
 
