@@ -56,9 +56,11 @@ install:
 	#$(MAKE) -C build-qt DESTDIR=$(CURDIR)/debian/ppsspp PREFIX=/usr install  # make install of ppsspp installs only icons... needs improvement by upstream
 	cp $(CURDIR)/build/PPSSPPSDL $(CURDIR)/debian/ppsspp/usr/games/PPSSPPSDL
 	strip $(CURDIR)/debian/ppsspp/usr/games/PPSSPPSDL
-	ln -s $(CURDIR)/debian/ppsspp/usr/games/PPSSPPSDL $(CURDIR)/debian/ppsspp/usr/games/ppsspp
+	cd $(CURDIR)/debian/ppsspp/usr/games/ && ln -s PPSSPPSDL ppsspp
 	cp $(CURDIR)/debian/ppsspp.desktop $(CURDIR)/debian/ppsspp/usr/share/applications/
 	cp -r $(CURDIR)/assets/unix-icons/hicolor/* $(CURDIR)/debian/ppsspp/usr/share/icons/hicolor/
+	mkdir -p $(CURDIR)/debian/ppsspp/usr/share/ppsspp
+	cp -r $(CURDIR)/assets/ $(CURDIR)/debian/ppsspp/usr/share/ppsspp/
 
 # Build architecture-independent files here.
 binary-indep: install

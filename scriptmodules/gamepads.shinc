@@ -61,11 +61,16 @@ function gp_ps3_blu()
 	cp -v "$scriptdir/emu-cfgs/ps3_blu_controller/mupen64plus/mupen64plus.cfg" "$config_home/.config/mupen64plus/"
 
 	# Dolphin (GameCube/Wii)
-	# default path: /home/$USER/.retrorig/.dolphin-emu
-	# Main config
-	cp -v "$scriptdir/emu-cfgs/ps3_blu_controller/Dolphin/GCPadNew.ini" "$config_home/.dolphin-emu/Config/"
-	cp -v "$scriptdir/emu-cfgs/ps3_blu_controller/Dolphin/Dolphin.ini" "$config_home/.dolphin-emu/Config/"
-	cp -v "$scriptdir/emu-cfgs/ps3_blu_controller/Dolphin/WiimoteNew.ini" "$config_home/.dolphin-emu/Config/"
+	# default path: /home/$USER/.retrorig/.dolphin-emu/Wii/
+	# default path: /home/$USER/.retrorig/.dolphin-emu/GC/
+	## GC config ##
+	cp -v "$scriptdir/emu-cfgs/ps3_blu_controller/Dolphin/GC/GCPadNew.ini" "$config_home/.dolphin-emu/GC/Config/"
+	cp -v "$scriptdir/emu-cfgs/ps3_blu_controller/Dolphin/GC/Dolphin.ini" "$config_home/.dolphin-emu/GC/Config/"
+	cp -v "$scriptdir/emu-cfgs/ps3_blu_controller/Dolphin/GC/WiimoteNew.ini" "$config_home/.dolphin-emu/GC/Config/"
+	## Wii config ##
+	cp -v "$scriptdir/emu-cfgs/ps3_blu_controller/Dolphin/Wii/GCPadNew.ini" "$config_home/.dolphin-emu/Wii/Config/"
+	cp -v "$scriptdir/emu-cfgs/ps3_blu_controller/Dolphin/Wii/Dolphin.ini" "$config_home/.dolphin-emu/Wii/Config/"
+	cp -v "$scriptdir/emu-cfgs/ps3_blu_controller/Dolphin/Wii/WiimoteNew.ini" "$config_home/.dolphin-emu/Wii/Config/"
 
 	# PCSX2
 	# base config folder
@@ -225,7 +230,7 @@ function gp_ps3_blu_main()
         echo "starting serives" | tee "$rootdir/logs/debug.log"
         echo "" | tee "$rootdir/logs/debug.log"
         # start service, but fork to background so when user exits script it is still running $
-        service sixad start | tee "$rootdir/logs/debug.log" &
+        $cmd_sixad_start | tee "$rootdir/logs/debug.log" &
         sleep 2s
         clear
 
@@ -255,7 +260,6 @@ function gp_ps3_blu_main()
 		ps3_set_ctrl_assignments
 		ps3_set_emulator_ids
 		dialog --msgbox "Pairing of Player 1 Controller complete" 5 43 
-		sleep 5s
 		;;
 
 		2)
@@ -375,7 +379,7 @@ function ps3_set_ctrl_assignments()
 	# Function Description:
 	# 
 	# This function sets the control methods for XBMC navigation
-	# and assignsthe unique MAC address of P1 to use as primary
+	# and assigns the unique MAC address of P1 to use as primary
 	####################################################################
 
 	# inform user
@@ -384,9 +388,37 @@ function ps3_set_ctrl_assignments()
 
 	# Set PS3 Blu MAC value with the "joydetect" C program
 	# Credit for this goes entirely to http://www.reddit.com/user/ElFeesho
- 	PS3_MAC_BLU=$(joydetect /dev/input/js0 | awk -F'[^:[a-zA-Z0-9]*' '{print $6}')
+	
+	device_id=`joydetect /dev/input/js0 2>/dev/null`
+	if [ -n "$device_id" ]; then 
+		echo "found controller on device 0"
+		PS3_MAC_BLU=$(echo $device_id | awk -F'[^:[a-zA-Z0-9]*' '{print $6}')
+		device_index_PS3=0
+	else
+		device_id=`joydetect /dev/input/js1 2>/dev/null`
+		if [ -n "$device_id" ]; then  
+			echo "found controller on device 1"
+			PS3_MAC_BLU=$(echo $device_id | awk -F'[^:[a-zA-Z0-9]*' '{print $6}')
+			device_index_PS3=1
+		else  
+			device_id=`joydetect /dev/input/js2 2>/dev/null`
+			if [ -n "$device_id" ]; then  
+				echo "found controller on device 2"
+				PS3_MAC_BLU=$(echo $device_id | awk -F'[^:[a-zA-Z0-9]*' '{print $6}')
+				device_index_PS3=2
+			else  
+				device_id=`joydetect /dev/input/js3 2>/dev/null`
+				if [ -n "$device_id" ]; then  
+					echo "found controller on device 3"
+					PS3_MAC_BLU=$(echo $device_id | awk -F'[^:[a-zA-Z0-9]*' '{print $6}')
+					device_index_PS3=3
+				else  
+					echo "No device found. Please try again under RetroRig Settings/Change Gamepad Type"
+				fi
+			fi
+		fi
+	fi
 	echo -e "\nController ID/MAC Address applied to XBMC controls was:\n$PS3_MAC_BLU \n"
-	sleep 2s
 
 	# copy over default keyboard file:
 	cp "$scriptdir/gamepad-cfgs/ps3_blu_controller/keyboard.xml" "$xbmc_home/userdata/keymaps/"
@@ -394,7 +426,7 @@ function ps3_set_ctrl_assignments()
 	# Copy our keymap to the regular .xbmc dotfile directory if keyboard.xml exists:
 	if [[ -f "$home/.xbmc/userdata/keymaps/keyboard.xml" ]]; then
 		# back up current file
-		cp -v "$home/.xbmc/userdata/keymaps/keyboard.xml" "$home/.xbmc/userdata/keymaps/keyboard.xml.old"
+		cp "$home/.xbmc/userdata/keymaps/keyboard.xml" "$home/.xbmc/userdata/keymaps/keyboard.xml.old"
 		# copy in keymap
 		cp "$scriptdir/gamepad-cfgs/ps3_blu_controller/keyboard.xml" "$home/.xbmc/userdata/keymaps/"
 	fi
@@ -431,47 +463,78 @@ function ps3_set_emulator_ids()
 	# However, it is noted that it is "included for informational purposes only", so a sed swap should not
 	# Be necessary
  
-        if [ $n == "1" ]; then
+	if [ $n == "1" ]; then
+		
+		i=$((device_index_PS3+0))
 		# Dolphin
-		dolphin_MAC_BLU=$(joydetect /dev/input/js0 | awk -F'[^:[a-zA-Z0-9]*' '{print $6}')
+		dolphin_MAC_BLU=$(joydetect /dev/input/js$i | awk -F'[^:[a-zA-Z0-9]*' '{print $6}')
 		# Stella (supports only 2 players )
-		Stella_MAC_BLU=$(joydetect /dev/input/js0 | awk -F'[^:[a-zA-Z0-9]*' '{print $6}')
-		sed -i "s|p1_stella_MAC_temp|$Stella_MAC_BLU|g" "$config_home/.stella/stellarc"
+		Stella_MAC_BLU=$(joydetect /dev/input/js$i | awk -F'[^:[a-zA-Z0-9]*' '{print $6}')
 
 	elif [ $n == "2" ]; then
+		
+		i=$((device_index_PS3+1))
 		# Dolphin
-		dolphin_MAC_BLU=$(joydetect /dev/input/js1 | awk -F'[^:[a-zA-Z0-9]*' '{print $6}')
+		dolphin_MAC_BLU=$(joydetect /dev/input/js$i | awk -F'[^:[a-zA-Z0-9]*' '{print $6}')
 		# Stella (supports only 2 players )
-		Stella_MAC_BLU=$(joydetect /dev/input/js1 | awk -F'[^:[a-zA-Z0-9]*' '{print $6}')
-		sed -i "s|p2_stella_MAC_temp|$Stella_MAC_BLU|g" "$config_home/.stella/stellarc"
+		Stella_MAC_BLU=$(joydetect /dev/input/js$i | awk -F'[^:[a-zA-Z0-9]*' '{print $6}')
 
 	elif [ $n == "3" ]; then
+	        
+		i=$((device_index_PS3+2))
 		# Dolphin
-		dolphin_MAC_BLU=$(joydetect /dev/input/js2 | awk -F'[^:[a-zA-Z0-9]*' '{print $6}')
+		dolphin_MAC_BLU=$(joydetect /dev/input/js$i | awk -F'[^:[a-zA-Z0-9]*' '{print $6}')
 
 	elif [ $n == "4" ]; then
+		
+		i=$((device_index_PS3+3))
 		# Dolphin
-		dolphin_MAC_BLU=$(joydetect /dev/input/js3 | awk -F'[^:[a-zA-Z0-9]*' '{print $6}')
+		dolphin_MAC_BLU=$(joydetect /dev/input/js$i | awk -F'[^:[a-zA-Z0-9]*' '{print $6}')
 
 	else
-		echo "Error settings MAC/ID for emulator"
+		echo "Error setting MAC/ID for emulator"
 
-        fi
+	fi
 
 	echo -e "Controller ID/MAC Address applied to the Dolphin emulator Controller $n was:\n$dolphin_MAC_BLU"
 	echo -e "\nController ID/MAC Address applied to the Stella emulator Controller $n was:\n$Stella_MAC_BLU"
 
-	# Assign controller ID
-	sed -i "s|MAC_TEMP_$n|$dolphin_MAC_BLU|g" "$config_home/.dolphin-emu/Config/GCPadNew.ini"
-	sed -i "s|MAC_TEMP_$n|$dolphin_MAC_BLU|g" "$config_home/.dolphin-emu/Config/WiimoteNew.ini"
+	# Assign controller ID for Dolphin
+	## GC ##
+	sed -i "s|MAC_TEMP_$n|$dolphin_MAC_BLU|g" "$config_home/.dolphin-emu/GC/Config/GCPadNew.ini"
+	sed -i "s|MAC_TEMP_$n|$dolphin_MAC_BLU|g" "$config_home/.dolphin-emu/GC/Config/WiimoteNew.ini"
+	## Wii ##
+	sed -i "s|MAC_TEMP_$n|$dolphin_MAC_BLU|g" "$config_home/.dolphin-emu/Wii/Config/GCPadNew.ini"
+	sed -i "s|MAC_TEMP_$n|$dolphin_MAC_BLU|g" "$config_home/.dolphin-emu/Wii/Config/WiimoteNew.ini"
 
-	#native or emulated Wii controller 1=emulated 2=native
- 	clear
-        src=1
+	# Assign controller ID for Stella
+	sed -i "s|MAC_TEMP_$n|$Stella_MAC_BLU|g" "$config_home/.stella/stellarc"
+	
+	sleep 2
+
+}
+
+function enable_autostart_RetroRig()
+{
+	####################################################################
+	#
+	# Function Description:
+	# 
+	# enable / disable auto start function for RetroRig
+	#
+	#################################################################### 
+
+	clear
+	
+	PS3_USB=$(grep -m 1 -Ee "autostartXBMC_PS3_USB" "/usr/share/applications/gp_autodetect_xbmc.sh")
+	PS3_BT=$(grep -m 1 -Ee "autostartXBMC_PS3_BT" "/usr/share/applications/gp_autodetect_xbmc.sh")
+	
+	#default is disabled
+	autostart=disabled
+	
 	dialog --title "Confirm yes/no" \
-	--backtitle "Wii game controller" \
-	--yesno " Do you want to use a native controller for Wii games? "  6 60
-
+	--backtitle "Auto Start RetroRig" \
+	--yesno "Do you want to have RetroRig started automatically for the first gamepad being switch on? (PS3 Sixaxis only)"  6 60
 	# Get exit status
 	# 0 means user hit [yes] button.
 	# 1 means user hit [no] button.
@@ -479,23 +542,112 @@ function ps3_set_emulator_ids()
 	response=$?
 	case $response in
 		0)
-		clear
-		src=2
-		dialog --msgbox "For Wii games, controls have been mapped to a native motion controller. Press 1+2 for older Wii controller, or the small button in the battery compartement to activate the controller every time after game start. Navigation in XBMC, game launch and exit for Wii games, as for all other games, is still handled by your primary controller. This applies also to the save state and load state functions. Use your primary controller in parallel to your Wii controller to save and load game states. " 14 60
+			autostart=enabled
 		;;
 
 		1)
-                src=1 
+			autostart=disabled
 		;;
 
 		255)
-                src=1
+			autostart=disabled
 		;;
 	esac
+	
+	if [ "$autostart" == "enabled" ]; then
+		sed -i "s|$PS3_USB|autostartXBMC_PS3_USB=enabled|g" "/usr/share/applications/gp_autodetect_xbmc.sh"
+		sed -i "s|$PS3_BT|autostartXBMC_PS3_BT=enabled|g" "/usr/share/applications/gp_autodetect_xbmc.sh"
+	else
+		sed -i "s|$PS3_USB|autostartXBMC_PS3_USB=disabled|g" "/usr/share/applications/gp_autodetect_xbmc.sh"
+		sed -i "s|$PS3_BT|autostartXBMC_PS3_BT=disabled|g" "/usr/share/applications/gp_autodetect_xbmc.sh"
+	fi
+	
+	clear
+	$cmd_rescan_restart
+	sleep 2
+}
 
-	sed -i "s|PLAYER_SRC|$src|g" "$config_home/.dolphin-emu/Config/WiimoteNew.ini"
+function wii_motion_controller_for_dolphin()
+{
+	####################################################################
+	#
+	# Function Description:
+	# 
+	# configure dolphin to use a Wii motion controller for Wii games
+	#
+	#################################################################### 
 
-	sleep 2s
+	#native or emulated Wii controller 1=emulated 2=native
+	clear
+	src=1
+
+	# get the current state of GC controller state
+	# on state = 6
+	# off state = 0
+	gc1_state=$(grep "SIDevice0 = " "$config_home/.dolphin-emu/Wii/Config/Dolphin.ini")
+	gc2_state=$(grep "SIDevice1 = " "$config_home/.dolphin-emu/Wii/Config/Dolphin.ini")
+	gc3_state=$(grep "SIDevice2 = " "$config_home/.dolphin-emu/Wii/Config/Dolphin.ini")
+	gc4_state=$(grep "SIDevice3 = " "$config_home/.dolphin-emu/Wii/Config/Dolphin.ini")
+
+
+cmd=(dialog --backtitle "LibreGeek.org RetroRig" --menu "How do you wish to play your Wii games?" 18 0 12)
+options=(1 "Real Wiimote"  
+	 2 "Emulated Wiimote"
+	 3 "Emulated Gamecube Controller")
+
+	#make menu choice
+	selection=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
+	#functions
+
+	for choice in $selection
+	do
+		case $choice in
+
+		1)
+			clear
+			src=2
+			dialog --msgbox "For Wii games, controls have been mapped to a native motion controller. Press 1+2 for older Wii controller, or the small button in the battery compartement to activate the controller every time after game start. Navigation in XBMC, game launch and exit for Wii games, as for all other games, is still handled by your primary controller. This applies also to the save state and load state functions. Use your primary controller in parallel to your Wii controller to save and load game states. " 14 60
+
+			# DISABLE GC controller since user wants to use the Wiimote
+			# This was noted by a user to cause conflicts with using a Wii mote at the same time
+
+			sed -i "s|$gc1_state|SIDevice0 = 0|g" "$config_home/.dolphin-emu/Wii/Config/Dolphin.ini"
+			sed -i "s|$gc2_state|SIDevice1 = 0|g" "$config_home/.dolphin-emu/Wii/Config/Dolphin.ini"
+			sed -i "s|$gc3_state|SIDevice2 = 0|g" "$config_home/.dolphin-emu/Wii/Config/Dolphin.ini"
+			sed -i "s|$gc4_state|SIDevice3 = 0|g" "$config_home/.dolphin-emu/Wii/Config/Dolphin.ini"
+
+			# assign Wiimote
+			sed -i "s|PLAYER_SRC|$src|g" "$config_home/.dolphin-emu/Wii/Config/WiimoteNew.ini"
+			;;
+
+		2)
+			src=1
+			# DISABLE GC controller since user wants to use the emulated Wiimote
+			# This was noted by a user to cause conflicts with using a Wii mote at the same time
+			sed -i "s|$gc1_state|SIDevice0 = 0|g" "$config_home/.dolphin-emu/Wii/Config/Dolphin.ini"
+			sed -i "s|$gc2_state|SIDevice1 = 0|g" "$config_home/.dolphin-emu/Wii/Config/Dolphin.ini"
+			sed -i "s|$gc3_state|SIDevice2 = 0|g" "$config_home/.dolphin-emu/Wii/Config/Dolphin.ini"
+			sed -i "s|$gc4_state|SIDevice3 = 0|g" "$config_home/.dolphin-emu/Wii/Config/Dolphin.ini"
+
+			# assign Wiimote
+			sed -i "s|PLAYER_SRC|$src|g" "$config_home/.dolphin-emu/Wii/Config/WiimoteNew.ini"
+			;;
+
+		3)
+			src=0
+			# ENABLE GC controller since user does not want to use a Wiimote
+			sed -i "s|$gc1_state|SIDevice0 = 6|g" "$config_home/.dolphin-emu/Wii/Config/Dolphin.ini"
+			sed -i "s|$gc2_state|SIDevice1 = 6|g" "$config_home/.dolphin-emu/Wii/Config/Dolphin.ini"
+			sed -i "s|$gc3_state|SIDevice2 = 6|g" "$config_home/.dolphin-emu/Wii/Config/Dolphin.ini"
+			sed -i "s|$gc4_state|SIDevice3 = 6|g" "$config_home/.dolphin-emu/Wii/Config/Dolphin.ini"
+
+			# disable Wiimote with 0 value
+			sed -i "s|PLAYER_SRC|$src|g" "$config_home/.dolphin-emu/Wii/Config/WiimoteNew.ini"
+			;;
+		
+		esac
+	done
+
 }
 
 function ps3_pair_blu()
@@ -565,10 +717,16 @@ function gp_ps3_usb()
 	cp -v "$scriptdir/emu-cfgs/ps3_usb_controller/mupen64plus/mupen64plus.cfg" "$config_home/.config/mupen64plus/"
 
 	# Dolphin (GameCube/Wii)
-	# default path: /home/$USER/.retrorig/.dolphin-emu
-	# Main config
-	cp -v "$scriptdir/emu-cfgs/ps3_usb_controller/Dolphin/GCPadNew.ini" "$config_home/.dolphin-emu/Config"
-	cp -v "$scriptdir/emu-cfgs/ps3_usb_controller/Dolphin/Dolphin.ini" "$config_home/.dolphin-emu/Config"
+	# default path: /home/$USER/.retrorig/.dolphin-emu/Wii/
+	# default path: /home/$USER/.retrorig/.dolphin-emu/GC/
+	## GC config ##
+	cp -v "$scriptdir/emu-cfgs/ps3_usb_controller/Dolphin/GC/GCPadNew.ini" "$config_home/.dolphin-emu/GC/Config/"
+	cp -v "$scriptdir/emu-cfgs/ps3_usb_controller/Dolphin/GC/Dolphin.ini" "$config_home/.dolphin-emu/GC/Config/"
+	cp -v "$scriptdir/emu-cfgs/ps3_usb_controller/Dolphin/GC/WiimoteNew.ini" "$config_home/.dolphin-emu/GC/Config/"
+	## Wii config ##
+	cp -v "$scriptdir/emu-cfgs/ps3_usb_controller/Dolphin/Wii/GCPadNew.ini" "$config_home/.dolphin-emu/Wii/Config/"
+	cp -v "$scriptdir/emu-cfgs/ps3_usb_controller/Dolphin/Wii/Dolphin.ini" "$config_home/.dolphin-emu/Wii/Config/"
+	cp -v "$scriptdir/emu-cfgs/ps3_usb_controller/Dolphin/Wii/WiimoteNew.ini" "$config_home/.dolphin-emu/Wii/Config/"
 
 	# Stella
 	# default path: /home/$USER/.retrorig/.config/mupen64plus
@@ -623,9 +781,9 @@ function gp_ps3_usb()
 	cont_num_org=$(grep "CONTROLLER_NUM=" "/etc/default/xboxdrv")
 
 	# inform user that you must have controller connected or restart
-	dialog --msgbox "The xboxdrv userland module detects the number of USB PS3 controllers connected \
+	dialog --msgbox "The xboxdrv userland module detects the number of PS3 controllers connected \
 when it starts. Therefore, we must specify how many you have connected or want to use. \
-You must reboot to have these changes take effect. If you tell xboxdrv I have 3 controllers, when you only have one, \
+If you tell xboxdrv that you have 3 controllers, when you only have one, \
 the service may fail to start correctly.\n\nPlease see /etc/default/xboxdrv for more. Press the PS Button after \
 RetorRig loads to use the gamepad" 14 60
 
@@ -779,13 +937,7 @@ RetorRig loads to use the gamepad" 14 60
 
 	# start the xboxdrv service
 	# disable for now, hangs script completion running in background
-	# service xboxdrv start &
-
-	# copy in the gp_autodetect_xbmc.sh template file, and change the gamepad type 
-	# Testing ONLY for gp_autodetect_xbmc.sh.testing
-	# new_controller_type="ps3_usb"
-	# cp -v "$scriptdir/XBMC-cfgs/extra/gp_autodetect_xbmc.sh" "/usr/share/applications/" 
-	# sed -i "s|controller_temp|$new_controller_type|g" "/usr/share/applications/gp_autodetect_xbmc.sh"
+	# $cmd_xboxdrv_start &
 
 	# replace specific user paths that emulators and files may use
 	h_emu_user_fixes
@@ -793,9 +945,7 @@ RetorRig loads to use the gamepad" 14 60
 	# correct permissions since we install using sudo access
 	h_correct_perms
 
-	# Let the user know about reboot
-	dialog --msgbox "Please reboot to fully enable the controller!"  5 60
-
+	sixad --boot-no
 }
 
 function gp_x360_wireless()
@@ -841,10 +991,16 @@ function gp_x360_wireless()
 	cp -v "$scriptdir/emu-cfgs/x360_wireless_controller/mupen64plus/mupen64plus.cfg" "$config_home/.config/mupen64plus/"
 
 	# Dolphin (GameCube/Wii)
-	# default path: /home/$USER/.retrorig/.dolphin-emu
-	# Main config
-	cp -v "$scriptdir/emu-cfgs/x360_wireless_controller/Dolphin/GCPadNew.ini" "$config_home/.dolphin-emu/Config/"
-	cp -v "$scriptdir/emu-cfgs/x360_wireless_controller/Dolphin/Dolphin.ini" "$config_home/.dolphin-emu/Config/"
+	# default path: /home/$USER/.retrorig/.dolphin-emu/Wii/
+	# default path: /home/$USER/.retrorig/.dolphin-emu/GC/
+	## GC config ##
+	cp -v "$scriptdir/emu-cfgs/x360_wireless_controller/Dolphin/GC/GCPadNew.ini" "$config_home/.dolphin-emu/GC/Config/"
+	cp -v "$scriptdir/emu-cfgs/px360_wireless_controller/Dolphin/GC/Dolphin.ini" "$config_home/.dolphin-emu/GC/Config/"
+	cp -v "$scriptdir/emu-cfgs/x360_wireless_controller/Dolphin/GC/WiimoteNew.ini" "$config_home/.dolphin-emu/GC/Config/"
+	## Wii config ##
+	cp -v "$scriptdir/emu-cfgs/x360_wireless_controller/Dolphin/Wii/GCPadNew.ini" "$config_home/.dolphin-emu/Wii/Config/"
+	cp -v "$scriptdir/emu-cfgs/x360_wireless_controller/Dolphin/Wii/Dolphin.ini" "$config_home/.dolphin-emu/Wii/Config/"
+	cp -v "$scriptdir/emu-cfgs/x360_wireless_controller/Dolphin/Wii/WiimoteNew.ini" "$config_home/.dolphin-emu/Wii/Config/"
 
 	# PCSX2
 	# base config folder
@@ -900,11 +1056,11 @@ function gp_x360_wireless()
 	cont_num_org=$(grep "CONTROLLER_NUM=" "/etc/default/xboxdrv")
 
 	# inform user that you must have controller connected or restart
-	dialog --msgbox "The xboxdrv userland module detects the number of USB PS3 controllers connected \
+	dialog --msgbox "The xboxdrv userland module detects the number of Xbox controllers connected \
 when it starts. Therefore, we must specify how many you have connected or want to use. \
-You must reboot to have these changes take effect. If you tell xboxdrv I have 3 controllers, when you only have one, \
-the service may fail to start correctly.\n\nPlease see /etc/default/xboxdrv for more. Press the PS Button after \
-RetorRig loads to use the gamepad" 14 60
+You must reboot to have these changes take effect. If you tell xboxdrv that you have 3 controllers, when you only have one, \
+the service may fail to start correctly.\n\nPlease see /etc/default/xboxdrv for more. Press the center Guide Button after \
+RetorRig loads to use the gamepad." 14 60
 
 	# Present small menu asking for number of controllers
 	cmd=(dialog --backtitle "LibreGeek.org RetroRig Installer" \
@@ -1072,6 +1228,9 @@ RetorRig loads to use the gamepad" 14 60
 
 	# Let the user know about reboot
 	dialog --msgbox "Please reboot to fully enable the controller(s)."  5 52
+	
+	# Turn off the sixad service
+	sixad --boot-no
 }
 
 function gp_x360_usb()
@@ -1117,10 +1276,16 @@ function gp_x360_usb()
 	cp -v "$scriptdir/emu-cfgs/x360_usb_controller/mupen64plus/mupen64plus.cfg" "$config_home/.config/mupen64plus/"
 
 	# Dolphin (GameCube/Wii)
-	# default path: /home/$USER/.retrorig/.dolphin-emu
-	# Main config
-	cp -v "$scriptdir/emu-cfgs/x360_usb_controller//Dolphin/GCPadNew.ini" "$config_home/.dolphin-emu/Config/"
-	cp -v "$scriptdir/emu-cfgs/x360_usb_controller//Dolphin/Dolphin.ini" "$config_home/.dolphin-emu/Config/"
+	# default path: /home/$USER/.retrorig/.dolphin-emu/Wii/
+	# default path: /home/$USER/.retrorig/.dolphin-emu/GC/
+	## GC config ##
+	cp -v "$scriptdir/emu-cfgs/x360_usb_controller/Dolphin/GC/GCPadNew.ini" "$config_home/.dolphin-emu/GC/Config/"
+	cp -v "$scriptdir/emu-cfgs/px360_usb_controller/Dolphin/GC/Dolphin.ini" "$config_home/.dolphin-emu/GC/Config/"
+	cp -v "$scriptdir/emu-cfgs/x360_usb_controller/Dolphin/GC/WiimoteNew.ini" "$config_home/.dolphin-emu/GC/Config/"
+	## Wii config ##
+	cp -v "$scriptdir/emu-cfgs/x360_usb_controller/Dolphin/Wii/GCPadNew.ini" "$config_home/.dolphin-emu/Wii/Config/"
+	cp -v "$scriptdir/emu-cfgs/x360_usb_controller/Dolphin/Wii/Dolphin.ini" "$config_home/.dolphin-emu/Wii/Config/"
+	cp -v "$scriptdir/emu-cfgs/x360_usb_controller/Dolphin/Wii/WiimoteNew.ini" "$config_home/.dolphin-emu/Wii/Config/"
 
 	# PCSX2
 	# base config folder
@@ -1184,7 +1349,7 @@ RetorRig loads to use the gamepad" 14 60
 
 	# Present small menu asking for number of controllers
 	cmd=(dialog --backtitle "LibreGeek.org RetroRig Installer" \
-		    --menu "Please select the number of USB PS3 controllers" 16 47 16)
+		    --menu "Please select the number of USB Xbox controllers" 16 47 16)
 	options=(1 "1"
 	 	 2 "2"
 	 	 3 "3"
@@ -1328,7 +1493,7 @@ RetorRig loads to use the gamepad" 14 60
 
 	# start the xboxdrv service
 	# disable for now, hangs script completion running in background
-	# service xboxdrv start &
+	# $cmd_xboxdrv_start &
 
 	#####################################################################################
 	# THIS FUNCTION SECTION IS NOT USED AT THE MOMENT, MORE TESTING IS NEEDED!!!
@@ -1349,4 +1514,5 @@ RetorRig loads to use the gamepad" 14 60
 	dialog --msgbox "Using wired controllers, the pairing is in sequence. If you \
 received the wrong LED, unplug and plug the USB cable back in until you get the correct LED number. Please reboot to fully enable the controller"  10 40
 
+	sixad --boot-no
 }

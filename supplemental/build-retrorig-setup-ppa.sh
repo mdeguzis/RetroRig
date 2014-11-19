@@ -3,46 +3,118 @@
 #======================================================================== 
 #
 # Author      : Michael T. DeGuzis, Jens-Christian Lache
-# Date        : 201401018
-# Version     : 0.9.5
+# Date        : 201401115
+# Version     : 0.9.7
 # Description : Install RetroRig via Debian package
+#
 #		Please see changelog for latest alterations and fixes
+#
 # ========================================================================
+
+clear
 
 #define base version
 PRE=0
-BASE=0.9.5
+BASE=0.9.7
 
 # define patch level
 # In this case, this level will be used to denote incremental changes
 # instead of a specific branch for now (beta/master only exist at the
 # momement).
-PL=3
+PL=1.2
 
-#define branch
-#BRANCH=beta
-BRANCH=master
+#choose user
+#user="pk"
+user="jc"
 
-#define upload target
-#LAUNCHPAD_PPA="ppa:mdeguzis/retrorig"
-LAUNCHPAD_PPA="ppa:mdeguzis/retrorig"
+##########################################################################################
+#
+# The Professor
+#
+# (packaging for official releases)
+#
+##########################################################################################
 
-#define uploader for changelog
-#uploader="Michael DeGuzis <mdeguzis@gmail.com>"
-uploader="Michael DeGuzis <mdeguzis@gmail.com>"
+if [ "$user" == "pk" ]; then
 
-#define package maintainer for dsc and control file 
-pkgmaintainer="RetroRig Development Team <mdeguzis@gmail.com>"
+	#define branch
+	BRANCH=master
 
-#define github repository
-source_reprository=https://github.com/ProfessorKaos64/RetroRig
-#source_reprository="https://github.com/beaumanvienna/RetroRig"
+	#define upload target
+	LAUNCHPAD_PPA="ppa:mdeguzis/retrorig"
+	#LAUNCHPAD_PPA="ppa:mdeguzis/pkg-testing"
+	
+	#changed in package
+	CHANGE_TEXT="add comments here"
+
+	#define uploader, date and time zone for changelog
+	uploader_date="Michael DeGuzis <mdeguzis@gmail.com>  Sun, 26 Oct 2014 00:00:00 -0300"
+
+	#define package maintainer for dsc and control file 
+	pkgmaintainer="RetroRig Development Team <mdeguzis@gmail.com>"
+
+	#define github repository
+	source_reprository=https://github.com/ProfessorKaos64/RetroRig
+
+fi
+
+##########################################################################################
+#
+# Beauman
+#
+# (contribution testing)
+#
+##########################################################################################
+
+if [ "$user" == "jc" ]; then
+
+	#define branch
+	BRANCH=beta
+
+	#define upload target
+	LAUNCHPAD_PPA="ppa:beauman/retrorig-testing"
+
+	#changed in package
+	CHANGE_TEXT=" New dolphin version / splitted configuration folder for Wii and Gamecube"
+
+	#define uploader, date and time zone for changelog
+	uploader_date="Jens-Christian Lache <jc.lache@web.de>  Sat, 15 Nov 2014 16:00:00 +0100"
+
+	#define package maintainer for dsc and control file 
+	pkgmaintainer="RetroRig Development Team <jc.lache@gmail.com>"
+
+	#define github repository
+	source_reprository="https://github.com/beaumanvienna/RetroRig"
+
+fi
 
 clear
 echo "#################################################################"
 echo "Building custom retrorig-setup Debian package (branch $BRANCH)"
 echo "#################################################################"
 echo ""
+
+echo ""
+echo ""
+echo ""
+echo "user is: "$user
+echo "package maintainer is: "$pkgmaintainer
+echo ""
+echo "version: *** "$PRE:$BASE.$PL" *** from "$source_reprository", branch "$BRANCH
+echo ""
+echo "changed: "$CHANGE_TEXT
+echo ""
+echo "uploading to: "$LAUNCHPAD_PPA
+echo ""
+echo "Did you adapt debian/changelog accordingly?"
+echo ""
+echo ""
+echo ""
+sleep 5
+
+
+
+
 if [[ -n "$1" ]]; then
 
   echo ""
@@ -132,7 +204,8 @@ mkdir -p debian/source
 echo "changelog"
 cp ~/RetroRig/supplemental/retrorig-setup/changelog debian/
 sed -i "s|version_placeholder|$PRE:$BASE.$PL|g" debian/changelog
-sed -i "s|uploader|$uploader|g" debian/changelog
+sed -i "s|uploader_date|$uploader_date|g" debian/changelog
+sed -i "s|changelog_text|$CHANGE_TEXT|g" debian/changelog
 
 echo "control"
 cp ~/RetroRig/supplemental/retrorig-setup/control debian/

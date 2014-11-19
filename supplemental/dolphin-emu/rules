@@ -14,8 +14,11 @@ configure: configure-stamp
 configure-stamp:
 	dh_testdir
 	# Add here commands to configure the package.
-	mkdir build ; cd build ; cmake -DCMAKE_INSTALL_PREFIX:PATH=/usr ..
-
+	mkdir build ; cd build ; \
+	cmake .. \
+    -DCMAKE_INSTALL_PREFIX='/usr' \
+    -DCMAKE_CXX_FLAGS='-fno-inline-functions' \
+    -DENABLE_LTO='TRUE'
 
 build: build-stamp
 

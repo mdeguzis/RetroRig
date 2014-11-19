@@ -1,0 +1,393 @@
+Format-Specification: http://svn.debian.org/wsvn/dep/web/deps/dep5.mdwn?op=file&rev=135
+Name: dolphin-emu
+Maintainer:
+ Glenn Rice <glennricster@gmail.com>
+Source: http://dolphin-emu.googlecode.com
+
+Files: *
+Copyright: 2003-2010, Dolphin Project
+License: GPL-2+
+
+Files: Source/Core/AudioCommon/Src/aldlist.cpp
+Copyright: 2006, Creative Labs Inc.
+License:
+ THIS SOFTWARE IS PROVIDED BY THE AUTHORS ''AS IS'' AND ANY EXPRESS
+ OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+ WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ ARE DISCLAIMED.  IN NO EVENT SHALL THE AUTHORS OR CONTRIBUTORS BE
+ LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+ CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+ SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR
+ BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+ WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE
+ OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+ EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+Files: Source/Core/DiscIO/Src/AES/aes_core.c
+Copyright: Public Domain
+License:
+ Redistribution and use in source and binary forms, with or without modification, are permitted provided
+ that the following conditions are met:
+ 
+     * Redistributions of source code must retain the above copyright notice, this list of conditions and
+ 	     the following disclaimer.
+     * Redistributions in binary form must reproduce the above copyright notice, this list of conditions
+ 	     and the following disclaimer in the documentation and/or other materials provided with the distribution.
+     * Neither the name of Creative Labs Inc. nor the names of its contributors may be used to endorse or
+ 	     promote products derived from this software without specific prior written permission.
+ 
+ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED
+ WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A
+ PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR
+ ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED
+ TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+ HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+ NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+ POSSIBILITY OF SUCH DAMAGE.
+
+
+Files:
+ Source/Core/DiscIO/Src/AES/aes_cbc.c,
+ Source/Core/DiscIO/Src/AES/aes_locl.h
+Copyright:
+ 1998-2002, The OpenSSL Project
+License:
+ Redistribution and use in source and binary forms, with or without
+ modification, are permitted provided that the following conditions
+ are met:
+ 
+ 1. Redistributions of source code must retain the above copyright
+    notice, this list of conditions and the following disclaimer. 
+ 
+ 2. Redistributions in binary form must reproduce the above copyright
+    notice, this list of conditions and the following disclaimer in
+    the documentation and/or other materials provided with the
+    distribution.
+ 
+ 3. All advertising materials mentioning features or use of this
+    software must display the following acknowledgment:
+    "This product includes software developed by the OpenSSL Project
+    for use in the OpenSSL Toolkit. (http://www.openssl.org/)"
+ 
+ 4. The names "OpenSSL Toolkit" and "OpenSSL Project" must not be used to
+    endorse or promote products derived from this software without
+    prior written permission. For written permission, please contact
+    openssl-core@openssl.org.
+ 
+ 5. Products derived from this software may not be called "OpenSSL"
+    nor may "OpenSSL" appear in their names without prior written
+    permission of the OpenSSL Project.
+ 
+ 6. Redistributions of any form whatsoever must retain the following
+    acknowledgment:
+    "This product includes software developed by the OpenSSL Project
+    for use in the OpenSSL Toolkit (http://www.openssl.org/)"
+ 
+ THIS SOFTWARE IS PROVIDED BY THE OpenSSL PROJECT ``AS IS'' AND ANY
+ EXPRESSED OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+ PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL THE OpenSSL PROJECT OR
+ ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT
+ NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+ LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+ HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT,
+ STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+ ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED
+ OF THE POSSIBILITY OF SUCH DAMAGE.
+
+Files: Source/Core/Core/Src/HW/BBA-TAP/TAP_Win32.h
+Copyright:
+ 2002-2005, OpenVPN Solutions LLC
+ 2003, Damion K. Wilson
+License: GPL-2
+
+Files:
+ Source/Core/Core/Src/HW/WiimoteEmu/Encryption.cpp,
+ Source/Core/Core/Src/HW/WiimoteEmu/Encryption.h
+Copyright:
+ 2003, Dolphin Project
+ Hector Martin <hector@marcansoft.com>
+License: GPL-2
+
+Files: Source/Core/Core/Src/ARDecrypt.cpp
+Copyright:
+ 2003, Dolphin Project
+ 2003-2004, Parasyte
+License: GPL-2
+
+Files:
+ Source/Core/Core/Src/IPC_HLE/l2cap.h,
+ Source/Core/Core/Src/IPC_HLE/hci.h
+Copyright:
+ 2005, Iain Hibbert.
+ 2006, Itronix Inc.
+ 2001, Maksim Yevmenkin <m_evmenkin@yahoo.com>
+License:
+ Redistribution and use in source and binary forms, with or without
+ modification, are permitted provided that the following conditions
+ are met:
+ 1. Redistributions of source code must retain the above copyright
+    notice, this list of conditions and the following disclaimer.
+ 2. Redistributions in binary form must reproduce the above copyright
+    notice, this list of conditions and the following disclaimer in the
+    documentation and/or other materials provided with the distribution.
+ 3. The name of Itronix Inc. may not be used to endorse
+    or promote products derived from this software without specific
+    prior written permission.
+ 
+ THIS SOFTWARE IS PROVIDED BY ITRONIX INC. ``AS IS'' AND
+ ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED
+ TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+ PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL ITRONIX INC. BE LIABLE FOR ANY
+ DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+ (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+ LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ ON ANY THEORY OF LIABILITY, WHETHER IN
+ CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+ ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+ POSSIBILITY OF SUCH DAMAGE.
+
+ Redistribution and use in source and binary forms, with or without
+ modification, are permitted provided that the following conditions
+ are met:
+ 1. Redistributions of source code must retain the above copyright
+    notice, this list of conditions and the following disclaimer.
+ 2. Redistributions in binary form must reproduce the above copyright
+    notice, this list of conditions and the following disclaimer in the
+    documentation and/or other materials provided with the distribution.
+ 
+ THIS SOFTWARE IS PROVIDED BY THE AUTHOR AND CONTRIBUTORS ``AS IS'' AND
+ ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ ARE DISCLAIMED. IN NO EVENT SHALL THE AUTHOR OR CONTRIBUTORS BE LIABLE
+ FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+ DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
+ OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+ HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+ LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
+ OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+ SUCH DAMAGE.
+
+Files: Source/Core/Common/Src/SDCardUtil.cpp
+Copyright: 2007, The Android Open Source Project
+License:
+ Redistribution and use in source and binary forms, with or without
+ modification, are permitted provided that the following conditions are met:
+     * Redistributions of source code must retain the above copyright
+       notice, this list of conditions and the following disclaimer.
+     * Redistributions in binary form must reproduce the above copyright
+       notice, this list of conditions and the following disclaimer in the
+       documentation and/or other materials provided with the distribution.
+     * Neither the name of Google Inc. nor the names of its contributors may
+       be used to endorse or promote products derived from this software
+       without specific prior written permission.
+ 
+ THIS SOFTWARE IS PROVIDED BY Google Inc. ``AS IS'' AND ANY EXPRESS OR
+ IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
+ MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO
+ EVENT SHALL Google Inc. BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+ PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS;
+ OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+ WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR
+ OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
+ ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+Files: Source/Plugins/Plugin_VideoSoftware/Src/Clipper.cpp
+Copyright:
+ 2003-2009, Dolphin Project
+ 2007-2008, Markus Trenkwalder
+License: GPL-2 or other
+ This program is free software: you can redistribute it and/or modify
+ it under the terms of the GNU General Public License as published by
+ the Free Software Foundation, version 2.0.
+ 
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU General Public License 2.0 for more details.
+ 
+ A copy of the GPL 2.0 should have been included with the program.
+ If not, see http://www.gnu.org/licenses/
+ 
+ Official SVN repository and contact information can be found at
+ http://code.google.com/p/dolphin-emu/
+
+ Redistribution and use in source and binary forms, with or without 
+ modification, are permitted provided that the following conditions are met:
+ 
+ * Redistributions of source code must retain the above copyright notice, 
+   this list of conditions and the following disclaimer.
+ 
+ * Redistributions in binary form must reproduce the above copyright notice,
+   this list of conditions and the following disclaimer in the documentation 
+   and/or other materials provided with the distribution.
+ 
+ * Neither the name of the library's copyright owner nor the names of its 
+   contributors may be used to endorse or promote products derived from this 
+   software without specific prior written permission.
+ 
+ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+ "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+ LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+ A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR
+ CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+ EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+ PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
+ PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+ LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+ NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+Files:
+ Source/Core/DSPCore/Src/disassemble.cpp,
+ Source/Core/DSPCore/Src/assemble.h,
+ Source/Core/DSPCore/Src/assemble.cpp,
+ Source/Core/DSPCore/Src/DSPIntUtil.h,
+ Source/Core/DSPCore/Src/disassemble.h,
+ Source/Core/DSPCore/Src/DSPIntExtOps.h,
+ docs/DSP/DSP_InterC/DSP_InterC/DSPExt.h,
+ docs/DSP/DSP_InterC/DSP_InterC/gdsp_opcodes_helper.h,
+ docs/DSP/DSP_InterC/DSP_InterC/DSPExt.cpp
+Copyright:
+ 2005, Duddie
+License: GPL-2+
+
+Files:
+ Source/Core/DSPCore/Src/DSPHWInterface.h,
+ Source/Core/DSPCore/Src/DSPCore.cpp,
+ Source/Core/DSPCore/Src/DSPInterpreter.cpp,
+ Source/Core/DSPCore/Src/DSPStacks.cpp,
+ Source/Core/DSPCore/Src/DSPHWInterface.cpp,
+ Source/Core/DSPCore/Src/DSPStacks.h,
+ Source/Core/DSPCore/Src/DSPMemoryMap.cpp,
+ Source/Core/DSPCore/Src/DSPCore.h,
+ Source/Core/DSPCore/Src/DSPMemoryMap.h,
+ docs/DSP/DSP_InterC/DSP_InterC/DSPOpcodes.h
+Copyright:
+ 2005, Duddie & Tratax
+License: GPL-2+
+
+Files:
+ Source/Core/DSPCore/Src/DSPTables.h,
+ Source/Core/DSPCore/Src/DSPTables.cpp
+Copyright:
+ 2003, Dolphin Project
+ 2005, Duddie <duddie@walla.com>
+License: GPL-2
+
+Files:
+ Externals/CLRun/include/CL/cl_platform.h,
+ Externals/CLRun/include/CL/cl.h,
+ Externals/CLRun/include/CL/cl_gl.h
+Copyright:
+ 2008-2010, The Khronos Group Inc
+License:
+ Permission is hereby granted, free of charge, to any person obtaining a
+ copy of this software and/or associated documentation files (the
+ "Materials"), to deal in the Materials without restriction, including
+ without limitation the rights to use, copy, modify, merge, publish,
+ distribute, sublicense, and/or sell copies of the Materials, and to
+ permit persons to whom the Materials are furnished to do so, subject to
+ the following conditions:
+
+ The above copyright notice and this permission notice shall be included
+ in all copies or substantial portions of the Materials.
+
+ THE MATERIALS ARE PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+ EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+ MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+ IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
+ CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
+ MATERIALS OR THE USE OR OTHER DEALINGS IN THE MATERIALS.
+
+Files:
+ Externals/Bochs_disasm/PowerPCDisasm.h,
+ Externals/Bochs_disasm/PowerPCDisasm.cpp
+Copyright:
+ 1998-2000, Frank Wille
+License:
+ This code is freeware and may be freely redistributed as long as
+ no modifications are made and nothing is charged for it.
+ Non-commercial usage is allowed without any restrictions.
+ EVERY PRODUCT OR PROGRAM DERIVED DIRECTLY FROM MY SOURCE MAY NOT BE
+ SOLD COMMERCIALLY WITHOUT PERMISSION FROM THE AUTHOR.
+
+Files: Source/Core/DolphinWX/Src/MemoryCards/WiiSaveCrypted.cpp
+Copyright:
+ 2003-2009, Dolphin Project
+ 2007-2008, Segher Boessenkool <segher@kernel.crashing.org>
+License: GPL-2
+
+Files: debian/*
+Copyright:
+ 2010, Glenn Rice <glennricster@gmail.com>
+License: GPL-2
+
+Files: Source/Core/VideoCommon/Src/memcpy_amd.cpp
+Copyright:
+ 2001, Advanced Micro Devices, Inc.
+License:
+ LIMITATION OF LIABILITY:  THE MATERIALS ARE PROVIDED *AS IS* WITHOUT ANY
+ EXPRESS OR IMPLIED WARRANTY OF ANY KIND INCLUDING WARRANTIES OF MERCHANTABILITY,
+ NONINFRINGEMENT OF THIRD-PARTY INTELLECTUAL PROPERTY, OR FITNESS FOR ANY
+ PARTICULAR PURPOSE.  IN NO EVENT SHALL AMD OR ITS SUPPLIERS BE LIABLE FOR ANY
+ DAMAGES WHATSOEVER (INCLUDING, WITHOUT LIMITATION, DAMAGES FOR LOSS OF PROFITS,
+ BUSINESS INTERRUPTION, LOSS OF INFORMATION) ARISING OUT OF THE USE OF OR
+ INABILITY TO USE THE MATERIALS, EVEN IF AMD HAS BEEN ADVISED OF THE POSSIBILITY
+ OF SUCH DAMAGES.  BECAUSE SOME JURISDICTIONS PROHIBIT THE EXCLUSION OR LIMITATION
+ OF LIABILITY FOR CONSEQUENTIAL OR INCIDENTAL DAMAGES, THE ABOVE LIMITATION MAY
+ NOT APPLY TO YOU.
+ .
+ AMD does not assume any responsibility for any errors which may appear in the
+ Materials nor any responsibility to support or update the Materials.  AMD retains
+ the right to make changes to its test specifications at any time, without notice.
+ .
+ NO SUPPORT OBLIGATION: AMD is not obligated to furnish, support, or make any
+ further information, software, technical information, know-how, or show-how
+ available to you.
+ .
+ So that all may benefit from your experience, please report  any  problems
+ or  suggestions about this software to 3dsdk.support@amd.com
+ .
+ AMD Developer Technologies, M/S 585
+ Advanced Micro Devices, Inc.
+ 5900 E. Ben White Blvd.
+ Austin, TX 78741
+ 3dsdk.support@amd.com
+
+Files:
+ Source/Core/Common/Src/Crypto/bn.cpp,
+ Source/Core/Common/Src/Crypto/tools.h,
+ Source/Core/Common/Src/Crypto/ec.cpp
+Copyright:
+ 2007-2008, Segher Boessenkool <segher@kernel.crashing.org>
+License: GPL-2
+
+Files:
+ Source/Core/Common/Src/Crypto/sha1.h
+ Source/Core/Common/Src/Crypto/md5.h,
+ Source/Core/Common/Src/Crypto/md5.cpp,
+ Source/Core/Common/Src/Crypto/sha1.cpp
+Copyright:
+ 2006-2009, Paul Bakker <polarssl_maintainer at polarssl.org>
+ on original XySSL code with: Christophe Devine
+License: GPL-2+
+
+License: GPL-2
+ This program is free software: you can redistribute it and/or modify
+ it under the terms of the GNU General Public License as published by
+ the Free Software Foundation, version 2.0.
+ .
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU General Public License 2.0 for more details.
+ .
+ A copy of the GPL 2.0 should have been included with the program.
+ If not, see http://www.gnu.org/licenses/
+ .
+ On Debian systems, the complete text of the GNU General Public License
+ version 2 can be found in `/usr/share/common-licenses/GPL-2'.

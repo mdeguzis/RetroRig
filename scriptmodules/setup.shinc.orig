@@ -1087,3 +1087,21 @@ function rrs_reboot()
 		;;
 	esac
 }
+
+<<<<<<< HEAD
+=======
+rrs_kernel_check()
+{
+
+	# The 3.14 manual kernel upgrade for Ubuntu systems is no longer necessary
+	# This is confirmed to be fixed since linux: 3.13.0-38.65
+	# Confirmed to be fine in current 3.13.0-37-generic.
+	# Please see commit efeb2bd for legacy code. This message will be 
+	# Removed in due time. 
+
+	# System is upgraded during initial install
+	# Something needs to be here or otherwise there is a syntax error?
+	echo "" > /dev/null
+
+}
+>>>>>>> master
