@@ -21,7 +21,7 @@ BASE=0.9.7
 # In this case, this level will be used to denote incremental changes
 # instead of a specific branch for now (beta/master only exist at the
 # momement).
-PL=1.3
+PL=2
 
 #choose user
 #user="pk"
@@ -78,7 +78,7 @@ if [ "$user" == "jc" ]; then
 	CHANGE_TEXT="Lintian messages reduced"
 
 	#define uploader, date and time zone for changelog
-	uploader_date="Jens-Christian Lache <jc.lache@web.de>  Sun, 16 Nov 2014 16:00:00 +0100"
+	uploader_date="Jens-Christian Lache <jc.lache@web.de>  Wed, 19 Nov 2014 20:30:00 +0100"
 
 	#define package maintainer for dsc and control file 
 	pkgmaintainer="RetroRig Development Team <jc.lache@gmail.com>"
@@ -182,9 +182,7 @@ SRC_FOLDER=retrorig-setup-$BASE.$PL
 
 echo "cloning repository"
 
-echo "################# DEBUG #################"
-#git clone $source_reprository  
-cp -r ~/tmp/RetroRig .
+git clone $source_reprository  
 
 file RetroRig/
 
@@ -202,9 +200,6 @@ cd $SRC_FOLDER
 
 git checkout $BRANCH
 git pull
-
-echo "################# DEBUG #################"
-cp ~/RetroRig/supplemental/retrorig-setup/retrorig-setup.7 supplemental/retrorig-setup/
 
 mkdir -p debian/source
 
