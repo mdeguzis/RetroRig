@@ -3,13 +3,13 @@
 #======================================================================== 
 #
 # Author      : Michael T. DeGuzis, Jens-Christian Lache
-# Date        : 201401115
+# Date        : 201401121
 # Version     : 0.9.7
 # Description : Install RetroRig via Debian package
 #
 #		Please see changelog for latest alterations and fixes
 #
-# ========================================================================
+#========================================================================
 
 clear
 
@@ -21,7 +21,7 @@ BASE=0.9.7
 # In this case, this level will be used to denote incremental changes
 # instead of a specific branch for now (beta/master only exist at the
 # momement).
-PL=2
+PL=3
 
 #choose user
 #user="pk"
@@ -75,10 +75,10 @@ if [ "$user" == "jc" ]; then
 	LAUNCHPAD_PPA="ppa:beauman/retrorig-testing"
 
 	#changed in package
-	CHANGE_TEXT="Lintian messages reduced"
+	CHANGE_TEXT="bug fix package check"
 
 	#define uploader, date and time zone for changelog
-	uploader_date="Jens-Christian Lache <jc.lache@web.de>  Wed, 19 Nov 2014 20:30:00 +0100"
+	uploader_date="Jens-Christian Lache <jc.lache@web.de>  Fri, 21 Nov 2014 18:00:00 +0100"
 
 	#define package maintainer for dsc and control file 
 	pkgmaintainer="RetroRig Development Team <jc.lache@gmail.com>"
