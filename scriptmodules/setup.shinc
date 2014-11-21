@@ -673,7 +673,7 @@ function rrs_software()
 	# install binaries
 	$cmd_install_pkg xboxdrv curl python-software-properties \
 	pkg-config software-properties-common dconf-tools jstest-gtk \
-	qjoypad sixad libusb-0.1-4 antimicro bluez getpos unclutter \
+	sixad libusb-0.1-4 antimicro bluez getpos unclutter \
 	joydetect sudo ttf-dejavu-core ttf-dejavu-core ttf-liberation
 
 	#wii motion support
@@ -752,26 +752,28 @@ function rrs_debug()
 	gsettings list-recursively "org.gnome.desktop.screensaver" | grep "ubuntu-lock-on-suspend" >> "$rootdir/logs/debug.log"	
 	gsettings list-recursively "org.gnome.desktop.session" | grep "idle-delay" >> "$rootdir/logs/debug.log"
 
-	# Source built / pre-built
-	h_filechecker "$rootdir/emulators/PPSSPP/ppsspp-0.9.8-SDL-pk64"
-	h_filechecker "/ust/bin/PPSSPPSDL"
-
 	# pkg checks
-	echo -e "\nCheck for needed pkgs installed via apt: " >> "$rootdir/logs/debug.log"
+	echo -e "\nCheck for needed pkgs: " >> "$rootdir/logs/debug.log"
 	h_pkgcheck "stella"
+	h_pkgcheck "mednafen"
+	h_pkgcheck "mess"
+	h_pkgcheck "mame"
+	h_pkgcheck "ppsspp"
+	h_pkgcheck "dolphin-emu"
+	h_pkgcheck "mupen64plus"
+	h_pkgcheck "pcsx2"
+	h_pkgcheck "gens"
+	
 	h_pkgcheck "python-software-properties"
 	h_pkgcheck "xbmc"
 	h_pkgcheck "dconf-tools"
 	h_pkgcheck "xboxdrv"
 	h_pkgcheck "curl"
-	h_pkgcheck "xbmc"
-	h_pkgcheck "mednafen"
-	h_pkgcheck "mess"
-	h_pkgcheck "mame"
-	h_pkgcheck "qjoypad"
+	h_pkgcheck "getpos"
 	h_pkgcheck "jstest-gtk"
+	h_pkgcheck "antimicro"
 
-   	echo -e "\nEnd of log file" >> "$rootdir/logs/debug.log" >> "$rootdir/logs/debug.log"
+	echo -e "\nEnd of log file" >> "$rootdir/logs/debug.log" >> "$rootdir/logs/debug.log"
 
 	dialog --backtitle "LibreGeek.org - RetroRig Setup. Installation folder: $rootdir for user $	user" --msgbox "Debug log was generated in $rootdir/logs/debug.log. Additional logs can be found in the folder $rootdir/logs/." 10 60 
 
