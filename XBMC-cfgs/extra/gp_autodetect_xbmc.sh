@@ -29,6 +29,12 @@ do
   if [ "$PS3_USB_controllerAvailable" != "$oldPS3_USB_controllerAvailable" ]; then
     echo "[begin:] PS3 / USB controller changed"
     
+    #first attempt
+    service xboxdrv stop
+    killall -9 xboxdrv
+    service xboxdrv start
+
+    #second attempt
     service xboxdrv stop
     killall -9 xboxdrv
     service xboxdrv start
