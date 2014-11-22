@@ -29,13 +29,10 @@ do
   if [ "$PS3_USB_controllerAvailable" != "$oldPS3_USB_controllerAvailable" ]; then
     echo "[begin:] PS3 / USB controller changed"
     
-    #first attempt
-    service xboxdrv restart
-    echo "sending gamepad reconfiguration request"
-    killall xbmc.bin -SIGUSR1
-    
-    #second attempt
-    service xboxdrv restart
+    service xboxdrv stop
+    killall -9 xboxdrv
+    service xboxdrv start
+
     echo "sending gamepad reconfiguration request"
     killall xbmc.bin -SIGUSR1
     

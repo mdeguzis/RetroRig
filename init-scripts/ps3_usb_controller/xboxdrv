@@ -16,7 +16,7 @@ PATH=/sbin:/usr/sbin:/bin:/usr/bin
 DESC="XBOX Controller Service"
 NAME=xboxdrv
 DAEMON=/usr/bin/$NAME
-DAEMON_ARGS="-D -d --deadzone 4000 --dbus disabled --detach"
+DAEMON_ARGS="-D -d --dbus disabled --detach"
 PIDFILE=/var/run/$NAME.pid
 SCRIPTNAME=/etc/init.d/$NAME
 
@@ -52,6 +52,7 @@ do_stop()
 {
     start-stop-daemon -K -o -q -x $DAEMON
     sleep 1
+    killall -9 xboxdrv
 }
 
 case "$1" in
