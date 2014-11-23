@@ -21,7 +21,7 @@ BASE=0.9.7
 # In this case, this level will be used to denote incremental changes
 # instead of a specific branch for now (beta/master only exist at the
 # momement).
-PL=3.1
+PL=3.2
 
 #choose user
 #user="pk"
@@ -72,13 +72,13 @@ if [ "$user" == "jc" ]; then
 	BRANCH=beta
 
 	#define upload target
-	LAUNCHPAD_PPA="ppa:beauman/retrorig"
+	LAUNCHPAD_PPA="ppa:beauman/retrorig-testing"
 
 	#changed in package
-	CHANGE_TEXT="bug fix h_pkgcheck() / PS3 Sixaxis USB hotplug support"
+	CHANGE_TEXT="merged quality of life changes from Two-Tone"
 
 	#define uploader, date and time zone for changelog
-	uploader_date="Jens-Christian Lache <jc.lache@web.de>  Sat, 22 Nov 2014 14:30:00 +0100"
+	uploader_date="Jens-Christian Lache <jc.lache@web.de>  Sat, 23 Nov 2014 18:30:00 +0100"
 
 	#define package maintainer for dsc and control file 
 	pkgmaintainer="RetroRig Development Team <jc.lache@gmail.com>"

@@ -3,6 +3,12 @@ retrorig-setup (version_placeholder) trusty; urgency=medium
   * changelog_text
 
  -- uploader_date
+
+retrorig-setup (0:0.9.7.3.1) trusty; urgency=medium
+
+  * bug fix h_pkgcheck() / PS3 Sixaxis USB hotplug support
+
+ -- Jens-Christian Lache <jc.lache@web.de>  Sat, 22 Nov 2014 14:30:00 +0100
  
 retrorig-setup (0:0.9.7.2) trusty; urgency=medium
 
