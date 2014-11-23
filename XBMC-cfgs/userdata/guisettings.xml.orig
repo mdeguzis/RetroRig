@@ -820,13 +820,21 @@
         <setting type="string" name="skin.ace.fav5.path"></setting>
         <setting type="string" name="skin.ace.addon1.label">Go Retro!</setting>
         <setting type="string" name="skin.ace.addon1.path">script.games.rom.collection.browser</setting>
+<<<<<<< HEAD
         <setting type="string" name="skin.ace.addon1.bg">installdir_temp/Artwork/XBMC/RetroMain-0-9-7.png</setting>
+=======
+        <setting type="string" name="skin.ace.addon1.bg">installdir_temp/Artwork/XBMC/RetroMain-0-9-7b.png</setting>
+>>>>>>> refs/remotes/origin/master
         <setting type="string" name="skin.ace.addon2.label"></setting>
         <setting type="string" name="skin.ace.addon2.path"></setting>
         <setting type="string" name="skin.ace.addon2.bg"></setting>
         <setting type="string" name="skin.ace.addon3.label">RetroRig Settings</setting>
         <setting type="string" name="skin.ace.addon3.path">plugin.program.advanced.launcher</setting>
+<<<<<<< HEAD
         <setting type="string" name="skin.ace.addon3.bg">installdir_temp/Artwork/XBMC/RetroMain-0-9-7.png</setting>
+=======
+        <setting type="string" name="skin.ace.addon3.bg">installdir_temp/Artwork/XBMC/RetroMain-0-9-7b.png</setting>
+>>>>>>> refs/remotes/origin/master
         <setting type="string" name="skin.ace.addon4.label"></setting>
         <setting type="string" name="skin.ace.addon4.path"></setting>
         <setting type="string" name="skin.ace.addon4.bg"></setting>

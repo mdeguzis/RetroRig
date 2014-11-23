@@ -51,7 +51,7 @@ h_clean_gamepad()
 	# rm -f "/usr/share/applications/gp_autodetect_xbmc.sh"
 
 	# Xbox controller 
-	service xboxdrv stop
+	$cmd_xboxdrv_stop
 	rm -f /etc/init.d/xboxdrv
 	rm -f /etc/default/xboxdrv
 
