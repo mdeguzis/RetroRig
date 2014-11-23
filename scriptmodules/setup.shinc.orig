@@ -531,15 +531,18 @@ function rrs_add_standard_repos()
 					echo "deb http://ppa.launchpad.net/beauman/retrorig/ubuntu trusty main" >\
 					  /etc/apt/sources.list.d/beauman-ubuntu-retrorig-trusty.list
 
+					echo "deb http://ppa.launchpad.net/beauman/retrorig-testing/ubuntu trusty main" >\
+					  /etc/apt/sources.list.d/beauman-ubuntu-retrorig-testing-trusty.list
+
 					echo "copying missing libraries for Ubuntu 14.10"
-					mkdir -p /usr/share/RetroRig
-					cd /usr/share/RetroRig
+					mkdir -p /usr/lib/RetroRig
+					cd /usr/lib/RetroRig
 					wget --tries=50 -P /tmp "http://www.libregeek.org/RetroRig/libs/libs.Ubuntu.14.10.tar.bz"
 					tar xvfj /tmp/libs.Ubuntu.14.10.tar.bz
 
-					echo "installing libraries system wide"
+					echo "installing librariessystem wide"
 					cd /etc/ld.so.conf.d/
-					echo /usr/share/RetroRig > RetroRig.conf
+					echo /usr/lib/RetroRig > RetroRig.conf
 					ldconfig
 				
 #					TODO
@@ -551,7 +554,7 @@ function rrs_add_standard_repos()
 #					apt-get update
 #
 #					# remove supplemental libraries
-#					rm -rf /usr/share/RetroRig
+#					rm -rf /usr/lib/RetroRig
 #					rm /etc/ld.so.conf.d/RetroRig.conf
 #					ldconfig
 					;;
@@ -673,8 +676,8 @@ function rrs_software()
 	# install binaries
 	$cmd_install_pkg xboxdrv curl python-software-properties \
 	pkg-config software-properties-common dconf-tools jstest-gtk \
-	sixad libusb-0.1-4 antimicro bluez getpos unclutter \
-	joydetect sudo ttf-dejavu-core ttf-dejavu-core ttf-liberation
+	qjoypad sixad libusb-0.1-4 antimicro bluez getpos unclutter \
+	joydetect sudo
 
 	#wii motion support
 	$cmd_install_pkg libcwiid1 lswm wmgui wminput
@@ -752,28 +755,26 @@ function rrs_debug()
 	gsettings list-recursively "org.gnome.desktop.screensaver" | grep "ubuntu-lock-on-suspend" >> "$rootdir/logs/debug.log"	
 	gsettings list-recursively "org.gnome.desktop.session" | grep "idle-delay" >> "$rootdir/logs/debug.log"
 
+	# Source built / pre-built
+	h_filechecker "$rootdir/emulators/PPSSPP/ppsspp-0.9.8-SDL-pk64"
+	h_filechecker "/ust/bin/PPSSPPSDL"
+
 	# pkg checks
-	echo -e "\nCheck for needed pkgs: " >> "$rootdir/logs/debug.log"
+	echo -e "\nCheck for needed pkgs installed via apt: " >> "$rootdir/logs/debug.log"
 	h_pkgcheck "stella"
-	h_pkgcheck "mednafen"
-	h_pkgcheck "mess"
-	h_pkgcheck "mame"
-	h_pkgcheck "ppsspp"
-	h_pkgcheck "dolphin-emu"
-	h_pkgcheck "mupen64plus"
-	h_pkgcheck "pcsx2"
-	h_pkgcheck "gens"
-	
 	h_pkgcheck "python-software-properties"
 	h_pkgcheck "xbmc"
 	h_pkgcheck "dconf-tools"
 	h_pkgcheck "xboxdrv"
 	h_pkgcheck "curl"
-	h_pkgcheck "getpos"
+	h_pkgcheck "xbmc"
+	h_pkgcheck "mednafen"
+	h_pkgcheck "mess"
+	h_pkgcheck "mame"
+	h_pkgcheck "qjoypad"
 	h_pkgcheck "jstest-gtk"
-	h_pkgcheck "antimicro"
 
-	echo -e "\nEnd of log file" >> "$rootdir/logs/debug.log" >> "$rootdir/logs/debug.log"
+   	echo -e "\nEnd of log file" >> "$rootdir/logs/debug.log" >> "$rootdir/logs/debug.log"
 
 	dialog --backtitle "LibreGeek.org - RetroRig Setup. Installation folder: $rootdir for user $	user" --msgbox "Debug log was generated in $rootdir/logs/debug.log. Additional logs can be found in the folder $rootdir/logs/." 10 60 
 
@@ -959,7 +960,7 @@ function rrs_done()
 	# Please see commit efeb2bd for legacy code. This message will be 
 	# Removed in due time.
 
-       	dialog --backtitle "LibreGeek.org - RetroRig Setup. Installation folder: $rootdir for user $user" --msgbox "Finished main install tasks.\n\nYou now have to copy roms to the roms folders. \nThis can be done via SSH, Samba, or via your graphic folder manager (please see settings menu for more)\n\nAll current config folders used were appended with .old for restoration purposes.\n\nDon't forget to install the latest graphics drivers. Oftentimes proprietary driver help to improve gaming performance." 18 50
+       	dialog --backtitle "LibreGeek.org - RetroRig Setup. Installation folder: $rootdir for user $user" --msgbox "Finished main install tasks.\n\nYou now have to copy roms to the roms folders. \nThis can be done via SSH, Samba, or via your graphic folder manager (please see settings menu for more)\n\nAll current config folders used were appended with .old for restoration purposes.\n\n" 18 50
 
 	# correct permissions
 	h_correct_perms
@@ -1086,3 +1087,21 @@ function rrs_reboot()
 		;;
 	esac
 }
+
+<<<<<<< HEAD
+=======
+rrs_kernel_check()
+{
+
+	# The 3.14 manual kernel upgrade for Ubuntu systems is no longer necessary
+	# This is confirmed to be fixed since linux: 3.13.0-38.65
+	# Confirmed to be fine in current 3.13.0-37-generic.
+	# Please see commit efeb2bd for legacy code. This message will be 
+	# Removed in due time. 
+
+	# System is upgraded during initial install
+	# Something needs to be here or otherwise there is a syntax error?
+	echo "" > /dev/null
+
+}
+>>>>>>> master
