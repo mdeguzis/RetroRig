@@ -933,7 +933,7 @@ RetorRig loads to use the gamepad" 14 60
 	sed -i "s|$old_post|$new_post|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
 
 	#update init scripts for xboxdrv
-	update-rc.d xboxdrv defaults
+	$update_init_xboxdrv
 
 	# start the xboxdrv service
 	# disable for now, hangs script completion running in background
@@ -1205,7 +1205,7 @@ RetorRig loads to use the gamepad." 14 60
 
 
 	#update init scripts for xboxdrv
-	update-rc.d xboxdrv defaults
+	$update_init_xboxdrv
 
 	# start the xboxdrv service
 	# disable for now, hangs script completion running in background
@@ -1489,7 +1489,7 @@ RetorRig loads to use the gamepad" 14 60
 	sed -i "s|$old_post|$new_post|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
 
 	# update init scripts for xboxdrv
-	update-rc.d xboxdrv defaults
+	$update_init_xboxdrv
 
 	# start the xboxdrv service
 	# disable for now, hangs script completion running in background
