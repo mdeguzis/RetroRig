@@ -1049,7 +1049,7 @@ function h_filechecker()
 
 function h_pkgcheck()
 {
-    PKG_OK=$($cmd_remove_pkg "$1" | egrep -w "Status|Package|Version")
+    PKG_OK=$($cmd_query_pkg "$1" | egrep -w "Status|Package|Version")
     echo "Checking for some pkg/lib: $PKG_OK"
     if [ "" == "$PKG_OK" ]; then
         echo "NOT INSTALLED: $1" >> "$rootdir/logs/debug.log"

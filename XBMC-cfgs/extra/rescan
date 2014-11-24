@@ -1,12 +1,12 @@
 #!/bin/bash
 ### BEGIN INIT INFO
 # Provides: rescan
-# Required-Start:    
-# Required-Stop:     
+# Required-Start: $remote_fs
+# Required-Stop: $remote_fs
 # Default-Start:     2 3 4 5
 # Default-Stop:      0 1 6
 # Short-Description: Start rescan
-# Short-Description: This script starts, stops or restarts /usr/share/applications/gp_autodetect_xbmc.sh from project RetroRig. For more information see there.
+# Description: This script starts, stops or restarts /usr/share/applications/gp_autodetect_xbmc.sh from project RetroRig. For more information see there.
 ### END INIT INFO
 #
 # Author:      beauman @ jc techno labs
@@ -96,6 +96,10 @@ case "$1" in
     fi
     ;;
   restart)
+    $0 stop
+    $0 start
+    ;;
+  force-reload)
     $0 stop
     $0 start
     ;;
