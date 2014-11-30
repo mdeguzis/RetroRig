@@ -167,7 +167,7 @@ if [ "$script_invoke_path" == "/usr/bin/retrorig-setup" ]; then
 
 	#install method via system folder
 	
-	scriptdir=/usr/lib/RetroRig
+	scriptdir=/usr/share/RetroRig
 	
 else
 

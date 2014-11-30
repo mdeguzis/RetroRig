@@ -3,13 +3,13 @@
 #======================================================================== 
 #
 # Author      : Michael T. DeGuzis, Jens-Christian Lache
-# Date        : 201401115
+# Date        : 201401121
 # Version     : 0.9.7
 # Description : Install RetroRig via Debian package
 #
 #		Please see changelog for latest alterations and fixes
 #
-# ========================================================================
+#========================================================================
 
 clear
 
@@ -21,7 +21,7 @@ BASE=0.9.7
 # In this case, this level will be used to denote incremental changes
 # instead of a specific branch for now (beta/master only exist at the
 # momement).
-PL=1.2
+PL=3.2
 
 #choose user
 #user="pk"
@@ -75,10 +75,10 @@ if [ "$user" == "jc" ]; then
 	LAUNCHPAD_PPA="ppa:beauman/retrorig-testing"
 
 	#changed in package
-	CHANGE_TEXT=" New dolphin version / splitted configuration folder for Wii and Gamecube"
+	CHANGE_TEXT="merged quality of life changes from Two-Tone"
 
 	#define uploader, date and time zone for changelog
-	uploader_date="Jens-Christian Lache <jc.lache@web.de>  Sat, 15 Nov 2014 16:00:00 +0100"
+	uploader_date="Jens-Christian Lache <jc.lache@web.de>  Sat, 23 Nov 2014 18:30:00 +0100"
 
 	#define package maintainer for dsc and control file 
 	pkgmaintainer="RetroRig Development Team <jc.lache@gmail.com>"
@@ -105,6 +105,8 @@ echo ""
 echo "changed: "$CHANGE_TEXT
 echo ""
 echo "uploading to: "$LAUNCHPAD_PPA
+echo ""
+echo "by/date: "$uploader_date
 echo ""
 echo "Did you adapt debian/changelog accordingly?"
 echo ""
@@ -181,7 +183,9 @@ sed -i "s|pkgmaintainer|$pkgmaintainer|g" "retrorig-setup-$PRE:$BASE.$PL.dsc"
 SRC_FOLDER=retrorig-setup-$BASE.$PL
 
 echo "cloning repository"
+
 git clone $source_reprository  
+
 file RetroRig/
 
 if [ $? -eq 0 ]; then  
@@ -220,8 +224,18 @@ cp ~/RetroRig/supplemental/retrorig-setup/format debian/source/
 echo "Makefile"
 cp ~/RetroRig/supplemental/retrorig-setup/Makefile .
 
+echo "copyright"
+cp ~/RetroRig/supplemental/retrorig-setup/copyright debian/copyright
+
+echo "compat"
+cp ~/RetroRig/supplemental/retrorig-setup/compat debian/compat
+
+echo "postinst/postrm"
+cp ~/RetroRig/supplemental/retrorig-setup/postinst debian/postinst
+cp ~/RetroRig/supplemental/retrorig-setup/postrm debian/postrm
+
 echo "removing internal files"
-rm -rf supplemental/ .git/
+rm -rf .git/
 
 echo "installation script"
 if [ -f retrorig-setup.sh ]; then  
