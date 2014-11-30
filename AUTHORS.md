@@ -29,6 +29,7 @@
 - The great work from FernetMenta's [xbmc branch](https://github.com/FernetMenta/xbmc)
 - [wsnipex](http://forum.xbmc.org/member.php?action=profile&uid=96724) from the XBMC forums
 - The creator of the [Ace](http://forum.xbmc.org/forumdisplay.php?fid=190) XBMC theme
+- The creator of the [Steam Launcher addon for XBMC/Kodi](http://forum.kodi.tv/showthread.php?tid=157499)
 
 ##### If I missed you, please let me know so I can give you credit!
 
