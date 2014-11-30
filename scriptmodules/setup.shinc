@@ -491,7 +491,6 @@ function rrs_source_syscalls()
 	echo "Release: $OS_RELEASE"
 	echo "Default init system: $init_system"
 	echo "Primary package management system: $pkg_manager"
-	echo ""
 	echo "#####################################################"
 	sleep 4s
 
@@ -708,9 +707,6 @@ function rrs_software()
 		dialog --backtitle "LibreGeek.org - RetroRig Setup. Installation folder: $rootdir for user $user" --msgbox "$__postMSGs\n\nSoftware install complete. See debug.log for more details. Continuing on to emulator installs..." 18 60
 	fi
 
-	chown -R "$user" "$rootdir/logs/install_$now.log.txt"
-	chgrp -R "$user" "$rootdir/logs/install_$now.log.txt"
-
 }
 
 function rrs_debug()
@@ -760,7 +756,7 @@ function rrs_debug()
 	h_filechecker "/ust/bin/PPSSPPSDL"
 
 	# pkg checks
-	echo -e "\nCheck for needed pkgs installed via apt: " >> "$rootdir/logs/debug.log"
+	echo -e "\nChecking for needed pkgs installed: " >> "$rootdir/logs/debug.log"
 	h_pkgcheck "stella"
 	h_pkgcheck "python-software-properties"
 	h_pkgcheck "xbmc"
@@ -771,8 +767,13 @@ function rrs_debug()
 	h_pkgcheck "mednafen"
 	h_pkgcheck "mess"
 	h_pkgcheck "mame"
-	h_pkgcheck "qjoypad"
 	h_pkgcheck "jstest-gtk"
+	h_pkgcheck "antimicro"
+	h_pkgcheck "dolphin-emu"
+	h_pkgcheck "gens"
+	h_pkgcheck "pcsx2"
+	h_pkgcheck "ppsspp"
+	h_pkgcheck "dos2unix"
 
    	echo -e "\nEnd of log file" >> "$rootdir/logs/debug.log" >> "$rootdir/logs/debug.log"
 

@@ -182,14 +182,12 @@ echo "#####################################################"
 echo "Loading script modules"
 echo "#####################################################"
 
-echo ""
 import "$scriptdir/scriptmodules/helpers"
 import "$scriptdir/scriptmodules/configuration"
 import "$scriptdir/scriptmodules/settings"
 import "$scriptdir/scriptmodules/setup"
 import "$scriptdir/scriptmodules/gamepads"
 import "$scriptdir/scriptmodules/emulators"
-echo ""
 
 # DEBUG ONLY!
 # Remove the below comment to double check all modules load
@@ -198,7 +196,6 @@ echo ""
 echo "#####################################################"
 echo "Checking compatibility"
 echo "#####################################################"
-echo ""
 
 # Discover platform
 rrs_discover_distro
@@ -388,7 +385,9 @@ Installer" --menu "| Main Menu (v.0.9.7b) | \
 		set_resolution
 		rrs_post_install
 		rrs_done
-		} 2>&1 | tee "$rootdir/logs/install_$now.log.txt"              	
+		} 2>&1 | tee "$rootdir/logs/temp_log.txt"
+		# clean and fixup log file
+		tr -cd '\11\12\15\40-\176' < "$rootdir/logs/temp_log.txt" > "$rootdir/logs/install_$now.log.txt"              	
 		chown -R "$user" "$rootdir/logs/install_$now.log.txt"
 		chgrp -R "$user" "$rootdir/logs/install_$now.log.txt"
 

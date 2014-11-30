@@ -708,9 +708,6 @@ function rrs_software()
 		dialog --backtitle "LibreGeek.org - RetroRig Setup. Installation folder: $rootdir for user $user" --msgbox "$__postMSGs\n\nSoftware install complete. See debug.log for more details. Continuing on to emulator installs..." 18 60
 	fi
 
-	chown -R "$user" "$rootdir/logs/install_$now.log.txt"
-	chgrp -R "$user" "$rootdir/logs/install_$now.log.txt"
-
 }
 
 function rrs_debug()
