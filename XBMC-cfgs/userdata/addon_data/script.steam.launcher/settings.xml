@@ -1,8 +1,11 @@
 <settings>
     <setting id="BusyDialogTime" value="10" />
     <setting id="DelUserScript" value="false" />
-    <setting id="FilePathCheck" value="true" />
-    <setting id="KodiLinux" value="/usr/bin/xbmc" />
+    <!-- Set path check to false to silence errors for next hack -->
+    <setting id="FilePathCheck" value="false" />
+    <!-- Changed Kodi/XBMC's location to none, otherwise RR reboots over itself..-->
+    <!-- This needs to be investigated a bit further -->
+    <setting id="KodiLinux" value="NONE" />
     <setting id="KodiOsx" value="/Applications/Kodi.app/" />
     <setting id="KodiPortable" value="false" />
     <setting id="KodiWin" value="C:\Program Files (x86)\Kodi\Kodi.exe" />
