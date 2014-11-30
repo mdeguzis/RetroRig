@@ -282,24 +282,36 @@ options=(1 "Xbox 360 Controller (wireless)"
 		gp_common
 		gp_x360_wireless
 		h_restore_bios_cfg
+		# set type for steam setup and set controls
+		STEAM_GP_TYPE="x360wireless"
+		gp_steam_control	
 		;;
 
 		2)
 		gp_common
 		gp_x360_usb
 		h_restore_bios_cfg
+		# set type for steam setup and set controls
+		STEAM_GP_TYPE="x360usb"
+		gp_steam_control
 		;;
 
 		3)
 		gp_common
 		gp_ps3_blu
 		h_restore_bios_cfg
+		# set type for steam setup and set controls
+		STEAM_GP_TYPE="ps3blu"
+		gp_steam_control
 		;;
 
 		4)
 		gp_common
 		gp_ps3_usb
 		h_restore_bios_cfg
+		# set type for steam setup and set controls
+		STEAM_GP_TYPE="ps3usb"
+		gp_steam_control
 		;;
 
 		5)
@@ -961,7 +973,7 @@ function rrs_done()
 	# Please see commit efeb2bd for legacy code. This message will be 
 	# Removed in due time.
 
-       	dialog --backtitle "LibreGeek.org - RetroRig Setup. Installation folder: $rootdir for user $user" --msgbox "Finished main install tasks.\n\nYou now have to copy roms to the roms folders. \nThis can be done via SSH, Samba, or via your graphic folder manager (please see settings menu for more)\n\nAll current config folders used were appended with .old for restoration purposes.\n\n" 18 50
+       	dialog --backtitle "LibreGeek.org - RetroRig Setup. Installation folder: $rootdir for user $user" --msgbox "Finished main install tasks.\n\nYou now have to copy roms to the roms folders. \nThis can be done via SSH, Samba, or via your graphic folder manager (please see settings menu for more)\n\nAll current config folders used were appended with .old for restoration purposes.\n\nSteam Users: If you had Steam installed ahead of time, your controller should work. Otherwise, you will need to setup the controller in the Steam settings menu in Big Picture Mode or optionally run the gamepad setup again." 18 60
 
 	# correct permissions
 	h_correct_perms

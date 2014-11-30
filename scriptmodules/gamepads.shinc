@@ -1310,6 +1310,10 @@ function gp_x360_usb()
 	# Gens GS (Sega CD/32X)
 	cp -v "$scriptdir/emu-cfgs/x360_usb_controller/GensGS/gens.cfg" "$config_home/.gens/"
 
+	# Alter Steam config.vdf with proper controls if controller exists
+	STEAM_GP_TYPE="x360usb"
+	gp_steam_control
+
 	############################################
 	# configure xboxdrv for 360 gamepad (USB)
 	############################################
@@ -1515,4 +1519,46 @@ RetorRig loads to use the gamepad" 14 60
 received the wrong LED, unplug and plug the USB cable back in until you get the correct LED number. Please reboot to fully enable the controller"  10 40
 
 	sixad --boot-no
+}
+
+gp_steam_control()
+{
+
+	# set Steam controls based on current controller type
+	# note: $STEAM_GP_TYPE is set in rrs_gamepad
+
+	# ascertain current binding from config.vdf
+	STEAM_GP_ORIG=$(grep "\bSDL_GamepadBind\b" "$config_home/.local/share/Steam/config/config.vdf") 
+	
+	case $STEAM_GP_TYPE in
+
+		x360wireless)
+			# set keybinding value
+			# STEAM_GP_NEW=$(<"$scriptdir/gamepad-cfgs/x360_wireless_controller/x360wireless_steam.txt")
+			# change controller bindings
+			sed -i "s|$STEAM_GP_ORIG|$STEAM_GP_NEW|g" "$config_home/.local/share/Steam/config/config.vdf"
+			;;
+
+		x360usb)
+			# set keybinding value
+			STEAM_GP_NEW=$(<"$scriptdir/gamepad-cfgs/x360_usb_controller/x360usb_steam.txt")
+			# change controller bindings
+			sed -i "s|$STEAM_GP_ORIG|$STEAM_GP_NEW|g" "$config_home/.local/share/Steam/config/config.vdf"
+			;;
+
+		ps3blu)
+			# set keybinding value
+			# STEAM_GP_NEW=$(<"$scriptdir/gamepad-cfgs/ps3_blu_controller/ps3blu_steam.txt")
+			# change controller bindings
+			sed -i "s|$STEAM_GP_ORIG|$STEAM_GP_NEW|g" "$config_home/.local/share/Steam/config/config.vdf"
+			;;
+
+		ps3usb)
+			# set keybinding value
+			# STEAM_GP_NEW=$(<"$scriptdir/gamepad-cfgs/ps3_usb_controller/ps3usb_steam.txt")
+			# change controller bindings
+			sed -i "s|$STEAM_GP_ORIG|$STEAM_GP_NEW|g" "$config_home/.local/share/Steam/config/config.vdf"
+			;;
+	esac		
+
 }

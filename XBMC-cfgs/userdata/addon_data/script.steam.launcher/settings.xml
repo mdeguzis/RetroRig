@@ -1,0 +1,19 @@
+<settings>
+    <setting id="BusyDialogTime" value="10" />
+    <setting id="DelUserScript" value="false" />
+    <setting id="FilePathCheck" value="true" />
+    <setting id="KodiLinux" value="/usr/bin/xbmc" />
+    <setting id="KodiOsx" value="/Applications/Kodi.app/" />
+    <setting id="KodiPortable" value="false" />
+    <setting id="KodiWin" value="C:\Program Files (x86)\Kodi\Kodi.exe" />
+    <setting id="PostScript" value="" />
+    <setting id="PostScriptEnabled" value="false" />
+    <setting id="PreScript" value="" />
+    <setting id="PreScriptEnabled" value="false" />
+    <setting id="QuitKodi" value="0" />
+    <setting id="ScriptUpdateCheck" value="true" />
+    <setting id="SteamLinux" value="/usr/bin/steam" />
+    <setting id="SteamOsx" value="/Applications/Steam.app/" />
+    <setting id="SteamWin" value="C:\Program Files (x86)\Steam\steam.exe" />
+    <setting id="WmctrlCheck" value="true" />
+</settings>
