@@ -956,8 +956,8 @@ function h_correct_perms()
 	fi
 
 	# xboxdrv init script
-	chmod 755 /etc/init.d/xboxdrv > /dev/null 2>&1
-	chmod 755 /etc/default/xboxdrv > /dev/null 2>&1
+	chmod 755 $xboxdrv_init > /dev/null 2>&1
+	chmod 755 $xboxdrv_defaults > /dev/null 2>&1
 }
 
 function h_emu_user_fixes()

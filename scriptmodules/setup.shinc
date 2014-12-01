@@ -322,7 +322,8 @@ options=(1 "Xbox 360 Controller (wireless)"
 	done
 	
 	wii_motion_controller_for_dolphin
-	enable_autostart_RetroRig
+	enable_gp_autostart
+	enable_rr_autostart
 	
 }
 
@@ -801,7 +802,6 @@ function rrs_xbmc_patched()
 	# release the aptitdue hold to install/upgrade RetroRig's XBMC version
 	$cmd_unhold_pkg xbmc xbmc-bin
 
-	# create autostart for XBMC and place our modified files
 	# Custom script for reboots/hotplugging
 	if [ -f "$scriptdir/XBMC-cfgs/extra/gp_autodetect_xbmc.sh" ]; then
 		cp -v "$scriptdir/XBMC-cfgs/extra/gp_autodetect_xbmc.sh" "/usr/share/applications/"
@@ -826,13 +826,8 @@ function rrs_xbmc_patched()
 	# insert restarting xboxdrv specifically into /etc/sudoers
 	cat "$scriptdir/XBMC-cfgs/extra/sudoers.txt" >> "/etc/sudoers"
 
-	# create autostart entry, remove prior if it exists
-	rm -f "$home.config/autostart/RetroRig.desktop"
-	cp -v "$scriptdir/XBMC-cfgs/extra/RetroRig.desktop" "$home/.config/autostart"
-
 	# fix their permissions
 	chmod 755 "/usr/share/applications/gp_autodetect_xbmc.sh" 
-	chmod 755 "$home/.config/autostart/RetroRig.desktop"
 	chmod 755 "/usr/share/applications/RetroRig.desktop"
 	chmod 755 "/usr/share/applications/startXBMC.sh" 
 

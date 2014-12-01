@@ -516,14 +516,14 @@ function ps3_set_emulator_ids()
 
 }
 
-function enable_autostart_RetroRig()
+function enable_gp_autostart()
 {
 	####################################################################
 	#
 	# Function Description:
 	# 
-	# enable / disable auto start function for RetroRig
-	#
+	# enable / disable auto start function for RetroRig with gamepads
+	# 	#
 	#################################################################### 
 
 	clear
@@ -531,8 +531,8 @@ function enable_autostart_RetroRig()
 	PS3_USB=$(grep -m 1 -Ee "autostartXBMC_PS3_USB" "/usr/share/applications/gp_autodetect_xbmc.sh")
 	PS3_BT=$(grep -m 1 -Ee "autostartXBMC_PS3_BT" "/usr/share/applications/gp_autodetect_xbmc.sh")
 	
-	#default is disabled
-	autostart=disabled
+	#default gamepad autostart is disabled
+	gp_autostart=disabled
 	
 	dialog --title "Confirm yes/no" \
 	--backtitle "Auto Start RetroRig" \
@@ -544,19 +544,19 @@ function enable_autostart_RetroRig()
 	response=$?
 	case $response in
 		0)
-			autostart=enabled
+			gp_autostart=enabled
 		;;
 
 		1)
-			autostart=disabled
+			gp_autostart=disabled
 		;;
 
 		255)
-			autostart=disabled
+			gp_autostart=disabled
 		;;
 	esac
 	
-	if [ "$autostart" == "enabled" ]; then
+	if [ "$gp_autostart" == "enabled" ]; then
 		sed -i "s|$PS3_USB|autostartXBMC_PS3_USB=enabled|g" "/usr/share/applications/gp_autodetect_xbmc.sh"
 		sed -i "s|$PS3_BT|autostartXBMC_PS3_BT=enabled|g" "/usr/share/applications/gp_autodetect_xbmc.sh"
 	else
@@ -569,6 +569,56 @@ function enable_autostart_RetroRig()
 	sleep 2
 }
 
+
+function enable_rr_autostart()
+{
+	####################################################################
+	#
+	# Function Description:
+	# 
+	# enable / disable auto start of RetroRig after login
+	# 	
+	#################################################################### 
+
+	clear
+
+	rr_autostart=disabled
+	
+	dialog --title "Confirm yes/no" \
+	--backtitle "Auto Start RetroRig" \
+	--yesno "Do you want to have RetroRig started after the X server loads (GUI)?"  6 60
+	# Get exit status
+	# 0 means user hit [yes] button.
+	# 1 means user hit [no] button.
+	# 255 means user hit [Esc] key.
+	response=$?
+	case $response in
+		0)
+			rr_autostart=enabled
+		;;
+
+		1)
+			rr_autostart=disabled
+		;;
+
+		255)
+			rr_autostart=disabled
+		;;
+	esac
+	
+	if [ "$rr_autostart" == "enabled" ]; then
+		# create autostart entry, remove prior if it exists
+		rm -f "$home.config/autostart/RetroRig.desktop"
+		cp -v "$scriptdir/XBMC-cfgs/extra/RetroRig.desktop" "$home/.config/autostart"
+		# fix permissions
+		chmod 755 "$home/.config/autostart/RetroRig.desktop"
+	else
+		# remove any existing entry
+		rm -f "$home.config/autostart/RetroRig.desktop"
+	fi
+
+	sleep 2
+}
 function wii_motion_controller_for_dolphin()
 {
 	####################################################################
@@ -1550,7 +1600,7 @@ gp_steam_control()
 
 		ps3blu)
 			# set keybinding value
-			# STEAM_GP_NEW=$(<"$scriptdir/gamepad-cfgs/ps3_blu_controller/ps3blu_steam.txt")
+			STEAM_GP_NEW=$(<"$scriptdir/gamepad-cfgs/ps3_blu_controller/ps3blu_steam.txt")
 			# change controller bindings
 			sed -i "s|$STEAM_GP_ORIG|$STEAM_GP_NEW|g" "$config_home/.local/share/Steam/config/config.vdf"
 			# replace MAC address in keybinding file

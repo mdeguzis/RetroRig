@@ -37,6 +37,8 @@ cmd_manual_pkg_install="dpkg -i"
 # update rescan init
 update_init_rescan="update-rc.d rescan defaults"
 update_init_xboxdrv="update-rc.d xboxdrv defaults"
+xboxdrv_init="/etc/init.d/xboxdrv"
+xboxdrv_defaults="/etc/default/xboxdrv"
 
 ######################################################
 # Kernel
