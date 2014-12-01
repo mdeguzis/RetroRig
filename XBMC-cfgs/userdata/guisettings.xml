@@ -823,7 +823,7 @@
         <setting type="string" name="skin.ace.addon1.bg">installdir_temp/Artwork/XBMC/RetroMain-0-9-8.png</setting>
         <setting type="string" name="skin.ace.addon2.label"></setting>
         <setting type="string" name="skin.ace.addon2.path">script.steam.launcher</setting>
-        <setting type="string" name="skin.ace.addon2.bg"></setting>
+        <setting type="string" name="skin.ace.addon2.bg">installdir_temp/Artwork/XBMC/steam-menu-bg.jpg</setting>
         <setting type="string" name="skin.ace.addon3.label">RetroRig Settings</setting>
         <setting type="string" name="skin.ace.addon3.path">plugin.program.advanced.launcher</setting>
         <setting type="string" name="skin.ace.addon3.bg">installdir_temp/Artwork/XBMC/RetroMain-0-9-8.png</setting>
