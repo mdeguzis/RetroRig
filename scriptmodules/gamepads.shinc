@@ -470,6 +470,8 @@ function ps3_set_emulator_ids()
 		dolphin_MAC_BLU=$(joydetect /dev/input/js$i | awk -F'[^:[a-zA-Z0-9]*' '{print $6}')
 		# Stella (supports only 2 players )
 		Stella_MAC_BLU=$(joydetect /dev/input/js$i | awk -F'[^:[a-zA-Z0-9]*' '{print $6}')
+		# Set MAC address for Steam Assignment
+		Steam_MAC_BLU=$(joydetect /dev/input/js$i | awk -F'[^:[a-zA-Z0-9]*' '{print $6}')
 
 	elif [ $n == "2" ]; then
 		
@@ -1534,7 +1536,7 @@ gp_steam_control()
 
 		x360wireless)
 			# set keybinding value
-			# STEAM_GP_NEW=$(<"$scriptdir/gamepad-cfgs/x360_wireless_controller/x360wireless_steam.txt")
+			STEAM_GP_NEW=$(<"$scriptdir/gamepad-cfgs/x360_wireless_controller/x360wireless_steam.txt")
 			# change controller bindings
 			sed -i "s|$STEAM_GP_ORIG|$STEAM_GP_NEW|g" "$config_home/.local/share/Steam/config/config.vdf"
 			;;
@@ -1551,11 +1553,13 @@ gp_steam_control()
 			# STEAM_GP_NEW=$(<"$scriptdir/gamepad-cfgs/ps3_blu_controller/ps3blu_steam.txt")
 			# change controller bindings
 			sed -i "s|$STEAM_GP_ORIG|$STEAM_GP_NEW|g" "$config_home/.local/share/Steam/config/config.vdf"
+			# replace MAC address in keybinding file
+			sed -i "s|steam_mac_tmp|$Steam_MAC_BLU|g" "$config_home/.local/share/Steam/config/config.vdf"
 			;;
 
 		ps3usb)
 			# set keybinding value
-			# STEAM_GP_NEW=$(<"$scriptdir/gamepad-cfgs/ps3_usb_controller/ps3usb_steam.txt")
+			STEAM_GP_NEW=$(<"$scriptdir/gamepad-cfgs/ps3_usb_controller/ps3usb_steam.txt")
 			# change controller bindings
 			sed -i "s|$STEAM_GP_ORIG|$STEAM_GP_NEW|g" "$config_home/.local/share/Steam/config/config.vdf"
 			;;
