@@ -95,6 +95,10 @@ function gp_ps3_blu()
 	# Gens GS (Sega CD/32X)
 	cp -v "$scriptdir/emu-cfgs/ps3_blu_controller/GensGS/gens.cfg" "$config_home/.gens/"
 
+	# Alter Steam config.vdf with proper controls if controller exists
+	STEAM_GP_TYPE="ps3blu"
+	gp_steam_control
+
 	###########################################################
 	# Add emulator specifc control remaps here for qjoypad
 	###########################################################
@@ -803,6 +807,10 @@ function gp_ps3_usb()
 	# Gens GS (Sega CD/32X)
 	cp -v "$scriptdir/emu-cfgs/ps3_usb_controller/GensGS/gens.cfg" "$config_home/.gens/"
 
+	# Alter Steam config.vdf with proper controls if controller exists
+	STEAM_GP_TYPE="ps3usb"
+	gp_steam_control
+
 	##############################################################
 	# Set system objects
 	##############################################################
@@ -1076,6 +1084,10 @@ function gp_x360_wireless()
 
 	# Gens GS (Sega CD/32X)
 	cp -v "$scriptdir/emu-cfgs/x360_wireless_controller/GensGS/gens.cfg" "$config_home/.gens/"
+
+	# Alter Steam config.vdf with proper controls if controller exists
+	STEAM_GP_TYPE="x360wireless"
+	gp_steam_control
 
 	#######################################################
 	# configure xboxdrv for 360 gamepad (wireless)
@@ -1579,10 +1591,38 @@ gp_steam_control()
 	# set Steam controls based on current controller type
 	# note: $STEAM_GP_TYPE is set in rrs_gamepad
 
-	# ascertain current binding from config.vdf
-	STEAM_GP_ORIG=$(grep "\bSDL_GamepadBind\b" "$config_home/.local/share/Steam/config/config.vdf") 
-	
+	########################################################################
+	##################### !!!!!!!!UNFINISHED!!!!!!!!!!!#####################
+	########################################################################
+
+	# Config.vdf file evaulation
+	if [ ! -d "$home/.local/share/Steam/config/config.vdf" ]; then
+		# copy existing user file to avoid reconfiguration
+		cp -v "$home/.local/share/Steam/config/config.vdf" "$config_home/.local/share/Steam/config"
+
+		# Now check if SDL Bindings are in place
+		if grep -q grep "\bSDL_GamepadBind\b" "$config_home/.local/share/Steam/config/config.vdf"
+			# ascertain current bindings to var
+			STEAM_GP_ORIG=$(grep "\bSDL_GamepadBind\b" "$config_home/.local/share/Steam/config/config.vdf")
+		else
+			# Bindings do not exist, fall back to skeleton file
+			# Unfortunately, this means user must login again
+			cp -v "$scriptdir/XBMC-cfgs/extra/Steam/config.vdf" "$config_home/.local/share/Steam/config"
+			# Set var to skeleton file place holder
+			STEAM_GP_ORIG="SDL_BIND_TEMP"
+	else
+		# copy skeleton file instead
+		# Unfortunately, this means user must login again
+		cp -v "$scriptdir/XBMC-cfgs/extra/Steam/config.vdf" "$config_home/.local/share/Steam/config"
+		# Set var to skeleton file place holder
+		STEAM_GP_ORIG="SDL_BIND_TEMP"
+	fi
+
+	# change controls
+	# User can always set controls manually, but if we can make it easier for them
+	# Let's make it happen :)
 	case $STEAM_GP_TYPE in
+
 
 		x360wireless)
 			# set keybinding value

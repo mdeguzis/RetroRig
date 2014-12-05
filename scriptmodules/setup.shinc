@@ -114,6 +114,7 @@ function rrs_prepareFolders()
 	pathlist+=("$config_home/.mess/cfg")
 	pathlist+=("$config_home/.stella")
 	pathlist+=("$config_home/.mednafen")
+	pathlist+=("$config_home/.local/share/Steam/config")
 
 	# xbmc folders
 	pathlist+=("$xbmc_home/userdata/keymaps")
