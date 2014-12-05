@@ -1024,14 +1024,6 @@ function h_emu_user_fixes()
 	sed -i "s|PLACEHOLDER_SAVESTATEPTH|$config_home/.config/mupen64plus/save|g" "$config_home/.config/mupen64plus/mupen64plus.cfg"
 
 	# Advanced Launcher (XBMC)
-	echo "*****"
-	echo "*****"
-	echo "***** please fix me! Advanced Launcher (XBMC) in helpers.shinc *****"
-	echo "*****"
-	echo "*****"
-	#sed -i "s|config_temp|$config_home|g" "$config_home/"
-
-	# antimicro
 	sed -i "s|config_temp|$config_home|g" "$xbmc_home/userdata/addon_data/plugin.program.advanced.launcher/launchers.xml"		
 
 	# echo change

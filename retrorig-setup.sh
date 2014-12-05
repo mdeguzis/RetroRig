@@ -352,7 +352,7 @@ cd "$rootdir"
 
 while true; do
     cmd=(dialog --backtitle "LibreGeek.org RetroRig 
-Installer" --menu "| Main Menu (v.0.9.7b) | \
+Installer" --menu "| Main Menu (v.0.9.8) | \
  			 BIOS files are NOT provided!" 17 62 16)
     options=(1 "Install RetroRig" 
 	     2 "Retro Rig Settings" 
