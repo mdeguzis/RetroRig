@@ -642,9 +642,6 @@ function rrs_emulators()
 	#fix permissions since we are running as sudo
 	h_correct_perms
 
-	# Run Debug checks
-	rrs_debug
-
 	__postMSGs="$__postMSGs This current configuration requires BIOS files be placed under '$rootdir/BIOS/' folder for the respective system you are using or under the '$rootdir/ROMs/' folder for the same system. You may also use the BIOS Loader under the settings menu. Many MAME games under MAME4ALL have self contained BIOS files."
 
 	# inject a space to seperate messages?
@@ -705,9 +702,6 @@ function rrs_software()
 
 	#fix permissions since we are running as sudo
 	h_correct_perms
-
-	# Run Debug checks
-	rrs_debug
 
 	# Inform user about post-install tasks
 	# Output postMSGs to screen
