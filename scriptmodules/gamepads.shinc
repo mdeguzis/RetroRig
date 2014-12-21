@@ -995,9 +995,8 @@ RetorRig loads to use the gamepad" 14 60
 	#update init scripts for xboxdrv
 	$update_init_xboxdrv
 
-	# start the xboxdrv service
-	# disable for now, hangs script completion running in background
-	# $cmd_xboxdrv_start &
+	# restart the xboxdrv service, not start, in case it was already loaded for a gamepad change
+	$cmd_xboxdrv_restart
 
 	# replace specific user paths that emulators and files may use
 	h_emu_user_fixes
@@ -1122,9 +1121,9 @@ function gp_x360_wireless()
 	# inform user that you must have controller connected or restart
 	dialog --msgbox "The xboxdrv userland module detects the number of Xbox controllers connected \
 when it starts. Therefore, we must specify how many you have connected or want to use. \
-You must reboot to have these changes take effect. If you tell xboxdrv that you have 3 controllers, when you only have one, \
+There is no need to reboot to have these changes take effect. If you tell xboxdrv that you have 3 controllers, when you only have one, \
 the service may fail to start correctly.\n\nPlease see /etc/default/xboxdrv for more. Press the center Guide Button after \
-RetorRig loads to use the gamepad." 14 60
+RetorRig loads to use the gamepad." 14 62
 
 	# Present small menu asking for number of controllers
 	cmd=(dialog --backtitle "LibreGeek.org RetroRig Installer" \
@@ -1271,9 +1270,8 @@ RetorRig loads to use the gamepad." 14 60
 	#update init scripts for xboxdrv
 	$update_init_xboxdrv
 
-	# start the xboxdrv service
-	# disable for now, hangs script completion running in background
-	# service xboxdrv start &
+	# restart the xboxdrv service, not start, in case it was already loaded for a gamepad change
+	$cmd_xboxdrv_restart
 
 	#####################################################################################
 	# THIS FUNCTION SECTION IS NOT USED AT THE MOMENT, MORE TESTING IS NEEDED!!!
@@ -1411,9 +1409,9 @@ function gp_x360_usb()
 	# inform user that you must have controller connected or restart
 	dialog --msgbox "The xboxdrv userland module detects the number of USB PS3 controllers connected \
 when it starts. Therefore, we must specify how many you have connected or want to use. \
-Please reboot to have these changes take effect! If you tell xboxdrv I have 3 controllers, when you only have one, \
+There is no need to reboot to have these changes take effect! If you tell xboxdrv I have 3 controllers, when you only have one, \
 the service may fail to start correctly.\n\nPlease see /etc/default/xboxdrv for more. Press the PS Button after \
-RetorRig loads to use the gamepad" 14 60
+RetorRig loads to use the gamepad" 14 62
 
 	# Present small menu asking for number of controllers
 	cmd=(dialog --backtitle "LibreGeek.org RetroRig Installer" \
@@ -1559,9 +1557,8 @@ RetorRig loads to use the gamepad" 14 60
 	# update init scripts for xboxdrv
 	$update_init_xboxdrv
 
-	# start the xboxdrv service
-	# disable for now, hangs script completion running in background
-	# $cmd_xboxdrv_start &
+	# restart the xboxdrv service, not start, in case it was already loaded for a gamepad change
+	$cmd_xboxdrv_restart
 
 	#####################################################################################
 	# THIS FUNCTION SECTION IS NOT USED AT THE MOMENT, MORE TESTING IS NEEDED!!!
@@ -1580,7 +1577,7 @@ RetorRig loads to use the gamepad" 14 60
 
 	# Let the user know about LED's
 	dialog --msgbox "Using wired controllers, the pairing is in sequence. If you \
-received the wrong LED, unplug and plug the USB cable back in until you get the correct LED number. Please reboot to fully enable the controller"  10 40
+received the wrong LED, unplug and plug the USB cable back in until you get the correct LED number."  16 62
 
 	sixad --boot-no
 }

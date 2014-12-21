@@ -122,7 +122,7 @@ case $response in
 	sed -i '/%sudo   ALL=NOPASSWD: \/usr\/bin\/xboxdrv/d' "/etc/sudoers"
 
 	# remove system services
-	$cmd_xboxdrv_stop=
+	$cmd_xboxdrv_stop
 	$cmd_rescan_stop	
 	$cmd_remove_xboxdrv
 	rm -f /etc/init.d/xboxdrv

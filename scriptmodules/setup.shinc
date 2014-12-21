@@ -651,10 +651,10 @@ function rrs_emulators()
 
 
 	if [[ ! -z $__postMSGs ]]; then
-	dialog --backtitle "LibreGeek.org - RetroRig Setup. Installation folder: $rootdir for user $user" --msgbox "$__postMSGs" 17 70
+	dialog --backtitle "LibreGeek.org - RetroRig Setup. Installation folder: $rootdir" --msgbox "$__postMSGs" 17 70
 	fi
 
-	dialog --backtitle "LibreGeek.org - RetroRig Setup. Installation folder: $rootdir for user $user" --msgbox "Finished emulator installs.\n\nYou now have to copy roms to the roms folders. You may also use the 'ROM loader' in settings menu" 17 60
+	dialog --backtitle "LibreGeek.org - RetroRig Setup. Installation folder: $rootdir" --msgbox "Finished emulator installs.\n\nYou now have to copy roms to the roms folders. You may also use the 'ROM loader' in settings menu" 17 60
 
 }
 
@@ -710,7 +710,7 @@ function rrs_software()
 	__postMSGs="$__postMSGs For VirtualBox users, please see the wiki under 'Installation' for notes on running RetroRig under a virtual machine! At the minimum, you will need to add a filter for your controller "
 
 	if [[ ! -z $__postMSGs ]]; then
-		dialog --backtitle "LibreGeek.org - RetroRig Setup. Installation folder: $rootdir for user $user" --msgbox "$__postMSGs\n\nSoftware install complete. See debug.log for more details. Continuing on to emulator installs..." 18 60
+		dialog --backtitle "LibreGeek.org - RetroRig Setup. Installation folder: $rootdir" --msgbox "$__postMSGs\n\nSoftware install complete. See debug.log for more details. Continuing on to emulator installs..." 18 60
 	fi
 
 }
@@ -785,7 +785,7 @@ function rrs_debug()
 
 	echo -e "\nEnd of log file" >> "$rootdir/logs/debug.log" >> "$rootdir/logs/debug.log"
 
-	dialog --backtitle "LibreGeek.org - RetroRig Setup. Installation folder: $rootdir for user $	user" --msgbox "Debug log was generated in $rootdir/logs/debug.log. Additional logs can be found in the folder $rootdir/logs/." 10 60 
+	dialog --backtitle "LibreGeek.org - RetroRig Setup. Installation folder: $rootdir" --msgbox "Debug log was generated in $rootdir/logs/debug.log. Additional logs can be found in the folder $rootdir/logs/." 10 60 
 
 	#corect permissions
 	h_correct_perms
@@ -963,7 +963,7 @@ function rrs_done()
 	# Please see commit efeb2bd for legacy code. This message will be 
 	# Removed in due time.
 
-       	dialog --backtitle "LibreGeek.org - RetroRig Setup. Installation folder: $rootdir for user $user" --msgbox "Finished main install tasks.\n\nYou now have to copy roms to the roms folders. \nThis can be done via SSH, Samba, or via your graphic folder manager (please see settings menu for more)\n\nAll current config folders used were appended with .old for restoration purposes.\n\nSteam Users: If you had Steam installed ahead of time, your controller should work. Otherwise, you will need to setup the controller in the Steam settings menu in Big Picture Mode or optionally run the gamepad setup again." 18 60
+       	dialog --backtitle "LibreGeek.org - RetroRig Setup. Installation folder: $rootdir" --msgbox "Finished main install tasks.\n\nYou now have to copy roms to the roms folders. \nThis can be done via SSH, Samba, or via your graphic folder manager (please see settings menu for more)\n\nAll current config folders used were appended with .old for restoration purposes.\n\nSteam Users: If you had Steam installed ahead of time, your controller should work. Otherwise, you will need to setup the controller in the Steam settings menu in Big Picture Mode or optionally run the gamepad setup again." 18 60
 
 	# correct permissions
 	h_correct_perms
@@ -976,7 +976,6 @@ function rrs_showHelp()
     PATHCOLOR="36m"  #Cyan text
     TITLECOLOR="33m"  #Yellow text
     BARCOLOR="35m"  #Yellow text
-
     #Console help file
     clear
     echo ""
