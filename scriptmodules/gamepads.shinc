@@ -1590,6 +1590,9 @@ gp_steam_control()
 
 	# set Steam controls based on current controller type
 	# note: $STEAM_GP_TYPE is set in rrs_gamepad
+	# This function will also take care of if the user already has other
+	# Settings defined for Steam, such as login information etc.
+	# *Very early draft
 
 	########################################################################
 	##################### !!!!!!!!UNFINISHED!!!!!!!!!!!#####################
@@ -1603,13 +1606,14 @@ gp_steam_control()
 		# Now check if SDL Bindings are in place
 		if grep -q grep "\bSDL_GamepadBind\b" "$config_home/.local/share/Steam/config/config.vdf"
 			# ascertain current bindings to var
-			STEAM_GP_ORIG=$(grep "\bSDL_GamepadBind\b" "$config_home/.local/share/Steam/config/config.vdf")
+			then STEAM_GP_ORIG=$(grep "\bSDL_GamepadBind\b" "$config_home/.local/share/Steam/config/config.vdf")
 		else
 			# Bindings do not exist, fall back to skeleton file
 			# Unfortunately, this means user must login again
 			cp -v "$scriptdir/XBMC-cfgs/extra/Steam/config.vdf" "$config_home/.local/share/Steam/config"
 			# Set var to skeleton file place holder
 			STEAM_GP_ORIG="SDL_BIND_TEMP"
+		fi
 	else
 		# copy skeleton file instead
 		# Unfortunately, this means user must login again
