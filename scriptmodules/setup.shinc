@@ -114,6 +114,7 @@ function rrs_prepareFolders()
 	pathlist+=("$config_home/.mess/cfg")
 	pathlist+=("$config_home/.stella")
 	pathlist+=("$config_home/.mednafen")
+	pathlist+=("$config_home/.local/share/Steam/config")
 
 	# xbmc folders
 	pathlist+=("$xbmc_home/userdata/keymaps")
@@ -282,24 +283,36 @@ options=(1 "Xbox 360 Controller (wireless)"
 		gp_common
 		gp_x360_wireless
 		h_restore_bios_cfg
+		# set type for steam setup and set controls
+		STEAM_GP_TYPE="x360wireless"
+		gp_steam_control	
 		;;
 
 		2)
 		gp_common
 		gp_x360_usb
 		h_restore_bios_cfg
+		# set type for steam setup and set controls
+		STEAM_GP_TYPE="x360usb"
+		gp_steam_control
 		;;
 
 		3)
 		gp_common
 		gp_ps3_blu
 		h_restore_bios_cfg
+		# set type for steam setup and set controls
+		STEAM_GP_TYPE="ps3blu"
+		gp_steam_control
 		;;
 
 		4)
 		gp_common
 		gp_ps3_usb
 		h_restore_bios_cfg
+		# set type for steam setup and set controls
+		STEAM_GP_TYPE="ps3usb"
+		gp_steam_control
 		;;
 
 		5)
@@ -310,7 +323,8 @@ options=(1 "Xbox 360 Controller (wireless)"
 	done
 	
 	wii_motion_controller_for_dolphin
-	enable_autostart_RetroRig
+	enable_gp_autostart
+	enable_rr_autostart
 	
 }
 
@@ -491,7 +505,6 @@ function rrs_source_syscalls()
 	echo "Release: $OS_RELEASE"
 	echo "Default init system: $init_system"
 	echo "Primary package management system: $pkg_manager"
-	echo ""
 	echo "#####################################################"
 	sleep 4s
 
@@ -531,18 +544,15 @@ function rrs_add_standard_repos()
 					echo "deb http://ppa.launchpad.net/beauman/retrorig/ubuntu trusty main" >\
 					  /etc/apt/sources.list.d/beauman-ubuntu-retrorig-trusty.list
 
-					echo "deb http://ppa.launchpad.net/beauman/retrorig-testing/ubuntu trusty main" >\
-					  /etc/apt/sources.list.d/beauman-ubuntu-retrorig-testing-trusty.list
-
 					echo "copying missing libraries for Ubuntu 14.10"
-					mkdir -p /usr/lib/RetroRig
-					cd /usr/lib/RetroRig
+					mkdir -p /usr/share/RetroRig
+					cd /usr/share/RetroRig
 					wget --tries=50 -P /tmp "http://www.libregeek.org/RetroRig/libs/libs.Ubuntu.14.10.tar.bz"
 					tar xvfj /tmp/libs.Ubuntu.14.10.tar.bz
 
-					echo "installing librariessystem wide"
+					echo "installing libraries system wide"
 					cd /etc/ld.so.conf.d/
-					echo /usr/lib/RetroRig > RetroRig.conf
+					echo /usr/share/RetroRig > RetroRig.conf
 					ldconfig
 				
 #					TODO
@@ -554,7 +564,7 @@ function rrs_add_standard_repos()
 #					apt-get update
 #
 #					# remove supplemental libraries
-#					rm -rf /usr/lib/RetroRig
+#					rm -rf /usr/share/RetroRig
 #					rm /etc/ld.so.conf.d/RetroRig.conf
 #					ldconfig
 					;;
@@ -632,9 +642,6 @@ function rrs_emulators()
 	#fix permissions since we are running as sudo
 	h_correct_perms
 
-	# Run Debug checks
-	rrs_debug
-
 	__postMSGs="$__postMSGs This current configuration requires BIOS files be placed under '$rootdir/BIOS/' folder for the respective system you are using or under the '$rootdir/ROMs/' folder for the same system. You may also use the BIOS Loader under the settings menu. Many MAME games under MAME4ALL have self contained BIOS files."
 
 	# inject a space to seperate messages?
@@ -644,10 +651,10 @@ function rrs_emulators()
 
 
 	if [[ ! -z $__postMSGs ]]; then
-	dialog --backtitle "LibreGeek.org - RetroRig Setup. Installation folder: $rootdir for user $user" --msgbox "$__postMSGs" 17 70
+	dialog --backtitle "LibreGeek.org - RetroRig Setup. Installation folder: $rootdir" --msgbox "$__postMSGs" 17 70
 	fi
 
-	dialog --backtitle "LibreGeek.org - RetroRig Setup. Installation folder: $rootdir for user $user" --msgbox "Finished emulator installs.\n\nYou now have to copy roms to the roms folders. You may also use the 'ROM loader' in settings menu" 17 60
+	dialog --backtitle "LibreGeek.org - RetroRig Setup. Installation folder: $rootdir" --msgbox "Finished emulator installs.\n\nYou now have to copy roms to the roms folders. You may also use the 'ROM loader' in settings menu" 17 60
 
 }
 
@@ -676,8 +683,9 @@ function rrs_software()
 	# install binaries
 	$cmd_install_pkg xboxdrv curl python-software-properties \
 	pkg-config software-properties-common dconf-tools jstest-gtk \
-	qjoypad sixad libusb-0.1-4 antimicro bluez getpos unclutter \
-	joydetect sudo
+	sixad libusb-0.1-4 antimicro bluez getpos unclutter \
+	joydetect sudo ttf-dejavu-core ttf-dejavu-core ttf-liberation \
+	wmctrl
 
 	#wii motion support
 	$cmd_install_pkg libcwiid1 lswm wmgui wminput
@@ -695,9 +703,6 @@ function rrs_software()
 	#fix permissions since we are running as sudo
 	h_correct_perms
 
-	# Run Debug checks
-	rrs_debug
-
 	# Inform user about post-install tasks
 	# Output postMSGs to screen
 
@@ -705,11 +710,8 @@ function rrs_software()
 	__postMSGs="$__postMSGs For VirtualBox users, please see the wiki under 'Installation' for notes on running RetroRig under a virtual machine! At the minimum, you will need to add a filter for your controller "
 
 	if [[ ! -z $__postMSGs ]]; then
-		dialog --backtitle "LibreGeek.org - RetroRig Setup. Installation folder: $rootdir for user $user" --msgbox "$__postMSGs\n\nSoftware install complete. See debug.log for more details. Continuing on to emulator installs..." 18 60
+		dialog --backtitle "LibreGeek.org - RetroRig Setup. Installation folder: $rootdir" --msgbox "$__postMSGs\n\nSoftware install complete. See debug.log for more details. Continuing on to emulator installs..." 18 60
 	fi
-
-	chown -R "$user" "$rootdir/logs/install_$now.log.txt"
-	chgrp -R "$user" "$rootdir/logs/install_$now.log.txt"
 
 }
 
@@ -755,28 +757,35 @@ function rrs_debug()
 	gsettings list-recursively "org.gnome.desktop.screensaver" | grep "ubuntu-lock-on-suspend" >> "$rootdir/logs/debug.log"	
 	gsettings list-recursively "org.gnome.desktop.session" | grep "idle-delay" >> "$rootdir/logs/debug.log"
 
-	# Source built / pre-built
-	h_filechecker "$rootdir/emulators/PPSSPP/ppsspp-0.9.8-SDL-pk64"
-	h_filechecker "/ust/bin/PPSSPPSDL"
-
 	# pkg checks
-	echo -e "\nCheck for needed pkgs installed via apt: " >> "$rootdir/logs/debug.log"
+	echo -e "\nChecking for needed pkgs installed: " >> "$rootdir/logs/debug.log"
 	h_pkgcheck "stella"
+	h_pkgcheck "mednafen"
+	h_pkgcheck "mess"
+	h_pkgcheck "mame"
+	h_pkgcheck "ppsspp"
+	h_pkgcheck "dolphin-emu"
+	h_pkgcheck "mupen64plus"
+	h_pkgcheck "pcsx2"
+	h_pkgcheck "gens"
+	
 	h_pkgcheck "python-software-properties"
 	h_pkgcheck "xbmc"
 	h_pkgcheck "dconf-tools"
 	h_pkgcheck "xboxdrv"
 	h_pkgcheck "curl"
-	h_pkgcheck "xbmc"
-	h_pkgcheck "mednafen"
-	h_pkgcheck "mess"
-	h_pkgcheck "mame"
-	h_pkgcheck "qjoypad"
+	h_pkgcheck "getpos"
 	h_pkgcheck "jstest-gtk"
+	h_pkgcheck "antimicro"
+	h_pkgcheck "dolphin-emu"
+	h_pkgcheck "gens"
+	h_pkgcheck "pcsx2"
+	h_pkgcheck "ppsspp"
+	h_pkgcheck "dos2unix"
 
-   	echo -e "\nEnd of log file" >> "$rootdir/logs/debug.log" >> "$rootdir/logs/debug.log"
+	echo -e "\nEnd of log file" >> "$rootdir/logs/debug.log" >> "$rootdir/logs/debug.log"
 
-	dialog --backtitle "LibreGeek.org - RetroRig Setup. Installation folder: $rootdir for user $	user" --msgbox "Debug log was generated in $rootdir/logs/debug.log. Additional logs can be found in the folder $rootdir/logs/." 10 60 
+	dialog --backtitle "LibreGeek.org - RetroRig Setup. Installation folder: $rootdir" --msgbox "Debug log was generated in $rootdir/logs/debug.log. Additional logs can be found in the folder $rootdir/logs/." 10 60 
 
 	#corect permissions
 	h_correct_perms
@@ -789,7 +798,6 @@ function rrs_xbmc_patched()
 	# release the aptitdue hold to install/upgrade RetroRig's XBMC version
 	$cmd_unhold_pkg xbmc xbmc-bin
 
-	# create autostart for XBMC and place our modified files
 	# Custom script for reboots/hotplugging
 	if [ -f "$scriptdir/XBMC-cfgs/extra/gp_autodetect_xbmc.sh" ]; then
 		cp -v "$scriptdir/XBMC-cfgs/extra/gp_autodetect_xbmc.sh" "/usr/share/applications/"
@@ -814,13 +822,8 @@ function rrs_xbmc_patched()
 	# insert restarting xboxdrv specifically into /etc/sudoers
 	cat "$scriptdir/XBMC-cfgs/extra/sudoers.txt" >> "/etc/sudoers"
 
-	# create autostart entry, remove prior if it exists
-	rm -f "$home.config/autostart/RetroRig.desktop"
-	cp -v "$scriptdir/XBMC-cfgs/extra/RetroRig.desktop" "$home/.config/autostart"
-
 	# fix their permissions
 	chmod 755 "/usr/share/applications/gp_autodetect_xbmc.sh" 
-	chmod 755 "$home/.config/autostart/RetroRig.desktop"
 	chmod 755 "/usr/share/applications/RetroRig.desktop"
 	chmod 755 "/usr/share/applications/startXBMC.sh" 
 
@@ -960,7 +963,7 @@ function rrs_done()
 	# Please see commit efeb2bd for legacy code. This message will be 
 	# Removed in due time.
 
-       	dialog --backtitle "LibreGeek.org - RetroRig Setup. Installation folder: $rootdir for user $user" --msgbox "Finished main install tasks.\n\nYou now have to copy roms to the roms folders. \nThis can be done via SSH, Samba, or via your graphic folder manager (please see settings menu for more)\n\nAll current config folders used were appended with .old for restoration purposes.\n\n" 18 50
+       	dialog --backtitle "LibreGeek.org - RetroRig Setup. Installation folder: $rootdir" --msgbox "Finished main install tasks.\n\nYou now have to copy roms to the roms folders. \nThis can be done via SSH, Samba, or via your graphic folder manager (please see settings menu for more)\n\nAll current config folders used were appended with .old for restoration purposes.\n\nSteam Users: If you had Steam installed ahead of time, your controller should work. Otherwise, you will need to setup the controller in the Steam settings menu in Big Picture Mode or optionally run the gamepad setup again." 18 60
 
 	# correct permissions
 	h_correct_perms
@@ -973,7 +976,6 @@ function rrs_showHelp()
     PATHCOLOR="36m"  #Cyan text
     TITLECOLOR="33m"  #Yellow text
     BARCOLOR="35m"  #Yellow text
-
     #Console help file
     clear
     echo ""

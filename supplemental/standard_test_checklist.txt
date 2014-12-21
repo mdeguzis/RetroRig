@@ -223,6 +223,13 @@ Have you submitted any pull requests needed after testing?
 
 Notes:
 
+----------------------------------------------------------------------------------
+Lead Maintainer only:
+
+1. All PRs and remote code pulled before final changes?
+2. Version tags been updated?
+3. Artwork updated?
+4. Package versions checked?
 
 *--------------------------------------------------------------------------------*
 *--------------------------------------------------------------------------------*

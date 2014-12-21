@@ -95,6 +95,10 @@ function gp_ps3_blu()
 	# Gens GS (Sega CD/32X)
 	cp -v "$scriptdir/emu-cfgs/ps3_blu_controller/GensGS/gens.cfg" "$config_home/.gens/"
 
+	# Alter Steam config.vdf with proper controls if controller exists
+	STEAM_GP_TYPE="ps3blu"
+	gp_steam_control
+
 	###########################################################
 	# Add emulator specifc control remaps here for qjoypad
 	###########################################################
@@ -470,6 +474,8 @@ function ps3_set_emulator_ids()
 		dolphin_MAC_BLU=$(joydetect /dev/input/js$i | awk -F'[^:[a-zA-Z0-9]*' '{print $6}')
 		# Stella (supports only 2 players )
 		Stella_MAC_BLU=$(joydetect /dev/input/js$i | awk -F'[^:[a-zA-Z0-9]*' '{print $6}')
+		# Set MAC address for Steam Assignment
+		Steam_MAC_BLU=$(joydetect /dev/input/js$i | awk -F'[^:[a-zA-Z0-9]*' '{print $6}')
 
 	elif [ $n == "2" ]; then
 		
@@ -514,14 +520,14 @@ function ps3_set_emulator_ids()
 
 }
 
-function enable_autostart_RetroRig()
+function enable_gp_autostart()
 {
 	####################################################################
 	#
 	# Function Description:
 	# 
-	# enable / disable auto start function for RetroRig
-	#
+	# enable / disable auto start function for RetroRig with gamepads
+	# 	#
 	#################################################################### 
 
 	clear
@@ -529,8 +535,8 @@ function enable_autostart_RetroRig()
 	PS3_USB=$(grep -m 1 -Ee "autostartXBMC_PS3_USB" "/usr/share/applications/gp_autodetect_xbmc.sh")
 	PS3_BT=$(grep -m 1 -Ee "autostartXBMC_PS3_BT" "/usr/share/applications/gp_autodetect_xbmc.sh")
 	
-	#default is disabled
-	autostart=disabled
+	#default gamepad autostart is disabled
+	gp_autostart=disabled
 	
 	dialog --title "Confirm yes/no" \
 	--backtitle "Auto Start RetroRig" \
@@ -542,19 +548,19 @@ function enable_autostart_RetroRig()
 	response=$?
 	case $response in
 		0)
-			autostart=enabled
+			gp_autostart=enabled
 		;;
 
 		1)
-			autostart=disabled
+			gp_autostart=disabled
 		;;
 
 		255)
-			autostart=disabled
+			gp_autostart=disabled
 		;;
 	esac
 	
-	if [ "$autostart" == "enabled" ]; then
+	if [ "$gp_autostart" == "enabled" ]; then
 		sed -i "s|$PS3_USB|autostartXBMC_PS3_USB=enabled|g" "/usr/share/applications/gp_autodetect_xbmc.sh"
 		sed -i "s|$PS3_BT|autostartXBMC_PS3_BT=enabled|g" "/usr/share/applications/gp_autodetect_xbmc.sh"
 	else
@@ -567,6 +573,56 @@ function enable_autostart_RetroRig()
 	sleep 2
 }
 
+
+function enable_rr_autostart()
+{
+	####################################################################
+	#
+	# Function Description:
+	# 
+	# enable / disable auto start of RetroRig after login
+	# 	
+	#################################################################### 
+
+	clear
+
+	rr_autostart=disabled
+	
+	dialog --title "Confirm yes/no" \
+	--backtitle "Auto Start RetroRig" \
+	--yesno "Do you want to have RetroRig started after the X server loads (GUI)?"  6 60
+	# Get exit status
+	# 0 means user hit [yes] button.
+	# 1 means user hit [no] button.
+	# 255 means user hit [Esc] key.
+	response=$?
+	case $response in
+		0)
+			rr_autostart=enabled
+		;;
+
+		1)
+			rr_autostart=disabled
+		;;
+
+		255)
+			rr_autostart=disabled
+		;;
+	esac
+	
+	if [ "$rr_autostart" == "enabled" ]; then
+		# create autostart entry, remove prior if it exists
+		rm -f "$home.config/autostart/RetroRig.desktop"
+		cp -v "$scriptdir/XBMC-cfgs/extra/RetroRig.desktop" "$home/.config/autostart"
+		# fix permissions
+		chmod 755 "$home/.config/autostart/RetroRig.desktop"
+	else
+		# remove any existing entry
+		rm -f "$home.config/autostart/RetroRig.desktop"
+	fi
+
+	sleep 2
+}
 function wii_motion_controller_for_dolphin()
 {
 	####################################################################
@@ -750,6 +806,10 @@ function gp_ps3_usb()
 
 	# Gens GS (Sega CD/32X)
 	cp -v "$scriptdir/emu-cfgs/ps3_usb_controller/GensGS/gens.cfg" "$config_home/.gens/"
+
+	# Alter Steam config.vdf with proper controls if controller exists
+	STEAM_GP_TYPE="ps3usb"
+	gp_steam_control
 
 	##############################################################
 	# Set system objects
@@ -935,9 +995,8 @@ RetorRig loads to use the gamepad" 14 60
 	#update init scripts for xboxdrv
 	$update_init_xboxdrv
 
-	# start the xboxdrv service
-	# disable for now, hangs script completion running in background
-	# $cmd_xboxdrv_start &
+	# restart the xboxdrv service, not start, in case it was already loaded for a gamepad change
+	$cmd_xboxdrv_restart
 
 	# replace specific user paths that emulators and files may use
 	h_emu_user_fixes
@@ -1025,6 +1084,10 @@ function gp_x360_wireless()
 	# Gens GS (Sega CD/32X)
 	cp -v "$scriptdir/emu-cfgs/x360_wireless_controller/GensGS/gens.cfg" "$config_home/.gens/"
 
+	# Alter Steam config.vdf with proper controls if controller exists
+	STEAM_GP_TYPE="x360wireless"
+	gp_steam_control
+
 	#######################################################
 	# configure xboxdrv for 360 gamepad (wireless)
 	#######################################################
@@ -1058,9 +1121,9 @@ function gp_x360_wireless()
 	# inform user that you must have controller connected or restart
 	dialog --msgbox "The xboxdrv userland module detects the number of Xbox controllers connected \
 when it starts. Therefore, we must specify how many you have connected or want to use. \
-You must reboot to have these changes take effect. If you tell xboxdrv that you have 3 controllers, when you only have one, \
+There is no need to reboot to have these changes take effect. If you tell xboxdrv that you have 3 controllers, when you only have one, \
 the service may fail to start correctly.\n\nPlease see /etc/default/xboxdrv for more. Press the center Guide Button after \
-RetorRig loads to use the gamepad." 14 60
+RetorRig loads to use the gamepad." 14 62
 
 	# Present small menu asking for number of controllers
 	cmd=(dialog --backtitle "LibreGeek.org RetroRig Installer" \
@@ -1207,9 +1270,8 @@ RetorRig loads to use the gamepad." 14 60
 	#update init scripts for xboxdrv
 	$update_init_xboxdrv
 
-	# start the xboxdrv service
-	# disable for now, hangs script completion running in background
-	# service xboxdrv start &
+	# restart the xboxdrv service, not start, in case it was already loaded for a gamepad change
+	$cmd_xboxdrv_restart
 
 	#####################################################################################
 	# THIS FUNCTION SECTION IS NOT USED AT THE MOMENT, MORE TESTING IS NEEDED!!!
@@ -1310,6 +1372,10 @@ function gp_x360_usb()
 	# Gens GS (Sega CD/32X)
 	cp -v "$scriptdir/emu-cfgs/x360_usb_controller/GensGS/gens.cfg" "$config_home/.gens/"
 
+	# Alter Steam config.vdf with proper controls if controller exists
+	STEAM_GP_TYPE="x360usb"
+	gp_steam_control
+
 	############################################
 	# configure xboxdrv for 360 gamepad (USB)
 	############################################
@@ -1343,9 +1409,9 @@ function gp_x360_usb()
 	# inform user that you must have controller connected or restart
 	dialog --msgbox "The xboxdrv userland module detects the number of USB PS3 controllers connected \
 when it starts. Therefore, we must specify how many you have connected or want to use. \
-Please reboot to have these changes take effect! If you tell xboxdrv I have 3 controllers, when you only have one, \
+There is no need to reboot to have these changes take effect! If you tell xboxdrv I have 3 controllers, when you only have one, \
 the service may fail to start correctly.\n\nPlease see /etc/default/xboxdrv for more. Press the PS Button after \
-RetorRig loads to use the gamepad" 14 60
+RetorRig loads to use the gamepad" 14 62
 
 	# Present small menu asking for number of controllers
 	cmd=(dialog --backtitle "LibreGeek.org RetroRig Installer" \
@@ -1491,9 +1557,8 @@ RetorRig loads to use the gamepad" 14 60
 	# update init scripts for xboxdrv
 	$update_init_xboxdrv
 
-	# start the xboxdrv service
-	# disable for now, hangs script completion running in background
-	# $cmd_xboxdrv_start &
+	# restart the xboxdrv service, not start, in case it was already loaded for a gamepad change
+	$cmd_xboxdrv_restart
 
 	#####################################################################################
 	# THIS FUNCTION SECTION IS NOT USED AT THE MOMENT, MORE TESTING IS NEEDED!!!
@@ -1512,7 +1577,83 @@ RetorRig loads to use the gamepad" 14 60
 
 	# Let the user know about LED's
 	dialog --msgbox "Using wired controllers, the pairing is in sequence. If you \
-received the wrong LED, unplug and plug the USB cable back in until you get the correct LED number. Please reboot to fully enable the controller"  10 40
+received the wrong LED, unplug and plug the USB cable back in until you get the correct LED number."  16 62
 
 	sixad --boot-no
+}
+
+gp_steam_control()
+{
+
+	# set Steam controls based on current controller type
+	# note: $STEAM_GP_TYPE is set in rrs_gamepad
+	# This function will also take care of if the user already has other
+	# Settings defined for Steam, such as login information etc.
+	# *Very early draft
+
+	########################################################################
+	##################### !!!!!!!!UNFINISHED!!!!!!!!!!!#####################
+	########################################################################
+
+	# Config.vdf file evaulation
+	if [ ! -d "$home/.local/share/Steam/config/config.vdf" ]; then
+		# copy existing user file to avoid reconfiguration
+		cp -v "$home/.local/share/Steam/config/config.vdf" "$config_home/.local/share/Steam/config"
+
+		# Now check if SDL Bindings are in place
+		if grep -q grep "\bSDL_GamepadBind\b" "$config_home/.local/share/Steam/config/config.vdf"
+			# ascertain current bindings to var
+			then STEAM_GP_ORIG=$(grep "\bSDL_GamepadBind\b" "$config_home/.local/share/Steam/config/config.vdf")
+		else
+			# Bindings do not exist, fall back to skeleton file
+			# Unfortunately, this means user must login again
+			cp -v "$scriptdir/XBMC-cfgs/extra/Steam/config.vdf" "$config_home/.local/share/Steam/config"
+			# Set var to skeleton file place holder
+			STEAM_GP_ORIG="SDL_BIND_TEMP"
+		fi
+	else
+		# copy skeleton file instead
+		# Unfortunately, this means user must login again
+		cp -v "$scriptdir/XBMC-cfgs/extra/Steam/config.vdf" "$config_home/.local/share/Steam/config"
+		# Set var to skeleton file place holder
+		STEAM_GP_ORIG="SDL_BIND_TEMP"
+	fi
+
+	# change controls
+	# User can always set controls manually, but if we can make it easier for them
+	# Let's make it happen :)
+	case $STEAM_GP_TYPE in
+
+
+		x360wireless)
+			# set keybinding value
+			STEAM_GP_NEW=$(<"$scriptdir/gamepad-cfgs/x360_wireless_controller/x360wireless_steam.txt")
+			# change controller bindings
+			sed -i "s|$STEAM_GP_ORIG|$STEAM_GP_NEW|g" "$config_home/.local/share/Steam/config/config.vdf"
+			;;
+
+		x360usb)
+			# set keybinding value
+			STEAM_GP_NEW=$(<"$scriptdir/gamepad-cfgs/x360_usb_controller/x360usb_steam.txt")
+			# change controller bindings
+			sed -i "s|$STEAM_GP_ORIG|$STEAM_GP_NEW|g" "$config_home/.local/share/Steam/config/config.vdf"
+			;;
+
+		ps3blu)
+			# set keybinding value
+			STEAM_GP_NEW=$(<"$scriptdir/gamepad-cfgs/ps3_blu_controller/ps3blu_steam.txt")
+			# change controller bindings
+			sed -i "s|$STEAM_GP_ORIG|$STEAM_GP_NEW|g" "$config_home/.local/share/Steam/config/config.vdf"
+			# replace MAC address in keybinding file
+			sed -i "s|steam_mac_tmp|$Steam_MAC_BLU|g" "$config_home/.local/share/Steam/config/config.vdf"
+			;;
+
+		ps3usb)
+			# set keybinding value
+			STEAM_GP_NEW=$(<"$scriptdir/gamepad-cfgs/ps3_usb_controller/ps3usb_steam.txt")
+			# change controller bindings
+			sed -i "s|$STEAM_GP_ORIG|$STEAM_GP_NEW|g" "$config_home/.local/share/Steam/config/config.vdf"
+			;;
+	esac		
+
 }

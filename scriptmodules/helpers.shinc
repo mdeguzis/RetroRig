@@ -956,8 +956,8 @@ function h_correct_perms()
 	fi
 
 	# xboxdrv init script
-	chmod 755 /etc/init.d/xboxdrv > /dev/null 2>&1
-	chmod 755 /etc/default/xboxdrv > /dev/null 2>&1
+	chmod 755 $xboxdrv_init > /dev/null 2>&1
+	chmod 755 $xboxdrv_defaults > /dev/null 2>&1
 }
 
 function h_emu_user_fixes()
@@ -1024,14 +1024,6 @@ function h_emu_user_fixes()
 	sed -i "s|PLACEHOLDER_SAVESTATEPTH|$config_home/.config/mupen64plus/save|g" "$config_home/.config/mupen64plus/mupen64plus.cfg"
 
 	# Advanced Launcher (XBMC)
-	echo "*****"
-	echo "*****"
-	echo "***** please fix me! Advanced Launcher (XBMC) in helpers.shinc *****"
-	echo "*****"
-	echo "*****"
-	#sed -i "s|config_temp|$config_home|g" "$config_home/"
-
-	# antimicro
 	sed -i "s|config_temp|$config_home|g" "$xbmc_home/userdata/addon_data/plugin.program.advanced.launcher/launchers.xml"		
 
 	# echo change
@@ -1049,12 +1041,12 @@ function h_filechecker()
 
 function h_pkgcheck()
 {
-    PKG_OK=$($cmd_remove_pkg "$1" | egrep -w "Status|Package|Version")
+    PKG_OK=$($cmd_query_pkg "$1" | egrep -w "Status|Package|Version")
     echo "Checking for some pkg/lib: $PKG_OK"
     if [ "" == "$PKG_OK" ]; then
-        echo "NOT INSTALLED: $1" >> "$rootdir/logs/debug.log"
+        echo "NOT INSTALLED: $1"
     else
-        echo "installed: $1" >> "$rootdir/logs/debug.log"
+        echo "installed: $1"
     fi
 }
 

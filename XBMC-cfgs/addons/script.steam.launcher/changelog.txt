@@ -1,0 +1,206 @@
+0.0.1
+
+First version,
+
+0.1.0
+
+Reworked the windows side, now xbmc restarts once steam is exited.
+Thanks to malte for Rom Collection Browser. http://forum.xbmc.org/showthread.php?tid=70115
+Thanks to JohnnyD2 for VB scripts http://forum.xbmc.org/showthread.php?tid=70115&pid=960394#pid960394
+I used their work to improve the addon.
+
+0.1.1
+
+Reworked linux side, now xbmc restarts after steam is closed.
+Thanks to malte for Rom Collection Browser. http://forum.xbmc.org/showthread.php?tid=70115
+Thanks to Resandro for Arcade Browser. http://forum.xbmc.org/showthread.php?tid=48983
+I used their work to improve the addon
+
+0.1.2
+
+Minor change to allow install on osx. Other small changes.
+
+0.1.3
+
+Additions to Windows scripting: Xbmc will stay closed if Steam updates itself, it will wait for up to 5 seconds for Steam to restart. If steam is already open Xbmc will exit and Steam will switch to big picture mode.
+
+0.1.4
+Moved scripts into new directory.
+
+0.1.5
+Windows command windows now hidden.
+
+0.1.6
+Reworked Linux scripting - If steam is already open Xbmc will exit and Steam will switch to big picture mode.
+Reorganised files.
+
+0.1.7
+Small fix
+
+0.1.8
+Linux now uses a lockfile to prevent multiple instances of xbmc reopening if Steam has been exited to desktop and xbmc re-opened.
+
+0.1.9 
+New windows scripting
+
+0.2.0 
+Windows checks whether its 32 or 64 bit.
+New icon.
+
+0.2.2
+Changes to steam-launch.bat and default.py
+
+0.3.4
+AutoHotKey .exe used instead of batch file, now when exiting to desktop xbmc relaunches in windows. ahk script is included in case you want to make changes to the default timeouts, eg: start steam, wait X seconds then kill xbmc. The ahk script will force focus on either xbmc/steam when they are run. Script usage is SteamLaunch-AHK.exe "d:\games\steam\steam.exe" "d:\xbmc\xbmc.exe"
+Fanart added.
+
+0.3.6
+Changes to AHK script - disable #persistence and force #singleinstance
+
+0.4.0
+Added back code to autodetect if windows is 32 or 64 bit.
+New steam-launch.sh and now xbmc will restart if steam is exited or returned to desktop mode. The linux version now requires the program 'wmctrl' to work.
+
+0.4.4
+Small fixes.
+
+0.5.0
+Changes to windows side of default.py - now cmd window completely hidden and will not steal focus away from xbmc when in a true full screen.
+Somewhere along the line the <provides> tag in addon.xml was changed to 'game'. If a xbmc build with a Games main menu is used (eg garbear's retroplayer builds), the addon will appear under games, if not it will appear under Programs.
+
+0.5.1
+Recompiled AHK script using 32bit AHK, fixes script not working on win32
+Linux version now makes the steam-launch.sh script executable when run, no need to manually do it (it annoyed the hell out of me!). 
+
+0.8.4
+Test version.
+Steam/XBMC paths now changed via addon settings gui.
+Scripts are now launched from the addon_data directory, if the script does not exist it will be copied over from the addon install directory. Custom scripts will now not be deleted on addon update.
+Removed unnecessary scripts plus changes to remaining scripts.
+Plus other changes.
+Big thanks to malte, I used code and ideas from Rom Collection Browser. Cheers!
+
+0.8.6
+Added 2 advanced settings:
+1. Delete scripts and update on next run will delete the scripts out of the addon_data dir and copy them from the addon install dir the next time the addon is run. This is handy if you want to go back to the default scripts or if thebundled scripts have been updated. Only the script file will be deleted and the setting is turned off (to default) when run once.
+2. Linux only: Make steam-launch.sh executable on next run - This changed the executable bit on the file 'steam-launch.sh' which is necessary for this addon to run. This setting defaults to off after being run once.
+Addon now only copies/deletes os specific scripts.
+Small changes
+
+0.9.0
+Re-added and made changes to launchhidden.vbs, it's needed to prevent 'unable to launch application' error messages from xbmc restarting too fast.
+Changes to default.py
+
+0.9.2
+Changes to default.py
+Check if script files exist before deleting, prevents a error.
+Updated Steam-Lanuch-AHK.exe - Additional checks incase BPM is already active + for when BPM is restarted for forced/beta updates, script will check for 5 seconds for BPM or the steam update window to show up again, if it does it kills xbmc and waits for BPM to be closed. Also removed all hard timeouts and now everything happens on window events, eg XBMC is killed when either the BPM or steam update window appear.
+
+0.9.3
+Fixed wrong AHK.exe.
+Added busy dialog when script is run.
+Updated docs.
+
+0.9.5
+Cleaned up addon + updated script files for linux + windows. 
+Readded macosx code.
+Option to minimize xbmc instead of exiting it, this is set via addon settings. Yes, no and ask are available.
+Checks if files steam/xbmc locations exist and/or steam-launch.sh is executable, If not a yes/no dialog appears which can take you to the settings.
+Configurable timeout for 'Busy Dialog".
+
+0.9.7
+Checks for script updates and notifies user.
+
+0.9.8
+OSX now working, although xbmc will only restart after quitting steam completely.
+Option to disable program file checks
+Small changes.
+
+0.9.9
+Reverted windows changes in 0.9.8
+
+0.9.10
+French translation thanks to Kre|S.
+OSX checks for XBMC + Steam paths.
+A advanced option to use a Batch file to launch scripts - uses a batch file as in previous version which should hopefully solve the 'nothing happening' issue some people have been having. GUI settings for XBMC + Steam paths and whether to quit XBMC have no effect with this setting enabled, the options are configured via steam-launch.bat, located in userdata/addon_data/script.steam.launcher/scripts/ , with instructions located in file itself. steam-launch.bat is not deleted by the addon or updates and if it does not exist it will be copied to the userdata directory on first run with the option enabled, along with launchhidden-bat.vbs
+Deleting scripts via addon settings now deletes scripts from other O/S's if they exist.
+
+0.9.15
+Addon now logs to xbmc.log.
+A few fixes + changes.
+Linux script uses a temp lockfile to prevent multiple instances of XBMC reopening.
+
+0.9.90
+Fixed the 'nothing happening' issue on windows that some people were having.
+Removed 'Use a batch file to launch script' as it is no longer necessary.
+Updated script files with more info and markers for where to add external scripts to start before steam or xbmc.
+Notification on script failure.
+Few small changes.
+
+1.0.4
+Scripts need to be updated for this version!
+Reverted 'call' command in windows. 
+Added addon setting for pre/post steam scripts. The addon will wait for the script to finish before continuing. 
+Added portable mode option.
+Increased default busy dialog to 10 seconds.
+Heap of small changes.
+
+1.0.5
+Small fix for xbmc not restarting if steam exited quickly after opening.
+
+1.0.6
+Fix unnecessary 'script not executable' dialog when deleting scripts.
+
+1.1.1
+Added fix from 1.0.5 to OSX portion of steam-launch.sh
+In linux section of steam-launch.sh the 3rd argument is passed to the pre-steam script. This is for my linux system.
+Preliminary SteamOS support. The addon assumes you are running xbmc in the desktop session or with XBMC replacing the Gnome session and when run switches to the steam session (same as the desktop icon, which points to /usr/bin/returntosteam.sh). Only option available with SteamOS is 'Quit XBMC'. See the Steam-Launcher tjread for some more info.
+
+1.2.2
+Basic support for Android added. This simply launches the Steam app. Only options that work are 'busy dialog timeouts'. Closing XBMC requires root rights (at least using 'kill' via adb), and anyway, is there any point to closing XBMC on Android?
+Script files attempt to close xbmc gracefully, then in the background waits 1 second and if xbmc still exists it will be closed forcefully.
+
+1.9.4
+New settings layout - only OS specific settings are shown.
+Steam-launch.sh is made executable automatically when necessary and the option do so is removed.
+Rewrote default.py - added extra logging and trimmed it down and cleaned it up a bit, should work better now.
+New locking mechanism to try and prevent xbmc restarting multiple instances on linux if addon run multiple times
+Changes to included scripts
+
+1.9.6
+fixed error notifications
+cleaned up launching commands
+addon check if checks if pre/post steam scripts exist, if not disables them.
+small fixes
+
+1.9.7
+English strings changed and updated.
+Script update dialog has changed - yes now updates scripts instead of going to settings screen.
+Small fixes.
+Readded cscript prefix to windows command, with out it addon fails silently in Frodo.
+
+1.9.8
+Fixed script update check with older scripts
+Script files give error messages if run with no arguments
+Small fixes
+
+2.0.0
+Fixed formatting in addon.xml
+Use proper locking in steam-launch.sh script, thanks BtbN!
+Updated French language strings, thanks Kre|S!
+
+2.1.0
+Added close_fds=True to the subprocess.Popen call. Prevents the webserver port from being held in linux and renders launchhidden.vbs in windows obsolete. Thanks Lord_Gaav!
+Removed LaunchHidden.vbs
+Added custom icon to AHK script + cleaned/fixed it up a bit.
+Tiny cleanup to steam-launch.sh, no version bump.
+
+2.1.1
+Fix line endings in steam-launch.sh
+
+2.2.0
+Linux: Added a check for the the program 'wmctrl' which is a external dependency, check can be disabled in addon settings (eg for SteamOS users running XBMC in its own session)
+Addon will exit if the addon settings are opened via the script, so any changes can be reloaded.
+
+3.0.0
+Changes for Kodi / Helix 14 compatibility.

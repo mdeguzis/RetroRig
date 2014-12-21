@@ -167,7 +167,7 @@ if [ "$script_invoke_path" == "/usr/bin/retrorig-setup" ]; then
 
 	#install method via system folder
 	
-	scriptdir=/usr/lib/RetroRig
+	scriptdir=/usr/share/RetroRig
 	
 else
 
@@ -182,14 +182,12 @@ echo "#####################################################"
 echo "Loading script modules"
 echo "#####################################################"
 
-echo ""
 import "$scriptdir/scriptmodules/helpers"
 import "$scriptdir/scriptmodules/configuration"
 import "$scriptdir/scriptmodules/settings"
 import "$scriptdir/scriptmodules/setup"
 import "$scriptdir/scriptmodules/gamepads"
 import "$scriptdir/scriptmodules/emulators"
-echo ""
 
 # DEBUG ONLY!
 # Remove the below comment to double check all modules load
@@ -198,7 +196,6 @@ echo ""
 echo "#####################################################"
 echo "Checking compatibility"
 echo "#####################################################"
-echo ""
 
 # Discover platform
 rrs_discover_distro
@@ -355,7 +352,7 @@ cd "$rootdir"
 
 while true; do
     cmd=(dialog --backtitle "LibreGeek.org RetroRig 
-Installer" --menu "| Main Menu (v.0.9.7b) | \
+Installer" --menu "| Main Menu (v.0.9.8) | \
  			 BIOS files are NOT provided!" 17 62 16)
     options=(1 "Install RetroRig" 
 	     2 "Retro Rig Settings" 
@@ -376,19 +373,20 @@ Installer" --menu "| Main Menu (v.0.9.7b) | \
 
 	    1) 
 		now=$(date +'%d%m%Y_%H%M%S')
-		{
-		h_autosave_configs
-		rrs_prepareFolders
-		rrs_software
-		rrs_emulators
-		rrs_retrorig_cfgs
-		rrs_xbmc_cfgs
-		rrs_gamepad
-		h_emu_user_fixes
-		set_resolution
-		rrs_post_install
-		rrs_done
-		} 2>&1 | tee "$rootdir/logs/install_$now.log.txt"              	
+		h_autosave_configs | tee $rootdir/logs/install_$now.log.txt
+		rrs_prepareFolders | tee $rootdir/logs/install_$now.log.txt
+		rrs_software | tee $rootdir/logs/install_$now.log.txt
+		rrs_emulators | tee $rootdir/logs/install_$now.log.txt
+		rrs_retrorig_cfgs | tee $rootdir/logs/install_$now.log.txt
+		rrs_xbmc_cfgs | tee $rootdir/logs/install_$now.log.txt
+		rrs_gamepad | tee $rootdir/logs/install_$now.log.txt
+		h_emu_user_fixes | tee $rootdir/logs/install_$now.log.txt
+		set_resolution | tee $rootdir/logs/install_$now.log.txt
+		rrs_post_install | tee $rootdir/logs/install_$now.log.txt
+		rrs_debug | tee $rootdir/logs/install_$now.log.txt
+		rrs_done | tee $rootdir/logs/install_$now.log.txt
+		# clean and fixup log file
+		tr -cd '\11\12\15\40-\176' < "$rootdir/logs/temp_log.txt" > "$rootdir/logs/install_$now.log.txt"              	
 		chown -R "$user" "$rootdir/logs/install_$now.log.txt"
 		chgrp -R "$user" "$rootdir/logs/install_$now.log.txt"
 

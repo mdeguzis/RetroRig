@@ -30,12 +30,15 @@ do
     echo "[begin:] PS3 / USB controller changed"
     
     #first attempt
-    service xboxdrv restart
-    echo "sending gamepad reconfiguration request"
-    killall xbmc.bin -SIGUSR1
-    
+    service xboxdrv stop
+    killall -9 xboxdrv
+    service xboxdrv start
+
     #second attempt
-    service xboxdrv restart
+    service xboxdrv stop
+    killall -9 xboxdrv
+    service xboxdrv start
+
     echo "sending gamepad reconfiguration request"
     killall xbmc.bin -SIGUSR1
     
