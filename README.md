@@ -53,6 +53,7 @@ For all other features and future plans, please see the [wiki](https://github.co
 * Seperate dot file (.retrorig, not .xbmc) so you can have your cake and eat it too!
 * Hotplugging support for supported wireles game controllers
 * Dual monitor support for XBMC
+* Steam (Big Picture Mode) launcher from the main screen
 * Auto-install software, emulator configs, and required components
 * Many supported consoles (more added frequently)
 * Gamepad select menu
