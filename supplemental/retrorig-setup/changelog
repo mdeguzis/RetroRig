@@ -1,6 +1,11 @@
 retrorig-setup (version_placeholder) trusty; urgency=medium
 
-  * changelog_text
+  * Steam integration
+  * Logging fixes
+  * syntax corrections
+  * issues corrections
+  * code fixes for windows positioning
+
 
  -- uploader_date
 
