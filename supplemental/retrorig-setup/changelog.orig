@@ -1,6 +1,9 @@
 retrorig-setup (version_placeholder) trusty; urgency=medium
 
+<<<<<<< HEAD
+=======
 
+>>>>>>> master
   * Steam integration
   * Logging fixes
   * syntax corrections

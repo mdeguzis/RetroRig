@@ -1,7 +1,10 @@
 RetroRig Project
 ===================================================
 ![alt text](http://i.imgur.com/Irgv0Fx.png "RetroRig")
-###### [Version 0.9.9]
+###### [Version 0.9.8]
+
+Note: An EmulationStation-powered flavor of RetroRig is in the works. Be sure to bookmark:  
+https://github.com/ProfessorKaos64/RetroRig-ES
 
 RetroRig is shell script to setup a Linux x86_64 system  with several emulators, and XBMC as graphical
 front end.The inspiration for doing this lies almost completely with the RetroPie Project. I wanted to provide
@@ -53,6 +56,7 @@ For all other features and future plans, please see the [wiki](https://github.co
 * Seperate dot file (.retrorig, not .xbmc) so you can have your cake and eat it too!
 * Hotplugging support for supported wireles game controllers
 * Dual monitor support for XBMC
+* Steam (Big Picture Mode) launcher from the main screen
 * Auto-install software, emulator configs, and required components
 * Many supported consoles (more added frequently)
 * Gamepad select menu
