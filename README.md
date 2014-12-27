@@ -3,9 +3,6 @@ RetroRig Project
 ![alt text](http://i.imgur.com/Irgv0Fx.png "RetroRig")
 ###### [Version 0.9.8]
 
-Note: An EmulationStation-powered flavor of RetroRig is in the works. Be sure to bookmark:  
-https://github.com/ProfessorKaos64/RetroRig-ES
-
 RetroRig is shell script to setup a Linux x86_64 system  with several emulators, and XBMC as graphical
 front end.The inspiration for doing this lies almost completely with the RetroPie Project. I wanted to provide
 something similar, but with XBMC, x86_64, and my favorite interface, "Rom Collection Browser."
@@ -111,7 +108,7 @@ Pre-built packages for other distributions will be coming in the future. Stay tu
 To install via GitHub source:
 ````
 cd RetroRig
-sudo ./retrorig_setup.sh
+sudo ./retrorig-setup.sh
 ````
 
 The main disitribution target is Ubuntu 14.04 LTS, but support for other platforms is being worked on. For a currernt list of supported platofrms and distributions, see [this](https://github.com/ProfessorKaos64/RetroRig/wiki/Installation#platforms) wiki entry. You can also perform a `git checkout Beta` to try our Beta branch, but please do so with caution and backup any file before hand!
