@@ -21,7 +21,7 @@ BASE=0.9.8
 # In this case, this level will be used to denote incremental changes
 # instead of a specific branch for now (beta/master only exist at the
 # momement).
-PL=0
+PL=1
 
 #choose user
 #user="pk"
@@ -278,8 +278,6 @@ case "$arg0" in
       echo "Building source package"
       echo "##########################################"
       echo ""
-      echo ""
-      echo ""
       echo "****** please copy your gpg passphrase into the clipboard ******"
       echo ""
       sleep 10
@@ -291,10 +289,8 @@ case "$arg0" in
         echo ""
         ls -lah ~/packaging/retrorig-setup
         echo ""
-        echo ""
         echo "you can upload the package with dput $LAUNCHPAD_PPA ~/packaging/retrorig-setup/retrorig-setup_$BASE.$PL""_source.changes"
         echo "all good"
-        echo ""
         echo ""
 
         while true; do
