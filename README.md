@@ -71,7 +71,7 @@ For all other features and future plans, please see the [wiki](https://github.co
 
 ## Wiki
 
-First, I must direct you to read the wiki on this github page, as it contains extra information outside this wiki. A large amount of tips, tricks, and how-to information is located on this, all for your benefit.
+First, I must direct you to read the wiki on this github page, as it contains extra information outside this readme file. A large amount of tips, tricks, and how-to information is located on this, all for your benefit.
 https://github.com/ProfessorKaos64/RetroRig/wiki
 
 **Please also note**  
