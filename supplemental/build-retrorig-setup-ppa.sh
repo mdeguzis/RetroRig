@@ -21,7 +21,7 @@ BASE=0.9.8
 # In this case, this level will be used to denote incremental changes
 # instead of a specific branch for now (beta/master only exist at the
 # momement).
-PL=1
+PL=2
 
 #choose user
 #user="pk"
@@ -48,7 +48,7 @@ if [ "$user" == "pk" ]; then
 	CHANGE_TEXT="add comments here"
 
 	#define uploader, date and time zone for changelog
-	uploader_date="Michael DeGuzis <mdeguzis@gmail.com>  Sun, 21 Dec 2014 00:00:00 -0300"
+	uploader_date="Michael DeGuzis <mdeguzis@gmail.com>  Sat, 27 Dec 2014 23:08:00 -0300"
 
 	#define package maintainer for dsc and control file 
 	pkgmaintainer="RetroRig Development Team <mdeguzis@gmail.com>"

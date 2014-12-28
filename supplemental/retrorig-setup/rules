@@ -53,7 +53,7 @@ override_dh_install:
 	
 	#icons / pictures
 	mv $(CURDIR)/debian/retrorig-setup/usr/share/RetroRig/XBMC-cfgs/extra/retro-icon.png $(CURDIR)/debian/retrorig-setup/usr/share/icons
-	cp Artwork/XBMC/RetroMain-0-9-7b.png $(CURDIR)/debian/retrorig-setup/usr/share/RetroRig/Artwork/XBMC/
+	cp Artwork/XBMC/RetroMain-0-9-8.png $(CURDIR)/debian/retrorig-setup/usr/share/RetroRig/Artwork/XBMC/
 	cp Artwork/XBMC/gears.png $(CURDIR)/debian/retrorig-setup/usr/share/RetroRig/Artwork/XBMC/
 	
 	#supplemental application files
@@ -103,6 +103,8 @@ override_dh_makeshlibs:
 	chmod 755 $(CURDIR)/debian/retrorig-setup/usr/share/RetroRig/scriptmodules/syscalls-deb.shinc
 	chmod 755 $(CURDIR)/debian/retrorig-setup/usr/share/applications/gp_autodetect_xbmc.sh
 	chmod 755 $(CURDIR)/debian/retrorig-setup/usr/share/applications/startXBMC.sh
+	chmod 755 $(CURDIR)/debian/retrorig-setup/usr/share/RetroRig/XBMC-cfgs/addons/script.steam.launcher/resources/scripts/steam-launch.sh
+	chmod 644 $(CURDIR)/debian/retrorig-setup/usr/share/RetroRig/XBMC-cfgs/extra/Steam/config.vdf
 
 	#removing unnecessary executable attributes
 	chmod 644 $(CURDIR)/debian/retrorig-setup/usr/share/RetroRig/common/parserConfig.xml
