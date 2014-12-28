@@ -74,6 +74,7 @@ override_dh_install:
 	rm -f $(CURDIR)/debian/retrorig-setup/usr/share/RetroRig/XBMC-cfgs/addons/script.games.rom.collection.browser/resources/skins/fonts/DejaVuSans-Bold.ttf
 	rm -f $(CURDIR)/debian/retrorig-setup/usr/share/RetroRig/XBMC-cfgs/addons/script.games.rom.collection.browser/resources/skins/fonts/DejaVuSans.ttf
 	rm -f $(CURDIR)/debian/retrorig-setup/usr/share/RetroRig/XBMC-cfgs/addons/script.games.rom.collection.browser/resources/skins/fonts/LiberationSans-Regular.ttf
+	rm -f $(CURDIR)/debian/retrorig-setup/usr/share/RetroRig/XBMC-cfgs/addons/script.steam.launcher/LICENSE.txt
 	
 	#man page
 	gzip -c supplemental/retrorig-setup/retrorig-setup.7 > $(CURDIR)/debian/retrorig-setup/usr/share/man/man7/retrorig-setup.7.gz
