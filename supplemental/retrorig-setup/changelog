@@ -20,7 +20,7 @@ retrorig-setup (0:0.9.8.0) trusty; urgency=medium
   * code fixes for windows positioning
 
  -- Michael DeGuzis <mdeguzis@gmail.com>   Sun, 21 Dec 2014 00:00:00 -0300
-
+ 
 retrorig-setup (0:0.9.7.3.1) trusty; urgency=medium
 
   * bug fix h_pkgcheck() / PS3 Sixaxis USB hotplug support
