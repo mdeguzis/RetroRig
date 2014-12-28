@@ -413,6 +413,9 @@ function rrs_source_syscalls()
 	# Source the correct syscalls for platform
 	# This largely alludes to the default package manager
 	echo "Setting syscalls based on default package manager..."
+
+	# set default var strings
+	exit_unsupported="no"
 	
 	case $OS_TYPE in
 		Ubuntu)
@@ -428,7 +431,7 @@ function rrs_source_syscalls()
 
 				14.10)
 					source "$scriptdir/scriptmodules/syscalls-deb.shinc"
-					platform_check="Yes"
+					platform_check="Currently Experiencing Issues"
 					pkg_manager="apt/aptitude"
 					init_system="upstart"
 					;;
@@ -440,8 +443,7 @@ function rrs_source_syscalls()
 					platform_check="No"
 					pkg_manager="N/A"
 					init_system="N/A"
-					#clear
-					#exit
+					exit_unsupported="yes"
 					;;
 			esac
 			;;
@@ -465,8 +467,7 @@ function rrs_source_syscalls()
 					platform_check="No"
 					pkg_manager="N/A"
 					init_system="N/A"
-					#clear
-					#exit
+					exit_unsupported="yes"
 					;;
 			esac
 
@@ -491,8 +492,7 @@ function rrs_source_syscalls()
 					platform_check="No"
 					pkg_manager="N/A"
 					init_system="N/A"
-					#clear
-					#exit
+					exit_unsupported="yes"
 					;;
 			esac
 
@@ -504,8 +504,9 @@ function rrs_source_syscalls()
 			platform_check="No"
 			pkg_manager="N/A"
 			init_system="N/A"
-			#clear
-			#exit
+			# set flag to exit
+			exit_unsupported="yes"
+			
 		;;
 
 	esac
@@ -517,6 +518,12 @@ function rrs_source_syscalls()
 	echo "Primary package management system: $pkg_manager"
 	echo "#####################################################"
 	sleep 4s
+
+	# exit script if platform is unsupported
+	if [ "$exit_unsupported" == 'yes' ]; then
+		echo "Exiting due to unsupported platform/release"		
+		exit
+	fi
 
 }
 
