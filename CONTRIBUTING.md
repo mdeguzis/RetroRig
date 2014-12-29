@@ -14,10 +14,11 @@ Describe your system:
  - RetroRig version:
  - Installation method used (Git or PPA):
 
+Describe the problem:
+
+
 Please list numerical steps we can use to reproduce this issue:
 
-
-Describe the problem:
 
 
 Please provide any additional information below:
