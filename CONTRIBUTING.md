@@ -1,7 +1,7 @@
 ## Git and Pull requests
 * Contributions are submitted, reviewed, and accepted using Github pull requests. 
-* [Read this article](https://github.com/ProfessorKaos64/RetroRig/wiki/Helping-out) 
-for some details.
+* Please see [this article](https://github.com/ProfessorKaos64/RetroRig/wiki/Helping-out) 
+for some details on how to help and contribute to RetroRig
 
 ## Submitting issues
 Please use the following template for submitting issues:
