@@ -17,7 +17,7 @@ Describe your system:
 Describe the problem:
 
 
-Please list numerical steps we can use to reproduce this issue:
+Please list numerical steps we can use to reproduce this issue. *Please*, for code snippets longer than 15 lines, use a service such as pastebin, slexy, or a number of ASCII text pasting services. If you do paste code below without a paste link, please encapsulate your code in a series of 3 backtickets (```)
 
 
 
