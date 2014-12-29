@@ -24,7 +24,7 @@ while true; do
 	     10 "Restore first run configs"
 	     11 "Update XBMC configs"
 	     12 "Enable XBMC Session (Experimental Beta!)"
-	     12 "System Upgrades"
+	     13 "System Upgrades"
  	     14 "Back to main menu")
 
 	#make menu choice
@@ -101,16 +101,14 @@ done
 function set_system_upgrades()
 {
 
-#set fstart to start at specified folder directory, local var only
-local fstart
 
+# Present menu
 cmd=(dialog --backtitle "LibreGeek.org RetroRig Installer" --menu "Default directory: ~/.config/mupen64plus" 16 0 16)
 options=(1 "Upgrade 14.04 LTS Kernel to 3.14.0"
 	 2 "Back to settings menu")  
 
 	#make menu choice
 	selection=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
-	#functions
 
 	for choice in $selection
 	do
