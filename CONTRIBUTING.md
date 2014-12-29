@@ -6,7 +6,7 @@ for some details on how to help and contribute to RetroRig
 ## Submitting issues
 Please use the following template for submitting issues. *Please*, for code snippets longer than 
 15 lines, use a service such as pastebin, slexy, or a number of ASCII text pasting services. If you do 
-paste code below without a paste link, please encapsulate your code in a series of 3 backtickets (```)
+paste code below without a paste link, please encapsulate your code in a series of 3 backticks (```)
 
 ```
 Describe your system:
