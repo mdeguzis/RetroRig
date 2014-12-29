@@ -8,10 +8,11 @@ Please use the following template for submitting issues:
 
 ```
 Describe your system:
- - Operating System (be specific):
+ - Linux Distribution:
+ - Release Version:
  - Machine type (32-bit or 64-bit):
  - RetroRig version:
- - Plugins used:
+ - Installation method used (Git or PPA):
 
 Please list numerical steps we can use to reproduce this issue:
 
@@ -19,7 +20,7 @@ Please list numerical steps we can use to reproduce this issue:
 Describe the problem:
 
 
-Please provide any additional information below.
+Please provide any additional information below:
 
 
 ```
