@@ -25,3 +25,13 @@ Please provide any additional information below:
 
 
 ```
+
+## Getting additional help
+Many times, the easiest way to ask a simple question or collaborate is to join the  #retrorig-dev  IRC channel on  irc.freenode.net . There are also these options:
+- The contact page on www.libregeek.org 
+- The RetroRig forum section of LibreGeek's forums
+- Submitting an issue on Github
+- The many social media connections available on my Main Website, and the forum listed above. 
+
+## For everything else (including the kitchen sink)
+- Please see the [wiki](https://github.com/ProfessorKaos64/RetroRig/wiki)
