@@ -434,6 +434,9 @@ function rrs_source_syscalls()
 					platform_check="Currently Experiencing Issues"
 					pkg_manager="apt/aptitude"
 					init_system="upstart"
+
+					# disabling support until install is fixed. 20141228, PK
+					exit_unsupported="yes"
 					;;
 
 				*)
@@ -521,7 +524,10 @@ function rrs_source_syscalls()
 
 	# exit script if platform is unsupported
 	if [ "$exit_unsupported" == 'yes' ]; then
-		echo "Exiting due to unsupported platform/release"		
+		echo "Exiting due to unsupported platform/release."
+		echo "This may also mean a certain platform is experiencing" 
+		echo "issues that are inhibiting a normal installation."
+		echo ""	
 		exit
 	fi
 
