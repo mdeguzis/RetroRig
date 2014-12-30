@@ -508,7 +508,7 @@ function rrs_source_syscalls()
 			pkg_manager="N/A"
 			init_system="N/A"
 			# set flag to exit
-			#exit_unsupported="yes"
+			exit_unsupported="yes"
 			
 		;;
 
