@@ -413,6 +413,9 @@ function rrs_source_syscalls()
 	# Source the correct syscalls for platform
 	# This largely alludes to the default package manager
 	echo "Setting syscalls based on default package manager..."
+
+	# set default var strings
+	exit_unsupported="no"
 	
 	case $OS_TYPE in
 		Ubuntu)
@@ -428,9 +431,12 @@ function rrs_source_syscalls()
 
 				14.10)
 					source "$scriptdir/scriptmodules/syscalls-deb.shinc"
-					platform_check="Yes"
+					platform_check="Currently Experiencing Issues"
 					pkg_manager="apt/aptitude"
 					init_system="upstart"
+
+					# disabling support until install is fixed. 20141228, PK
+					exit_unsupported="yes"
 					;;
 
 				*)
@@ -440,8 +446,7 @@ function rrs_source_syscalls()
 					platform_check="No"
 					pkg_manager="N/A"
 					init_system="N/A"
-					#clear
-					#exit
+					exit_unsupported="yes"
 					;;
 			esac
 			;;
@@ -465,8 +470,7 @@ function rrs_source_syscalls()
 					platform_check="No"
 					pkg_manager="N/A"
 					init_system="N/A"
-					#clear
-					#exit
+					exit_unsupported="yes"
 					;;
 			esac
 
@@ -491,8 +495,7 @@ function rrs_source_syscalls()
 					platform_check="No"
 					pkg_manager="N/A"
 					init_system="N/A"
-					#clear
-					#exit
+					exit_unsupported="yes"
 					;;
 			esac
 
@@ -504,8 +507,9 @@ function rrs_source_syscalls()
 			platform_check="No"
 			pkg_manager="N/A"
 			init_system="N/A"
-			#clear
-			#exit
+			# set flag to exit
+			exit_unsupported="yes"
+			
 		;;
 
 	esac
@@ -517,6 +521,15 @@ function rrs_source_syscalls()
 	echo "Primary package management system: $pkg_manager"
 	echo "#####################################################"
 	sleep 4s
+
+	# exit script if platform is unsupported
+	if [ "$exit_unsupported" == 'yes' ]; then
+		echo "Exiting due to unsupported platform/release."
+		echo "This may also mean a certain platform is experiencing" 
+		echo "issues that are inhibiting a normal installation."
+		echo ""	
+		exit
+	fi
 
 }
 
@@ -1098,4 +1111,64 @@ function rrs_reboot()
 		return
 		;;
 	esac
+}
+
+rrs_ubuntu_kernel_upgrade()
+{
+	##################################################################
+	# related documentation as to why this kernel upgrade is done:
+	#
+	# hid-sony kernel module regression::
+	# https://bugs.launchpad.net/ubuntu/+source/linux/+bug/1326725
+	#
+	# PPA Page:
+	# http://kernel.ubuntu.com/~kernel-ppa/mainline/v3.14-trusty/
+	#
+	# WARNING:
+	# Canonical does not recommend updating your Linux kernel to other
+	# versions other than the ones provided on official channels. This
+	# is not a totally safe procedure and you might have problems
+	# afterwards, even system failures or applications not working
+	# properly. On the other hand, you might get better performance
+	# from your system.
+	#
+	##################################################################
+	
+	clear
+	# alternatively: a=$(uname -r); user_kernel=${a//[^0-9]}
+	# Get user's current kernel. We only need the 3.14.0 digits
+	# The rest can be different between kernels and is not needed
+	# To determine if we are on 3.14.x / 3.14.x.000000
+
+	user_kernel=$(uname -r | awk -F'[^0-9]*' '{print $1$2$3}')
+	echo "user's kernel is: $user_kernel"
+	sleep 2s
+	target_kernel="3140"
+	echo "Target kernel is: $target_kernel"
+	sleep 2s
+
+	# Check if 3.14.x exists
+	if [ $user_kernel -lt "$target_kernel" ]; then
+		echo "Kernel 3.14.x not found, installing"
+		sleep 5s
+		wget --tries=50 -P /tmp "http://kernel.ubuntu.com/~kernel-ppa/mainline/v3.14-trusty/linux-headers-3.14.0-031400_3.14.0-031400.201403310035_all.deb"
+		wget --tries=50 -P /tmp "http://kernel.ubuntu.com/~kernel-ppa/mainline/v3.14-trusty/linux-headers-3.14.0-031400-generic_3.14.0-031400.201403310035_amd64.deb"
+		wget --tries=50 -P /tmp "http://kernel.ubuntu.com/~kernel-ppa/mainline/v3.14-trusty/linux-image-3.14.0-031400-generic_3.14.0-031400.201403310035_amd64.deb"
+		cd /tmp
+		dpkg -i linux-headers-3.14*.deb linux-image-3.14*.deb
+	elif [ $user_kernel -ge "$target_kernel" ]; then
+		# Do nothing
+		echo "Kernel 3.14.x or greater found, exiting"
+		sleep 2s
+	fi
+
+	# Hold the kernel packages so the kernel is not upgrade by accident
+	# Commented out for testing some errors with an old mednafen pkg
+	#sudo aptitude hold linux-image-`uname -r`
+	# inform user of what was done
+
+	dialog --msgbox "Upgrading the kernel to 3.14.0-031400-generic is complete. The packages 'linux-generic linux-headers-generic linux-image-generic' have been held to avoid falling back to a regressed kernel (sony-hid). If you wish to change your kernel, please run the following command in the terminal:\n\n'sudo apt-mark unhold linux-generic linux-headers-generic linux-image-generic'" 14 60
+	# cleanup packages
+	rm -f /tmp/linux-headers-3.14*
+	rm -f /tmp/linux-image-3.14*
 }

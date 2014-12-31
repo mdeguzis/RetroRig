@@ -1287,9 +1287,6 @@ RetorRig loads to use the gamepad." 14 62
 
 	# correct permissions since we install using sudo access
 	h_correct_perms
-
-	# Let the user know about reboot
-	dialog --msgbox "Please reboot to fully enable the controller(s)."  5 52
 	
 	# Turn off the sixad service
 	sixad --boot-no
