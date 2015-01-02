@@ -30,9 +30,6 @@ function gp_ps3_blu()
 	# for the PS3 Controller over bluetooth
 	####################################################################
 
-	# clean any old configs
-	h_clean_gamepad
-
 	#mame
 	# default path: /home/$USER/.mame
 	# Main config
@@ -743,9 +740,6 @@ function gp_ps3_usb()
 	# USB
 	####################################################################
 
-	# clean any old configs
-	h_clean_gamepad
-
 	# MAME
 	# default path: /home/$USER/.retrorig/.mame
 	# Main config
@@ -1015,9 +1009,6 @@ function gp_x360_wireless()
 	# Assign and modify emulator configurations for wireless 
 	# X360 Controller
 	####################################################################
-
-	# clean any old configs
-	h_clean_gamepad
 
 	#######################################################
 	# Add controller specifc emulator controlos
@@ -1300,9 +1291,6 @@ function gp_x360_usb()
 	# Assign and modify emulator configurations for USB / Wired 
 	# X360 Controller
 	####################################################################
-
-	# clean any old configs
-	h_clean_gamepad
 
 	#######################################################
 	# Add controller specifc emulator controlos
@@ -1589,9 +1577,6 @@ function gp_generic_usb()
 	# "Xbox 360 like" controllers. 
 	# 16 buttons (4 face, 4 trigger, 4 dpad, start, select, thumb-click)
 	####################################################################
-
-	# clean any old configs
-	h_clean_gamepad
 
 	#######################################################
 	# Add controller specifc emulator controlos

@@ -27,7 +27,7 @@ function rrs_prepareFolders()
 	pathlist+=("$rootdir/ROMs/Atari Lynx")
 	pathlist+=("$rootdir/ROMs/Gamecube")
 	pathlist+=("$rootdir/ROMs/MAME")
-	pathlist+=("$rootdir/ROMs/mupen64plus")
+	pathlist+=("$rootdir/ROMs/Nintendo 64")
 	pathlist+=("$rootdir/ROMs/NES")
 	pathlist+=("$rootdir/ROMs/SNES")
 	pathlist+=("$rootdir/ROMs/Sega Master System")
@@ -281,6 +281,7 @@ options=(1 "Xbox 360 Controller (wireless)"
 		case $choice in
 
 		1)
+		h_clean_gamepad
 		gp_common
 		gp_x360_wireless
 		h_restore_bios_cfg
@@ -290,6 +291,7 @@ options=(1 "Xbox 360 Controller (wireless)"
 		;;
 
 		2)
+		h_clean_gamepad
 		gp_common
 		gp_x360_usb
 		h_restore_bios_cfg
@@ -299,6 +301,7 @@ options=(1 "Xbox 360 Controller (wireless)"
 		;;
 
 		3)
+		h_clean_gamepad
 		gp_common
 		gp_ps3_blu
 		h_restore_bios_cfg
@@ -308,6 +311,7 @@ options=(1 "Xbox 360 Controller (wireless)"
 		;;
 
 		4)
+		h_clean_gamepad
 		gp_common
 		gp_ps3_usb
 		h_restore_bios_cfg
@@ -316,7 +320,8 @@ options=(1 "Xbox 360 Controller (wireless)"
 		gp_steam_control
 		;;
 
-		4)
+		5)
+		h_clean_gamepad
 		gp_common
 		gp_generic_usb
 		h_restore_bios_cfg
