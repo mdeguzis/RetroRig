@@ -320,7 +320,7 @@ options=(1 "Xbox 360 Controller (wireless)"
 		gp_steam_control
 		;;
 
-		4)
+		5)
 		h_clean_gamepad
 		gp_common
 		gp_generic_usb
