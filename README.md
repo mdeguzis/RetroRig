@@ -3,9 +3,6 @@ RetroRig Project
 ![alt text](http://i.imgur.com/Irgv0Fx.png "RetroRig")
 ###### [Version 0.9.8]
 
-Note: An EmulationStation-powered flavor of RetroRig is in the works. Be sure to bookmark:  
-https://github.com/ProfessorKaos64/RetroRig-ES
-
 RetroRig is shell script to setup a Linux x86_64 system  with several emulators, and XBMC as graphical
 front end.The inspiration for doing this lies almost completely with the RetroPie Project. I wanted to provide
 something similar, but with XBMC, x86_64, and my favorite interface, "Rom Collection Browser."
@@ -74,11 +71,11 @@ For all other features and future plans, please see the [wiki](https://github.co
 
 ## Wiki
 
-First, I must direct you to read the wiki on this github page, as it contains extra information outside this wiki. A large amount of tips, tricks, and how-to information is located on this, all for your benefit.
+First, I must direct you to read the wiki on this github page, as it contains extra information outside this readme file. A large amount of tips, tricks, and how-to information is located on this, all for your benefit.
 https://github.com/ProfessorKaos64/RetroRig/wiki
 
 **Please also note**  
-You may add the `--help` flag to the script for a quick help file. Come on, do it, it has psychedelic colorrrrsss!
+You may add the `--help` flag to the script for a quick help file. Come on, do it, it has psychedelic colorrrrsss! But on a serious note, **Please** take not of the contributing guidelines at the top of the page when submitting a new issue. It helps a lot!
 
 ## Installation
 
@@ -111,7 +108,7 @@ Pre-built packages for other distributions will be coming in the future. Stay tu
 To install via GitHub source:
 ````
 cd RetroRig
-sudo ./retrorig_setup.sh
+sudo ./retrorig-setup.sh
 ````
 
 The main disitribution target is Ubuntu 14.04 LTS, but support for other platforms is being worked on. For a currernt list of supported platofrms and distributions, see [this](https://github.com/ProfessorKaos64/RetroRig/wiki/Installation#platforms) wiki entry. You can also perform a `git checkout Beta` to try our Beta branch, but please do so with caution and backup any file before hand!

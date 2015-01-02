@@ -1,5 +1,17 @@
 retrorig-setup (version_placeholder) trusty; urgency=medium
 
+  * corrected build script errors
+  * updated patch level
+
+ -- uploader_date
+ 
+retrorig-setup (0:0.9.8.1) trusty; urgency=medium
+
+  * added generic 16 btn xboxdrv option
+
+ -- Michael DeGuzis <mdeguzis@gmail.com>  Sun, 21 Dec 2014 00:00:00 -0300
+ 
+retrorig-setup (0:0.9.8.0) trusty; urgency=medium
 
   * Steam integration
   * Logging fixes
@@ -7,9 +19,8 @@ retrorig-setup (version_placeholder) trusty; urgency=medium
   * issues corrections
   * code fixes for windows positioning
 
-
- -- uploader_date
-
+ -- Michael DeGuzis <mdeguzis@gmail.com>  Sun, 21 Dec 2014 00:00:00 -0300
+ 
 retrorig-setup (0:0.9.7.3.1) trusty; urgency=medium
 
   * bug fix h_pkgcheck() / PS3 Sixaxis USB hotplug support

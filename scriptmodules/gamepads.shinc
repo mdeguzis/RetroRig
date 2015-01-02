@@ -30,9 +30,6 @@ function gp_ps3_blu()
 	# for the PS3 Controller over bluetooth
 	####################################################################
 
-	# clean any old configs
-	h_clean_gamepad
-
 	#mame
 	# default path: /home/$USER/.mame
 	# Main config
@@ -743,9 +740,6 @@ function gp_ps3_usb()
 	# USB
 	####################################################################
 
-	# clean any old configs
-	h_clean_gamepad
-
 	# MAME
 	# default path: /home/$USER/.retrorig/.mame
 	# Main config
@@ -1016,9 +1010,6 @@ function gp_x360_wireless()
 	# X360 Controller
 	####################################################################
 
-	# clean any old configs
-	h_clean_gamepad
-
 	#######################################################
 	# Add controller specifc emulator controlos
 	#######################################################
@@ -1287,9 +1278,6 @@ RetorRig loads to use the gamepad." 14 62
 
 	# correct permissions since we install using sudo access
 	h_correct_perms
-
-	# Let the user know about reboot
-	dialog --msgbox "Please reboot to fully enable the controller(s)."  5 52
 	
 	# Turn off the sixad service
 	sixad --boot-no
@@ -1303,9 +1291,6 @@ function gp_x360_usb()
 	# Assign and modify emulator configurations for USB / Wired 
 	# X360 Controller
 	####################################################################
-
-	# clean any old configs
-	h_clean_gamepad
 
 	#######################################################
 	# Add controller specifc emulator controlos
@@ -1592,9 +1577,6 @@ function gp_generic_usb()
 	# "Xbox 360 like" controllers. 
 	# 16 buttons (4 face, 4 trigger, 4 dpad, start, select, thumb-click)
 	####################################################################
-
-	# clean any old configs
-	h_clean_gamepad
 
 	#######################################################
 	# Add controller specifc emulator controlos

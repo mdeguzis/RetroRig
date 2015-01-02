@@ -373,22 +373,23 @@ Installer" --menu "| Main Menu (v.0.9.8) | \
 
 	    1) 
 		now=$(date +'%d%m%Y_%H%M%S')
-		h_autosave_configs | tee $rootdir/logs/install_$now.log.txt
-		rrs_prepareFolders | tee $rootdir/logs/install_$now.log.txt
-		rrs_software | tee $rootdir/logs/install_$now.log.txt
-		rrs_emulators | tee $rootdir/logs/install_$now.log.txt
-		rrs_retrorig_cfgs | tee $rootdir/logs/install_$now.log.txt
-		rrs_xbmc_cfgs | tee $rootdir/logs/install_$now.log.txt
-		rrs_gamepad | tee $rootdir/logs/install_$now.log.txt
-		h_emu_user_fixes | tee $rootdir/logs/install_$now.log.txt
-		set_resolution | tee $rootdir/logs/install_$now.log.txt
-		rrs_post_install | tee $rootdir/logs/install_$now.log.txt
-		rrs_debug | tee $rootdir/logs/install_$now.log.txt
-		rrs_done | tee $rootdir/logs/install_$now.log.txt
+		h_autosave_configs
+		rrs_prepareFolders
+		rrs_software
+		rrs_emulators
+		rrs_retrorig_cfgs
+		rrs_xbmc_cfgs
+		rrs_gamepad
+		set_resolution
+		rrs_post_install
+		rrs_debug
+		rrs_done
+
+		# something is ruining logging using "| tee >> $rootdir/logs/temp_log.txt" removing for now
 		# clean and fixup log file
-		tr -cd '\11\12\15\40-\176' < "$rootdir/logs/temp_log.txt" > "$rootdir/logs/install_$now.log.txt"              	
-		chown -R "$user" "$rootdir/logs/install_$now.log.txt"
-		chgrp -R "$user" "$rootdir/logs/install_$now.log.txt"
+		#tr -cd '\11\12\15\40-\176' < "$rootdir/logs/temp_log.txt" > "$rootdir/logs/install_$now.log.txt"              	
+		#chown -R "$user" "$rootdir/logs/install_$now.log.txt"
+		#chgrp -R "$user" "$rootdir/logs/install_$now.log.txt"
 
 		kernelUpdate=`cat $rootdir/logs/kernelUpdate`
 		rm -f "$rootdir/logs/kernelUpdate"
