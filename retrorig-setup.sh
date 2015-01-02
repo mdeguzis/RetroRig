@@ -380,7 +380,6 @@ Installer" --menu "| Main Menu (v.0.9.8) | \
 		rrs_retrorig_cfgs
 		rrs_xbmc_cfgs
 		rrs_gamepad
-		h_emu_user_fixes
 		set_resolution
 		rrs_post_install
 		rrs_debug
