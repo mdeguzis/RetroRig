@@ -1,5 +1,5 @@
 <!--
-# This file is for use with a XBOX 360 Controller under RetroRig
+# This file is for use with a Generic 16 btn Controller under RetroRig
 # Button id numbers are totally diffferent, due to the use of
 # the use-dpad-as-button, and use-trigger-as-button options used.
 # To use please replace the joystickname with the one you find 
