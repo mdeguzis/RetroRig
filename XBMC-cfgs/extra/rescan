@@ -49,7 +49,7 @@ rescanIsRunning () {
 
 checkSHA1ofXBMC () {
 
-  VAR=`file /usr/lib/xbmc/xbmc.bin | cut -f 19 -d ' '| cut -f 2 -d '='|cut -f 1 -d ','| grep $SHA1`
+  VAR=`sha256sum /usr/lib/xbmc/xbmc.bin | cut -f 1 -d ' '| grep $SHA1`
   # skip version test
   # VAR=notEmpty
 

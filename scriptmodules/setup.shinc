@@ -713,7 +713,7 @@ function rrs_software()
 	pkg-config software-properties-common dconf-tools jstest-gtk \
 	sixad libusb-0.1-4 antimicro bluez getpos unclutter \
 	joydetect sudo ttf-dejavu-core ttf-dejavu-core ttf-liberation \
-	wmctrl
+	wmctrl coreutils
 
 	#wii motion support
 	$cmd_install_pkg libcwiid1 lswm wmgui wminput
@@ -875,7 +875,7 @@ function rrs_xbmc_patched()
 	$cmd_hold_pkg xbmc
 
 	# get SHA1 tag from patched XBMC version
-	sha1=$(file /usr/lib/xbmc/xbmc.bin | cut -f 19 -d ' '| cut -f 2 -d '='|cut -f 1 -d ',')
+	sha1=$(sha256sum /usr/lib/xbmc/xbmc.bin | cut -f 1 -d ' ')
 
 	# insert SHA1 tag to rescan by replacing the placeholder
 	if [ -f "$scriptdir/XBMC-cfgs/extra/rescan" ]; then
