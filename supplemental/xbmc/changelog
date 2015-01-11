@@ -1,4 +1,4 @@
-xbmc (version_placeholder) trusty; urgency=medium
+xbmc (version_placeholder) utopic; urgency=medium
 
   * Changed: disabled GUI dialog 
     (Add-on is incompatible due to unmet dependencies.)
@@ -7,7 +7,7 @@ xbmc (version_placeholder) trusty; urgency=medium
   
   * Recreate main window after game exit (for Gnome Desktop)
 
- -- Jens-Christian Lache <jc.lache@web.de>  Fri, 25 Oct 2014 23:00:00 +0200
+ -- Jens-Christian Lache <jc.lache@web.de>  Sun, 04 Jan 2015 06:00:00 +0800
 
 xbmc (3:14.0.11.0) trusty; urgency=medium
 

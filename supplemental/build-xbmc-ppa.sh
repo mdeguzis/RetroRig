@@ -25,7 +25,7 @@ PL=12
 #define xbmc branch to checkout
 BRANCH=retrorig-pl$PL
 
-UPLOAD_TRY=2
+UPLOAD_TRY=3
 
 PPA="ppa:beauman/retrorig"
 
@@ -73,7 +73,8 @@ if [[ -n "$2" ]]; then
   #apt-get build-deps
   sudo apt-get -y build-dep xbmc
   #apt-get install packages
-  sudo apt-get install -y build-essential fakeroot devscripts automake autoconf autotools-dev fpc ffmpeg-xbmc-dev
+  sudo apt-get install -y build-essential fakeroot devscripts automake autoconf autotools-dev fpc ffmpeg-xbmc-dev cvs gdc libafpclient-dev libgnutls-dev libshairplay-dev
+
 
 else
   echo ""
@@ -110,8 +111,8 @@ cp ~/RetroRig/supplemental/xbmc/xbmc.dsc xbmc_$BASE.$PL.$UPLOAD_TRY.dsc
 sed -i "s|version_placeholder|$BASE.$PL.$UPLOAD_TRY|g" "xbmc_$BASE.$PL.$UPLOAD_TRY.dsc"
 
 echo "original tarball"
-git clone https://github.com/beaumanvienna/xbmc 
-#cp -r ~/xbmc .
+#git clone https://github.com/beaumanvienna/xbmc 
+cp -r ~/xbmc .
 
 file xbmc/
 
