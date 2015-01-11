@@ -27,7 +27,7 @@ function rrs_prepareFolders()
 	pathlist+=("$rootdir/ROMs/Atari Lynx")
 	pathlist+=("$rootdir/ROMs/Gamecube")
 	pathlist+=("$rootdir/ROMs/MAME")
-	pathlist+=("$rootdir/ROMs/mupen64plus")
+	pathlist+=("$rootdir/ROMs/Nintendo 64")
 	pathlist+=("$rootdir/ROMs/NES")
 	pathlist+=("$rootdir/ROMs/SNES")
 	pathlist+=("$rootdir/ROMs/Sega Master System")
@@ -114,6 +114,7 @@ function rrs_prepareFolders()
 	pathlist+=("$config_home/.mess/cfg")
 	pathlist+=("$config_home/.stella")
 	pathlist+=("$config_home/.mednafen")
+	pathlist+=("$config_home/.local/share/Steam/config")
 
 	# xbmc folders
 	pathlist+=("$xbmc_home/userdata/keymaps")
@@ -268,7 +269,8 @@ options=(1 "Xbox 360 Controller (wireless)"
 	 2 "Xbox 360 Controller (USB)"
 	 3 "Sony PS3 Sixaxis (Bluetooth)"
 	 4 "Sony PS3 Sixaxis (USB)"
-	 5 "Exit gamepad selection")
+	 5 "16 Button Generic USB"
+	 6 "Exit gamepad selection")
 
 	#make menu choice
 	selection=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
@@ -279,30 +281,56 @@ options=(1 "Xbox 360 Controller (wireless)"
 		case $choice in
 
 		1)
+		h_clean_gamepad
 		gp_common
 		gp_x360_wireless
 		h_restore_bios_cfg
+		# set type for steam setup and set controls
+		STEAM_GP_TYPE="x360wireless"
+		gp_steam_control	
 		;;
 
 		2)
+		h_clean_gamepad
 		gp_common
 		gp_x360_usb
 		h_restore_bios_cfg
+		# set type for steam setup and set controls
+		STEAM_GP_TYPE="x360usb"
+		gp_steam_control
 		;;
 
 		3)
+		h_clean_gamepad
 		gp_common
 		gp_ps3_blu
 		h_restore_bios_cfg
+		# set type for steam setup and set controls
+		STEAM_GP_TYPE="ps3blu"
+		gp_steam_control
 		;;
 
 		4)
+		h_clean_gamepad
 		gp_common
 		gp_ps3_usb
 		h_restore_bios_cfg
+		# set type for steam setup and set controls
+		STEAM_GP_TYPE="ps3usb"
+		gp_steam_control
 		;;
 
 		5)
+		h_clean_gamepad
+		gp_common
+		gp_generic_usb
+		h_restore_bios_cfg
+		# set type for steam setup and set controls
+		STEAM_GP_TYPE="generic_usb"
+		gp_steam_control
+		;;
+
+		6)
 		return
 		;;
 
@@ -310,7 +338,8 @@ options=(1 "Xbox 360 Controller (wireless)"
 	done
 	
 	wii_motion_controller_for_dolphin
-	enable_autostart_RetroRig
+	enable_gp_autostart
+	enable_rr_autostart
 	
 }
 
@@ -389,6 +418,9 @@ function rrs_source_syscalls()
 	# Source the correct syscalls for platform
 	# This largely alludes to the default package manager
 	echo "Setting syscalls based on default package manager..."
+
+	# set default var strings
+	exit_unsupported="no"
 	
 	case $OS_TYPE in
 		Ubuntu)
@@ -404,9 +436,12 @@ function rrs_source_syscalls()
 
 				14.10)
 					source "$scriptdir/scriptmodules/syscalls-deb.shinc"
-					platform_check="Yes"
+					platform_check="Currently Experiencing Issues"
 					pkg_manager="apt/aptitude"
 					init_system="upstart"
+
+					# disabling support until install is fixed. 20141228, PK
+					exit_unsupported="yes"
 					;;
 
 				*)
@@ -416,8 +451,7 @@ function rrs_source_syscalls()
 					platform_check="No"
 					pkg_manager="N/A"
 					init_system="N/A"
-					#clear
-					#exit
+					exit_unsupported="yes"
 					;;
 			esac
 			;;
@@ -441,8 +475,7 @@ function rrs_source_syscalls()
 					platform_check="No"
 					pkg_manager="N/A"
 					init_system="N/A"
-					#clear
-					#exit
+					exit_unsupported="yes"
 					;;
 			esac
 
@@ -467,8 +500,7 @@ function rrs_source_syscalls()
 					platform_check="No"
 					pkg_manager="N/A"
 					init_system="N/A"
-					#clear
-					#exit
+					exit_unsupported="yes"
 					;;
 			esac
 
@@ -480,8 +512,9 @@ function rrs_source_syscalls()
 			platform_check="No"
 			pkg_manager="N/A"
 			init_system="N/A"
-			#clear
-			#exit
+			# set flag to exit
+			exit_unsupported="yes"
+			
 		;;
 
 	esac
@@ -491,9 +524,17 @@ function rrs_source_syscalls()
 	echo "Release: $OS_RELEASE"
 	echo "Default init system: $init_system"
 	echo "Primary package management system: $pkg_manager"
-	echo ""
 	echo "#####################################################"
 	sleep 4s
+
+	# exit script if platform is unsupported
+	if [ "$exit_unsupported" == 'yes' ]; then
+		echo "Exiting due to unsupported platform/release."
+		echo "This may also mean a certain platform is experiencing" 
+		echo "issues that are inhibiting a normal installation."
+		echo ""	
+		exit
+	fi
 
 }
 
@@ -629,9 +670,6 @@ function rrs_emulators()
 	#fix permissions since we are running as sudo
 	h_correct_perms
 
-	# Run Debug checks
-	rrs_debug
-
 	__postMSGs="$__postMSGs This current configuration requires BIOS files be placed under '$rootdir/BIOS/' folder for the respective system you are using or under the '$rootdir/ROMs/' folder for the same system. You may also use the BIOS Loader under the settings menu. Many MAME games under MAME4ALL have self contained BIOS files."
 
 	# inject a space to seperate messages?
@@ -641,10 +679,10 @@ function rrs_emulators()
 
 
 	if [[ ! -z $__postMSGs ]]; then
-	dialog --backtitle "LibreGeek.org - RetroRig Setup. Installation folder: $rootdir for user $user" --msgbox "$__postMSGs" 17 70
+	dialog --backtitle "LibreGeek.org - RetroRig Setup. Installation folder: $rootdir" --msgbox "$__postMSGs" 17 70
 	fi
 
-	dialog --backtitle "LibreGeek.org - RetroRig Setup. Installation folder: $rootdir for user $user" --msgbox "Finished emulator installs.\n\nYou now have to copy roms to the roms folders. You may also use the 'ROM loader' in settings menu" 17 60
+	dialog --backtitle "LibreGeek.org - RetroRig Setup. Installation folder: $rootdir" --msgbox "Finished emulator installs.\n\nYou now have to copy roms to the roms folders. You may also use the 'ROM loader' in settings menu" 17 60
 
 }
 
@@ -674,7 +712,8 @@ function rrs_software()
 	$cmd_install_pkg xboxdrv curl python-software-properties \
 	pkg-config software-properties-common dconf-tools jstest-gtk \
 	sixad libusb-0.1-4 antimicro bluez getpos unclutter \
-	joydetect sudo ttf-dejavu-core ttf-dejavu-core ttf-liberation
+	joydetect sudo ttf-dejavu-core ttf-dejavu-core ttf-liberation \
+	wmctrl
 
 	#wii motion support
 	$cmd_install_pkg libcwiid1 lswm wmgui wminput
@@ -692,9 +731,6 @@ function rrs_software()
 	#fix permissions since we are running as sudo
 	h_correct_perms
 
-	# Run Debug checks
-	rrs_debug
-
 	# Inform user about post-install tasks
 	# Output postMSGs to screen
 
@@ -702,11 +738,8 @@ function rrs_software()
 	__postMSGs="$__postMSGs For VirtualBox users, please see the wiki under 'Installation' for notes on running RetroRig under a virtual machine! At the minimum, you will need to add a filter for your controller "
 
 	if [[ ! -z $__postMSGs ]]; then
-		dialog --backtitle "LibreGeek.org - RetroRig Setup. Installation folder: $rootdir for user $user" --msgbox "$__postMSGs\n\nSoftware install complete. See debug.log for more details. Continuing on to emulator installs..." 18 60
+		dialog --backtitle "LibreGeek.org - RetroRig Setup. Installation folder: $rootdir" --msgbox "$__postMSGs\n\nSoftware install complete. See debug.log for more details. Continuing on to emulator installs..." 18 60
 	fi
-
-	chown -R "$user" "$rootdir/logs/install_$now.log.txt"
-	chgrp -R "$user" "$rootdir/logs/install_$now.log.txt"
 
 }
 
@@ -753,7 +786,7 @@ function rrs_debug()
 	gsettings list-recursively "org.gnome.desktop.session" | grep "idle-delay" >> "$rootdir/logs/debug.log"
 
 	# pkg checks
-	echo -e "\nCheck for needed pkgs: " >> "$rootdir/logs/debug.log"
+	echo -e "\nChecking for needed pkgs installed: " >> "$rootdir/logs/debug.log"
 	h_pkgcheck "stella"
 	h_pkgcheck "mednafen"
 	h_pkgcheck "mess"
@@ -772,10 +805,15 @@ function rrs_debug()
 	h_pkgcheck "getpos"
 	h_pkgcheck "jstest-gtk"
 	h_pkgcheck "antimicro"
+	h_pkgcheck "dolphin-emu"
+	h_pkgcheck "gens"
+	h_pkgcheck "pcsx2"
+	h_pkgcheck "ppsspp"
+	h_pkgcheck "dos2unix"
 
 	echo -e "\nEnd of log file" >> "$rootdir/logs/debug.log" >> "$rootdir/logs/debug.log"
 
-	dialog --backtitle "LibreGeek.org - RetroRig Setup. Installation folder: $rootdir for user $	user" --msgbox "Debug log was generated in $rootdir/logs/debug.log. Additional logs can be found in the folder $rootdir/logs/." 10 60 
+	dialog --backtitle "LibreGeek.org - RetroRig Setup. Installation folder: $rootdir" --msgbox "Debug log was generated in $rootdir/logs/debug.log. Additional logs can be found in the folder $rootdir/logs/." 10 60 
 
 	#corect permissions
 	h_correct_perms
@@ -788,7 +826,6 @@ function rrs_xbmc_patched()
 	# release the aptitdue hold to install/upgrade RetroRig's XBMC version
 	$cmd_unhold_pkg xbmc xbmc-bin
 
-	# create autostart for XBMC and place our modified files
 	# Custom script for reboots/hotplugging
 	if [ -f "$scriptdir/XBMC-cfgs/extra/gp_autodetect_xbmc.sh" ]; then
 		cp -v "$scriptdir/XBMC-cfgs/extra/gp_autodetect_xbmc.sh" "/usr/share/applications/"
@@ -813,13 +850,8 @@ function rrs_xbmc_patched()
 	# insert restarting xboxdrv specifically into /etc/sudoers
 	cat "$scriptdir/XBMC-cfgs/extra/sudoers.txt" >> "/etc/sudoers"
 
-	# create autostart entry, remove prior if it exists
-	rm -f "$home.config/autostart/RetroRig.desktop"
-	cp -v "$scriptdir/XBMC-cfgs/extra/RetroRig.desktop" "$home/.config/autostart"
-
 	# fix their permissions
 	chmod 755 "/usr/share/applications/gp_autodetect_xbmc.sh" 
-	chmod 755 "$home/.config/autostart/RetroRig.desktop"
 	chmod 755 "/usr/share/applications/RetroRig.desktop"
 	chmod 755 "/usr/share/applications/startXBMC.sh" 
 
@@ -959,7 +991,7 @@ function rrs_done()
 	# Please see commit efeb2bd for legacy code. This message will be 
 	# Removed in due time.
 
-       	dialog --backtitle "LibreGeek.org - RetroRig Setup. Installation folder: $rootdir for user $user" --msgbox "Finished main install tasks.\n\nYou now have to copy roms to the roms folders. \nThis can be done via SSH, Samba, or via your graphic folder manager (please see settings menu for more)\n\nAll current config folders used were appended with .old for restoration purposes.\n\nDon't forget to install the latest graphics drivers. Oftentimes proprietary driver help to improve gaming performance." 18 50
+       	dialog --backtitle "LibreGeek.org - RetroRig Setup. Installation folder: $rootdir" --msgbox "Finished main install tasks.\n\nYou now have to copy roms to the roms folders. \nThis can be done via SSH, Samba, or via your graphic folder manager (please see settings menu for more)\n\nAll current config folders used were appended with .old for restoration purposes.\n\nSteam Users: If you had Steam installed ahead of time, your controller should work. Otherwise, you will need to setup the controller in the Steam settings menu in Big Picture Mode or optionally run the gamepad setup again." 18 60
 
 	# correct permissions
 	h_correct_perms
@@ -972,7 +1004,6 @@ function rrs_showHelp()
     PATHCOLOR="36m"  #Cyan text
     TITLECOLOR="33m"  #Yellow text
     BARCOLOR="35m"  #Yellow text
-
     #Console help file
     clear
     echo ""
@@ -1085,4 +1116,64 @@ function rrs_reboot()
 		return
 		;;
 	esac
+}
+
+rrs_ubuntu_kernel_upgrade()
+{
+	##################################################################
+	# related documentation as to why this kernel upgrade is done:
+	#
+	# hid-sony kernel module regression::
+	# https://bugs.launchpad.net/ubuntu/+source/linux/+bug/1326725
+	#
+	# PPA Page:
+	# http://kernel.ubuntu.com/~kernel-ppa/mainline/v3.14-trusty/
+	#
+	# WARNING:
+	# Canonical does not recommend updating your Linux kernel to other
+	# versions other than the ones provided on official channels. This
+	# is not a totally safe procedure and you might have problems
+	# afterwards, even system failures or applications not working
+	# properly. On the other hand, you might get better performance
+	# from your system.
+	#
+	##################################################################
+	
+	clear
+	# alternatively: a=$(uname -r); user_kernel=${a//[^0-9]}
+	# Get user's current kernel. We only need the 3.14.0 digits
+	# The rest can be different between kernels and is not needed
+	# To determine if we are on 3.14.x / 3.14.x.000000
+
+	user_kernel=$(uname -r | awk -F'[^0-9]*' '{print $1$2$3}')
+	echo "user's kernel is: $user_kernel"
+	sleep 2s
+	target_kernel="3140"
+	echo "Target kernel is: $target_kernel"
+	sleep 2s
+
+	# Check if 3.14.x exists
+	if [ $user_kernel -lt "$target_kernel" ]; then
+		echo "Kernel 3.14.x not found, installing"
+		sleep 5s
+		wget --tries=50 -P /tmp "http://kernel.ubuntu.com/~kernel-ppa/mainline/v3.14-trusty/linux-headers-3.14.0-031400_3.14.0-031400.201403310035_all.deb"
+		wget --tries=50 -P /tmp "http://kernel.ubuntu.com/~kernel-ppa/mainline/v3.14-trusty/linux-headers-3.14.0-031400-generic_3.14.0-031400.201403310035_amd64.deb"
+		wget --tries=50 -P /tmp "http://kernel.ubuntu.com/~kernel-ppa/mainline/v3.14-trusty/linux-image-3.14.0-031400-generic_3.14.0-031400.201403310035_amd64.deb"
+		cd /tmp
+		dpkg -i linux-headers-3.14*.deb linux-image-3.14*.deb
+	elif [ $user_kernel -ge "$target_kernel" ]; then
+		# Do nothing
+		echo "Kernel 3.14.x or greater found, exiting"
+		sleep 2s
+	fi
+
+	# Hold the kernel packages so the kernel is not upgrade by accident
+	# Commented out for testing some errors with an old mednafen pkg
+	#sudo aptitude hold linux-image-`uname -r`
+	# inform user of what was done
+
+	dialog --msgbox "Upgrading the kernel to 3.14.0-031400-generic is complete. The packages 'linux-generic linux-headers-generic linux-image-generic' have been held to avoid falling back to a regressed kernel (sony-hid). If you wish to change your kernel, please run the following command in the terminal:\n\n'sudo apt-mark unhold linux-generic linux-headers-generic linux-image-generic'" 14 60
+	# cleanup packages
+	rm -f /tmp/linux-headers-3.14*
+	rm -f /tmp/linux-image-3.14*
 }

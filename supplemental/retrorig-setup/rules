@@ -53,7 +53,7 @@ override_dh_install:
 	
 	#icons / pictures
 	mv $(CURDIR)/debian/retrorig-setup/usr/share/RetroRig/XBMC-cfgs/extra/retro-icon.png $(CURDIR)/debian/retrorig-setup/usr/share/icons
-	cp Artwork/XBMC/RetroMain-0-9-7b.png $(CURDIR)/debian/retrorig-setup/usr/share/RetroRig/Artwork/XBMC/
+	cp Artwork/XBMC/RetroMain-0-9-8.png $(CURDIR)/debian/retrorig-setup/usr/share/RetroRig/Artwork/XBMC/
 	cp Artwork/XBMC/gears.png $(CURDIR)/debian/retrorig-setup/usr/share/RetroRig/Artwork/XBMC/
 	
 	#supplemental application files
@@ -74,6 +74,7 @@ override_dh_install:
 	rm -f $(CURDIR)/debian/retrorig-setup/usr/share/RetroRig/XBMC-cfgs/addons/script.games.rom.collection.browser/resources/skins/fonts/DejaVuSans-Bold.ttf
 	rm -f $(CURDIR)/debian/retrorig-setup/usr/share/RetroRig/XBMC-cfgs/addons/script.games.rom.collection.browser/resources/skins/fonts/DejaVuSans.ttf
 	rm -f $(CURDIR)/debian/retrorig-setup/usr/share/RetroRig/XBMC-cfgs/addons/script.games.rom.collection.browser/resources/skins/fonts/LiberationSans-Regular.ttf
+	rm -f $(CURDIR)/debian/retrorig-setup/usr/share/RetroRig/XBMC-cfgs/addons/script.steam.launcher/LICENSE.txt
 	
 	#man page
 	gzip -c supplemental/retrorig-setup/retrorig-setup.7 > $(CURDIR)/debian/retrorig-setup/usr/share/man/man7/retrorig-setup.7.gz
@@ -103,6 +104,8 @@ override_dh_makeshlibs:
 	chmod 755 $(CURDIR)/debian/retrorig-setup/usr/share/RetroRig/scriptmodules/syscalls-deb.shinc
 	chmod 755 $(CURDIR)/debian/retrorig-setup/usr/share/applications/gp_autodetect_xbmc.sh
 	chmod 755 $(CURDIR)/debian/retrorig-setup/usr/share/applications/startXBMC.sh
+	chmod 755 $(CURDIR)/debian/retrorig-setup/usr/share/RetroRig/XBMC-cfgs/addons/script.steam.launcher/resources/scripts/steam-launch.sh
+	chmod 644 $(CURDIR)/debian/retrorig-setup/usr/share/RetroRig/XBMC-cfgs/extra/Steam/config.vdf
 
 	#removing unnecessary executable attributes
 	chmod 644 $(CURDIR)/debian/retrorig-setup/usr/share/RetroRig/common/parserConfig.xml

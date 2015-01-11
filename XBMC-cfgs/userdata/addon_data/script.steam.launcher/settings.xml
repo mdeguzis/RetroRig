@@ -1,0 +1,22 @@
+<settings>
+    <setting id="BusyDialogTime" value="10" />
+    <setting id="DelUserScript" value="false" />
+    <!-- Set path check to false to silence errors for next hack -->
+    <setting id="FilePathCheck" value="false" />
+    <!-- Changed Kodi/XBMC's location to none, otherwise RR reboots over itself..-->
+    <!-- This needs to be investigated a bit further -->
+    <setting id="KodiLinux" value="NONE" />
+    <setting id="KodiOsx" value="/Applications/Kodi.app/" />
+    <setting id="KodiPortable" value="false" />
+    <setting id="KodiWin" value="C:\Program Files (x86)\Kodi\Kodi.exe" />
+    <setting id="PostScript" value="" />
+    <setting id="PostScriptEnabled" value="false" />
+    <setting id="PreScript" value="" />
+    <setting id="PreScriptEnabled" value="false" />
+    <setting id="QuitKodi" value="0" />
+    <setting id="ScriptUpdateCheck" value="true" />
+    <setting id="SteamLinux" value="/usr/bin/steam" />
+    <setting id="SteamOsx" value="/Applications/Steam.app/" />
+    <setting id="SteamWin" value="C:\Program Files (x86)\Steam\steam.exe" />
+    <setting id="WmctrlCheck" value="true" />
+</settings>

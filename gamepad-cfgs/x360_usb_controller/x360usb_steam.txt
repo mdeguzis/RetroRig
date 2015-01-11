@@ -1,0 +1,1 @@
+SDL_GamepadBind"		"0000000058626f782047616d65706100,Xbox Gamepad (userspace driver),a:b4,b:b5,y:b7,x:b6,start:b13,guide:b14,back:b12,leftstick:b15,rightstick:b16,leftshoulder:b8,rightshoulder:b9,dpup:b0,dpleft:b2,dpdown:b1,dpright:b3,leftx:a0,lefty:a1,rightx:a2,righty:a3,lefttrigger:b10,righttrigger:b11,"

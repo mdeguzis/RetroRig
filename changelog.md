@@ -1,6 +1,14 @@
 RetroRig changelog
 ============================
 
+Version 0.9.8
+
+* Steam integration
+* Logging fixes
+* syntax corrections
+* issues corrections
+* code fixes for windows positioning
+
 Version 0.9.5
 
 * Fix for BIOS specifications disappearing after controller type is switched.

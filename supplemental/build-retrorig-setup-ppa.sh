@@ -3,8 +3,8 @@
 #======================================================================== 
 #
 # Author      : Michael T. DeGuzis, Jens-Christian Lache
-# Date        : 201401121
-# Version     : 0.9.7
+# Date        : 20141221
+# Version     : 0.9.8
 # Description : Install RetroRig via Debian package
 #
 #		Please see changelog for latest alterations and fixes
@@ -15,17 +15,17 @@ clear
 
 #define base version
 PRE=0
-BASE=0.9.7
+BASE=0.9.8
 
 # define patch level
 # In this case, this level will be used to denote incremental changes
 # instead of a specific branch for now (beta/master only exist at the
 # momement).
-PL=3.2
+PL=2
 
 #choose user
 #user="pk"
-user="jc"
+user="pk"
 
 ##########################################################################################
 #
@@ -48,7 +48,7 @@ if [ "$user" == "pk" ]; then
 	CHANGE_TEXT="add comments here"
 
 	#define uploader, date and time zone for changelog
-	uploader_date="Michael DeGuzis <mdeguzis@gmail.com>  Sun, 26 Oct 2014 00:00:00 -0300"
+	uploader_date="Michael DeGuzis <mdeguzis@gmail.com>  Sat, 27 Dec 2014 23:08:00 -0300"
 
 	#define package maintainer for dsc and control file 
 	pkgmaintainer="RetroRig Development Team <mdeguzis@gmail.com>"
@@ -93,23 +93,14 @@ echo "#################################################################"
 echo "Building custom retrorig-setup Debian package (branch $BRANCH)"
 echo "#################################################################"
 echo ""
-
-echo ""
-echo ""
 echo ""
 echo "user is: "$user
 echo "package maintainer is: "$pkgmaintainer
-echo ""
 echo "version: *** "$PRE:$BASE.$PL" *** from "$source_reprository", branch "$BRANCH
-echo ""
 echo "changed: "$CHANGE_TEXT
-echo ""
 echo "uploading to: "$LAUNCHPAD_PPA
-echo ""
 echo "by/date: "$uploader_date
-echo ""
 echo "Did you adapt debian/changelog accordingly?"
-echo ""
 echo ""
 echo ""
 sleep 5
@@ -119,12 +110,10 @@ sleep 5
 
 if [[ -n "$1" ]]; then
 
-  echo ""
   echo "build target is $1"
   echo ""
 
 else
-  echo ""
   echo "build target is source"
   echo ""
 fi
@@ -289,8 +278,6 @@ case "$arg0" in
       echo "Building source package"
       echo "##########################################"
       echo ""
-      echo ""
-      echo ""
       echo "****** please copy your gpg passphrase into the clipboard ******"
       echo ""
       sleep 10
@@ -302,10 +289,8 @@ case "$arg0" in
         echo ""
         ls -lah ~/packaging/retrorig-setup
         echo ""
-        echo ""
         echo "you can upload the package with dput $LAUNCHPAD_PPA ~/packaging/retrorig-setup/retrorig-setup_$BASE.$PL""_source.changes"
         echo "all good"
-        echo ""
         echo ""
 
         while true; do
