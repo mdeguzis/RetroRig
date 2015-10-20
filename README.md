@@ -3,8 +3,8 @@ RetroRig Project
 ![alt text](http://i.imgur.com/Irgv0Fx.png "RetroRig")
 ###### [Version 0.9.8]
 
-##### News/Anncouncements
-Be sure to checkout the new EmulationStation flavor of RetroRig called [RetroRig-ES](https://github.com/ProfessorKaos64/RetroRig-ES)! Things are still in the early stages, but most basic things should be usable.
+##### PLEASE NOTE!
+The EmulationStation flavor of RetroRig called [RetroRig-ES](https://github.com/ProfessorKaos64/RetroRig-ES) is *highly* preferred over this project. I do not have a lot of time to shape up this project for Ubuntu versions past 14.04 LTS without some help. In contrast to RetroRig-ES, this project was quite hacky in how it was implemented as well. 
 
 ## About
 
