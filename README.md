@@ -23,7 +23,7 @@ an easy way to get up and running with RetroGaming on x86_64 Linux systems. Pull
 Issues are very much welcome! Please see the AUTHORS file in the root directory for all the awesome people
 that contribute to this project.
 
-You can follow RetroRig's development by staring the github.com page, or with joining the IRC channel `#retrorig-dev`
+You can follow RetroRig's development by staring the github.com page, or with joining the IRC channel `#libregeek`
 located under the irc.freenode.net network. The main op is me "ProfessorKaos64". You can also follow me on twitter with the username "@N3RD42". There is also a [forum](http://libregeek.org/forum/index.php) for any and all discussion.
 
 **Please be advised:**      
