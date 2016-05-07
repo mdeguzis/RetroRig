@@ -3,7 +3,7 @@
 # RetroRig Main Setup Script
 # This is a small script to copy over configuration files for emulators
 # append a "-x" on the end above for debugging if need be
-# Version 0.9.7
+# Version 0.9.8
 #
 # Note: Syscalls are now abstracted!
 # Please see syscalls-<pkg_mgr>.shinc for more.

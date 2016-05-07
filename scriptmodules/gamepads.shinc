@@ -1853,6 +1853,244 @@ received the wrong LED, unplug and plug the USB cable back in until you get the 
 	sixad --boot-no
 }
 
+function gp_mayflash_gc()
+{
+	####################################################################
+	# Function Description:
+	# 
+	# Assign and modify emulator configurations for the Gamecube
+	# controller connected via a Mayflash USB adapter
+	#
+	####################################################################
+
+	# clean any old configs
+	h_clean_gamepad
+
+	#######################################################
+	# Add controller specifc emulator controlos
+	#######################################################
+
+	#mame
+	# default path: /home/$USER/.mame
+	# Main config
+	cp -v "$scriptdir/emu-cfgs/mayflash_gc_usb/MAME/default.cfg" "$config_home/.mame/cfg"
+	cp -v "$scriptdir/emu-cfgs/mayflash_gc_usb/MAME/mame.ini" "$config_home/.mame/"
+
+	# mess
+	# default path: /home/$USER/.mednafen/mednafen.cfg
+	# Main config
+	cp -v "$scriptdir/emu-cfgs/mayflash_gc_usb/MESS/mess.ini" "$config_home/.mess/"
+	cp -v "$scriptdir/emu-cfgs/mayflash_gc_usb/MESS/aes.ini" "$config_home/.mess/"
+	cp -v "$scriptdir/emu-cfgs/mayflash_gc_usb/MESS/neocdz.ini" "$config_home/.mess/"
+	cp -v "$scriptdir/emu-cfgs/mayflash_gc_usb/MESS/default.cfg" "$config_home/.mess/cfg/"
+	cp -v "$scriptdir/emu-cfgs/mayflash_gc_usb/MESS/neocdz.cfg" "$config_home/.mess/cfg/"
+	cp -v "$scriptdir/emu-cfgs/mayflash_gc_usb/MESS/aes.cfg" "$config_home/.mess/cfg/"
+
+	# mednafen
+	# default path: /home/$USER/.mednafen/mednafen.cfg
+	# Main config
+	cp -v "$scriptdir/emu-cfgs/mayflash_gc_usb/mednafen/mednafen-09x.cfg" "$config_home/.mednafen/"
+
+	# mupen64plus
+	# default path: /home/$USER/.config/mupen64plus
+	# Main config
+	cp -v "$scriptdir/emu-cfgs/mayflash_gc_usb/mupen64plus/mupen64plus.cfg" "$config_home/.config/mupen64plus/"
+
+	# Dolphin (GameCube/Wii)
+	# default path: /home/$USER/.retrorig/.dolphin-emu/Wii/
+	# default path: /home/$USER/.retrorig/.dolphin-emu/GC/
+	## GC config ##
+	cp -v "$scriptdir/emu-cfgs/mayflash_gc_usb/Dolphin/GC/GCPadNew.ini" "$config_home/.dolphin-emu/GC/Config/"
+	cp -v "$scriptdir/emu-cfgs/mayflash_gc_usb/Dolphin/GC/Dolphin.ini" "$config_home/.dolphin-emu/GC/Config/"
+	cp -v "$scriptdir/emu-cfgs/mayflash_gc_usb/Dolphin/GC/WiimoteNew.ini" "$config_home/.dolphin-emu/GC/Config/"
+	## Wii config ##
+	cp -v "$scriptdir/emu-cfgs/mayflash_gc_usb/Dolphin/Wii/GCPadNew.ini" "$config_home/.dolphin-emu/Wii/Config/"
+	cp -v "$scriptdir/emu-cfgs/mayflash_gc_usb/Dolphin/Wii/Dolphin.ini" "$config_home/.dolphin-emu/Wii/Config/"
+	cp -v "$scriptdir/emu-cfgs/mayflash_gc_usb/Dolphin/Wii/WiimoteNew.ini" "$config_home/.dolphin-emu/Wii/Config/"
+
+	# PCSX2
+	# base config folder
+	cp -v "$scriptdir/emu-cfgs/mayflash_gc_usb/PCSX2/inisOnePAD.ini" "$config_home/.config/pcsx2/inisOnePAD.ini"
+	cp -v "$scriptdir/emu-cfgs/mayflash_gc_usb/PCSX2/PCSX2-reg.ini" "$config_home/.config/pcsx2/PCSX2-reg.ini"
+	# inis
+	cp -v "$scriptdir/emu-cfgs/mayflash_gc_usb/PCSX2/inis/GSdx.ini" "$config_home/.config/pcsx2/inis/"
+	cp -v "$scriptdir/emu-cfgs/mayflash_gc_usb/PCSX2/inis/OnePAD.ini" "$config_home/.config/pcsx2/inis/"
+	cp -v "$scriptdir/emu-cfgs/mayflash_gc_usb/PCSX2/inis/PCSX2_ui.ini" "$config_home/.config/pcsx2/inis/"
+	cp -v "$scriptdir/emu-cfgs/mayflash_gc_usb/PCSX2/inis/PCSX2_vm.ini" "$config_home/.config/pcsx2/inis/"
+	cp -v "$scriptdir/emu-cfgs/mayflash_gc_usb/PCSX2/inis/spu2-x.ini" "$config_home/.config/pcsx2/inis/"
+
+	#Stella
+	#default path: /home/$USER/.config/mupen64plus
+	#Main config
+	cp -v "$scriptdir/emu-cfgs/mayflash_gc_usb/Stella/stellarc" "$config_home/.stella/"
+
+	# PPSSPP
+	cp -v "$scriptdir/emu-cfgs/mayflash_gc_usb/PPSSPP/ppsspp.ini" "$config_home/.config/ppsspp/PSP/SYSTEM/"
+	cp -v "$scriptdir/emu-cfgs/mayflash_gc_usb/PPSSPP/controls.ini" "$config_home/.config/ppsspp/PSP/SYSTEM/"
+
+	# Gens GS (Sega CD/32X)
+	cp -v "$scriptdir/emu-cfgs/mayflash_gc_usb/GensGS/gens.cfg" "$config_home/.gens/"
+
+	# Alter Steam config.vdf with proper controls if controller exists
+	STEAM_GP_TYPE="x360usb"
+	gp_steam_control
+	
+	#blacklist xpad
+	cp -v "$scriptdir/init-scripts/mayflash_gc_usb/blacklist.conf" "/etc/modprobe.d/"
+
+	# copy keyboard.xml file for XBMC. Button id numbers are totally diffferent, due to the use of 
+	# the use-dpad-as-button, and use-trigger-as-button options used.
+	cp -v "$scriptdir/gamepad-cfgs/mayflash_gc_usb/keyboard.xml" "$xbmc_home/userdata/keymaps"
+
+	# Copy our keymap to the regular .xbmc dotfile directory if keyboard.xml exists:
+	if [[ -f "$home/.xbmc/userdata/keymaps/keyboard.xml" ]]; then
+		# back up current file
+		cp -v "$home/.xbmc/userdata/keymaps/keyboard.xml" "$home/.xbmc/userdata/keymaps/keyboard.xml.old"
+		# copy in keymap
+		cp "$scriptdir/gamepad-cfgs/mayflash_gc_usb/keyboard.xml" "$home/.xbmc/userdata/keymaps/"
+	fi
+
+	##################################
+	# Mayflash adapter information
+	##################################
+
+	# No need to present small menu asking for number of controllers
+	# Always has 2 connected with generic name "HuiJia USB Gamepad"
+
+	###########################################################
+	# Add emulator specifc control remaps here for qjoypad
+	###########################################################
+	# !!! Removed in favor of anitmicro since 0.9.5b !!!
+	###########################################################
+
+	# copy in fresh copy of RCB's config.xml to make replacements
+	cp -v "$scriptdir/XBMC-cfgs/userdata/addon_data/script.games.rom.collection.browser/config.xml" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/"
+
+	# blacklist xpad
+	cp -v "$scriptdir/init-scripts/mayflash_gc_usb/blacklist.conf" "/etc/modprobe.d/"
+
+	###########################################################
+	# Add emulator specifc control remaps here for AniMicro
+	###########################################################
+	# Note: In due time, AntiMicro may replace qjoypad for all
+	# emulator control hotswaps for gamepads
+	###########################################################
+
+	# copy in profiles for emulators (antimicro)
+	cp -v "$scriptdir/gamepad-cfgs/mayflash_gc_usb/antimicro_settings.ini" "$config_home/.config/antimicro/"
+	cp -v "$scriptdir/gamepad-cfgs/mayflash_gc_usb/am_pcsx2_x360_usb.joystick.xml" "$config_home/.config/antimicro/"
+	cp -v "$scriptdir/gamepad-cfgs/mayflash_gc_usb/am_mednafen_gen_x360_usb.joystick.xml" "$config_home/.config/antimicro/"
+	cp -v "$scriptdir/gamepad-cfgs/mayflash_gc_usb/am_mednafen_ps1_x360_usb.joystick.xml" "$config_home/.config/antimicro/"
+	cp -v "$scriptdir/gamepad-cfgs/mayflash_gc_usb/am_ppsspp_x360_usb.joystick.xml" "$config_home/.config/antimicro/"
+	cp -v "$scriptdir/gamepad-cfgs/mayflash_gc_usb/am_dolphin_x360_usb.joystick.xml" "$config_home/.config/antimicro/"
+	cp -v "$scriptdir/gamepad-cfgs/mayflash_gc_usb/am_gensgs_x360_usb.joystick.xml" "$config_home/.config/antimicro/"
+
+	#####################
+	# PCSX2
+	#####################
+
+	old_pre="ps2_pre"
+	old_post="ps2_post"
+	new_pre="antimicro --hidden --profile $config_home/.config/antimicro/am_pcsx2_x360_usb.joystick.xml \&amp;"
+	# The line below is only for good measure
+	new_post="killall pcsx2 antimicro"
+	# perform actual changes
+	sed -i "s|$old_pre|$new_pre|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
+	sed -i "s|$old_post|$new_post|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
+
+	#####################
+	# Mednafen (general)
+	#####################
+
+	old_pre="med_gen_pre"
+	old_post="med_gen_post"
+	new_pre="antimicro --hidden --profile $config_home/.config/antimicro/am_mednafen_gen_x360_usb.joystick.xml \&amp;"
+	# The line below is only for good measure
+	new_post="killall pcsx2 antimicro"
+	# perform actual changes
+	sed -i "s|$old_pre|$new_pre|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
+	sed -i "s|$old_post|$new_post|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
+
+	#####################
+	# Mednafen (PS1/PSX)
+	#####################
+
+	old_pre="ps1_pre"
+	old_post="ps1_post"
+	new_pre="antimicro --hidden --profile $config_home/.config/antimicro/am_mednafen_ps1_x360_usb.joystick.xml \&amp;"
+	# The line below is only for good measure
+	new_post="killall pcsx2 antimicro"
+	# perform actual changes
+	sed -i "s|$old_pre|$new_pre|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
+	sed -i "s|$old_post|$new_post|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
+
+	#####################
+	# PPSSPP
+	#####################
+
+	old_pre="psp_pre"
+	old_post="psp_post"
+	new_pre="antimicro --hidden --profile $config_home/.config/antimicro/am_ppsspp_x360_usb.joystick.xml \&amp;"
+	# The line below is only for good measure
+	new_post="killall pcsx2 antimicro"
+	# perform actual changes
+	sed -i "s|$old_pre|$new_pre|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
+	sed -i "s|$old_post|$new_post|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
+
+	##########################
+	# Dolphin (GameCube/Wii)
+	##########################
+
+	old_pre="dolphin_pre"
+	old_post="dolphin_post"
+	new_pre="antimicro --hidden --profile $config_home/.config/antimicro/am_dolphin_x360_usb.joystick.xml \&amp;"
+	# The line below is only for good measure
+	new_post="killall pcsx2 antimicro"
+	# perform actual changes
+	sed -i "s|$old_pre|$new_pre|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
+	sed -i "s|$old_post|$new_post|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
+
+	################################
+	# Gens GS (Sega CD/32X/Genesis)
+	################################
+
+	old_pre="gens_pre"
+	old_post="gens_post"
+	new_pre="antimicro --hidden --profile $config_home/.config/antimicro/am_gensgs_x360_usb.joystick.xml \&amp;"
+	# The line below is only for good measure
+	new_post="killall antimicro"
+	# perform actual changes
+	sed -i "s|$old_pre|$new_pre|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
+	sed -i "s|$old_post|$new_post|g" "$xbmc_home/userdata/addon_data/script.games.rom.collection.browser/config.xml"
+
+	# update init scripts for xboxdrv
+	$update_init_xboxdrv
+
+	# restart the xboxdrv service, not start, in case it was already loaded for a gamepad change
+	$cmd_xboxdrv_restart
+
+	#####################################################################################
+	# THIS FUNCTION SECTION IS NOT USED AT THE MOMENT, MORE TESTING IS NEEDED!!!
+	#####################################################################################
+
+	# Testing ONLY for gp_autodetect_xbmc.sh.testing
+	# new_controller_type="x360_wired"
+	# cp -v "$scriptdir/XBMC-cfgs/extra/gp_autodetect_xbmc.sh" "/usr/share/applications/" 
+	# sed -i "s|controller_temp|$new_controller_type|g" "/usr/share/applications/gp_autodetect_xbmc.sh"
+
+	# replace specific user paths that emulators and files may use
+	h_emu_user_fixes
+
+	# correct permissions since we install using sudo access
+	h_correct_perms
+
+	# Let the user know about LED's
+	dialog --msgbox "Using wired controllers, the pairing is in sequence. If you \
+received the wrong LED, unplug and plug the USB cable back in until you get the correct LED number."  16 62
+
+	sixad --boot-no
+}
+
 gp_steam_control()
 {
 
